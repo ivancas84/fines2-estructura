@@ -21,5 +21,6 @@ fecha_anio (fa): year nf. NOT NULL.
 fecha_semestre (fs): integer nf. NOT NULL.
 tramo (tr): string nf. NOT NULL. NOT ADMIN.
 horario (hoa): string nf. NOT NULL. NOT ADMIN.
+periodo (pe): string nf. NOT ADMIN.
 comision_siguiente (cs): integer mu.
 division (dvi): integer mu. NOT NULL. MAIN.

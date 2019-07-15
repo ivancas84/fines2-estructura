@@ -25,7 +25,7 @@ class ComisionSql extends ComisionSqlMain {
   FROM (
 
 SELECT DISTINCT
-{$this->_fieldsDb()}, horario_.horario, CONCAT({$t}.anio,{$t}.semestre) AS tramo
+{$this->_fieldsDb()}, horario_.horario, CONCAT({$t}.anio,{$t}.semestre) AS tramo, CONCAT({$t}.fecha_anio,{$t}.fecha_semestre) AS periodo
 {$this->_from($render)}
 LEFT JOIN (
   SELECT comision.id AS comision, CONCAT_WS(\" \", dias.dia, 

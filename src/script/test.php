@@ -15,7 +15,7 @@ $render = new Render();
 $render->setCondition([
     //["horario","=~","martes"],
     //["tramo","=","21"]
-    ["cla_nombre","=","Fines"]
+    ["periodo","=","20191"]
 ]);
 echo "<pre>";
-echo EntitySql::getInstanceFromString("clasificacion_plan", "cla")->_subSql($render);
+echo EntitySqlo::getInstanceFromString("comision")->all($render);
