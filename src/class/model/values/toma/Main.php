@@ -1,0 +1,182 @@
+<?php
+
+require_once("class/model/Values.php");
+
+//Implementacion principal de Values para una entidad especifica
+class TomaValuesMain extends EntityValues {
+  public $id = UNDEFINED;
+  public $fechaToma = UNDEFINED;
+  public $fechaInicio = UNDEFINED;
+  public $fechaFin = UNDEFINED;
+  public $fechaEntradaContralor = UNDEFINED;
+  public $estado = UNDEFINED;
+  public $observaciones = UNDEFINED;
+  public $comentarioContralor = UNDEFINED;
+  public $alta = UNDEFINED;
+  public $tipoMovimiento = UNDEFINED;
+  public $estadoContralor = UNDEFINED;
+  public $fechaDesde = UNDEFINED;
+  public $sumaHorasCatedra = UNDEFINED;
+  public $curso = UNDEFINED;
+  public $profesor = UNDEFINED;
+  public $reemplaza = UNDEFINED;
+
+  public function fromArray(array $row = NULL){
+    if(empty($row)) return;
+    if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row["fecha_toma"])) $this->fechaToma = (is_null($row["fecha_toma"])) ? null : DateTime::createFromFormat('Y-m-d', $row["fecha_toma"]);
+    if(isset($row["fecha_inicio"])) $this->fechaInicio = (is_null($row["fecha_inicio"])) ? null : DateTime::createFromFormat('Y-m-d', $row["fecha_inicio"]);
+    if(isset($row["fecha_fin"])) $this->fechaFin = (is_null($row["fecha_fin"])) ? null : DateTime::createFromFormat('Y-m-d', $row["fecha_fin"]);
+    if(isset($row["fecha_entrada_contralor"])) $this->fechaEntradaContralor = (is_null($row["fecha_entrada_contralor"])) ? null : DateTime::createFromFormat('Y-m-d', $row["fecha_entrada_contralor"]);
+    if(isset($row["estado"])) $this->estado = (is_null($row["estado"])) ? null : (string)$row["estado"];
+    if(isset($row["observaciones"])) $this->observaciones = (is_null($row["observaciones"])) ? null : (string)$row["observaciones"];
+    if(isset($row["comentario_contralor"])) $this->comentarioContralor = (is_null($row["comentario_contralor"])) ? null : (string)$row["comentario_contralor"];
+    if(isset($row["alta"])) $this->alta = (is_null($row["alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row["alta"]);
+    if(isset($row["tipo_movimiento"])) $this->tipoMovimiento = (is_null($row["tipo_movimiento"])) ? null : (string)$row["tipo_movimiento"];
+    if(isset($row["estado_contralor"])) $this->estadoContralor = (is_null($row["estado_contralor"])) ? null : (string)$row["estado_contralor"];
+    if(isset($row["fecha_desde"])) $this->fechaDesde = (is_null($row["fecha_desde"])) ? null : DateTime::createFromFormat('Y-m-d', $row["fecha_desde"]);
+    if(isset($row["suma_horas_catedra"])) $this->sumaHorasCatedra = (is_null($row["suma_horas_catedra"])) ? null : intval($row["suma_horas_catedra"]);
+    if(isset($row["curso"])) $this->curso = (is_null($row["curso"])) ? null : (string)$row["curso"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row["profesor"])) $this->profesor = (is_null($row["profesor"])) ? null : (string)$row["profesor"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row["reemplaza"])) $this->reemplaza = (is_null($row["reemplaza"])) ? null : (string)$row["reemplaza"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+  }
+
+
+  public function toArray(){
+    $row = [];
+    if($this->id !== UNDEFINED) $row["id"] = $this->id;
+    if($this->fechaToma !== UNDEFINED) {
+      if(empty($this->fechaToma)) $row["fecha_toma"] = $this->fechaToma;
+      else $row["fecha_toma"] = $this->fechaToma->format('Y-m-d');
+    }
+    if($this->fechaInicio !== UNDEFINED) {
+      if(empty($this->fechaInicio)) $row["fecha_inicio"] = $this->fechaInicio;
+      else $row["fecha_inicio"] = $this->fechaInicio->format('Y-m-d');
+    }
+    if($this->fechaFin !== UNDEFINED) {
+      if(empty($this->fechaFin)) $row["fecha_fin"] = $this->fechaFin;
+      else $row["fecha_fin"] = $this->fechaFin->format('Y-m-d');
+    }
+    if($this->fechaEntradaContralor !== UNDEFINED) {
+      if(empty($this->fechaEntradaContralor)) $row["fecha_entrada_contralor"] = $this->fechaEntradaContralor;
+      else $row["fecha_entrada_contralor"] = $this->fechaEntradaContralor->format('Y-m-d');
+    }
+    if($this->estado !== UNDEFINED) $row["estado"] = $this->estado;
+    if($this->observaciones !== UNDEFINED) $row["observaciones"] = $this->observaciones;
+    if($this->comentarioContralor !== UNDEFINED) $row["comentario_contralor"] = $this->comentarioContralor;
+    if($this->alta !== UNDEFINED) {
+      if(empty($this->alta)) $row["alta"] = $this->alta;
+      else $row["alta"] = $this->alta->format('Y-m-d H:i:s');
+    }
+    if($this->tipoMovimiento !== UNDEFINED) $row["tipo_movimiento"] = $this->tipoMovimiento;
+    if($this->estadoContralor !== UNDEFINED) $row["estado_contralor"] = $this->estadoContralor;
+    if($this->fechaDesde !== UNDEFINED) {
+      if(empty($this->fechaDesde)) $row["fecha_desde"] = $this->fechaDesde;
+      else $row["fecha_desde"] = $this->fechaDesde->format('Y-m-d');
+    }
+    if($this->sumaHorasCatedra !== UNDEFINED) $row["suma_horas_catedra"] = $this->sumaHorasCatedra;
+    if($this->curso !== UNDEFINED) $row["curso"] = $this->curso;
+    if($this->profesor !== UNDEFINED) $row["profesor"] = $this->profesor;
+    if($this->reemplaza !== UNDEFINED) $row["reemplaza"] = $this->reemplaza;
+    return $row;
+  }
+
+  public function id() { return $this->id; }
+  public function fechaToma($format = 'd/m/Y') { return $this->formatDate($this->fechaToma, $format); }
+  public function fechaInicio($format = 'd/m/Y') { return $this->formatDate($this->fechaInicio, $format); }
+  public function fechaFin($format = 'd/m/Y') { return $this->formatDate($this->fechaFin, $format); }
+  public function fechaEntradaContralor($format = 'd/m/Y') { return $this->formatDate($this->fechaEntradaContralor, $format); }
+  public function estado($format = null) { return $this->formatString($this->estado, $format); }
+  public function observaciones($format = null) { return $this->formatString($this->observaciones, $format); }
+  public function comentarioContralor($format = null) { return $this->formatString($this->comentarioContralor, $format); }
+  public function alta($format = 'd/m/Y H:i') { return $this->formatDate($this->alta, $format); }
+  public function tipoMovimiento($format = null) { return $this->formatString($this->tipoMovimiento, $format); }
+  public function estadoContralor($format = null) { return $this->formatString($this->estadoContralor, $format); }
+  public function fechaDesde($format = 'd/m/Y') { return $this->formatDate($this->fechaDesde, $format); }
+  public function sumaHorasCatedra() { return $this->sumaHorasCatedra; }
+  public function curso() { return $this->curso; }
+  public function profesor() { return $this->profesor; }
+  public function reemplaza() { return $this->reemplaza; }
+  public function setId($p) {
+    if(empty($p)) return;
+    $this->id = $p;
+  }
+
+  public function setFechaToma($p) {
+    if(empty($p)) return;
+    $this->fechaToma = $p;
+  }
+
+  public function setFechaInicio($p) {
+    if(empty($p)) return;
+    $this->fechaInicio = $p;
+  }
+
+  public function setFechaFin($p) {
+    if(empty($p)) return;
+    $this->fechaFin = $p;
+  }
+
+  public function setFechaEntradaContralor($p) {
+    if(empty($p)) return;
+    $this->fechaEntradaContralor = $p;
+  }
+
+  public function setEstado($p) {
+    if(empty($p)) return;
+    $this->estado = $p;
+  }
+
+  public function setObservaciones($p) {
+    if(empty($p)) return;
+    $this->observaciones = $p;
+  }
+
+  public function setComentarioContralor($p) {
+    if(empty($p)) return;
+    $this->comentarioContralor = $p;
+  }
+
+  public function setAlta($p) {
+    if(empty($p)) return;
+    $this->alta = $p;
+  }
+
+  public function setTipoMovimiento($p) {
+    if(empty($p)) return;
+    $this->tipoMovimiento = $p;
+  }
+
+  public function setEstadoContralor($p) {
+    if(empty($p)) return;
+    $this->estadoContralor = $p;
+  }
+
+  public function setFechaDesde($p) {
+    if(empty($p)) return;
+    $this->fechaDesde = $p;
+  }
+
+  public function setSumaHorasCatedra($p) {
+    if(empty($p) && $p !== 0) return;
+    $this->sumaHorasCatedra = intval($p);
+  }
+
+  public function setCurso($p) {
+    if(empty($p) && $p !== 0) return;
+    $this->curso = intval($p);
+  }
+
+  public function setProfesor($p) {
+    if(empty($p) && $p !== 0) return;
+    $this->profesor = intval($p);
+  }
+
+  public function setReemplaza($p) {
+    if(empty($p) && $p !== 0) return;
+    $this->reemplaza = intval($p);
+  }
+
+
+
+}

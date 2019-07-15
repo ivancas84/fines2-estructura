@@ -1,0 +1,6 @@
+clasificacion - cla
+plan - pla
+
+id (id): integer pk. NOT NULL. MAIN. UNIQUE.
+clasificacion (cla): integer mu. NOT NULL.
+plan (pla): integer mu. NOT NULL.

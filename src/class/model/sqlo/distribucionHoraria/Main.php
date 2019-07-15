@@ -1,0 +1,91 @@
+<?php
+
+require_once("class/model/Sqlo.php");
+
+//Implementacion principal de Sqlo para una entidad especifica
+class DistribucionHorariaSqloMain extends EntitySqlo {
+
+  public function __construct(){
+    /**
+     * Se definen todos los recursos de forma independiente, sin parametros en el constructor, para facilitar el polimorfismo de las subclases
+     */
+    $this->db = Dba::dbInstance();
+    $this->entity = Entity::getInstanceFromString('distribucion_horaria');
+    $this->sql = EntitySql::getInstanceFromString('distribucion_horaria');
+  }
+
+  protected function _insert(array $row){ //@override
+      $sql = "
+  INSERT INTO " . $this->entity->sn_() . " (";
+      $sql .= "id, " ;
+    $sql .= "dia, " ;
+    $sql .= "horas_catedra, " ;
+    $sql .= "carga_horaria, " ;
+    $sql = substr($sql, 0, -2); //eliminar ultima coma
+
+    $sql .= ")
+VALUES ( ";
+    $sql .= $row['id'] . ", " ;
+    $sql .= $row['dia'] . ", " ;
+    $sql .= $row['horas_catedra'] . ", " ;
+    $sql .= $row['carga_horaria'] . ", " ;
+    $sql = substr($sql, 0, -2); //eliminar ultima coma
+
+    $sql .= ");
+";
+
+    return $sql;
+  }
+
+  protected function _update(array $row){ //@override
+    $sql = "
+UPDATE " . $this->entity->sn_() . " SET
+";
+    if (isset($row['dia'] )) $sql .= "dia = " . $row['dia'] . " ," ;
+    if (isset($row['horas_catedra'] )) $sql .= "horas_catedra = " . $row['horas_catedra'] . " ," ;
+    if (isset($row['carga_horaria'] )) $sql .= "carga_horaria = " . $row['carga_horaria'] . " ," ;
+    //eliminar ultima coma
+    $sql = substr($sql, 0, -2);
+
+    return $sql;
+  }
+
+  public function json(array $row){
+    if(empty($row)) return null;
+    $row_ = $this->sql->_json($row);
+    if(!is_null($row['ch_id'])){
+      $json = EntitySql::getInstanceFromString('carga_horaria', 'ch')->_json($row);
+      $row_["carga_horaria_"] = $json;
+    }
+    if(!is_null($row['ch_asi_id'])){
+      $json = EntitySql::getInstanceFromString('asignatura', 'ch_asi')->_json($row);
+      $row_["carga_horaria_"]["asignatura_"] = $json;
+    }
+    if(!is_null($row['ch_pla_id'])){
+      $json = EntitySql::getInstanceFromString('plan', 'ch_pla')->_json($row);
+      $row_["carga_horaria_"]["plan_"] = $json;
+    }
+    return $row_;
+  }
+
+  public function values(array $row){
+    $row_ = [];
+
+    $json = ($row && !is_null($row['id'])) ? $this->sql->_json($row) : null;
+    $row_["distribucion_horaria"] = EntityValues::getInstanceFromString("distribucion_horaria", $json);
+
+    $json = ($row && !is_null($row['ch_id'])) ? EntitySql::getInstanceFromString('carga_horaria', 'ch')->_json($row) : null;
+    $row_["carga_horaria"] = EntityValues::getInstanceFromString('carga_horaria', $json);
+
+    $json = ($row && !is_null($row['ch_asi_id'])) ? EntitySql::getInstanceFromString('asignatura', 'ch_asi')->_json($row) : null;
+    $row_["asignatura"] = EntityValues::getInstanceFromString('asignatura', $json);
+
+    $json = ($row && !is_null($row['ch_pla_id'])) ? EntitySql::getInstanceFromString('plan', 'ch_pla')->_json($row) : null;
+    $row_["plan"] = EntityValues::getInstanceFromString('plan', $json);
+
+    return $row_;
+  }
+
+
+
+}

@@ -1,0 +1,10 @@
+id_persona - per
+
+id (id): integer pk. NOT NULL. MAIN. UNIQUE.
+fotocopia_documento (fd): boolean nf. NOT NULL.
+partida_nacimiento (pn): boolean nf. NOT NULL.
+constancia_cuil (cc): boolean nf. NOT NULL.
+certificado_estudios (ce): boolean nf. NOT NULL.
+anio_ingreso (ai): integer nf.
+observaciones (obs): text nf.
+persona (per): integer _u. NOT NULL. UNIQUE.

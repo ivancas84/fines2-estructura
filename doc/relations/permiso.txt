@@ -1,0 +1,8 @@
+rol - rol
+id_persona - per
+
+id (id): integer pk. NOT NULL. MAIN. UNIQUE.
+alta (alt): timestamp nf. NOT NULL. DEFAULT: CURRENT_TIMESTAMP.
+baja (baj): timestamp nf.
+rol (rol): integer mu. NOT NULL.
+persona (per): integer mu. NOT NULL.

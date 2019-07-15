@@ -1,0 +1,17 @@
+tipo_sede - ts
+domicilio - dom
+id_persona - coo
+id_persona - ref
+
+id (id): integer pk. NOT NULL. UNIQUE.
+numero (num): string nf. MAIN.
+nombre (nom): string nf. NOT NULL. MAIN.
+organizacion (org): string nf.
+observaciones (obs): text nf.
+tipo (tip): string nf.
+baja (baj): timestamp nf.
+dependencia (dep): integer mu.
+tipo_sede (ts): integer mu.
+domicilio (dom): integer _u. UNIQUE.
+coordinador (coo): integer fk. NOT ADMIN.
+referente (ref): integer fk. NOT ADMIN.

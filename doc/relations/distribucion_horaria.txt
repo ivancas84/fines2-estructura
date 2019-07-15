@@ -1,0 +1,8 @@
+carga_horaria - ch
+asignatura - ch_asi
+plan - ch_pla
+
+id (id): integer pk. NOT NULL. MAIN. UNIQUE.
+dia (dia): integer nf. NOT NULL.
+horas_catedra (hc): integer nf. NOT NULL.
+carga_horaria (ch): integer mu. NOT NULL.

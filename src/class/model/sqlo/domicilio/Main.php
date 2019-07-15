@@ -1,0 +1,82 @@
+<?php
+
+require_once("class/model/Sqlo.php");
+
+//Implementacion principal de Sqlo para una entidad especifica
+class DomicilioSqloMain extends EntitySqlo {
+
+  public function __construct(){
+    /**
+     * Se definen todos los recursos de forma independiente, sin parametros en el constructor, para facilitar el polimorfismo de las subclases
+     */
+    $this->db = Dba::dbInstance();
+    $this->entity = Entity::getInstanceFromString('domicilio');
+    $this->sql = EntitySql::getInstanceFromString('domicilio');
+  }
+
+  protected function _insert(array $row){ //@override
+      $sql = "
+  INSERT INTO " . $this->entity->sn_() . " (";
+      $sql .= "id, " ;
+    $sql .= "calle, " ;
+    $sql .= "entre, " ;
+    $sql .= "numero, " ;
+    $sql .= "piso, " ;
+    $sql .= "departamento, " ;
+    $sql .= "barrio, " ;
+    $sql .= "localidad, " ;
+    $sql = substr($sql, 0, -2); //eliminar ultima coma
+
+    $sql .= ")
+VALUES ( ";
+    $sql .= $row['id'] . ", " ;
+    $sql .= $row['calle'] . ", " ;
+    $sql .= $row['entre'] . ", " ;
+    $sql .= $row['numero'] . ", " ;
+    $sql .= $row['piso'] . ", " ;
+    $sql .= $row['departamento'] . ", " ;
+    $sql .= $row['barrio'] . ", " ;
+    $sql .= $row['localidad'] . ", " ;
+    $sql = substr($sql, 0, -2); //eliminar ultima coma
+
+    $sql .= ");
+";
+
+    return $sql;
+  }
+
+  protected function _update(array $row){ //@override
+    $sql = "
+UPDATE " . $this->entity->sn_() . " SET
+";
+    if (isset($row['calle'] )) $sql .= "calle = " . $row['calle'] . " ," ;
+    if (isset($row['entre'] )) $sql .= "entre = " . $row['entre'] . " ," ;
+    if (isset($row['numero'] )) $sql .= "numero = " . $row['numero'] . " ," ;
+    if (isset($row['piso'] )) $sql .= "piso = " . $row['piso'] . " ," ;
+    if (isset($row['departamento'] )) $sql .= "departamento = " . $row['departamento'] . " ," ;
+    if (isset($row['barrio'] )) $sql .= "barrio = " . $row['barrio'] . " ," ;
+    if (isset($row['localidad'] )) $sql .= "localidad = " . $row['localidad'] . " ," ;
+    //eliminar ultima coma
+    $sql = substr($sql, 0, -2);
+
+    return $sql;
+  }
+
+  public function json(array $row){
+    if(empty($row)) return null;
+    $row_ = $this->sql->_json($row);
+    return $row_;
+  }
+
+  public function values(array $row){
+    $row_ = [];
+
+    $json = ($row && !is_null($row['id'])) ? $this->sql->_json($row) : null;
+    $row_["domicilio"] = EntityValues::getInstanceFromString("domicilio", $json);
+
+    return $row_;
+  }
+
+
+
+}

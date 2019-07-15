@@ -1,0 +1,12 @@
+id_persona - per
+sede - sed
+tipo_sede - sed_ts
+domicilio - sed_dom
+id_persona - sed_coo
+id_persona - sed_ref
+
+id (id): integer pk. NOT NULL. MAIN. UNIQUE.
+alta (alt): timestamp nf. NOT NULL. NOT ADMIN. DEFAULT: CURRENT_TIMESTAMP.
+baja (baj): timestamp nf. NOT ADMIN.
+persona (per): integer mu. NOT NULL.
+sede (sed): integer mu. NOT NULL.

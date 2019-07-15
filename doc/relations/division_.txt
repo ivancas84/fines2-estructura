@@ -1,0 +1,2 @@
+_clasificacion: Condición avanzada para buscar por id de clasificacion
+_clasificacion_nombre: Condición avanzada para buscar por nombre de clasificacion

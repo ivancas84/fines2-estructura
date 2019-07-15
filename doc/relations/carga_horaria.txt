@@ -1,0 +1,10 @@
+asignatura - asi
+plan - pla
+
+id (id): integer pk. NOT NULL. UNIQUE.
+anio (ani): integer nf. NOT NULL.
+semestre (sem): integer nf. NOT NULL.
+horas_catedra (hc): integer nf. NOT NULL.
+tramo (tra): string nf. NOT NULL. NOT ADMIN.
+asignatura (asi): integer mu. NOT NULL. MAIN.
+plan (pla): integer mu. NOT NULL. MAIN.

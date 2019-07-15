@@ -1,0 +1,3 @@
+id (id): integer pk. NOT NULL. MAIN. UNIQUE.
+descripcion (des): string nf. NOT NULL.
+detalle (det): string nf.

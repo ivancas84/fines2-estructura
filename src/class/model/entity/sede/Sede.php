@@ -1,0 +1,29 @@
+<?php
+
+require_once("class/model/entity/sede/Main.php");
+
+class SedeEntity extends SedeEntityMain {
+
+  public function getFieldsNf(){
+    $array = parent::getFieldsNf();
+
+    for($j = 0; $j < 2; $j++){
+      for($i = 0; $i < count($array); $i++){
+        if($array[$i] instanceof FieldSedeUsuario) break;
+        if($array[$i] instanceof FieldSedeAlta) break;
+      }
+      if($i < count($array)) unset($array[$i]);
+      $array = array_values($array);
+    }
+
+    return $array;
+  }
+
+  public function getFieldsFk(){
+    $array = parent::getFieldsFk();
+    array_push($array, new FieldSedeCoordinador());
+    array_push($array, new FieldSedeReferente());
+
+    return $array;
+  }
+}

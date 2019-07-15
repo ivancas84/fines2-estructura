@@ -1,0 +1,25 @@
+division - dvi
+plan - dvi_pla
+sede - dvi_sed
+tipo_sede - dvi_sed_ts
+domicilio - dvi_sed_dom
+id_persona - dvi_sed_coo
+id_persona - dvi_sed_ref
+
+id (id): integer pk. NOT NULL. UNIQUE.
+anio (ani): integer nf. NOT NULL. MAIN.
+semestre (sem): integer nf. NOT NULL. MAIN.
+observaciones (obs): text nf.
+fecha (fec): date nf. NOT ADMIN.
+alta (alt): timestamp nf. NOT NULL. NOT ADMIN. DEFAULT: CURRENT_TIMESTAMP.
+baja (baj): timestamp nf. NOT ADMIN.
+comentario (com): string nf.
+autorizada (aut): boolean nf. NOT NULL.
+apertura (ape): boolean nf. NOT NULL.
+publicar (pub): boolean nf. NOT NULL.
+fecha_anio (fa): year nf. NOT NULL.
+fecha_semestre (fs): integer nf. NOT NULL.
+tramo (tr): string nf. NOT NULL. NOT ADMIN.
+horario (hoa): string nf. NOT NULL. NOT ADMIN.
+comision_siguiente (cs): integer mu.
+division (dvi): integer mu. NOT NULL. MAIN.

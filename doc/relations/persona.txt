@@ -1,0 +1,10 @@
+lugar_nacimiento - ln
+id_persona - ip
+domicilio - dom
+
+id (id): integer pk. NOT NULL. MAIN. UNIQUE.
+alta (alt): timestamp nf. NOT NULL. DEFAULT: CURRENT_TIMESTAMP.
+baja (baj): timestamp nf. NOT ADMIN.
+lugar_nacimiento (ln): integer mu.
+id_persona (ip): integer mu. NOT NULL.
+domicilio (dom): integer mu.

@@ -1,0 +1,21 @@
+<?php
+
+require_once("class/model/Field.php");
+
+class FieldIdPersonaTipoDocumentoMain extends Field {
+
+  public $type = "varchar";
+  public $fieldType = "nf";
+  public $unique = false;
+  public $notNull = false;
+  public $default = "DNI";
+  public $length = "45";
+  public $main = false;
+  public $name = "tipo_documento";
+  public $alias = "td";
+
+
+  public function getEntity(){ return new IdPersonaEntity; }
+
+
+}

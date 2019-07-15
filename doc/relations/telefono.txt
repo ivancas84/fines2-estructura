@@ -1,0 +1,9 @@
+id_persona - per
+
+id (id): integer pk. NOT NULL. MAIN. UNIQUE.
+prefijo (pre): integer nf. NOT NULL.
+numero (num): integer nf. NOT NULL.
+tipo (tip): string nf. NOT NULL.
+alta (alt): timestamp nf. NOT NULL. NOT ADMIN. DEFAULT: CURRENT_TIMESTAMP.
+baja (baj): timestamp nf.
+persona (per): integer mu. NOT NULL.

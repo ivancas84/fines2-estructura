@@ -1,0 +1,21 @@
+<?php
+
+require_once("class/model/Field.php");
+
+class FieldTelefonoPrefijoMain extends Field {
+
+  public $type = "int";
+  public $fieldType = "nf";
+  public $unique = false;
+  public $notNull = true;
+  public $default = false;
+  public $length = "10";
+  public $main = false;
+  public $name = "prefijo";
+  public $alias = "pre";
+
+
+  public function getEntity(){ return new TelefonoEntity; }
+
+
+}

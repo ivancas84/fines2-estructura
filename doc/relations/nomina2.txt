@@ -1,0 +1,22 @@
+id_persona - per
+comision - com
+division - com_dvi
+plan - com_dvi_pla
+sede - com_dvi_sed
+tipo_sede - com_dvi_sed_ts
+domicilio - com_dvi_sed_dom
+id_persona - com_dvi_sed_coo
+id_persona - com_dvi_sed_ref
+
+id (id): integer pk. NOT NULL. MAIN. UNIQUE.
+fotocopia_documento (fd): boolean nf. NOT NULL.
+partida_nacimiento (pn): boolean nf. NOT NULL.
+alta (alt): timestamp nf. NOT NULL. DEFAULT: CURRENT_TIMESTAMP.
+constancia_cuil (cc): boolean nf. NOT NULL.
+certificado_estudios (ce): boolean nf. NOT NULL.
+anio_ingreso (ai): integer nf.
+activo (act): boolean nf. NOT NULL.
+programa (pro): string nf.
+observaciones (obs): text nf.
+persona (per): integer mu. NOT NULL.
+comision (com): integer mu. NOT NULL.

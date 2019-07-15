@@ -1,0 +1,2 @@
+id (id): integer pk. NOT NULL. UNIQUE.
+nombre (nom): string nf. NOT NULL. MAIN. UNIQUE.

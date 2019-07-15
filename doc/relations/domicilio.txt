@@ -1,0 +1,8 @@
+id (id): integer pk. NOT NULL. UNIQUE.
+calle (cal): string nf. NOT NULL. MAIN.
+entre (ent): string nf.
+numero (num): string nf. NOT NULL. MAIN. DEFAULT: S/N.
+piso (pis): string nf.
+departamento (dep): string nf.
+barrio (bar): string nf. MAIN.
+localidad (loc): string nf. NOT NULL. DEFAULT: La Plata.

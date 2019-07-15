@@ -1,0 +1,23 @@
+dia - dia
+curso - cur
+comision - cur_com
+division - cur_com_dvi
+plan - cur_com_dvi_pla
+sede - cur_com_dvi_sed
+tipo_sede - cur_com_dvi_sed_ts
+domicilio - cur_com_dvi_sed_dom
+id_persona - cur_com_dvi_sed_coo
+id_persona - cur_com_dvi_sed_ref
+carga_horaria - cur_ch
+asignatura - cur_ch_asi
+plan - cur_ch_pla
+toma - cur_ta
+id_persona - cur_ta_pro
+id_persona - cur_ta_ree
+
+id (id): integer pk. NOT NULL. MAIN. UNIQUE.
+hora_inicio (hi): time nf. NOT NULL.
+hora_fin (hf): time nf. NOT NULL.
+horas_catedra (hc): integer nf. NOT NULL. NOT ADMIN. HIDDEN.
+dia (dia): integer mu. NOT NULL.
+curso (cur): integer mu. NOT NULL.

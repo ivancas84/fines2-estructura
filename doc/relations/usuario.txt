@@ -1,0 +1,7 @@
+id_persona - per
+
+id (id): integer pk. NOT NULL. MAIN. UNIQUE.
+clave (cla): string nf. NOT NULL.
+alta (alt): timestamp nf. NOT NULL. DEFAULT: CURRENT_TIMESTAMP.
+baja (baj): timestamp nf.
+persona (per): integer mu. NOT NULL.
