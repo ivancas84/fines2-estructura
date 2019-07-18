@@ -8,8 +8,11 @@ class ComisionSqlo extends ComisionSqloMain{
   public function insert(array $row) {
     $r = $this->sql->initializeInsert($row);
 
-    $rowD = Dba::get("division", $row["division"]);
-    $rowsCH = Dba::all("carga_horaria", [["anio", "=", $row["anio"]], ["semestre", "=", $row["semestre"]], ["plan", "=", $rowD["plan"]]]);
+    $sql = DivisionSqlo::getInstance()->getAll([$row["division"]]);
+    $rowD = Dba::fetchAssoc($sql);
+    $sql = CargaHorariaSqlo::getInstance()->all([["anio", "=", $row["anio"]], ["semestre", "=", $row["semestre"]], ["plan", "=", $rowD["plan"]]]);
+    //echo "<pre>".$sql;
+    $rowsCH = Dba::fetchAll($sql);
 
     if(!count($rowsCH)) throw new Exception("No existen cargas horarias asociadas");
 
