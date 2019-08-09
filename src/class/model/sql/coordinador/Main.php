@@ -85,7 +85,7 @@ class CoordinadorSqlMain extends EntitySql{
 ' . EntitySql::getInstanceFromString('domicilio', 'sed_dom')->_fields() . ',
 ' . EntitySql::getInstanceFromString('id_persona', 'sed_coo')->_fields() . ',
 ' . EntitySql::getInstanceFromString('id_persona', 'sed_ref')->_fields() . ',
-' . EntitySql::getInstanceFromString('id_persona', 'per')->_fields() . ' 
+' . EntitySql::getInstanceFromString('id_persona', 'per')->_fields() . '
 ';
   }
 

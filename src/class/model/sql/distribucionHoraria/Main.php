@@ -76,7 +76,7 @@ class DistribucionHorariaSqlMain extends EntitySql{
     return $this->_fields() . ',
 ' . EntitySql::getInstanceFromString('carga_horaria', 'ch')->_fields() . ',
 ' . EntitySql::getInstanceFromString('asignatura', 'ch_asi')->_fields() . ',
-' . EntitySql::getInstanceFromString('plan', 'ch_pla')->_fields() . ' 
+' . EntitySql::getInstanceFromString('plan', 'ch_pla')->_fields() . '
 ';
   }
 

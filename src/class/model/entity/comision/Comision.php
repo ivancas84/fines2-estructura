@@ -8,7 +8,7 @@ class ComisionEntity extends ComisionEntityMain {
     $array = parent::getFieldsNf();
     array_push($array, new FieldComisionTramo);
     array_push($array, new FieldComisionHorario);
-    array_push($array, new FieldComisionPeriodo);
+    //array_push($array, new FieldComisionPeriodo);
 
 
     for($i = 0; $i < count($array); $i++){

@@ -19,7 +19,6 @@ class ComisionValuesMain extends EntityValues {
   public $fechaSemestre = UNDEFINED;
   public $tramo = UNDEFINED;
   public $horario = UNDEFINED;
-  public $periodo = UNDEFINED;
   public $comisionSiguiente = UNDEFINED;
   public $division = UNDEFINED;
 
@@ -40,7 +39,6 @@ class ComisionValuesMain extends EntityValues {
     if(isset($row["fecha_semestre"])) $this->fechaSemestre = (is_null($row["fecha_semestre"])) ? null : intval($row["fecha_semestre"]);
     if(isset($row["tramo"])) $this->tramo = (is_null($row["tramo"])) ? null : (string)$row["tramo"];
     if(isset($row["horario"])) $this->horario = (is_null($row["horario"])) ? null : (string)$row["horario"];
-    if(isset($row["periodo"])) $this->periodo = (is_null($row["periodo"])) ? null : (string)$row["periodo"];
     if(isset($row["comision_siguiente"])) $this->comisionSiguiente = (is_null($row["comision_siguiente"])) ? null : (string)$row["comision_siguiente"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
     if(isset($row["division"])) $this->division = (is_null($row["division"])) ? null : (string)$row["division"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
@@ -72,7 +70,6 @@ class ComisionValuesMain extends EntityValues {
     if($this->fechaSemestre !== UNDEFINED) $row["fecha_semestre"] = $this->fechaSemestre;
     if($this->tramo !== UNDEFINED) $row["tramo"] = $this->tramo;
     if($this->horario !== UNDEFINED) $row["horario"] = $this->horario;
-    if($this->periodo !== UNDEFINED) $row["periodo"] = $this->periodo;
     if($this->comisionSiguiente !== UNDEFINED) $row["comision_siguiente"] = $this->comisionSiguiente;
     if($this->division !== UNDEFINED) $row["division"] = $this->division;
     return $row;
@@ -93,7 +90,6 @@ class ComisionValuesMain extends EntityValues {
   public function fechaSemestre() { return $this->fechaSemestre; }
   public function tramo($format = null) { return $this->formatString($this->tramo, $format); }
   public function horario($format = null) { return $this->formatString($this->horario, $format); }
-  public function periodo($format = null) { return $this->formatString($this->periodo, $format); }
   public function comisionSiguiente() { return $this->comisionSiguiente; }
   public function division() { return $this->division; }
   public function setId($p) {
@@ -166,11 +162,6 @@ class ComisionValuesMain extends EntityValues {
   public function setHorario($p) {
     if(empty($p)) return;
     $this->horario = $p;
-  }
-
-  public function setPeriodo($p) {
-    if(empty($p)) return;
-    $this->periodo = $p;
   }
 
   public function setComisionSiguiente($p) {

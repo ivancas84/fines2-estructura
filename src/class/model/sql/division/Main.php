@@ -76,7 +76,7 @@ class DivisionSqlMain extends EntitySql{
 ' . EntitySql::getInstanceFromString('tipo_sede', 'sed_ts')->_fields() . ',
 ' . EntitySql::getInstanceFromString('domicilio', 'sed_dom')->_fields() . ',
 ' . EntitySql::getInstanceFromString('id_persona', 'sed_coo')->_fields() . ',
-' . EntitySql::getInstanceFromString('id_persona', 'sed_ref')->_fields() . ' 
+' . EntitySql::getInstanceFromString('id_persona', 'sed_ref')->_fields() . '
 ';
   }
 
