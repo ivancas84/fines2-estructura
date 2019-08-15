@@ -115,7 +115,7 @@ class InasistenciaSqlMain extends EntitySql{
 ' . EntitySql::getInstanceFromString('asignatura', 'tom_cur_ch_asi')->_fields() . ',
 ' . EntitySql::getInstanceFromString('plan', 'tom_cur_ch_pla')->_fields() . ',
 ' . EntitySql::getInstanceFromString('id_persona', 'tom_pro')->_fields() . ',
-' . EntitySql::getInstanceFromString('id_persona', 'tom_ree')->_fields() . '
+' . EntitySql::getInstanceFromString('id_persona', 'tom_ree')->_fields() . ' 
 ';
   }
 

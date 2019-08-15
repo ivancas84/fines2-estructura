@@ -108,7 +108,7 @@ class CursoSqlMain extends EntitySql{
 ' . EntitySql::getInstanceFromString('plan', 'ch_pla')->_fields() . ',
 ' . EntitySql::getInstanceFromString('toma', 'ta')->_fields() . ',
 ' . EntitySql::getInstanceFromString('id_persona', 'ta_pro')->_fields() . ',
-' . EntitySql::getInstanceFromString('id_persona', 'ta_ree')->_fields() . '
+' . EntitySql::getInstanceFromString('id_persona', 'ta_ree')->_fields() . ' 
 ';
   }
 

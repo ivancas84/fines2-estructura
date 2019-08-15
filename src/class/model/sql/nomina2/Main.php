@@ -99,7 +99,7 @@ class Nomina2SqlMain extends EntitySql{
 ' . EntitySql::getInstanceFromString('tipo_sede', 'com_dvi_sed_ts')->_fields() . ',
 ' . EntitySql::getInstanceFromString('domicilio', 'com_dvi_sed_dom')->_fields() . ',
 ' . EntitySql::getInstanceFromString('id_persona', 'com_dvi_sed_coo')->_fields() . ',
-' . EntitySql::getInstanceFromString('id_persona', 'com_dvi_sed_ref')->_fields() . '
+' . EntitySql::getInstanceFromString('id_persona', 'com_dvi_sed_ref')->_fields() . ' 
 ';
   }
 

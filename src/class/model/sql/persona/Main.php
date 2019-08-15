@@ -84,7 +84,7 @@ class PersonaSqlMain extends EntitySql{
     return $this->_fields() . ',
 ' . EntitySql::getInstanceFromString('lugar_nacimiento', 'ln')->_fields() . ',
 ' . EntitySql::getInstanceFromString('id_persona', 'ip')->_fields() . ',
-' . EntitySql::getInstanceFromString('domicilio', 'dom')->_fields() . '
+' . EntitySql::getInstanceFromString('domicilio', 'dom')->_fields() . ' 
 ';
   }
 

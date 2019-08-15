@@ -142,7 +142,7 @@ class TomaSqlMain extends EntitySql{
 ' . EntitySql::getInstanceFromString('asignatura', 'cur_ch_asi')->_fields() . ',
 ' . EntitySql::getInstanceFromString('plan', 'cur_ch_pla')->_fields() . ',
 ' . EntitySql::getInstanceFromString('id_persona', 'pro')->_fields() . ',
-' . EntitySql::getInstanceFromString('id_persona', 'ree')->_fields() . '
+' . EntitySql::getInstanceFromString('id_persona', 'ree')->_fields() . ' 
 ';
   }
 

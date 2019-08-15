@@ -29,6 +29,7 @@ class ComisionSqlMain extends EntitySql{
       case $p.'fecha_semestre': return $t.".fecha_semestre";
       case $p.'tramo': return $t.".tramo";
       case $p.'horario': return $t.".horario";
+      case $p.'periodo': return $t.".periodo";
       case $p.'comision_siguiente': return $t.".comision_siguiente";
       case $p.'division': return $t.".division";
       default: return null;
@@ -104,7 +105,7 @@ class ComisionSqlMain extends EntitySql{
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingFieldEntity($p.'anio') . ' AS ' . $p.'anio, ' . $this->_mappingFieldEntity($p.'semestre') . ' AS ' . $p.'semestre, ' . $this->_mappingFieldEntity($p.'observaciones') . ' AS ' . $p.'observaciones, ' . $this->_mappingFieldEntity($p.'fecha') . ' AS ' . $p.'fecha, ' . $this->_mappingFieldEntity($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingFieldEntity($p.'baja') . ' AS ' . $p.'baja, ' . $this->_mappingFieldEntity($p.'comentario') . ' AS ' . $p.'comentario, ' . $this->_mappingFieldEntity($p.'autorizada') . ' AS ' . $p.'autorizada, ' . $this->_mappingFieldEntity($p.'apertura') . ' AS ' . $p.'apertura, ' . $this->_mappingFieldEntity($p.'publicar') . ' AS ' . $p.'publicar, ' . $this->_mappingFieldEntity($p.'fecha_anio') . ' AS ' . $p.'fecha_anio, ' . $this->_mappingFieldEntity($p.'fecha_semestre') . ' AS ' . $p.'fecha_semestre, ' . $this->_mappingFieldEntity($p.'tramo') . ' AS ' . $p.'tramo, ' . $this->_mappingFieldEntity($p.'horario') . ' AS ' . $p.'horario, ' . $this->_mappingFieldEntity($p.'comision_siguiente') . ' AS ' . $p.'comision_siguiente, ' . $this->_mappingFieldEntity($p.'division') . ' AS ' . $p.'division';
+' . $this->_mappingFieldEntity($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingFieldEntity($p.'anio') . ' AS ' . $p.'anio, ' . $this->_mappingFieldEntity($p.'semestre') . ' AS ' . $p.'semestre, ' . $this->_mappingFieldEntity($p.'observaciones') . ' AS ' . $p.'observaciones, ' . $this->_mappingFieldEntity($p.'fecha') . ' AS ' . $p.'fecha, ' . $this->_mappingFieldEntity($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingFieldEntity($p.'baja') . ' AS ' . $p.'baja, ' . $this->_mappingFieldEntity($p.'comentario') . ' AS ' . $p.'comentario, ' . $this->_mappingFieldEntity($p.'autorizada') . ' AS ' . $p.'autorizada, ' . $this->_mappingFieldEntity($p.'apertura') . ' AS ' . $p.'apertura, ' . $this->_mappingFieldEntity($p.'publicar') . ' AS ' . $p.'publicar, ' . $this->_mappingFieldEntity($p.'fecha_anio') . ' AS ' . $p.'fecha_anio, ' . $this->_mappingFieldEntity($p.'fecha_semestre') . ' AS ' . $p.'fecha_semestre, ' . $this->_mappingFieldEntity($p.'tramo') . ' AS ' . $p.'tramo, ' . $this->_mappingFieldEntity($p.'horario') . ' AS ' . $p.'horario, ' . $this->_mappingFieldEntity($p.'periodo') . ' AS ' . $p.'periodo, ' . $this->_mappingFieldEntity($p.'comision_siguiente') . ' AS ' . $p.'comision_siguiente, ' . $this->_mappingFieldEntity($p.'division') . ' AS ' . $p.'division';
   }
 
   public function _fieldsDb(){
@@ -122,7 +123,7 @@ class ComisionSqlMain extends EntitySql{
 ' . EntitySql::getInstanceFromString('tipo_sede', 'dvi_sed_ts')->_fields() . ',
 ' . EntitySql::getInstanceFromString('domicilio', 'dvi_sed_dom')->_fields() . ',
 ' . EntitySql::getInstanceFromString('id_persona', 'dvi_sed_coo')->_fields() . ',
-' . EntitySql::getInstanceFromString('id_persona', 'dvi_sed_ref')->_fields() . '
+' . EntitySql::getInstanceFromString('id_persona', 'dvi_sed_ref')->_fields() . ' 
 ';
   }
 
@@ -159,6 +160,7 @@ class ComisionSqlMain extends EntitySql{
       case "{$p}fecha_semestre": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}tramo": return $this->format->conditionText($f, $value, $option);
       case "{$p}horario": return $this->format->conditionText($f, $value, $option);
+      case "{$p}periodo": return $this->format->conditionText($f, $value, $option);
       case "{$p}comision_siguiente": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}division": return $this->format->conditionNumber($f, $value, $option);
       default: return parent::_conditionFieldStruct($field, $option, $value);
@@ -241,6 +243,7 @@ class ComisionSqlMain extends EntitySql{
     if(isset($row['fecha_semestre'])) $row_['fecha_semestre'] = $this->format->numeric($row['fecha_semestre']);
     if(isset($row['tramo'])) $row_['tramo'] = $this->format->escapeString($row['tramo']);
     if(isset($row['horario'])) $row_['horario'] = $this->format->escapeString($row['horario']);
+    if(isset($row['periodo'])) $row_['periodo'] = $this->format->escapeString($row['periodo']);
     if(isset($row['comision_siguiente']) ) $row_['comision_siguiente'] = $this->format->positiveIntegerWithoutZerofill($row['comision_siguiente']);
     if(isset($row['division']) ) $row_['division'] = $this->format->positiveIntegerWithoutZerofill($row['division']);
 
@@ -265,6 +268,7 @@ class ComisionSqlMain extends EntitySql{
     $row_["fecha_semestre"] = (is_null($row[$prefix . "fecha_semestre"])) ? null : intval($row[$prefix . "fecha_semestre"]);
     $row_["tramo"] = (is_null($row[$prefix . "tramo"])) ? null : (string)$row[$prefix . "tramo"];
     $row_["horario"] = (is_null($row[$prefix . "horario"])) ? null : (string)$row[$prefix . "horario"];
+    $row_["periodo"] = (is_null($row[$prefix . "periodo"])) ? null : (string)$row[$prefix . "periodo"];
     $row_["comision_siguiente"] = (is_null($row[$prefix . "comision_siguiente"])) ? null : (string)$row[$prefix . "comision_siguiente"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
     $row_["division"] = (is_null($row[$prefix . "division"])) ? null : (string)$row[$prefix . "division"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
     return $row_;

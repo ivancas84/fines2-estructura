@@ -113,7 +113,7 @@ class NotaSqlMain extends EntitySql{
 ' . EntitySql::getInstanceFromString('toma', 'cur_ta')->_fields() . ',
 ' . EntitySql::getInstanceFromString('id_persona', 'cur_ta_pro')->_fields() . ',
 ' . EntitySql::getInstanceFromString('id_persona', 'cur_ta_ree')->_fields() . ',
-' . EntitySql::getInstanceFromString('id_persona', 'alu')->_fields() . '
+' . EntitySql::getInstanceFromString('id_persona', 'alu')->_fields() . ' 
 ';
   }
 
