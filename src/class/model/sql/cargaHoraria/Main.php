@@ -85,7 +85,7 @@ class CargaHorariaSqlMain extends EntitySql{
   }
 
   public function fields(){
-    return $this->_fields() . ',
+    return parent::fields() . ',
 ' . EntitySql::getInstanceFromString('asignatura', 'asi')->_fields() . ',
 ' . EntitySql::getInstanceFromString('plan', 'pla')->_fields() . ' 
 ';

@@ -4,6 +4,7 @@ require_once("class/model/sql/cargaHoraria/Main.php");
 
 class CargaHorariaSql extends CargaHorariaSqlMain {
 
+
     public function _subSql(Render $render){ //subconsulta sql (en construccion)
         $t = $this->prt();
         return "
