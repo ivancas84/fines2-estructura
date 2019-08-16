@@ -11,6 +11,15 @@ class NotaValuesMain extends EntityValues {
   public $curso = UNDEFINED;
   public $alumno = UNDEFINED;
 
+  public function setDefault(){
+    $this->id = null;
+    $this->nota = null;
+    $this->alta = new DateTime();
+    $this->profesor = null;
+    $this->curso = null;
+    $this->alumno = null;
+  }
+
   public function fromArray(array $row = NULL){
     if(empty($row)) return;
     if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
@@ -20,7 +29,6 @@ class NotaValuesMain extends EntityValues {
     if(isset($row["curso"])) $this->curso = (is_null($row["curso"])) ? null : (string)$row["curso"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
     if(isset($row["alumno"])) $this->alumno = (is_null($row["alumno"])) ? null : (string)$row["alumno"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
-
 
   public function toArray(){
     $row = [];
@@ -44,32 +52,32 @@ class NotaValuesMain extends EntityValues {
   public function alumno() { return $this->alumno; }
   public function setId($p) {
     if(empty($p)) return;
-    $this->id = $p;
+    $this->id = trim($p);
   }
 
   public function setNota($p) {
     if(empty($p) && $p !== 0) return;
-    $this->nota = intval($p);
+    $this->nota = intval(trim($p));
   }
 
   public function setAlta($p) {
     if(empty($p)) return;
-    $this->alta = $p;
+    $this->alta = trim($p);
   }
 
   public function setProfesor($p) {
     if(empty($p) && $p !== 0) return;
-    $this->profesor = intval($p);
+    $this->profesor = intval(trim($p));
   }
 
   public function setCurso($p) {
     if(empty($p) && $p !== 0) return;
-    $this->curso = intval($p);
+    $this->curso = intval(trim($p));
   }
 
   public function setAlumno($p) {
     if(empty($p) && $p !== 0) return;
-    $this->alumno = intval($p);
+    $this->alumno = intval(trim($p));
   }
 
 

@@ -12,6 +12,16 @@ class TelefonoValuesMain extends EntityValues {
   public $baja = UNDEFINED;
   public $persona = UNDEFINED;
 
+  public function setDefault(){
+    $this->id = null;
+    $this->prefijo = null;
+    $this->numero = null;
+    $this->tipo = null;
+    $this->alta = new DateTime();
+    $this->baja = null;
+    $this->persona = null;
+  }
+
   public function fromArray(array $row = NULL){
     if(empty($row)) return;
     if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
@@ -22,7 +32,6 @@ class TelefonoValuesMain extends EntityValues {
     if(isset($row["baja"])) $this->baja = (is_null($row["baja"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row["baja"]);
     if(isset($row["persona"])) $this->persona = (is_null($row["persona"])) ? null : (string)$row["persona"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
-
 
   public function toArray(){
     $row = [];
@@ -51,37 +60,37 @@ class TelefonoValuesMain extends EntityValues {
   public function persona() { return $this->persona; }
   public function setId($p) {
     if(empty($p)) return;
-    $this->id = $p;
+    $this->id = trim($p);
   }
 
   public function setPrefijo($p) {
     if(empty($p) && $p !== 0) return;
-    $this->prefijo = intval($p);
+    $this->prefijo = intval(trim($p));
   }
 
   public function setNumero($p) {
     if(empty($p) && $p !== 0) return;
-    $this->numero = intval($p);
+    $this->numero = intval(trim($p));
   }
 
   public function setTipo($p) {
     if(empty($p)) return;
-    $this->tipo = $p;
+    $this->tipo = trim($p);
   }
 
   public function setAlta($p) {
     if(empty($p)) return;
-    $this->alta = $p;
+    $this->alta = trim($p);
   }
 
   public function setBaja($p) {
     if(empty($p)) return;
-    $this->baja = $p;
+    $this->baja = trim($p);
   }
 
   public function setPersona($p) {
     if(empty($p) && $p !== 0) return;
-    $this->persona = intval($p);
+    $this->persona = intval(trim($p));
   }
 
 

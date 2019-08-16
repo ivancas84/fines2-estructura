@@ -21,6 +21,25 @@ class TomaValuesMain extends EntityValues {
   public $profesor = UNDEFINED;
   public $reemplaza = UNDEFINED;
 
+  public function setDefault(){
+    $this->id = null;
+    $this->fechaToma = null;
+    $this->fechaInicio = null;
+    $this->fechaFin = null;
+    $this->fechaEntradaContralor = null;
+    $this->estado = "Pendiente";
+    $this->observaciones = null;
+    $this->comentarioContralor = null;
+    $this->alta = new DateTime();
+    $this->tipoMovimiento = "AI";
+    $this->estadoContralor = "Pasar";
+    $this->fechaDesde = null;
+    $this->sumaHorasCatedra = null;
+    $this->curso = null;
+    $this->profesor = null;
+    $this->reemplaza = null;
+  }
+
   public function fromArray(array $row = NULL){
     if(empty($row)) return;
     if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
@@ -40,7 +59,6 @@ class TomaValuesMain extends EntityValues {
     if(isset($row["profesor"])) $this->profesor = (is_null($row["profesor"])) ? null : (string)$row["profesor"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
     if(isset($row["reemplaza"])) $this->reemplaza = (is_null($row["reemplaza"])) ? null : (string)$row["reemplaza"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
-
 
   public function toArray(){
     $row = [];
@@ -99,82 +117,82 @@ class TomaValuesMain extends EntityValues {
   public function reemplaza() { return $this->reemplaza; }
   public function setId($p) {
     if(empty($p)) return;
-    $this->id = $p;
+    $this->id = trim($p);
   }
 
   public function setFechaToma($p) {
     if(empty($p)) return;
-    $this->fechaToma = $p;
+    $this->fechaToma = trim($p);
   }
 
   public function setFechaInicio($p) {
     if(empty($p)) return;
-    $this->fechaInicio = $p;
+    $this->fechaInicio = trim($p);
   }
 
   public function setFechaFin($p) {
     if(empty($p)) return;
-    $this->fechaFin = $p;
+    $this->fechaFin = trim($p);
   }
 
   public function setFechaEntradaContralor($p) {
     if(empty($p)) return;
-    $this->fechaEntradaContralor = $p;
+    $this->fechaEntradaContralor = trim($p);
   }
 
   public function setEstado($p) {
     if(empty($p)) return;
-    $this->estado = $p;
+    $this->estado = trim($p);
   }
 
   public function setObservaciones($p) {
     if(empty($p)) return;
-    $this->observaciones = $p;
+    $this->observaciones = trim($p);
   }
 
   public function setComentarioContralor($p) {
     if(empty($p)) return;
-    $this->comentarioContralor = $p;
+    $this->comentarioContralor = trim($p);
   }
 
   public function setAlta($p) {
     if(empty($p)) return;
-    $this->alta = $p;
+    $this->alta = trim($p);
   }
 
   public function setTipoMovimiento($p) {
     if(empty($p)) return;
-    $this->tipoMovimiento = $p;
+    $this->tipoMovimiento = trim($p);
   }
 
   public function setEstadoContralor($p) {
     if(empty($p)) return;
-    $this->estadoContralor = $p;
+    $this->estadoContralor = trim($p);
   }
 
   public function setFechaDesde($p) {
     if(empty($p)) return;
-    $this->fechaDesde = $p;
+    $this->fechaDesde = trim($p);
   }
 
   public function setSumaHorasCatedra($p) {
     if(empty($p) && $p !== 0) return;
-    $this->sumaHorasCatedra = intval($p);
+    $this->sumaHorasCatedra = intval(trim($p));
   }
 
   public function setCurso($p) {
     if(empty($p) && $p !== 0) return;
-    $this->curso = intval($p);
+    $this->curso = intval(trim($p));
   }
 
   public function setProfesor($p) {
     if(empty($p) && $p !== 0) return;
-    $this->profesor = intval($p);
+    $this->profesor = intval(trim($p));
   }
 
   public function setReemplaza($p) {
     if(empty($p) && $p !== 0) return;
-    $this->reemplaza = intval($p);
+    $this->reemplaza = intval(trim($p));
   }
 
 

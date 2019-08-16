@@ -10,6 +10,14 @@ class LugarNacimientoValuesMain extends EntityValues {
   public $pais = UNDEFINED;
   public $alta = UNDEFINED;
 
+  public function setDefault(){
+    $this->id = null;
+    $this->ciudad = null;
+    $this->provincia = null;
+    $this->pais = null;
+    $this->alta = new DateTime();
+  }
+
   public function fromArray(array $row = NULL){
     if(empty($row)) return;
     if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
@@ -18,7 +26,6 @@ class LugarNacimientoValuesMain extends EntityValues {
     if(isset($row["pais"])) $this->pais = (is_null($row["pais"])) ? null : (string)$row["pais"];
     if(isset($row["alta"])) $this->alta = (is_null($row["alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row["alta"]);
   }
-
 
   public function toArray(){
     $row = [];
@@ -40,27 +47,27 @@ class LugarNacimientoValuesMain extends EntityValues {
   public function alta($format = 'd/m/Y H:i') { return $this->formatDate($this->alta, $format); }
   public function setId($p) {
     if(empty($p)) return;
-    $this->id = $p;
+    $this->id = trim($p);
   }
 
   public function setCiudad($p) {
     if(empty($p)) return;
-    $this->ciudad = $p;
+    $this->ciudad = trim($p);
   }
 
   public function setProvincia($p) {
     if(empty($p)) return;
-    $this->provincia = $p;
+    $this->provincia = trim($p);
   }
 
   public function setPais($p) {
     if(empty($p)) return;
-    $this->pais = $p;
+    $this->pais = trim($p);
   }
 
   public function setAlta($p) {
     if(empty($p)) return;
-    $this->alta = $p;
+    $this->alta = trim($p);
   }
 
 

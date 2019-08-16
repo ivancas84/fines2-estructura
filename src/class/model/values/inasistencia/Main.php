@@ -14,6 +14,18 @@ class InasistenciaValuesMain extends EntityValues {
   public $observaciones = UNDEFINED;
   public $toma = UNDEFINED;
 
+  public function setDefault(){
+    $this->id = null;
+    $this->fechaDesde = null;
+    $this->fechaHasta = null;
+    $this->modulosSemanales = null;
+    $this->modulosMensuales = null;
+    $this->articulo = null;
+    $this->inciso = null;
+    $this->observaciones = null;
+    $this->toma = null;
+  }
+
   public function fromArray(array $row = NULL){
     if(empty($row)) return;
     if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
@@ -26,7 +38,6 @@ class InasistenciaValuesMain extends EntityValues {
     if(isset($row["observaciones"])) $this->observaciones = (is_null($row["observaciones"])) ? null : (string)$row["observaciones"];
     if(isset($row["toma"])) $this->toma = (is_null($row["toma"])) ? null : (string)$row["toma"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
-
 
   public function toArray(){
     $row = [];
@@ -59,47 +70,47 @@ class InasistenciaValuesMain extends EntityValues {
   public function toma() { return $this->toma; }
   public function setId($p) {
     if(empty($p)) return;
-    $this->id = $p;
+    $this->id = trim($p);
   }
 
   public function setFechaDesde($p) {
     if(empty($p)) return;
-    $this->fechaDesde = $p;
+    $this->fechaDesde = trim($p);
   }
 
   public function setFechaHasta($p) {
     if(empty($p)) return;
-    $this->fechaHasta = $p;
+    $this->fechaHasta = trim($p);
   }
 
   public function setModulosSemanales($p) {
     if(empty($p) && $p !== 0) return;
-    $this->modulosSemanales = intval($p);
+    $this->modulosSemanales = intval(trim($p));
   }
 
   public function setModulosMensuales($p) {
     if(empty($p) && $p !== 0) return;
-    $this->modulosMensuales = intval($p);
+    $this->modulosMensuales = intval(trim($p));
   }
 
   public function setArticulo($p) {
     if(empty($p)) return;
-    $this->articulo = $p;
+    $this->articulo = trim($p);
   }
 
   public function setInciso($p) {
     if(empty($p)) return;
-    $this->inciso = $p;
+    $this->inciso = trim($p);
   }
 
   public function setObservaciones($p) {
     if(empty($p)) return;
-    $this->observaciones = $p;
+    $this->observaciones = trim($p);
   }
 
   public function setToma($p) {
     if(empty($p) && $p !== 0) return;
-    $this->toma = intval($p);
+    $this->toma = intval(trim($p));
   }
 
 

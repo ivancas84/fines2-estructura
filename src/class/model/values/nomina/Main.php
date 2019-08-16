@@ -10,6 +10,14 @@ class NominaValuesMain extends EntityValues {
   public $division = UNDEFINED;
   public $persona = UNDEFINED;
 
+  public function setDefault(){
+    $this->id = null;
+    $this->alta = new DateTime();
+    $this->activo = 1;
+    $this->division = null;
+    $this->persona = null;
+  }
+
   public function fromArray(array $row = NULL){
     if(empty($row)) return;
     if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
@@ -18,7 +26,6 @@ class NominaValuesMain extends EntityValues {
     if(isset($row["division"])) $this->division = (is_null($row["division"])) ? null : (string)$row["division"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
     if(isset($row["persona"])) $this->persona = (is_null($row["persona"])) ? null : (string)$row["persona"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
-
 
   public function toArray(){
     $row = [];
@@ -40,26 +47,26 @@ class NominaValuesMain extends EntityValues {
   public function persona() { return $this->persona; }
   public function setId($p) {
     if(empty($p)) return;
-    $this->id = $p;
+    $this->id = trim($p);
   }
 
   public function setAlta($p) {
     if(empty($p)) return;
-    $this->alta = $p;
+    $this->alta = trim($p);
   }
 
   public function setActivo($p) {
-    $this->activo = settypebool($p);
+    $this->activo = settypebool(trim($p));
   }
 
   public function setDivision($p) {
     if(empty($p) && $p !== 0) return;
-    $this->division = intval($p);
+    $this->division = intval(trim($p));
   }
 
   public function setPersona($p) {
     if(empty($p) && $p !== 0) return;
-    $this->persona = intval($p);
+    $this->persona = intval(trim($p));
   }
 
 

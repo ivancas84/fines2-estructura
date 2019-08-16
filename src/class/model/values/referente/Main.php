@@ -10,6 +10,14 @@ class ReferenteValuesMain extends EntityValues {
   public $persona = UNDEFINED;
   public $sede = UNDEFINED;
 
+  public function setDefault(){
+    $this->id = null;
+    $this->alta = new DateTime();
+    $this->baja = null;
+    $this->persona = null;
+    $this->sede = null;
+  }
+
   public function fromArray(array $row = NULL){
     if(empty($row)) return;
     if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
@@ -18,7 +26,6 @@ class ReferenteValuesMain extends EntityValues {
     if(isset($row["persona"])) $this->persona = (is_null($row["persona"])) ? null : (string)$row["persona"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
     if(isset($row["sede"])) $this->sede = (is_null($row["sede"])) ? null : (string)$row["sede"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
-
 
   public function toArray(){
     $row = [];
@@ -43,27 +50,27 @@ class ReferenteValuesMain extends EntityValues {
   public function sede() { return $this->sede; }
   public function setId($p) {
     if(empty($p)) return;
-    $this->id = $p;
+    $this->id = trim($p);
   }
 
   public function setAlta($p) {
     if(empty($p)) return;
-    $this->alta = $p;
+    $this->alta = trim($p);
   }
 
   public function setBaja($p) {
     if(empty($p)) return;
-    $this->baja = $p;
+    $this->baja = trim($p);
   }
 
   public function setPersona($p) {
     if(empty($p) && $p !== 0) return;
-    $this->persona = intval($p);
+    $this->persona = intval(trim($p));
   }
 
   public function setSede($p) {
     if(empty($p) && $p !== 0) return;
-    $this->sede = intval($p);
+    $this->sede = intval(trim($p));
   }
 
 

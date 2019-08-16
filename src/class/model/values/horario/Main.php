@@ -11,6 +11,15 @@ class HorarioValuesMain extends EntityValues {
   public $dia = UNDEFINED;
   public $curso = UNDEFINED;
 
+  public function setDefault(){
+    $this->id = null;
+    $this->horaInicio = null;
+    $this->horaFin = null;
+    $this->horasCatedra = null;
+    $this->dia = null;
+    $this->curso = null;
+  }
+
   public function fromArray(array $row = NULL){
     if(empty($row)) return;
     if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
@@ -20,7 +29,6 @@ class HorarioValuesMain extends EntityValues {
     if(isset($row["dia"])) $this->dia = (is_null($row["dia"])) ? null : (string)$row["dia"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
     if(isset($row["curso"])) $this->curso = (is_null($row["curso"])) ? null : (string)$row["curso"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
-
 
   public function toArray(){
     $row = [];
@@ -47,32 +55,32 @@ class HorarioValuesMain extends EntityValues {
   public function curso() { return $this->curso; }
   public function setId($p) {
     if(empty($p)) return;
-    $this->id = $p;
+    $this->id = trim($p);
   }
 
   public function setHoraInicio($p) {
     if(empty($p)) return;
-    $this->horaInicio = $p;
+    $this->horaInicio = trim($p);
   }
 
   public function setHoraFin($p) {
     if(empty($p)) return;
-    $this->horaFin = $p;
+    $this->horaFin = trim($p);
   }
 
   public function setHorasCatedra($p) {
     if(empty($p) && $p !== 0) return;
-    $this->horasCatedra = intval($p);
+    $this->horasCatedra = intval(trim($p));
   }
 
   public function setDia($p) {
     if(empty($p) && $p !== 0) return;
-    $this->dia = intval($p);
+    $this->dia = intval(trim($p));
   }
 
   public function setCurso($p) {
     if(empty($p) && $p !== 0) return;
-    $this->curso = intval($p);
+    $this->curso = intval(trim($p));
   }
 
 

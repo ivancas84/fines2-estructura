@@ -12,6 +12,16 @@ class CargaHorariaValuesMain extends EntityValues {
   public $asignatura = UNDEFINED;
   public $plan = UNDEFINED;
 
+  public function setDefault(){
+    $this->id = null;
+    $this->anio = null;
+    $this->semestre = null;
+    $this->horasCatedra = null;
+    $this->tramo = null;
+    $this->asignatura = null;
+    $this->plan = null;
+  }
+
   public function fromArray(array $row = NULL){
     if(empty($row)) return;
     if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
@@ -22,7 +32,6 @@ class CargaHorariaValuesMain extends EntityValues {
     if(isset($row["asignatura"])) $this->asignatura = (is_null($row["asignatura"])) ? null : (string)$row["asignatura"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
     if(isset($row["plan"])) $this->plan = (is_null($row["plan"])) ? null : (string)$row["plan"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
-
 
   public function toArray(){
     $row = [];
@@ -45,37 +54,37 @@ class CargaHorariaValuesMain extends EntityValues {
   public function plan() { return $this->plan; }
   public function setId($p) {
     if(empty($p)) return;
-    $this->id = $p;
+    $this->id = trim($p);
   }
 
   public function setAnio($p) {
     if(empty($p) && $p !== 0) return;
-    $this->anio = intval($p);
+    $this->anio = intval(trim($p));
   }
 
   public function setSemestre($p) {
     if(empty($p) && $p !== 0) return;
-    $this->semestre = intval($p);
+    $this->semestre = intval(trim($p));
   }
 
   public function setHorasCatedra($p) {
     if(empty($p) && $p !== 0) return;
-    $this->horasCatedra = intval($p);
+    $this->horasCatedra = intval(trim($p));
   }
 
   public function setTramo($p) {
     if(empty($p)) return;
-    $this->tramo = $p;
+    $this->tramo = trim($p);
   }
 
   public function setAsignatura($p) {
     if(empty($p) && $p !== 0) return;
-    $this->asignatura = intval($p);
+    $this->asignatura = intval(trim($p));
   }
 
   public function setPlan($p) {
     if(empty($p) && $p !== 0) return;
-    $this->plan = intval($p);
+    $this->plan = intval(trim($p));
   }
 
 

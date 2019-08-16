@@ -23,6 +23,27 @@ class ComisionValuesMain extends EntityValues {
   public $comisionSiguiente = UNDEFINED;
   public $division = UNDEFINED;
 
+  public function setDefault(){
+    $this->id = null;
+    $this->anio = null;
+    $this->semestre = null;
+    $this->observaciones = null;
+    $this->fecha = null;
+    $this->alta = new DateTime();
+    $this->baja = null;
+    $this->comentario = null;
+    $this->autorizada = null;
+    $this->apertura = null;
+    $this->publicar = null;
+    $this->fechaAnio = null;
+    $this->fechaSemestre = null;
+    $this->tramo = null;
+    $this->horario = null;
+    $this->periodo = null;
+    $this->comisionSiguiente = null;
+    $this->division = null;
+  }
+
   public function fromArray(array $row = NULL){
     if(empty($row)) return;
     if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
@@ -44,7 +65,6 @@ class ComisionValuesMain extends EntityValues {
     if(isset($row["comision_siguiente"])) $this->comisionSiguiente = (is_null($row["comision_siguiente"])) ? null : (string)$row["comision_siguiente"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
     if(isset($row["division"])) $this->division = (is_null($row["division"])) ? null : (string)$row["division"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
-
 
   public function toArray(){
     $row = [];
@@ -98,89 +118,89 @@ class ComisionValuesMain extends EntityValues {
   public function division() { return $this->division; }
   public function setId($p) {
     if(empty($p)) return;
-    $this->id = $p;
+    $this->id = trim($p);
   }
 
   public function setAnio($p) {
     if(empty($p) && $p !== 0) return;
-    $this->anio = intval($p);
+    $this->anio = intval(trim($p));
   }
 
   public function setSemestre($p) {
     if(empty($p) && $p !== 0) return;
-    $this->semestre = intval($p);
+    $this->semestre = intval(trim($p));
   }
 
   public function setObservaciones($p) {
     if(empty($p)) return;
-    $this->observaciones = $p;
+    $this->observaciones = trim($p);
   }
 
   public function setFecha($p) {
     if(empty($p)) return;
-    $this->fecha = $p;
+    $this->fecha = trim($p);
   }
 
   public function setAlta($p) {
     if(empty($p)) return;
-    $this->alta = $p;
+    $this->alta = trim($p);
   }
 
   public function setBaja($p) {
     if(empty($p)) return;
-    $this->baja = $p;
+    $this->baja = trim($p);
   }
 
   public function setComentario($p) {
     if(empty($p)) return;
-    $this->comentario = $p;
+    $this->comentario = trim($p);
   }
 
   public function setAutorizada($p) {
-    $this->autorizada = settypebool($p);
+    $this->autorizada = settypebool(trim($p));
   }
 
   public function setApertura($p) {
-    $this->apertura = settypebool($p);
+    $this->apertura = settypebool(trim($p));
   }
 
   public function setPublicar($p) {
-    $this->publicar = settypebool($p);
+    $this->publicar = settypebool(trim($p));
   }
 
   public function setFechaAnio($p) {
     if(empty($p)) return;
-    $this->fechaAnio = $p;
+    $this->fechaAnio = trim($p);
   }
 
   public function setFechaSemestre($p) {
     if(empty($p) && $p !== 0) return;
-    $this->fechaSemestre = intval($p);
+    $this->fechaSemestre = intval(trim($p));
   }
 
   public function setTramo($p) {
     if(empty($p)) return;
-    $this->tramo = $p;
+    $this->tramo = trim($p);
   }
 
   public function setHorario($p) {
     if(empty($p)) return;
-    $this->horario = $p;
+    $this->horario = trim($p);
   }
 
   public function setPeriodo($p) {
     if(empty($p)) return;
-    $this->periodo = $p;
+    $this->periodo = trim($p);
   }
 
   public function setComisionSiguiente($p) {
     if(empty($p) && $p !== 0) return;
-    $this->comisionSiguiente = intval($p);
+    $this->comisionSiguiente = intval(trim($p));
   }
 
   public function setDivision($p) {
     if(empty($p) && $p !== 0) return;
-    $this->division = intval($p);
+    $this->division = intval(trim($p));
   }
 
 

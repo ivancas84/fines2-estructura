@@ -13,6 +13,17 @@ class CursoValuesMain extends EntityValues {
   public $cargaHoraria = UNDEFINED;
   public $tomaActiva = UNDEFINED;
 
+  public function setDefault(){
+    $this->id = null;
+    $this->estado = null;
+    $this->alta = new DateTime();
+    $this->baja = null;
+    $this->horario = null;
+    $this->comision = null;
+    $this->cargaHoraria = null;
+    $this->tomaActiva = null;
+  }
+
   public function fromArray(array $row = NULL){
     if(empty($row)) return;
     if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
@@ -24,7 +35,6 @@ class CursoValuesMain extends EntityValues {
     if(isset($row["carga_horaria"])) $this->cargaHoraria = (is_null($row["carga_horaria"])) ? null : (string)$row["carga_horaria"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
     if(isset($row["toma_activa"])) $this->tomaActiva = (is_null($row["toma_activa"])) ? null : (string)$row["toma_activa"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
-
 
   public function toArray(){
     $row = [];
@@ -55,42 +65,42 @@ class CursoValuesMain extends EntityValues {
   public function tomaActiva() { return $this->tomaActiva; }
   public function setId($p) {
     if(empty($p)) return;
-    $this->id = $p;
+    $this->id = trim($p);
   }
 
   public function setEstado($p) {
     if(empty($p)) return;
-    $this->estado = $p;
+    $this->estado = trim($p);
   }
 
   public function setAlta($p) {
     if(empty($p)) return;
-    $this->alta = $p;
+    $this->alta = trim($p);
   }
 
   public function setBaja($p) {
     if(empty($p)) return;
-    $this->baja = $p;
+    $this->baja = trim($p);
   }
 
   public function setHorario($p) {
     if(empty($p)) return;
-    $this->horario = $p;
+    $this->horario = trim($p);
   }
 
   public function setComision($p) {
     if(empty($p) && $p !== 0) return;
-    $this->comision = intval($p);
+    $this->comision = intval(trim($p));
   }
 
   public function setCargaHoraria($p) {
     if(empty($p) && $p !== 0) return;
-    $this->cargaHoraria = intval($p);
+    $this->cargaHoraria = intval(trim($p));
   }
 
   public function setTomaActiva($p) {
     if(empty($p) && $p !== 0) return;
-    $this->tomaActiva = intval($p);
+    $this->tomaActiva = intval(trim($p));
   }
 
 

@@ -13,6 +13,17 @@ class DomicilioValuesMain extends EntityValues {
   public $barrio = UNDEFINED;
   public $localidad = UNDEFINED;
 
+  public function setDefault(){
+    $this->id = null;
+    $this->calle = null;
+    $this->entre = null;
+    $this->numero = "S/N";
+    $this->piso = null;
+    $this->departamento = null;
+    $this->barrio = null;
+    $this->localidad = "La Plata";
+  }
+
   public function fromArray(array $row = NULL){
     if(empty($row)) return;
     if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
@@ -24,7 +35,6 @@ class DomicilioValuesMain extends EntityValues {
     if(isset($row["barrio"])) $this->barrio = (is_null($row["barrio"])) ? null : (string)$row["barrio"];
     if(isset($row["localidad"])) $this->localidad = (is_null($row["localidad"])) ? null : (string)$row["localidad"];
   }
-
 
   public function toArray(){
     $row = [];
@@ -49,42 +59,42 @@ class DomicilioValuesMain extends EntityValues {
   public function localidad($format = null) { return $this->formatString($this->localidad, $format); }
   public function setId($p) {
     if(empty($p)) return;
-    $this->id = $p;
+    $this->id = trim($p);
   }
 
   public function setCalle($p) {
     if(empty($p)) return;
-    $this->calle = $p;
+    $this->calle = trim($p);
   }
 
   public function setEntre($p) {
     if(empty($p)) return;
-    $this->entre = $p;
+    $this->entre = trim($p);
   }
 
   public function setNumero($p) {
     if(empty($p)) return;
-    $this->numero = $p;
+    $this->numero = trim($p);
   }
 
   public function setPiso($p) {
     if(empty($p)) return;
-    $this->piso = $p;
+    $this->piso = trim($p);
   }
 
   public function setDepartamento($p) {
     if(empty($p)) return;
-    $this->departamento = $p;
+    $this->departamento = trim($p);
   }
 
   public function setBarrio($p) {
     if(empty($p)) return;
-    $this->barrio = $p;
+    $this->barrio = trim($p);
   }
 
   public function setLocalidad($p) {
     if(empty($p)) return;
-    $this->localidad = $p;
+    $this->localidad = trim($p);
   }
 
 

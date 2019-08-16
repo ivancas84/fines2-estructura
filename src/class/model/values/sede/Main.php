@@ -17,6 +17,21 @@ class SedeValuesMain extends EntityValues {
   public $coordinador = UNDEFINED;
   public $referente = UNDEFINED;
 
+  public function setDefault(){
+    $this->id = null;
+    $this->numero = null;
+    $this->nombre = null;
+    $this->organizacion = null;
+    $this->observaciones = null;
+    $this->tipo = null;
+    $this->baja = null;
+    $this->dependencia = null;
+    $this->tipoSede = null;
+    $this->domicilio = null;
+    $this->coordinador = null;
+    $this->referente = null;
+  }
+
   public function fromArray(array $row = NULL){
     if(empty($row)) return;
     if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
@@ -32,7 +47,6 @@ class SedeValuesMain extends EntityValues {
     if(isset($row["coordinador"])) $this->coordinador = (is_null($row["coordinador"])) ? null : (string)$row["coordinador"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
     if(isset($row["referente"])) $this->referente = (is_null($row["referente"])) ? null : (string)$row["referente"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
-
 
   public function toArray(){
     $row = [];
@@ -68,62 +82,62 @@ class SedeValuesMain extends EntityValues {
   public function referente() { return $this->referente; }
   public function setId($p) {
     if(empty($p)) return;
-    $this->id = $p;
+    $this->id = trim($p);
   }
 
   public function setNumero($p) {
     if(empty($p)) return;
-    $this->numero = $p;
+    $this->numero = trim($p);
   }
 
   public function setNombre($p) {
     if(empty($p)) return;
-    $this->nombre = $p;
+    $this->nombre = trim($p);
   }
 
   public function setOrganizacion($p) {
     if(empty($p)) return;
-    $this->organizacion = $p;
+    $this->organizacion = trim($p);
   }
 
   public function setObservaciones($p) {
     if(empty($p)) return;
-    $this->observaciones = $p;
+    $this->observaciones = trim($p);
   }
 
   public function setTipo($p) {
     if(empty($p)) return;
-    $this->tipo = $p;
+    $this->tipo = trim($p);
   }
 
   public function setBaja($p) {
     if(empty($p)) return;
-    $this->baja = $p;
+    $this->baja = trim($p);
   }
 
   public function setDependencia($p) {
     if(empty($p) && $p !== 0) return;
-    $this->dependencia = intval($p);
+    $this->dependencia = intval(trim($p));
   }
 
   public function setTipoSede($p) {
     if(empty($p) && $p !== 0) return;
-    $this->tipoSede = intval($p);
+    $this->tipoSede = intval(trim($p));
   }
 
   public function setDomicilio($p) {
     if(empty($p) && $p !== 0) return;
-    $this->domicilio = intval($p);
+    $this->domicilio = intval(trim($p));
   }
 
   public function setCoordinador($p) {
     if(empty($p) && $p !== 0) return;
-    $this->coordinador = intval($p);
+    $this->coordinador = intval(trim($p));
   }
 
   public function setReferente($p) {
     if(empty($p) && $p !== 0) return;
-    $this->referente = intval($p);
+    $this->referente = intval(trim($p));
   }
 
 

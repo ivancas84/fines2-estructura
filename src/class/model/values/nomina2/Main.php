@@ -17,6 +17,21 @@ class Nomina2ValuesMain extends EntityValues {
   public $persona = UNDEFINED;
   public $comision = UNDEFINED;
 
+  public function setDefault(){
+    $this->id = null;
+    $this->fotocopiaDocumento = null;
+    $this->partidaNacimiento = null;
+    $this->alta = new DateTime();
+    $this->constanciaCuil = null;
+    $this->certificadoEstudios = null;
+    $this->anioIngreso = null;
+    $this->activo = null;
+    $this->programa = null;
+    $this->observaciones = null;
+    $this->persona = null;
+    $this->comision = null;
+  }
+
   public function fromArray(array $row = NULL){
     if(empty($row)) return;
     if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
@@ -32,7 +47,6 @@ class Nomina2ValuesMain extends EntityValues {
     if(isset($row["persona"])) $this->persona = (is_null($row["persona"])) ? null : (string)$row["persona"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
     if(isset($row["comision"])) $this->comision = (is_null($row["comision"])) ? null : (string)$row["comision"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
-
 
   public function toArray(){
     $row = [];
@@ -68,57 +82,57 @@ class Nomina2ValuesMain extends EntityValues {
   public function comision() { return $this->comision; }
   public function setId($p) {
     if(empty($p)) return;
-    $this->id = $p;
+    $this->id = trim($p);
   }
 
   public function setFotocopiaDocumento($p) {
-    $this->fotocopiaDocumento = settypebool($p);
+    $this->fotocopiaDocumento = settypebool(trim($p));
   }
 
   public function setPartidaNacimiento($p) {
-    $this->partidaNacimiento = settypebool($p);
+    $this->partidaNacimiento = settypebool(trim($p));
   }
 
   public function setAlta($p) {
     if(empty($p)) return;
-    $this->alta = $p;
+    $this->alta = trim($p);
   }
 
   public function setConstanciaCuil($p) {
-    $this->constanciaCuil = settypebool($p);
+    $this->constanciaCuil = settypebool(trim($p));
   }
 
   public function setCertificadoEstudios($p) {
-    $this->certificadoEstudios = settypebool($p);
+    $this->certificadoEstudios = settypebool(trim($p));
   }
 
   public function setAnioIngreso($p) {
     if(empty($p) && $p !== 0) return;
-    $this->anioIngreso = intval($p);
+    $this->anioIngreso = intval(trim($p));
   }
 
   public function setActivo($p) {
-    $this->activo = settypebool($p);
+    $this->activo = settypebool(trim($p));
   }
 
   public function setPrograma($p) {
     if(empty($p)) return;
-    $this->programa = $p;
+    $this->programa = trim($p);
   }
 
   public function setObservaciones($p) {
     if(empty($p)) return;
-    $this->observaciones = $p;
+    $this->observaciones = trim($p);
   }
 
   public function setPersona($p) {
     if(empty($p) && $p !== 0) return;
-    $this->persona = intval($p);
+    $this->persona = intval(trim($p));
   }
 
   public function setComision($p) {
     if(empty($p) && $p !== 0) return;
-    $this->comision = intval($p);
+    $this->comision = intval(trim($p));
   }
 
 

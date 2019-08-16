@@ -7,12 +7,16 @@ class ClasificacionValuesMain extends EntityValues {
   public $id = UNDEFINED;
   public $nombre = UNDEFINED;
 
+  public function setDefault(){
+    $this->id = null;
+    $this->nombre = null;
+  }
+
   public function fromArray(array $row = NULL){
     if(empty($row)) return;
     if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
     if(isset($row["nombre"])) $this->nombre = (is_null($row["nombre"])) ? null : (string)$row["nombre"];
   }
-
 
   public function toArray(){
     $row = [];
@@ -25,12 +29,12 @@ class ClasificacionValuesMain extends EntityValues {
   public function nombre($format = null) { return $this->formatString($this->nombre, $format); }
   public function setId($p) {
     if(empty($p)) return;
-    $this->id = $p;
+    $this->id = trim($p);
   }
 
   public function setNombre($p) {
     if(empty($p)) return;
-    $this->nombre = $p;
+    $this->nombre = trim($p);
   }
 
 

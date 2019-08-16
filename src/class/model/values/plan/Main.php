@@ -8,13 +8,18 @@ class PlanValuesMain extends EntityValues {
   public $orientacion = UNDEFINED;
   public $resolucion = UNDEFINED;
 
+  public function setDefault(){
+    $this->id = null;
+    $this->orientacion = null;
+    $this->resolucion = null;
+  }
+
   public function fromArray(array $row = NULL){
     if(empty($row)) return;
     if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
     if(isset($row["orientacion"])) $this->orientacion = (is_null($row["orientacion"])) ? null : (string)$row["orientacion"];
     if(isset($row["resolucion"])) $this->resolucion = (is_null($row["resolucion"])) ? null : (string)$row["resolucion"];
   }
-
 
   public function toArray(){
     $row = [];
@@ -29,17 +34,17 @@ class PlanValuesMain extends EntityValues {
   public function resolucion($format = null) { return $this->formatString($this->resolucion, $format); }
   public function setId($p) {
     if(empty($p)) return;
-    $this->id = $p;
+    $this->id = trim($p);
   }
 
   public function setOrientacion($p) {
     if(empty($p)) return;
-    $this->orientacion = $p;
+    $this->orientacion = trim($p);
   }
 
   public function setResolucion($p) {
     if(empty($p)) return;
-    $this->resolucion = $p;
+    $this->resolucion = trim($p);
   }
 
 

@@ -11,6 +11,15 @@ class PersonaValuesMain extends EntityValues {
   public $idPersona = UNDEFINED;
   public $domicilio = UNDEFINED;
 
+  public function setDefault(){
+    $this->id = null;
+    $this->alta = new DateTime();
+    $this->baja = null;
+    $this->lugarNacimiento = null;
+    $this->idPersona = null;
+    $this->domicilio = null;
+  }
+
   public function fromArray(array $row = NULL){
     if(empty($row)) return;
     if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
@@ -20,7 +29,6 @@ class PersonaValuesMain extends EntityValues {
     if(isset($row["id_persona"])) $this->idPersona = (is_null($row["id_persona"])) ? null : (string)$row["id_persona"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
     if(isset($row["domicilio"])) $this->domicilio = (is_null($row["domicilio"])) ? null : (string)$row["domicilio"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
-
 
   public function toArray(){
     $row = [];
@@ -47,32 +55,32 @@ class PersonaValuesMain extends EntityValues {
   public function domicilio() { return $this->domicilio; }
   public function setId($p) {
     if(empty($p)) return;
-    $this->id = $p;
+    $this->id = trim($p);
   }
 
   public function setAlta($p) {
     if(empty($p)) return;
-    $this->alta = $p;
+    $this->alta = trim($p);
   }
 
   public function setBaja($p) {
     if(empty($p)) return;
-    $this->baja = $p;
+    $this->baja = trim($p);
   }
 
   public function setLugarNacimiento($p) {
     if(empty($p) && $p !== 0) return;
-    $this->lugarNacimiento = intval($p);
+    $this->lugarNacimiento = intval(trim($p));
   }
 
   public function setIdPersona($p) {
     if(empty($p) && $p !== 0) return;
-    $this->idPersona = intval($p);
+    $this->idPersona = intval(trim($p));
   }
 
   public function setDomicilio($p) {
     if(empty($p) && $p !== 0) return;
-    $this->domicilio = intval($p);
+    $this->domicilio = intval(trim($p));
   }
 
 

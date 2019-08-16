@@ -11,6 +11,15 @@ class AsignaturaValuesMain extends EntityValues {
   public $codigo = UNDEFINED;
   public $perfil = UNDEFINED;
 
+  public function setDefault(){
+    $this->id = null;
+    $this->nombre = null;
+    $this->formacion = null;
+    $this->clasificacion = null;
+    $this->codigo = null;
+    $this->perfil = null;
+  }
+
   public function fromArray(array $row = NULL){
     if(empty($row)) return;
     if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
@@ -20,7 +29,6 @@ class AsignaturaValuesMain extends EntityValues {
     if(isset($row["codigo"])) $this->codigo = (is_null($row["codigo"])) ? null : (string)$row["codigo"];
     if(isset($row["perfil"])) $this->perfil = (is_null($row["perfil"])) ? null : (string)$row["perfil"];
   }
-
 
   public function toArray(){
     $row = [];
@@ -41,32 +49,32 @@ class AsignaturaValuesMain extends EntityValues {
   public function perfil($format = null) { return $this->formatString($this->perfil, $format); }
   public function setId($p) {
     if(empty($p)) return;
-    $this->id = $p;
+    $this->id = trim($p);
   }
 
   public function setNombre($p) {
     if(empty($p)) return;
-    $this->nombre = $p;
+    $this->nombre = trim($p);
   }
 
   public function setFormacion($p) {
     if(empty($p)) return;
-    $this->formacion = $p;
+    $this->formacion = trim($p);
   }
 
   public function setClasificacion($p) {
     if(empty($p)) return;
-    $this->clasificacion = $p;
+    $this->clasificacion = trim($p);
   }
 
   public function setCodigo($p) {
     if(empty($p)) return;
-    $this->codigo = $p;
+    $this->codigo = trim($p);
   }
 
   public function setPerfil($p) {
     if(empty($p)) return;
-    $this->perfil = $p;
+    $this->perfil = trim($p);
   }
 
 

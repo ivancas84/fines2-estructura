@@ -13,6 +13,17 @@ class AlumnoValuesMain extends EntityValues {
   public $observaciones = UNDEFINED;
   public $persona = UNDEFINED;
 
+  public function setDefault(){
+    $this->id = null;
+    $this->fotocopiaDocumento = null;
+    $this->partidaNacimiento = null;
+    $this->constanciaCuil = null;
+    $this->certificadoEstudios = null;
+    $this->anioIngreso = null;
+    $this->observaciones = null;
+    $this->persona = null;
+  }
+
   public function fromArray(array $row = NULL){
     if(empty($row)) return;
     if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
@@ -24,7 +35,6 @@ class AlumnoValuesMain extends EntityValues {
     if(isset($row["observaciones"])) $this->observaciones = (is_null($row["observaciones"])) ? null : (string)$row["observaciones"];
     if(isset($row["persona"])) $this->persona = (is_null($row["persona"])) ? null : (string)$row["persona"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
-
 
   public function toArray(){
     $row = [];
@@ -49,38 +59,38 @@ class AlumnoValuesMain extends EntityValues {
   public function persona() { return $this->persona; }
   public function setId($p) {
     if(empty($p)) return;
-    $this->id = $p;
+    $this->id = trim($p);
   }
 
   public function setFotocopiaDocumento($p) {
-    $this->fotocopiaDocumento = settypebool($p);
+    $this->fotocopiaDocumento = settypebool(trim($p));
   }
 
   public function setPartidaNacimiento($p) {
-    $this->partidaNacimiento = settypebool($p);
+    $this->partidaNacimiento = settypebool(trim($p));
   }
 
   public function setConstanciaCuil($p) {
-    $this->constanciaCuil = settypebool($p);
+    $this->constanciaCuil = settypebool(trim($p));
   }
 
   public function setCertificadoEstudios($p) {
-    $this->certificadoEstudios = settypebool($p);
+    $this->certificadoEstudios = settypebool(trim($p));
   }
 
   public function setAnioIngreso($p) {
     if(empty($p) && $p !== 0) return;
-    $this->anioIngreso = intval($p);
+    $this->anioIngreso = intval(trim($p));
   }
 
   public function setObservaciones($p) {
     if(empty($p)) return;
-    $this->observaciones = $p;
+    $this->observaciones = trim($p);
   }
 
   public function setPersona($p) {
     if(empty($p) && $p !== 0) return;
-    $this->persona = intval($p);
+    $this->persona = intval(trim($p));
   }
 
 

@@ -8,13 +8,18 @@ class RolValuesMain extends EntityValues {
   public $descripcion = UNDEFINED;
   public $detalle = UNDEFINED;
 
+  public function setDefault(){
+    $this->id = null;
+    $this->descripcion = null;
+    $this->detalle = null;
+  }
+
   public function fromArray(array $row = NULL){
     if(empty($row)) return;
     if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
     if(isset($row["descripcion"])) $this->descripcion = (is_null($row["descripcion"])) ? null : (string)$row["descripcion"];
     if(isset($row["detalle"])) $this->detalle = (is_null($row["detalle"])) ? null : (string)$row["detalle"];
   }
-
 
   public function toArray(){
     $row = [];
@@ -29,17 +34,17 @@ class RolValuesMain extends EntityValues {
   public function detalle($format = null) { return $this->formatString($this->detalle, $format); }
   public function setId($p) {
     if(empty($p)) return;
-    $this->id = $p;
+    $this->id = trim($p);
   }
 
   public function setDescripcion($p) {
     if(empty($p)) return;
-    $this->descripcion = $p;
+    $this->descripcion = trim($p);
   }
 
   public function setDetalle($p) {
     if(empty($p)) return;
-    $this->detalle = $p;
+    $this->detalle = trim($p);
   }
 
 

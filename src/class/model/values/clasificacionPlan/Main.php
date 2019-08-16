@@ -8,13 +8,18 @@ class ClasificacionPlanValuesMain extends EntityValues {
   public $clasificacion = UNDEFINED;
   public $plan = UNDEFINED;
 
+  public function setDefault(){
+    $this->id = null;
+    $this->clasificacion = null;
+    $this->plan = null;
+  }
+
   public function fromArray(array $row = NULL){
     if(empty($row)) return;
     if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
     if(isset($row["clasificacion"])) $this->clasificacion = (is_null($row["clasificacion"])) ? null : (string)$row["clasificacion"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
     if(isset($row["plan"])) $this->plan = (is_null($row["plan"])) ? null : (string)$row["plan"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
-
 
   public function toArray(){
     $row = [];
@@ -29,17 +34,17 @@ class ClasificacionPlanValuesMain extends EntityValues {
   public function plan() { return $this->plan; }
   public function setId($p) {
     if(empty($p)) return;
-    $this->id = $p;
+    $this->id = trim($p);
   }
 
   public function setClasificacion($p) {
     if(empty($p) && $p !== 0) return;
-    $this->clasificacion = intval($p);
+    $this->clasificacion = intval(trim($p));
   }
 
   public function setPlan($p) {
     if(empty($p) && $p !== 0) return;
-    $this->plan = intval($p);
+    $this->plan = intval(trim($p));
   }
 
 

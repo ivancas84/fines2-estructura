@@ -9,6 +9,13 @@ class DistribucionHorariaValuesMain extends EntityValues {
   public $horasCatedra = UNDEFINED;
   public $cargaHoraria = UNDEFINED;
 
+  public function setDefault(){
+    $this->id = null;
+    $this->dia = null;
+    $this->horasCatedra = null;
+    $this->cargaHoraria = null;
+  }
+
   public function fromArray(array $row = NULL){
     if(empty($row)) return;
     if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
@@ -16,7 +23,6 @@ class DistribucionHorariaValuesMain extends EntityValues {
     if(isset($row["horas_catedra"])) $this->horasCatedra = (is_null($row["horas_catedra"])) ? null : intval($row["horas_catedra"]);
     if(isset($row["carga_horaria"])) $this->cargaHoraria = (is_null($row["carga_horaria"])) ? null : (string)$row["carga_horaria"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
-
 
   public function toArray(){
     $row = [];
@@ -33,22 +39,22 @@ class DistribucionHorariaValuesMain extends EntityValues {
   public function cargaHoraria() { return $this->cargaHoraria; }
   public function setId($p) {
     if(empty($p)) return;
-    $this->id = $p;
+    $this->id = trim($p);
   }
 
   public function setDia($p) {
     if(empty($p) && $p !== 0) return;
-    $this->dia = intval($p);
+    $this->dia = intval(trim($p));
   }
 
   public function setHorasCatedra($p) {
     if(empty($p) && $p !== 0) return;
-    $this->horasCatedra = intval($p);
+    $this->horasCatedra = intval(trim($p));
   }
 
   public function setCargaHoraria($p) {
     if(empty($p) && $p !== 0) return;
-    $this->cargaHoraria = intval($p);
+    $this->cargaHoraria = intval(trim($p));
   }
 
 

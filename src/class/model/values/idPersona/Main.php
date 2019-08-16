@@ -17,6 +17,21 @@ class IdPersonaValuesMain extends EntityValues {
   public $alta = UNDEFINED;
   public $telefonos = UNDEFINED;
 
+  public function setDefault(){
+    $this->id = null;
+    $this->nombres = null;
+    $this->apellidos = null;
+    $this->sobrenombre = null;
+    $this->fechaNacimiento = null;
+    $this->tipoDocumento = "DNI";
+    $this->numeroDocumento = null;
+    $this->email = null;
+    $this->genero = null;
+    $this->cuil = null;
+    $this->alta = new DateTime();
+    $this->telefonos = null;
+  }
+
   public function fromArray(array $row = NULL){
     if(empty($row)) return;
     if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
@@ -32,7 +47,6 @@ class IdPersonaValuesMain extends EntityValues {
     if(isset($row["alta"])) $this->alta = (is_null($row["alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row["alta"]);
     if(isset($row["telefonos"])) $this->telefonos = (is_null($row["telefonos"])) ? null : (string)$row["telefonos"];
   }
-
 
   public function toArray(){
     $row = [];
@@ -71,62 +85,62 @@ class IdPersonaValuesMain extends EntityValues {
   public function telefonos($format = null) { return $this->formatString($this->telefonos, $format); }
   public function setId($p) {
     if(empty($p)) return;
-    $this->id = $p;
+    $this->id = trim($p);
   }
 
   public function setNombres($p) {
     if(empty($p)) return;
-    $this->nombres = $p;
+    $this->nombres = trim($p);
   }
 
   public function setApellidos($p) {
     if(empty($p)) return;
-    $this->apellidos = $p;
+    $this->apellidos = trim($p);
   }
 
   public function setSobrenombre($p) {
     if(empty($p)) return;
-    $this->sobrenombre = $p;
+    $this->sobrenombre = trim($p);
   }
 
   public function setFechaNacimiento($p) {
     if(empty($p)) return;
-    $this->fechaNacimiento = $p;
+    $this->fechaNacimiento = trim($p);
   }
 
   public function setTipoDocumento($p) {
     if(empty($p)) return;
-    $this->tipoDocumento = $p;
+    $this->tipoDocumento = trim($p);
   }
 
   public function setNumeroDocumento($p) {
     if(empty($p)) return;
-    $this->numeroDocumento = $p;
+    $this->numeroDocumento = trim($p);
   }
 
   public function setEmail($p) {
     if(empty($p)) return;
-    $this->email = $p;
+    $this->email = trim($p);
   }
 
   public function setGenero($p) {
     if(empty($p)) return;
-    $this->genero = $p;
+    $this->genero = trim($p);
   }
 
   public function setCuil($p) {
     if(empty($p)) return;
-    $this->cuil = $p;
+    $this->cuil = trim($p);
   }
 
   public function setAlta($p) {
     if(empty($p)) return;
-    $this->alta = $p;
+    $this->alta = trim($p);
   }
 
   public function setTelefonos($p) {
     if(empty($p)) return;
-    $this->telefonos = $p;
+    $this->telefonos = trim($p);
   }
 
 
