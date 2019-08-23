@@ -248,18 +248,15 @@ HAVING cantidad > 1
 
 
   public function idsActivosFiltros($filtros) { //id de nomina solo de alumnos activos
-    
-    
     //$condicionFiltros = Data::condicionFiltros($filtros);
-
     $render = new Render();
-    $render->addAdvanced([
+    $render->setCondition([
       ["com_fecha_anio","=",$filtros["fecha_anio"]],
       ["com_fecha_semestre","=",$filtros["fecha_semestre"]],
       ["com_autorizada","=",$filtros["autorizada"]],
       ["com_dvi__clasificacion","=",$filtros["clasificacion"]],
       ["com_dvi_sed_dependencia","=", $filtros["dependencia"]],
-      ["activo","=", true]
+      ["activo","=", true],
     ]);
     $sql = $this->all($render);
     $sql2 = $this->personasActivasRepetidasPeriodo($filtros);
