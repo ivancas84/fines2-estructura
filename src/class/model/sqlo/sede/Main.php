@@ -96,7 +96,7 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_ = [];
 
     $json = ($row && !is_null($row['id'])) ? $this->sql->_json($row) : null;
-    $row_["sede"] = EntityValues::getInstanceRequires("sede", $json);
+    $row_["sede"] = EntityValues::getInstanceRequire("sede", $json);
 
     $json = ($row && !is_null($row['ts_id'])) ? EntitySql::getInstanceRequire('tipo_sede', 'ts')->_json($row) : null;
     $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede', $json);

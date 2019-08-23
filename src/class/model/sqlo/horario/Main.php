@@ -129,7 +129,7 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_ = [];
 
     $json = ($row && !is_null($row['id'])) ? $this->sql->_json($row) : null;
-    $row_["horario"] = EntityValues::getInstanceRequires("horario", $json);
+    $row_["horario"] = EntityValues::getInstanceRequire("horario", $json);
 
     $json = ($row && !is_null($row['dia_id'])) ? EntitySql::getInstanceRequire('dia', 'dia')->_json($row) : null;
     $row_["dia"] = EntityValues::getInstanceRequire('dia', $json);

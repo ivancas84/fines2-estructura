@@ -76,7 +76,7 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_ = [];
 
     $json = ($row && !is_null($row['id'])) ? $this->sql->_json($row) : null;
-    $row_["carga_horaria"] = EntityValues::getInstanceRequires("carga_horaria", $json);
+    $row_["carga_horaria"] = EntityValues::getInstanceRequire("carga_horaria", $json);
 
     $json = ($row && !is_null($row['asi_id'])) ? EntitySql::getInstanceRequire('asignatura', 'asi')->_json($row) : null;
     $row_["asignatura"] = EntityValues::getInstanceRequire('asignatura', $json);

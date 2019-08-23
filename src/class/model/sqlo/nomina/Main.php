@@ -97,7 +97,7 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_ = [];
 
     $json = ($row && !is_null($row['id'])) ? $this->sql->_json($row) : null;
-    $row_["nomina"] = EntityValues::getInstanceRequires("nomina", $json);
+    $row_["nomina"] = EntityValues::getInstanceRequire("nomina", $json);
 
     $json = ($row && !is_null($row['dia_id'])) ? EntitySql::getInstanceRequire('division', 'dia')->_json($row) : null;
     $row_["division"] = EntityValues::getInstanceRequire('division', $json);

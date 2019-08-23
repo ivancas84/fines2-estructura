@@ -83,7 +83,7 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_ = [];
 
     $json = ($row && !is_null($row['id'])) ? $this->sql->_json($row) : null;
-    $row_["id_persona"] = EntityValues::getInstanceRequires("id_persona", $json);
+    $row_["id_persona"] = EntityValues::getInstanceRequire("id_persona", $json);
 
     return $row_;
   }
