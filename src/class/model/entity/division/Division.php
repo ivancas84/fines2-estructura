@@ -6,7 +6,7 @@ class DivisionEntity extends DivisionEntityMain {
   
   public function getFieldsNf(){
     $array = parent::getFieldsNf();
-    array_push($array, new FieldDivisionNumero);
+    array_push($array, Field::getInstanceRequire("division","numero"));
     return $array;
   }
 }

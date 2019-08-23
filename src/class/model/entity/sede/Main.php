@@ -1,39 +1,39 @@
 <?php
 
 require_once("class/model/Entity.php");
-require_once("config/entityClasses.php");
+require_once("class/model/Field.php");
 
 class SedeEntityMain extends Entity {
   public $name = "sede";
   public $alias = "sede";
  
   public function getPk(){
-    return new FieldSedeId;
+    return Field::getInstanceRequire("sede", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      new FieldSedeNumero,
-      new FieldSedeNombre,
-      new FieldSedeOrganizacion,
-      new FieldSedeObservaciones,
-      new FieldSedeTipo,
-      new FieldSedeAlta,
-      new FieldSedeBaja,
-      new FieldSedeUsuario,
+      Field::getInstanceRequire("sede", "numero"),
+      Field::getInstanceRequire("sede", "nombre"),
+      Field::getInstanceRequire("sede", "organizacion"),
+      Field::getInstanceRequire("sede", "observaciones"),
+      Field::getInstanceRequire("sede", "tipo"),
+      Field::getInstanceRequire("sede", "alta"),
+      Field::getInstanceRequire("sede", "baja"),
+      Field::getInstanceRequire("sede", "usuario"),
     );
   }
 
   public function getFieldsMu(){
     return array(
-      new FieldSedeDependencia,
-      new FieldSedeTipoSede,
+      Field::getInstanceRequire("sede", "dependencia"),
+      Field::getInstanceRequire("sede", "tipo_sede"),
     );
   }
 
   public function getFields_U(){
     return array(
-      new FieldSedeDomicilio,
+      Field::getInstanceRequire("sede", "domicilio"),
     );
   }
 

@@ -5,11 +5,11 @@ class ClasificacionSqlMain extends EntitySql{
 
   public function __construct(){
     parent::__construct();
-    $this->entity = Entity::getInstanceFromString('clasificacion');
+    $this->entity = Entity::getInstanceRequire('clasificacion');
   }
 
 
-  public function _mappingField($field){
+  public function _mappingFieldStruct($field){
     $p = $this->prf();
     $t = $this->prt();
 
@@ -36,20 +36,20 @@ class ClasificacionSqlMain extends EntitySql{
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingFieldEntity($p.'nombre') . ' AS ' . $p.'nombre';
+' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'nombre') . ' AS ' . $p.'nombre';
   }
 
   public function _fieldsDb(){
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ', ' . $this->_mappingFieldEntity($p.'nombre') . '';
+' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'nombre') . '';
   }
 
   public function _conditionFieldStruct($field, $option, $value){
     $p = $this->prf();
 
-    $f = $this->_mappingFieldEntity($field);
+    $f = $this->_mappingField($field);
     switch ($field){
       case "{$p}id": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}nombre": return $this->format->conditionText($f, $value, $option);
@@ -68,6 +68,7 @@ class ClasificacionSqlMain extends EntitySql{
 
   //@override
   public function initializeUpdate(array $data){
+    if(array_key_exists('id', $data)) { if(!isset($data['id']) || ($data['id'] == '')) throw new Exception('dato obligatorio sin valor: id'); }
     if(array_key_exists('nombre', $data)) { if(empty($data['nombre'])) throw new Exception('dato obligatorio sin valor: nombre'); }
 
     return $data;

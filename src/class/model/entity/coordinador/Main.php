@@ -1,27 +1,27 @@
 <?php
 
 require_once("class/model/Entity.php");
-require_once("config/entityClasses.php");
+require_once("class/model/Field.php");
 
 class CoordinadorEntityMain extends Entity {
   public $name = "coordinador";
   public $alias = "coor";
  
   public function getPk(){
-    return new FieldCoordinadorId;
+    return Field::getInstanceRequire("coordinador", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      new FieldCoordinadorAlta,
-      new FieldCoordinadorBaja,
+      Field::getInstanceRequire("coordinador", "alta"),
+      Field::getInstanceRequire("coordinador", "baja"),
     );
   }
 
   public function getFieldsMu(){
     return array(
-      new FieldCoordinadorSede,
-      new FieldCoordinadorPersona,
+      Field::getInstanceRequire("coordinador", "sede"),
+      Field::getInstanceRequire("coordinador", "persona"),
     );
   }
 

@@ -5,11 +5,11 @@ class CargaHorariaSqlMain extends EntitySql{
 
   public function __construct(){
     parent::__construct();
-    $this->entity = Entity::getInstanceFromString('carga_horaria');
+    $this->entity = Entity::getInstanceRequire('carga_horaria');
   }
 
 
-  public function _mappingField($field){
+  public function _mappingFieldStruct($field){
     $p = $this->prf();
     $t = $this->prt();
 
@@ -64,9 +64,9 @@ class CargaHorariaSqlMain extends EntitySql{
   }
 
   public function mappingField($field){
-    if($f = $this->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('asignatura', 'asi')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('plan', 'pla')->_mappingFieldEntity($field)) return $f;
+    if($f = $this->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('asignatura', 'asi')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('plan', 'pla')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido " . $field);
   }
 
@@ -74,33 +74,33 @@ class CargaHorariaSqlMain extends EntitySql{
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingFieldEntity($p.'anio') . ' AS ' . $p.'anio, ' . $this->_mappingFieldEntity($p.'semestre') . ' AS ' . $p.'semestre, ' . $this->_mappingFieldEntity($p.'horas_catedra') . ' AS ' . $p.'horas_catedra, ' . $this->_mappingFieldEntity($p.'tramo') . ' AS ' . $p.'tramo, ' . $this->_mappingFieldEntity($p.'asignatura') . ' AS ' . $p.'asignatura, ' . $this->_mappingFieldEntity($p.'plan') . ' AS ' . $p.'plan';
+' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'anio') . ' AS ' . $p.'anio, ' . $this->_mappingField($p.'semestre') . ' AS ' . $p.'semestre, ' . $this->_mappingField($p.'horas_catedra') . ' AS ' . $p.'horas_catedra, ' . $this->_mappingField($p.'tramo') . ' AS ' . $p.'tramo, ' . $this->_mappingField($p.'asignatura') . ' AS ' . $p.'asignatura, ' . $this->_mappingField($p.'plan') . ' AS ' . $p.'plan';
   }
 
   public function _fieldsDb(){
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ', ' . $this->_mappingFieldEntity($p.'anio') . ', ' . $this->_mappingFieldEntity($p.'semestre') . ', ' . $this->_mappingFieldEntity($p.'horas_catedra') . ', ' . $this->_mappingFieldEntity($p.'asignatura') . ', ' . $this->_mappingFieldEntity($p.'plan') . '';
+' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'anio') . ', ' . $this->_mappingField($p.'semestre') . ', ' . $this->_mappingField($p.'horas_catedra') . ', ' . $this->_mappingField($p.'asignatura') . ', ' . $this->_mappingField($p.'plan') . '';
   }
 
   public function fields(){
-    return parent::fields() . ',
-' . EntitySql::getInstanceFromString('asignatura', 'asi')->_fields() . ',
-' . EntitySql::getInstanceFromString('plan', 'pla')->_fields() . ' 
+    return $this->_fields() . ',
+' . EntitySql::getInstanceRequire('asignatura', 'asi')->_fields() . ',
+' . EntitySql::getInstanceRequire('plan', 'pla')->_fields() . ' 
 ';
   }
 
   public function join(Render $render){
-    return EntitySql::getInstanceFromString('asignatura', 'asi')->_join('asignatura', 'ch', $render) . '
-' . EntitySql::getInstanceFromString('plan', 'pla')->_join('plan', 'ch', $render) . '
+    return EntitySql::getInstanceRequire('asignatura', 'asi')->_join('asignatura', 'ch', $render) . '
+' . EntitySql::getInstanceRequire('plan', 'pla')->_join('plan', 'ch', $render) . '
 ' ;
   }
 
   public function _conditionFieldStruct($field, $option, $value){
     $p = $this->prf();
 
-    $f = $this->_mappingFieldEntity($field);
+    $f = $this->_mappingField($field);
     switch ($field){
       case "{$p}id": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}anio": return $this->format->conditionNumber($f, $value, $option);
@@ -115,14 +115,14 @@ class CargaHorariaSqlMain extends EntitySql{
 
   protected function conditionFieldStruct($field, $option, $value) {
     if($c = $this->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('asignatura','asi')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('plan','pla')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('asignatura','asi')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','pla')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldAux($field, $option, $value) {
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('asignatura','asi')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('plan','pla')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('asignatura','asi')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','pla')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
 
@@ -140,6 +140,7 @@ class CargaHorariaSqlMain extends EntitySql{
 
   //@override
   public function initializeUpdate(array $data){
+    if(array_key_exists('id', $data)) { if(!isset($data['id']) || ($data['id'] == '')) throw new Exception('dato obligatorio sin valor: id'); }
     if(array_key_exists('anio', $data)) { if(!isset($data['anio']) || ($data['anio'] == '')) throw new Exception('dato obligatorio sin valor: anio'); }
     if(array_key_exists('semestre', $data)) { if(!isset($data['semestre']) || ($data['semestre'] == '')) throw new Exception('dato obligatorio sin valor: semestre'); }
     if(array_key_exists('horas_catedra', $data)) { if(!isset($data['horas_catedra']) || ($data['horas_catedra'] == '')) throw new Exception('dato obligatorio sin valor: horas_catedra'); }

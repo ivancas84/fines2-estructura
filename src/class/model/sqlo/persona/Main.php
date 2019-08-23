@@ -1,6 +1,8 @@
 <?php
 
 require_once("class/model/Sqlo.php");
+require_once("class/model/Sql.php");
+require_once("class/model/Entity.php");
 
 //Implementacion principal de Sqlo para una entidad especifica
 class PersonaSqloMain extends EntitySqlo {
@@ -10,8 +12,8 @@ class PersonaSqloMain extends EntitySqlo {
      * Se definen todos los recursos de forma independiente, sin parametros en el constructor, para facilitar el polimorfismo de las subclases
      */
     $this->db = Dba::dbInstance();
-    $this->entity = Entity::getInstanceFromString('persona');
-    $this->sql = EntitySql::getInstanceFromString('persona');
+    $this->entity = Entity::getInstanceRequire('persona');
+    $this->sql = EntitySql::getInstanceRequire('persona');
   }
 
   protected function _insert(array $row){ //@override
@@ -57,15 +59,15 @@ UPDATE " . $this->entity->sn_() . " SET
     if(empty($row)) return null;
     $row_ = $this->sql->_json($row);
     if(!is_null($row['ln_id'])){
-      $json = EntitySql::getInstanceFromString('lugar_nacimiento', 'ln')->_json($row);
+      $json = EntitySql::getInstanceRequire('lugar_nacimiento', 'ln')->_json($row);
       $row_["lugar_nacimiento_"] = $json;
     }
     if(!is_null($row['ip_id'])){
-      $json = EntitySql::getInstanceFromString('id_persona', 'ip')->_json($row);
+      $json = EntitySql::getInstanceRequire('id_persona', 'ip')->_json($row);
       $row_["id_persona_"] = $json;
     }
     if(!is_null($row['dom_id'])){
-      $json = EntitySql::getInstanceFromString('domicilio', 'dom')->_json($row);
+      $json = EntitySql::getInstanceRequire('domicilio', 'dom')->_json($row);
       $row_["domicilio_"] = $json;
     }
     return $row_;
@@ -75,16 +77,16 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_ = [];
 
     $json = ($row && !is_null($row['id'])) ? $this->sql->_json($row) : null;
-    $row_["persona"] = EntityValues::getInstanceFromString("persona", $json);
+    $row_["persona"] = EntityValues::getInstanceRequires("persona", $json);
 
-    $json = ($row && !is_null($row['ln_id'])) ? EntitySql::getInstanceFromString('lugar_nacimiento', 'ln')->_json($row) : null;
-    $row_["lugar_nacimiento"] = EntityValues::getInstanceFromString('lugar_nacimiento', $json);
+    $json = ($row && !is_null($row['ln_id'])) ? EntitySql::getInstanceRequire('lugar_nacimiento', 'ln')->_json($row) : null;
+    $row_["lugar_nacimiento"] = EntityValues::getInstanceRequire('lugar_nacimiento', $json);
 
-    $json = ($row && !is_null($row['ip_id'])) ? EntitySql::getInstanceFromString('id_persona', 'ip')->_json($row) : null;
-    $row_["id_persona"] = EntityValues::getInstanceFromString('id_persona', $json);
+    $json = ($row && !is_null($row['ip_id'])) ? EntitySql::getInstanceRequire('id_persona', 'ip')->_json($row) : null;
+    $row_["id_persona"] = EntityValues::getInstanceRequire('id_persona', $json);
 
-    $json = ($row && !is_null($row['dom_id'])) ? EntitySql::getInstanceFromString('domicilio', 'dom')->_json($row) : null;
-    $row_["domicilio"] = EntityValues::getInstanceFromString('domicilio', $json);
+    $json = ($row && !is_null($row['dom_id'])) ? EntitySql::getInstanceRequire('domicilio', 'dom')->_json($row) : null;
+    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $json);
 
     return $row_;
   }

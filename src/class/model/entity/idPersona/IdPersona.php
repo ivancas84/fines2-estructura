@@ -6,7 +6,7 @@ class IdPersonaEntity extends IdPersonaEntityMain {
 
   public function getFieldsNf(){
     $array = parent::getFieldsNf();
-    array_push($array, new FieldIdPersonaTelefonos);
+    array_push($array, Field::getInstanceRequire("id_persona","telefonos"));
     return $array;
   }
 }

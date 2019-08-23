@@ -136,19 +136,37 @@ class ComisionValuesMain extends EntityValues {
     $this->observaciones = trim($p);
   }
 
-  public function setFecha($p) {
+  public function setFecha(DateTime $p) {
     if(empty($p)) return;
-    $this->fecha = trim($p);
+    $this->fecha = $p;
   }
 
-  public function setAlta($p) {
+  public function setFechaStr($p, $format = "Y-m-d") {
+    $p = SpanishDateTime::createFromFormat($format, trim($p));
     if(empty($p)) return;
-    $this->alta = trim($p);
+    $this->fecha = $p;
   }
 
-  public function setBaja($p) {
+  public function setAlta(DateTime $p) {
     if(empty($p)) return;
-    $this->baja = trim($p);
+    $this->alta = $p;
+  }
+
+  public function setAltaStr($p, $format = "Y-m-d H:i:s") {
+    $p = SpanishDateTime::createFromFormat($format, trim($p));
+    if(empty($p)) return;
+    $this->alta = $p;
+  }
+
+  public function setBaja(DateTime $p) {
+    if(empty($p)) return;
+    $this->baja = $p;
+  }
+
+  public function setBajaStr($p, $format = "Y-m-d H:i:s") {
+    $p = SpanishDateTime::createFromFormat($format, trim($p));
+    if(empty($p)) return;
+    $this->baja = $p;
   }
 
   public function setComentario($p) {

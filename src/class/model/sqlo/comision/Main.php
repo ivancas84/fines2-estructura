@@ -1,6 +1,8 @@
 <?php
 
 require_once("class/model/Sqlo.php");
+require_once("class/model/Sql.php");
+require_once("class/model/Entity.php");
 
 //Implementacion principal de Sqlo para una entidad especifica
 class ComisionSqloMain extends EntitySqlo {
@@ -10,8 +12,8 @@ class ComisionSqloMain extends EntitySqlo {
      * Se definen todos los recursos de forma independiente, sin parametros en el constructor, para facilitar el polimorfismo de las subclases
      */
     $this->db = Dba::dbInstance();
-    $this->entity = Entity::getInstanceFromString('comision');
-    $this->sql = EntitySql::getInstanceFromString('comision');
+    $this->entity = Entity::getInstanceRequire('comision');
+    $this->sql = EntitySql::getInstanceRequire('comision');
   }
 
   protected function _insert(array $row){ //@override
@@ -78,31 +80,31 @@ UPDATE " . $this->entity->sn_() . " SET
     if(empty($row)) return null;
     $row_ = $this->sql->_json($row);
     if(!is_null($row['dvi_id'])){
-      $json = EntitySql::getInstanceFromString('division', 'dvi')->_json($row);
+      $json = EntitySql::getInstanceRequire('division', 'dvi')->_json($row);
       $row_["division_"] = $json;
     }
     if(!is_null($row['dvi_pla_id'])){
-      $json = EntitySql::getInstanceFromString('plan', 'dvi_pla')->_json($row);
+      $json = EntitySql::getInstanceRequire('plan', 'dvi_pla')->_json($row);
       $row_["division_"]["plan_"] = $json;
     }
     if(!is_null($row['dvi_sed_id'])){
-      $json = EntitySql::getInstanceFromString('sede', 'dvi_sed')->_json($row);
+      $json = EntitySql::getInstanceRequire('sede', 'dvi_sed')->_json($row);
       $row_["division_"]["sede_"] = $json;
     }
     if(!is_null($row['dvi_sed_ts_id'])){
-      $json = EntitySql::getInstanceFromString('tipo_sede', 'dvi_sed_ts')->_json($row);
+      $json = EntitySql::getInstanceRequire('tipo_sede', 'dvi_sed_ts')->_json($row);
       $row_["division_"]["sede_"]["tipo_sede_"] = $json;
     }
     if(!is_null($row['dvi_sed_dom_id'])){
-      $json = EntitySql::getInstanceFromString('domicilio', 'dvi_sed_dom')->_json($row);
+      $json = EntitySql::getInstanceRequire('domicilio', 'dvi_sed_dom')->_json($row);
       $row_["division_"]["sede_"]["domicilio_"] = $json;
     }
     if(!is_null($row['dvi_sed_coo_id'])){
-      $json = EntitySql::getInstanceFromString('id_persona', 'dvi_sed_coo')->_json($row);
+      $json = EntitySql::getInstanceRequire('id_persona', 'dvi_sed_coo')->_json($row);
       $row_["division_"]["sede_"]["coordinador_"] = $json;
     }
     if(!is_null($row['dvi_sed_ref_id'])){
-      $json = EntitySql::getInstanceFromString('id_persona', 'dvi_sed_ref')->_json($row);
+      $json = EntitySql::getInstanceRequire('id_persona', 'dvi_sed_ref')->_json($row);
       $row_["division_"]["sede_"]["referente_"] = $json;
     }
     return $row_;
@@ -112,28 +114,28 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_ = [];
 
     $json = ($row && !is_null($row['id'])) ? $this->sql->_json($row) : null;
-    $row_["comision"] = EntityValues::getInstanceFromString("comision", $json);
+    $row_["comision"] = EntityValues::getInstanceRequires("comision", $json);
 
-    $json = ($row && !is_null($row['dvi_id'])) ? EntitySql::getInstanceFromString('division', 'dvi')->_json($row) : null;
-    $row_["division"] = EntityValues::getInstanceFromString('division', $json);
+    $json = ($row && !is_null($row['dvi_id'])) ? EntitySql::getInstanceRequire('division', 'dvi')->_json($row) : null;
+    $row_["division"] = EntityValues::getInstanceRequire('division', $json);
 
-    $json = ($row && !is_null($row['dvi_pla_id'])) ? EntitySql::getInstanceFromString('plan', 'dvi_pla')->_json($row) : null;
-    $row_["plan"] = EntityValues::getInstanceFromString('plan', $json);
+    $json = ($row && !is_null($row['dvi_pla_id'])) ? EntitySql::getInstanceRequire('plan', 'dvi_pla')->_json($row) : null;
+    $row_["plan"] = EntityValues::getInstanceRequire('plan', $json);
 
-    $json = ($row && !is_null($row['dvi_sed_id'])) ? EntitySql::getInstanceFromString('sede', 'dvi_sed')->_json($row) : null;
-    $row_["sede"] = EntityValues::getInstanceFromString('sede', $json);
+    $json = ($row && !is_null($row['dvi_sed_id'])) ? EntitySql::getInstanceRequire('sede', 'dvi_sed')->_json($row) : null;
+    $row_["sede"] = EntityValues::getInstanceRequire('sede', $json);
 
-    $json = ($row && !is_null($row['dvi_sed_ts_id'])) ? EntitySql::getInstanceFromString('tipo_sede', 'dvi_sed_ts')->_json($row) : null;
-    $row_["tipo_sede"] = EntityValues::getInstanceFromString('tipo_sede', $json);
+    $json = ($row && !is_null($row['dvi_sed_ts_id'])) ? EntitySql::getInstanceRequire('tipo_sede', 'dvi_sed_ts')->_json($row) : null;
+    $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede', $json);
 
-    $json = ($row && !is_null($row['dvi_sed_dom_id'])) ? EntitySql::getInstanceFromString('domicilio', 'dvi_sed_dom')->_json($row) : null;
-    $row_["domicilio"] = EntityValues::getInstanceFromString('domicilio', $json);
+    $json = ($row && !is_null($row['dvi_sed_dom_id'])) ? EntitySql::getInstanceRequire('domicilio', 'dvi_sed_dom')->_json($row) : null;
+    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $json);
 
-    $json = ($row && !is_null($row['dvi_sed_coo_id'])) ? EntitySql::getInstanceFromString('id_persona', 'dvi_sed_coo')->_json($row) : null;
-    $row_["coordinador"] = EntityValues::getInstanceFromString('id_persona', $json);
+    $json = ($row && !is_null($row['dvi_sed_coo_id'])) ? EntitySql::getInstanceRequire('id_persona', 'dvi_sed_coo')->_json($row) : null;
+    $row_["coordinador"] = EntityValues::getInstanceRequire('id_persona', $json);
 
-    $json = ($row && !is_null($row['dvi_sed_ref_id'])) ? EntitySql::getInstanceFromString('id_persona', 'dvi_sed_ref')->_json($row) : null;
-    $row_["referente"] = EntityValues::getInstanceFromString('id_persona', $json);
+    $json = ($row && !is_null($row['dvi_sed_ref_id'])) ? EntitySql::getInstanceRequire('id_persona', 'dvi_sed_ref')->_json($row) : null;
+    $row_["referente"] = EntityValues::getInstanceRequire('id_persona', $json);
 
     return $row_;
   }

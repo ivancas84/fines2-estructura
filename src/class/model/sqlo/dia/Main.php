@@ -1,6 +1,8 @@
 <?php
 
 require_once("class/model/Sqlo.php");
+require_once("class/model/Sql.php");
+require_once("class/model/Entity.php");
 
 //Implementacion principal de Sqlo para una entidad especifica
 class DiaSqloMain extends EntitySqlo {
@@ -10,8 +12,8 @@ class DiaSqloMain extends EntitySqlo {
      * Se definen todos los recursos de forma independiente, sin parametros en el constructor, para facilitar el polimorfismo de las subclases
      */
     $this->db = Dba::dbInstance();
-    $this->entity = Entity::getInstanceFromString('dia');
-    $this->sql = EntitySql::getInstanceFromString('dia');
+    $this->entity = Entity::getInstanceRequire('dia');
+    $this->sql = EntitySql::getInstanceRequire('dia');
   }
 
   protected function _insert(array $row){ //@override

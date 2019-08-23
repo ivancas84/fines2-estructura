@@ -5,11 +5,11 @@ class IdPersonaSqlMain extends EntitySql{
 
   public function __construct(){
     parent::__construct();
-    $this->entity = Entity::getInstanceFromString('id_persona');
+    $this->entity = Entity::getInstanceRequire('id_persona');
   }
 
 
-  public function _mappingField($field){
+  public function _mappingFieldStruct($field){
     $p = $this->prf();
     $t = $this->prt();
 
@@ -56,20 +56,20 @@ class IdPersonaSqlMain extends EntitySql{
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingFieldEntity($p.'nombres') . ' AS ' . $p.'nombres, ' . $this->_mappingFieldEntity($p.'apellidos') . ' AS ' . $p.'apellidos, ' . $this->_mappingFieldEntity($p.'sobrenombre') . ' AS ' . $p.'sobrenombre, ' . $this->_mappingFieldEntity($p.'fecha_nacimiento') . ' AS ' . $p.'fecha_nacimiento, ' . $this->_mappingFieldEntity($p.'tipo_documento') . ' AS ' . $p.'tipo_documento, ' . $this->_mappingFieldEntity($p.'numero_documento') . ' AS ' . $p.'numero_documento, ' . $this->_mappingFieldEntity($p.'email') . ' AS ' . $p.'email, ' . $this->_mappingFieldEntity($p.'genero') . ' AS ' . $p.'genero, ' . $this->_mappingFieldEntity($p.'cuil') . ' AS ' . $p.'cuil, ' . $this->_mappingFieldEntity($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingFieldEntity($p.'telefonos') . ' AS ' . $p.'telefonos';
+' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'nombres') . ' AS ' . $p.'nombres, ' . $this->_mappingField($p.'apellidos') . ' AS ' . $p.'apellidos, ' . $this->_mappingField($p.'sobrenombre') . ' AS ' . $p.'sobrenombre, ' . $this->_mappingField($p.'fecha_nacimiento') . ' AS ' . $p.'fecha_nacimiento, ' . $this->_mappingField($p.'tipo_documento') . ' AS ' . $p.'tipo_documento, ' . $this->_mappingField($p.'numero_documento') . ' AS ' . $p.'numero_documento, ' . $this->_mappingField($p.'email') . ' AS ' . $p.'email, ' . $this->_mappingField($p.'genero') . ' AS ' . $p.'genero, ' . $this->_mappingField($p.'cuil') . ' AS ' . $p.'cuil, ' . $this->_mappingField($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingField($p.'telefonos') . ' AS ' . $p.'telefonos';
   }
 
   public function _fieldsDb(){
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ', ' . $this->_mappingFieldEntity($p.'nombres') . ', ' . $this->_mappingFieldEntity($p.'apellidos') . ', ' . $this->_mappingFieldEntity($p.'sobrenombre') . ', ' . $this->_mappingFieldEntity($p.'fecha_nacimiento') . ', ' . $this->_mappingFieldEntity($p.'tipo_documento') . ', ' . $this->_mappingFieldEntity($p.'numero_documento') . ', ' . $this->_mappingFieldEntity($p.'email') . ', ' . $this->_mappingFieldEntity($p.'genero') . ', ' . $this->_mappingFieldEntity($p.'cuil') . ', ' . $this->_mappingFieldEntity($p.'alta') . '';
+' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'nombres') . ', ' . $this->_mappingField($p.'apellidos') . ', ' . $this->_mappingField($p.'sobrenombre') . ', ' . $this->_mappingField($p.'fecha_nacimiento') . ', ' . $this->_mappingField($p.'tipo_documento') . ', ' . $this->_mappingField($p.'numero_documento') . ', ' . $this->_mappingField($p.'email') . ', ' . $this->_mappingField($p.'genero') . ', ' . $this->_mappingField($p.'cuil') . ', ' . $this->_mappingField($p.'alta') . '';
   }
 
   public function _conditionFieldStruct($field, $option, $value){
     $p = $this->prf();
 
-    $f = $this->_mappingFieldEntity($field);
+    $f = $this->_mappingField($field);
     switch ($field){
       case "{$p}id": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}nombres": return $this->format->conditionText($f, $value, $option);
@@ -107,6 +107,7 @@ class IdPersonaSqlMain extends EntitySql{
 
   //@override
   public function initializeUpdate(array $data){
+    if(array_key_exists('id', $data)) { if(!isset($data['id']) || ($data['id'] == '')) throw new Exception('dato obligatorio sin valor: id'); }
     if(array_key_exists('nombres', $data)) { if(empty($data['nombres'])) throw new Exception('dato obligatorio sin valor: nombres'); }
     if(array_key_exists('apellidos', $data)) { if(empty($data['apellidos'])) throw new Exception('dato obligatorio sin valor: apellidos'); }
     if(array_key_exists('sobrenombre', $data)) { if(empty($data['sobrenombre'])) $data['sobrenombre'] = "null"; }

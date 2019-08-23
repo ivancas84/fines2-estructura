@@ -1,27 +1,27 @@
 <?php
 
 require_once("class/model/Entity.php");
-require_once("config/entityClasses.php");
+require_once("class/model/Field.php");
 
 class HorarioEntityMain extends Entity {
   public $name = "horario";
   public $alias = "hora";
  
   public function getPk(){
-    return new FieldHorarioId;
+    return Field::getInstanceRequire("horario", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      new FieldHorarioHoraInicio,
-      new FieldHorarioHoraFin,
+      Field::getInstanceRequire("horario", "hora_inicio"),
+      Field::getInstanceRequire("horario", "hora_fin"),
     );
   }
 
   public function getFieldsMu(){
     return array(
-      new FieldHorarioDia,
-      new FieldHorarioCurso,
+      Field::getInstanceRequire("horario", "dia"),
+      Field::getInstanceRequire("horario", "curso"),
     );
   }
 

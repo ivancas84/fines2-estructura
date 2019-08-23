@@ -5,11 +5,11 @@ class AsignaturaSqlMain extends EntitySql{
 
   public function __construct(){
     parent::__construct();
-    $this->entity = Entity::getInstanceFromString('asignatura');
+    $this->entity = Entity::getInstanceRequire('asignatura');
   }
 
 
-  public function _mappingField($field){
+  public function _mappingFieldStruct($field){
     $p = $this->prf();
     $t = $this->prt();
 
@@ -40,20 +40,20 @@ class AsignaturaSqlMain extends EntitySql{
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingFieldEntity($p.'nombre') . ' AS ' . $p.'nombre, ' . $this->_mappingFieldEntity($p.'formacion') . ' AS ' . $p.'formacion, ' . $this->_mappingFieldEntity($p.'clasificacion') . ' AS ' . $p.'clasificacion, ' . $this->_mappingFieldEntity($p.'codigo') . ' AS ' . $p.'codigo, ' . $this->_mappingFieldEntity($p.'perfil') . ' AS ' . $p.'perfil';
+' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'nombre') . ' AS ' . $p.'nombre, ' . $this->_mappingField($p.'formacion') . ' AS ' . $p.'formacion, ' . $this->_mappingField($p.'clasificacion') . ' AS ' . $p.'clasificacion, ' . $this->_mappingField($p.'codigo') . ' AS ' . $p.'codigo, ' . $this->_mappingField($p.'perfil') . ' AS ' . $p.'perfil';
   }
 
   public function _fieldsDb(){
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ', ' . $this->_mappingFieldEntity($p.'nombre') . ', ' . $this->_mappingFieldEntity($p.'formacion') . ', ' . $this->_mappingFieldEntity($p.'clasificacion') . ', ' . $this->_mappingFieldEntity($p.'codigo') . ', ' . $this->_mappingFieldEntity($p.'perfil') . '';
+' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'nombre') . ', ' . $this->_mappingField($p.'formacion') . ', ' . $this->_mappingField($p.'clasificacion') . ', ' . $this->_mappingField($p.'codigo') . ', ' . $this->_mappingField($p.'perfil') . '';
   }
 
   public function _conditionFieldStruct($field, $option, $value){
     $p = $this->prf();
 
-    $f = $this->_mappingFieldEntity($field);
+    $f = $this->_mappingField($field);
     switch ($field){
       case "{$p}id": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}nombre": return $this->format->conditionText($f, $value, $option);
@@ -80,6 +80,7 @@ class AsignaturaSqlMain extends EntitySql{
 
   //@override
   public function initializeUpdate(array $data){
+    if(array_key_exists('id', $data)) { if(!isset($data['id']) || ($data['id'] == '')) throw new Exception('dato obligatorio sin valor: id'); }
     if(array_key_exists('nombre', $data)) { if(empty($data['nombre'])) throw new Exception('dato obligatorio sin valor: nombre'); }
     if(array_key_exists('formacion', $data)) { if(empty($data['formacion'])) throw new Exception('dato obligatorio sin valor: formacion'); }
     if(array_key_exists('clasificacion', $data)) { if(empty($data['clasificacion'])) $data['clasificacion'] = "null"; }

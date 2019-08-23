@@ -1,6 +1,8 @@
 <?php
 
 require_once("class/model/Sqlo.php");
+require_once("class/model/Sql.php");
+require_once("class/model/Entity.php");
 
 //Implementacion principal de Sqlo para una entidad especifica
 class LugarNacimientoSqloMain extends EntitySqlo {
@@ -10,8 +12,8 @@ class LugarNacimientoSqloMain extends EntitySqlo {
      * Se definen todos los recursos de forma independiente, sin parametros en el constructor, para facilitar el polimorfismo de las subclases
      */
     $this->db = Dba::dbInstance();
-    $this->entity = Entity::getInstanceFromString('lugar_nacimiento');
-    $this->sql = EntitySql::getInstanceFromString('lugar_nacimiento');
+    $this->entity = Entity::getInstanceRequire('lugar_nacimiento');
+    $this->sql = EntitySql::getInstanceRequire('lugar_nacimiento');
   }
 
   protected function _insert(array $row){ //@override

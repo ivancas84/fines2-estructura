@@ -1,6 +1,8 @@
 <?php
 
 require_once("class/model/Sqlo.php");
+require_once("class/model/Sql.php");
+require_once("class/model/Entity.php");
 
 //Implementacion principal de Sqlo para una entidad especifica
 class DomicilioSqloMain extends EntitySqlo {
@@ -10,8 +12,8 @@ class DomicilioSqloMain extends EntitySqlo {
      * Se definen todos los recursos de forma independiente, sin parametros en el constructor, para facilitar el polimorfismo de las subclases
      */
     $this->db = Dba::dbInstance();
-    $this->entity = Entity::getInstanceFromString('domicilio');
-    $this->sql = EntitySql::getInstanceFromString('domicilio');
+    $this->entity = Entity::getInstanceRequire('domicilio');
+    $this->sql = EntitySql::getInstanceRequire('domicilio');
   }
 
   protected function _insert(array $row){ //@override
@@ -72,7 +74,7 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_ = [];
 
     $json = ($row && !is_null($row['id'])) ? $this->sql->_json($row) : null;
-    $row_["domicilio"] = EntityValues::getInstanceFromString("domicilio", $json);
+    $row_["domicilio"] = EntityValues::getInstanceRequires("domicilio", $json);
 
     return $row_;
   }

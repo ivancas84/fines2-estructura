@@ -21,8 +21,8 @@ class SedeEntity extends SedeEntityMain {
 
   public function getFieldsFk(){
     $array = parent::getFieldsFk();
-    array_push($array, new FieldSedeCoordinador());
-    array_push($array, new FieldSedeReferente());
+    array_push($array, Field::getInstanceRequire("sede","coordinador"));
+    array_push($array, Field::getInstanceRequire("sede","referente"));
 
     return $array;
   }

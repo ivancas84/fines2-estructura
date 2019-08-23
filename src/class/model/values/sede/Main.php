@@ -110,9 +110,15 @@ class SedeValuesMain extends EntityValues {
     $this->tipo = trim($p);
   }
 
-  public function setBaja($p) {
+  public function setBaja(DateTime $p) {
     if(empty($p)) return;
-    $this->baja = trim($p);
+    $this->baja = $p;
+  }
+
+  public function setBajaStr($p, $format = "Y-m-d H:i:s") {
+    $p = SpanishDateTime::createFromFormat($format, trim($p));
+    if(empty($p)) return;
+    $this->baja = $p;
   }
 
   public function setDependencia($p) {

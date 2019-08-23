@@ -5,11 +5,11 @@ class InasistenciaSqlMain extends EntitySql{
 
   public function __construct(){
     parent::__construct();
-    $this->entity = Entity::getInstanceFromString('inasistencia');
+    $this->entity = Entity::getInstanceRequire('inasistencia');
   }
 
 
-  public function _mappingField($field){
+  public function _mappingFieldStruct($field){
     $p = $this->prf();
     $t = $this->prt();
 
@@ -66,22 +66,22 @@ class InasistenciaSqlMain extends EntitySql{
   }
 
   public function mappingField($field){
-    if($f = $this->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('toma', 'tom')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('curso', 'tom_cur')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('comision', 'tom_cur_com')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('division', 'tom_cur_com_dvi')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('plan', 'tom_cur_com_dvi_pla')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('sede', 'tom_cur_com_dvi_sed')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('tipo_sede', 'tom_cur_com_dvi_sed_ts')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('domicilio', 'tom_cur_com_dvi_sed_dom')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('id_persona', 'tom_cur_com_dvi_sed_coo')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('id_persona', 'tom_cur_com_dvi_sed_ref')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('carga_horaria', 'tom_cur_ch')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('asignatura', 'tom_cur_ch_asi')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('plan', 'tom_cur_ch_pla')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('id_persona', 'tom_pro')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('id_persona', 'tom_ree')->_mappingFieldEntity($field)) return $f;
+    if($f = $this->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('toma', 'tom')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('curso', 'tom_cur')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('comision', 'tom_cur_com')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('division', 'tom_cur_com_dvi')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('plan', 'tom_cur_com_dvi_pla')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('sede', 'tom_cur_com_dvi_sed')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('tipo_sede', 'tom_cur_com_dvi_sed_ts')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('domicilio', 'tom_cur_com_dvi_sed_dom')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('id_persona', 'tom_cur_com_dvi_sed_coo')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('id_persona', 'tom_cur_com_dvi_sed_ref')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('carga_horaria', 'tom_cur_ch')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('asignatura', 'tom_cur_ch_asi')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('plan', 'tom_cur_ch_pla')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('id_persona', 'tom_pro')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('id_persona', 'tom_ree')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido " . $field);
   }
 
@@ -89,61 +89,61 @@ class InasistenciaSqlMain extends EntitySql{
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingFieldEntity($p.'fecha_desde') . ' AS ' . $p.'fecha_desde, ' . $this->_mappingFieldEntity($p.'fecha_hasta') . ' AS ' . $p.'fecha_hasta, ' . $this->_mappingFieldEntity($p.'modulos_semanales') . ' AS ' . $p.'modulos_semanales, ' . $this->_mappingFieldEntity($p.'modulos_mensuales') . ' AS ' . $p.'modulos_mensuales, ' . $this->_mappingFieldEntity($p.'articulo') . ' AS ' . $p.'articulo, ' . $this->_mappingFieldEntity($p.'inciso') . ' AS ' . $p.'inciso, ' . $this->_mappingFieldEntity($p.'observaciones') . ' AS ' . $p.'observaciones, ' . $this->_mappingFieldEntity($p.'toma') . ' AS ' . $p.'toma';
+' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'fecha_desde') . ' AS ' . $p.'fecha_desde, ' . $this->_mappingField($p.'fecha_hasta') . ' AS ' . $p.'fecha_hasta, ' . $this->_mappingField($p.'modulos_semanales') . ' AS ' . $p.'modulos_semanales, ' . $this->_mappingField($p.'modulos_mensuales') . ' AS ' . $p.'modulos_mensuales, ' . $this->_mappingField($p.'articulo') . ' AS ' . $p.'articulo, ' . $this->_mappingField($p.'inciso') . ' AS ' . $p.'inciso, ' . $this->_mappingField($p.'observaciones') . ' AS ' . $p.'observaciones, ' . $this->_mappingField($p.'toma') . ' AS ' . $p.'toma';
   }
 
   public function _fieldsDb(){
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ', ' . $this->_mappingFieldEntity($p.'fecha_desde') . ', ' . $this->_mappingFieldEntity($p.'fecha_hasta') . ', ' . $this->_mappingFieldEntity($p.'modulos_semanales') . ', ' . $this->_mappingFieldEntity($p.'modulos_mensuales') . ', ' . $this->_mappingFieldEntity($p.'articulo') . ', ' . $this->_mappingFieldEntity($p.'inciso') . ', ' . $this->_mappingFieldEntity($p.'observaciones') . ', ' . $this->_mappingFieldEntity($p.'toma') . '';
+' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'fecha_desde') . ', ' . $this->_mappingField($p.'fecha_hasta') . ', ' . $this->_mappingField($p.'modulos_semanales') . ', ' . $this->_mappingField($p.'modulos_mensuales') . ', ' . $this->_mappingField($p.'articulo') . ', ' . $this->_mappingField($p.'inciso') . ', ' . $this->_mappingField($p.'observaciones') . ', ' . $this->_mappingField($p.'toma') . '';
   }
 
   public function fields(){
     return $this->_fields() . ',
-' . EntitySql::getInstanceFromString('toma', 'tom')->_fields() . ',
-' . EntitySql::getInstanceFromString('curso', 'tom_cur')->_fields() . ',
-' . EntitySql::getInstanceFromString('comision', 'tom_cur_com')->_fields() . ',
-' . EntitySql::getInstanceFromString('division', 'tom_cur_com_dvi')->_fields() . ',
-' . EntitySql::getInstanceFromString('plan', 'tom_cur_com_dvi_pla')->_fields() . ',
-' . EntitySql::getInstanceFromString('sede', 'tom_cur_com_dvi_sed')->_fields() . ',
-' . EntitySql::getInstanceFromString('tipo_sede', 'tom_cur_com_dvi_sed_ts')->_fields() . ',
-' . EntitySql::getInstanceFromString('domicilio', 'tom_cur_com_dvi_sed_dom')->_fields() . ',
-' . EntitySql::getInstanceFromString('id_persona', 'tom_cur_com_dvi_sed_coo')->_fields() . ',
-' . EntitySql::getInstanceFromString('id_persona', 'tom_cur_com_dvi_sed_ref')->_fields() . ',
-' . EntitySql::getInstanceFromString('carga_horaria', 'tom_cur_ch')->_fields() . ',
-' . EntitySql::getInstanceFromString('asignatura', 'tom_cur_ch_asi')->_fields() . ',
-' . EntitySql::getInstanceFromString('plan', 'tom_cur_ch_pla')->_fields() . ',
-' . EntitySql::getInstanceFromString('id_persona', 'tom_pro')->_fields() . ',
-' . EntitySql::getInstanceFromString('id_persona', 'tom_ree')->_fields() . ' 
+' . EntitySql::getInstanceRequire('toma', 'tom')->_fields() . ',
+' . EntitySql::getInstanceRequire('curso', 'tom_cur')->_fields() . ',
+' . EntitySql::getInstanceRequire('comision', 'tom_cur_com')->_fields() . ',
+' . EntitySql::getInstanceRequire('division', 'tom_cur_com_dvi')->_fields() . ',
+' . EntitySql::getInstanceRequire('plan', 'tom_cur_com_dvi_pla')->_fields() . ',
+' . EntitySql::getInstanceRequire('sede', 'tom_cur_com_dvi_sed')->_fields() . ',
+' . EntitySql::getInstanceRequire('tipo_sede', 'tom_cur_com_dvi_sed_ts')->_fields() . ',
+' . EntitySql::getInstanceRequire('domicilio', 'tom_cur_com_dvi_sed_dom')->_fields() . ',
+' . EntitySql::getInstanceRequire('id_persona', 'tom_cur_com_dvi_sed_coo')->_fields() . ',
+' . EntitySql::getInstanceRequire('id_persona', 'tom_cur_com_dvi_sed_ref')->_fields() . ',
+' . EntitySql::getInstanceRequire('carga_horaria', 'tom_cur_ch')->_fields() . ',
+' . EntitySql::getInstanceRequire('asignatura', 'tom_cur_ch_asi')->_fields() . ',
+' . EntitySql::getInstanceRequire('plan', 'tom_cur_ch_pla')->_fields() . ',
+' . EntitySql::getInstanceRequire('id_persona', 'tom_pro')->_fields() . ',
+' . EntitySql::getInstanceRequire('id_persona', 'tom_ree')->_fields() . ' 
 ';
   }
 
   public function join(Render $render){
-    return EntitySql::getInstanceFromString('toma', 'tom')->_join('toma', 'inas', $render) . '
-' . EntitySql::getInstanceFromString('curso', 'tom_cur')->_join('curso', 'tom', $render) . '
-' . EntitySql::getInstanceFromString('comision', 'tom_cur_com')->_join('comision', 'tom_cur', $render) . '
-' . EntitySql::getInstanceFromString('comision', 'tom_cur_com_cs')->_join('comision_siguiente', 'tom_cur_com', $render) . '
-' . EntitySql::getInstanceFromString('division', 'tom_cur_com_dvi')->_join('division', 'tom_cur_com', $render) . '
-' . EntitySql::getInstanceFromString('plan', 'tom_cur_com_dvi_pla')->_join('plan', 'tom_cur_com_dvi', $render) . '
-' . EntitySql::getInstanceFromString('sede', 'tom_cur_com_dvi_sed')->_join('sede', 'tom_cur_com_dvi', $render) . '
-' . EntitySql::getInstanceFromString('sede', 'tom_cur_com_dvi_sed_dep')->_join('dependencia', 'tom_cur_com_dvi_sed', $render) . '
-' . EntitySql::getInstanceFromString('tipo_sede', 'tom_cur_com_dvi_sed_ts')->_join('tipo_sede', 'tom_cur_com_dvi_sed', $render) . '
-' . EntitySql::getInstanceFromString('domicilio', 'tom_cur_com_dvi_sed_dom')->_join('domicilio', 'tom_cur_com_dvi_sed', $render) . '
-' . EntitySql::getInstanceFromString('id_persona', 'tom_cur_com_dvi_sed_coo')->_join('coordinador', 'tom_cur_com_dvi_sed', $render) . '
-' . EntitySql::getInstanceFromString('id_persona', 'tom_cur_com_dvi_sed_ref')->_join('referente', 'tom_cur_com_dvi_sed', $render) . '
-' . EntitySql::getInstanceFromString('carga_horaria', 'tom_cur_ch')->_join('carga_horaria', 'tom_cur', $render) . '
-' . EntitySql::getInstanceFromString('asignatura', 'tom_cur_ch_asi')->_join('asignatura', 'tom_cur_ch', $render) . '
-' . EntitySql::getInstanceFromString('plan', 'tom_cur_ch_pla')->_join('plan', 'tom_cur_ch', $render) . '
-' . EntitySql::getInstanceFromString('id_persona', 'tom_pro')->_join('profesor', 'tom', $render) . '
-' . EntitySql::getInstanceFromString('id_persona', 'tom_ree')->_join('reemplaza', 'tom', $render) . '
+    return EntitySql::getInstanceRequire('toma', 'tom')->_join('toma', 'inas', $render) . '
+' . EntitySql::getInstanceRequire('curso', 'tom_cur')->_join('curso', 'tom', $render) . '
+' . EntitySql::getInstanceRequire('comision', 'tom_cur_com')->_join('comision', 'tom_cur', $render) . '
+' . EntitySql::getInstanceRequire('comision', 'tom_cur_com_cs')->_join('comision_siguiente', 'tom_cur_com', $render) . '
+' . EntitySql::getInstanceRequire('division', 'tom_cur_com_dvi')->_join('division', 'tom_cur_com', $render) . '
+' . EntitySql::getInstanceRequire('plan', 'tom_cur_com_dvi_pla')->_join('plan', 'tom_cur_com_dvi', $render) . '
+' . EntitySql::getInstanceRequire('sede', 'tom_cur_com_dvi_sed')->_join('sede', 'tom_cur_com_dvi', $render) . '
+' . EntitySql::getInstanceRequire('sede', 'tom_cur_com_dvi_sed_dep')->_join('dependencia', 'tom_cur_com_dvi_sed', $render) . '
+' . EntitySql::getInstanceRequire('tipo_sede', 'tom_cur_com_dvi_sed_ts')->_join('tipo_sede', 'tom_cur_com_dvi_sed', $render) . '
+' . EntitySql::getInstanceRequire('domicilio', 'tom_cur_com_dvi_sed_dom')->_join('domicilio', 'tom_cur_com_dvi_sed', $render) . '
+' . EntitySql::getInstanceRequire('id_persona', 'tom_cur_com_dvi_sed_coo')->_join('coordinador', 'tom_cur_com_dvi_sed', $render) . '
+' . EntitySql::getInstanceRequire('id_persona', 'tom_cur_com_dvi_sed_ref')->_join('referente', 'tom_cur_com_dvi_sed', $render) . '
+' . EntitySql::getInstanceRequire('carga_horaria', 'tom_cur_ch')->_join('carga_horaria', 'tom_cur', $render) . '
+' . EntitySql::getInstanceRequire('asignatura', 'tom_cur_ch_asi')->_join('asignatura', 'tom_cur_ch', $render) . '
+' . EntitySql::getInstanceRequire('plan', 'tom_cur_ch_pla')->_join('plan', 'tom_cur_ch', $render) . '
+' . EntitySql::getInstanceRequire('id_persona', 'tom_pro')->_join('profesor', 'tom', $render) . '
+' . EntitySql::getInstanceRequire('id_persona', 'tom_ree')->_join('reemplaza', 'tom', $render) . '
 ' ;
   }
 
   public function _conditionFieldStruct($field, $option, $value){
     $p = $this->prf();
 
-    $f = $this->_mappingFieldEntity($field);
+    $f = $this->_mappingField($field);
     switch ($field){
       case "{$p}id": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}fecha_desde": return $this->format->conditionDate($f, $value, $option);
@@ -160,40 +160,40 @@ class InasistenciaSqlMain extends EntitySql{
 
   protected function conditionFieldStruct($field, $option, $value) {
     if($c = $this->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('toma','tom')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('curso','tom_cur')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('comision','tom_cur_com')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('division','tom_cur_com_dvi')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('plan','tom_cur_com_dvi_pla')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('sede','tom_cur_com_dvi_sed')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('tipo_sede','tom_cur_com_dvi_sed_ts')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('domicilio','tom_cur_com_dvi_sed_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('id_persona','tom_cur_com_dvi_sed_coo')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('id_persona','tom_cur_com_dvi_sed_ref')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('carga_horaria','tom_cur_ch')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('asignatura','tom_cur_ch_asi')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('plan','tom_cur_ch_pla')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('id_persona','tom_pro')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('id_persona','tom_ree')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('toma','tom')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('curso','tom_cur')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('comision','tom_cur_com')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('division','tom_cur_com_dvi')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','tom_cur_com_dvi_pla')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('sede','tom_cur_com_dvi_sed')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('tipo_sede','tom_cur_com_dvi_sed_ts')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','tom_cur_com_dvi_sed_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','tom_cur_com_dvi_sed_coo')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','tom_cur_com_dvi_sed_ref')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('carga_horaria','tom_cur_ch')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('asignatura','tom_cur_ch_asi')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','tom_cur_ch_pla')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','tom_pro')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','tom_ree')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldAux($field, $option, $value) {
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('toma','tom')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('curso','tom_cur')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('comision','tom_cur_com')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('division','tom_cur_com_dvi')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('plan','tom_cur_com_dvi_pla')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('sede','tom_cur_com_dvi_sed')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('tipo_sede','tom_cur_com_dvi_sed_ts')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('domicilio','tom_cur_com_dvi_sed_dom')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('id_persona','tom_cur_com_dvi_sed_coo')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('id_persona','tom_cur_com_dvi_sed_ref')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('carga_horaria','tom_cur_ch')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('asignatura','tom_cur_ch_asi')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('plan','tom_cur_ch_pla')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('id_persona','tom_pro')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('id_persona','tom_ree')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('toma','tom')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('curso','tom_cur')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('comision','tom_cur_com')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('division','tom_cur_com_dvi')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','tom_cur_com_dvi_pla')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('sede','tom_cur_com_dvi_sed')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('tipo_sede','tom_cur_com_dvi_sed_ts')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','tom_cur_com_dvi_sed_dom')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','tom_cur_com_dvi_sed_coo')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','tom_cur_com_dvi_sed_ref')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('carga_horaria','tom_cur_ch')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('asignatura','tom_cur_ch_asi')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','tom_cur_ch_pla')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','tom_pro')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','tom_ree')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
 
@@ -214,6 +214,7 @@ class InasistenciaSqlMain extends EntitySql{
 
   //@override
   public function initializeUpdate(array $data){
+    if(array_key_exists('id', $data)) { if(!isset($data['id']) || ($data['id'] == '')) throw new Exception('dato obligatorio sin valor: id'); }
     if(array_key_exists('fecha_desde', $data)) { if(empty($data['fecha_desde']))  throw new Exception('fecha/hora obligatoria sin valor: fecha_desde'); }
     if(array_key_exists('fecha_hasta', $data)) { if(empty($data['fecha_hasta']))  throw new Exception('fecha/hora obligatoria sin valor: fecha_hasta'); }
     if(array_key_exists('modulos_semanales', $data)) { if(!isset($data['modulos_semanales']) || ($data['modulos_semanales'] == '')) $data['modulos_semanales'] = "null"; }

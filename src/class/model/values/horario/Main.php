@@ -58,14 +58,26 @@ class HorarioValuesMain extends EntityValues {
     $this->id = trim($p);
   }
 
-  public function setHoraInicio($p) {
+  public function setHoraInicio(DateTime $p) {
     if(empty($p)) return;
-    $this->horaInicio = trim($p);
+    $this->horaInicio = $p;
   }
 
-  public function setHoraFin($p) {
+  public function setHoraInicioStr($p, $format = "H:i") {
+    $p = SpanishDateTime::createFromFormat($format, trim($p));
     if(empty($p)) return;
-    $this->horaFin = trim($p);
+    $this->horaInicio = $p;
+  }
+
+  public function setHoraFin(DateTime $p) {
+    if(empty($p)) return;
+    $this->horaFin = $p;
+  }
+
+  public function setHoraFinStr($p, $format = "H:i") {
+    $p = SpanishDateTime::createFromFormat($format, trim($p));
+    if(empty($p)) return;
+    $this->horaFin = $p;
   }
 
   public function setHorasCatedra($p) {

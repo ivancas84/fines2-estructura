@@ -1,14 +1,14 @@
 <?php
 
 require_once("class/model/Entity.php");
-require_once("config/entityClasses.php");
+require_once("class/model/Field.php");
 
 class ClasificacionPlanEntityMain extends Entity {
   public $name = "clasificacion_plan";
   public $alias = "cp";
  
   public function getPk(){
-    return new FieldClasificacionPlanId;
+    return Field::getInstanceRequire("clasificacion_plan", "id");
   }
 
   public function getFieldsNf(){
@@ -18,8 +18,8 @@ class ClasificacionPlanEntityMain extends Entity {
 
   public function getFieldsMu(){
     return array(
-      new FieldClasificacionPlanClasificacion,
-      new FieldClasificacionPlanPlan,
+      Field::getInstanceRequire("clasificacion_plan", "clasificacion"),
+      Field::getInstanceRequire("clasificacion_plan", "plan"),
     );
   }
 

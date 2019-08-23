@@ -53,14 +53,26 @@ class CoordinadorValuesMain extends EntityValues {
     $this->id = trim($p);
   }
 
-  public function setAlta($p) {
+  public function setAlta(DateTime $p) {
     if(empty($p)) return;
-    $this->alta = trim($p);
+    $this->alta = $p;
   }
 
-  public function setBaja($p) {
+  public function setAltaStr($p, $format = "Y-m-d H:i:s") {
+    $p = SpanishDateTime::createFromFormat($format, trim($p));
     if(empty($p)) return;
-    $this->baja = trim($p);
+    $this->alta = $p;
+  }
+
+  public function setBaja(DateTime $p) {
+    if(empty($p)) return;
+    $this->baja = $p;
+  }
+
+  public function setBajaStr($p, $format = "Y-m-d H:i:s") {
+    $p = SpanishDateTime::createFromFormat($format, trim($p));
+    if(empty($p)) return;
+    $this->baja = $p;
   }
 
   public function setSede($p) {

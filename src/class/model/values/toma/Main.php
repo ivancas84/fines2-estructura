@@ -120,24 +120,48 @@ class TomaValuesMain extends EntityValues {
     $this->id = trim($p);
   }
 
-  public function setFechaToma($p) {
+  public function setFechaToma(DateTime $p) {
     if(empty($p)) return;
-    $this->fechaToma = trim($p);
+    $this->fechaToma = $p;
   }
 
-  public function setFechaInicio($p) {
+  public function setFechaTomaStr($p, $format = "Y-m-d") {
+    $p = SpanishDateTime::createFromFormat($format, trim($p));
     if(empty($p)) return;
-    $this->fechaInicio = trim($p);
+    $this->fechaToma = $p;
   }
 
-  public function setFechaFin($p) {
+  public function setFechaInicio(DateTime $p) {
     if(empty($p)) return;
-    $this->fechaFin = trim($p);
+    $this->fechaInicio = $p;
   }
 
-  public function setFechaEntradaContralor($p) {
+  public function setFechaInicioStr($p, $format = "Y-m-d") {
+    $p = SpanishDateTime::createFromFormat($format, trim($p));
     if(empty($p)) return;
-    $this->fechaEntradaContralor = trim($p);
+    $this->fechaInicio = $p;
+  }
+
+  public function setFechaFin(DateTime $p) {
+    if(empty($p)) return;
+    $this->fechaFin = $p;
+  }
+
+  public function setFechaFinStr($p, $format = "Y-m-d") {
+    $p = SpanishDateTime::createFromFormat($format, trim($p));
+    if(empty($p)) return;
+    $this->fechaFin = $p;
+  }
+
+  public function setFechaEntradaContralor(DateTime $p) {
+    if(empty($p)) return;
+    $this->fechaEntradaContralor = $p;
+  }
+
+  public function setFechaEntradaContralorStr($p, $format = "Y-m-d") {
+    $p = SpanishDateTime::createFromFormat($format, trim($p));
+    if(empty($p)) return;
+    $this->fechaEntradaContralor = $p;
   }
 
   public function setEstado($p) {
@@ -155,9 +179,15 @@ class TomaValuesMain extends EntityValues {
     $this->comentarioContralor = trim($p);
   }
 
-  public function setAlta($p) {
+  public function setAlta(DateTime $p) {
     if(empty($p)) return;
-    $this->alta = trim($p);
+    $this->alta = $p;
+  }
+
+  public function setAltaStr($p, $format = "Y-m-d H:i:s") {
+    $p = SpanishDateTime::createFromFormat($format, trim($p));
+    if(empty($p)) return;
+    $this->alta = $p;
   }
 
   public function setTipoMovimiento($p) {
@@ -170,9 +200,15 @@ class TomaValuesMain extends EntityValues {
     $this->estadoContralor = trim($p);
   }
 
-  public function setFechaDesde($p) {
+  public function setFechaDesde(DateTime $p) {
     if(empty($p)) return;
-    $this->fechaDesde = trim($p);
+    $this->fechaDesde = $p;
+  }
+
+  public function setFechaDesdeStr($p, $format = "Y-m-d") {
+    $p = SpanishDateTime::createFromFormat($format, trim($p));
+    if(empty($p)) return;
+    $this->fechaDesde = $p;
   }
 
   public function setSumaHorasCatedra($p) {

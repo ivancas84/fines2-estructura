@@ -1,19 +1,19 @@
 <?php
 
 require_once("class/model/Entity.php");
-require_once("config/entityClasses.php");
+require_once("class/model/Field.php");
 
 class TipoSedeEntityMain extends Entity {
   public $name = "tipo_sede";
   public $alias = "ts";
  
   public function getPk(){
-    return new FieldTipoSedeId;
+    return Field::getInstanceRequire("tipo_sede", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      new FieldTipoSedeDescripcion,
+      Field::getInstanceRequire("tipo_sede", "descripcion"),
     );
   }
 

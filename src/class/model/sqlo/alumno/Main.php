@@ -1,6 +1,8 @@
 <?php
 
 require_once("class/model/Sqlo.php");
+require_once("class/model/Sql.php");
+require_once("class/model/Entity.php");
 
 //Implementacion principal de Sqlo para una entidad especifica
 class AlumnoSqloMain extends EntitySqlo {
@@ -10,8 +12,8 @@ class AlumnoSqloMain extends EntitySqlo {
      * Se definen todos los recursos de forma independiente, sin parametros en el constructor, para facilitar el polimorfismo de las subclases
      */
     $this->db = Dba::dbInstance();
-    $this->entity = Entity::getInstanceFromString('alumno');
-    $this->sql = EntitySql::getInstanceFromString('alumno');
+    $this->entity = Entity::getInstanceRequire('alumno');
+    $this->sql = EntitySql::getInstanceRequire('alumno');
   }
 
   protected function _insert(array $row){ //@override
@@ -66,7 +68,7 @@ UPDATE " . $this->entity->sn_() . " SET
     if(empty($row)) return null;
     $row_ = $this->sql->_json($row);
     if(!is_null($row['per_id'])){
-      $json = EntitySql::getInstanceFromString('id_persona', 'per')->_json($row);
+      $json = EntitySql::getInstanceRequire('id_persona', 'per')->_json($row);
       $row_["persona_"] = $json;
     }
     return $row_;
@@ -76,10 +78,10 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_ = [];
 
     $json = ($row && !is_null($row['id'])) ? $this->sql->_json($row) : null;
-    $row_["alumno"] = EntityValues::getInstanceFromString("alumno", $json);
+    $row_["alumno"] = EntityValues::getInstanceRequires("alumno", $json);
 
-    $json = ($row && !is_null($row['per_id'])) ? EntitySql::getInstanceFromString('id_persona', 'per')->_json($row) : null;
-    $row_["persona"] = EntityValues::getInstanceFromString('id_persona', $json);
+    $json = ($row && !is_null($row['per_id'])) ? EntitySql::getInstanceRequire('id_persona', 'per')->_json($row) : null;
+    $row_["persona"] = EntityValues::getInstanceRequire('id_persona', $json);
 
     return $row_;
   }

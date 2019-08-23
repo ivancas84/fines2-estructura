@@ -1,20 +1,20 @@
 <?php
 
 require_once("class/model/Entity.php");
-require_once("config/entityClasses.php");
+require_once("class/model/Field.php");
 
 class DiaEntityMain extends Entity {
   public $name = "dia";
   public $alias = "dia";
  
   public function getPk(){
-    return new FieldDiaId;
+    return Field::getInstanceRequire("dia", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      new FieldDiaNumero,
-      new FieldDiaDia,
+      Field::getInstanceRequire("dia", "numero"),
+      Field::getInstanceRequire("dia", "dia"),
     );
   }
 

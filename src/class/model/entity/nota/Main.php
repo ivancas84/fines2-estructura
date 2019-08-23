@@ -1,28 +1,28 @@
 <?php
 
 require_once("class/model/Entity.php");
-require_once("config/entityClasses.php");
+require_once("class/model/Field.php");
 
 class NotaEntityMain extends Entity {
   public $name = "nota";
   public $alias = "nota";
  
   public function getPk(){
-    return new FieldNotaId;
+    return Field::getInstanceRequire("nota", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      new FieldNotaNota,
-      new FieldNotaAlta,
+      Field::getInstanceRequire("nota", "nota"),
+      Field::getInstanceRequire("nota", "alta"),
     );
   }
 
   public function getFieldsMu(){
     return array(
-      new FieldNotaProfesor,
-      new FieldNotaCurso,
-      new FieldNotaAlumno,
+      Field::getInstanceRequire("nota", "profesor"),
+      Field::getInstanceRequire("nota", "curso"),
+      Field::getInstanceRequire("nota", "alumno"),
     );
   }
 

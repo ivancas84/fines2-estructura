@@ -1,6 +1,8 @@
 <?php
 
 require_once("class/model/Sqlo.php");
+require_once("class/model/Sql.php");
+require_once("class/model/Entity.php");
 
 //Implementacion principal de Sqlo para una entidad especifica
 class CargaHorariaSqloMain extends EntitySqlo {
@@ -10,8 +12,8 @@ class CargaHorariaSqloMain extends EntitySqlo {
      * Se definen todos los recursos de forma independiente, sin parametros en el constructor, para facilitar el polimorfismo de las subclases
      */
     $this->db = Dba::dbInstance();
-    $this->entity = Entity::getInstanceFromString('carga_horaria');
-    $this->sql = EntitySql::getInstanceFromString('carga_horaria');
+    $this->entity = Entity::getInstanceRequire('carga_horaria');
+    $this->sql = EntitySql::getInstanceRequire('carga_horaria');
   }
 
   protected function _insert(array $row){ //@override
@@ -60,11 +62,11 @@ UPDATE " . $this->entity->sn_() . " SET
     if(empty($row)) return null;
     $row_ = $this->sql->_json($row);
     if(!is_null($row['asi_id'])){
-      $json = EntitySql::getInstanceFromString('asignatura', 'asi')->_json($row);
+      $json = EntitySql::getInstanceRequire('asignatura', 'asi')->_json($row);
       $row_["asignatura_"] = $json;
     }
     if(!is_null($row['pla_id'])){
-      $json = EntitySql::getInstanceFromString('plan', 'pla')->_json($row);
+      $json = EntitySql::getInstanceRequire('plan', 'pla')->_json($row);
       $row_["plan_"] = $json;
     }
     return $row_;
@@ -74,13 +76,13 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_ = [];
 
     $json = ($row && !is_null($row['id'])) ? $this->sql->_json($row) : null;
-    $row_["carga_horaria"] = EntityValues::getInstanceFromString("carga_horaria", $json);
+    $row_["carga_horaria"] = EntityValues::getInstanceRequires("carga_horaria", $json);
 
-    $json = ($row && !is_null($row['asi_id'])) ? EntitySql::getInstanceFromString('asignatura', 'asi')->_json($row) : null;
-    $row_["asignatura"] = EntityValues::getInstanceFromString('asignatura', $json);
+    $json = ($row && !is_null($row['asi_id'])) ? EntitySql::getInstanceRequire('asignatura', 'asi')->_json($row) : null;
+    $row_["asignatura"] = EntityValues::getInstanceRequire('asignatura', $json);
 
-    $json = ($row && !is_null($row['pla_id'])) ? EntitySql::getInstanceFromString('plan', 'pla')->_json($row) : null;
-    $row_["plan"] = EntityValues::getInstanceFromString('plan', $json);
+    $json = ($row && !is_null($row['pla_id'])) ? EntitySql::getInstanceRequire('plan', 'pla')->_json($row) : null;
+    $row_["plan"] = EntityValues::getInstanceRequire('plan', $json);
 
     return $row_;
   }

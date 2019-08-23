@@ -73,14 +73,26 @@ class InasistenciaValuesMain extends EntityValues {
     $this->id = trim($p);
   }
 
-  public function setFechaDesde($p) {
+  public function setFechaDesde(DateTime $p) {
     if(empty($p)) return;
-    $this->fechaDesde = trim($p);
+    $this->fechaDesde = $p;
   }
 
-  public function setFechaHasta($p) {
+  public function setFechaDesdeStr($p, $format = "Y-m-d") {
+    $p = SpanishDateTime::createFromFormat($format, trim($p));
     if(empty($p)) return;
-    $this->fechaHasta = trim($p);
+    $this->fechaDesde = $p;
+  }
+
+  public function setFechaHasta(DateTime $p) {
+    if(empty($p)) return;
+    $this->fechaHasta = $p;
+  }
+
+  public function setFechaHastaStr($p, $format = "Y-m-d") {
+    $p = SpanishDateTime::createFromFormat($format, trim($p));
+    if(empty($p)) return;
+    $this->fechaHasta = $p;
   }
 
   public function setModulosSemanales($p) {

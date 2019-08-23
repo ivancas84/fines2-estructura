@@ -1,34 +1,34 @@
 <?php
 
 require_once("class/model/Entity.php");
-require_once("config/entityClasses.php");
+require_once("class/model/Field.php");
 
 class Nomina2EntityMain extends Entity {
   public $name = "nomina2";
   public $alias = "noa";
  
   public function getPk(){
-    return new FieldNomina2Id;
+    return Field::getInstanceRequire("nomina2", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      new FieldNomina2FotocopiaDocumento,
-      new FieldNomina2PartidaNacimiento,
-      new FieldNomina2Alta,
-      new FieldNomina2ConstanciaCuil,
-      new FieldNomina2CertificadoEstudios,
-      new FieldNomina2AnioIngreso,
-      new FieldNomina2Activo,
-      new FieldNomina2Programa,
-      new FieldNomina2Observaciones,
+      Field::getInstanceRequire("nomina2", "fotocopia_documento"),
+      Field::getInstanceRequire("nomina2", "partida_nacimiento"),
+      Field::getInstanceRequire("nomina2", "alta"),
+      Field::getInstanceRequire("nomina2", "constancia_cuil"),
+      Field::getInstanceRequire("nomina2", "certificado_estudios"),
+      Field::getInstanceRequire("nomina2", "anio_ingreso"),
+      Field::getInstanceRequire("nomina2", "activo"),
+      Field::getInstanceRequire("nomina2", "programa"),
+      Field::getInstanceRequire("nomina2", "observaciones"),
     );
   }
 
   public function getFieldsMu(){
     return array(
-      new FieldNomina2Persona,
-      new FieldNomina2Comision,
+      Field::getInstanceRequire("nomina2", "persona"),
+      Field::getInstanceRequire("nomina2", "comision"),
     );
   }
 

@@ -5,11 +5,11 @@ class PlanSqlMain extends EntitySql{
 
   public function __construct(){
     parent::__construct();
-    $this->entity = Entity::getInstanceFromString('plan');
+    $this->entity = Entity::getInstanceRequire('plan');
   }
 
 
-  public function _mappingField($field){
+  public function _mappingFieldStruct($field){
     $p = $this->prf();
     $t = $this->prt();
 
@@ -37,20 +37,20 @@ class PlanSqlMain extends EntitySql{
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingFieldEntity($p.'orientacion') . ' AS ' . $p.'orientacion, ' . $this->_mappingFieldEntity($p.'resolucion') . ' AS ' . $p.'resolucion';
+' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'orientacion') . ' AS ' . $p.'orientacion, ' . $this->_mappingField($p.'resolucion') . ' AS ' . $p.'resolucion';
   }
 
   public function _fieldsDb(){
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ', ' . $this->_mappingFieldEntity($p.'orientacion') . ', ' . $this->_mappingFieldEntity($p.'resolucion') . '';
+' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'orientacion') . ', ' . $this->_mappingField($p.'resolucion') . '';
   }
 
   public function _conditionFieldStruct($field, $option, $value){
     $p = $this->prf();
 
-    $f = $this->_mappingFieldEntity($field);
+    $f = $this->_mappingField($field);
     switch ($field){
       case "{$p}id": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}orientacion": return $this->format->conditionText($f, $value, $option);
@@ -71,6 +71,7 @@ class PlanSqlMain extends EntitySql{
 
   //@override
   public function initializeUpdate(array $data){
+    if(array_key_exists('id', $data)) { if(!isset($data['id']) || ($data['id'] == '')) throw new Exception('dato obligatorio sin valor: id'); }
     if(array_key_exists('orientacion', $data)) { if(empty($data['orientacion'])) throw new Exception('dato obligatorio sin valor: orientacion'); }
     if(array_key_exists('resolucion', $data)) { if(empty($data['resolucion'])) $data['resolucion'] = "null"; }
 

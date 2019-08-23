@@ -5,11 +5,11 @@ class AlumnoSqlMain extends EntitySql{
 
   public function __construct(){
     parent::__construct();
-    $this->entity = Entity::getInstanceFromString('alumno');
+    $this->entity = Entity::getInstanceRequire('alumno');
   }
 
 
-  public function _mappingField($field){
+  public function _mappingFieldStruct($field){
     $p = $this->prf();
     $t = $this->prt();
 
@@ -49,8 +49,8 @@ class AlumnoSqlMain extends EntitySql{
   }
 
   public function mappingField($field){
-    if($f = $this->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('id_persona', 'per')->_mappingFieldEntity($field)) return $f;
+    if($f = $this->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('id_persona', 'per')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido " . $field);
   }
 
@@ -58,31 +58,31 @@ class AlumnoSqlMain extends EntitySql{
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingFieldEntity($p.'fotocopia_documento') . ' AS ' . $p.'fotocopia_documento, ' . $this->_mappingFieldEntity($p.'partida_nacimiento') . ' AS ' . $p.'partida_nacimiento, ' . $this->_mappingFieldEntity($p.'constancia_cuil') . ' AS ' . $p.'constancia_cuil, ' . $this->_mappingFieldEntity($p.'certificado_estudios') . ' AS ' . $p.'certificado_estudios, ' . $this->_mappingFieldEntity($p.'anio_ingreso') . ' AS ' . $p.'anio_ingreso, ' . $this->_mappingFieldEntity($p.'observaciones') . ' AS ' . $p.'observaciones, ' . $this->_mappingFieldEntity($p.'persona') . ' AS ' . $p.'persona';
+' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'fotocopia_documento') . ' AS ' . $p.'fotocopia_documento, ' . $this->_mappingField($p.'partida_nacimiento') . ' AS ' . $p.'partida_nacimiento, ' . $this->_mappingField($p.'constancia_cuil') . ' AS ' . $p.'constancia_cuil, ' . $this->_mappingField($p.'certificado_estudios') . ' AS ' . $p.'certificado_estudios, ' . $this->_mappingField($p.'anio_ingreso') . ' AS ' . $p.'anio_ingreso, ' . $this->_mappingField($p.'observaciones') . ' AS ' . $p.'observaciones, ' . $this->_mappingField($p.'persona') . ' AS ' . $p.'persona';
   }
 
   public function _fieldsDb(){
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ', ' . $this->_mappingFieldEntity($p.'fotocopia_documento') . ', ' . $this->_mappingFieldEntity($p.'partida_nacimiento') . ', ' . $this->_mappingFieldEntity($p.'constancia_cuil') . ', ' . $this->_mappingFieldEntity($p.'certificado_estudios') . ', ' . $this->_mappingFieldEntity($p.'anio_ingreso') . ', ' . $this->_mappingFieldEntity($p.'observaciones') . ', ' . $this->_mappingFieldEntity($p.'persona') . '';
+' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'fotocopia_documento') . ', ' . $this->_mappingField($p.'partida_nacimiento') . ', ' . $this->_mappingField($p.'constancia_cuil') . ', ' . $this->_mappingField($p.'certificado_estudios') . ', ' . $this->_mappingField($p.'anio_ingreso') . ', ' . $this->_mappingField($p.'observaciones') . ', ' . $this->_mappingField($p.'persona') . '';
   }
 
   public function fields(){
     return $this->_fields() . ',
-' . EntitySql::getInstanceFromString('id_persona', 'per')->_fields() . ' 
+' . EntitySql::getInstanceRequire('id_persona', 'per')->_fields() . ' 
 ';
   }
 
   public function join(Render $render){
-    return EntitySql::getInstanceFromString('id_persona', 'per')->_join('persona', 'alum', $render) . '
+    return EntitySql::getInstanceRequire('id_persona', 'per')->_join('persona', 'alum', $render) . '
 ' ;
   }
 
   public function _conditionFieldStruct($field, $option, $value){
     $p = $this->prf();
 
-    $f = $this->_mappingFieldEntity($field);
+    $f = $this->_mappingField($field);
     switch ($field){
       case "{$p}id": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}fotocopia_documento": return $this->format->conditionBoolean($f, $value);
@@ -98,12 +98,12 @@ class AlumnoSqlMain extends EntitySql{
 
   protected function conditionFieldStruct($field, $option, $value) {
     if($c = $this->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('id_persona','per')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','per')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldAux($field, $option, $value) {
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('id_persona','per')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','per')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
 
@@ -123,6 +123,7 @@ class AlumnoSqlMain extends EntitySql{
 
   //@override
   public function initializeUpdate(array $data){
+    if(array_key_exists('id', $data)) { if(!isset($data['id']) || ($data['id'] == '')) throw new Exception('dato obligatorio sin valor: id'); }
     if(array_key_exists('fotocopia_documento', $data)) { if(!isset($data['fotocopia_documento']) || ($data['fotocopia_documento'] == '')) $data['fotocopia_documento'] = "false"; }
     if(array_key_exists('partida_nacimiento', $data)) { if(!isset($data['partida_nacimiento']) || ($data['partida_nacimiento'] == '')) $data['partida_nacimiento'] = "false"; }
     if(array_key_exists('constancia_cuil', $data)) { if(!isset($data['constancia_cuil']) || ($data['constancia_cuil'] == '')) $data['constancia_cuil'] = "false"; }

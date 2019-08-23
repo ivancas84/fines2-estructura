@@ -5,11 +5,11 @@ class Nomina2SqlMain extends EntitySql{
 
   public function __construct(){
     parent::__construct();
-    $this->entity = Entity::getInstanceFromString('nomina2');
+    $this->entity = Entity::getInstanceRequire('nomina2');
   }
 
 
-  public function _mappingField($field){
+  public function _mappingFieldStruct($field){
     $p = $this->prf();
     $t = $this->prt();
 
@@ -62,16 +62,16 @@ class Nomina2SqlMain extends EntitySql{
   }
 
   public function mappingField($field){
-    if($f = $this->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('id_persona', 'per')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('comision', 'com')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('division', 'com_dvi')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('plan', 'com_dvi_pla')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('sede', 'com_dvi_sed')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('tipo_sede', 'com_dvi_sed_ts')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('domicilio', 'com_dvi_sed_dom')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('id_persona', 'com_dvi_sed_coo')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('id_persona', 'com_dvi_sed_ref')->_mappingFieldEntity($field)) return $f;
+    if($f = $this->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('id_persona', 'per')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('comision', 'com')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('division', 'com_dvi')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('plan', 'com_dvi_pla')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('sede', 'com_dvi_sed')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('tipo_sede', 'com_dvi_sed_ts')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('domicilio', 'com_dvi_sed_dom')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('id_persona', 'com_dvi_sed_coo')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('id_persona', 'com_dvi_sed_ref')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido " . $field);
   }
 
@@ -79,49 +79,49 @@ class Nomina2SqlMain extends EntitySql{
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingFieldEntity($p.'fotocopia_documento') . ' AS ' . $p.'fotocopia_documento, ' . $this->_mappingFieldEntity($p.'partida_nacimiento') . ' AS ' . $p.'partida_nacimiento, ' . $this->_mappingFieldEntity($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingFieldEntity($p.'constancia_cuil') . ' AS ' . $p.'constancia_cuil, ' . $this->_mappingFieldEntity($p.'certificado_estudios') . ' AS ' . $p.'certificado_estudios, ' . $this->_mappingFieldEntity($p.'anio_ingreso') . ' AS ' . $p.'anio_ingreso, ' . $this->_mappingFieldEntity($p.'activo') . ' AS ' . $p.'activo, ' . $this->_mappingFieldEntity($p.'programa') . ' AS ' . $p.'programa, ' . $this->_mappingFieldEntity($p.'observaciones') . ' AS ' . $p.'observaciones, ' . $this->_mappingFieldEntity($p.'persona') . ' AS ' . $p.'persona, ' . $this->_mappingFieldEntity($p.'comision') . ' AS ' . $p.'comision';
+' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'fotocopia_documento') . ' AS ' . $p.'fotocopia_documento, ' . $this->_mappingField($p.'partida_nacimiento') . ' AS ' . $p.'partida_nacimiento, ' . $this->_mappingField($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingField($p.'constancia_cuil') . ' AS ' . $p.'constancia_cuil, ' . $this->_mappingField($p.'certificado_estudios') . ' AS ' . $p.'certificado_estudios, ' . $this->_mappingField($p.'anio_ingreso') . ' AS ' . $p.'anio_ingreso, ' . $this->_mappingField($p.'activo') . ' AS ' . $p.'activo, ' . $this->_mappingField($p.'programa') . ' AS ' . $p.'programa, ' . $this->_mappingField($p.'observaciones') . ' AS ' . $p.'observaciones, ' . $this->_mappingField($p.'persona') . ' AS ' . $p.'persona, ' . $this->_mappingField($p.'comision') . ' AS ' . $p.'comision';
   }
 
   public function _fieldsDb(){
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ', ' . $this->_mappingFieldEntity($p.'fotocopia_documento') . ', ' . $this->_mappingFieldEntity($p.'partida_nacimiento') . ', ' . $this->_mappingFieldEntity($p.'alta') . ', ' . $this->_mappingFieldEntity($p.'constancia_cuil') . ', ' . $this->_mappingFieldEntity($p.'certificado_estudios') . ', ' . $this->_mappingFieldEntity($p.'anio_ingreso') . ', ' . $this->_mappingFieldEntity($p.'activo') . ', ' . $this->_mappingFieldEntity($p.'programa') . ', ' . $this->_mappingFieldEntity($p.'observaciones') . ', ' . $this->_mappingFieldEntity($p.'persona') . ', ' . $this->_mappingFieldEntity($p.'comision') . '';
+' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'fotocopia_documento') . ', ' . $this->_mappingField($p.'partida_nacimiento') . ', ' . $this->_mappingField($p.'alta') . ', ' . $this->_mappingField($p.'constancia_cuil') . ', ' . $this->_mappingField($p.'certificado_estudios') . ', ' . $this->_mappingField($p.'anio_ingreso') . ', ' . $this->_mappingField($p.'activo') . ', ' . $this->_mappingField($p.'programa') . ', ' . $this->_mappingField($p.'observaciones') . ', ' . $this->_mappingField($p.'persona') . ', ' . $this->_mappingField($p.'comision') . '';
   }
 
   public function fields(){
     return $this->_fields() . ',
-' . EntitySql::getInstanceFromString('id_persona', 'per')->_fields() . ',
-' . EntitySql::getInstanceFromString('comision', 'com')->_fields() . ',
-' . EntitySql::getInstanceFromString('division', 'com_dvi')->_fields() . ',
-' . EntitySql::getInstanceFromString('plan', 'com_dvi_pla')->_fields() . ',
-' . EntitySql::getInstanceFromString('sede', 'com_dvi_sed')->_fields() . ',
-' . EntitySql::getInstanceFromString('tipo_sede', 'com_dvi_sed_ts')->_fields() . ',
-' . EntitySql::getInstanceFromString('domicilio', 'com_dvi_sed_dom')->_fields() . ',
-' . EntitySql::getInstanceFromString('id_persona', 'com_dvi_sed_coo')->_fields() . ',
-' . EntitySql::getInstanceFromString('id_persona', 'com_dvi_sed_ref')->_fields() . ' 
+' . EntitySql::getInstanceRequire('id_persona', 'per')->_fields() . ',
+' . EntitySql::getInstanceRequire('comision', 'com')->_fields() . ',
+' . EntitySql::getInstanceRequire('division', 'com_dvi')->_fields() . ',
+' . EntitySql::getInstanceRequire('plan', 'com_dvi_pla')->_fields() . ',
+' . EntitySql::getInstanceRequire('sede', 'com_dvi_sed')->_fields() . ',
+' . EntitySql::getInstanceRequire('tipo_sede', 'com_dvi_sed_ts')->_fields() . ',
+' . EntitySql::getInstanceRequire('domicilio', 'com_dvi_sed_dom')->_fields() . ',
+' . EntitySql::getInstanceRequire('id_persona', 'com_dvi_sed_coo')->_fields() . ',
+' . EntitySql::getInstanceRequire('id_persona', 'com_dvi_sed_ref')->_fields() . ' 
 ';
   }
 
   public function join(Render $render){
-    return EntitySql::getInstanceFromString('id_persona', 'per')->_join('persona', 'noa', $render) . '
-' . EntitySql::getInstanceFromString('comision', 'com')->_join('comision', 'noa', $render) . '
-' . EntitySql::getInstanceFromString('comision', 'com_cs')->_join('comision_siguiente', 'com', $render) . '
-' . EntitySql::getInstanceFromString('division', 'com_dvi')->_join('division', 'com', $render) . '
-' . EntitySql::getInstanceFromString('plan', 'com_dvi_pla')->_join('plan', 'com_dvi', $render) . '
-' . EntitySql::getInstanceFromString('sede', 'com_dvi_sed')->_join('sede', 'com_dvi', $render) . '
-' . EntitySql::getInstanceFromString('sede', 'com_dvi_sed_dep')->_join('dependencia', 'com_dvi_sed', $render) . '
-' . EntitySql::getInstanceFromString('tipo_sede', 'com_dvi_sed_ts')->_join('tipo_sede', 'com_dvi_sed', $render) . '
-' . EntitySql::getInstanceFromString('domicilio', 'com_dvi_sed_dom')->_join('domicilio', 'com_dvi_sed', $render) . '
-' . EntitySql::getInstanceFromString('id_persona', 'com_dvi_sed_coo')->_join('coordinador', 'com_dvi_sed', $render) . '
-' . EntitySql::getInstanceFromString('id_persona', 'com_dvi_sed_ref')->_join('referente', 'com_dvi_sed', $render) . '
+    return EntitySql::getInstanceRequire('id_persona', 'per')->_join('persona', 'noa', $render) . '
+' . EntitySql::getInstanceRequire('comision', 'com')->_join('comision', 'noa', $render) . '
+' . EntitySql::getInstanceRequire('comision', 'com_cs')->_join('comision_siguiente', 'com', $render) . '
+' . EntitySql::getInstanceRequire('division', 'com_dvi')->_join('division', 'com', $render) . '
+' . EntitySql::getInstanceRequire('plan', 'com_dvi_pla')->_join('plan', 'com_dvi', $render) . '
+' . EntitySql::getInstanceRequire('sede', 'com_dvi_sed')->_join('sede', 'com_dvi', $render) . '
+' . EntitySql::getInstanceRequire('sede', 'com_dvi_sed_dep')->_join('dependencia', 'com_dvi_sed', $render) . '
+' . EntitySql::getInstanceRequire('tipo_sede', 'com_dvi_sed_ts')->_join('tipo_sede', 'com_dvi_sed', $render) . '
+' . EntitySql::getInstanceRequire('domicilio', 'com_dvi_sed_dom')->_join('domicilio', 'com_dvi_sed', $render) . '
+' . EntitySql::getInstanceRequire('id_persona', 'com_dvi_sed_coo')->_join('coordinador', 'com_dvi_sed', $render) . '
+' . EntitySql::getInstanceRequire('id_persona', 'com_dvi_sed_ref')->_join('referente', 'com_dvi_sed', $render) . '
 ' ;
   }
 
   public function _conditionFieldStruct($field, $option, $value){
     $p = $this->prf();
 
-    $f = $this->_mappingFieldEntity($field);
+    $f = $this->_mappingField($field);
     switch ($field){
       case "{$p}id": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}fotocopia_documento": return $this->format->conditionBoolean($f, $value);
@@ -141,28 +141,28 @@ class Nomina2SqlMain extends EntitySql{
 
   protected function conditionFieldStruct($field, $option, $value) {
     if($c = $this->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('id_persona','per')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('comision','com')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('division','com_dvi')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('plan','com_dvi_pla')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('sede','com_dvi_sed')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('tipo_sede','com_dvi_sed_ts')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('domicilio','com_dvi_sed_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('id_persona','com_dvi_sed_coo')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('id_persona','com_dvi_sed_ref')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','per')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('comision','com')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('division','com_dvi')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','com_dvi_pla')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('sede','com_dvi_sed')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('tipo_sede','com_dvi_sed_ts')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','com_dvi_sed_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','com_dvi_sed_coo')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','com_dvi_sed_ref')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldAux($field, $option, $value) {
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('id_persona','per')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('comision','com')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('division','com_dvi')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('plan','com_dvi_pla')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('sede','com_dvi_sed')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('tipo_sede','com_dvi_sed_ts')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('domicilio','com_dvi_sed_dom')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('id_persona','com_dvi_sed_coo')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('id_persona','com_dvi_sed_ref')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','per')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('comision','com')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('division','com_dvi')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','com_dvi_pla')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('sede','com_dvi_sed')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('tipo_sede','com_dvi_sed_ts')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','com_dvi_sed_dom')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','com_dvi_sed_coo')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','com_dvi_sed_ref')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
 
@@ -186,6 +186,7 @@ class Nomina2SqlMain extends EntitySql{
 
   //@override
   public function initializeUpdate(array $data){
+    if(array_key_exists('id', $data)) { if(!isset($data['id']) || ($data['id'] == '')) throw new Exception('dato obligatorio sin valor: id'); }
     if(array_key_exists('fotocopia_documento', $data)) { if(!isset($data['fotocopia_documento']) || ($data['fotocopia_documento'] == '')) $data['fotocopia_documento'] = "false"; }
     if(array_key_exists('partida_nacimiento', $data)) { if(!isset($data['partida_nacimiento']) || ($data['partida_nacimiento'] == '')) $data['partida_nacimiento'] = "false"; }
     if(array_key_exists('alta', $data)) { if(empty($data['alta']))  $data['alta'] = date("Y-m-d H:i:s"); }

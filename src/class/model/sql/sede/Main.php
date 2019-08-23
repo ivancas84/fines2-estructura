@@ -5,11 +5,11 @@ class SedeSqlMain extends EntitySql{
 
   public function __construct(){
     parent::__construct();
-    $this->entity = Entity::getInstanceFromString('sede');
+    $this->entity = Entity::getInstanceRequire('sede');
   }
 
 
-  public function _mappingField($field){
+  public function _mappingFieldStruct($field){
     $p = $this->prf();
     $t = $this->prt();
 
@@ -68,11 +68,11 @@ class SedeSqlMain extends EntitySql{
   }
 
   public function mappingField($field){
-    if($f = $this->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('tipo_sede', 'ts')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('domicilio', 'dom')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('id_persona', 'coo')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('id_persona', 'ref')->_mappingFieldEntity($field)) return $f;
+    if($f = $this->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('tipo_sede', 'ts')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('domicilio', 'dom')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('id_persona', 'coo')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('id_persona', 'ref')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido " . $field);
   }
 
@@ -80,38 +80,38 @@ class SedeSqlMain extends EntitySql{
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingFieldEntity($p.'numero') . ' AS ' . $p.'numero, ' . $this->_mappingFieldEntity($p.'nombre') . ' AS ' . $p.'nombre, ' . $this->_mappingFieldEntity($p.'organizacion') . ' AS ' . $p.'organizacion, ' . $this->_mappingFieldEntity($p.'observaciones') . ' AS ' . $p.'observaciones, ' . $this->_mappingFieldEntity($p.'tipo') . ' AS ' . $p.'tipo, ' . $this->_mappingFieldEntity($p.'baja') . ' AS ' . $p.'baja, ' . $this->_mappingFieldEntity($p.'dependencia') . ' AS ' . $p.'dependencia, ' . $this->_mappingFieldEntity($p.'tipo_sede') . ' AS ' . $p.'tipo_sede, ' . $this->_mappingFieldEntity($p.'domicilio') . ' AS ' . $p.'domicilio, ' . $this->_mappingFieldEntity($p.'coordinador') . ' AS ' . $p.'coordinador, ' . $this->_mappingFieldEntity($p.'referente') . ' AS ' . $p.'referente';
+' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'numero') . ' AS ' . $p.'numero, ' . $this->_mappingField($p.'nombre') . ' AS ' . $p.'nombre, ' . $this->_mappingField($p.'organizacion') . ' AS ' . $p.'organizacion, ' . $this->_mappingField($p.'observaciones') . ' AS ' . $p.'observaciones, ' . $this->_mappingField($p.'tipo') . ' AS ' . $p.'tipo, ' . $this->_mappingField($p.'baja') . ' AS ' . $p.'baja, ' . $this->_mappingField($p.'dependencia') . ' AS ' . $p.'dependencia, ' . $this->_mappingField($p.'tipo_sede') . ' AS ' . $p.'tipo_sede, ' . $this->_mappingField($p.'domicilio') . ' AS ' . $p.'domicilio, ' . $this->_mappingField($p.'coordinador') . ' AS ' . $p.'coordinador, ' . $this->_mappingField($p.'referente') . ' AS ' . $p.'referente';
   }
 
   public function _fieldsDb(){
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ', ' . $this->_mappingFieldEntity($p.'numero') . ', ' . $this->_mappingFieldEntity($p.'nombre') . ', ' . $this->_mappingFieldEntity($p.'organizacion') . ', ' . $this->_mappingFieldEntity($p.'observaciones') . ', ' . $this->_mappingFieldEntity($p.'tipo') . ', ' . $this->_mappingFieldEntity($p.'baja') . ', ' . $this->_mappingFieldEntity($p.'dependencia') . ', ' . $this->_mappingFieldEntity($p.'tipo_sede') . ', ' . $this->_mappingFieldEntity($p.'domicilio') . '';
+' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'numero') . ', ' . $this->_mappingField($p.'nombre') . ', ' . $this->_mappingField($p.'organizacion') . ', ' . $this->_mappingField($p.'observaciones') . ', ' . $this->_mappingField($p.'tipo') . ', ' . $this->_mappingField($p.'baja') . ', ' . $this->_mappingField($p.'dependencia') . ', ' . $this->_mappingField($p.'tipo_sede') . ', ' . $this->_mappingField($p.'domicilio') . '';
   }
 
   public function fields(){
     return $this->_fields() . ',
-' . EntitySql::getInstanceFromString('tipo_sede', 'ts')->_fields() . ',
-' . EntitySql::getInstanceFromString('domicilio', 'dom')->_fields() . ',
-' . EntitySql::getInstanceFromString('id_persona', 'coo')->_fields() . ',
-' . EntitySql::getInstanceFromString('id_persona', 'ref')->_fields() . ' 
+' . EntitySql::getInstanceRequire('tipo_sede', 'ts')->_fields() . ',
+' . EntitySql::getInstanceRequire('domicilio', 'dom')->_fields() . ',
+' . EntitySql::getInstanceRequire('id_persona', 'coo')->_fields() . ',
+' . EntitySql::getInstanceRequire('id_persona', 'ref')->_fields() . ' 
 ';
   }
 
   public function join(Render $render){
-    return EntitySql::getInstanceFromString('sede', 'dep')->_join('dependencia', 'sede', $render) . '
-' . EntitySql::getInstanceFromString('tipo_sede', 'ts')->_join('tipo_sede', 'sede', $render) . '
-' . EntitySql::getInstanceFromString('domicilio', 'dom')->_join('domicilio', 'sede', $render) . '
-' . EntitySql::getInstanceFromString('id_persona', 'coo')->_join('coordinador', 'sede', $render) . '
-' . EntitySql::getInstanceFromString('id_persona', 'ref')->_join('referente', 'sede', $render) . '
+    return EntitySql::getInstanceRequire('sede', 'dep')->_join('dependencia', 'sede', $render) . '
+' . EntitySql::getInstanceRequire('tipo_sede', 'ts')->_join('tipo_sede', 'sede', $render) . '
+' . EntitySql::getInstanceRequire('domicilio', 'dom')->_join('domicilio', 'sede', $render) . '
+' . EntitySql::getInstanceRequire('id_persona', 'coo')->_join('coordinador', 'sede', $render) . '
+' . EntitySql::getInstanceRequire('id_persona', 'ref')->_join('referente', 'sede', $render) . '
 ' ;
   }
 
   public function _conditionFieldStruct($field, $option, $value){
     $p = $this->prf();
 
-    $f = $this->_mappingFieldEntity($field);
+    $f = $this->_mappingField($field);
     switch ($field){
       case "{$p}id": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}numero": return $this->format->conditionText($f, $value, $option);
@@ -131,18 +131,18 @@ class SedeSqlMain extends EntitySql{
 
   protected function conditionFieldStruct($field, $option, $value) {
     if($c = $this->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('tipo_sede','ts')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('domicilio','dom')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('id_persona','coo')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('id_persona','ref')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('tipo_sede','ts')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','dom')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','coo')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','ref')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldAux($field, $option, $value) {
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('tipo_sede','ts')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('domicilio','dom')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('id_persona','coo')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('id_persona','ref')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('tipo_sede','ts')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','dom')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','coo')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','ref')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
 
@@ -164,6 +164,7 @@ class SedeSqlMain extends EntitySql{
 
   //@override
   public function initializeUpdate(array $data){
+    if(array_key_exists('id', $data)) { if(!isset($data['id']) || ($data['id'] == '')) throw new Exception('dato obligatorio sin valor: id'); }
     if(array_key_exists('numero', $data)) { if(empty($data['numero'])) $data['numero'] = "null"; }
     if(array_key_exists('nombre', $data)) { if(empty($data['nombre'])) throw new Exception('dato obligatorio sin valor: nombre'); }
     if(array_key_exists('organizacion', $data)) { if(empty($data['organizacion'])) $data['organizacion'] = "null"; }

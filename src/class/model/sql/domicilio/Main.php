@@ -5,11 +5,11 @@ class DomicilioSqlMain extends EntitySql{
 
   public function __construct(){
     parent::__construct();
-    $this->entity = Entity::getInstanceFromString('domicilio');
+    $this->entity = Entity::getInstanceRequire('domicilio');
   }
 
 
-  public function _mappingField($field){
+  public function _mappingFieldStruct($field){
     $p = $this->prf();
     $t = $this->prt();
 
@@ -42,20 +42,20 @@ class DomicilioSqlMain extends EntitySql{
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingFieldEntity($p.'calle') . ' AS ' . $p.'calle, ' . $this->_mappingFieldEntity($p.'entre') . ' AS ' . $p.'entre, ' . $this->_mappingFieldEntity($p.'numero') . ' AS ' . $p.'numero, ' . $this->_mappingFieldEntity($p.'piso') . ' AS ' . $p.'piso, ' . $this->_mappingFieldEntity($p.'departamento') . ' AS ' . $p.'departamento, ' . $this->_mappingFieldEntity($p.'barrio') . ' AS ' . $p.'barrio, ' . $this->_mappingFieldEntity($p.'localidad') . ' AS ' . $p.'localidad';
+' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'calle') . ' AS ' . $p.'calle, ' . $this->_mappingField($p.'entre') . ' AS ' . $p.'entre, ' . $this->_mappingField($p.'numero') . ' AS ' . $p.'numero, ' . $this->_mappingField($p.'piso') . ' AS ' . $p.'piso, ' . $this->_mappingField($p.'departamento') . ' AS ' . $p.'departamento, ' . $this->_mappingField($p.'barrio') . ' AS ' . $p.'barrio, ' . $this->_mappingField($p.'localidad') . ' AS ' . $p.'localidad';
   }
 
   public function _fieldsDb(){
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ', ' . $this->_mappingFieldEntity($p.'calle') . ', ' . $this->_mappingFieldEntity($p.'entre') . ', ' . $this->_mappingFieldEntity($p.'numero') . ', ' . $this->_mappingFieldEntity($p.'piso') . ', ' . $this->_mappingFieldEntity($p.'departamento') . ', ' . $this->_mappingFieldEntity($p.'barrio') . ', ' . $this->_mappingFieldEntity($p.'localidad') . '';
+' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'calle') . ', ' . $this->_mappingField($p.'entre') . ', ' . $this->_mappingField($p.'numero') . ', ' . $this->_mappingField($p.'piso') . ', ' . $this->_mappingField($p.'departamento') . ', ' . $this->_mappingField($p.'barrio') . ', ' . $this->_mappingField($p.'localidad') . '';
   }
 
   public function _conditionFieldStruct($field, $option, $value){
     $p = $this->prf();
 
-    $f = $this->_mappingFieldEntity($field);
+    $f = $this->_mappingField($field);
     switch ($field){
       case "{$p}id": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}calle": return $this->format->conditionText($f, $value, $option);
@@ -86,6 +86,7 @@ class DomicilioSqlMain extends EntitySql{
 
   //@override
   public function initializeUpdate(array $data){
+    if(array_key_exists('id', $data)) { if(!isset($data['id']) || ($data['id'] == '')) throw new Exception('dato obligatorio sin valor: id'); }
     if(array_key_exists('calle', $data)) { if(empty($data['calle'])) throw new Exception('dato obligatorio sin valor: calle'); }
     if(array_key_exists('entre', $data)) { if(empty($data['entre'])) $data['entre'] = "null"; }
     if(array_key_exists('numero', $data)) { if(empty($data['numero'])) $data['numero'] = "S/N"; }

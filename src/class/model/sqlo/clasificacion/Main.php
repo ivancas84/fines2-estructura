@@ -1,6 +1,8 @@
 <?php
 
 require_once("class/model/Sqlo.php");
+require_once("class/model/Sql.php");
+require_once("class/model/Entity.php");
 
 //Implementacion principal de Sqlo para una entidad especifica
 class ClasificacionSqloMain extends EntitySqlo {
@@ -10,8 +12,8 @@ class ClasificacionSqloMain extends EntitySqlo {
      * Se definen todos los recursos de forma independiente, sin parametros en el constructor, para facilitar el polimorfismo de las subclases
      */
     $this->db = Dba::dbInstance();
-    $this->entity = Entity::getInstanceFromString('clasificacion');
-    $this->sql = EntitySql::getInstanceFromString('clasificacion');
+    $this->entity = Entity::getInstanceRequire('clasificacion');
+    $this->sql = EntitySql::getInstanceRequire('clasificacion');
   }
 
   protected function _insert(array $row){ //@override

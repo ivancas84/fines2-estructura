@@ -5,11 +5,11 @@ class LugarNacimientoSqlMain extends EntitySql{
 
   public function __construct(){
     parent::__construct();
-    $this->entity = Entity::getInstanceFromString('lugar_nacimiento');
+    $this->entity = Entity::getInstanceRequire('lugar_nacimiento');
   }
 
 
-  public function _mappingField($field){
+  public function _mappingFieldStruct($field){
     $p = $this->prf();
     $t = $this->prt();
 
@@ -44,20 +44,20 @@ class LugarNacimientoSqlMain extends EntitySql{
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingFieldEntity($p.'ciudad') . ' AS ' . $p.'ciudad, ' . $this->_mappingFieldEntity($p.'provincia') . ' AS ' . $p.'provincia, ' . $this->_mappingFieldEntity($p.'pais') . ' AS ' . $p.'pais, ' . $this->_mappingFieldEntity($p.'alta') . ' AS ' . $p.'alta';
+' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'ciudad') . ' AS ' . $p.'ciudad, ' . $this->_mappingField($p.'provincia') . ' AS ' . $p.'provincia, ' . $this->_mappingField($p.'pais') . ' AS ' . $p.'pais, ' . $this->_mappingField($p.'alta') . ' AS ' . $p.'alta';
   }
 
   public function _fieldsDb(){
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ', ' . $this->_mappingFieldEntity($p.'ciudad') . ', ' . $this->_mappingFieldEntity($p.'provincia') . ', ' . $this->_mappingFieldEntity($p.'pais') . ', ' . $this->_mappingFieldEntity($p.'alta') . '';
+' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'ciudad') . ', ' . $this->_mappingField($p.'provincia') . ', ' . $this->_mappingField($p.'pais') . ', ' . $this->_mappingField($p.'alta') . '';
   }
 
   public function _conditionFieldStruct($field, $option, $value){
     $p = $this->prf();
 
-    $f = $this->_mappingFieldEntity($field);
+    $f = $this->_mappingField($field);
     switch ($field){
       case "{$p}id": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}ciudad": return $this->format->conditionText($f, $value, $option);
@@ -82,6 +82,7 @@ class LugarNacimientoSqlMain extends EntitySql{
 
   //@override
   public function initializeUpdate(array $data){
+    if(array_key_exists('id', $data)) { if(!isset($data['id']) || ($data['id'] == '')) throw new Exception('dato obligatorio sin valor: id'); }
     if(array_key_exists('ciudad', $data)) { if(empty($data['ciudad'])) $data['ciudad'] = "null"; }
     if(array_key_exists('provincia', $data)) { if(empty($data['provincia'])) $data['provincia'] = "null"; }
     if(array_key_exists('pais', $data)) { if(empty($data['pais'])) $data['pais'] = "null"; }

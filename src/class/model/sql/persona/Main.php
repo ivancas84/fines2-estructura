@@ -5,11 +5,11 @@ class PersonaSqlMain extends EntitySql{
 
   public function __construct(){
     parent::__construct();
-    $this->entity = Entity::getInstanceFromString('persona');
+    $this->entity = Entity::getInstanceRequire('persona');
   }
 
 
-  public function _mappingField($field){
+  public function _mappingFieldStruct($field){
     $p = $this->prf();
     $t = $this->prt();
 
@@ -59,10 +59,10 @@ class PersonaSqlMain extends EntitySql{
   }
 
   public function mappingField($field){
-    if($f = $this->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('lugar_nacimiento', 'ln')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('id_persona', 'ip')->_mappingFieldEntity($field)) return $f;
-    if($f = EntitySql::getInstanceFromString('domicilio', 'dom')->_mappingFieldEntity($field)) return $f;
+    if($f = $this->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('lugar_nacimiento', 'ln')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('id_persona', 'ip')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('domicilio', 'dom')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido " . $field);
   }
 
@@ -70,35 +70,35 @@ class PersonaSqlMain extends EntitySql{
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingFieldEntity($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingFieldEntity($p.'baja') . ' AS ' . $p.'baja, ' . $this->_mappingFieldEntity($p.'lugar_nacimiento') . ' AS ' . $p.'lugar_nacimiento, ' . $this->_mappingFieldEntity($p.'id_persona') . ' AS ' . $p.'id_persona, ' . $this->_mappingFieldEntity($p.'domicilio') . ' AS ' . $p.'domicilio';
+' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingField($p.'baja') . ' AS ' . $p.'baja, ' . $this->_mappingField($p.'lugar_nacimiento') . ' AS ' . $p.'lugar_nacimiento, ' . $this->_mappingField($p.'id_persona') . ' AS ' . $p.'id_persona, ' . $this->_mappingField($p.'domicilio') . ' AS ' . $p.'domicilio';
   }
 
   public function _fieldsDb(){
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingFieldEntity($p.'id') . ', ' . $this->_mappingFieldEntity($p.'alta') . ', ' . $this->_mappingFieldEntity($p.'baja') . ', ' . $this->_mappingFieldEntity($p.'lugar_nacimiento') . ', ' . $this->_mappingFieldEntity($p.'id_persona') . ', ' . $this->_mappingFieldEntity($p.'domicilio') . '';
+' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'alta') . ', ' . $this->_mappingField($p.'baja') . ', ' . $this->_mappingField($p.'lugar_nacimiento') . ', ' . $this->_mappingField($p.'id_persona') . ', ' . $this->_mappingField($p.'domicilio') . '';
   }
 
   public function fields(){
     return $this->_fields() . ',
-' . EntitySql::getInstanceFromString('lugar_nacimiento', 'ln')->_fields() . ',
-' . EntitySql::getInstanceFromString('id_persona', 'ip')->_fields() . ',
-' . EntitySql::getInstanceFromString('domicilio', 'dom')->_fields() . ' 
+' . EntitySql::getInstanceRequire('lugar_nacimiento', 'ln')->_fields() . ',
+' . EntitySql::getInstanceRequire('id_persona', 'ip')->_fields() . ',
+' . EntitySql::getInstanceRequire('domicilio', 'dom')->_fields() . ' 
 ';
   }
 
   public function join(Render $render){
-    return EntitySql::getInstanceFromString('lugar_nacimiento', 'ln')->_join('lugar_nacimiento', 'pers', $render) . '
-' . EntitySql::getInstanceFromString('id_persona', 'ip')->_join('id_persona', 'pers', $render) . '
-' . EntitySql::getInstanceFromString('domicilio', 'dom')->_join('domicilio', 'pers', $render) . '
+    return EntitySql::getInstanceRequire('lugar_nacimiento', 'ln')->_join('lugar_nacimiento', 'pers', $render) . '
+' . EntitySql::getInstanceRequire('id_persona', 'ip')->_join('id_persona', 'pers', $render) . '
+' . EntitySql::getInstanceRequire('domicilio', 'dom')->_join('domicilio', 'pers', $render) . '
 ' ;
   }
 
   public function _conditionFieldStruct($field, $option, $value){
     $p = $this->prf();
 
-    $f = $this->_mappingFieldEntity($field);
+    $f = $this->_mappingField($field);
     switch ($field){
       case "{$p}id": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}alta": return $this->format->conditionTimestamp($f, $value, $option);
@@ -112,16 +112,16 @@ class PersonaSqlMain extends EntitySql{
 
   protected function conditionFieldStruct($field, $option, $value) {
     if($c = $this->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('lugar_nacimiento','ln')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('id_persona','ip')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('domicilio','dom')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('lugar_nacimiento','ln')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','ip')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','dom')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldAux($field, $option, $value) {
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('lugar_nacimiento','ln')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('id_persona','ip')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceFromString('domicilio','dom')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('lugar_nacimiento','ln')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','ip')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','dom')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
 
@@ -138,6 +138,7 @@ class PersonaSqlMain extends EntitySql{
 
   //@override
   public function initializeUpdate(array $data){
+    if(array_key_exists('id', $data)) { if(!isset($data['id']) || ($data['id'] == '')) throw new Exception('dato obligatorio sin valor: id'); }
     if(array_key_exists('alta', $data)) { if(empty($data['alta']))  $data['alta'] = date("Y-m-d H:i:s"); }
     if(array_key_exists('lugar_nacimiento', $data)) { if(!isset($data['lugar_nacimiento']) || ($data['lugar_nacimiento'] == '')) $data['lugar_nacimiento'] = "null"; }
     if(array_key_exists('id_persona', $data)) { if(!isset($data['id_persona']) || ($data['id_persona'] == '')) throw new Exception('dato obligatorio sin valor: id_persona'); }

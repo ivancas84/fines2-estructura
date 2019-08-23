@@ -1,6 +1,8 @@
 <?php
 
 require_once("class/model/Sqlo.php");
+require_once("class/model/Sql.php");
+require_once("class/model/Entity.php");
 
 //Implementacion principal de Sqlo para una entidad especifica
 class IdPersonaSqloMain extends EntitySqlo {
@@ -10,8 +12,8 @@ class IdPersonaSqloMain extends EntitySqlo {
      * Se definen todos los recursos de forma independiente, sin parametros en el constructor, para facilitar el polimorfismo de las subclases
      */
     $this->db = Dba::dbInstance();
-    $this->entity = Entity::getInstanceFromString('id_persona');
-    $this->sql = EntitySql::getInstanceFromString('id_persona');
+    $this->entity = Entity::getInstanceRequire('id_persona');
+    $this->sql = EntitySql::getInstanceRequire('id_persona');
   }
 
   protected function _insert(array $row){ //@override
@@ -81,7 +83,7 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_ = [];
 
     $json = ($row && !is_null($row['id'])) ? $this->sql->_json($row) : null;
-    $row_["id_persona"] = EntityValues::getInstanceFromString("id_persona", $json);
+    $row_["id_persona"] = EntityValues::getInstanceRequires("id_persona", $json);
 
     return $row_;
   }

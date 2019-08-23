@@ -6,13 +6,13 @@ class CursoEntity extends CursoEntityMain {
 
   public function getFieldsNf(){
     $array = parent::getFieldsNf();
-    array_push($array, new FieldCursoHorario);
+    array_push($array, Field::getInstanceRequire("curso","horario"));
     return $array;
   }
 
   public function getFieldsFk(){
     $array = parent::getFieldsFk();
-    array_push($array, new FieldCursoTomaActiva);
+    array_push($array, Field::getInstanceRequire("curso","toma_activa"));
     return $array;
   }
 

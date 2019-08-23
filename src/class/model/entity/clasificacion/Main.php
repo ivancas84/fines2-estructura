@@ -1,19 +1,19 @@
 <?php
 
 require_once("class/model/Entity.php");
-require_once("config/entityClasses.php");
+require_once("class/model/Field.php");
 
 class ClasificacionEntityMain extends Entity {
   public $name = "clasificacion";
   public $alias = "clas";
  
   public function getPk(){
-    return new FieldClasificacionId;
+    return Field::getInstanceRequire("clasificacion", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      new FieldClasificacionNombre,
+      Field::getInstanceRequire("clasificacion", "nombre"),
     );
   }
 

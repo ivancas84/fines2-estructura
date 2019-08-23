@@ -1,27 +1,27 @@
 <?php
 
 require_once("class/model/Entity.php");
-require_once("config/entityClasses.php");
+require_once("class/model/Field.php");
 
 class PermisoEntityMain extends Entity {
   public $name = "permiso";
   public $alias = "perm";
  
   public function getPk(){
-    return new FieldPermisoId;
+    return Field::getInstanceRequire("permiso", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      new FieldPermisoAlta,
-      new FieldPermisoBaja,
+      Field::getInstanceRequire("permiso", "alta"),
+      Field::getInstanceRequire("permiso", "baja"),
     );
   }
 
   public function getFieldsMu(){
     return array(
-      new FieldPermisoRol,
-      new FieldPermisoPersona,
+      Field::getInstanceRequire("permiso", "rol"),
+      Field::getInstanceRequire("permiso", "persona"),
     );
   }
 

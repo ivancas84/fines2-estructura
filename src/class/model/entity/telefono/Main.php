@@ -1,29 +1,29 @@
 <?php
 
 require_once("class/model/Entity.php");
-require_once("config/entityClasses.php");
+require_once("class/model/Field.php");
 
 class TelefonoEntityMain extends Entity {
   public $name = "telefono";
   public $alias = "tele";
  
   public function getPk(){
-    return new FieldTelefonoId;
+    return Field::getInstanceRequire("telefono", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      new FieldTelefonoPrefijo,
-      new FieldTelefonoNumero,
-      new FieldTelefonoTipo,
-      new FieldTelefonoAlta,
-      new FieldTelefonoBaja,
+      Field::getInstanceRequire("telefono", "prefijo"),
+      Field::getInstanceRequire("telefono", "numero"),
+      Field::getInstanceRequire("telefono", "tipo"),
+      Field::getInstanceRequire("telefono", "alta"),
+      Field::getInstanceRequire("telefono", "baja"),
     );
   }
 
   public function getFieldsMu(){
     return array(
-      new FieldTelefonoPersona,
+      Field::getInstanceRequire("telefono", "persona"),
     );
   }
 
