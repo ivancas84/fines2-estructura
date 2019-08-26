@@ -15,7 +15,7 @@ try{
   $params = Filter::postAllRequired();
   $display = Dba::displayParams($params, "data");
   $idsPlanes = Dba::field("clasificacion_plan", "plan", [["clasificacion", "=", $display["aux"]["clasificacion"]]]);
-  $sqlo = EntitySqlo::getInstanceFromString(ENTITY);
+  $sqlo = EntitySqlo::getInstanceString(ENTITY);
   $sql = $sqlo->cantidadAnioSemestreAutorizadasFiltros($display["aux"]["fecha_anio"],$display["aux"]["fecha_semestre"],$display["aux"]["dependencia"],$idsPlanes);
   $rows = Dba::fetchAll($sql);
   echo json_encode($rows);

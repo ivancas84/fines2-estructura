@@ -19,7 +19,7 @@ try{
   $display = Dba::displayParams($params, "data");
 
   $render = Dba::renderDisplay($display);
-  $sqlo = EntitySqlo::getInstanceFromString(ENTITY);
+  $sqlo = EntitySqlo::getInstanceString(ENTITY);
 
   $idsPlanes = Dba::field("clasificacion_plan", "plan", [["clasificacion", "=", $display["aux"]["clasificacion"]]]);
 
