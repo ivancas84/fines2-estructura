@@ -18,13 +18,13 @@ class LugarNacimientoValuesMain extends EntityValues {
     $this->alta = new DateTime();
   }
 
-  public function fromArray(array $row = NULL){
+  public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["ciudad"])) $this->ciudad = (is_null($row["ciudad"])) ? null : (string)$row["ciudad"];
-    if(isset($row["provincia"])) $this->provincia = (is_null($row["provincia"])) ? null : (string)$row["provincia"];
-    if(isset($row["pais"])) $this->pais = (is_null($row["pais"])) ? null : (string)$row["pais"];
-    if(isset($row["alta"])) $this->alta = (is_null($row["alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row["alta"]);
+    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."ciudad"])) $this->ciudad = (is_null($row[$p."ciudad"])) ? null : (string)$row[$p."ciudad"];
+    if(isset($row[$p."provincia"])) $this->provincia = (is_null($row[$p."provincia"])) ? null : (string)$row[$p."provincia"];
+    if(isset($row[$p."pais"])) $this->pais = (is_null($row[$p."pais"])) ? null : (string)$row[$p."pais"];
+    if(isset($row[$p."alta"])) $this->alta = (is_null($row[$p."alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row[$p."alta"]);
   }
 
   public function toArray(){

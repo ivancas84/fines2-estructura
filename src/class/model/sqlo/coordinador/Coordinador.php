@@ -24,8 +24,8 @@ WHERE {$this->entity->getPk()->getName()} IN ({$ids_});
     /**
      * Metodo obsoleto, sera reemplazado por cantidadAlumnosTramo_($anio, $semestre)
      */
-     $sqlActivos = EntitySqlo::getInstanceFromString("comision")->cantidadAlumnosActivos($fecha);
-     $sqlNoActivos = EntitySqlo::getInstanceFromString("comision")->cantidadAlumnosNoActivos($fecha);
+     $sqlActivos = EntitySqlo::getInstanceString("comision")->cantidadAlumnosActivos($fecha);
+     $sqlNoActivos = EntitySqlo::getInstanceString("comision")->cantidadAlumnosNoActivos($fecha);
 
      return "
 SELECT coor.persona, SUM(cantidad_activos.cantidad) AS cantidad_activos, SUM(cantidad_no_activos.cantidad) AS cantidad_no_activos

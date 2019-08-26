@@ -38,7 +38,7 @@ class ComisionSqlo extends ComisionSqloMain{
 
 
   public function cantidadAlumnosActivos($fecha){
-     $sql = EntitySqlo::getInstanceFromString("nomina2")->activos($fecha);
+     $sql = EntitySqlo::getInstanceString("nomina2")->activos($fecha);
 
      return "
 SELECT com.id AS comision, count(*) AS cantidad
@@ -55,7 +55,7 @@ GROUP BY comision
   }
 
   public function cantidadAlumnosActivosPorTramo($fecha){
-     $sql = EntitySqlo::getInstanceFromString("nomina2")->activos($fecha);
+     $sql = EntitySqlo::getInstanceString("nomina2")->activos($fecha);
 
      return "
 SELECT com.anio AS anio, com.semestre AS semestre, count(*) AS cantidad
@@ -74,7 +74,7 @@ ORDER BY anio, semestre
 
 
   public function cantidadAlumnosNoActivos($fecha){
-     $sql = EntitySqlo::getInstanceFromString("nomina2")->noActivos($fecha);
+     $sql = EntitySqlo::getInstanceString("nomina2")->noActivos($fecha);
 
      return "
 SELECT com.id AS comision, count(*) AS cantidad

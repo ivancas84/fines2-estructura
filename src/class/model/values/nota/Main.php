@@ -20,14 +20,14 @@ class NotaValuesMain extends EntityValues {
     $this->alumno = null;
   }
 
-  public function fromArray(array $row = NULL){
+  public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["nota"])) $this->nota = (is_null($row["nota"])) ? null : intval($row["nota"]);
-    if(isset($row["alta"])) $this->alta = (is_null($row["alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row["alta"]);
-    if(isset($row["profesor"])) $this->profesor = (is_null($row["profesor"])) ? null : (string)$row["profesor"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["curso"])) $this->curso = (is_null($row["curso"])) ? null : (string)$row["curso"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["alumno"])) $this->alumno = (is_null($row["alumno"])) ? null : (string)$row["alumno"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."nota"])) $this->nota = (is_null($row[$p."nota"])) ? null : intval($row[$p."nota"]);
+    if(isset($row[$p."alta"])) $this->alta = (is_null($row[$p."alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row[$p."alta"]);
+    if(isset($row[$p."profesor"])) $this->profesor = (is_null($row[$p."profesor"])) ? null : (string)$row[$p."profesor"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."curso"])) $this->curso = (is_null($row[$p."curso"])) ? null : (string)$row[$p."curso"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."alumno"])) $this->alumno = (is_null($row[$p."alumno"])) ? null : (string)$row[$p."alumno"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
 
   public function toArray(){

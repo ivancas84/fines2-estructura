@@ -26,17 +26,17 @@ class InasistenciaValuesMain extends EntityValues {
     $this->toma = null;
   }
 
-  public function fromArray(array $row = NULL){
+  public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["fecha_desde"])) $this->fechaDesde = (is_null($row["fecha_desde"])) ? null : DateTime::createFromFormat('Y-m-d', $row["fecha_desde"]);
-    if(isset($row["fecha_hasta"])) $this->fechaHasta = (is_null($row["fecha_hasta"])) ? null : DateTime::createFromFormat('Y-m-d', $row["fecha_hasta"]);
-    if(isset($row["modulos_semanales"])) $this->modulosSemanales = (is_null($row["modulos_semanales"])) ? null : intval($row["modulos_semanales"]);
-    if(isset($row["modulos_mensuales"])) $this->modulosMensuales = (is_null($row["modulos_mensuales"])) ? null : intval($row["modulos_mensuales"]);
-    if(isset($row["articulo"])) $this->articulo = (is_null($row["articulo"])) ? null : (string)$row["articulo"];
-    if(isset($row["inciso"])) $this->inciso = (is_null($row["inciso"])) ? null : (string)$row["inciso"];
-    if(isset($row["observaciones"])) $this->observaciones = (is_null($row["observaciones"])) ? null : (string)$row["observaciones"];
-    if(isset($row["toma"])) $this->toma = (is_null($row["toma"])) ? null : (string)$row["toma"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."fecha_desde"])) $this->fechaDesde = (is_null($row[$p."fecha_desde"])) ? null : DateTime::createFromFormat('Y-m-d', $row[$p."fecha_desde"]);
+    if(isset($row[$p."fecha_hasta"])) $this->fechaHasta = (is_null($row[$p."fecha_hasta"])) ? null : DateTime::createFromFormat('Y-m-d', $row[$p."fecha_hasta"]);
+    if(isset($row[$p."modulos_semanales"])) $this->modulosSemanales = (is_null($row[$p."modulos_semanales"])) ? null : intval($row[$p."modulos_semanales"]);
+    if(isset($row[$p."modulos_mensuales"])) $this->modulosMensuales = (is_null($row[$p."modulos_mensuales"])) ? null : intval($row[$p."modulos_mensuales"]);
+    if(isset($row[$p."articulo"])) $this->articulo = (is_null($row[$p."articulo"])) ? null : (string)$row[$p."articulo"];
+    if(isset($row[$p."inciso"])) $this->inciso = (is_null($row[$p."inciso"])) ? null : (string)$row[$p."inciso"];
+    if(isset($row[$p."observaciones"])) $this->observaciones = (is_null($row[$p."observaciones"])) ? null : (string)$row[$p."observaciones"];
+    if(isset($row[$p."toma"])) $this->toma = (is_null($row[$p."toma"])) ? null : (string)$row[$p."toma"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
 
   public function toArray(){

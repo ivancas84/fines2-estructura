@@ -32,20 +32,20 @@ class IdPersonaValuesMain extends EntityValues {
     $this->telefonos = null;
   }
 
-  public function fromArray(array $row = NULL){
+  public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["nombres"])) $this->nombres = (is_null($row["nombres"])) ? null : (string)$row["nombres"];
-    if(isset($row["apellidos"])) $this->apellidos = (is_null($row["apellidos"])) ? null : (string)$row["apellidos"];
-    if(isset($row["sobrenombre"])) $this->sobrenombre = (is_null($row["sobrenombre"])) ? null : (string)$row["sobrenombre"];
-    if(isset($row["fecha_nacimiento"])) $this->fechaNacimiento = (is_null($row["fecha_nacimiento"])) ? null : DateTime::createFromFormat('Y-m-d', $row["fecha_nacimiento"]);
-    if(isset($row["tipo_documento"])) $this->tipoDocumento = (is_null($row["tipo_documento"])) ? null : (string)$row["tipo_documento"];
-    if(isset($row["numero_documento"])) $this->numeroDocumento = (is_null($row["numero_documento"])) ? null : (string)$row["numero_documento"];
-    if(isset($row["email"])) $this->email = (is_null($row["email"])) ? null : (string)$row["email"];
-    if(isset($row["genero"])) $this->genero = (is_null($row["genero"])) ? null : (string)$row["genero"];
-    if(isset($row["cuil"])) $this->cuil = (is_null($row["cuil"])) ? null : (string)$row["cuil"];
-    if(isset($row["alta"])) $this->alta = (is_null($row["alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row["alta"]);
-    if(isset($row["telefonos"])) $this->telefonos = (is_null($row["telefonos"])) ? null : (string)$row["telefonos"];
+    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."nombres"])) $this->nombres = (is_null($row[$p."nombres"])) ? null : (string)$row[$p."nombres"];
+    if(isset($row[$p."apellidos"])) $this->apellidos = (is_null($row[$p."apellidos"])) ? null : (string)$row[$p."apellidos"];
+    if(isset($row[$p."sobrenombre"])) $this->sobrenombre = (is_null($row[$p."sobrenombre"])) ? null : (string)$row[$p."sobrenombre"];
+    if(isset($row[$p."fecha_nacimiento"])) $this->fechaNacimiento = (is_null($row[$p."fecha_nacimiento"])) ? null : DateTime::createFromFormat('Y-m-d', $row[$p."fecha_nacimiento"]);
+    if(isset($row[$p."tipo_documento"])) $this->tipoDocumento = (is_null($row[$p."tipo_documento"])) ? null : (string)$row[$p."tipo_documento"];
+    if(isset($row[$p."numero_documento"])) $this->numeroDocumento = (is_null($row[$p."numero_documento"])) ? null : (string)$row[$p."numero_documento"];
+    if(isset($row[$p."email"])) $this->email = (is_null($row[$p."email"])) ? null : (string)$row[$p."email"];
+    if(isset($row[$p."genero"])) $this->genero = (is_null($row[$p."genero"])) ? null : (string)$row[$p."genero"];
+    if(isset($row[$p."cuil"])) $this->cuil = (is_null($row[$p."cuil"])) ? null : (string)$row[$p."cuil"];
+    if(isset($row[$p."alta"])) $this->alta = (is_null($row[$p."alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row[$p."alta"]);
+    if(isset($row[$p."telefonos"])) $this->telefonos = (is_null($row[$p."telefonos"])) ? null : (string)$row[$p."telefonos"];
   }
 
   public function toArray(){

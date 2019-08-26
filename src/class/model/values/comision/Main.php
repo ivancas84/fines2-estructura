@@ -44,26 +44,26 @@ class ComisionValuesMain extends EntityValues {
     $this->division = null;
   }
 
-  public function fromArray(array $row = NULL){
+  public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["anio"])) $this->anio = (is_null($row["anio"])) ? null : intval($row["anio"]);
-    if(isset($row["semestre"])) $this->semestre = (is_null($row["semestre"])) ? null : intval($row["semestre"]);
-    if(isset($row["observaciones"])) $this->observaciones = (is_null($row["observaciones"])) ? null : (string)$row["observaciones"];
-    if(isset($row["fecha"])) $this->fecha = (is_null($row["fecha"])) ? null : DateTime::createFromFormat('Y-m-d', $row["fecha"]);
-    if(isset($row["alta"])) $this->alta = (is_null($row["alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row["alta"]);
-    if(isset($row["baja"])) $this->baja = (is_null($row["baja"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row["baja"]);
-    if(isset($row["comentario"])) $this->comentario = (is_null($row["comentario"])) ? null : (string)$row["comentario"];
-    if(isset($row["autorizada"])) $this->autorizada = (is_null($row["autorizada"])) ? null : settypebool($row["autorizada"]);
-    if(isset($row["apertura"])) $this->apertura = (is_null($row["apertura"])) ? null : settypebool($row["apertura"]);
-    if(isset($row["publicar"])) $this->publicar = (is_null($row["publicar"])) ? null : settypebool($row["publicar"]);
-    if(isset($row["fecha_anio"])) $this->fechaAnio = (is_null($row["fecha_anio"])) ? null : (string)$row["fecha_anio"];
-    if(isset($row["fecha_semestre"])) $this->fechaSemestre = (is_null($row["fecha_semestre"])) ? null : intval($row["fecha_semestre"]);
-    if(isset($row["tramo"])) $this->tramo = (is_null($row["tramo"])) ? null : (string)$row["tramo"];
-    if(isset($row["horario"])) $this->horario = (is_null($row["horario"])) ? null : (string)$row["horario"];
-    if(isset($row["periodo"])) $this->periodo = (is_null($row["periodo"])) ? null : (string)$row["periodo"];
-    if(isset($row["comision_siguiente"])) $this->comisionSiguiente = (is_null($row["comision_siguiente"])) ? null : (string)$row["comision_siguiente"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["division"])) $this->division = (is_null($row["division"])) ? null : (string)$row["division"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."anio"])) $this->anio = (is_null($row[$p."anio"])) ? null : intval($row[$p."anio"]);
+    if(isset($row[$p."semestre"])) $this->semestre = (is_null($row[$p."semestre"])) ? null : intval($row[$p."semestre"]);
+    if(isset($row[$p."observaciones"])) $this->observaciones = (is_null($row[$p."observaciones"])) ? null : (string)$row[$p."observaciones"];
+    if(isset($row[$p."fecha"])) $this->fecha = (is_null($row[$p."fecha"])) ? null : DateTime::createFromFormat('Y-m-d', $row[$p."fecha"]);
+    if(isset($row[$p."alta"])) $this->alta = (is_null($row[$p."alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row[$p."alta"]);
+    if(isset($row[$p."baja"])) $this->baja = (is_null($row[$p."baja"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row[$p."baja"]);
+    if(isset($row[$p."comentario"])) $this->comentario = (is_null($row[$p."comentario"])) ? null : (string)$row[$p."comentario"];
+    if(isset($row[$p."autorizada"])) $this->autorizada = (is_null($row[$p."autorizada"])) ? null : settypebool($row[$p."autorizada"]);
+    if(isset($row[$p."apertura"])) $this->apertura = (is_null($row[$p."apertura"])) ? null : settypebool($row[$p."apertura"]);
+    if(isset($row[$p."publicar"])) $this->publicar = (is_null($row[$p."publicar"])) ? null : settypebool($row[$p."publicar"]);
+    if(isset($row[$p."fecha_anio"])) $this->fechaAnio = (is_null($row[$p."fecha_anio"])) ? null : (string)$row[$p."fecha_anio"];
+    if(isset($row[$p."fecha_semestre"])) $this->fechaSemestre = (is_null($row[$p."fecha_semestre"])) ? null : intval($row[$p."fecha_semestre"]);
+    if(isset($row[$p."tramo"])) $this->tramo = (is_null($row[$p."tramo"])) ? null : (string)$row[$p."tramo"];
+    if(isset($row[$p."horario"])) $this->horario = (is_null($row[$p."horario"])) ? null : (string)$row[$p."horario"];
+    if(isset($row[$p."periodo"])) $this->periodo = (is_null($row[$p."periodo"])) ? null : (string)$row[$p."periodo"];
+    if(isset($row[$p."comision_siguiente"])) $this->comisionSiguiente = (is_null($row[$p."comision_siguiente"])) ? null : (string)$row[$p."comision_siguiente"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."division"])) $this->division = (is_null($row[$p."division"])) ? null : (string)$row[$p."division"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
 
   public function toArray(){

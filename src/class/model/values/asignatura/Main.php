@@ -20,14 +20,14 @@ class AsignaturaValuesMain extends EntityValues {
     $this->perfil = null;
   }
 
-  public function fromArray(array $row = NULL){
+  public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["nombre"])) $this->nombre = (is_null($row["nombre"])) ? null : (string)$row["nombre"];
-    if(isset($row["formacion"])) $this->formacion = (is_null($row["formacion"])) ? null : (string)$row["formacion"];
-    if(isset($row["clasificacion"])) $this->clasificacion = (is_null($row["clasificacion"])) ? null : (string)$row["clasificacion"];
-    if(isset($row["codigo"])) $this->codigo = (is_null($row["codigo"])) ? null : (string)$row["codigo"];
-    if(isset($row["perfil"])) $this->perfil = (is_null($row["perfil"])) ? null : (string)$row["perfil"];
+    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."nombre"])) $this->nombre = (is_null($row[$p."nombre"])) ? null : (string)$row[$p."nombre"];
+    if(isset($row[$p."formacion"])) $this->formacion = (is_null($row[$p."formacion"])) ? null : (string)$row[$p."formacion"];
+    if(isset($row[$p."clasificacion"])) $this->clasificacion = (is_null($row[$p."clasificacion"])) ? null : (string)$row[$p."clasificacion"];
+    if(isset($row[$p."codigo"])) $this->codigo = (is_null($row[$p."codigo"])) ? null : (string)$row[$p."codigo"];
+    if(isset($row[$p."perfil"])) $this->perfil = (is_null($row[$p."perfil"])) ? null : (string)$row[$p."perfil"];
   }
 
   public function toArray(){

@@ -32,20 +32,20 @@ class Nomina2ValuesMain extends EntityValues {
     $this->comision = null;
   }
 
-  public function fromArray(array $row = NULL){
+  public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["fotocopia_documento"])) $this->fotocopiaDocumento = (is_null($row["fotocopia_documento"])) ? null : settypebool($row["fotocopia_documento"]);
-    if(isset($row["partida_nacimiento"])) $this->partidaNacimiento = (is_null($row["partida_nacimiento"])) ? null : settypebool($row["partida_nacimiento"]);
-    if(isset($row["alta"])) $this->alta = (is_null($row["alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row["alta"]);
-    if(isset($row["constancia_cuil"])) $this->constanciaCuil = (is_null($row["constancia_cuil"])) ? null : settypebool($row["constancia_cuil"]);
-    if(isset($row["certificado_estudios"])) $this->certificadoEstudios = (is_null($row["certificado_estudios"])) ? null : settypebool($row["certificado_estudios"]);
-    if(isset($row["anio_ingreso"])) $this->anioIngreso = (is_null($row["anio_ingreso"])) ? null : intval($row["anio_ingreso"]);
-    if(isset($row["activo"])) $this->activo = (is_null($row["activo"])) ? null : settypebool($row["activo"]);
-    if(isset($row["programa"])) $this->programa = (is_null($row["programa"])) ? null : (string)$row["programa"];
-    if(isset($row["observaciones"])) $this->observaciones = (is_null($row["observaciones"])) ? null : (string)$row["observaciones"];
-    if(isset($row["persona"])) $this->persona = (is_null($row["persona"])) ? null : (string)$row["persona"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["comision"])) $this->comision = (is_null($row["comision"])) ? null : (string)$row["comision"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."fotocopia_documento"])) $this->fotocopiaDocumento = (is_null($row[$p."fotocopia_documento"])) ? null : settypebool($row[$p."fotocopia_documento"]);
+    if(isset($row[$p."partida_nacimiento"])) $this->partidaNacimiento = (is_null($row[$p."partida_nacimiento"])) ? null : settypebool($row[$p."partida_nacimiento"]);
+    if(isset($row[$p."alta"])) $this->alta = (is_null($row[$p."alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row[$p."alta"]);
+    if(isset($row[$p."constancia_cuil"])) $this->constanciaCuil = (is_null($row[$p."constancia_cuil"])) ? null : settypebool($row[$p."constancia_cuil"]);
+    if(isset($row[$p."certificado_estudios"])) $this->certificadoEstudios = (is_null($row[$p."certificado_estudios"])) ? null : settypebool($row[$p."certificado_estudios"]);
+    if(isset($row[$p."anio_ingreso"])) $this->anioIngreso = (is_null($row[$p."anio_ingreso"])) ? null : intval($row[$p."anio_ingreso"]);
+    if(isset($row[$p."activo"])) $this->activo = (is_null($row[$p."activo"])) ? null : settypebool($row[$p."activo"]);
+    if(isset($row[$p."programa"])) $this->programa = (is_null($row[$p."programa"])) ? null : (string)$row[$p."programa"];
+    if(isset($row[$p."observaciones"])) $this->observaciones = (is_null($row[$p."observaciones"])) ? null : (string)$row[$p."observaciones"];
+    if(isset($row[$p."persona"])) $this->persona = (is_null($row[$p."persona"])) ? null : (string)$row[$p."persona"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."comision"])) $this->comision = (is_null($row[$p."comision"])) ? null : (string)$row[$p."comision"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
 
   public function toArray(){

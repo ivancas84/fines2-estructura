@@ -16,7 +16,7 @@ class Nomina2Sql extends Nomina2SqlMain {
       //$option = IN | NOT IN
       //$value = fecha 'YYYY-MM-DD'
       case "{$p}alumnos_activos_duplicados":
-        $alumnos_activos_duplicados = EntitySqlo::getInstanceFromString('nomina2')->alumnosActivosDuplicados($value);
+        $alumnos_activos_duplicados = EntitySqlo::getInstanceString('nomina2')->alumnosActivosDuplicados($value);
         return "(
   {$t}.persona {$option}(
     SELECT persona FROM (
@@ -28,7 +28,7 @@ class Nomina2Sql extends Nomina2SqlMain {
         break;
 
         case "{$p}alumnos_no_activos_duplicados":
-          $alumnos_activos_duplicados = EntitySqlo::getInstanceFromString('nomina2')->alumnosNoActivosDuplicados($value);
+          $alumnos_activos_duplicados = EntitySqlo::getInstanceString('nomina2')->alumnosNoActivosDuplicados($value);
           return "(
     {$t}.persona {$option}(
       SELECT persona FROM (
@@ -41,7 +41,7 @@ class Nomina2Sql extends Nomina2SqlMain {
 
 
         case "{$p}alumnos_activos":
-          $alumnos_activos = EntitySqlo::getInstanceFromString('nomina2')->activos($value);
+          $alumnos_activos = EntitySqlo::getInstanceString('nomina2')->activos($value);
           return "(
     {$t}.persona {$option}(
       SELECT persona FROM (

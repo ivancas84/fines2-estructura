@@ -20,14 +20,14 @@ class DivisionValuesMain extends EntityValues {
     $this->sede = null;
   }
 
-  public function fromArray(array $row = NULL){
+  public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["serie"])) $this->serie = (is_null($row["serie"])) ? null : (string)$row["serie"];
-    if(isset($row["turno"])) $this->turno = (is_null($row["turno"])) ? null : (string)$row["turno"];
-    if(isset($row["numero"])) $this->numero = (is_null($row["numero"])) ? null : (string)$row["numero"];
-    if(isset($row["plan"])) $this->plan = (is_null($row["plan"])) ? null : (string)$row["plan"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["sede"])) $this->sede = (is_null($row["sede"])) ? null : (string)$row["sede"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."serie"])) $this->serie = (is_null($row[$p."serie"])) ? null : (string)$row[$p."serie"];
+    if(isset($row[$p."turno"])) $this->turno = (is_null($row[$p."turno"])) ? null : (string)$row[$p."turno"];
+    if(isset($row[$p."numero"])) $this->numero = (is_null($row[$p."numero"])) ? null : (string)$row[$p."numero"];
+    if(isset($row[$p."plan"])) $this->plan = (is_null($row[$p."plan"])) ? null : (string)$row[$p."plan"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."sede"])) $this->sede = (is_null($row[$p."sede"])) ? null : (string)$row[$p."sede"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
 
   public function toArray(){

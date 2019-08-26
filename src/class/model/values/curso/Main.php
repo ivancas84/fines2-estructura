@@ -24,16 +24,16 @@ class CursoValuesMain extends EntityValues {
     $this->tomaActiva = null;
   }
 
-  public function fromArray(array $row = NULL){
+  public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["estado"])) $this->estado = (is_null($row["estado"])) ? null : (string)$row["estado"];
-    if(isset($row["alta"])) $this->alta = (is_null($row["alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row["alta"]);
-    if(isset($row["baja"])) $this->baja = (is_null($row["baja"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row["baja"]);
-    if(isset($row["horario"])) $this->horario = (is_null($row["horario"])) ? null : (string)$row["horario"];
-    if(isset($row["comision"])) $this->comision = (is_null($row["comision"])) ? null : (string)$row["comision"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["carga_horaria"])) $this->cargaHoraria = (is_null($row["carga_horaria"])) ? null : (string)$row["carga_horaria"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["toma_activa"])) $this->tomaActiva = (is_null($row["toma_activa"])) ? null : (string)$row["toma_activa"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."estado"])) $this->estado = (is_null($row[$p."estado"])) ? null : (string)$row[$p."estado"];
+    if(isset($row[$p."alta"])) $this->alta = (is_null($row[$p."alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row[$p."alta"]);
+    if(isset($row[$p."baja"])) $this->baja = (is_null($row[$p."baja"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row[$p."baja"]);
+    if(isset($row[$p."horario"])) $this->horario = (is_null($row[$p."horario"])) ? null : (string)$row[$p."horario"];
+    if(isset($row[$p."comision"])) $this->comision = (is_null($row[$p."comision"])) ? null : (string)$row[$p."comision"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."carga_horaria"])) $this->cargaHoraria = (is_null($row[$p."carga_horaria"])) ? null : (string)$row[$p."carga_horaria"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."toma_activa"])) $this->tomaActiva = (is_null($row[$p."toma_activa"])) ? null : (string)$row[$p."toma_activa"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
 
   public function toArray(){

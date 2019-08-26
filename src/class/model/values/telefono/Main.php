@@ -22,15 +22,15 @@ class TelefonoValuesMain extends EntityValues {
     $this->persona = null;
   }
 
-  public function fromArray(array $row = NULL){
+  public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["prefijo"])) $this->prefijo = (is_null($row["prefijo"])) ? null : intval($row["prefijo"]);
-    if(isset($row["numero"])) $this->numero = (is_null($row["numero"])) ? null : intval($row["numero"]);
-    if(isset($row["tipo"])) $this->tipo = (is_null($row["tipo"])) ? null : (string)$row["tipo"];
-    if(isset($row["alta"])) $this->alta = (is_null($row["alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row["alta"]);
-    if(isset($row["baja"])) $this->baja = (is_null($row["baja"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row["baja"]);
-    if(isset($row["persona"])) $this->persona = (is_null($row["persona"])) ? null : (string)$row["persona"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."prefijo"])) $this->prefijo = (is_null($row[$p."prefijo"])) ? null : intval($row[$p."prefijo"]);
+    if(isset($row[$p."numero"])) $this->numero = (is_null($row[$p."numero"])) ? null : intval($row[$p."numero"]);
+    if(isset($row[$p."tipo"])) $this->tipo = (is_null($row[$p."tipo"])) ? null : (string)$row[$p."tipo"];
+    if(isset($row[$p."alta"])) $this->alta = (is_null($row[$p."alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row[$p."alta"]);
+    if(isset($row[$p."baja"])) $this->baja = (is_null($row[$p."baja"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row[$p."baja"]);
+    if(isset($row[$p."persona"])) $this->persona = (is_null($row[$p."persona"])) ? null : (string)$row[$p."persona"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
 
   public function toArray(){

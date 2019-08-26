@@ -16,12 +16,12 @@ class DistribucionHorariaValuesMain extends EntityValues {
     $this->cargaHoraria = null;
   }
 
-  public function fromArray(array $row = NULL){
+  public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["dia"])) $this->dia = (is_null($row["dia"])) ? null : intval($row["dia"]);
-    if(isset($row["horas_catedra"])) $this->horasCatedra = (is_null($row["horas_catedra"])) ? null : intval($row["horas_catedra"]);
-    if(isset($row["carga_horaria"])) $this->cargaHoraria = (is_null($row["carga_horaria"])) ? null : (string)$row["carga_horaria"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."dia"])) $this->dia = (is_null($row[$p."dia"])) ? null : intval($row[$p."dia"]);
+    if(isset($row[$p."horas_catedra"])) $this->horasCatedra = (is_null($row[$p."horas_catedra"])) ? null : intval($row[$p."horas_catedra"]);
+    if(isset($row[$p."carga_horaria"])) $this->cargaHoraria = (is_null($row[$p."carga_horaria"])) ? null : (string)$row[$p."carga_horaria"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
 
   public function toArray(){

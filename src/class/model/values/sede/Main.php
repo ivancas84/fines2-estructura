@@ -32,20 +32,20 @@ class SedeValuesMain extends EntityValues {
     $this->referente = null;
   }
 
-  public function fromArray(array $row = NULL){
+  public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["numero"])) $this->numero = (is_null($row["numero"])) ? null : (string)$row["numero"];
-    if(isset($row["nombre"])) $this->nombre = (is_null($row["nombre"])) ? null : (string)$row["nombre"];
-    if(isset($row["organizacion"])) $this->organizacion = (is_null($row["organizacion"])) ? null : (string)$row["organizacion"];
-    if(isset($row["observaciones"])) $this->observaciones = (is_null($row["observaciones"])) ? null : (string)$row["observaciones"];
-    if(isset($row["tipo"])) $this->tipo = (is_null($row["tipo"])) ? null : (string)$row["tipo"];
-    if(isset($row["baja"])) $this->baja = (is_null($row["baja"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row["baja"]);
-    if(isset($row["dependencia"])) $this->dependencia = (is_null($row["dependencia"])) ? null : (string)$row["dependencia"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["tipo_sede"])) $this->tipoSede = (is_null($row["tipo_sede"])) ? null : (string)$row["tipo_sede"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["domicilio"])) $this->domicilio = (is_null($row["domicilio"])) ? null : (string)$row["domicilio"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["coordinador"])) $this->coordinador = (is_null($row["coordinador"])) ? null : (string)$row["coordinador"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["referente"])) $this->referente = (is_null($row["referente"])) ? null : (string)$row["referente"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."numero"])) $this->numero = (is_null($row[$p."numero"])) ? null : (string)$row[$p."numero"];
+    if(isset($row[$p."nombre"])) $this->nombre = (is_null($row[$p."nombre"])) ? null : (string)$row[$p."nombre"];
+    if(isset($row[$p."organizacion"])) $this->organizacion = (is_null($row[$p."organizacion"])) ? null : (string)$row[$p."organizacion"];
+    if(isset($row[$p."observaciones"])) $this->observaciones = (is_null($row[$p."observaciones"])) ? null : (string)$row[$p."observaciones"];
+    if(isset($row[$p."tipo"])) $this->tipo = (is_null($row[$p."tipo"])) ? null : (string)$row[$p."tipo"];
+    if(isset($row[$p."baja"])) $this->baja = (is_null($row[$p."baja"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row[$p."baja"]);
+    if(isset($row[$p."dependencia"])) $this->dependencia = (is_null($row[$p."dependencia"])) ? null : (string)$row[$p."dependencia"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."tipo_sede"])) $this->tipoSede = (is_null($row[$p."tipo_sede"])) ? null : (string)$row[$p."tipo_sede"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."domicilio"])) $this->domicilio = (is_null($row[$p."domicilio"])) ? null : (string)$row[$p."domicilio"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."coordinador"])) $this->coordinador = (is_null($row[$p."coordinador"])) ? null : (string)$row[$p."coordinador"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."referente"])) $this->referente = (is_null($row[$p."referente"])) ? null : (string)$row[$p."referente"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
 
   public function toArray(){

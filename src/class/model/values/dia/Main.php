@@ -14,11 +14,11 @@ class DiaValuesMain extends EntityValues {
     $this->dia = null;
   }
 
-  public function fromArray(array $row = NULL){
+  public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["numero"])) $this->numero = (is_null($row["numero"])) ? null : intval($row["numero"]);
-    if(isset($row["dia"])) $this->dia = (is_null($row["dia"])) ? null : (string)$row["dia"];
+    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."numero"])) $this->numero = (is_null($row[$p."numero"])) ? null : intval($row[$p."numero"]);
+    if(isset($row[$p."dia"])) $this->dia = (is_null($row[$p."dia"])) ? null : (string)$row[$p."dia"];
   }
 
   public function toArray(){

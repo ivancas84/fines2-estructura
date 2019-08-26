@@ -66,10 +66,10 @@ GROUP BY asignatura
   }
 
   public function cantidadesCursosPublicados($fecha){
-    $cantidadCursosPublicados = EntitySqlo::getInstanceFromString("asignatura")->cantidadCursosPublicados($fecha);
-    $cantidadCursosPublicadosAprobados = EntitySqlo::getInstanceFromString("asignatura")->cantidadCursosPublicadosAprobados($fecha);
-    $cantidadCursosPublicadosErrores = EntitySqlo::getInstanceFromString("asignatura")->cantidadCursosPublicadosErrores($fecha);
-    $cantidadCursosPublicadosRenuncias = EntitySqlo::getInstanceFromString("asignatura")->cantidadCursosPublicadosRenuncias($fecha);
+    $cantidadCursosPublicados = EntitySqlo::getInstanceString("asignatura")->cantidadCursosPublicados($fecha);
+    $cantidadCursosPublicadosAprobados = EntitySqlo::getInstanceString("asignatura")->cantidadCursosPublicadosAprobados($fecha);
+    $cantidadCursosPublicadosErrores = EntitySqlo::getInstanceString("asignatura")->cantidadCursosPublicadosErrores($fecha);
+    $cantidadCursosPublicadosRenuncias = EntitySqlo::getInstanceString("asignatura")->cantidadCursosPublicadosRenuncias($fecha);
 
     return "
       SELECT asignatura.id, asignatura.nombre, cantidad_cursos, cantidad_cursos_aprobados, cantidad_cursos_errores, cantidad_cursos_renuncias

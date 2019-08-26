@@ -7,7 +7,7 @@ class CursoSqlo extends CursoSqloMain{
 
 
   public function idCursosNoDisponibles($fecha){
-    $advanced = EntitySql::getInstanceFromString("comision")->_advancedComisionesAutorizadasPublicadas($fecha, "com");
+    $advanced = EntitySql::getInstanceString("comision")->_advancedComisionesAutorizadasPublicadas($fecha, "com");
 
     return "SELECT DISTINCT
 {$this->sql->fieldId()}
@@ -21,7 +21,7 @@ AND {$this->sql->conditionAdvanced($advanced)}
   }
 
   public function idCursosRenuncias($fecha){
-    $advanced = EntitySql::getInstanceFromString("comision")->_advancedComisionesAutorizadasPublicadas($fecha, "com");
+    $advanced = EntitySql::getInstanceString("comision")->_advancedComisionesAutorizadasPublicadas($fecha, "com");
 
     return "SELECT DISTINCT
 {$this->sql->fieldId()}
@@ -35,7 +35,7 @@ AND {$this->sql->conditionAdvanced($advanced)}
   }
 
   public function idCursosDisponibles($fecha){
-    $advanced = EntitySql::getInstanceFromString("comision")->_advancedComisionesAutorizadasPublicadas($fecha, "com");
+    $advanced = EntitySql::getInstanceString("comision")->_advancedComisionesAutorizadasPublicadas($fecha, "com");
 
     return "SELECT DISTINCT
   {$this->sql->fieldId()}
@@ -48,7 +48,7 @@ AND {$this->sql->conditionAdvanced($advanced)}
   }
 
   public function actoPublicoSinCubrir($fecha){
-    $advanced = EntitySql::getInstanceFromString("comision")->_advancedComisionesAutorizadasPublicadas($fecha, "com");
+    $advanced = EntitySql::getInstanceString("comision")->_advancedComisionesAutorizadasPublicadas($fecha, "com");
     $sql = "SELECT DISTINCT
 {$this->sql->fieldsFull()}
 {$this->sql->from()}
@@ -79,7 +79,7 @@ return $sql;
 
 
   public function actoPublicoRenuncias($fecha){
-    $advanced = EntitySql::getInstanceFromString("comision")->_advancedComisionesAutorizadasPublicadas($fecha, "com");
+    $advanced = EntitySql::getInstanceString("comision")->_advancedComisionesAutorizadasPublicadas($fecha, "com");
 
     return "SELECT DISTINCT
 {$this->sql->fieldsFull()},

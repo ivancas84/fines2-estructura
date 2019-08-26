@@ -24,16 +24,16 @@ class DomicilioValuesMain extends EntityValues {
     $this->localidad = "La Plata";
   }
 
-  public function fromArray(array $row = NULL){
+  public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["calle"])) $this->calle = (is_null($row["calle"])) ? null : (string)$row["calle"];
-    if(isset($row["entre"])) $this->entre = (is_null($row["entre"])) ? null : (string)$row["entre"];
-    if(isset($row["numero"])) $this->numero = (is_null($row["numero"])) ? null : (string)$row["numero"];
-    if(isset($row["piso"])) $this->piso = (is_null($row["piso"])) ? null : (string)$row["piso"];
-    if(isset($row["departamento"])) $this->departamento = (is_null($row["departamento"])) ? null : (string)$row["departamento"];
-    if(isset($row["barrio"])) $this->barrio = (is_null($row["barrio"])) ? null : (string)$row["barrio"];
-    if(isset($row["localidad"])) $this->localidad = (is_null($row["localidad"])) ? null : (string)$row["localidad"];
+    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."calle"])) $this->calle = (is_null($row[$p."calle"])) ? null : (string)$row[$p."calle"];
+    if(isset($row[$p."entre"])) $this->entre = (is_null($row[$p."entre"])) ? null : (string)$row[$p."entre"];
+    if(isset($row[$p."numero"])) $this->numero = (is_null($row[$p."numero"])) ? null : (string)$row[$p."numero"];
+    if(isset($row[$p."piso"])) $this->piso = (is_null($row[$p."piso"])) ? null : (string)$row[$p."piso"];
+    if(isset($row[$p."departamento"])) $this->departamento = (is_null($row[$p."departamento"])) ? null : (string)$row[$p."departamento"];
+    if(isset($row[$p."barrio"])) $this->barrio = (is_null($row[$p."barrio"])) ? null : (string)$row[$p."barrio"];
+    if(isset($row[$p."localidad"])) $this->localidad = (is_null($row[$p."localidad"])) ? null : (string)$row[$p."localidad"];
   }
 
   public function toArray(){

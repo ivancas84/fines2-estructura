@@ -20,14 +20,14 @@ class PersonaValuesMain extends EntityValues {
     $this->domicilio = null;
   }
 
-  public function fromArray(array $row = NULL){
+  public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["alta"])) $this->alta = (is_null($row["alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row["alta"]);
-    if(isset($row["baja"])) $this->baja = (is_null($row["baja"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row["baja"]);
-    if(isset($row["lugar_nacimiento"])) $this->lugarNacimiento = (is_null($row["lugar_nacimiento"])) ? null : (string)$row["lugar_nacimiento"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["id_persona"])) $this->idPersona = (is_null($row["id_persona"])) ? null : (string)$row["id_persona"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["domicilio"])) $this->domicilio = (is_null($row["domicilio"])) ? null : (string)$row["domicilio"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."alta"])) $this->alta = (is_null($row[$p."alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row[$p."alta"]);
+    if(isset($row[$p."baja"])) $this->baja = (is_null($row[$p."baja"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row[$p."baja"]);
+    if(isset($row[$p."lugar_nacimiento"])) $this->lugarNacimiento = (is_null($row[$p."lugar_nacimiento"])) ? null : (string)$row[$p."lugar_nacimiento"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."id_persona"])) $this->idPersona = (is_null($row[$p."id_persona"])) ? null : (string)$row[$p."id_persona"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."domicilio"])) $this->domicilio = (is_null($row[$p."domicilio"])) ? null : (string)$row[$p."domicilio"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
 
   public function toArray(){

@@ -40,24 +40,24 @@ class TomaValuesMain extends EntityValues {
     $this->reemplaza = null;
   }
 
-  public function fromArray(array $row = NULL){
+  public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row["id"])) $this->id = (is_null($row["id"])) ? null : (string)$row["id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["fecha_toma"])) $this->fechaToma = (is_null($row["fecha_toma"])) ? null : DateTime::createFromFormat('Y-m-d', $row["fecha_toma"]);
-    if(isset($row["fecha_inicio"])) $this->fechaInicio = (is_null($row["fecha_inicio"])) ? null : DateTime::createFromFormat('Y-m-d', $row["fecha_inicio"]);
-    if(isset($row["fecha_fin"])) $this->fechaFin = (is_null($row["fecha_fin"])) ? null : DateTime::createFromFormat('Y-m-d', $row["fecha_fin"]);
-    if(isset($row["fecha_entrada_contralor"])) $this->fechaEntradaContralor = (is_null($row["fecha_entrada_contralor"])) ? null : DateTime::createFromFormat('Y-m-d', $row["fecha_entrada_contralor"]);
-    if(isset($row["estado"])) $this->estado = (is_null($row["estado"])) ? null : (string)$row["estado"];
-    if(isset($row["observaciones"])) $this->observaciones = (is_null($row["observaciones"])) ? null : (string)$row["observaciones"];
-    if(isset($row["comentario_contralor"])) $this->comentarioContralor = (is_null($row["comentario_contralor"])) ? null : (string)$row["comentario_contralor"];
-    if(isset($row["alta"])) $this->alta = (is_null($row["alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row["alta"]);
-    if(isset($row["tipo_movimiento"])) $this->tipoMovimiento = (is_null($row["tipo_movimiento"])) ? null : (string)$row["tipo_movimiento"];
-    if(isset($row["estado_contralor"])) $this->estadoContralor = (is_null($row["estado_contralor"])) ? null : (string)$row["estado_contralor"];
-    if(isset($row["fecha_desde"])) $this->fechaDesde = (is_null($row["fecha_desde"])) ? null : DateTime::createFromFormat('Y-m-d', $row["fecha_desde"]);
-    if(isset($row["suma_horas_catedra"])) $this->sumaHorasCatedra = (is_null($row["suma_horas_catedra"])) ? null : intval($row["suma_horas_catedra"]);
-    if(isset($row["curso"])) $this->curso = (is_null($row["curso"])) ? null : (string)$row["curso"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["profesor"])) $this->profesor = (is_null($row["profesor"])) ? null : (string)$row["profesor"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row["reemplaza"])) $this->reemplaza = (is_null($row["reemplaza"])) ? null : (string)$row["reemplaza"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."fecha_toma"])) $this->fechaToma = (is_null($row[$p."fecha_toma"])) ? null : DateTime::createFromFormat('Y-m-d', $row[$p."fecha_toma"]);
+    if(isset($row[$p."fecha_inicio"])) $this->fechaInicio = (is_null($row[$p."fecha_inicio"])) ? null : DateTime::createFromFormat('Y-m-d', $row[$p."fecha_inicio"]);
+    if(isset($row[$p."fecha_fin"])) $this->fechaFin = (is_null($row[$p."fecha_fin"])) ? null : DateTime::createFromFormat('Y-m-d', $row[$p."fecha_fin"]);
+    if(isset($row[$p."fecha_entrada_contralor"])) $this->fechaEntradaContralor = (is_null($row[$p."fecha_entrada_contralor"])) ? null : DateTime::createFromFormat('Y-m-d', $row[$p."fecha_entrada_contralor"]);
+    if(isset($row[$p."estado"])) $this->estado = (is_null($row[$p."estado"])) ? null : (string)$row[$p."estado"];
+    if(isset($row[$p."observaciones"])) $this->observaciones = (is_null($row[$p."observaciones"])) ? null : (string)$row[$p."observaciones"];
+    if(isset($row[$p."comentario_contralor"])) $this->comentarioContralor = (is_null($row[$p."comentario_contralor"])) ? null : (string)$row[$p."comentario_contralor"];
+    if(isset($row[$p."alta"])) $this->alta = (is_null($row[$p."alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row[$p."alta"]);
+    if(isset($row[$p."tipo_movimiento"])) $this->tipoMovimiento = (is_null($row[$p."tipo_movimiento"])) ? null : (string)$row[$p."tipo_movimiento"];
+    if(isset($row[$p."estado_contralor"])) $this->estadoContralor = (is_null($row[$p."estado_contralor"])) ? null : (string)$row[$p."estado_contralor"];
+    if(isset($row[$p."fecha_desde"])) $this->fechaDesde = (is_null($row[$p."fecha_desde"])) ? null : DateTime::createFromFormat('Y-m-d', $row[$p."fecha_desde"]);
+    if(isset($row[$p."suma_horas_catedra"])) $this->sumaHorasCatedra = (is_null($row[$p."suma_horas_catedra"])) ? null : intval($row[$p."suma_horas_catedra"]);
+    if(isset($row[$p."curso"])) $this->curso = (is_null($row[$p."curso"])) ? null : (string)$row[$p."curso"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."profesor"])) $this->profesor = (is_null($row[$p."profesor"])) ? null : (string)$row[$p."profesor"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."reemplaza"])) $this->reemplaza = (is_null($row[$p."reemplaza"])) ? null : (string)$row[$p."reemplaza"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
   }
 
   public function toArray(){

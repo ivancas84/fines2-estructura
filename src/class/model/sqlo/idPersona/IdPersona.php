@@ -68,8 +68,8 @@ SELECT count(DISTINCT " . $this->sql->fieldId() . ") AS \"num_rows\"
 
   public function cantidadAlumnosComisiones($fecha, $render = NULL){
     $r = $this->render($render);
-    $sqlCoordinadores = EntitySqlo::getInstanceFromString("coordinador")->cantidadAlumnos($fecha);
-    $sqlCantidadComisiones = EntitySqlo::getInstanceFromString("coordinador")->cantidadComisiones($fecha);
+    $sqlCoordinadores = EntitySqlo::getInstanceString("coordinador")->cantidadAlumnos($fecha);
+    $sqlCantidadComisiones = EntitySqlo::getInstanceString("coordinador")->cantidadComisiones($fecha);
 
     $sql = "SELECT DISTINCT
 {$this->sql->fieldsFull()}, cantidad_alumnos.cantidad_activos, cantidad_alumnos.cantidad_no_activos, cantidad_comisiones.cantidad_comisiones
@@ -87,7 +87,7 @@ INNER JOIN ({$sqlCantidadComisiones}) AS cantidad_comisiones ON (cantidad_comisi
 
   public function cantidadComisionesTramo($fecha, $render){
     $r = $this->render($render);
-    $sqlCantidadComisionesTramo = EntitySqlo::getInstanceFromString("coordinador")->cantidadComisionesTramo($fecha);
+    $sqlCantidadComisionesTramo = EntitySqlo::getInstanceString("coordinador")->cantidadComisionesTramo($fecha);
   }
 
   public function idFechaToma($fechaToma, $render = null){
