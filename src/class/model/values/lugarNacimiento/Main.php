@@ -20,11 +20,11 @@ class LugarNacimientoValuesMain extends EntityValues {
 
   public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row[$p."ciudad"])) $this->ciudad = (is_null($row[$p."ciudad"])) ? null : (string)$row[$p."ciudad"];
-    if(isset($row[$p."provincia"])) $this->provincia = (is_null($row[$p."provincia"])) ? null : (string)$row[$p."provincia"];
-    if(isset($row[$p."pais"])) $this->pais = (is_null($row[$p."pais"])) ? null : (string)$row[$p."pais"];
-    if(isset($row[$p."alta"])) $this->alta = (is_null($row[$p."alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row[$p."alta"]);
+    if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
+    if(isset($row[$p."ciudad"])) $this->setCiudad($row[$p."ciudad"]);
+    if(isset($row[$p."provincia"])) $this->setProvincia($row[$p."provincia"]);
+    if(isset($row[$p."pais"])) $this->setPais($row[$p."pais"]);
+    if(isset($row[$p."alta"])) $this->setAltaStr($row[$p."alta"]);
   }
 
   public function toArray(){
@@ -34,9 +34,9 @@ class LugarNacimientoValuesMain extends EntityValues {
     if($this->provincia !== UNDEFINED) $row["provincia"] = $this->provincia;
     if($this->pais !== UNDEFINED) $row["pais"] = $this->pais;
     if($this->alta !== UNDEFINED) {
-      if(empty($this->alta)) $row["alta"] = $this->alta;
-      else $row["alta"] = $this->alta->format('Y-m-d H:i:s');
-    }
+        if(empty($this->alta)) $row["alta"] = $this->alta;
+        else $row["alta"] = $this->alta->format('Y-m-d H:i:s');
+      }
     return $row;
   }
 
@@ -44,36 +44,34 @@ class LugarNacimientoValuesMain extends EntityValues {
   public function ciudad($format = null) { return $this->formatString($this->ciudad, $format); }
   public function provincia($format = null) { return $this->formatString($this->provincia, $format); }
   public function pais($format = null) { return $this->formatString($this->pais, $format); }
-  public function alta($format = 'd/m/Y H:i') { return $this->formatDate($this->alta, $format); }
+  public function alta($format = 'd/m/Y H:i:s') { return $this->formatDate($this->alta, $format); }
   public function setId($p) {
-    if(empty($p)) return;
-    $this->id = trim($p);
+    $p = trim($p);
+    $this->id = (empty($p)) ? null : (string)$p;
   }
 
   public function setCiudad($p) {
-    if(empty($p)) return;
-    $this->ciudad = trim($p);
+    $p = trim($p);
+    $this->ciudad = (empty($p)) ? null : (string)$p;
   }
 
   public function setProvincia($p) {
-    if(empty($p)) return;
-    $this->provincia = trim($p);
+    $p = trim($p);
+    $this->provincia = (empty($p)) ? null : (string)$p;
   }
 
   public function setPais($p) {
-    if(empty($p)) return;
-    $this->pais = trim($p);
+    $p = trim($p);
+    $this->pais = (empty($p)) ? null : (string)$p;
   }
 
-  public function setAlta(DateTime $p) {
-    if(empty($p)) return;
+  public function setAlta(DateTime $p = null) {
     $this->alta = $p;
   }
 
   public function setAltaStr($p, $format = "Y-m-d H:i:s") {
     $p = SpanishDateTime::createFromFormat($format, trim($p));
-    if(empty($p)) return;
-    $this->alta = $p;
+    $this->alta = (empty($p)) ? null : $p;
   }
 
 

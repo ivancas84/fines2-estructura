@@ -34,18 +34,18 @@ class SedeValuesMain extends EntityValues {
 
   public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row[$p."numero"])) $this->numero = (is_null($row[$p."numero"])) ? null : (string)$row[$p."numero"];
-    if(isset($row[$p."nombre"])) $this->nombre = (is_null($row[$p."nombre"])) ? null : (string)$row[$p."nombre"];
-    if(isset($row[$p."organizacion"])) $this->organizacion = (is_null($row[$p."organizacion"])) ? null : (string)$row[$p."organizacion"];
-    if(isset($row[$p."observaciones"])) $this->observaciones = (is_null($row[$p."observaciones"])) ? null : (string)$row[$p."observaciones"];
-    if(isset($row[$p."tipo"])) $this->tipo = (is_null($row[$p."tipo"])) ? null : (string)$row[$p."tipo"];
-    if(isset($row[$p."baja"])) $this->baja = (is_null($row[$p."baja"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row[$p."baja"]);
-    if(isset($row[$p."dependencia"])) $this->dependencia = (is_null($row[$p."dependencia"])) ? null : (string)$row[$p."dependencia"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row[$p."tipo_sede"])) $this->tipoSede = (is_null($row[$p."tipo_sede"])) ? null : (string)$row[$p."tipo_sede"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row[$p."domicilio"])) $this->domicilio = (is_null($row[$p."domicilio"])) ? null : (string)$row[$p."domicilio"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row[$p."coordinador"])) $this->coordinador = (is_null($row[$p."coordinador"])) ? null : (string)$row[$p."coordinador"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row[$p."referente"])) $this->referente = (is_null($row[$p."referente"])) ? null : (string)$row[$p."referente"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
+    if(isset($row[$p."numero"])) $this->setNumero($row[$p."numero"]);
+    if(isset($row[$p."nombre"])) $this->setNombre($row[$p."nombre"]);
+    if(isset($row[$p."organizacion"])) $this->setOrganizacion($row[$p."organizacion"]);
+    if(isset($row[$p."observaciones"])) $this->setObservaciones($row[$p."observaciones"]);
+    if(isset($row[$p."tipo"])) $this->setTipo($row[$p."tipo"]);
+    if(isset($row[$p."baja"])) $this->setBajaStr($row[$p."baja"]);
+    if(isset($row[$p."dependencia"])) $this->setDependencia($row[$p."dependencia"]);
+    if(isset($row[$p."tipo_sede"])) $this->setTipoSede($row[$p."tipo_sede"]);
+    if(isset($row[$p."domicilio"])) $this->setDomicilio($row[$p."domicilio"]);
+    if(isset($row[$p."coordinador"])) $this->setCoordinador($row[$p."coordinador"]);
+    if(isset($row[$p."referente"])) $this->setReferente($row[$p."referente"]);
   }
 
   public function toArray(){
@@ -57,9 +57,9 @@ class SedeValuesMain extends EntityValues {
     if($this->observaciones !== UNDEFINED) $row["observaciones"] = $this->observaciones;
     if($this->tipo !== UNDEFINED) $row["tipo"] = $this->tipo;
     if($this->baja !== UNDEFINED) {
-      if(empty($this->baja)) $row["baja"] = $this->baja;
-      else $row["baja"] = $this->baja->format('Y-m-d H:i:s');
-    }
+        if(empty($this->baja)) $row["baja"] = $this->baja;
+        else $row["baja"] = $this->baja->format('Y-m-d H:i:s');
+      }
     if($this->dependencia !== UNDEFINED) $row["dependencia"] = $this->dependencia;
     if($this->tipoSede !== UNDEFINED) $row["tipo_sede"] = $this->tipoSede;
     if($this->domicilio !== UNDEFINED) $row["domicilio"] = $this->domicilio;
@@ -74,76 +74,74 @@ class SedeValuesMain extends EntityValues {
   public function organizacion($format = null) { return $this->formatString($this->organizacion, $format); }
   public function observaciones($format = null) { return $this->formatString($this->observaciones, $format); }
   public function tipo($format = null) { return $this->formatString($this->tipo, $format); }
-  public function baja($format = 'd/m/Y H:i') { return $this->formatDate($this->baja, $format); }
+  public function baja($format = 'd/m/Y H:i:s') { return $this->formatDate($this->baja, $format); }
   public function dependencia() { return $this->dependencia; }
   public function tipoSede() { return $this->tipoSede; }
   public function domicilio() { return $this->domicilio; }
   public function coordinador() { return $this->coordinador; }
   public function referente() { return $this->referente; }
   public function setId($p) {
-    if(empty($p)) return;
-    $this->id = trim($p);
+    $p = trim($p);
+    $this->id = (empty($p)) ? null : (string)$p;
   }
 
   public function setNumero($p) {
-    if(empty($p)) return;
-    $this->numero = trim($p);
+    $p = trim($p);
+    $this->numero = (empty($p)) ? null : (string)$p;
   }
 
   public function setNombre($p) {
-    if(empty($p)) return;
-    $this->nombre = trim($p);
+    $p = trim($p);
+    $this->nombre = (empty($p)) ? null : (string)$p;
   }
 
   public function setOrganizacion($p) {
-    if(empty($p)) return;
-    $this->organizacion = trim($p);
+    $p = trim($p);
+    $this->organizacion = (empty($p)) ? null : (string)$p;
   }
 
   public function setObservaciones($p) {
-    if(empty($p)) return;
-    $this->observaciones = trim($p);
+    $p = trim($p);
+    $this->observaciones = (empty($p)) ? null : (string)$p;
   }
 
   public function setTipo($p) {
-    if(empty($p)) return;
-    $this->tipo = trim($p);
+    $p = trim($p);
+    $this->tipo = (empty($p)) ? null : (string)$p;
   }
 
-  public function setBaja(DateTime $p) {
-    if(empty($p)) return;
+  public function setBaja(DateTime $p = null) {
     $this->baja = $p;
   }
 
   public function setBajaStr($p, $format = "Y-m-d H:i:s") {
     $p = SpanishDateTime::createFromFormat($format, trim($p));
-    if(empty($p)) return;
-    $this->baja = $p;
+    $this->baja = (empty($p)) ? null : $p;
   }
 
   public function setDependencia($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->dependencia = intval(trim($p));
+    $p = trim($p);
+    $this->dependencia = (empty($p)) ? null : (string)$p;
   }
 
   public function setTipoSede($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->tipoSede = intval(trim($p));
+    $p = trim($p);
+    $this->tipoSede = (empty($p)) ? null : (string)$p;
   }
 
   public function setDomicilio($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->domicilio = intval(trim($p));
+    $p = trim($p);
+    $this->domicilio = (empty($p)) ? null : (string)$p;
   }
 
   public function setCoordinador($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->coordinador = intval(trim($p));
+    $p = trim($p);
+    $this->coordinador = (empty($p)) ? null : (string)$p;
   }
 
   public function setReferente($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->referente = intval(trim($p));
+    $p = trim($p);
+    $this->referente = (empty($p)) ? null : (string)$p;
   }
 
 

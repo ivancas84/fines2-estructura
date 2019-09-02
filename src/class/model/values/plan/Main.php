@@ -16,9 +16,9 @@ class PlanValuesMain extends EntityValues {
 
   public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row[$p."orientacion"])) $this->orientacion = (is_null($row[$p."orientacion"])) ? null : (string)$row[$p."orientacion"];
-    if(isset($row[$p."resolucion"])) $this->resolucion = (is_null($row[$p."resolucion"])) ? null : (string)$row[$p."resolucion"];
+    if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
+    if(isset($row[$p."orientacion"])) $this->setOrientacion($row[$p."orientacion"]);
+    if(isset($row[$p."resolucion"])) $this->setResolucion($row[$p."resolucion"]);
   }
 
   public function toArray(){
@@ -33,18 +33,18 @@ class PlanValuesMain extends EntityValues {
   public function orientacion($format = null) { return $this->formatString($this->orientacion, $format); }
   public function resolucion($format = null) { return $this->formatString($this->resolucion, $format); }
   public function setId($p) {
-    if(empty($p)) return;
-    $this->id = trim($p);
+    $p = trim($p);
+    $this->id = (empty($p)) ? null : (string)$p;
   }
 
   public function setOrientacion($p) {
-    if(empty($p)) return;
-    $this->orientacion = trim($p);
+    $p = trim($p);
+    $this->orientacion = (empty($p)) ? null : (string)$p;
   }
 
   public function setResolucion($p) {
-    if(empty($p)) return;
-    $this->resolucion = trim($p);
+    $p = trim($p);
+    $this->resolucion = (empty($p)) ? null : (string)$p;
   }
 
 

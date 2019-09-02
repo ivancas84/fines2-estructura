@@ -20,11 +20,11 @@ class UsuarioValuesMain extends EntityValues {
 
   public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row[$p."clave"])) $this->clave = (is_null($row[$p."clave"])) ? null : (string)$row[$p."clave"];
-    if(isset($row[$p."alta"])) $this->alta = (is_null($row[$p."alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row[$p."alta"]);
-    if(isset($row[$p."baja"])) $this->baja = (is_null($row[$p."baja"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row[$p."baja"]);
-    if(isset($row[$p."persona"])) $this->persona = (is_null($row[$p."persona"])) ? null : (string)$row[$p."persona"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
+    if(isset($row[$p."clave"])) $this->setClave($row[$p."clave"]);
+    if(isset($row[$p."alta"])) $this->setAltaStr($row[$p."alta"]);
+    if(isset($row[$p."baja"])) $this->setBajaStr($row[$p."baja"]);
+    if(isset($row[$p."persona"])) $this->setPersona($row[$p."persona"]);
   }
 
   public function toArray(){
@@ -32,57 +32,53 @@ class UsuarioValuesMain extends EntityValues {
     if($this->id !== UNDEFINED) $row["id"] = $this->id;
     if($this->clave !== UNDEFINED) $row["clave"] = $this->clave;
     if($this->alta !== UNDEFINED) {
-      if(empty($this->alta)) $row["alta"] = $this->alta;
-      else $row["alta"] = $this->alta->format('Y-m-d H:i:s');
-    }
+        if(empty($this->alta)) $row["alta"] = $this->alta;
+        else $row["alta"] = $this->alta->format('Y-m-d H:i:s');
+      }
     if($this->baja !== UNDEFINED) {
-      if(empty($this->baja)) $row["baja"] = $this->baja;
-      else $row["baja"] = $this->baja->format('Y-m-d H:i:s');
-    }
+        if(empty($this->baja)) $row["baja"] = $this->baja;
+        else $row["baja"] = $this->baja->format('Y-m-d H:i:s');
+      }
     if($this->persona !== UNDEFINED) $row["persona"] = $this->persona;
     return $row;
   }
 
   public function id() { return $this->id; }
   public function clave($format = null) { return $this->formatString($this->clave, $format); }
-  public function alta($format = 'd/m/Y H:i') { return $this->formatDate($this->alta, $format); }
-  public function baja($format = 'd/m/Y H:i') { return $this->formatDate($this->baja, $format); }
+  public function alta($format = 'd/m/Y H:i:s') { return $this->formatDate($this->alta, $format); }
+  public function baja($format = 'd/m/Y H:i:s') { return $this->formatDate($this->baja, $format); }
   public function persona() { return $this->persona; }
   public function setId($p) {
-    if(empty($p)) return;
-    $this->id = trim($p);
+    $p = trim($p);
+    $this->id = (empty($p)) ? null : (string)$p;
   }
 
   public function setClave($p) {
-    if(empty($p)) return;
-    $this->clave = trim($p);
+    $p = trim($p);
+    $this->clave = (empty($p)) ? null : (string)$p;
   }
 
-  public function setAlta(DateTime $p) {
-    if(empty($p)) return;
+  public function setAlta(DateTime $p = null) {
     $this->alta = $p;
   }
 
   public function setAltaStr($p, $format = "Y-m-d H:i:s") {
     $p = SpanishDateTime::createFromFormat($format, trim($p));
-    if(empty($p)) return;
-    $this->alta = $p;
+    $this->alta = (empty($p)) ? null : $p;
   }
 
-  public function setBaja(DateTime $p) {
-    if(empty($p)) return;
+  public function setBaja(DateTime $p = null) {
     $this->baja = $p;
   }
 
   public function setBajaStr($p, $format = "Y-m-d H:i:s") {
     $p = SpanishDateTime::createFromFormat($format, trim($p));
-    if(empty($p)) return;
-    $this->baja = $p;
+    $this->baja = (empty($p)) ? null : $p;
   }
 
   public function setPersona($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->persona = intval(trim($p));
+    $p = trim($p);
+    $this->persona = (empty($p)) ? null : (string)$p;
   }
 
 

@@ -24,13 +24,13 @@ class CargaHorariaValuesMain extends EntityValues {
 
   public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row[$p."anio"])) $this->anio = (is_null($row[$p."anio"])) ? null : intval($row[$p."anio"]);
-    if(isset($row[$p."semestre"])) $this->semestre = (is_null($row[$p."semestre"])) ? null : intval($row[$p."semestre"]);
-    if(isset($row[$p."horas_catedra"])) $this->horasCatedra = (is_null($row[$p."horas_catedra"])) ? null : intval($row[$p."horas_catedra"]);
-    if(isset($row[$p."tramo"])) $this->tramo = (is_null($row[$p."tramo"])) ? null : (string)$row[$p."tramo"];
-    if(isset($row[$p."asignatura"])) $this->asignatura = (is_null($row[$p."asignatura"])) ? null : (string)$row[$p."asignatura"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row[$p."plan"])) $this->plan = (is_null($row[$p."plan"])) ? null : (string)$row[$p."plan"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
+    if(isset($row[$p."anio"])) $this->setAnio($row[$p."anio"]);
+    if(isset($row[$p."semestre"])) $this->setSemestre($row[$p."semestre"]);
+    if(isset($row[$p."horas_catedra"])) $this->setHorasCatedra($row[$p."horas_catedra"]);
+    if(isset($row[$p."tramo"])) $this->setTramo($row[$p."tramo"]);
+    if(isset($row[$p."asignatura"])) $this->setAsignatura($row[$p."asignatura"]);
+    if(isset($row[$p."plan"])) $this->setPlan($row[$p."plan"]);
   }
 
   public function toArray(){
@@ -53,38 +53,35 @@ class CargaHorariaValuesMain extends EntityValues {
   public function asignatura() { return $this->asignatura; }
   public function plan() { return $this->plan; }
   public function setId($p) {
-    if(empty($p)) return;
-    $this->id = trim($p);
+    $p = trim($p);
+    $this->id = (empty($p)) ? null : (string)$p;
   }
 
   public function setAnio($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->anio = intval(trim($p));
+    $p = trim($p);
+    $this->anio = (is_null($p) && $p !== 0) ? null : intval($p);
   }
-
   public function setSemestre($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->semestre = intval(trim($p));
+    $p = trim($p);
+    $this->semestre = (is_null($p) && $p !== 0) ? null : intval($p);
   }
-
   public function setHorasCatedra($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->horasCatedra = intval(trim($p));
+    $p = trim($p);
+    $this->horasCatedra = (is_null($p) && $p !== 0) ? null : intval($p);
   }
-
   public function setTramo($p) {
-    if(empty($p)) return;
-    $this->tramo = trim($p);
+    $p = trim($p);
+    $this->tramo = (empty($p)) ? null : (string)$p;
   }
 
   public function setAsignatura($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->asignatura = intval(trim($p));
+    $p = trim($p);
+    $this->asignatura = (empty($p)) ? null : (string)$p;
   }
 
   public function setPlan($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->plan = intval(trim($p));
+    $p = trim($p);
+    $this->plan = (empty($p)) ? null : (string)$p;
   }
 
 

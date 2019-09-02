@@ -28,28 +28,28 @@ class InasistenciaValuesMain extends EntityValues {
 
   public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row[$p."fecha_desde"])) $this->fechaDesde = (is_null($row[$p."fecha_desde"])) ? null : DateTime::createFromFormat('Y-m-d', $row[$p."fecha_desde"]);
-    if(isset($row[$p."fecha_hasta"])) $this->fechaHasta = (is_null($row[$p."fecha_hasta"])) ? null : DateTime::createFromFormat('Y-m-d', $row[$p."fecha_hasta"]);
-    if(isset($row[$p."modulos_semanales"])) $this->modulosSemanales = (is_null($row[$p."modulos_semanales"])) ? null : intval($row[$p."modulos_semanales"]);
-    if(isset($row[$p."modulos_mensuales"])) $this->modulosMensuales = (is_null($row[$p."modulos_mensuales"])) ? null : intval($row[$p."modulos_mensuales"]);
-    if(isset($row[$p."articulo"])) $this->articulo = (is_null($row[$p."articulo"])) ? null : (string)$row[$p."articulo"];
-    if(isset($row[$p."inciso"])) $this->inciso = (is_null($row[$p."inciso"])) ? null : (string)$row[$p."inciso"];
-    if(isset($row[$p."observaciones"])) $this->observaciones = (is_null($row[$p."observaciones"])) ? null : (string)$row[$p."observaciones"];
-    if(isset($row[$p."toma"])) $this->toma = (is_null($row[$p."toma"])) ? null : (string)$row[$p."toma"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
+    if(isset($row[$p."fecha_desde"])) $this->setFechaDesdeStr($row[$p."fecha_desde"]);
+    if(isset($row[$p."fecha_hasta"])) $this->setFechaHastaStr($row[$p."fecha_hasta"]);
+    if(isset($row[$p."modulos_semanales"])) $this->setModulosSemanales($row[$p."modulos_semanales"]);
+    if(isset($row[$p."modulos_mensuales"])) $this->setModulosMensuales($row[$p."modulos_mensuales"]);
+    if(isset($row[$p."articulo"])) $this->setArticulo($row[$p."articulo"]);
+    if(isset($row[$p."inciso"])) $this->setInciso($row[$p."inciso"]);
+    if(isset($row[$p."observaciones"])) $this->setObservaciones($row[$p."observaciones"]);
+    if(isset($row[$p."toma"])) $this->setToma($row[$p."toma"]);
   }
 
   public function toArray(){
     $row = [];
     if($this->id !== UNDEFINED) $row["id"] = $this->id;
     if($this->fechaDesde !== UNDEFINED) {
-      if(empty($this->fechaDesde)) $row["fecha_desde"] = $this->fechaDesde;
-      else $row["fecha_desde"] = $this->fechaDesde->format('Y-m-d');
-    }
+        if(empty($this->fechaDesde)) $row["fecha_desde"] = $this->fechaDesde;
+        else $row["fecha_desde"] = $this->fechaDesde->format('Y-m-d');
+      }
     if($this->fechaHasta !== UNDEFINED) {
-      if(empty($this->fechaHasta)) $row["fecha_hasta"] = $this->fechaHasta;
-      else $row["fecha_hasta"] = $this->fechaHasta->format('Y-m-d');
-    }
+        if(empty($this->fechaHasta)) $row["fecha_hasta"] = $this->fechaHasta;
+        else $row["fecha_hasta"] = $this->fechaHasta->format('Y-m-d');
+      }
     if($this->modulosSemanales !== UNDEFINED) $row["modulos_semanales"] = $this->modulosSemanales;
     if($this->modulosMensuales !== UNDEFINED) $row["modulos_mensuales"] = $this->modulosMensuales;
     if($this->articulo !== UNDEFINED) $row["articulo"] = $this->articulo;
@@ -69,60 +69,54 @@ class InasistenciaValuesMain extends EntityValues {
   public function observaciones($format = null) { return $this->formatString($this->observaciones, $format); }
   public function toma() { return $this->toma; }
   public function setId($p) {
-    if(empty($p)) return;
-    $this->id = trim($p);
+    $p = trim($p);
+    $this->id = (empty($p)) ? null : (string)$p;
   }
 
-  public function setFechaDesde(DateTime $p) {
-    if(empty($p)) return;
+  public function setFechaDesde(DateTime $p = null) {
     $this->fechaDesde = $p;
   }
 
   public function setFechaDesdeStr($p, $format = "Y-m-d") {
     $p = SpanishDateTime::createFromFormat($format, trim($p));
-    if(empty($p)) return;
-    $this->fechaDesde = $p;
+    $this->fechaDesde = (empty($p)) ? null : $p;
   }
 
-  public function setFechaHasta(DateTime $p) {
-    if(empty($p)) return;
+  public function setFechaHasta(DateTime $p = null) {
     $this->fechaHasta = $p;
   }
 
   public function setFechaHastaStr($p, $format = "Y-m-d") {
     $p = SpanishDateTime::createFromFormat($format, trim($p));
-    if(empty($p)) return;
-    $this->fechaHasta = $p;
+    $this->fechaHasta = (empty($p)) ? null : $p;
   }
 
   public function setModulosSemanales($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->modulosSemanales = intval(trim($p));
+    $p = trim($p);
+    $this->modulosSemanales = (is_null($p) && $p !== 0) ? null : intval($p);
   }
-
   public function setModulosMensuales($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->modulosMensuales = intval(trim($p));
+    $p = trim($p);
+    $this->modulosMensuales = (is_null($p) && $p !== 0) ? null : intval($p);
   }
-
   public function setArticulo($p) {
-    if(empty($p)) return;
-    $this->articulo = trim($p);
+    $p = trim($p);
+    $this->articulo = (empty($p)) ? null : (string)$p;
   }
 
   public function setInciso($p) {
-    if(empty($p)) return;
-    $this->inciso = trim($p);
+    $p = trim($p);
+    $this->inciso = (empty($p)) ? null : (string)$p;
   }
 
   public function setObservaciones($p) {
-    if(empty($p)) return;
-    $this->observaciones = trim($p);
+    $p = trim($p);
+    $this->observaciones = (empty($p)) ? null : (string)$p;
   }
 
   public function setToma($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->toma = intval(trim($p));
+    $p = trim($p);
+    $this->toma = (empty($p)) ? null : (string)$p;
   }
 
 

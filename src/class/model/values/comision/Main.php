@@ -46,24 +46,24 @@ class ComisionValuesMain extends EntityValues {
 
   public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row[$p."anio"])) $this->anio = (is_null($row[$p."anio"])) ? null : intval($row[$p."anio"]);
-    if(isset($row[$p."semestre"])) $this->semestre = (is_null($row[$p."semestre"])) ? null : intval($row[$p."semestre"]);
-    if(isset($row[$p."observaciones"])) $this->observaciones = (is_null($row[$p."observaciones"])) ? null : (string)$row[$p."observaciones"];
-    if(isset($row[$p."fecha"])) $this->fecha = (is_null($row[$p."fecha"])) ? null : DateTime::createFromFormat('Y-m-d', $row[$p."fecha"]);
-    if(isset($row[$p."alta"])) $this->alta = (is_null($row[$p."alta"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row[$p."alta"]);
-    if(isset($row[$p."baja"])) $this->baja = (is_null($row[$p."baja"])) ? null : DateTime::createFromFormat('Y-m-d H:i:s', $row[$p."baja"]);
-    if(isset($row[$p."comentario"])) $this->comentario = (is_null($row[$p."comentario"])) ? null : (string)$row[$p."comentario"];
-    if(isset($row[$p."autorizada"])) $this->autorizada = (is_null($row[$p."autorizada"])) ? null : settypebool($row[$p."autorizada"]);
-    if(isset($row[$p."apertura"])) $this->apertura = (is_null($row[$p."apertura"])) ? null : settypebool($row[$p."apertura"]);
-    if(isset($row[$p."publicar"])) $this->publicar = (is_null($row[$p."publicar"])) ? null : settypebool($row[$p."publicar"]);
-    if(isset($row[$p."fecha_anio"])) $this->fechaAnio = (is_null($row[$p."fecha_anio"])) ? null : (string)$row[$p."fecha_anio"];
-    if(isset($row[$p."fecha_semestre"])) $this->fechaSemestre = (is_null($row[$p."fecha_semestre"])) ? null : intval($row[$p."fecha_semestre"]);
-    if(isset($row[$p."tramo"])) $this->tramo = (is_null($row[$p."tramo"])) ? null : (string)$row[$p."tramo"];
-    if(isset($row[$p."horario"])) $this->horario = (is_null($row[$p."horario"])) ? null : (string)$row[$p."horario"];
-    if(isset($row[$p."periodo"])) $this->periodo = (is_null($row[$p."periodo"])) ? null : (string)$row[$p."periodo"];
-    if(isset($row[$p."comision_siguiente"])) $this->comisionSiguiente = (is_null($row[$p."comision_siguiente"])) ? null : (string)$row[$p."comision_siguiente"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row[$p."division"])) $this->division = (is_null($row[$p."division"])) ? null : (string)$row[$p."division"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
+    if(isset($row[$p."anio"])) $this->setAnio($row[$p."anio"]);
+    if(isset($row[$p."semestre"])) $this->setSemestre($row[$p."semestre"]);
+    if(isset($row[$p."observaciones"])) $this->setObservaciones($row[$p."observaciones"]);
+    if(isset($row[$p."fecha"])) $this->setFechaStr($row[$p."fecha"]);
+    if(isset($row[$p."alta"])) $this->setAltaStr($row[$p."alta"]);
+    if(isset($row[$p."baja"])) $this->setBajaStr($row[$p."baja"]);
+    if(isset($row[$p."comentario"])) $this->setComentario($row[$p."comentario"]);
+    if(isset($row[$p."autorizada"])) $this->setAutorizada($row[$p."autorizada"]);
+    if(isset($row[$p."apertura"])) $this->setApertura($row[$p."apertura"]);
+    if(isset($row[$p."publicar"])) $this->setPublicar($row[$p."publicar"]);
+    if(isset($row[$p."fecha_anio"])) $this->setFechaAnioStr($row[$p."fecha_anio"]);
+    if(isset($row[$p."fecha_semestre"])) $this->setFechaSemestre($row[$p."fecha_semestre"]);
+    if(isset($row[$p."tramo"])) $this->setTramo($row[$p."tramo"]);
+    if(isset($row[$p."horario"])) $this->setHorario($row[$p."horario"]);
+    if(isset($row[$p."periodo"])) $this->setPeriodo($row[$p."periodo"]);
+    if(isset($row[$p."comision_siguiente"])) $this->setComisionSiguiente($row[$p."comision_siguiente"]);
+    if(isset($row[$p."division"])) $this->setDivision($row[$p."division"]);
   }
 
   public function toArray(){
@@ -73,22 +73,25 @@ class ComisionValuesMain extends EntityValues {
     if($this->semestre !== UNDEFINED) $row["semestre"] = $this->semestre;
     if($this->observaciones !== UNDEFINED) $row["observaciones"] = $this->observaciones;
     if($this->fecha !== UNDEFINED) {
-      if(empty($this->fecha)) $row["fecha"] = $this->fecha;
-      else $row["fecha"] = $this->fecha->format('Y-m-d');
-    }
+        if(empty($this->fecha)) $row["fecha"] = $this->fecha;
+        else $row["fecha"] = $this->fecha->format('Y-m-d');
+      }
     if($this->alta !== UNDEFINED) {
-      if(empty($this->alta)) $row["alta"] = $this->alta;
-      else $row["alta"] = $this->alta->format('Y-m-d H:i:s');
-    }
+        if(empty($this->alta)) $row["alta"] = $this->alta;
+        else $row["alta"] = $this->alta->format('Y-m-d H:i:s');
+      }
     if($this->baja !== UNDEFINED) {
-      if(empty($this->baja)) $row["baja"] = $this->baja;
-      else $row["baja"] = $this->baja->format('Y-m-d H:i:s');
-    }
+        if(empty($this->baja)) $row["baja"] = $this->baja;
+        else $row["baja"] = $this->baja->format('Y-m-d H:i:s');
+      }
     if($this->comentario !== UNDEFINED) $row["comentario"] = $this->comentario;
-    if($this->autorizada !== UNDEFINED) $row["autorizada"] = ($this->autorizada) ? "true" : "false";        
-    if($this->apertura !== UNDEFINED) $row["apertura"] = ($this->apertura) ? "true" : "false";        
-    if($this->publicar !== UNDEFINED) $row["publicar"] = ($this->publicar) ? "true" : "false";        
-    if($this->fechaAnio !== UNDEFINED) $row["fecha_anio"] = $this->fechaAnio;
+    if($this->autorizada !== UNDEFINED) $row["autorizada"] = ($this->autorizada) ? true : false;        
+    if($this->apertura !== UNDEFINED) $row["apertura"] = ($this->apertura) ? true : false;        
+    if($this->publicar !== UNDEFINED) $row["publicar"] = ($this->publicar) ? true : false;        
+    if($this->fechaAnio !== UNDEFINED) {
+        if(empty($this->fechaAnio)) $row["fecha_anio"] = $this->fechaAnio;
+        else $row["fecha_anio"] = $this->fechaAnio->format('Y');
+      }
     if($this->fechaSemestre !== UNDEFINED) $row["fecha_semestre"] = $this->fechaSemestre;
     if($this->tramo !== UNDEFINED) $row["tramo"] = $this->tramo;
     if($this->horario !== UNDEFINED) $row["horario"] = $this->horario;
@@ -103,13 +106,13 @@ class ComisionValuesMain extends EntityValues {
   public function semestre() { return $this->semestre; }
   public function observaciones($format = null) { return $this->formatString($this->observaciones, $format); }
   public function fecha($format = 'd/m/Y') { return $this->formatDate($this->fecha, $format); }
-  public function alta($format = 'd/m/Y H:i') { return $this->formatDate($this->alta, $format); }
-  public function baja($format = 'd/m/Y H:i') { return $this->formatDate($this->baja, $format); }
+  public function alta($format = 'd/m/Y H:i:s') { return $this->formatDate($this->alta, $format); }
+  public function baja($format = 'd/m/Y H:i:s') { return $this->formatDate($this->baja, $format); }
   public function comentario($format = null) { return $this->formatString($this->comentario, $format); }
   public function autorizada() { return ($this->autorizada) ? 'Sí' : 'No'; }
   public function apertura() { return ($this->apertura) ? 'Sí' : 'No'; }
   public function publicar() { return ($this->publicar) ? 'Sí' : 'No'; }
-  public function fechaAnio() { return $this->fechaAnio; }
+  public function fechaAnio($format = 'Y') { return $this->formatDate($this->fechaAnio, $format); }
   public function fechaSemestre() { return $this->fechaSemestre; }
   public function tramo($format = null) { return $this->formatString($this->tramo, $format); }
   public function horario($format = null) { return $this->formatString($this->horario, $format); }
@@ -117,108 +120,103 @@ class ComisionValuesMain extends EntityValues {
   public function comisionSiguiente() { return $this->comisionSiguiente; }
   public function division() { return $this->division; }
   public function setId($p) {
-    if(empty($p)) return;
-    $this->id = trim($p);
+    $p = trim($p);
+    $this->id = (empty($p)) ? null : (string)$p;
   }
 
   public function setAnio($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->anio = intval(trim($p));
+    $p = trim($p);
+    $this->anio = (is_null($p) && $p !== 0) ? null : intval($p);
   }
-
   public function setSemestre($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->semestre = intval(trim($p));
+    $p = trim($p);
+    $this->semestre = (is_null($p) && $p !== 0) ? null : intval($p);
   }
-
   public function setObservaciones($p) {
-    if(empty($p)) return;
-    $this->observaciones = trim($p);
+    $p = trim($p);
+    $this->observaciones = (empty($p)) ? null : (string)$p;
   }
 
-  public function setFecha(DateTime $p) {
-    if(empty($p)) return;
+  public function setFecha(DateTime $p = null) {
     $this->fecha = $p;
   }
 
   public function setFechaStr($p, $format = "Y-m-d") {
     $p = SpanishDateTime::createFromFormat($format, trim($p));
-    if(empty($p)) return;
-    $this->fecha = $p;
+    $this->fecha = (empty($p)) ? null : $p;
   }
 
-  public function setAlta(DateTime $p) {
-    if(empty($p)) return;
+  public function setAlta(DateTime $p = null) {
     $this->alta = $p;
   }
 
   public function setAltaStr($p, $format = "Y-m-d H:i:s") {
     $p = SpanishDateTime::createFromFormat($format, trim($p));
-    if(empty($p)) return;
-    $this->alta = $p;
+    $this->alta = (empty($p)) ? null : $p;
   }
 
-  public function setBaja(DateTime $p) {
-    if(empty($p)) return;
+  public function setBaja(DateTime $p = null) {
     $this->baja = $p;
   }
 
   public function setBajaStr($p, $format = "Y-m-d H:i:s") {
     $p = SpanishDateTime::createFromFormat($format, trim($p));
-    if(empty($p)) return;
-    $this->baja = $p;
+    $this->baja = (empty($p)) ? null : $p;
   }
 
   public function setComentario($p) {
-    if(empty($p)) return;
-    $this->comentario = trim($p);
+    $p = trim($p);
+    $this->comentario = (empty($p)) ? null : (string)$p;
   }
 
   public function setAutorizada($p) {
-    $this->autorizada = settypebool(trim($p));
+    $p = trim($p);
+    $this->autorizada = (is_null($p)) ? null : settypebool($p);
   }
-
   public function setApertura($p) {
-    $this->apertura = settypebool(trim($p));
+    $p = trim($p);
+    $this->apertura = (is_null($p)) ? null : settypebool($p);
   }
-
   public function setPublicar($p) {
-    $this->publicar = settypebool(trim($p));
+    $p = trim($p);
+    $this->publicar = (is_null($p)) ? null : settypebool($p);
+  }
+  public function setFechaAnio(DateTime $p = null) {
+    $this->fechaAnio = $p;
   }
 
-  public function setFechaAnio($p) {
-    if(empty($p)) return;
-    $this->fechaAnio = trim($p);
+  public function setFechaAnioStr($p, $format = "Y") {
+    $p = SpanishDateTime::createFromFormat($format, trim($p));
+    $this->fechaAnio = (empty($p)) ? null : $p;
   }
 
   public function setFechaSemestre($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->fechaSemestre = intval(trim($p));
+    $p = trim($p);
+    $this->fechaSemestre = (is_null($p) && $p !== 0) ? null : intval($p);
   }
-
   public function setTramo($p) {
-    if(empty($p)) return;
-    $this->tramo = trim($p);
+    $p = trim($p);
+    $this->tramo = (empty($p)) ? null : (string)$p;
   }
 
   public function setHorario($p) {
-    if(empty($p)) return;
-    $this->horario = trim($p);
+    $p = trim($p);
+    $this->horario = (empty($p)) ? null : (string)$p;
   }
 
   public function setPeriodo($p) {
-    if(empty($p)) return;
-    $this->periodo = trim($p);
+    $p = trim($p);
+    $this->periodo = (empty($p)) ? null : (string)$p;
   }
 
   public function setComisionSiguiente($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->comisionSiguiente = intval(trim($p));
+    $p = trim($p);
+    $this->comisionSiguiente = (empty($p)) ? null : (string)$p;
   }
 
   public function setDivision($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->division = intval(trim($p));
+    $p = trim($p);
+    $this->division = (empty($p)) ? null : (string)$p;
   }
 
 

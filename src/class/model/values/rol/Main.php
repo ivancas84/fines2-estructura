@@ -16,9 +16,9 @@ class RolValuesMain extends EntityValues {
 
   public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row[$p."descripcion"])) $this->descripcion = (is_null($row[$p."descripcion"])) ? null : (string)$row[$p."descripcion"];
-    if(isset($row[$p."detalle"])) $this->detalle = (is_null($row[$p."detalle"])) ? null : (string)$row[$p."detalle"];
+    if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
+    if(isset($row[$p."descripcion"])) $this->setDescripcion($row[$p."descripcion"]);
+    if(isset($row[$p."detalle"])) $this->setDetalle($row[$p."detalle"]);
   }
 
   public function toArray(){
@@ -33,18 +33,18 @@ class RolValuesMain extends EntityValues {
   public function descripcion($format = null) { return $this->formatString($this->descripcion, $format); }
   public function detalle($format = null) { return $this->formatString($this->detalle, $format); }
   public function setId($p) {
-    if(empty($p)) return;
-    $this->id = trim($p);
+    $p = trim($p);
+    $this->id = (empty($p)) ? null : (string)$p;
   }
 
   public function setDescripcion($p) {
-    if(empty($p)) return;
-    $this->descripcion = trim($p);
+    $p = trim($p);
+    $this->descripcion = (empty($p)) ? null : (string)$p;
   }
 
   public function setDetalle($p) {
-    if(empty($p)) return;
-    $this->detalle = trim($p);
+    $p = trim($p);
+    $this->detalle = (empty($p)) ? null : (string)$p;
   }
 
 

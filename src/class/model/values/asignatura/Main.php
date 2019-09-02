@@ -22,12 +22,12 @@ class AsignaturaValuesMain extends EntityValues {
 
   public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row[$p."nombre"])) $this->nombre = (is_null($row[$p."nombre"])) ? null : (string)$row[$p."nombre"];
-    if(isset($row[$p."formacion"])) $this->formacion = (is_null($row[$p."formacion"])) ? null : (string)$row[$p."formacion"];
-    if(isset($row[$p."clasificacion"])) $this->clasificacion = (is_null($row[$p."clasificacion"])) ? null : (string)$row[$p."clasificacion"];
-    if(isset($row[$p."codigo"])) $this->codigo = (is_null($row[$p."codigo"])) ? null : (string)$row[$p."codigo"];
-    if(isset($row[$p."perfil"])) $this->perfil = (is_null($row[$p."perfil"])) ? null : (string)$row[$p."perfil"];
+    if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
+    if(isset($row[$p."nombre"])) $this->setNombre($row[$p."nombre"]);
+    if(isset($row[$p."formacion"])) $this->setFormacion($row[$p."formacion"]);
+    if(isset($row[$p."clasificacion"])) $this->setClasificacion($row[$p."clasificacion"]);
+    if(isset($row[$p."codigo"])) $this->setCodigo($row[$p."codigo"]);
+    if(isset($row[$p."perfil"])) $this->setPerfil($row[$p."perfil"]);
   }
 
   public function toArray(){
@@ -48,33 +48,33 @@ class AsignaturaValuesMain extends EntityValues {
   public function codigo($format = null) { return $this->formatString($this->codigo, $format); }
   public function perfil($format = null) { return $this->formatString($this->perfil, $format); }
   public function setId($p) {
-    if(empty($p)) return;
-    $this->id = trim($p);
+    $p = trim($p);
+    $this->id = (empty($p)) ? null : (string)$p;
   }
 
   public function setNombre($p) {
-    if(empty($p)) return;
-    $this->nombre = trim($p);
+    $p = trim($p);
+    $this->nombre = (empty($p)) ? null : (string)$p;
   }
 
   public function setFormacion($p) {
-    if(empty($p)) return;
-    $this->formacion = trim($p);
+    $p = trim($p);
+    $this->formacion = (empty($p)) ? null : (string)$p;
   }
 
   public function setClasificacion($p) {
-    if(empty($p)) return;
-    $this->clasificacion = trim($p);
+    $p = trim($p);
+    $this->clasificacion = (empty($p)) ? null : (string)$p;
   }
 
   public function setCodigo($p) {
-    if(empty($p)) return;
-    $this->codigo = trim($p);
+    $p = trim($p);
+    $this->codigo = (empty($p)) ? null : (string)$p;
   }
 
   public function setPerfil($p) {
-    if(empty($p)) return;
-    $this->perfil = trim($p);
+    $p = trim($p);
+    $this->perfil = (empty($p)) ? null : (string)$p;
   }
 
 

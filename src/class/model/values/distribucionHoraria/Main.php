@@ -18,10 +18,10 @@ class DistribucionHorariaValuesMain extends EntityValues {
 
   public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row[$p."dia"])) $this->dia = (is_null($row[$p."dia"])) ? null : intval($row[$p."dia"]);
-    if(isset($row[$p."horas_catedra"])) $this->horasCatedra = (is_null($row[$p."horas_catedra"])) ? null : intval($row[$p."horas_catedra"]);
-    if(isset($row[$p."carga_horaria"])) $this->cargaHoraria = (is_null($row[$p."carga_horaria"])) ? null : (string)$row[$p."carga_horaria"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
+    if(isset($row[$p."dia"])) $this->setDia($row[$p."dia"]);
+    if(isset($row[$p."horas_catedra"])) $this->setHorasCatedra($row[$p."horas_catedra"]);
+    if(isset($row[$p."carga_horaria"])) $this->setCargaHoraria($row[$p."carga_horaria"]);
   }
 
   public function toArray(){
@@ -38,23 +38,21 @@ class DistribucionHorariaValuesMain extends EntityValues {
   public function horasCatedra() { return $this->horasCatedra; }
   public function cargaHoraria() { return $this->cargaHoraria; }
   public function setId($p) {
-    if(empty($p)) return;
-    $this->id = trim($p);
+    $p = trim($p);
+    $this->id = (empty($p)) ? null : (string)$p;
   }
 
   public function setDia($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->dia = intval(trim($p));
+    $p = trim($p);
+    $this->dia = (is_null($p) && $p !== 0) ? null : intval($p);
   }
-
   public function setHorasCatedra($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->horasCatedra = intval(trim($p));
+    $p = trim($p);
+    $this->horasCatedra = (is_null($p) && $p !== 0) ? null : intval($p);
   }
-
   public function setCargaHoraria($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->cargaHoraria = intval(trim($p));
+    $p = trim($p);
+    $this->cargaHoraria = (empty($p)) ? null : (string)$p;
   }
 
 

@@ -26,23 +26,23 @@ class AlumnoValuesMain extends EntityValues {
 
   public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row[$p."fotocopia_documento"])) $this->fotocopiaDocumento = (is_null($row[$p."fotocopia_documento"])) ? null : settypebool($row[$p."fotocopia_documento"]);
-    if(isset($row[$p."partida_nacimiento"])) $this->partidaNacimiento = (is_null($row[$p."partida_nacimiento"])) ? null : settypebool($row[$p."partida_nacimiento"]);
-    if(isset($row[$p."constancia_cuil"])) $this->constanciaCuil = (is_null($row[$p."constancia_cuil"])) ? null : settypebool($row[$p."constancia_cuil"]);
-    if(isset($row[$p."certificado_estudios"])) $this->certificadoEstudios = (is_null($row[$p."certificado_estudios"])) ? null : settypebool($row[$p."certificado_estudios"]);
-    if(isset($row[$p."anio_ingreso"])) $this->anioIngreso = (is_null($row[$p."anio_ingreso"])) ? null : intval($row[$p."anio_ingreso"]);
-    if(isset($row[$p."observaciones"])) $this->observaciones = (is_null($row[$p."observaciones"])) ? null : (string)$row[$p."observaciones"];
-    if(isset($row[$p."persona"])) $this->persona = (is_null($row[$p."persona"])) ? null : (string)$row[$p."persona"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
+    if(isset($row[$p."fotocopia_documento"])) $this->setFotocopiaDocumento($row[$p."fotocopia_documento"]);
+    if(isset($row[$p."partida_nacimiento"])) $this->setPartidaNacimiento($row[$p."partida_nacimiento"]);
+    if(isset($row[$p."constancia_cuil"])) $this->setConstanciaCuil($row[$p."constancia_cuil"]);
+    if(isset($row[$p."certificado_estudios"])) $this->setCertificadoEstudios($row[$p."certificado_estudios"]);
+    if(isset($row[$p."anio_ingreso"])) $this->setAnioIngreso($row[$p."anio_ingreso"]);
+    if(isset($row[$p."observaciones"])) $this->setObservaciones($row[$p."observaciones"]);
+    if(isset($row[$p."persona"])) $this->setPersona($row[$p."persona"]);
   }
 
   public function toArray(){
     $row = [];
     if($this->id !== UNDEFINED) $row["id"] = $this->id;
-    if($this->fotocopiaDocumento !== UNDEFINED) $row["fotocopia_documento"] = ($this->fotocopiaDocumento) ? "true" : "false";        
-    if($this->partidaNacimiento !== UNDEFINED) $row["partida_nacimiento"] = ($this->partidaNacimiento) ? "true" : "false";        
-    if($this->constanciaCuil !== UNDEFINED) $row["constancia_cuil"] = ($this->constanciaCuil) ? "true" : "false";        
-    if($this->certificadoEstudios !== UNDEFINED) $row["certificado_estudios"] = ($this->certificadoEstudios) ? "true" : "false";        
+    if($this->fotocopiaDocumento !== UNDEFINED) $row["fotocopia_documento"] = ($this->fotocopiaDocumento) ? true : false;        
+    if($this->partidaNacimiento !== UNDEFINED) $row["partida_nacimiento"] = ($this->partidaNacimiento) ? true : false;        
+    if($this->constanciaCuil !== UNDEFINED) $row["constancia_cuil"] = ($this->constanciaCuil) ? true : false;        
+    if($this->certificadoEstudios !== UNDEFINED) $row["certificado_estudios"] = ($this->certificadoEstudios) ? true : false;        
     if($this->anioIngreso !== UNDEFINED) $row["anio_ingreso"] = $this->anioIngreso;
     if($this->observaciones !== UNDEFINED) $row["observaciones"] = $this->observaciones;
     if($this->persona !== UNDEFINED) $row["persona"] = $this->persona;
@@ -58,39 +58,38 @@ class AlumnoValuesMain extends EntityValues {
   public function observaciones($format = null) { return $this->formatString($this->observaciones, $format); }
   public function persona() { return $this->persona; }
   public function setId($p) {
-    if(empty($p)) return;
-    $this->id = trim($p);
+    $p = trim($p);
+    $this->id = (empty($p)) ? null : (string)$p;
   }
 
   public function setFotocopiaDocumento($p) {
-    $this->fotocopiaDocumento = settypebool(trim($p));
+    $p = trim($p);
+    $this->fotocopiaDocumento = (is_null($p)) ? null : settypebool($p);
   }
-
   public function setPartidaNacimiento($p) {
-    $this->partidaNacimiento = settypebool(trim($p));
+    $p = trim($p);
+    $this->partidaNacimiento = (is_null($p)) ? null : settypebool($p);
   }
-
   public function setConstanciaCuil($p) {
-    $this->constanciaCuil = settypebool(trim($p));
+    $p = trim($p);
+    $this->constanciaCuil = (is_null($p)) ? null : settypebool($p);
   }
-
   public function setCertificadoEstudios($p) {
-    $this->certificadoEstudios = settypebool(trim($p));
+    $p = trim($p);
+    $this->certificadoEstudios = (is_null($p)) ? null : settypebool($p);
   }
-
   public function setAnioIngreso($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->anioIngreso = intval(trim($p));
+    $p = trim($p);
+    $this->anioIngreso = (is_null($p) && $p !== 0) ? null : intval($p);
   }
-
   public function setObservaciones($p) {
-    if(empty($p)) return;
-    $this->observaciones = trim($p);
+    $p = trim($p);
+    $this->observaciones = (empty($p)) ? null : (string)$p;
   }
 
   public function setPersona($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->persona = intval(trim($p));
+    $p = trim($p);
+    $this->persona = (empty($p)) ? null : (string)$p;
   }
 
 

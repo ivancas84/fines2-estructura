@@ -14,8 +14,8 @@ class TipoSedeValuesMain extends EntityValues {
 
   public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row[$p."descripcion"])) $this->descripcion = (is_null($row[$p."descripcion"])) ? null : (string)$row[$p."descripcion"];
+    if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
+    if(isset($row[$p."descripcion"])) $this->setDescripcion($row[$p."descripcion"]);
   }
 
   public function toArray(){
@@ -28,13 +28,13 @@ class TipoSedeValuesMain extends EntityValues {
   public function id() { return $this->id; }
   public function descripcion($format = null) { return $this->formatString($this->descripcion, $format); }
   public function setId($p) {
-    if(empty($p)) return;
-    $this->id = trim($p);
+    $p = trim($p);
+    $this->id = (empty($p)) ? null : (string)$p;
   }
 
   public function setDescripcion($p) {
-    if(empty($p)) return;
-    $this->descripcion = trim($p);
+    $p = trim($p);
+    $this->descripcion = (empty($p)) ? null : (string)$p;
   }
 
 

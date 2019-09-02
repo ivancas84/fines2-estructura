@@ -22,12 +22,12 @@ class DivisionValuesMain extends EntityValues {
 
   public function fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
-    if(isset($row[$p."id"])) $this->id = (is_null($row[$p."id"])) ? null : (string)$row[$p."id"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row[$p."serie"])) $this->serie = (is_null($row[$p."serie"])) ? null : (string)$row[$p."serie"];
-    if(isset($row[$p."turno"])) $this->turno = (is_null($row[$p."turno"])) ? null : (string)$row[$p."turno"];
-    if(isset($row[$p."numero"])) $this->numero = (is_null($row[$p."numero"])) ? null : (string)$row[$p."numero"];
-    if(isset($row[$p."plan"])) $this->plan = (is_null($row[$p."plan"])) ? null : (string)$row[$p."plan"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
-    if(isset($row[$p."sede"])) $this->sede = (is_null($row[$p."sede"])) ? null : (string)$row[$p."sede"]; //los id siempre deben tratarse como string para evitar problemas de manejo de numero enteros
+    if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
+    if(isset($row[$p."serie"])) $this->setSerie($row[$p."serie"]);
+    if(isset($row[$p."turno"])) $this->setTurno($row[$p."turno"]);
+    if(isset($row[$p."numero"])) $this->setNumero($row[$p."numero"]);
+    if(isset($row[$p."plan"])) $this->setPlan($row[$p."plan"]);
+    if(isset($row[$p."sede"])) $this->setSede($row[$p."sede"]);
   }
 
   public function toArray(){
@@ -48,33 +48,33 @@ class DivisionValuesMain extends EntityValues {
   public function plan() { return $this->plan; }
   public function sede() { return $this->sede; }
   public function setId($p) {
-    if(empty($p)) return;
-    $this->id = trim($p);
+    $p = trim($p);
+    $this->id = (empty($p)) ? null : (string)$p;
   }
 
   public function setSerie($p) {
-    if(empty($p)) return;
-    $this->serie = trim($p);
+    $p = trim($p);
+    $this->serie = (empty($p)) ? null : (string)$p;
   }
 
   public function setTurno($p) {
-    if(empty($p)) return;
-    $this->turno = trim($p);
+    $p = trim($p);
+    $this->turno = (empty($p)) ? null : (string)$p;
   }
 
   public function setNumero($p) {
-    if(empty($p)) return;
-    $this->numero = trim($p);
+    $p = trim($p);
+    $this->numero = (empty($p)) ? null : (string)$p;
   }
 
   public function setPlan($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->plan = intval(trim($p));
+    $p = trim($p);
+    $this->plan = (empty($p)) ? null : (string)$p;
   }
 
   public function setSede($p) {
-    if(empty($p) && $p !== 0) return;
-    $this->sede = intval(trim($p));
+    $p = trim($p);
+    $this->sede = (empty($p)) ? null : (string)$p;
   }
 
 

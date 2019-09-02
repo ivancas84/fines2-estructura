@@ -5,6 +5,7 @@ require_once("class/model/sql/nomina2/Main.php");
 class Nomina2Sql extends Nomina2SqlMain {
 
   //@override
+  /*
   public function _conditionField($field, $option, $value, $prefix = ''){
     $p = (empty($prefix)) ? '' : $prefix . '_';
     $t = (empty($prefix)) ? 'noa' : $prefix;
@@ -52,7 +53,7 @@ class Nomina2Sql extends Nomina2SqlMain {
   ";
           break;
     }
-  }
+  }*/
 
 
 }
