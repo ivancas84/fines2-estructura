@@ -108,7 +108,7 @@ class CursoSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('plan', 'ch_pla')->_fields() . ',
 ' . EntitySql::getInstanceRequire('toma', 'ta')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'ta_pro')->_fields() . ',
-' . EntitySql::getInstanceRequire('id_persona', 'ta_ree')->_fields() . ' 
+' . EntitySql::getInstanceRequire('id_persona', 'ta_ree')->_fields() . '
 ';
   }
 

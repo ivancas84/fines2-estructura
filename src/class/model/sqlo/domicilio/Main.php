@@ -73,9 +73,7 @@ UPDATE " . $this->entity->sn_() . " SET
   public function values(array $row){
     $row_ = [];
 
-    $json = ($row && !is_null($row['id'])) ? $this->sql->_json($row) : null;
-    $row_["domicilio"] = EntityValues::getInstanceRequire("domicilio", $json);
-
+    $row_["domicilio"] = EntityValues::getInstanceRequire("domicilio", $row);
     return $row_;
   }
 

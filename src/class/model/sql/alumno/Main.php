@@ -70,7 +70,7 @@ class AlumnoSqlMain extends EntitySql{
 
   public function fields(){
     return $this->_fields() . ',
-' . EntitySql::getInstanceRequire('id_persona', 'per')->_fields() . ' 
+' . EntitySql::getInstanceRequire('id_persona', 'per')->_fields() . '
 ';
   }
 

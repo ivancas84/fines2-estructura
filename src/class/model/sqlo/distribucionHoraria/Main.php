@@ -73,18 +73,10 @@ UPDATE " . $this->entity->sn_() . " SET
   public function values(array $row){
     $row_ = [];
 
-    $json = ($row && !is_null($row['id'])) ? $this->sql->_json($row) : null;
-    $row_["distribucion_horaria"] = EntityValues::getInstanceRequire("distribucion_horaria", $json);
-
-    $json = ($row && !is_null($row['ch_id'])) ? EntitySql::getInstanceRequire('carga_horaria', 'ch')->_json($row) : null;
-    $row_["carga_horaria"] = EntityValues::getInstanceRequire('carga_horaria', $json);
-
-    $json = ($row && !is_null($row['ch_asi_id'])) ? EntitySql::getInstanceRequire('asignatura', 'ch_asi')->_json($row) : null;
-    $row_["asignatura"] = EntityValues::getInstanceRequire('asignatura', $json);
-
-    $json = ($row && !is_null($row['ch_pla_id'])) ? EntitySql::getInstanceRequire('plan', 'ch_pla')->_json($row) : null;
-    $row_["plan"] = EntityValues::getInstanceRequire('plan', $json);
-
+    $row_["distribucion_horaria"] = EntityValues::getInstanceRequire("distribucion_horaria", $row);
+    $row_["carga_horaria"] = EntityValues::getInstanceRequire('carga_horaria', $row, 'ch_');
+    $row_["asignatura"] = EntityValues::getInstanceRequire('asignatura', $row, 'ch_asi_');
+    $row_["plan"] = EntityValues::getInstanceRequire('plan', $row, 'ch_pla_');
     return $row_;
   }
 

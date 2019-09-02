@@ -102,7 +102,7 @@ class HorarioSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('plan', 'cur_ch_pla')->_fields() . ',
 ' . EntitySql::getInstanceRequire('toma', 'cur_ta')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'cur_ta_pro')->_fields() . ',
-' . EntitySql::getInstanceRequire('id_persona', 'cur_ta_ree')->_fields() . ' 
+' . EntitySql::getInstanceRequire('id_persona', 'cur_ta_ree')->_fields() . '
 ';
   }
 

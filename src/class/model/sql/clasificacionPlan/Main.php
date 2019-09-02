@@ -65,7 +65,7 @@ class ClasificacionPlanSqlMain extends EntitySql{
   public function fields(){
     return $this->_fields() . ',
 ' . EntitySql::getInstanceRequire('clasificacion', 'cla')->_fields() . ',
-' . EntitySql::getInstanceRequire('plan', 'pla')->_fields() . ' 
+' . EntitySql::getInstanceRequire('plan', 'pla')->_fields() . '
 ';
   }
 

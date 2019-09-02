@@ -121,36 +121,16 @@ UPDATE " . $this->entity->sn_() . " SET
   public function values(array $row){
     $row_ = [];
 
-    $json = ($row && !is_null($row['id'])) ? $this->sql->_json($row) : null;
-    $row_["nomina2"] = EntityValues::getInstanceRequire("nomina2", $json);
-
-    $json = ($row && !is_null($row['per_id'])) ? EntitySql::getInstanceRequire('id_persona', 'per')->_json($row) : null;
-    $row_["persona"] = EntityValues::getInstanceRequire('id_persona', $json);
-
-    $json = ($row && !is_null($row['com_id'])) ? EntitySql::getInstanceRequire('comision', 'com')->_json($row) : null;
-    $row_["comision"] = EntityValues::getInstanceRequire('comision', $json);
-
-    $json = ($row && !is_null($row['com_dvi_id'])) ? EntitySql::getInstanceRequire('division', 'com_dvi')->_json($row) : null;
-    $row_["division"] = EntityValues::getInstanceRequire('division', $json);
-
-    $json = ($row && !is_null($row['com_dvi_pla_id'])) ? EntitySql::getInstanceRequire('plan', 'com_dvi_pla')->_json($row) : null;
-    $row_["plan"] = EntityValues::getInstanceRequire('plan', $json);
-
-    $json = ($row && !is_null($row['com_dvi_sed_id'])) ? EntitySql::getInstanceRequire('sede', 'com_dvi_sed')->_json($row) : null;
-    $row_["sede"] = EntityValues::getInstanceRequire('sede', $json);
-
-    $json = ($row && !is_null($row['com_dvi_sed_ts_id'])) ? EntitySql::getInstanceRequire('tipo_sede', 'com_dvi_sed_ts')->_json($row) : null;
-    $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede', $json);
-
-    $json = ($row && !is_null($row['com_dvi_sed_dom_id'])) ? EntitySql::getInstanceRequire('domicilio', 'com_dvi_sed_dom')->_json($row) : null;
-    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $json);
-
-    $json = ($row && !is_null($row['com_dvi_sed_coo_id'])) ? EntitySql::getInstanceRequire('id_persona', 'com_dvi_sed_coo')->_json($row) : null;
-    $row_["coordinador"] = EntityValues::getInstanceRequire('id_persona', $json);
-
-    $json = ($row && !is_null($row['com_dvi_sed_ref_id'])) ? EntitySql::getInstanceRequire('id_persona', 'com_dvi_sed_ref')->_json($row) : null;
-    $row_["referente"] = EntityValues::getInstanceRequire('id_persona', $json);
-
+    $row_["nomina2"] = EntityValues::getInstanceRequire("nomina2", $row);
+    $row_["persona"] = EntityValues::getInstanceRequire('id_persona', $row, 'per_');
+    $row_["comision"] = EntityValues::getInstanceRequire('comision', $row, 'com_');
+    $row_["division"] = EntityValues::getInstanceRequire('division', $row, 'com_dvi_');
+    $row_["plan"] = EntityValues::getInstanceRequire('plan', $row, 'com_dvi_pla_');
+    $row_["sede"] = EntityValues::getInstanceRequire('sede', $row, 'com_dvi_sed_');
+    $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede', $row, 'com_dvi_sed_ts_');
+    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $row, 'com_dvi_sed_dom_');
+    $row_["coordinador"] = EntityValues::getInstanceRequire('id_persona', $row, 'com_dvi_sed_coo_');
+    $row_["referente"] = EntityValues::getInstanceRequire('id_persona', $row, 'com_dvi_sed_ref_');
     return $row_;
   }
 

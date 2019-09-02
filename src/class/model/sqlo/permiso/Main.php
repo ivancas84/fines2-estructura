@@ -72,15 +72,9 @@ UPDATE " . $this->entity->sn_() . " SET
   public function values(array $row){
     $row_ = [];
 
-    $json = ($row && !is_null($row['id'])) ? $this->sql->_json($row) : null;
-    $row_["permiso"] = EntityValues::getInstanceRequire("permiso", $json);
-
-    $json = ($row && !is_null($row['rol_id'])) ? EntitySql::getInstanceRequire('rol', 'rol')->_json($row) : null;
-    $row_["rol"] = EntityValues::getInstanceRequire('rol', $json);
-
-    $json = ($row && !is_null($row['per_id'])) ? EntitySql::getInstanceRequire('id_persona', 'per')->_json($row) : null;
-    $row_["persona"] = EntityValues::getInstanceRequire('id_persona', $json);
-
+    $row_["permiso"] = EntityValues::getInstanceRequire("permiso", $row);
+    $row_["rol"] = EntityValues::getInstanceRequire('rol', $row, 'rol_');
+    $row_["persona"] = EntityValues::getInstanceRequire('id_persona', $row, 'per_');
     return $row_;
   }
 

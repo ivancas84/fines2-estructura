@@ -123,7 +123,7 @@ class ComisionSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('tipo_sede', 'dvi_sed_ts')->_fields() . ',
 ' . EntitySql::getInstanceRequire('domicilio', 'dvi_sed_dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'dvi_sed_coo')->_fields() . ',
-' . EntitySql::getInstanceRequire('id_persona', 'dvi_sed_ref')->_fields() . ' 
+' . EntitySql::getInstanceRequire('id_persona', 'dvi_sed_ref')->_fields() . '
 ';
   }
 

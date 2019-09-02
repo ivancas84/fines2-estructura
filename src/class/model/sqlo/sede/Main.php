@@ -95,21 +95,11 @@ UPDATE " . $this->entity->sn_() . " SET
   public function values(array $row){
     $row_ = [];
 
-    $json = ($row && !is_null($row['id'])) ? $this->sql->_json($row) : null;
-    $row_["sede"] = EntityValues::getInstanceRequire("sede", $json);
-
-    $json = ($row && !is_null($row['ts_id'])) ? EntitySql::getInstanceRequire('tipo_sede', 'ts')->_json($row) : null;
-    $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede', $json);
-
-    $json = ($row && !is_null($row['dom_id'])) ? EntitySql::getInstanceRequire('domicilio', 'dom')->_json($row) : null;
-    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $json);
-
-    $json = ($row && !is_null($row['coo_id'])) ? EntitySql::getInstanceRequire('id_persona', 'coo')->_json($row) : null;
-    $row_["coordinador"] = EntityValues::getInstanceRequire('id_persona', $json);
-
-    $json = ($row && !is_null($row['ref_id'])) ? EntitySql::getInstanceRequire('id_persona', 'ref')->_json($row) : null;
-    $row_["referente"] = EntityValues::getInstanceRequire('id_persona', $json);
-
+    $row_["sede"] = EntityValues::getInstanceRequire("sede", $row);
+    $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede', $row, 'ts_');
+    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $row, 'dom_');
+    $row_["coordinador"] = EntityValues::getInstanceRequire('id_persona', $row, 'coo_');
+    $row_["referente"] = EntityValues::getInstanceRequire('id_persona', $row, 'ref_');
     return $row_;
   }
 

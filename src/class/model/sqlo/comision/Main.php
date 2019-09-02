@@ -113,30 +113,14 @@ UPDATE " . $this->entity->sn_() . " SET
   public function values(array $row){
     $row_ = [];
 
-    $json = ($row && !is_null($row['id'])) ? $this->sql->_json($row) : null;
-    $row_["comision"] = EntityValues::getInstanceRequire("comision", $json);
-
-    $json = ($row && !is_null($row['dvi_id'])) ? EntitySql::getInstanceRequire('division', 'dvi')->_json($row) : null;
-    $row_["division"] = EntityValues::getInstanceRequire('division', $json);
-
-    $json = ($row && !is_null($row['dvi_pla_id'])) ? EntitySql::getInstanceRequire('plan', 'dvi_pla')->_json($row) : null;
-    $row_["plan"] = EntityValues::getInstanceRequire('plan', $json);
-
-    $json = ($row && !is_null($row['dvi_sed_id'])) ? EntitySql::getInstanceRequire('sede', 'dvi_sed')->_json($row) : null;
-    $row_["sede"] = EntityValues::getInstanceRequire('sede', $json);
-
-    $json = ($row && !is_null($row['dvi_sed_ts_id'])) ? EntitySql::getInstanceRequire('tipo_sede', 'dvi_sed_ts')->_json($row) : null;
-    $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede', $json);
-
-    $json = ($row && !is_null($row['dvi_sed_dom_id'])) ? EntitySql::getInstanceRequire('domicilio', 'dvi_sed_dom')->_json($row) : null;
-    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $json);
-
-    $json = ($row && !is_null($row['dvi_sed_coo_id'])) ? EntitySql::getInstanceRequire('id_persona', 'dvi_sed_coo')->_json($row) : null;
-    $row_["coordinador"] = EntityValues::getInstanceRequire('id_persona', $json);
-
-    $json = ($row && !is_null($row['dvi_sed_ref_id'])) ? EntitySql::getInstanceRequire('id_persona', 'dvi_sed_ref')->_json($row) : null;
-    $row_["referente"] = EntityValues::getInstanceRequire('id_persona', $json);
-
+    $row_["comision"] = EntityValues::getInstanceRequire("comision", $row);
+    $row_["division"] = EntityValues::getInstanceRequire('division', $row, 'dvi_');
+    $row_["plan"] = EntityValues::getInstanceRequire('plan', $row, 'dvi_pla_');
+    $row_["sede"] = EntityValues::getInstanceRequire('sede', $row, 'dvi_sed_');
+    $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede', $row, 'dvi_sed_ts_');
+    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $row, 'dvi_sed_dom_');
+    $row_["coordinador"] = EntityValues::getInstanceRequire('id_persona', $row, 'dvi_sed_coo_');
+    $row_["referente"] = EntityValues::getInstanceRequire('id_persona', $row, 'dvi_sed_ref_');
     return $row_;
   }
 

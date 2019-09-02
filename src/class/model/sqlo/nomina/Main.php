@@ -96,33 +96,15 @@ UPDATE " . $this->entity->sn_() . " SET
   public function values(array $row){
     $row_ = [];
 
-    $json = ($row && !is_null($row['id'])) ? $this->sql->_json($row) : null;
-    $row_["nomina"] = EntityValues::getInstanceRequire("nomina", $json);
-
-    $json = ($row && !is_null($row['dia_id'])) ? EntitySql::getInstanceRequire('division', 'dia')->_json($row) : null;
-    $row_["division"] = EntityValues::getInstanceRequire('division', $json);
-
-    $json = ($row && !is_null($row['dia_pla_id'])) ? EntitySql::getInstanceRequire('plan', 'dia_pla')->_json($row) : null;
-    $row_["plan"] = EntityValues::getInstanceRequire('plan', $json);
-
-    $json = ($row && !is_null($row['dia_sed_id'])) ? EntitySql::getInstanceRequire('sede', 'dia_sed')->_json($row) : null;
-    $row_["sede"] = EntityValues::getInstanceRequire('sede', $json);
-
-    $json = ($row && !is_null($row['dia_sed_ts_id'])) ? EntitySql::getInstanceRequire('tipo_sede', 'dia_sed_ts')->_json($row) : null;
-    $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede', $json);
-
-    $json = ($row && !is_null($row['dia_sed_dom_id'])) ? EntitySql::getInstanceRequire('domicilio', 'dia_sed_dom')->_json($row) : null;
-    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $json);
-
-    $json = ($row && !is_null($row['dia_sed_coo_id'])) ? EntitySql::getInstanceRequire('id_persona', 'dia_sed_coo')->_json($row) : null;
-    $row_["coordinador"] = EntityValues::getInstanceRequire('id_persona', $json);
-
-    $json = ($row && !is_null($row['dia_sed_ref_id'])) ? EntitySql::getInstanceRequire('id_persona', 'dia_sed_ref')->_json($row) : null;
-    $row_["referente"] = EntityValues::getInstanceRequire('id_persona', $json);
-
-    $json = ($row && !is_null($row['per_id'])) ? EntitySql::getInstanceRequire('id_persona', 'per')->_json($row) : null;
-    $row_["persona"] = EntityValues::getInstanceRequire('id_persona', $json);
-
+    $row_["nomina"] = EntityValues::getInstanceRequire("nomina", $row);
+    $row_["division"] = EntityValues::getInstanceRequire('division', $row, 'dia_');
+    $row_["plan"] = EntityValues::getInstanceRequire('plan', $row, 'dia_pla_');
+    $row_["sede"] = EntityValues::getInstanceRequire('sede', $row, 'dia_sed_');
+    $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede', $row, 'dia_sed_ts_');
+    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $row, 'dia_sed_dom_');
+    $row_["coordinador"] = EntityValues::getInstanceRequire('id_persona', $row, 'dia_sed_coo_');
+    $row_["referente"] = EntityValues::getInstanceRequire('id_persona', $row, 'dia_sed_ref_');
+    $row_["persona"] = EntityValues::getInstanceRequire('id_persona', $row, 'per_');
     return $row_;
   }
 

@@ -76,18 +76,10 @@ UPDATE " . $this->entity->sn_() . " SET
   public function values(array $row){
     $row_ = [];
 
-    $json = ($row && !is_null($row['id'])) ? $this->sql->_json($row) : null;
-    $row_["persona"] = EntityValues::getInstanceRequire("persona", $json);
-
-    $json = ($row && !is_null($row['ln_id'])) ? EntitySql::getInstanceRequire('lugar_nacimiento', 'ln')->_json($row) : null;
-    $row_["lugar_nacimiento"] = EntityValues::getInstanceRequire('lugar_nacimiento', $json);
-
-    $json = ($row && !is_null($row['ip_id'])) ? EntitySql::getInstanceRequire('id_persona', 'ip')->_json($row) : null;
-    $row_["id_persona"] = EntityValues::getInstanceRequire('id_persona', $json);
-
-    $json = ($row && !is_null($row['dom_id'])) ? EntitySql::getInstanceRequire('domicilio', 'dom')->_json($row) : null;
-    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $json);
-
+    $row_["persona"] = EntityValues::getInstanceRequire("persona", $row);
+    $row_["lugar_nacimiento"] = EntityValues::getInstanceRequire('lugar_nacimiento', $row, 'ln_');
+    $row_["id_persona"] = EntityValues::getInstanceRequire('id_persona', $row, 'ip_');
+    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $row, 'dom_');
     return $row_;
   }
 
