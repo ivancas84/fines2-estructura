@@ -1,9 +1,8 @@
 <?php
 
-require_once("class/model/values/division/Main.php");
+require_once("class/model/values/division/_Division.php");
 
-//***** implementacion de Values para una determinada tabla *****
-class DivisionValues extends DivisionValuesMain{
+class Division extends _Division{
 
 
     public function turnoLetra() { return substr($this->formatString($this->turno, "X Y"), 0 , 1); }

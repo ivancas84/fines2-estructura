@@ -1,9 +1,9 @@
 <?php
 
-require_once("class/model/values/domicilio/Main.php");
+require_once("class/model/values/domicilio/_Domicilio.php");
 
 //***** implementacion de Values para una determinada tabla *****
-class DomicilioValues extends DomicilioValuesMain{
+class Domicilio extends _Domicilio{
 
   public function label(){
     return $this->calle . " N° " . $this->numero . " entre " . $this->entre . " " . $this->barrio . " " . $this->localidad;

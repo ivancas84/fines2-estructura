@@ -2,7 +2,7 @@
 
 require_once("class/model/Values.php");
 
-class TipoSede extends EntityValues {
+class _TipoSede extends EntityValues {
   public $id = UNDEFINED;
   public $descripcion = UNDEFINED;
 

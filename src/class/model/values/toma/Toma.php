@@ -1,9 +1,8 @@
 <?php
 
-require_once("class/model/values/toma/Main.php");
+require_once("class/model/values/toma/_Toma.php");
 
-//***** implementacion de Values para una determinada tabla *****
-class TomaValues extends TomaValuesMain{
+class Toma extends _Toma{
 
   public function tipoMovimiento($format = null){
     return ($this->estado() == "Aprobada") ? "AI" : "CP";

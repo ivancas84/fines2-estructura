@@ -1,9 +1,8 @@
 <?php
 
-require_once("class/model/values/horario/Main.php");
+require_once("class/model/values/horario/_Horario.php");
 
-//***** implementacion de Values para una determinada tabla *****
-class HorarioValues extends HorarioValuesMain{
+class Horario extends _Horario{
   
   public function totalMinutos(){
     return abs($this->horaFin->getTimestamp() - $this->horaInicio->getTimestamp()) / 60;

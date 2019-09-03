@@ -1,8 +1,6 @@
 <?php
 
-require_once("class/model/values/tipoSede/Main.php");
+require_once("class/model/values/tipoSede/_TipoSede.php");
 
-class TipoSedeValues extends TipoSedeValuesMain{
-
-}
+class TipoSedeValues extends _TipoSede{}
 

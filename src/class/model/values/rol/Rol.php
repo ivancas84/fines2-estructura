@@ -1,9 +1,6 @@
 <?php
 
-require_once("class/model/values/rol/Main.php");
+require_once("class/model/values/rol/_Rol.php");
 
-//***** implementacion de Values para una determinada tabla *****
-class RolValues extends RolValuesMain{
-
-}
+class RolValues extends _Rol{}
 

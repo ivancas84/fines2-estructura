@@ -1,9 +1,9 @@
 <?php
 
-require_once("class/model/values/alumno/Main.php");
+require_once("class/model/values/alumno/_Alumno.php");
 
 //***** implementacion de Values para una determinada tabla *****
-class AlumnoValues extends AlumnoValuesMain{
+class Alumno extends _Alumno{
 
 }
 

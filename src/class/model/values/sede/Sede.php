@@ -2,8 +2,7 @@
 
 require_once("class/model/values/sede/Main.php");
 
-//***** implementacion de Values para una determinada tabla *****
-class SedeValues extends SedeValuesMain{
+class Sede extends _Sede{
     public function nombre($modo = null) {
         switch($modo) {
             case "XX YY":

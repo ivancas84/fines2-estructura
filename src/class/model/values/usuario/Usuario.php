@@ -1,9 +1,6 @@
 <?php
 
-require_once("class/model/values/usuario/Main.php");
+require_once("class/model/values/usuario/_Usuario.php");
 
-//***** implementacion de Values para una determinada tabla *****
-class UsuarioValues extends UsuarioValuesMain{
-
-}
+class UsuarioValues extends _Usuario{}
 

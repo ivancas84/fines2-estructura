@@ -2,8 +2,7 @@
 
 require_once("class/model/Values.php");
 
-//Implementacion principal de Values para una entidad especifica
-class CargaHorariaValuesMain extends EntityValues {
+class _CargaHoraria extends EntityValues {
   public $id = UNDEFINED;
   public $anio = UNDEFINED;
   public $semestre = UNDEFINED;
@@ -12,17 +11,17 @@ class CargaHorariaValuesMain extends EntityValues {
   public $asignatura = UNDEFINED;
   public $plan = UNDEFINED;
 
-  public function setDefault(){
-    $this->id = null;
-    $this->anio = null;
-    $this->semestre = null;
-    $this->horasCatedra = null;
-    $this->tramo = null;
-    $this->asignatura = null;
-    $this->plan = null;
+  public function _setDefault(){
+    $this->setId(DEFAULT_VALUE);
+    $this->setAnio(DEFAULT_VALUE);
+    $this->setSemestre(DEFAULT_VALUE);
+    $this->setHorasCatedra(DEFAULT_VALUE);
+    $this->setTramo(DEFAULT_VALUE);
+    $this->setAsignatura(DEFAULT_VALUE);
+    $this->setPlan(DEFAULT_VALUE);
   }
 
-  public function fromArray(array $row = NULL, $p = ""){
+  public function _fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
     if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
     if(isset($row[$p."anio"])) $this->setAnio($row[$p."anio"]);
@@ -33,15 +32,15 @@ class CargaHorariaValuesMain extends EntityValues {
     if(isset($row[$p."plan"])) $this->setPlan($row[$p."plan"]);
   }
 
-  public function toArray(){
+  public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id;
-    if($this->anio !== UNDEFINED) $row["anio"] = $this->anio;
-    if($this->semestre !== UNDEFINED) $row["semestre"] = $this->semestre;
-    if($this->horasCatedra !== UNDEFINED) $row["horas_catedra"] = $this->horasCatedra;
-    if($this->tramo !== UNDEFINED) $row["tramo"] = $this->tramo;
-    if($this->asignatura !== UNDEFINED) $row["asignatura"] = $this->asignatura;
-    if($this->plan !== UNDEFINED) $row["plan"] = $this->plan;
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
+    if($this->anio !== UNDEFINED) $row["anio"] = $this->anio();
+    if($this->semestre !== UNDEFINED) $row["semestre"] = $this->semestre();
+    if($this->horasCatedra !== UNDEFINED) $row["horas_catedra"] = $this->horasCatedra();
+    if($this->tramo !== UNDEFINED) $row["tramo"] = $this->tramo();
+    if($this->asignatura !== UNDEFINED) $row["asignatura"] = $this->asignatura();
+    if($this->plan !== UNDEFINED) $row["plan"] = $this->plan();
     return $row;
   }
 
@@ -53,34 +52,37 @@ class CargaHorariaValuesMain extends EntityValues {
   public function asignatura() { return $this->asignatura; }
   public function plan() { return $this->plan; }
   public function setId($p) {
-    $p = trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->id = (empty($p)) ? null : (string)$p;
   }
 
   public function setAnio($p) {
-    $p = trim($p);
-    $this->anio = (is_null($p) && $p !== 0) ? null : intval($p);
+    if ($p == DEFAULT_VALUE) $p = null;
+    $this->anio = (is_null($p)) ? null : intval(trim($p));
   }
+
   public function setSemestre($p) {
-    $p = trim($p);
-    $this->semestre = (is_null($p) && $p !== 0) ? null : intval($p);
+    if ($p == DEFAULT_VALUE) $p = null;
+    $this->semestre = (is_null($p)) ? null : intval(trim($p));
   }
+
   public function setHorasCatedra($p) {
-    $p = trim($p);
-    $this->horasCatedra = (is_null($p) && $p !== 0) ? null : intval($p);
+    if ($p == DEFAULT_VALUE) $p = null;
+    $this->horasCatedra = (is_null($p)) ? null : intval(trim($p));
   }
+
   public function setTramo($p) {
-    $p = trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->tramo = (empty($p)) ? null : (string)$p;
   }
 
   public function setAsignatura($p) {
-    $p = trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->asignatura = (empty($p)) ? null : (string)$p;
   }
 
   public function setPlan($p) {
-    $p = trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->plan = (empty($p)) ? null : (string)$p;
   }
 

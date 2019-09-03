@@ -2,8 +2,7 @@
 
 require_once("class/model/Values.php");
 
-//Implementacion principal de Values para una entidad especifica
-class AsignaturaValuesMain extends EntityValues {
+class _Asignatura extends EntityValues {
   public $id = UNDEFINED;
   public $nombre = UNDEFINED;
   public $formacion = UNDEFINED;
@@ -11,16 +10,16 @@ class AsignaturaValuesMain extends EntityValues {
   public $codigo = UNDEFINED;
   public $perfil = UNDEFINED;
 
-  public function setDefault(){
-    $this->id = null;
-    $this->nombre = null;
-    $this->formacion = null;
-    $this->clasificacion = null;
-    $this->codigo = null;
-    $this->perfil = null;
+  public function _setDefault(){
+    $this->setId(DEFAULT_VALUE);
+    $this->setNombre(DEFAULT_VALUE);
+    $this->setFormacion(DEFAULT_VALUE);
+    $this->setClasificacion(DEFAULT_VALUE);
+    $this->setCodigo(DEFAULT_VALUE);
+    $this->setPerfil(DEFAULT_VALUE);
   }
 
-  public function fromArray(array $row = NULL, $p = ""){
+  public function _fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
     if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
     if(isset($row[$p."nombre"])) $this->setNombre($row[$p."nombre"]);
@@ -30,14 +29,14 @@ class AsignaturaValuesMain extends EntityValues {
     if(isset($row[$p."perfil"])) $this->setPerfil($row[$p."perfil"]);
   }
 
-  public function toArray(){
+  public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id;
-    if($this->nombre !== UNDEFINED) $row["nombre"] = $this->nombre;
-    if($this->formacion !== UNDEFINED) $row["formacion"] = $this->formacion;
-    if($this->clasificacion !== UNDEFINED) $row["clasificacion"] = $this->clasificacion;
-    if($this->codigo !== UNDEFINED) $row["codigo"] = $this->codigo;
-    if($this->perfil !== UNDEFINED) $row["perfil"] = $this->perfil;
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
+    if($this->nombre !== UNDEFINED) $row["nombre"] = $this->nombre();
+    if($this->formacion !== UNDEFINED) $row["formacion"] = $this->formacion();
+    if($this->clasificacion !== UNDEFINED) $row["clasificacion"] = $this->clasificacion();
+    if($this->codigo !== UNDEFINED) $row["codigo"] = $this->codigo();
+    if($this->perfil !== UNDEFINED) $row["perfil"] = $this->perfil();
     return $row;
   }
 
@@ -48,32 +47,32 @@ class AsignaturaValuesMain extends EntityValues {
   public function codigo($format = null) { return $this->formatString($this->codigo, $format); }
   public function perfil($format = null) { return $this->formatString($this->perfil, $format); }
   public function setId($p) {
-    $p = trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->id = (empty($p)) ? null : (string)$p;
   }
 
   public function setNombre($p) {
-    $p = trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->nombre = (empty($p)) ? null : (string)$p;
   }
 
   public function setFormacion($p) {
-    $p = trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->formacion = (empty($p)) ? null : (string)$p;
   }
 
   public function setClasificacion($p) {
-    $p = trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->clasificacion = (empty($p)) ? null : (string)$p;
   }
 
   public function setCodigo($p) {
-    $p = trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->codigo = (empty($p)) ? null : (string)$p;
   }
 
   public function setPerfil($p) {
-    $p = trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->perfil = (empty($p)) ? null : (string)$p;
   }
 

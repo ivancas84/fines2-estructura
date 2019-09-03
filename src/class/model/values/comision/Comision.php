@@ -1,9 +1,8 @@
 <?php
 
-require_once("class/model/values/comision/Main.php");
+require_once("class/model/values/comision/_Comision.php");
 
-//***** implementacion de Values para una determinada tabla *****
-class ComisionValues extends ComisionValuesMain {
+class Comision extends _Comision {
   public function tramo($separator = "") { return $this->anio . $separator . $this->semestre; }
 
   public function aperturaText() { return ($this->apertura)? "APERTURA" : ""; }

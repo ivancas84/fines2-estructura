@@ -1,9 +1,6 @@
 <?php
 
-require_once("class/model/values/plan/Main.php");
+require_once("class/model/values/plan/_Plan.php");
 
-//***** implementacion de Values para una determinada tabla *****
-class PlanValues extends PlanValuesMain{
-
-}
+class PlanValues extends _Plan{}
 

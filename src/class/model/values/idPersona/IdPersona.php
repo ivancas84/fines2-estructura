@@ -1,9 +1,8 @@
 <?php
 
-require_once("class/model/values/idPersona/Main.php");
+require_once("class/model/values/idPersona/_IdPersona.php");
 
-//***** implementacion de Values para una determinada tabla *****
-class IdPersonaValues extends IdPersonaValuesMain{
+class IdPersona extends _IdPersona{
 
   public function cuilInicio(){
     if(empty($this->cuil)) return null;

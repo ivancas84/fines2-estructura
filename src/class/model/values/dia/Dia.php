@@ -1,9 +1,6 @@
 <?php
 
-require_once("class/model/values/dia/Main.php");
+require_once("class/model/values/dia/_Dia.php");
 
-//***** implementacion de Values para una determinada tabla *****
-class DiaValues extends DiaValuesMain{
-
-}
+class DiaValues extends _Dia{}
 

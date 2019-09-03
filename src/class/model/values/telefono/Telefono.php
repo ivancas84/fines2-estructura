@@ -1,9 +1,6 @@
 <?php
 
-require_once("class/model/values/telefono/Main.php");
+require_once("class/model/values/telefono/_Telefono.php");
 
-//***** implementacion de Values para una determinada tabla *****
-class TelefonoValues extends TelefonoValuesMain{
-
-}
+class TelefonoValues extends _Telefono{}
 

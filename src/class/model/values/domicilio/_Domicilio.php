@@ -2,8 +2,7 @@
 
 require_once("class/model/Values.php");
 
-//Implementacion principal de Values para una entidad especifica
-class DomicilioValuesMain extends EntityValues {
+class _Domicilio extends EntityValues {
   public $id = UNDEFINED;
   public $calle = UNDEFINED;
   public $entre = UNDEFINED;
@@ -13,18 +12,18 @@ class DomicilioValuesMain extends EntityValues {
   public $barrio = UNDEFINED;
   public $localidad = UNDEFINED;
 
-  public function setDefault(){
-    $this->id = null;
-    $this->calle = null;
-    $this->entre = null;
-    $this->numero = "S/N";
-    $this->piso = null;
-    $this->departamento = null;
-    $this->barrio = null;
-    $this->localidad = "La Plata";
+  public function _setDefault(){
+    $this->setId(DEFAULT_VALUE);
+    $this->setCalle(DEFAULT_VALUE);
+    $this->setEntre(DEFAULT_VALUE);
+    $this->setNumero(DEFAULT_VALUE);
+    $this->setPiso(DEFAULT_VALUE);
+    $this->setDepartamento(DEFAULT_VALUE);
+    $this->setBarrio(DEFAULT_VALUE);
+    $this->setLocalidad(DEFAULT_VALUE);
   }
 
-  public function fromArray(array $row = NULL, $p = ""){
+  public function _fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
     if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
     if(isset($row[$p."calle"])) $this->setCalle($row[$p."calle"]);
@@ -36,16 +35,16 @@ class DomicilioValuesMain extends EntityValues {
     if(isset($row[$p."localidad"])) $this->setLocalidad($row[$p."localidad"]);
   }
 
-  public function toArray(){
+  public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id;
-    if($this->calle !== UNDEFINED) $row["calle"] = $this->calle;
-    if($this->entre !== UNDEFINED) $row["entre"] = $this->entre;
-    if($this->numero !== UNDEFINED) $row["numero"] = $this->numero;
-    if($this->piso !== UNDEFINED) $row["piso"] = $this->piso;
-    if($this->departamento !== UNDEFINED) $row["departamento"] = $this->departamento;
-    if($this->barrio !== UNDEFINED) $row["barrio"] = $this->barrio;
-    if($this->localidad !== UNDEFINED) $row["localidad"] = $this->localidad;
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
+    if($this->calle !== UNDEFINED) $row["calle"] = $this->calle();
+    if($this->entre !== UNDEFINED) $row["entre"] = $this->entre();
+    if($this->numero !== UNDEFINED) $row["numero"] = $this->numero();
+    if($this->piso !== UNDEFINED) $row["piso"] = $this->piso();
+    if($this->departamento !== UNDEFINED) $row["departamento"] = $this->departamento();
+    if($this->barrio !== UNDEFINED) $row["barrio"] = $this->barrio();
+    if($this->localidad !== UNDEFINED) $row["localidad"] = $this->localidad();
     return $row;
   }
 
@@ -58,42 +57,42 @@ class DomicilioValuesMain extends EntityValues {
   public function barrio($format = null) { return $this->formatString($this->barrio, $format); }
   public function localidad($format = null) { return $this->formatString($this->localidad, $format); }
   public function setId($p) {
-    $p = trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->id = (empty($p)) ? null : (string)$p;
   }
 
   public function setCalle($p) {
-    $p = trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->calle = (empty($p)) ? null : (string)$p;
   }
 
   public function setEntre($p) {
-    $p = trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->entre = (empty($p)) ? null : (string)$p;
   }
 
   public function setNumero($p) {
-    $p = trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'S/N' : trim($p);
     $this->numero = (empty($p)) ? null : (string)$p;
   }
 
   public function setPiso($p) {
-    $p = trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->piso = (empty($p)) ? null : (string)$p;
   }
 
   public function setDepartamento($p) {
-    $p = trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->departamento = (empty($p)) ? null : (string)$p;
   }
 
   public function setBarrio($p) {
-    $p = trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->barrio = (empty($p)) ? null : (string)$p;
   }
 
   public function setLocalidad($p) {
-    $p = trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'La Plata' : trim($p);
     $this->localidad = (empty($p)) ? null : (string)$p;
   }
 

@@ -1,8 +1,6 @@
 <?php
 
-require_once("class/model/values/distribucionHoraria/Main.php");
+require_once("class/model/values/distribucionHoraria/_DistribucionHoraria.php");
 
-class DistribucionHorariaValues extends DistribucionHorariaValuesMain{
-
-}
+class DistribucionHorariaValues extends _DistribucionHoraria{}
 

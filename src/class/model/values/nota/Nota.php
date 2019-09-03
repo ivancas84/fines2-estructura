@@ -1,9 +1,6 @@
 <?php
 
-require_once("class/model/values/nota/Main.php");
+require_once("class/model/values/nota/_Nota.php");
 
-//***** implementacion de Values para una determinada tabla *****
-class NotaValues extends NotaValuesMain{
-
-}
+class NotaValues extends _Nota{}
 

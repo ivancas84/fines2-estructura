@@ -1,9 +1,6 @@
 <?php
 
-require_once("class/model/values/lugarNacimiento/Main.php");
+require_once("class/model/values/lugarNacimiento/_LugarNacimiento.php");
 
-//***** implementacion de Values para una determinada tabla *****
-class LugarNacimientoValues extends LugarNacimientoValuesMain{
-
-}
+class LugarNacimientoValues extends _LugarNacimiento{}
 

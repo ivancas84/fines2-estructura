@@ -1,9 +1,9 @@
 <?php
 
-require_once("class/model/values/clasificacion/Main.php");
+require_once("class/model/values/clasificacion/_Clasificacion.php");
 
 //***** implementacion de Values para una determinada tabla *****
-class ClasificacionValues extends ClasificacionValuesMain{
+class Clasificacion extends _Clasificacion{
 
 }
 

@@ -1,9 +1,6 @@
 <?php
 
-require_once("class/model/values/permiso/Main.php");
+require_once("class/model/values/permiso/_Permiso.php");
 
-//***** implementacion de Values para una determinada tabla *****
-class PermisoValues extends PermisoValuesMain{
-
-}
+class PermisoValues extends _Permiso{}
 

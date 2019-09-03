@@ -1,9 +1,6 @@
 <?php
 
-require_once("class/model/values/coordinador/Main.php");
+require_once("class/model/values/coordinador/_Coordinador.php");
 
-//***** implementacion de Values para una determinada tabla *****
-class CoordinadorValues extends CoordinadorValuesMain{
-
-}
+class CoordinadorValues extends _Coordinador{}
 
