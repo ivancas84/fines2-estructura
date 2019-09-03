@@ -49,13 +49,13 @@ class _Domicilio extends EntityValues {
   }
 
   public function id() { return $this->id; }
-  public function calle($format = null) { return $this->formatString($this->calle, $format); }
-  public function entre($format = null) { return $this->formatString($this->entre, $format); }
-  public function numero($format = null) { return $this->formatString($this->numero, $format); }
-  public function piso($format = null) { return $this->formatString($this->piso, $format); }
-  public function departamento($format = null) { return $this->formatString($this->departamento, $format); }
-  public function barrio($format = null) { return $this->formatString($this->barrio, $format); }
-  public function localidad($format = null) { return $this->formatString($this->localidad, $format); }
+  public function calle($format = null) { return $this->_formatString($this->calle, $format); }
+  public function entre($format = null) { return $this->_formatString($this->entre, $format); }
+  public function numero($format = null) { return $this->_formatString($this->numero, $format); }
+  public function piso($format = null) { return $this->_formatString($this->piso, $format); }
+  public function departamento($format = null) { return $this->_formatString($this->departamento, $format); }
+  public function barrio($format = null) { return $this->_formatString($this->barrio, $format); }
+  public function localidad($format = null) { return $this->_formatString($this->localidad, $format); }
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->id = (empty($p)) ? null : (string)$p;

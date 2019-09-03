@@ -29,8 +29,8 @@ class _Rol extends EntityValues {
   }
 
   public function id() { return $this->id; }
-  public function descripcion($format = null) { return $this->formatString($this->descripcion, $format); }
-  public function detalle($format = null) { return $this->formatString($this->detalle, $format); }
+  public function descripcion($format = null) { return $this->_formatString($this->descripcion, $format); }
+  public function detalle($format = null) { return $this->_formatString($this->detalle, $format); }
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->id = (empty($p)) ? null : (string)$p;

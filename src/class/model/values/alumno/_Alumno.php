@@ -54,7 +54,7 @@ class _Alumno extends EntityValues {
   public function constanciaCuil($format = null) { return $this->formatBoolean($this->constanciaCuil, $format); }
   public function certificadoEstudios($format = null) { return $this->formatBoolean($this->certificadoEstudios, $format); }
   public function anioIngreso() { return $this->anioIngreso; }
-  public function observaciones($format = null) { return $this->formatString($this->observaciones, $format); }
+  public function observaciones($format = null) { return $this->_formatString($this->observaciones, $format); }
   public function persona() { return $this->persona; }
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);

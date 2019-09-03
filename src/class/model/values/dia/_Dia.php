@@ -30,7 +30,7 @@ class _Dia extends EntityValues {
 
   public function id() { return $this->id; }
   public function numero() { return $this->numero; }
-  public function dia($format = null) { return $this->formatString($this->dia, $format); }
+  public function dia($format = null) { return $this->_formatString($this->dia, $format); }
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->id = (empty($p)) ? null : (string)$p;

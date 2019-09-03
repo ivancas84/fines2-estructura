@@ -67,13 +67,13 @@ class _Nomina2 extends EntityValues {
   public function id() { return $this->id; }
   public function fotocopiaDocumento($format = null) { return $this->formatBoolean($this->fotocopiaDocumento, $format); }
   public function partidaNacimiento($format = null) { return $this->formatBoolean($this->partidaNacimiento, $format); }
-  public function alta($format = 'Y-m-d H:i:s') { return $this->formatDate($this->alta, $format); }
+  public function alta($format = 'Y-m-d H:i:s') { return $this->_formatDate($this->alta, $format); }
   public function constanciaCuil($format = null) { return $this->formatBoolean($this->constanciaCuil, $format); }
   public function certificadoEstudios($format = null) { return $this->formatBoolean($this->certificadoEstudios, $format); }
   public function anioIngreso() { return $this->anioIngreso; }
   public function activo($format = null) { return $this->formatBoolean($this->activo, $format); }
-  public function programa($format = null) { return $this->formatString($this->programa, $format); }
-  public function observaciones($format = null) { return $this->formatString($this->observaciones, $format); }
+  public function programa($format = null) { return $this->_formatString($this->programa, $format); }
+  public function observaciones($format = null) { return $this->_formatString($this->observaciones, $format); }
   public function persona() { return $this->persona; }
   public function comision() { return $this->comision; }
   public function setId($p) {

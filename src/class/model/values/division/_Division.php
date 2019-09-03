@@ -41,9 +41,9 @@ class _Division extends EntityValues {
   }
 
   public function id() { return $this->id; }
-  public function serie($format = null) { return $this->formatString($this->serie, $format); }
-  public function turno($format = null) { return $this->formatString($this->turno, $format); }
-  public function numero($format = null) { return $this->formatString($this->numero, $format); }
+  public function serie($format = null) { return $this->_formatString($this->serie, $format); }
+  public function turno($format = null) { return $this->_formatString($this->turno, $format); }
+  public function numero($format = null) { return $this->_formatString($this->numero, $format); }
   public function plan() { return $this->plan; }
   public function sede() { return $this->sede; }
   public function setId($p) {

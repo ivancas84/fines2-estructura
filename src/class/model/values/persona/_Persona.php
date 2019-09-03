@@ -41,8 +41,8 @@ class _Persona extends EntityValues {
   }
 
   public function id() { return $this->id; }
-  public function alta($format = 'Y-m-d H:i:s') { return $this->formatDate($this->alta, $format); }
-  public function baja($format = 'Y-m-d H:i:s') { return $this->formatDate($this->baja, $format); }
+  public function alta($format = 'Y-m-d H:i:s') { return $this->_formatDate($this->alta, $format); }
+  public function baja($format = 'Y-m-d H:i:s') { return $this->_formatDate($this->baja, $format); }
   public function lugarNacimiento() { return $this->lugarNacimiento; }
   public function idPersona() { return $this->idPersona; }
   public function domicilio() { return $this->domicilio; }

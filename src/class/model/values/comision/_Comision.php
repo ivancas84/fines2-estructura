@@ -91,19 +91,19 @@ class _Comision extends EntityValues {
   public function id() { return $this->id; }
   public function anio() { return $this->anio; }
   public function semestre() { return $this->semestre; }
-  public function observaciones($format = null) { return $this->formatString($this->observaciones, $format); }
-  public function fecha($format = 'Y-m-d') { return $this->formatDate($this->fecha, $format); }
-  public function alta($format = 'Y-m-d H:i:s') { return $this->formatDate($this->alta, $format); }
-  public function baja($format = 'Y-m-d H:i:s') { return $this->formatDate($this->baja, $format); }
-  public function comentario($format = null) { return $this->formatString($this->comentario, $format); }
+  public function observaciones($format = null) { return $this->_formatString($this->observaciones, $format); }
+  public function fecha($format = 'Y-m-d') { return $this->_formatDate($this->fecha, $format); }
+  public function alta($format = 'Y-m-d H:i:s') { return $this->_formatDate($this->alta, $format); }
+  public function baja($format = 'Y-m-d H:i:s') { return $this->_formatDate($this->baja, $format); }
+  public function comentario($format = null) { return $this->_formatString($this->comentario, $format); }
   public function autorizada($format = null) { return $this->formatBoolean($this->autorizada, $format); }
   public function apertura($format = null) { return $this->formatBoolean($this->apertura, $format); }
   public function publicar($format = null) { return $this->formatBoolean($this->publicar, $format); }
-  public function fechaAnio($format = 'Y') { return $this->formatDate($this->fechaAnio, $format); }
+  public function fechaAnio($format = 'Y') { return $this->_formatDate($this->fechaAnio, $format); }
   public function fechaSemestre() { return $this->fechaSemestre; }
-  public function tramo($format = null) { return $this->formatString($this->tramo, $format); }
-  public function horario($format = null) { return $this->formatString($this->horario, $format); }
-  public function periodo($format = null) { return $this->formatString($this->periodo, $format); }
+  public function tramo($format = null) { return $this->_formatString($this->tramo, $format); }
+  public function horario($format = null) { return $this->_formatString($this->horario, $format); }
+  public function periodo($format = null) { return $this->_formatString($this->periodo, $format); }
   public function comisionSiguiente() { return $this->comisionSiguiente; }
   public function division() { return $this->division; }
   public function setId($p) {

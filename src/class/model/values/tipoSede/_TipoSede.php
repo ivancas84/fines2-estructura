@@ -25,7 +25,7 @@ class _TipoSede extends EntityValues {
   }
 
   public function id() { return $this->id; }
-  public function descripcion($format = null) { return $this->formatString($this->descripcion, $format); }
+  public function descripcion($format = null) { return $this->_formatString($this->descripcion, $format); }
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->id = (empty($p)) ? null : (string)$p;

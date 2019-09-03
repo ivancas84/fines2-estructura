@@ -47,9 +47,9 @@ class _Telefono extends EntityValues {
   public function id() { return $this->id; }
   public function prefijo() { return $this->prefijo; }
   public function numero() { return $this->numero; }
-  public function tipo($format = null) { return $this->formatString($this->tipo, $format); }
-  public function alta($format = 'Y-m-d H:i:s') { return $this->formatDate($this->alta, $format); }
-  public function baja($format = 'Y-m-d H:i:s') { return $this->formatDate($this->baja, $format); }
+  public function tipo($format = null) { return $this->_formatString($this->tipo, $format); }
+  public function alta($format = 'Y-m-d H:i:s') { return $this->_formatDate($this->alta, $format); }
+  public function baja($format = 'Y-m-d H:i:s') { return $this->_formatDate($this->baja, $format); }
   public function persona() { return $this->persona; }
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);

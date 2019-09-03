@@ -2,5 +2,5 @@
 
 require_once("class/model/values/telefono/_Telefono.php");
 
-class TelefonoValues extends _Telefono{}
+class Telefono extends _Telefono{}
 

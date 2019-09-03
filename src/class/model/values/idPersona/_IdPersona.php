@@ -65,17 +65,17 @@ class _IdPersona extends EntityValues {
   }
 
   public function id() { return $this->id; }
-  public function nombres($format = null) { return $this->formatString($this->nombres, $format); }
-  public function apellidos($format = null) { return $this->formatString($this->apellidos, $format); }
-  public function sobrenombre($format = null) { return $this->formatString($this->sobrenombre, $format); }
-  public function fechaNacimiento($format = 'Y-m-d') { return $this->formatDate($this->fechaNacimiento, $format); }
-  public function tipoDocumento($format = null) { return $this->formatString($this->tipoDocumento, $format); }
-  public function numeroDocumento($format = null) { return $this->formatString($this->numeroDocumento, $format); }
-  public function email($format = null) { return $this->formatString($this->email, $format); }
-  public function genero($format = null) { return $this->formatString($this->genero, $format); }
-  public function cuil($format = null) { return $this->formatString($this->cuil, $format); }
-  public function alta($format = 'Y-m-d H:i:s') { return $this->formatDate($this->alta, $format); }
-  public function telefonos($format = null) { return $this->formatString($this->telefonos, $format); }
+  public function nombres($format = null) { return $this->_formatString($this->nombres, $format); }
+  public function apellidos($format = null) { return $this->_formatString($this->apellidos, $format); }
+  public function sobrenombre($format = null) { return $this->_formatString($this->sobrenombre, $format); }
+  public function fechaNacimiento($format = 'Y-m-d') { return $this->_formatDate($this->fechaNacimiento, $format); }
+  public function tipoDocumento($format = null) { return $this->_formatString($this->tipoDocumento, $format); }
+  public function numeroDocumento($format = null) { return $this->_formatString($this->numeroDocumento, $format); }
+  public function email($format = null) { return $this->_formatString($this->email, $format); }
+  public function genero($format = null) { return $this->_formatString($this->genero, $format); }
+  public function cuil($format = null) { return $this->_formatString($this->cuil, $format); }
+  public function alta($format = 'Y-m-d H:i:s') { return $this->_formatDate($this->alta, $format); }
+  public function telefonos($format = null) { return $this->_formatString($this->telefonos, $format); }
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->id = (empty($p)) ? null : (string)$p;

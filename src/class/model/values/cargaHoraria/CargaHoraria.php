@@ -1,9 +1,9 @@
 <?php
 
-require_once("class/model/values/cargaHoraria/Main.php");
+require_once("class/model/values/cargaHoraria/_CargaHoraria.php");
 
 //***** implementacion de Values para una determinada tabla *****
-class CargaHorariaValues extends CargaHorariaValuesMain{
+class CargaHoraria extends _CargaHoraria{
 
     public function horasReloj(){
         $minutos =intval($this->horasCatedra) * 40;

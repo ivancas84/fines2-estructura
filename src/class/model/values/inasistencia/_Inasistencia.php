@@ -53,13 +53,13 @@ class _Inasistencia extends EntityValues {
   }
 
   public function id() { return $this->id; }
-  public function fechaDesde($format = 'Y-m-d') { return $this->formatDate($this->fechaDesde, $format); }
-  public function fechaHasta($format = 'Y-m-d') { return $this->formatDate($this->fechaHasta, $format); }
+  public function fechaDesde($format = 'Y-m-d') { return $this->_formatDate($this->fechaDesde, $format); }
+  public function fechaHasta($format = 'Y-m-d') { return $this->_formatDate($this->fechaHasta, $format); }
   public function modulosSemanales() { return $this->modulosSemanales; }
   public function modulosMensuales() { return $this->modulosMensuales; }
-  public function articulo($format = null) { return $this->formatString($this->articulo, $format); }
-  public function inciso($format = null) { return $this->formatString($this->inciso, $format); }
-  public function observaciones($format = null) { return $this->formatString($this->observaciones, $format); }
+  public function articulo($format = null) { return $this->_formatString($this->articulo, $format); }
+  public function inciso($format = null) { return $this->_formatString($this->inciso, $format); }
+  public function observaciones($format = null) { return $this->_formatString($this->observaciones, $format); }
   public function toma() { return $this->toma; }
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);

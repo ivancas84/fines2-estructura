@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/model/values/sede/Main.php");
+require_once("class/model/values/sede/_Sede.php");
 
 class Sede extends _Sede{
     public function nombre($modo = null) {

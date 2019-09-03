@@ -42,7 +42,7 @@ class _Nota extends EntityValues {
 
   public function id() { return $this->id; }
   public function nota() { return $this->nota; }
-  public function alta($format = 'Y-m-d H:i:s') { return $this->formatDate($this->alta, $format); }
+  public function alta($format = 'Y-m-d H:i:s') { return $this->_formatDate($this->alta, $format); }
   public function profesor() { return $this->profesor; }
   public function curso() { return $this->curso; }
   public function alumno() { return $this->alumno; }

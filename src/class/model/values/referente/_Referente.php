@@ -37,8 +37,8 @@ class _Referente extends EntityValues {
   }
 
   public function id() { return $this->id; }
-  public function alta($format = 'Y-m-d H:i:s') { return $this->formatDate($this->alta, $format); }
-  public function baja($format = 'Y-m-d H:i:s') { return $this->formatDate($this->baja, $format); }
+  public function alta($format = 'Y-m-d H:i:s') { return $this->_formatDate($this->alta, $format); }
+  public function baja($format = 'Y-m-d H:i:s') { return $this->_formatDate($this->baja, $format); }
   public function persona() { return $this->persona; }
   public function sede() { return $this->sede; }
   public function setId($p) {

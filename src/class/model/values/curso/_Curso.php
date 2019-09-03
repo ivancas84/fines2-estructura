@@ -49,10 +49,10 @@ class _Curso extends EntityValues {
   }
 
   public function id() { return $this->id; }
-  public function estado($format = null) { return $this->formatString($this->estado, $format); }
-  public function alta($format = 'Y-m-d H:i:s') { return $this->formatDate($this->alta, $format); }
-  public function baja($format = 'Y-m-d H:i:s') { return $this->formatDate($this->baja, $format); }
-  public function horario($format = null) { return $this->formatString($this->horario, $format); }
+  public function estado($format = null) { return $this->_formatString($this->estado, $format); }
+  public function alta($format = 'Y-m-d H:i:s') { return $this->_formatDate($this->alta, $format); }
+  public function baja($format = 'Y-m-d H:i:s') { return $this->_formatDate($this->baja, $format); }
+  public function horario($format = null) { return $this->_formatString($this->horario, $format); }
   public function comision() { return $this->comision; }
   public function cargaHoraria() { return $this->cargaHoraria; }
   public function tomaActiva() { return $this->tomaActiva; }

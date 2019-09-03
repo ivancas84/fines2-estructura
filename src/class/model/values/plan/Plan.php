@@ -2,5 +2,5 @@
 
 require_once("class/model/values/plan/_Plan.php");
 
-class PlanValues extends _Plan{}
+class Plan extends _Plan{}
 

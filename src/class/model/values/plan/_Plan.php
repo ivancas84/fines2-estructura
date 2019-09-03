@@ -29,8 +29,8 @@ class _Plan extends EntityValues {
   }
 
   public function id() { return $this->id; }
-  public function orientacion($format = null) { return $this->formatString($this->orientacion, $format); }
-  public function resolucion($format = null) { return $this->formatString($this->resolucion, $format); }
+  public function orientacion($format = null) { return $this->_formatString($this->orientacion, $format); }
+  public function resolucion($format = null) { return $this->_formatString($this->resolucion, $format); }
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->id = (empty($p)) ? null : (string)$p;

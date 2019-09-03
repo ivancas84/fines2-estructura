@@ -37,10 +37,10 @@ class _LugarNacimiento extends EntityValues {
   }
 
   public function id() { return $this->id; }
-  public function ciudad($format = null) { return $this->formatString($this->ciudad, $format); }
-  public function provincia($format = null) { return $this->formatString($this->provincia, $format); }
-  public function pais($format = null) { return $this->formatString($this->pais, $format); }
-  public function alta($format = 'Y-m-d H:i:s') { return $this->formatDate($this->alta, $format); }
+  public function ciudad($format = null) { return $this->_formatString($this->ciudad, $format); }
+  public function provincia($format = null) { return $this->_formatString($this->provincia, $format); }
+  public function pais($format = null) { return $this->_formatString($this->pais, $format); }
+  public function alta($format = 'Y-m-d H:i:s') { return $this->_formatDate($this->alta, $format); }
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->id = (empty($p)) ? null : (string)$p;

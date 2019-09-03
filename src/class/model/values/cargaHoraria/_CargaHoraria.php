@@ -48,7 +48,7 @@ class _CargaHoraria extends EntityValues {
   public function anio() { return $this->anio; }
   public function semestre() { return $this->semestre; }
   public function horasCatedra() { return $this->horasCatedra; }
-  public function tramo($format = null) { return $this->formatString($this->tramo, $format); }
+  public function tramo($format = null) { return $this->_formatString($this->tramo, $format); }
   public function asignatura() { return $this->asignatura; }
   public function plan() { return $this->plan; }
   public function setId($p) {

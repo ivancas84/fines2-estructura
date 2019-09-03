@@ -65,12 +65,12 @@ class _Sede extends EntityValues {
   }
 
   public function id() { return $this->id; }
-  public function numero($format = null) { return $this->formatString($this->numero, $format); }
-  public function nombre($format = null) { return $this->formatString($this->nombre, $format); }
-  public function organizacion($format = null) { return $this->formatString($this->organizacion, $format); }
-  public function observaciones($format = null) { return $this->formatString($this->observaciones, $format); }
-  public function tipo($format = null) { return $this->formatString($this->tipo, $format); }
-  public function baja($format = 'Y-m-d H:i:s') { return $this->formatDate($this->baja, $format); }
+  public function numero($format = null) { return $this->_formatString($this->numero, $format); }
+  public function nombre($format = null) { return $this->_formatString($this->nombre, $format); }
+  public function organizacion($format = null) { return $this->_formatString($this->organizacion, $format); }
+  public function observaciones($format = null) { return $this->_formatString($this->observaciones, $format); }
+  public function tipo($format = null) { return $this->_formatString($this->tipo, $format); }
+  public function baja($format = 'Y-m-d H:i:s') { return $this->_formatDate($this->baja, $format); }
   public function dependencia() { return $this->dependencia; }
   public function tipoSede() { return $this->tipoSede; }
   public function domicilio() { return $this->domicilio; }

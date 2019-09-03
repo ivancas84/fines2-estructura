@@ -31,8 +31,8 @@ class IdPersona extends _IdPersona{
   }
   
   public function nombrePrincipal($format = "Xx Yy") {
-    if (!$this->isEmpty($this->sobrenombre)) return $this->sobrenombre($format);
-    elseif (!$this->isEmpty($this->nombres)) return explode(" ", $this->nombres($format))[0];
+    if (!$this->_isEmptyValue($this->sobrenombre)) return $this->sobrenombre($format);
+    elseif (!$this->_isEmptyValue($this->nombres)) return explode(" ", $this->nombres($format))[0];
     else return null;    
   }
 

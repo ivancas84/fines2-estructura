@@ -25,7 +25,7 @@ class _Clasificacion extends EntityValues {
   }
 
   public function id() { return $this->id; }
-  public function nombre($format = null) { return $this->formatString($this->nombre, $format); }
+  public function nombre($format = null) { return $this->_formatString($this->nombre, $format); }
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->id = (empty($p)) ? null : (string)$p;

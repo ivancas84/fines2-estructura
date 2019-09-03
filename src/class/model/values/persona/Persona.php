@@ -2,5 +2,5 @@
 
 require_once("class/model/values/persona/_Persona.php");
 
-class PersonaValues extends _Persona{}
+class Persona extends _Persona{}
 

@@ -41,11 +41,11 @@ class _Asignatura extends EntityValues {
   }
 
   public function id() { return $this->id; }
-  public function nombre($format = null) { return $this->formatString($this->nombre, $format); }
-  public function formacion($format = null) { return $this->formatString($this->formacion, $format); }
-  public function clasificacion($format = null) { return $this->formatString($this->clasificacion, $format); }
-  public function codigo($format = null) { return $this->formatString($this->codigo, $format); }
-  public function perfil($format = null) { return $this->formatString($this->perfil, $format); }
+  public function nombre($format = null) { return $this->_formatString($this->nombre, $format); }
+  public function formacion($format = null) { return $this->_formatString($this->formacion, $format); }
+  public function clasificacion($format = null) { return $this->_formatString($this->clasificacion, $format); }
+  public function codigo($format = null) { return $this->_formatString($this->codigo, $format); }
+  public function perfil($format = null) { return $this->_formatString($this->perfil, $format); }
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $this->id = (empty($p)) ? null : (string)$p;

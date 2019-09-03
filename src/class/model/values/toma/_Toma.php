@@ -81,17 +81,17 @@ class _Toma extends EntityValues {
   }
 
   public function id() { return $this->id; }
-  public function fechaToma($format = 'Y-m-d') { return $this->formatDate($this->fechaToma, $format); }
-  public function fechaInicio($format = 'Y-m-d') { return $this->formatDate($this->fechaInicio, $format); }
-  public function fechaFin($format = 'Y-m-d') { return $this->formatDate($this->fechaFin, $format); }
-  public function fechaEntradaContralor($format = 'Y-m-d') { return $this->formatDate($this->fechaEntradaContralor, $format); }
-  public function estado($format = null) { return $this->formatString($this->estado, $format); }
-  public function observaciones($format = null) { return $this->formatString($this->observaciones, $format); }
-  public function comentarioContralor($format = null) { return $this->formatString($this->comentarioContralor, $format); }
-  public function alta($format = 'Y-m-d H:i:s') { return $this->formatDate($this->alta, $format); }
-  public function tipoMovimiento($format = null) { return $this->formatString($this->tipoMovimiento, $format); }
-  public function estadoContralor($format = null) { return $this->formatString($this->estadoContralor, $format); }
-  public function fechaDesde($format = 'Y-m-d') { return $this->formatDate($this->fechaDesde, $format); }
+  public function fechaToma($format = 'Y-m-d') { return $this->_formatDate($this->fechaToma, $format); }
+  public function fechaInicio($format = 'Y-m-d') { return $this->_formatDate($this->fechaInicio, $format); }
+  public function fechaFin($format = 'Y-m-d') { return $this->_formatDate($this->fechaFin, $format); }
+  public function fechaEntradaContralor($format = 'Y-m-d') { return $this->_formatDate($this->fechaEntradaContralor, $format); }
+  public function estado($format = null) { return $this->_formatString($this->estado, $format); }
+  public function observaciones($format = null) { return $this->_formatString($this->observaciones, $format); }
+  public function comentarioContralor($format = null) { return $this->_formatString($this->comentarioContralor, $format); }
+  public function alta($format = 'Y-m-d H:i:s') { return $this->_formatDate($this->alta, $format); }
+  public function tipoMovimiento($format = null) { return $this->_formatString($this->tipoMovimiento, $format); }
+  public function estadoContralor($format = null) { return $this->_formatString($this->estadoContralor, $format); }
+  public function fechaDesde($format = 'Y-m-d') { return $this->_formatDate($this->fechaDesde, $format); }
   public function sumaHorasCatedra() { return $this->sumaHorasCatedra; }
   public function curso() { return $this->curso; }
   public function profesor() { return $this->profesor; }

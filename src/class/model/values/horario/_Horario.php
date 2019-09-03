@@ -41,8 +41,8 @@ class _Horario extends EntityValues {
   }
 
   public function id() { return $this->id; }
-  public function horaInicio($format = 'H:i') { return $this->formatDate($this->horaInicio, $format); }
-  public function horaFin($format = 'H:i') { return $this->formatDate($this->horaFin, $format); }
+  public function horaInicio($format = 'H:i') { return $this->_formatDate($this->horaInicio, $format); }
+  public function horaFin($format = 'H:i') { return $this->_formatDate($this->horaFin, $format); }
   public function horasCatedra() { return $this->horasCatedra; }
   public function dia() { return $this->dia; }
   public function curso() { return $this->curso; }
