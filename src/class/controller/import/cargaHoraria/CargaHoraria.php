@@ -43,10 +43,14 @@ class CargaHorariaImport extends Import {
     public function process(){
         foreach($this->elements as &$element) {
             if(!$element->process) continue;
-            $this->processSource_("asignatura", $element->entities["asignatura"], $element->entities["asignatura"]->nombre());
-            $this->processSource_("clasificacion", $element->entities["clasificacion"], $element->entities["clasificacion"]->nombre());
-            $this->processSource_("plan", $element->entities["asignatura"], $element->entities["plan"]->_identifier());
-            $this->processSource_("carga_horaria", $element->entities["carga_horaria"], $element->entities["carga_horaria"]->_identifier());
+            $element->sql .= $this->processSource_("asignatura", $element->entities, $element->entities["asignatura"]->nombre());
+            $element->sql .= $this->processSource_("clasificacion", $element->entities, $element->entities["clasificacion"]->nombre());
+            $element->sql .= $this->processSource_("plan", $element->entities, $element->entities["plan"]->_identifier());
+            
+            $element->entities["carga_horaria"]->setAsignatura($element->entities["asignatura"]->id);
+            $element->entities["carga_horaria"]->setPlan($element->entities["plan"]->id);
+            $element->sql .= $this->processSource_("carga_horaria", $element->entities, $element->entities["carga_horaria"]->_identifier());
+
         }
     }
 
