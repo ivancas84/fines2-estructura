@@ -15,7 +15,7 @@ $import->pathSummary = PATH_ROOT . "doc/informe/" . date("YmdHis") . "_".$import
 $import->define();
 $import->identify();
 $import->query();
-$import->process();
+// $import->process();
 
 
 echo "<pre>";
