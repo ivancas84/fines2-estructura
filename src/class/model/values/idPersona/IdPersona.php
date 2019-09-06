@@ -1,6 +1,7 @@
 <?php
 
 require_once("class/model/values/idPersona/_IdPersona.php");
+require_once("function/dni_to_cuil.php");
 
 class IdPersona extends _IdPersona{
 
@@ -39,5 +40,27 @@ class IdPersona extends _IdPersona{
   function descripcion(){
     if(empty($this->nombrePrincipal("Xx Yy"))) return null;
     return $this->nombrePrincipal("Xx Yy") . " (DNI TERMINA: " . substr($this->numeroDocumento(), -3) . ")";
+  }
+
+  public function _check(){ //true | "error"
+    if(
+      $this->_isEmptyValue($this->numeroDocumento())
+      || $this->_isEmptyValue($this->genero())
+      || (strlen($this->numeroDocumento()) < 7)
+      || (strlen($this->numeroDocumento()) < 11)
+      || ((strpos($this->genero("x"), 'f') !== false) 
+         && (strpos($this->genero("x"), 'm') !== false))
+    ) {
+      $this->_addError("Datos incorrectos");
+      return false;
+    }
+
+    return true;
+  }
+
+  public function _calcularCuil(){
+    if(!$this->_check()) return false;
+    $g = (strpos($this->genero("x"), 'f') !== false) ? "2" : "1";
+    return dni_to_cuil($this->numeroDocumento(), $g);
   }
 }
