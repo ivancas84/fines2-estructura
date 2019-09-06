@@ -43,23 +43,16 @@ class IdPersona extends _IdPersona{
   }
 
   public function _check(){ //true | "error"
-    if(
-      $this->_isEmptyValue($this->numeroDocumento())
-      || $this->_isEmptyValue($this->genero())
-      || (strlen($this->numeroDocumento()) < 7)
-      || (strlen($this->numeroDocumento()) < 11)
-      || ((strpos($this->genero("x"), 'f') !== false) 
-         && (strpos($this->genero("x"), 'm') !== false))
-    ) {
-      $this->_addError("Datos incorrectos");
-      return false;
-    }
-
-    return true;
+    $error = [];
+    if($this->_isEmptyValue($this->numeroDocumento())) $error["numero_documento"] = "Vacío";
+    elseif((strlen($this->numeroDocumento()) < 7) || (strlen($this->numeroDocumento()) > 8)) $error["numero_documento"] = "Error de longitud";
+    if($this->_isEmptyValue($this->genero())) $error["genero"] = "Genero vacío";
+    elseif((strpos($this->genero("x"), 'f') === false) && (strpos($this->genero("x"), 'm') === false)) $error["genero"] = "Datos incorrectos";
+    return (empty($error)) ? true : $error;    
   }
 
   public function _calcularCuil(){
-    if(!$this->_check()) return false;
+    if($this->_check() !== true) return false;
     $g = (strpos($this->genero("x"), 'f') !== false) ? "2" : "1";
     return dni_to_cuil($this->numeroDocumento(), $g);
   }
