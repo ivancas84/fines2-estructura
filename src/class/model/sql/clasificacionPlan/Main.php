@@ -22,20 +22,21 @@ class ClasificacionPlanSqlMain extends EntitySql{
   }
 
   public function _mappingFieldAggregate($field){
-    $t = $this->entity->getAlias();
+    $p = $this->prf();
+    $t = $this->prt();
 
     switch ($field) {
-      case 'min_id': return "MIN({$t}.id)";
-      case 'max_id': return "MAX({$t}.id)";
-      case 'count_id': return "COUNT({$t}.id)";
+      case $p.'min_id': return "MIN({$t}.id)";
+      case $p.'max_id': return "MAX({$t}.id)";
+      case $p.'count_id': return "COUNT({$t}.id)";
 
-      case 'min_clasificacion': return "MIN({$t}.clasificacion)";
-      case 'max_clasificacion': return "MAX({$t}.clasificacion)";
-      case 'count_clasificacion': return "COUNT({$t}.clasificacion)";
+      case $p.'min_clasificacion': return "MIN({$t}.clasificacion)";
+      case $p.'max_clasificacion': return "MAX({$t}.clasificacion)";
+      case $p.'count_clasificacion': return "COUNT({$t}.clasificacion)";
 
-      case 'min_plan': return "MIN({$t}.plan)";
-      case 'max_plan': return "MAX({$t}.plan)";
-      case 'count_plan': return "COUNT({$t}.plan)";
+      case $p.'min_plan': return "MIN({$t}.plan)";
+      case $p.'max_plan': return "MAX({$t}.plan)";
+      case $p.'count_plan': return "COUNT({$t}.plan)";
 
       default: return null;
     }
@@ -65,7 +66,7 @@ class ClasificacionPlanSqlMain extends EntitySql{
   public function fields(){
     return $this->_fields() . ',
 ' . EntitySql::getInstanceRequire('clasificacion', 'cla')->_fields() . ',
-' . EntitySql::getInstanceRequire('plan', 'pla')->_fields() . '
+' . EntitySql::getInstanceRequire('plan', 'pla')->_fields() . ' 
 ';
   }
 
@@ -97,6 +98,12 @@ class ClasificacionPlanSqlMain extends EntitySql{
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('clasificacion','cla')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','pla')->_conditionFieldAux($field, $option, $value)) return $c;
+  }
+
+  protected function conditionFieldHaving($field, $option, $value) {
+    if($c = $this->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('clasificacion','cla')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','pla')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
 

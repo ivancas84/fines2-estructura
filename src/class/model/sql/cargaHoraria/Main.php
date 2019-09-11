@@ -26,38 +26,39 @@ class CargaHorariaSqlMain extends EntitySql{
   }
 
   public function _mappingFieldAggregate($field){
-    $t = $this->entity->getAlias();
+    $p = $this->prf();
+    $t = $this->prt();
 
     switch ($field) {
-      case 'min_id': return "MIN({$t}.id)";
-      case 'max_id': return "MAX({$t}.id)";
-      case 'count_id': return "COUNT({$t}.id)";
+      case $p.'min_id': return "MIN({$t}.id)";
+      case $p.'max_id': return "MAX({$t}.id)";
+      case $p.'count_id': return "COUNT({$t}.id)";
 
-      case 'sum_anio': return "SUM({$t}.anio)";
-      case 'avg_anio': return "AVG({$t}.anio)";
-      case 'min_anio': return "MIN({$t}.anio)";
-      case 'max_anio': return "MAX({$t}.anio)";
-      case 'count_anio': return "COUNT({$t}.anio)";
+      case $p.'sum_anio': return "SUM({$t}.anio)";
+      case $p.'avg_anio': return "AVG({$t}.anio)";
+      case $p.'min_anio': return "MIN({$t}.anio)";
+      case $p.'max_anio': return "MAX({$t}.anio)";
+      case $p.'count_anio': return "COUNT({$t}.anio)";
 
-      case 'sum_semestre': return "SUM({$t}.semestre)";
-      case 'avg_semestre': return "AVG({$t}.semestre)";
-      case 'min_semestre': return "MIN({$t}.semestre)";
-      case 'max_semestre': return "MAX({$t}.semestre)";
-      case 'count_semestre': return "COUNT({$t}.semestre)";
+      case $p.'sum_semestre': return "SUM({$t}.semestre)";
+      case $p.'avg_semestre': return "AVG({$t}.semestre)";
+      case $p.'min_semestre': return "MIN({$t}.semestre)";
+      case $p.'max_semestre': return "MAX({$t}.semestre)";
+      case $p.'count_semestre': return "COUNT({$t}.semestre)";
 
-      case 'sum_horas_catedra': return "SUM({$t}.horas_catedra)";
-      case 'avg_horas_catedra': return "AVG({$t}.horas_catedra)";
-      case 'min_horas_catedra': return "MIN({$t}.horas_catedra)";
-      case 'max_horas_catedra': return "MAX({$t}.horas_catedra)";
-      case 'count_horas_catedra': return "COUNT({$t}.horas_catedra)";
+      case $p.'sum_horas_catedra': return "SUM({$t}.horas_catedra)";
+      case $p.'avg_horas_catedra': return "AVG({$t}.horas_catedra)";
+      case $p.'min_horas_catedra': return "MIN({$t}.horas_catedra)";
+      case $p.'max_horas_catedra': return "MAX({$t}.horas_catedra)";
+      case $p.'count_horas_catedra': return "COUNT({$t}.horas_catedra)";
 
-      case 'min_asignatura': return "MIN({$t}.asignatura)";
-      case 'max_asignatura': return "MAX({$t}.asignatura)";
-      case 'count_asignatura': return "COUNT({$t}.asignatura)";
+      case $p.'min_asignatura': return "MIN({$t}.asignatura)";
+      case $p.'max_asignatura': return "MAX({$t}.asignatura)";
+      case $p.'count_asignatura': return "COUNT({$t}.asignatura)";
 
-      case 'min_plan': return "MIN({$t}.plan)";
-      case 'max_plan': return "MAX({$t}.plan)";
-      case 'count_plan': return "COUNT({$t}.plan)";
+      case $p.'min_plan': return "MIN({$t}.plan)";
+      case $p.'max_plan': return "MAX({$t}.plan)";
+      case $p.'count_plan': return "COUNT({$t}.plan)";
 
       default: return null;
     }
@@ -87,7 +88,7 @@ class CargaHorariaSqlMain extends EntitySql{
   public function fields(){
     return $this->_fields() . ',
 ' . EntitySql::getInstanceRequire('asignatura', 'asi')->_fields() . ',
-' . EntitySql::getInstanceRequire('plan', 'pla')->_fields() . '
+' . EntitySql::getInstanceRequire('plan', 'pla')->_fields() . ' 
 ';
   }
 
@@ -123,6 +124,12 @@ class CargaHorariaSqlMain extends EntitySql{
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('asignatura','asi')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','pla')->_conditionFieldAux($field, $option, $value)) return $c;
+  }
+
+  protected function conditionFieldHaving($field, $option, $value) {
+    if($c = $this->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('asignatura','asi')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','pla')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
 

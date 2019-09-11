@@ -28,38 +28,39 @@ class InasistenciaSqlMain extends EntitySql{
   }
 
   public function _mappingFieldAggregate($field){
-    $t = $this->entity->getAlias();
+    $p = $this->prf();
+    $t = $this->prt();
 
     switch ($field) {
-      case 'min_id': return "MIN({$t}.id)";
-      case 'max_id': return "MAX({$t}.id)";
-      case 'count_id': return "COUNT({$t}.id)";
+      case $p.'min_id': return "MIN({$t}.id)";
+      case $p.'max_id': return "MAX({$t}.id)";
+      case $p.'count_id': return "COUNT({$t}.id)";
 
-      case 'avg_fecha_desde': return "AVG({$t}.fecha_desde)";
-      case 'min_fecha_desde': return "MIN({$t}.fecha_desde)";
-      case 'max_fecha_desde': return "MAX({$t}.fecha_desde)";
-      case 'count_fecha_desde': return "COUNT({$t}.fecha_desde)";
+      case $p.'avg_fecha_desde': return "AVG({$t}.fecha_desde)";
+      case $p.'min_fecha_desde': return "MIN({$t}.fecha_desde)";
+      case $p.'max_fecha_desde': return "MAX({$t}.fecha_desde)";
+      case $p.'count_fecha_desde': return "COUNT({$t}.fecha_desde)";
 
-      case 'avg_fecha_hasta': return "AVG({$t}.fecha_hasta)";
-      case 'min_fecha_hasta': return "MIN({$t}.fecha_hasta)";
-      case 'max_fecha_hasta': return "MAX({$t}.fecha_hasta)";
-      case 'count_fecha_hasta': return "COUNT({$t}.fecha_hasta)";
+      case $p.'avg_fecha_hasta': return "AVG({$t}.fecha_hasta)";
+      case $p.'min_fecha_hasta': return "MIN({$t}.fecha_hasta)";
+      case $p.'max_fecha_hasta': return "MAX({$t}.fecha_hasta)";
+      case $p.'count_fecha_hasta': return "COUNT({$t}.fecha_hasta)";
 
-      case 'sum_modulos_semanales': return "SUM({$t}.modulos_semanales)";
-      case 'avg_modulos_semanales': return "AVG({$t}.modulos_semanales)";
-      case 'min_modulos_semanales': return "MIN({$t}.modulos_semanales)";
-      case 'max_modulos_semanales': return "MAX({$t}.modulos_semanales)";
-      case 'count_modulos_semanales': return "COUNT({$t}.modulos_semanales)";
+      case $p.'sum_modulos_semanales': return "SUM({$t}.modulos_semanales)";
+      case $p.'avg_modulos_semanales': return "AVG({$t}.modulos_semanales)";
+      case $p.'min_modulos_semanales': return "MIN({$t}.modulos_semanales)";
+      case $p.'max_modulos_semanales': return "MAX({$t}.modulos_semanales)";
+      case $p.'count_modulos_semanales': return "COUNT({$t}.modulos_semanales)";
 
-      case 'sum_modulos_mensuales': return "SUM({$t}.modulos_mensuales)";
-      case 'avg_modulos_mensuales': return "AVG({$t}.modulos_mensuales)";
-      case 'min_modulos_mensuales': return "MIN({$t}.modulos_mensuales)";
-      case 'max_modulos_mensuales': return "MAX({$t}.modulos_mensuales)";
-      case 'count_modulos_mensuales': return "COUNT({$t}.modulos_mensuales)";
+      case $p.'sum_modulos_mensuales': return "SUM({$t}.modulos_mensuales)";
+      case $p.'avg_modulos_mensuales': return "AVG({$t}.modulos_mensuales)";
+      case $p.'min_modulos_mensuales': return "MIN({$t}.modulos_mensuales)";
+      case $p.'max_modulos_mensuales': return "MAX({$t}.modulos_mensuales)";
+      case $p.'count_modulos_mensuales': return "COUNT({$t}.modulos_mensuales)";
 
-      case 'min_toma': return "MIN({$t}.toma)";
-      case 'max_toma': return "MAX({$t}.toma)";
-      case 'count_toma': return "COUNT({$t}.toma)";
+      case $p.'min_toma': return "MIN({$t}.toma)";
+      case $p.'max_toma': return "MAX({$t}.toma)";
+      case $p.'count_toma': return "COUNT({$t}.toma)";
 
       default: return null;
     }
@@ -115,7 +116,7 @@ class InasistenciaSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('asignatura', 'tom_cur_ch_asi')->_fields() . ',
 ' . EntitySql::getInstanceRequire('plan', 'tom_cur_ch_pla')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'tom_pro')->_fields() . ',
-' . EntitySql::getInstanceRequire('id_persona', 'tom_ree')->_fields() . '
+' . EntitySql::getInstanceRequire('id_persona', 'tom_ree')->_fields() . ' 
 ';
   }
 
@@ -194,6 +195,25 @@ class InasistenciaSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('plan','tom_cur_ch_pla')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('id_persona','tom_pro')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('id_persona','tom_ree')->_conditionFieldAux($field, $option, $value)) return $c;
+  }
+
+  protected function conditionFieldHaving($field, $option, $value) {
+    if($c = $this->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('toma','tom')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('curso','tom_cur')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('comision','tom_cur_com')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('division','tom_cur_com_dvi')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','tom_cur_com_dvi_pla')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('sede','tom_cur_com_dvi_sed')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('tipo_sede','tom_cur_com_dvi_sed_ts')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','tom_cur_com_dvi_sed_dom')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','tom_cur_com_dvi_sed_coo')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','tom_cur_com_dvi_sed_ref')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('carga_horaria','tom_cur_ch')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('asignatura','tom_cur_ch_asi')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','tom_cur_ch_pla')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','tom_pro')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','tom_ree')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
 

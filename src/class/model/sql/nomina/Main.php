@@ -24,25 +24,26 @@ class NominaSqlMain extends EntitySql{
   }
 
   public function _mappingFieldAggregate($field){
-    $t = $this->entity->getAlias();
+    $p = $this->prf();
+    $t = $this->prt();
 
     switch ($field) {
-      case 'min_id': return "MIN({$t}.id)";
-      case 'max_id': return "MAX({$t}.id)";
-      case 'count_id': return "COUNT({$t}.id)";
+      case $p.'min_id': return "MIN({$t}.id)";
+      case $p.'max_id': return "MAX({$t}.id)";
+      case $p.'count_id': return "COUNT({$t}.id)";
 
-      case 'avg_alta': return "AVG({$t}.alta)";
-      case 'min_alta': return "MIN({$t}.alta)";
-      case 'max_alta': return "MAX({$t}.alta)";
-      case 'count_alta': return "COUNT({$t}.alta)";
+      case $p.'avg_alta': return "AVG({$t}.alta)";
+      case $p.'min_alta': return "MIN({$t}.alta)";
+      case $p.'max_alta': return "MAX({$t}.alta)";
+      case $p.'count_alta': return "COUNT({$t}.alta)";
 
-      case 'min_division': return "MIN({$t}.division)";
-      case 'max_division': return "MAX({$t}.division)";
-      case 'count_division': return "COUNT({$t}.division)";
+      case $p.'min_division': return "MIN({$t}.division)";
+      case $p.'max_division': return "MAX({$t}.division)";
+      case $p.'count_division': return "COUNT({$t}.division)";
 
-      case 'min_persona': return "MIN({$t}.persona)";
-      case 'max_persona': return "MAX({$t}.persona)";
-      case 'count_persona': return "COUNT({$t}.persona)";
+      case $p.'min_persona': return "MIN({$t}.persona)";
+      case $p.'max_persona': return "MAX({$t}.persona)";
+      case $p.'count_persona': return "COUNT({$t}.persona)";
 
       default: return null;
     }
@@ -84,7 +85,7 @@ class NominaSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('domicilio', 'dia_sed_dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'dia_sed_coo')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'dia_sed_ref')->_fields() . ',
-' . EntitySql::getInstanceRequire('id_persona', 'per')->_fields() . '
+' . EntitySql::getInstanceRequire('id_persona', 'per')->_fields() . ' 
 ';
   }
 
@@ -137,6 +138,18 @@ class NominaSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('id_persona','dia_sed_coo')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('id_persona','dia_sed_ref')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('id_persona','per')->_conditionFieldAux($field, $option, $value)) return $c;
+  }
+
+  protected function conditionFieldHaving($field, $option, $value) {
+    if($c = $this->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('division','dia')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','dia_pla')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('sede','dia_sed')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('tipo_sede','dia_sed_ts')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','dia_sed_dom')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','dia_sed_coo')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','dia_sed_ref')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','per')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
 

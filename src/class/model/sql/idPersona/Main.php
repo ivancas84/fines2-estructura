@@ -31,22 +31,23 @@ class IdPersonaSqlMain extends EntitySql{
   }
 
   public function _mappingFieldAggregate($field){
-    $t = $this->entity->getAlias();
+    $p = $this->prf();
+    $t = $this->prt();
 
     switch ($field) {
-      case 'min_id': return "MIN({$t}.id)";
-      case 'max_id': return "MAX({$t}.id)";
-      case 'count_id': return "COUNT({$t}.id)";
+      case $p.'min_id': return "MIN({$t}.id)";
+      case $p.'max_id': return "MAX({$t}.id)";
+      case $p.'count_id': return "COUNT({$t}.id)";
 
-      case 'avg_fecha_nacimiento': return "AVG({$t}.fecha_nacimiento)";
-      case 'min_fecha_nacimiento': return "MIN({$t}.fecha_nacimiento)";
-      case 'max_fecha_nacimiento': return "MAX({$t}.fecha_nacimiento)";
-      case 'count_fecha_nacimiento': return "COUNT({$t}.fecha_nacimiento)";
+      case $p.'avg_fecha_nacimiento': return "AVG({$t}.fecha_nacimiento)";
+      case $p.'min_fecha_nacimiento': return "MIN({$t}.fecha_nacimiento)";
+      case $p.'max_fecha_nacimiento': return "MAX({$t}.fecha_nacimiento)";
+      case $p.'count_fecha_nacimiento': return "COUNT({$t}.fecha_nacimiento)";
 
-      case 'avg_alta': return "AVG({$t}.alta)";
-      case 'min_alta': return "MIN({$t}.alta)";
-      case 'max_alta': return "MAX({$t}.alta)";
-      case 'count_alta': return "COUNT({$t}.alta)";
+      case $p.'avg_alta': return "AVG({$t}.alta)";
+      case $p.'min_alta': return "MIN({$t}.alta)";
+      case $p.'max_alta': return "MAX({$t}.alta)";
+      case $p.'count_alta': return "COUNT({$t}.alta)";
 
       default: return null;
     }

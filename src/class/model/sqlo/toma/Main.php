@@ -4,6 +4,8 @@ require_once("class/model/Sqlo.php");
 require_once("class/model/Sql.php");
 require_once("class/model/Entity.php");
 require_once("class/model/Values.php");
+require_once("class/model/Dba.php");
+
 
 class TomaSqloMain extends EntitySqlo {
 

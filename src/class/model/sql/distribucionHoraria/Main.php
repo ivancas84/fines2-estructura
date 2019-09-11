@@ -23,28 +23,29 @@ class DistribucionHorariaSqlMain extends EntitySql{
   }
 
   public function _mappingFieldAggregate($field){
-    $t = $this->entity->getAlias();
+    $p = $this->prf();
+    $t = $this->prt();
 
     switch ($field) {
-      case 'min_id': return "MIN({$t}.id)";
-      case 'max_id': return "MAX({$t}.id)";
-      case 'count_id': return "COUNT({$t}.id)";
+      case $p.'min_id': return "MIN({$t}.id)";
+      case $p.'max_id': return "MAX({$t}.id)";
+      case $p.'count_id': return "COUNT({$t}.id)";
 
-      case 'sum_dia': return "SUM({$t}.dia)";
-      case 'avg_dia': return "AVG({$t}.dia)";
-      case 'min_dia': return "MIN({$t}.dia)";
-      case 'max_dia': return "MAX({$t}.dia)";
-      case 'count_dia': return "COUNT({$t}.dia)";
+      case $p.'sum_dia': return "SUM({$t}.dia)";
+      case $p.'avg_dia': return "AVG({$t}.dia)";
+      case $p.'min_dia': return "MIN({$t}.dia)";
+      case $p.'max_dia': return "MAX({$t}.dia)";
+      case $p.'count_dia': return "COUNT({$t}.dia)";
 
-      case 'sum_horas_catedra': return "SUM({$t}.horas_catedra)";
-      case 'avg_horas_catedra': return "AVG({$t}.horas_catedra)";
-      case 'min_horas_catedra': return "MIN({$t}.horas_catedra)";
-      case 'max_horas_catedra': return "MAX({$t}.horas_catedra)";
-      case 'count_horas_catedra': return "COUNT({$t}.horas_catedra)";
+      case $p.'sum_horas_catedra': return "SUM({$t}.horas_catedra)";
+      case $p.'avg_horas_catedra': return "AVG({$t}.horas_catedra)";
+      case $p.'min_horas_catedra': return "MIN({$t}.horas_catedra)";
+      case $p.'max_horas_catedra': return "MAX({$t}.horas_catedra)";
+      case $p.'count_horas_catedra': return "COUNT({$t}.horas_catedra)";
 
-      case 'min_carga_horaria': return "MIN({$t}.carga_horaria)";
-      case 'max_carga_horaria': return "MAX({$t}.carga_horaria)";
-      case 'count_carga_horaria': return "COUNT({$t}.carga_horaria)";
+      case $p.'min_carga_horaria': return "MIN({$t}.carga_horaria)";
+      case $p.'max_carga_horaria': return "MAX({$t}.carga_horaria)";
+      case $p.'count_carga_horaria': return "COUNT({$t}.carga_horaria)";
 
       default: return null;
     }
@@ -76,7 +77,7 @@ class DistribucionHorariaSqlMain extends EntitySql{
     return $this->_fields() . ',
 ' . EntitySql::getInstanceRequire('carga_horaria', 'ch')->_fields() . ',
 ' . EntitySql::getInstanceRequire('asignatura', 'ch_asi')->_fields() . ',
-' . EntitySql::getInstanceRequire('plan', 'ch_pla')->_fields() . '
+' . EntitySql::getInstanceRequire('plan', 'ch_pla')->_fields() . ' 
 ';
   }
 
@@ -112,6 +113,13 @@ class DistribucionHorariaSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('carga_horaria','ch')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('asignatura','ch_asi')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','ch_pla')->_conditionFieldAux($field, $option, $value)) return $c;
+  }
+
+  protected function conditionFieldHaving($field, $option, $value) {
+    if($c = $this->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('carga_horaria','ch')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('asignatura','ch_asi')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','ch_pla')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
 

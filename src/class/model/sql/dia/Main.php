@@ -22,18 +22,19 @@ class DiaSqlMain extends EntitySql{
   }
 
   public function _mappingFieldAggregate($field){
-    $t = $this->entity->getAlias();
+    $p = $this->prf();
+    $t = $this->prt();
 
     switch ($field) {
-      case 'min_id': return "MIN({$t}.id)";
-      case 'max_id': return "MAX({$t}.id)";
-      case 'count_id': return "COUNT({$t}.id)";
+      case $p.'min_id': return "MIN({$t}.id)";
+      case $p.'max_id': return "MAX({$t}.id)";
+      case $p.'count_id': return "COUNT({$t}.id)";
 
-      case 'sum_numero': return "SUM({$t}.numero)";
-      case 'avg_numero': return "AVG({$t}.numero)";
-      case 'min_numero': return "MIN({$t}.numero)";
-      case 'max_numero': return "MAX({$t}.numero)";
-      case 'count_numero': return "COUNT({$t}.numero)";
+      case $p.'sum_numero': return "SUM({$t}.numero)";
+      case $p.'avg_numero': return "AVG({$t}.numero)";
+      case $p.'min_numero': return "MIN({$t}.numero)";
+      case $p.'max_numero': return "MAX({$t}.numero)";
+      case $p.'count_numero': return "COUNT({$t}.numero)";
 
       default: return null;
     }

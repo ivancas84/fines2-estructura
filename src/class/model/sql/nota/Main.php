@@ -25,35 +25,36 @@ class NotaSqlMain extends EntitySql{
   }
 
   public function _mappingFieldAggregate($field){
-    $t = $this->entity->getAlias();
+    $p = $this->prf();
+    $t = $this->prt();
 
     switch ($field) {
-      case 'min_id': return "MIN({$t}.id)";
-      case 'max_id': return "MAX({$t}.id)";
-      case 'count_id': return "COUNT({$t}.id)";
+      case $p.'min_id': return "MIN({$t}.id)";
+      case $p.'max_id': return "MAX({$t}.id)";
+      case $p.'count_id': return "COUNT({$t}.id)";
 
-      case 'sum_nota': return "SUM({$t}.nota)";
-      case 'avg_nota': return "AVG({$t}.nota)";
-      case 'min_nota': return "MIN({$t}.nota)";
-      case 'max_nota': return "MAX({$t}.nota)";
-      case 'count_nota': return "COUNT({$t}.nota)";
+      case $p.'sum_nota': return "SUM({$t}.nota)";
+      case $p.'avg_nota': return "AVG({$t}.nota)";
+      case $p.'min_nota': return "MIN({$t}.nota)";
+      case $p.'max_nota': return "MAX({$t}.nota)";
+      case $p.'count_nota': return "COUNT({$t}.nota)";
 
-      case 'avg_alta': return "AVG({$t}.alta)";
-      case 'min_alta': return "MIN({$t}.alta)";
-      case 'max_alta': return "MAX({$t}.alta)";
-      case 'count_alta': return "COUNT({$t}.alta)";
+      case $p.'avg_alta': return "AVG({$t}.alta)";
+      case $p.'min_alta': return "MIN({$t}.alta)";
+      case $p.'max_alta': return "MAX({$t}.alta)";
+      case $p.'count_alta': return "COUNT({$t}.alta)";
 
-      case 'min_profesor': return "MIN({$t}.profesor)";
-      case 'max_profesor': return "MAX({$t}.profesor)";
-      case 'count_profesor': return "COUNT({$t}.profesor)";
+      case $p.'min_profesor': return "MIN({$t}.profesor)";
+      case $p.'max_profesor': return "MAX({$t}.profesor)";
+      case $p.'count_profesor': return "COUNT({$t}.profesor)";
 
-      case 'min_curso': return "MIN({$t}.curso)";
-      case 'max_curso': return "MAX({$t}.curso)";
-      case 'count_curso': return "COUNT({$t}.curso)";
+      case $p.'min_curso': return "MIN({$t}.curso)";
+      case $p.'max_curso': return "MAX({$t}.curso)";
+      case $p.'count_curso': return "COUNT({$t}.curso)";
 
-      case 'min_alumno': return "MIN({$t}.alumno)";
-      case 'max_alumno': return "MAX({$t}.alumno)";
-      case 'count_alumno': return "COUNT({$t}.alumno)";
+      case $p.'min_alumno': return "MIN({$t}.alumno)";
+      case $p.'max_alumno': return "MAX({$t}.alumno)";
+      case $p.'count_alumno': return "COUNT({$t}.alumno)";
 
       default: return null;
     }
@@ -113,7 +114,7 @@ class NotaSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('toma', 'cur_ta')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'cur_ta_pro')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'cur_ta_ree')->_fields() . ',
-' . EntitySql::getInstanceRequire('id_persona', 'alu')->_fields() . '
+' . EntitySql::getInstanceRequire('id_persona', 'alu')->_fields() . ' 
 ';
   }
 
@@ -195,6 +196,27 @@ class NotaSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('id_persona','cur_ta_pro')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('id_persona','cur_ta_ree')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('id_persona','alu')->_conditionFieldAux($field, $option, $value)) return $c;
+  }
+
+  protected function conditionFieldHaving($field, $option, $value) {
+    if($c = $this->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','pro')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('curso','cur')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('comision','cur_com')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('division','cur_com_dvi')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','cur_com_dvi_pla')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('sede','cur_com_dvi_sed')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('tipo_sede','cur_com_dvi_sed_ts')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','cur_com_dvi_sed_dom')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','cur_com_dvi_sed_coo')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','cur_com_dvi_sed_ref')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('carga_horaria','cur_ch')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('asignatura','cur_ch_asi')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','cur_ch_pla')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('toma','cur_ta')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','cur_ta_pro')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','cur_ta_ree')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','alu')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
 

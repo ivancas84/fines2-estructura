@@ -25,20 +25,21 @@ class DivisionSqlMain extends EntitySql{
   }
 
   public function _mappingFieldAggregate($field){
-    $t = $this->entity->getAlias();
+    $p = $this->prf();
+    $t = $this->prt();
 
     switch ($field) {
-      case 'min_id': return "MIN({$t}.id)";
-      case 'max_id': return "MAX({$t}.id)";
-      case 'count_id': return "COUNT({$t}.id)";
+      case $p.'min_id': return "MIN({$t}.id)";
+      case $p.'max_id': return "MAX({$t}.id)";
+      case $p.'count_id': return "COUNT({$t}.id)";
 
-      case 'min_plan': return "MIN({$t}.plan)";
-      case 'max_plan': return "MAX({$t}.plan)";
-      case 'count_plan': return "COUNT({$t}.plan)";
+      case $p.'min_plan': return "MIN({$t}.plan)";
+      case $p.'max_plan': return "MAX({$t}.plan)";
+      case $p.'count_plan': return "COUNT({$t}.plan)";
 
-      case 'min_sede': return "MIN({$t}.sede)";
-      case 'max_sede': return "MAX({$t}.sede)";
-      case 'count_sede': return "COUNT({$t}.sede)";
+      case $p.'min_sede': return "MIN({$t}.sede)";
+      case $p.'max_sede': return "MAX({$t}.sede)";
+      case $p.'count_sede': return "COUNT({$t}.sede)";
 
       default: return null;
     }
@@ -76,7 +77,7 @@ class DivisionSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('tipo_sede', 'sed_ts')->_fields() . ',
 ' . EntitySql::getInstanceRequire('domicilio', 'sed_dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'sed_coo')->_fields() . ',
-' . EntitySql::getInstanceRequire('id_persona', 'sed_ref')->_fields() . '
+' . EntitySql::getInstanceRequire('id_persona', 'sed_ref')->_fields() . ' 
 ';
   }
 
@@ -124,6 +125,16 @@ class DivisionSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('domicilio','sed_dom')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('id_persona','sed_coo')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('id_persona','sed_ref')->_conditionFieldAux($field, $option, $value)) return $c;
+  }
+
+  protected function conditionFieldHaving($field, $option, $value) {
+    if($c = $this->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','pla')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('sede','sed')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('tipo_sede','sed_ts')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','sed_dom')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','sed_coo')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','sed_ref')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
 

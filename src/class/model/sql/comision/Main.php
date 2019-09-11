@@ -37,53 +37,54 @@ class ComisionSqlMain extends EntitySql{
   }
 
   public function _mappingFieldAggregate($field){
-    $t = $this->entity->getAlias();
+    $p = $this->prf();
+    $t = $this->prt();
 
     switch ($field) {
-      case 'min_id': return "MIN({$t}.id)";
-      case 'max_id': return "MAX({$t}.id)";
-      case 'count_id': return "COUNT({$t}.id)";
+      case $p.'min_id': return "MIN({$t}.id)";
+      case $p.'max_id': return "MAX({$t}.id)";
+      case $p.'count_id': return "COUNT({$t}.id)";
 
-      case 'sum_anio': return "SUM({$t}.anio)";
-      case 'avg_anio': return "AVG({$t}.anio)";
-      case 'min_anio': return "MIN({$t}.anio)";
-      case 'max_anio': return "MAX({$t}.anio)";
-      case 'count_anio': return "COUNT({$t}.anio)";
+      case $p.'sum_anio': return "SUM({$t}.anio)";
+      case $p.'avg_anio': return "AVG({$t}.anio)";
+      case $p.'min_anio': return "MIN({$t}.anio)";
+      case $p.'max_anio': return "MAX({$t}.anio)";
+      case $p.'count_anio': return "COUNT({$t}.anio)";
 
-      case 'sum_semestre': return "SUM({$t}.semestre)";
-      case 'avg_semestre': return "AVG({$t}.semestre)";
-      case 'min_semestre': return "MIN({$t}.semestre)";
-      case 'max_semestre': return "MAX({$t}.semestre)";
-      case 'count_semestre': return "COUNT({$t}.semestre)";
+      case $p.'sum_semestre': return "SUM({$t}.semestre)";
+      case $p.'avg_semestre': return "AVG({$t}.semestre)";
+      case $p.'min_semestre': return "MIN({$t}.semestre)";
+      case $p.'max_semestre': return "MAX({$t}.semestre)";
+      case $p.'count_semestre': return "COUNT({$t}.semestre)";
 
-      case 'avg_fecha': return "AVG({$t}.fecha)";
-      case 'min_fecha': return "MIN({$t}.fecha)";
-      case 'max_fecha': return "MAX({$t}.fecha)";
-      case 'count_fecha': return "COUNT({$t}.fecha)";
+      case $p.'avg_fecha': return "AVG({$t}.fecha)";
+      case $p.'min_fecha': return "MIN({$t}.fecha)";
+      case $p.'max_fecha': return "MAX({$t}.fecha)";
+      case $p.'count_fecha': return "COUNT({$t}.fecha)";
 
-      case 'avg_alta': return "AVG({$t}.alta)";
-      case 'min_alta': return "MIN({$t}.alta)";
-      case 'max_alta': return "MAX({$t}.alta)";
-      case 'count_alta': return "COUNT({$t}.alta)";
+      case $p.'avg_alta': return "AVG({$t}.alta)";
+      case $p.'min_alta': return "MIN({$t}.alta)";
+      case $p.'max_alta': return "MAX({$t}.alta)";
+      case $p.'count_alta': return "COUNT({$t}.alta)";
 
-      case 'avg_baja': return "AVG({$t}.baja)";
-      case 'min_baja': return "MIN({$t}.baja)";
-      case 'max_baja': return "MAX({$t}.baja)";
-      case 'count_baja': return "COUNT({$t}.baja)";
+      case $p.'avg_baja': return "AVG({$t}.baja)";
+      case $p.'min_baja': return "MIN({$t}.baja)";
+      case $p.'max_baja': return "MAX({$t}.baja)";
+      case $p.'count_baja': return "COUNT({$t}.baja)";
 
-      case 'sum_fecha_semestre': return "SUM({$t}.fecha_semestre)";
-      case 'avg_fecha_semestre': return "AVG({$t}.fecha_semestre)";
-      case 'min_fecha_semestre': return "MIN({$t}.fecha_semestre)";
-      case 'max_fecha_semestre': return "MAX({$t}.fecha_semestre)";
-      case 'count_fecha_semestre': return "COUNT({$t}.fecha_semestre)";
+      case $p.'sum_fecha_semestre': return "SUM({$t}.fecha_semestre)";
+      case $p.'avg_fecha_semestre': return "AVG({$t}.fecha_semestre)";
+      case $p.'min_fecha_semestre': return "MIN({$t}.fecha_semestre)";
+      case $p.'max_fecha_semestre': return "MAX({$t}.fecha_semestre)";
+      case $p.'count_fecha_semestre': return "COUNT({$t}.fecha_semestre)";
 
-      case 'min_comision_siguiente': return "MIN({$t}.comision_siguiente)";
-      case 'max_comision_siguiente': return "MAX({$t}.comision_siguiente)";
-      case 'count_comision_siguiente': return "COUNT({$t}.comision_siguiente)";
+      case $p.'min_comision_siguiente': return "MIN({$t}.comision_siguiente)";
+      case $p.'max_comision_siguiente': return "MAX({$t}.comision_siguiente)";
+      case $p.'count_comision_siguiente': return "COUNT({$t}.comision_siguiente)";
 
-      case 'min_division': return "MIN({$t}.division)";
-      case 'max_division': return "MAX({$t}.division)";
-      case 'count_division': return "COUNT({$t}.division)";
+      case $p.'min_division': return "MIN({$t}.division)";
+      case $p.'max_division': return "MAX({$t}.division)";
+      case $p.'count_division': return "COUNT({$t}.division)";
 
       default: return null;
     }
@@ -123,7 +124,7 @@ class ComisionSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('tipo_sede', 'dvi_sed_ts')->_fields() . ',
 ' . EntitySql::getInstanceRequire('domicilio', 'dvi_sed_dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'dvi_sed_coo')->_fields() . ',
-' . EntitySql::getInstanceRequire('id_persona', 'dvi_sed_ref')->_fields() . '
+' . EntitySql::getInstanceRequire('id_persona', 'dvi_sed_ref')->_fields() . ' 
 ';
   }
 
@@ -187,6 +188,17 @@ class ComisionSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('domicilio','dvi_sed_dom')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('id_persona','dvi_sed_coo')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('id_persona','dvi_sed_ref')->_conditionFieldAux($field, $option, $value)) return $c;
+  }
+
+  protected function conditionFieldHaving($field, $option, $value) {
+    if($c = $this->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('division','dvi')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','dvi_pla')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('sede','dvi_sed')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('tipo_sede','dvi_sed_ts')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','dvi_sed_dom')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','dvi_sed_coo')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','dvi_sed_ref')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
 

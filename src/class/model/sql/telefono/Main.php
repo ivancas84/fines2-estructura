@@ -26,38 +26,39 @@ class TelefonoSqlMain extends EntitySql{
   }
 
   public function _mappingFieldAggregate($field){
-    $t = $this->entity->getAlias();
+    $p = $this->prf();
+    $t = $this->prt();
 
     switch ($field) {
-      case 'min_id': return "MIN({$t}.id)";
-      case 'max_id': return "MAX({$t}.id)";
-      case 'count_id': return "COUNT({$t}.id)";
+      case $p.'min_id': return "MIN({$t}.id)";
+      case $p.'max_id': return "MAX({$t}.id)";
+      case $p.'count_id': return "COUNT({$t}.id)";
 
-      case 'sum_prefijo': return "SUM({$t}.prefijo)";
-      case 'avg_prefijo': return "AVG({$t}.prefijo)";
-      case 'min_prefijo': return "MIN({$t}.prefijo)";
-      case 'max_prefijo': return "MAX({$t}.prefijo)";
-      case 'count_prefijo': return "COUNT({$t}.prefijo)";
+      case $p.'sum_prefijo': return "SUM({$t}.prefijo)";
+      case $p.'avg_prefijo': return "AVG({$t}.prefijo)";
+      case $p.'min_prefijo': return "MIN({$t}.prefijo)";
+      case $p.'max_prefijo': return "MAX({$t}.prefijo)";
+      case $p.'count_prefijo': return "COUNT({$t}.prefijo)";
 
-      case 'sum_numero': return "SUM({$t}.numero)";
-      case 'avg_numero': return "AVG({$t}.numero)";
-      case 'min_numero': return "MIN({$t}.numero)";
-      case 'max_numero': return "MAX({$t}.numero)";
-      case 'count_numero': return "COUNT({$t}.numero)";
+      case $p.'sum_numero': return "SUM({$t}.numero)";
+      case $p.'avg_numero': return "AVG({$t}.numero)";
+      case $p.'min_numero': return "MIN({$t}.numero)";
+      case $p.'max_numero': return "MAX({$t}.numero)";
+      case $p.'count_numero': return "COUNT({$t}.numero)";
 
-      case 'avg_alta': return "AVG({$t}.alta)";
-      case 'min_alta': return "MIN({$t}.alta)";
-      case 'max_alta': return "MAX({$t}.alta)";
-      case 'count_alta': return "COUNT({$t}.alta)";
+      case $p.'avg_alta': return "AVG({$t}.alta)";
+      case $p.'min_alta': return "MIN({$t}.alta)";
+      case $p.'max_alta': return "MAX({$t}.alta)";
+      case $p.'count_alta': return "COUNT({$t}.alta)";
 
-      case 'avg_baja': return "AVG({$t}.baja)";
-      case 'min_baja': return "MIN({$t}.baja)";
-      case 'max_baja': return "MAX({$t}.baja)";
-      case 'count_baja': return "COUNT({$t}.baja)";
+      case $p.'avg_baja': return "AVG({$t}.baja)";
+      case $p.'min_baja': return "MIN({$t}.baja)";
+      case $p.'max_baja': return "MAX({$t}.baja)";
+      case $p.'count_baja': return "COUNT({$t}.baja)";
 
-      case 'min_persona': return "MIN({$t}.persona)";
-      case 'max_persona': return "MAX({$t}.persona)";
-      case 'count_persona': return "COUNT({$t}.persona)";
+      case $p.'min_persona': return "MIN({$t}.persona)";
+      case $p.'max_persona': return "MAX({$t}.persona)";
+      case $p.'count_persona': return "COUNT({$t}.persona)";
 
       default: return null;
     }
@@ -85,7 +86,7 @@ class TelefonoSqlMain extends EntitySql{
 
   public function fields(){
     return $this->_fields() . ',
-' . EntitySql::getInstanceRequire('id_persona', 'per')->_fields() . '
+' . EntitySql::getInstanceRequire('id_persona', 'per')->_fields() . ' 
 ';
   }
 
@@ -118,6 +119,11 @@ class TelefonoSqlMain extends EntitySql{
   protected function conditionFieldAux($field, $option, $value) {
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('id_persona','per')->_conditionFieldAux($field, $option, $value)) return $c;
+  }
+
+  protected function conditionFieldHaving($field, $option, $value) {
+    if($c = $this->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','per')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
 

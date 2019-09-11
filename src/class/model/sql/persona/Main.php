@@ -25,34 +25,35 @@ class PersonaSqlMain extends EntitySql{
   }
 
   public function _mappingFieldAggregate($field){
-    $t = $this->entity->getAlias();
+    $p = $this->prf();
+    $t = $this->prt();
 
     switch ($field) {
-      case 'min_id': return "MIN({$t}.id)";
-      case 'max_id': return "MAX({$t}.id)";
-      case 'count_id': return "COUNT({$t}.id)";
+      case $p.'min_id': return "MIN({$t}.id)";
+      case $p.'max_id': return "MAX({$t}.id)";
+      case $p.'count_id': return "COUNT({$t}.id)";
 
-      case 'avg_alta': return "AVG({$t}.alta)";
-      case 'min_alta': return "MIN({$t}.alta)";
-      case 'max_alta': return "MAX({$t}.alta)";
-      case 'count_alta': return "COUNT({$t}.alta)";
+      case $p.'avg_alta': return "AVG({$t}.alta)";
+      case $p.'min_alta': return "MIN({$t}.alta)";
+      case $p.'max_alta': return "MAX({$t}.alta)";
+      case $p.'count_alta': return "COUNT({$t}.alta)";
 
-      case 'avg_baja': return "AVG({$t}.baja)";
-      case 'min_baja': return "MIN({$t}.baja)";
-      case 'max_baja': return "MAX({$t}.baja)";
-      case 'count_baja': return "COUNT({$t}.baja)";
+      case $p.'avg_baja': return "AVG({$t}.baja)";
+      case $p.'min_baja': return "MIN({$t}.baja)";
+      case $p.'max_baja': return "MAX({$t}.baja)";
+      case $p.'count_baja': return "COUNT({$t}.baja)";
 
-      case 'min_lugar_nacimiento': return "MIN({$t}.lugar_nacimiento)";
-      case 'max_lugar_nacimiento': return "MAX({$t}.lugar_nacimiento)";
-      case 'count_lugar_nacimiento': return "COUNT({$t}.lugar_nacimiento)";
+      case $p.'min_lugar_nacimiento': return "MIN({$t}.lugar_nacimiento)";
+      case $p.'max_lugar_nacimiento': return "MAX({$t}.lugar_nacimiento)";
+      case $p.'count_lugar_nacimiento': return "COUNT({$t}.lugar_nacimiento)";
 
-      case 'min_id_persona': return "MIN({$t}.id_persona)";
-      case 'max_id_persona': return "MAX({$t}.id_persona)";
-      case 'count_id_persona': return "COUNT({$t}.id_persona)";
+      case $p.'min_id_persona': return "MIN({$t}.id_persona)";
+      case $p.'max_id_persona': return "MAX({$t}.id_persona)";
+      case $p.'count_id_persona': return "COUNT({$t}.id_persona)";
 
-      case 'min_domicilio': return "MIN({$t}.domicilio)";
-      case 'max_domicilio': return "MAX({$t}.domicilio)";
-      case 'count_domicilio': return "COUNT({$t}.domicilio)";
+      case $p.'min_domicilio': return "MIN({$t}.domicilio)";
+      case $p.'max_domicilio': return "MAX({$t}.domicilio)";
+      case $p.'count_domicilio': return "COUNT({$t}.domicilio)";
 
       default: return null;
     }
@@ -84,7 +85,7 @@ class PersonaSqlMain extends EntitySql{
     return $this->_fields() . ',
 ' . EntitySql::getInstanceRequire('lugar_nacimiento', 'ln')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'ip')->_fields() . ',
-' . EntitySql::getInstanceRequire('domicilio', 'dom')->_fields() . '
+' . EntitySql::getInstanceRequire('domicilio', 'dom')->_fields() . ' 
 ';
   }
 
@@ -122,6 +123,13 @@ class PersonaSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('lugar_nacimiento','ln')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('id_persona','ip')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','dom')->_conditionFieldAux($field, $option, $value)) return $c;
+  }
+
+  protected function conditionFieldHaving($field, $option, $value) {
+    if($c = $this->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('lugar_nacimiento','ln')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','ip')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','dom')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
 

@@ -31,31 +31,32 @@ class Nomina2SqlMain extends EntitySql{
   }
 
   public function _mappingFieldAggregate($field){
-    $t = $this->entity->getAlias();
+    $p = $this->prf();
+    $t = $this->prt();
 
     switch ($field) {
-      case 'min_id': return "MIN({$t}.id)";
-      case 'max_id': return "MAX({$t}.id)";
-      case 'count_id': return "COUNT({$t}.id)";
+      case $p.'min_id': return "MIN({$t}.id)";
+      case $p.'max_id': return "MAX({$t}.id)";
+      case $p.'count_id': return "COUNT({$t}.id)";
 
-      case 'avg_alta': return "AVG({$t}.alta)";
-      case 'min_alta': return "MIN({$t}.alta)";
-      case 'max_alta': return "MAX({$t}.alta)";
-      case 'count_alta': return "COUNT({$t}.alta)";
+      case $p.'avg_alta': return "AVG({$t}.alta)";
+      case $p.'min_alta': return "MIN({$t}.alta)";
+      case $p.'max_alta': return "MAX({$t}.alta)";
+      case $p.'count_alta': return "COUNT({$t}.alta)";
 
-      case 'sum_anio_ingreso': return "SUM({$t}.anio_ingreso)";
-      case 'avg_anio_ingreso': return "AVG({$t}.anio_ingreso)";
-      case 'min_anio_ingreso': return "MIN({$t}.anio_ingreso)";
-      case 'max_anio_ingreso': return "MAX({$t}.anio_ingreso)";
-      case 'count_anio_ingreso': return "COUNT({$t}.anio_ingreso)";
+      case $p.'sum_anio_ingreso': return "SUM({$t}.anio_ingreso)";
+      case $p.'avg_anio_ingreso': return "AVG({$t}.anio_ingreso)";
+      case $p.'min_anio_ingreso': return "MIN({$t}.anio_ingreso)";
+      case $p.'max_anio_ingreso': return "MAX({$t}.anio_ingreso)";
+      case $p.'count_anio_ingreso': return "COUNT({$t}.anio_ingreso)";
 
-      case 'min_persona': return "MIN({$t}.persona)";
-      case 'max_persona': return "MAX({$t}.persona)";
-      case 'count_persona': return "COUNT({$t}.persona)";
+      case $p.'min_persona': return "MIN({$t}.persona)";
+      case $p.'max_persona': return "MAX({$t}.persona)";
+      case $p.'count_persona': return "COUNT({$t}.persona)";
 
-      case 'min_comision': return "MIN({$t}.comision)";
-      case 'max_comision': return "MAX({$t}.comision)";
-      case 'count_comision': return "COUNT({$t}.comision)";
+      case $p.'min_comision': return "MIN({$t}.comision)";
+      case $p.'max_comision': return "MAX({$t}.comision)";
+      case $p.'count_comision': return "COUNT({$t}.comision)";
 
       default: return null;
     }
@@ -99,7 +100,7 @@ class Nomina2SqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('tipo_sede', 'com_dvi_sed_ts')->_fields() . ',
 ' . EntitySql::getInstanceRequire('domicilio', 'com_dvi_sed_dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'com_dvi_sed_coo')->_fields() . ',
-' . EntitySql::getInstanceRequire('id_persona', 'com_dvi_sed_ref')->_fields() . '
+' . EntitySql::getInstanceRequire('id_persona', 'com_dvi_sed_ref')->_fields() . ' 
 ';
   }
 
@@ -163,6 +164,19 @@ class Nomina2SqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('domicilio','com_dvi_sed_dom')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('id_persona','com_dvi_sed_coo')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('id_persona','com_dvi_sed_ref')->_conditionFieldAux($field, $option, $value)) return $c;
+  }
+
+  protected function conditionFieldHaving($field, $option, $value) {
+    if($c = $this->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','per')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('comision','com')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('division','com_dvi')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','com_dvi_pla')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('sede','com_dvi_sed')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('tipo_sede','com_dvi_sed_ts')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','com_dvi_sed_dom')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','com_dvi_sed_coo')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','com_dvi_sed_ref')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
 

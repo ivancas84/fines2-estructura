@@ -25,26 +25,27 @@ class HorarioSqlMain extends EntitySql{
   }
 
   public function _mappingFieldAggregate($field){
-    $t = $this->entity->getAlias();
+    $p = $this->prf();
+    $t = $this->prt();
 
     switch ($field) {
-      case 'min_id': return "MIN({$t}.id)";
-      case 'max_id': return "MAX({$t}.id)";
-      case 'count_id': return "COUNT({$t}.id)";
+      case $p.'min_id': return "MIN({$t}.id)";
+      case $p.'max_id': return "MAX({$t}.id)";
+      case $p.'count_id': return "COUNT({$t}.id)";
 
-      case 'sum_horas_catedra': return "SUM({$t}.horas_catedra)";
-      case 'avg_horas_catedra': return "AVG({$t}.horas_catedra)";
-      case 'min_horas_catedra': return "MIN({$t}.horas_catedra)";
-      case 'max_horas_catedra': return "MAX({$t}.horas_catedra)";
-      case 'count_horas_catedra': return "COUNT({$t}.horas_catedra)";
+      case $p.'sum_horas_catedra': return "SUM({$t}.horas_catedra)";
+      case $p.'avg_horas_catedra': return "AVG({$t}.horas_catedra)";
+      case $p.'min_horas_catedra': return "MIN({$t}.horas_catedra)";
+      case $p.'max_horas_catedra': return "MAX({$t}.horas_catedra)";
+      case $p.'count_horas_catedra': return "COUNT({$t}.horas_catedra)";
 
-      case 'min_dia': return "MIN({$t}.dia)";
-      case 'max_dia': return "MAX({$t}.dia)";
-      case 'count_dia': return "COUNT({$t}.dia)";
+      case $p.'min_dia': return "MIN({$t}.dia)";
+      case $p.'max_dia': return "MAX({$t}.dia)";
+      case $p.'count_dia': return "COUNT({$t}.dia)";
 
-      case 'min_curso': return "MIN({$t}.curso)";
-      case 'max_curso': return "MAX({$t}.curso)";
-      case 'count_curso': return "COUNT({$t}.curso)";
+      case $p.'min_curso': return "MIN({$t}.curso)";
+      case $p.'max_curso': return "MAX({$t}.curso)";
+      case $p.'count_curso': return "COUNT({$t}.curso)";
 
       default: return null;
     }
@@ -102,7 +103,7 @@ class HorarioSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('plan', 'cur_ch_pla')->_fields() . ',
 ' . EntitySql::getInstanceRequire('toma', 'cur_ta')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'cur_ta_pro')->_fields() . ',
-' . EntitySql::getInstanceRequire('id_persona', 'cur_ta_ree')->_fields() . '
+' . EntitySql::getInstanceRequire('id_persona', 'cur_ta_ree')->_fields() . ' 
 ';
   }
 
@@ -181,6 +182,26 @@ class HorarioSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('toma','cur_ta')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('id_persona','cur_ta_pro')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('id_persona','cur_ta_ree')->_conditionFieldAux($field, $option, $value)) return $c;
+  }
+
+  protected function conditionFieldHaving($field, $option, $value) {
+    if($c = $this->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('dia','dia')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('curso','cur')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('comision','cur_com')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('division','cur_com_dvi')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','cur_com_dvi_pla')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('sede','cur_com_dvi_sed')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('tipo_sede','cur_com_dvi_sed_ts')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','cur_com_dvi_sed_dom')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','cur_com_dvi_sed_coo')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','cur_com_dvi_sed_ref')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('carga_horaria','cur_ch')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('asignatura','cur_ch_asi')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','cur_ch_pla')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('toma','cur_ta')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','cur_ta_pro')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','cur_ta_ree')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
 

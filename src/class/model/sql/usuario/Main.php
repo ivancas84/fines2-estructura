@@ -24,26 +24,27 @@ class UsuarioSqlMain extends EntitySql{
   }
 
   public function _mappingFieldAggregate($field){
-    $t = $this->entity->getAlias();
+    $p = $this->prf();
+    $t = $this->prt();
 
     switch ($field) {
-      case 'min_id': return "MIN({$t}.id)";
-      case 'max_id': return "MAX({$t}.id)";
-      case 'count_id': return "COUNT({$t}.id)";
+      case $p.'min_id': return "MIN({$t}.id)";
+      case $p.'max_id': return "MAX({$t}.id)";
+      case $p.'count_id': return "COUNT({$t}.id)";
 
-      case 'avg_alta': return "AVG({$t}.alta)";
-      case 'min_alta': return "MIN({$t}.alta)";
-      case 'max_alta': return "MAX({$t}.alta)";
-      case 'count_alta': return "COUNT({$t}.alta)";
+      case $p.'avg_alta': return "AVG({$t}.alta)";
+      case $p.'min_alta': return "MIN({$t}.alta)";
+      case $p.'max_alta': return "MAX({$t}.alta)";
+      case $p.'count_alta': return "COUNT({$t}.alta)";
 
-      case 'avg_baja': return "AVG({$t}.baja)";
-      case 'min_baja': return "MIN({$t}.baja)";
-      case 'max_baja': return "MAX({$t}.baja)";
-      case 'count_baja': return "COUNT({$t}.baja)";
+      case $p.'avg_baja': return "AVG({$t}.baja)";
+      case $p.'min_baja': return "MIN({$t}.baja)";
+      case $p.'max_baja': return "MAX({$t}.baja)";
+      case $p.'count_baja': return "COUNT({$t}.baja)";
 
-      case 'min_persona': return "MIN({$t}.persona)";
-      case 'max_persona': return "MAX({$t}.persona)";
-      case 'count_persona': return "COUNT({$t}.persona)";
+      case $p.'min_persona': return "MIN({$t}.persona)";
+      case $p.'max_persona': return "MAX({$t}.persona)";
+      case $p.'count_persona': return "COUNT({$t}.persona)";
 
       default: return null;
     }
@@ -71,7 +72,7 @@ class UsuarioSqlMain extends EntitySql{
 
   public function fields(){
     return $this->_fields() . ',
-' . EntitySql::getInstanceRequire('id_persona', 'per')->_fields() . '
+' . EntitySql::getInstanceRequire('id_persona', 'per')->_fields() . ' 
 ';
   }
 
@@ -102,6 +103,11 @@ class UsuarioSqlMain extends EntitySql{
   protected function conditionFieldAux($field, $option, $value) {
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('id_persona','per')->_conditionFieldAux($field, $option, $value)) return $c;
+  }
+
+  protected function conditionFieldHaving($field, $option, $value) {
+    if($c = $this->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','per')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
 

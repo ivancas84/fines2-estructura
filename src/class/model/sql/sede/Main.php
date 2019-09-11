@@ -31,37 +31,38 @@ class SedeSqlMain extends EntitySql{
   }
 
   public function _mappingFieldAggregate($field){
-    $t = $this->entity->getAlias();
+    $p = $this->prf();
+    $t = $this->prt();
 
     switch ($field) {
-      case 'min_id': return "MIN({$t}.id)";
-      case 'max_id': return "MAX({$t}.id)";
-      case 'count_id': return "COUNT({$t}.id)";
+      case $p.'min_id': return "MIN({$t}.id)";
+      case $p.'max_id': return "MAX({$t}.id)";
+      case $p.'count_id': return "COUNT({$t}.id)";
 
-      case 'avg_baja': return "AVG({$t}.baja)";
-      case 'min_baja': return "MIN({$t}.baja)";
-      case 'max_baja': return "MAX({$t}.baja)";
-      case 'count_baja': return "COUNT({$t}.baja)";
+      case $p.'avg_baja': return "AVG({$t}.baja)";
+      case $p.'min_baja': return "MIN({$t}.baja)";
+      case $p.'max_baja': return "MAX({$t}.baja)";
+      case $p.'count_baja': return "COUNT({$t}.baja)";
 
-      case 'min_dependencia': return "MIN({$t}.dependencia)";
-      case 'max_dependencia': return "MAX({$t}.dependencia)";
-      case 'count_dependencia': return "COUNT({$t}.dependencia)";
+      case $p.'min_dependencia': return "MIN({$t}.dependencia)";
+      case $p.'max_dependencia': return "MAX({$t}.dependencia)";
+      case $p.'count_dependencia': return "COUNT({$t}.dependencia)";
 
-      case 'min_tipo_sede': return "MIN({$t}.tipo_sede)";
-      case 'max_tipo_sede': return "MAX({$t}.tipo_sede)";
-      case 'count_tipo_sede': return "COUNT({$t}.tipo_sede)";
+      case $p.'min_tipo_sede': return "MIN({$t}.tipo_sede)";
+      case $p.'max_tipo_sede': return "MAX({$t}.tipo_sede)";
+      case $p.'count_tipo_sede': return "COUNT({$t}.tipo_sede)";
 
-      case 'min_domicilio': return "MIN({$t}.domicilio)";
-      case 'max_domicilio': return "MAX({$t}.domicilio)";
-      case 'count_domicilio': return "COUNT({$t}.domicilio)";
+      case $p.'min_domicilio': return "MIN({$t}.domicilio)";
+      case $p.'max_domicilio': return "MAX({$t}.domicilio)";
+      case $p.'count_domicilio': return "COUNT({$t}.domicilio)";
 
-      case 'min_coordinador': return "MIN({$t}.coordinador)";
-      case 'max_coordinador': return "MAX({$t}.coordinador)";
-      case 'count_coordinador': return "COUNT({$t}.coordinador)";
+      case $p.'min_coordinador': return "MIN({$t}.coordinador)";
+      case $p.'max_coordinador': return "MAX({$t}.coordinador)";
+      case $p.'count_coordinador': return "COUNT({$t}.coordinador)";
 
-      case 'min_referente': return "MIN({$t}.referente)";
-      case 'max_referente': return "MAX({$t}.referente)";
-      case 'count_referente': return "COUNT({$t}.referente)";
+      case $p.'min_referente': return "MIN({$t}.referente)";
+      case $p.'max_referente': return "MAX({$t}.referente)";
+      case $p.'count_referente': return "COUNT({$t}.referente)";
 
       default: return null;
     }
@@ -95,7 +96,7 @@ class SedeSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('tipo_sede', 'ts')->_fields() . ',
 ' . EntitySql::getInstanceRequire('domicilio', 'dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'coo')->_fields() . ',
-' . EntitySql::getInstanceRequire('id_persona', 'ref')->_fields() . '
+' . EntitySql::getInstanceRequire('id_persona', 'ref')->_fields() . ' 
 ';
   }
 
@@ -143,6 +144,14 @@ class SedeSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('domicilio','dom')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('id_persona','coo')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('id_persona','ref')->_conditionFieldAux($field, $option, $value)) return $c;
+  }
+
+  protected function conditionFieldHaving($field, $option, $value) {
+    if($c = $this->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('tipo_sede','ts')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','dom')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','coo')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('id_persona','ref')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
 
