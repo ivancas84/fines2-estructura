@@ -1,4 +1,5 @@
 <?php
+require_once("function/array_unique_key.php");
 
 require_once("class/model/sql/division/Main.php");
 
@@ -26,11 +27,11 @@ INNER JOIN sede ON (sede.id = {$t}.sede)
 
     switch($field){
       case "{$p}_clasificacion":
-        $planesIds = Dba::field("clasificacion_plan", "plan", ["clasificacion",$option,$value]);
+        $planesIds = array_unique_key(Dba::all("clasificacion_plan", ["clasificacion",$option,$value]), "plan");
         return $this->conditionField("{$p}plan",$option,$planesIds);
 
       case "{$p}_clasificacion_nombre":
-        $planesIds = Dba::field("clasificacion_plan", "plan", ["cla_nombre",$option,$value]);
+        $planesIds = array_unique_key(Dba::all("clasificacion_plan", ["cla_nombre",$option,$value]), "plan");
         return $this->conditionField("{$p}plan",$option,$planesIds);
 
       default: return parent::_conditionFieldAux($field, $option, $value);
