@@ -276,23 +276,4 @@ GROUP BY coordinador.persona
 
     }
 
-
-    public function alumnosRepetidosPeriodo($fechaAnio, $fechaSemestre){ //id de alumno repetido y cantidad de repeticiones en un periodo
-      //@todo esta consulta puede ser reemplazada por una consulta avanzada
-      /**
-       * No define filtros debido a que involucra a todas las dependencias y planes
-       */
-      return "SELECT persona AS id, COUNT(*) as cantidad
-FROM nomina2
-INNER JOIN comision ON (nomina2.comision = comision.id)
-WHERE nomina2.activo
-AND comision.fecha_anio = '{$fechaAnio}'
-AND comision.fecha_semestre = {$fechaSemestre}
-GROUP BY persona
-HAVING cantidad > 1
-";
-
-
-    }
-
 }

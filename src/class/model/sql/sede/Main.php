@@ -96,7 +96,7 @@ class SedeSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('tipo_sede', 'ts')->_fields() . ',
 ' . EntitySql::getInstanceRequire('domicilio', 'dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'coo')->_fields() . ',
-' . EntitySql::getInstanceRequire('id_persona', 'ref')->_fields() . ' 
+' . EntitySql::getInstanceRequire('id_persona', 'ref')->_fields() . '
 ';
   }
 

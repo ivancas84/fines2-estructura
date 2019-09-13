@@ -85,7 +85,7 @@ class NominaSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('domicilio', 'dia_sed_dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'dia_sed_coo')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'dia_sed_ref')->_fields() . ',
-' . EntitySql::getInstanceRequire('id_persona', 'per')->_fields() . ' 
+' . EntitySql::getInstanceRequire('id_persona', 'per')->_fields() . '
 ';
   }
 

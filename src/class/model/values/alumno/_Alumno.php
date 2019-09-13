@@ -49,10 +49,10 @@ class _Alumno extends EntityValues {
   }
 
   public function id() { return $this->id; }
-  public function fotocopiaDocumento($format = null) { return $this->formatBoolean($this->fotocopiaDocumento, $format); }
-  public function partidaNacimiento($format = null) { return $this->formatBoolean($this->partidaNacimiento, $format); }
-  public function constanciaCuil($format = null) { return $this->formatBoolean($this->constanciaCuil, $format); }
-  public function certificadoEstudios($format = null) { return $this->formatBoolean($this->certificadoEstudios, $format); }
+  public function fotocopiaDocumento($format = null) { return $this->_formatBoolean($this->fotocopiaDocumento, $format); }
+  public function partidaNacimiento($format = null) { return $this->_formatBoolean($this->partidaNacimiento, $format); }
+  public function constanciaCuil($format = null) { return $this->_formatBoolean($this->constanciaCuil, $format); }
+  public function certificadoEstudios($format = null) { return $this->_formatBoolean($this->certificadoEstudios, $format); }
   public function anioIngreso() { return $this->anioIngreso; }
   public function observaciones($format = null) { return $this->_formatString($this->observaciones, $format); }
   public function persona() { return $this->persona; }

@@ -96,9 +96,9 @@ class _Comision extends EntityValues {
   public function alta($format = 'Y-m-d H:i:s') { return $this->_formatDate($this->alta, $format); }
   public function baja($format = 'Y-m-d H:i:s') { return $this->_formatDate($this->baja, $format); }
   public function comentario($format = null) { return $this->_formatString($this->comentario, $format); }
-  public function autorizada($format = null) { return $this->formatBoolean($this->autorizada, $format); }
-  public function apertura($format = null) { return $this->formatBoolean($this->apertura, $format); }
-  public function publicar($format = null) { return $this->formatBoolean($this->publicar, $format); }
+  public function autorizada($format = null) { return $this->_formatBoolean($this->autorizada, $format); }
+  public function apertura($format = null) { return $this->_formatBoolean($this->apertura, $format); }
+  public function publicar($format = null) { return $this->_formatBoolean($this->publicar, $format); }
   public function fechaAnio($format = 'Y') { return $this->_formatDate($this->fechaAnio, $format); }
   public function fechaSemestre() { return $this->fechaSemestre; }
   public function tramo($format = null) { return $this->_formatString($this->tramo, $format); }

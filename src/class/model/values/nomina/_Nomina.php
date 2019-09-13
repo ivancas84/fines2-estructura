@@ -38,7 +38,7 @@ class _Nomina extends EntityValues {
 
   public function id() { return $this->id; }
   public function alta($format = 'Y-m-d H:i:s') { return $this->_formatDate($this->alta, $format); }
-  public function activo($format = null) { return $this->formatBoolean($this->activo, $format); }
+  public function activo($format = null) { return $this->_formatBoolean($this->activo, $format); }
   public function division() { return $this->division; }
   public function persona() { return $this->persona; }
   public function setId($p) {

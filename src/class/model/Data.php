@@ -2,8 +2,59 @@
 
 require_once("class/model/Dba.php");
 require_once("class/model/Render.php");
+require_once("class/model/RenderAux.php");
+require_once("class/model/Sqlo.php");
+
 
 class Data {
+
+  public function alumnosRepetidosFiltros($fechaAnio, $fechaSemestre, $clasificacion, $dependencia){
+    $render = new RenderAux();
+    $render->setAggregate(["_cantidad"]);
+    $render->setGroup(["persona"]);
+    $render->setHaving(["_cantidad",">",1]);
+    $render->setCondition([
+      ["com_fecha_anio","=",$fechaAnio],
+      ["com_fecha_semestre",">",$fechaSemestre],
+      ["com_autorizada", "=", true],
+      ["com_dvi_sed_dependencia", "=", $dependencia],
+      ["activo","=",true]
+    ]);
+    $render->setGeneralCondition([
+      ["com_dvi__clasificacion_nombre", "=", $clasificacion]
+    ]);
+    
+    $sql = EntitySqlo::getInstanceRequire("nomina2")->advanced($render);
+//    echo "<pre>".$sql;
+    return Dba::fetchAll($sql);
+  }
+
+  public function nominaFiltros($fechaAnio, $fechaSemestre, $clasificacion, $dependencia, $personas){
+    $render = new Render();
+    $render->setCondition([
+      ["com_fecha_anio","=",$fechaAnio],
+      ["com_fecha_semestre",">",$fechaSemestre],
+      ["com_autorizada", "=", true],
+      ["com_dvi_sed_dependencia", "=", $dependencia],
+      ["persona","=",$personas],
+      ["activo","=",true]
+    ]);
+    $render->setGeneralCondition([
+      ["com_dvi__clasificacion_nombre", "=", $clasificacion]
+    ]);
+    $render->setOrder(["per_apellidos" => "asc", "per_nombres"=>"asc"]);
+    
+    $sql = EntitySqlo::getInstanceRequire("nomina2")->all($render);
+    return Dba::fetchAll($sql);
+  }
+
+
+
+
+
+
+
+
 
 
   public static function condicionFiltros_($filtros, $id = "id", $opt = "IN"){
