@@ -8,7 +8,7 @@ require_once("class/model/Sqlo.php");
 
 class Data {
 
-  public function alumnosRepetidosFiltros($fechaAnio, $fechaSemestre, $clasificacion, $dependencia){
+  public static function alumnosRepetidosFiltros($fechaAnio, $fechaSemestre, $clasificacion, $dependencia){
     $render = new RenderAux();
     $render->setAggregate(["_cantidad"]);
     $render->setGroup(["persona"]);
@@ -29,7 +29,7 @@ class Data {
     return Dba::fetchAll($sql);
   }
 
-  public function nominaFiltros($fechaAnio, $fechaSemestre, $clasificacion, $dependencia, $personas){
+  public static function nominaFiltros($fechaAnio, $fechaSemestre, $clasificacion, $dependencia, $personas){
     $render = new Render();
     $render->setCondition([
       ["com_fecha_anio","=",$fechaAnio],
