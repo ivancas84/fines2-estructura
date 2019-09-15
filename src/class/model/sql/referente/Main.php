@@ -86,14 +86,13 @@ class ReferenteSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('tipo_sede', 'sed_ts')->_fields() . ',
 ' . EntitySql::getInstanceRequire('domicilio', 'sed_dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'sed_coo')->_fields() . ',
-' . EntitySql::getInstanceRequire('id_persona', 'sed_ref')->_fields() . '
+' . EntitySql::getInstanceRequire('id_persona', 'sed_ref')->_fields() . ' 
 ';
   }
 
   public function join(Render $render){
     return EntitySql::getInstanceRequire('id_persona', 'per')->_join('persona', 'refe', $render) . '
 ' . EntitySql::getInstanceRequire('sede', 'sed')->_join('sede', 'refe', $render) . '
-' . EntitySql::getInstanceRequire('sede', 'sed_dep')->_join('dependencia', 'sed', $render) . '
 ' . EntitySql::getInstanceRequire('tipo_sede', 'sed_ts')->_join('tipo_sede', 'sed', $render) . '
 ' . EntitySql::getInstanceRequire('domicilio', 'sed_dom')->_join('domicilio', 'sed', $render) . '
 ' . EntitySql::getInstanceRequire('id_persona', 'sed_coo')->_join('coordinador', 'sed', $render) . '

@@ -96,13 +96,12 @@ class SedeSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('tipo_sede', 'ts')->_fields() . ',
 ' . EntitySql::getInstanceRequire('domicilio', 'dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'coo')->_fields() . ',
-' . EntitySql::getInstanceRequire('id_persona', 'ref')->_fields() . '
+' . EntitySql::getInstanceRequire('id_persona', 'ref')->_fields() . ' 
 ';
   }
 
   public function join(Render $render){
-    return EntitySql::getInstanceRequire('sede', 'dep')->_join('dependencia', 'sede', $render) . '
-' . EntitySql::getInstanceRequire('tipo_sede', 'ts')->_join('tipo_sede', 'sede', $render) . '
+    return EntitySql::getInstanceRequire('tipo_sede', 'ts')->_join('tipo_sede', 'sede', $render) . '
 ' . EntitySql::getInstanceRequire('domicilio', 'dom')->_join('domicilio', 'sede', $render) . '
 ' . EntitySql::getInstanceRequire('id_persona', 'coo')->_join('coordinador', 'sede', $render) . '
 ' . EntitySql::getInstanceRequire('id_persona', 'ref')->_join('referente', 'sede', $render) . '

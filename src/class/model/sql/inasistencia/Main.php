@@ -116,7 +116,7 @@ class InasistenciaSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('asignatura', 'tom_cur_ch_asi')->_fields() . ',
 ' . EntitySql::getInstanceRequire('plan', 'tom_cur_ch_pla')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'tom_pro')->_fields() . ',
-' . EntitySql::getInstanceRequire('id_persona', 'tom_ree')->_fields() . '
+' . EntitySql::getInstanceRequire('id_persona', 'tom_ree')->_fields() . ' 
 ';
   }
 
@@ -124,11 +124,9 @@ class InasistenciaSqlMain extends EntitySql{
     return EntitySql::getInstanceRequire('toma', 'tom')->_join('toma', 'inas', $render) . '
 ' . EntitySql::getInstanceRequire('curso', 'tom_cur')->_join('curso', 'tom', $render) . '
 ' . EntitySql::getInstanceRequire('comision', 'tom_cur_com')->_join('comision', 'tom_cur', $render) . '
-' . EntitySql::getInstanceRequire('comision', 'tom_cur_com_cs')->_join('comision_siguiente', 'tom_cur_com', $render) . '
 ' . EntitySql::getInstanceRequire('division', 'tom_cur_com_dvi')->_join('division', 'tom_cur_com', $render) . '
 ' . EntitySql::getInstanceRequire('plan', 'tom_cur_com_dvi_pla')->_join('plan', 'tom_cur_com_dvi', $render) . '
 ' . EntitySql::getInstanceRequire('sede', 'tom_cur_com_dvi_sed')->_join('sede', 'tom_cur_com_dvi', $render) . '
-' . EntitySql::getInstanceRequire('sede', 'tom_cur_com_dvi_sed_dep')->_join('dependencia', 'tom_cur_com_dvi_sed', $render) . '
 ' . EntitySql::getInstanceRequire('tipo_sede', 'tom_cur_com_dvi_sed_ts')->_join('tipo_sede', 'tom_cur_com_dvi_sed', $render) . '
 ' . EntitySql::getInstanceRequire('domicilio', 'tom_cur_com_dvi_sed_dom')->_join('domicilio', 'tom_cur_com_dvi_sed', $render) . '
 ' . EntitySql::getInstanceRequire('id_persona', 'tom_cur_com_dvi_sed_coo')->_join('coordinador', 'tom_cur_com_dvi_sed', $render) . '

@@ -85,7 +85,7 @@ class NominaSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('domicilio', 'dia_sed_dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'dia_sed_coo')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'dia_sed_ref')->_fields() . ',
-' . EntitySql::getInstanceRequire('id_persona', 'per')->_fields() . '
+' . EntitySql::getInstanceRequire('id_persona', 'per')->_fields() . ' 
 ';
   }
 
@@ -93,7 +93,6 @@ class NominaSqlMain extends EntitySql{
     return EntitySql::getInstanceRequire('division', 'dia')->_join('division', 'nomi', $render) . '
 ' . EntitySql::getInstanceRequire('plan', 'dia_pla')->_join('plan', 'dia', $render) . '
 ' . EntitySql::getInstanceRequire('sede', 'dia_sed')->_join('sede', 'dia', $render) . '
-' . EntitySql::getInstanceRequire('sede', 'dia_sed_dep')->_join('dependencia', 'dia_sed', $render) . '
 ' . EntitySql::getInstanceRequire('tipo_sede', 'dia_sed_ts')->_join('tipo_sede', 'dia_sed', $render) . '
 ' . EntitySql::getInstanceRequire('domicilio', 'dia_sed_dom')->_join('domicilio', 'dia_sed', $render) . '
 ' . EntitySql::getInstanceRequire('id_persona', 'dia_sed_coo')->_join('coordinador', 'dia_sed', $render) . '

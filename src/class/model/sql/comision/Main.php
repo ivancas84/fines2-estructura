@@ -124,16 +124,14 @@ class ComisionSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('tipo_sede', 'dvi_sed_ts')->_fields() . ',
 ' . EntitySql::getInstanceRequire('domicilio', 'dvi_sed_dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'dvi_sed_coo')->_fields() . ',
-' . EntitySql::getInstanceRequire('id_persona', 'dvi_sed_ref')->_fields() . '
+' . EntitySql::getInstanceRequire('id_persona', 'dvi_sed_ref')->_fields() . ' 
 ';
   }
 
   public function join(Render $render){
-    return EntitySql::getInstanceRequire('comision', 'cs')->_join('comision_siguiente', 'comi', $render) . '
-' . EntitySql::getInstanceRequire('division', 'dvi')->_join('division', 'comi', $render) . '
+    return EntitySql::getInstanceRequire('division', 'dvi')->_join('division', 'comi', $render) . '
 ' . EntitySql::getInstanceRequire('plan', 'dvi_pla')->_join('plan', 'dvi', $render) . '
 ' . EntitySql::getInstanceRequire('sede', 'dvi_sed')->_join('sede', 'dvi', $render) . '
-' . EntitySql::getInstanceRequire('sede', 'dvi_sed_dep')->_join('dependencia', 'dvi_sed', $render) . '
 ' . EntitySql::getInstanceRequire('tipo_sede', 'dvi_sed_ts')->_join('tipo_sede', 'dvi_sed', $render) . '
 ' . EntitySql::getInstanceRequire('domicilio', 'dvi_sed_dom')->_join('domicilio', 'dvi_sed', $render) . '
 ' . EntitySql::getInstanceRequire('id_persona', 'dvi_sed_coo')->_join('coordinador', 'dvi_sed', $render) . '

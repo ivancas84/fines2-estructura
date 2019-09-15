@@ -103,7 +103,7 @@ class HorarioSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('plan', 'cur_ch_pla')->_fields() . ',
 ' . EntitySql::getInstanceRequire('toma', 'cur_ta')->_fields() . ',
 ' . EntitySql::getInstanceRequire('id_persona', 'cur_ta_pro')->_fields() . ',
-' . EntitySql::getInstanceRequire('id_persona', 'cur_ta_ree')->_fields() . '
+' . EntitySql::getInstanceRequire('id_persona', 'cur_ta_ree')->_fields() . ' 
 ';
   }
 
@@ -111,11 +111,9 @@ class HorarioSqlMain extends EntitySql{
     return EntitySql::getInstanceRequire('dia', 'dia')->_join('dia', 'hora', $render) . '
 ' . EntitySql::getInstanceRequire('curso', 'cur')->_join('curso', 'hora', $render) . '
 ' . EntitySql::getInstanceRequire('comision', 'cur_com')->_join('comision', 'cur', $render) . '
-' . EntitySql::getInstanceRequire('comision', 'cur_com_cs')->_join('comision_siguiente', 'cur_com', $render) . '
 ' . EntitySql::getInstanceRequire('division', 'cur_com_dvi')->_join('division', 'cur_com', $render) . '
 ' . EntitySql::getInstanceRequire('plan', 'cur_com_dvi_pla')->_join('plan', 'cur_com_dvi', $render) . '
 ' . EntitySql::getInstanceRequire('sede', 'cur_com_dvi_sed')->_join('sede', 'cur_com_dvi', $render) . '
-' . EntitySql::getInstanceRequire('sede', 'cur_com_dvi_sed_dep')->_join('dependencia', 'cur_com_dvi_sed', $render) . '
 ' . EntitySql::getInstanceRequire('tipo_sede', 'cur_com_dvi_sed_ts')->_join('tipo_sede', 'cur_com_dvi_sed', $render) . '
 ' . EntitySql::getInstanceRequire('domicilio', 'cur_com_dvi_sed_dom')->_join('domicilio', 'cur_com_dvi_sed', $render) . '
 ' . EntitySql::getInstanceRequire('id_persona', 'cur_com_dvi_sed_coo')->_join('coordinador', 'cur_com_dvi_sed', $render) . '
