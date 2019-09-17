@@ -38,16 +38,16 @@ class Data {
     $render->setHaving(["_cantidad",">",1]);
     $render->setCondition([
       ["com_fecha_anio","=",$fechaAnio],
-      ["com_fecha_semestre",">",$fechaSemestre],
+      ["com_fecha_semestre","=",$fechaSemestre],
       ["com_autorizada", "=", true],
-      ["com_dvi_sed_dependencia", "=", $dependencia],
+      ["com_dvi_sed_dependencia", "=", $dependencia],      
+    ]);
+    $render->setGeneralCondition([
+      ["com_dvi__clasificacion_nombre", "=", $clasificacion],
       [
         ["activo","=",true, "AND"],
         ["com_anio","=","1", "OR"]
       ]
-    ]);
-    $render->setGeneralCondition([
-      ["com_dvi__clasificacion_nombre", "=", $clasificacion]
     ]);
     
     return EntitySqlo::getInstanceRequire("nomina2")->advanced($render);
@@ -58,7 +58,7 @@ class Data {
     $render = new Render();
     $render->setCondition([
       ["com_fecha_anio","=",$fechaAnio],
-      ["com_fecha_semestre",">",$fechaSemestre],
+      ["com_fecha_semestre","=",$fechaSemestre],
       ["com_autorizada", "=", true],
       ["com_dvi_sed_dependencia", "=", $dependencia],
       ["persona","=",$personas],
@@ -79,16 +79,16 @@ class Data {
       ["com_fecha_semestre","=",$fechaSemestre],
       ["com_autorizada", "=", true],
       ["com_dvi_sed_dependencia", "=", $dependencia],
-      [
-        ["activo","=",true, "AND"],
-        ["com_anio","=","1", "OR"]
-      ]
     ]);
 
     if(!empty($personas)) $render->addCondition(["persona","!=",$personas]);
 
     $render->setGeneralCondition([
-      ["com_dvi__clasificacion_nombre", "=", $clasificacion]
+      ["com_dvi__clasificacion_nombre", "=", $clasificacion],
+      [
+        ["activo","=",true, "AND"],
+        ["com_anio","=","1", "OR"]
+      ]
     ]);
 
     $render->setOrder(
