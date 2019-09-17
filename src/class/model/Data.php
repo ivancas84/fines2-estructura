@@ -8,7 +8,8 @@ require_once("class/model/Sqlo.php");
 
 class Data {
 
-  public static function alumnosRepetidosFiltros($fechaAnio, $fechaSemestre, $clasificacion, $dependencia){
+  
+  public static function alumnosActivosRepetidosFiltros($fechaAnio, $fechaSemestre, $clasificacion, $dependencia){
     $render = new RenderAux();
     $render->setAggregate(["_cantidad"]);
     $render->setGroup(["persona"]);
@@ -19,17 +20,41 @@ class Data {
       ["com_autorizada", "=", true],
       ["com_dvi_sed_dependencia", "=", $dependencia],
       ["activo","=",true]
+      
     ]);
     $render->setGeneralCondition([
       ["com_dvi__clasificacion_nombre", "=", $clasificacion]
     ]);
     
     $sql = EntitySqlo::getInstanceRequire("nomina2")->advanced($render);
-//    echo "<pre>".$sql;
     return Dba::fetchAll($sql);
   }
 
-  public static function nominaFiltros($fechaAnio, $fechaSemestre, $clasificacion, $dependencia, $personas){
+
+  public static function alumnosActivosTodos1RepetidosFiltros($fechaAnio, $fechaSemestre, $clasificacion, $dependencia){
+    $render = new RenderAux();
+    $render->setAggregate(["_cantidad"]);
+    $render->setGroup(["persona"]);
+    $render->setHaving(["_cantidad",">",1]);
+    $render->setCondition([
+      ["com_fecha_anio","=",$fechaAnio],
+      ["com_fecha_semestre",">",$fechaSemestre],
+      ["com_autorizada", "=", true],
+      ["com_dvi_sed_dependencia", "=", $dependencia],
+      [
+        ["activo","=",true, "AND"],
+        ["com_anio","=","1", "OR"]
+      ]
+    ]);
+    $render->setGeneralCondition([
+      ["com_dvi__clasificacion_nombre", "=", $clasificacion]
+    ]);
+    
+    return EntitySqlo::getInstanceRequire("nomina2")->advanced($render);
+  
+  }
+
+  public static function nominaFiltrosPersonas($fechaAnio, $fechaSemestre, $clasificacion, $dependencia, $personas){
     $render = new Render();
     $render->setCondition([
       ["com_fecha_anio","=",$fechaAnio],
@@ -44,8 +69,33 @@ class Data {
     ]);
     $render->setOrder(["per_apellidos" => "asc", "per_nombres"=>"asc"]);
     
-    $sql = EntitySqlo::getInstanceRequire("nomina2")->all($render);
-    return Dba::fetchAll($sql);
+    return EntitySqlo::getInstanceRequire("nomina2")->all($render);
+  }
+
+  public static function nominaActivosTodos1FiltrosSinPersonas($fechaAnio, $fechaSemestre, $clasificacion, $dependencia, $personas){
+    $render = new Render();
+    $render->setCondition([
+      ["com_fecha_anio","=",$fechaAnio],
+      ["com_fecha_semestre","=",$fechaSemestre],
+      ["com_autorizada", "=", true],
+      ["com_dvi_sed_dependencia", "=", $dependencia],
+      [
+        ["activo","=",true, "AND"],
+        ["com_anio","=","1", "OR"]
+      ]
+    ]);
+
+    if(!empty($personas)) $render->addCondition(["persona","!=",$personas]);
+
+    $render->setGeneralCondition([
+      ["com_dvi__clasificacion_nombre", "=", $clasificacion]
+    ]);
+
+    $render->setOrder(
+      ["com_dvi_sed_numero"=>"asc", "com_anio" => "asc", "com_semestre" => "asc", "com_dvi_numero" => "asc", "per_apellidos" => "asc", "per_nombres" => "asc"]
+    );
+    
+    return EntitySqlo::getInstanceRequire("nomina2")->all($render);
   }
 
 
