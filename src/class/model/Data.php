@@ -99,6 +99,24 @@ class Data {
   }
 
 
+  function contralor($fechaAnio, $fechaSemestre, $clasificacion, $fechaEntradaContralor){
+    $render = new Render();
+    $render->setCondition([
+        ["cur_com_dvi__clasificacion_nombre", "=", $clasificacion],
+        ["cur_com_fecha_anio", "=", $fechaAnio],
+        ["cur_com_fecha_semestre", "=", $fechaSemestre],
+        [
+            ["estado","=","Aprobada"],
+            ["estado","=","Renuncia","OR"],
+            ["estado","=","Baja","OR"],
+        ],
+        ["profesor","=",true],
+        ["fecha_entrada_contralor","=",$fechaEntradaContralor],
+        ["estado_contralor","=","Pasar"]
+    ]);
+    $render->setOrder(["pro__numero_documento" => "ASC"]);
+    return EntitySqlo::getInstanceRequire("toma")->all($render);
+  }
 
 
 
@@ -1077,38 +1095,6 @@ AND sede.numero <> '80'
     return $sql;
   }
 
-  public static function contralor($fecha, $optCoord = '!=', $optFechaEntrada = "", array $idsPersona = null){
-   $sql = "
-SELECT
-id_persona.id AS persona,
-IF(id_persona.cuil IS NOT NULL, SUBSTRING(id_persona.cuil,1,2), '') AS cuil_inicio,
-IF(id_persona.cuil IS NOT NULL, SUBSTRING(id_persona.cuil,3,8), id_persona.numero_documento) AS cuil_numero,
-IF(id_persona.cuil IS NOT NULL, SUBSTRING(id_persona.cuil,11,1), '') AS cuil_digito_verificador,
-DATE_FORMAT(id_persona.fecha_nacimiento,'%d/%m/%Y') AS fecha_nacimiento,
-CONCAT_WS(', ',id_persona.apellidos, id_persona.nombres) AS nombre,
-asignatura.nombre AS asignatura,
-carga_horaria.horas_catedra,
-comision.anio,
-comision.semestre,
-division.turno,
-toma.estado,
-sede.numero AS numero_sede,
-toma.fecha_toma,
-toma.fecha_fin,
-toma.fecha_entrada_contralor,
-DATE_FORMAT(toma.fecha_fin,'%d') AS dia_hasta,
-DATE_FORMAT(toma.fecha_fin,'%m') AS mes_hasta,
-DATE_FORMAT(toma.fecha_fin,'%Y') AS anio_hasta,
-toma.comentario_contralor,
-reemplazo.numero_documento AS numero_documento_reemplazo
-" . self::fromContralor($fecha, $optCoord
-, $optFechaEntrada, $idsPersona) . "
-ORDER BY CAST(id_persona.numero_documento AS UNSIGNED), fecha_toma, anio, semestre, numero_sede
-";
-
-      return Dba::fetchAllTimeAr($sql);
-
-  }
 
   public static function contralorCantidad($fecha, $optCoord){
     $sql = "
