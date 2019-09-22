@@ -99,7 +99,7 @@ class Data {
   }
 
 
-  function contralor($fechaAnio, $fechaSemestre, $clasificacion, $fechaEntradaContralor){
+  public static function contralor($fechaAnio, $fechaSemestre, $clasificacion, $fechaEntradaContralor){
     $render = new Render();
     $render->setCondition([
         ["cur_com_dvi__clasificacion_nombre", "=", $clasificacion],
