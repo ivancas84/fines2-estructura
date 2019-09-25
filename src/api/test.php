@@ -18,7 +18,7 @@ require_once("config/valuesClasses.php");
 
 
   $render = new RenderAux();
-  $render->setAggregate(["_cantidad"]);
+  $render->setAggregate(["_count"]);
 
   $sqlo = Sqlo::getInstanceString("asignatura");
   $sql = $sqlo->advanced($render);

@@ -11,9 +11,9 @@ class Data {
   
   public static function alumnosActivosRepetidosFiltros($fechaAnio, $fechaSemestre, $clasificacion, $dependencia){
     $render = new RenderAux();
-    $render->setAggregate(["_cantidad"]);
+    $render->setAggregate(["_count"]);
     $render->setGroup(["persona"]);
-    $render->setHaving(["_cantidad",">",1]);
+    $render->setHaving(["_count",">",1]);
     $render->setCondition([
       ["com_fecha_anio","=",$fechaAnio],
       ["com_fecha_semestre",">",$fechaSemestre],
@@ -33,9 +33,9 @@ class Data {
 
   public static function alumnosActivosTodos1RepetidosFiltros($fechaAnio, $fechaSemestre, $clasificacion, $dependencia){
     $render = new RenderAux();
-    $render->setAggregate(["_cantidad"]);
+    $render->setAggregate(["_count"]);
     $render->setGroup(["persona"]);
-    $render->setHaving(["_cantidad",">",1]);
+    $render->setHaving(["_count",">",1]);
     $render->setCondition([
       ["com_fecha_anio","=",$fechaAnio],
       ["com_fecha_semestre","=",$fechaSemestre],
