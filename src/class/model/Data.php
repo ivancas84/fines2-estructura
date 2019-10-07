@@ -140,7 +140,7 @@ class Data {
     return EntitySqlo::getInstanceRequire("toma")->all($render);
   }
 
-  public static function contralorControlFechaRenuncia($fechaAnio, $fechaSemestre, $clasificacion, $fechaInicio, $fechaFin){
+  public static function contralorControlFechaRenuncia($fechaAnio, $fechaSemestre, $clasificacion){
     $render = new Render();
     $render->setCondition([
         ["cur_com_dvi__clasificacion_nombre", "=", $clasificacion],
@@ -148,6 +148,11 @@ class Data {
         ["cur_com_fecha_semestre", "=", $fechaSemestre],
         ["estado","=","Renuncia"],
         ["profesor","=",true],
+        [
+          ["fecha_inicio","!=",$fechaInicio],
+          ["fecha_fin","!=",$fechaFin, "OR"],
+          ["fecha_toma",">",$fechaFin, "OR"],
+        ],
         ["estado_contralor","=","Pasar"]
     ]);
     $render->setOrder(["pro__numero_documento" => "ASC"]);
