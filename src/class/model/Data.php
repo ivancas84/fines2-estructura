@@ -118,6 +118,48 @@ class Data {
     return EntitySqlo::getInstanceRequire("toma")->all($render);
   }
 
+  public static function contralorControlFechaAprobada($fechaAnio, $fechaSemestre, $clasificacion, $fechaInicio, $fechaFin){
+    $render = new Render();
+    $render->setCondition([
+        ["cur_com_dvi__clasificacion_nombre", "=", $clasificacion],
+        ["cur_com_fecha_anio", "=", $fechaAnio],
+        ["cur_com_fecha_semestre", "=", $fechaSemestre],
+        [
+            ["estado","=","Aprobada"],
+            ["estado","=","Baja","OR"],
+        ],
+        ["profesor","=",true],
+        [
+          ["fecha_inicio","!=",$fechaInicio],
+          ["fecha_fin","!=",$fechaFin, "OR"],
+          ["fecha_toma",">",$fechaFin, "OR"],
+        ],
+        ["estado_contralor","=","Pasar"]
+    ]);
+    $render->setOrder(["pro__numero_documento" => "ASC"]);
+    return EntitySqlo::getInstanceRequire("toma")->all($render);
+  }
+
+  public static function contralorControlFechaRenuncia($fechaAnio, $fechaSemestre, $clasificacion){
+    $render = new Render();
+    $render->setCondition([
+        ["cur_com_dvi__clasificacion_nombre", "=", $clasificacion],
+        ["cur_com_fecha_anio", "=", $fechaAnio],
+        ["cur_com_fecha_semestre", "=", $fechaSemestre],
+        ["estado","=","Renuncia"],
+        ["profesor","=",true],
+        [
+          ["fecha_inicio","!=",$fechaInicio],
+          ["fecha_fin","!=",$fechaFin, "OR"],
+          ["fecha_toma",">",$fechaFin, "OR"],
+        ],
+        ["estado_contralor","=","Pasar"]
+    ]);
+    $render->setOrder(["pro__numero_documento" => "ASC"]);
+    return EntitySqlo::getInstanceRequire("toma")->all($render);
+  }
+
+
 
 
 
