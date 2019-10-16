@@ -119,6 +119,9 @@ class Data {
   }
 
   public static function contralorControlFechaAprobada($fechaAnio, $fechaSemestre, $clasificacion, $fechaInicio, $fechaFin){
+    /**
+     * Deberia tener dependencia tambien, pero por el momento no se define ya que los datos solo estan para el cens 456
+     */
     $render = new Render();
     $render->setCondition([
         ["cur_com_dvi__clasificacion_nombre", "=", $clasificacion],
@@ -126,7 +129,7 @@ class Data {
         ["cur_com_fecha_semestre", "=", $fechaSemestre],
         [
             ["estado","=","Aprobada"],
-            ["estado","=","Baja","OR"],
+            ["estado","=","Pendiente","OR"],
         ],
         ["profesor","=",true],
         [
@@ -141,20 +144,25 @@ class Data {
   }
 
   public static function contralorControlFechaRenuncia($fechaAnio, $fechaSemestre, $clasificacion){
+    /**
+     * Deberia tener dependencia tambien, pero por el momento no se define ya que los datos solo estan para el cens 456
+     */
     $render = new Render();
     $render->setCondition([
-        ["cur_com_dvi__clasificacion_nombre", "=", $clasificacion],
-        ["cur_com_fecha_anio", "=", $fechaAnio],
-        ["cur_com_fecha_semestre", "=", $fechaSemestre],
+      ["cur_com_dvi__clasificacion_nombre", "=", $clasificacion],
+      ["cur_com_fecha_anio", "=", $fechaAnio],
+      ["cur_com_fecha_semestre", "=", $fechaSemestre],
+      [
         ["estado","=","Renuncia"],
-        ["profesor","=",true],
-        [
-          ["fecha_inicio","!=",$fechaInicio],
-          ["fecha_fin","!=",$fechaFin, "OR"],
-          ["fecha_toma",">",$fechaFin, "OR"],
-        ],
-        ["estado_contralor","=","Pasar"]
+        ["estado","=","Baja","OR"]
+      ],
+      ["profesor","=",true],
+      ["estado_contralor","=","Pasar"]
     ]);
+    $render->setGeneralCondition([[
+      ["_compare","!=", ["fecha_toma","fecha_inicio"]],
+      ["_compare","!=", ["fecha_toma","fecha_fin"], "OR"]
+    ]]);
     $render->setOrder(["pro__numero_documento" => "ASC"]);
     return EntitySqlo::getInstanceRequire("toma")->all($render);
   }
