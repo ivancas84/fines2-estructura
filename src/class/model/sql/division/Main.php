@@ -15,6 +15,7 @@ class DivisionSqlMain extends EntitySql{
 
     switch ($field) {
       case $p.'id': return $t.".id";
+      case $p.'numero': return $t.".numero";
       case $p.'serie': return $t.".serie";
       case $p.'turno': return $t.".turno";
       case $p.'numero': return $t.".numero";
@@ -60,7 +61,7 @@ class DivisionSqlMain extends EntitySql{
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'serie') . ' AS ' . $p.'serie, ' . $this->_mappingField($p.'turno') . ' AS ' . $p.'turno, ' . $this->_mappingField($p.'numero') . ' AS ' . $p.'numero, ' . $this->_mappingField($p.'plan') . ' AS ' . $p.'plan, ' . $this->_mappingField($p.'sede') . ' AS ' . $p.'sede';
+' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'numero') . ' AS ' . $p.'numero, ' . $this->_mappingField($p.'serie') . ' AS ' . $p.'serie, ' . $this->_mappingField($p.'turno') . ' AS ' . $p.'turno, ' . $this->_mappingField($p.'numero') . ' AS ' . $p.'numero, ' . $this->_mappingField($p.'plan') . ' AS ' . $p.'plan, ' . $this->_mappingField($p.'sede') . ' AS ' . $p.'sede';
   }
 
   public function _fieldsDb(){
@@ -97,6 +98,7 @@ class DivisionSqlMain extends EntitySql{
     $f = $this->_mappingField($field);
     switch ($field){
       case "{$p}id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}numero": return $this->format->conditionText($f, $value, $option);
       case "{$p}serie": return $this->format->conditionText($f, $value, $option);
       case "{$p}turno": return $this->format->conditionText($f, $value, $option);
       case "{$p}numero": return $this->format->conditionText($f, $value, $option);
@@ -159,10 +161,10 @@ class DivisionSqlMain extends EntitySql{
     return $data;
   }
 
-  //Formato SQL
   public function format(array $row){
     $row_ = array();
     if(isset($row['id']) ) $row_['id'] = $this->format->positiveIntegerWithoutZerofill($row['id']);
+    if(isset($row['numero'])) $row_['numero'] = $this->format->escapeString($row['numero']);
     if(isset($row['serie'])) $row_['serie'] = $this->format->escapeString($row['serie']);
     if(isset($row['turno'])) $row_['turno'] = $this->format->escapeString($row['turno']);
     if(isset($row['numero'])) $row_['numero'] = $this->format->escapeString($row['numero']);
@@ -176,6 +178,7 @@ class DivisionSqlMain extends EntitySql{
     $prefix = $this->prf();
     $row_ = [];
     $row_["id"] = (is_null($row[$prefix . "id"])) ? null : (string)$row[$prefix . "id"]; //la pk se trata como string debido a un comportamiento erratico en angular 2 que al tratarlo como integer resta 1 en el valor
+    $row_["numero"] = (is_null($row[$prefix . "numero"])) ? null : (string)$row[$prefix . "numero"];
     $row_["serie"] = (is_null($row[$prefix . "serie"])) ? null : (string)$row[$prefix . "serie"];
     $row_["turno"] = (is_null($row[$prefix . "turno"])) ? null : (string)$row[$prefix . "turno"];
     $row_["numero"] = (is_null($row[$prefix . "numero"])) ? null : (string)$row[$prefix . "numero"];

@@ -1,10 +1,11 @@
 <?php
 
+require_once("class/Format.php");
 require_once("class/model/Values.php");
 
 class _TipoSede extends EntityValues {
-  public $id = UNDEFINED;
-  public $descripcion = UNDEFINED;
+  protected $id = UNDEFINED;
+  protected $descripcion = UNDEFINED;
 
   public function _setDefault(){
     $this->setId(DEFAULT_VALUE);
@@ -19,21 +20,38 @@ class _TipoSede extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->descripcion !== UNDEFINED) $row["descripcion"] = $this->descripcion();
+    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
+    if($this->descripcion !== UNDEFINED) $row["descripcion"] = $this->descripcion("");
     return $row;
   }
 
+  public function _isEmpty(){
+    if(!Validation::is_empty($this->id)) return false;
+    if(!Validation::is_empty($this->descripcion)) return false;
+    return true;
+  }
+
   public function id() { return $this->id; }
-  public function descripcion($format = null) { return $this->_formatString($this->descripcion, $format); }
+  public function descripcion($format = null) { return Format::convertCase($this->descripcion, $format); }
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $this->id = (empty($p)) ? null : (string)$p;
+    $p = (is_null($p)) ? null : (string)$p;
+    if($this->checkId($p)) $this->id = $p;
   }
 
   public function setDescripcion($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $this->descripcion = (empty($p)) ? null : (string)$p;
+    $p = (is_null($p)) ? null : (string)$p;
+    if($this->checkDescripcion($p)) $this->descripcion = $p;
+  }
+
+  public function checkId($value) { 
+      return true; 
+  }
+
+  public function checkDescripcion($value) { 
+    $v = Validation::getInstanceValue($value)->string()->required();
+    return $this->_setLogsValidation("descripcion", $v);
   }
 
 

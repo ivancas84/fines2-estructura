@@ -1,0 +1,19 @@
+#Inicialmente nulificar division.numero y posteriormente eliminarlo
+
+
+
+
+ALTER TABLE `fines2`.`division`
+CHANGE COLUMN `serie` `serie` VARCHAR(45) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NOT NULL,
+DROP COLUMN `numero`;
+
+
+
+ALTER TABLE `fines2`.`sede`
+CHANGE COLUMN `numero` `numero` VARCHAR(45) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NULL DEFAULT NULL ;
+
+
+UPDATE comision SET fecha_anio = year(fecha);
+UPDATE comision SET fecha_semestre = 1 WHERE month(fecha) < 7;
+UPDATE comision SET fecha_semestre = 2 WHERE month(fecha) >= 7;
+
