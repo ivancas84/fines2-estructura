@@ -137,7 +137,8 @@ class Data {
           ["fecha_fin","!=",$fechaFin, "OR"],
           ["fecha_toma",">",$fechaFin, "OR"],
         ],
-        ["estado_contralor","=","Pasar"]
+        ["estado_contralor","=","Pasar"],
+        ["fecha_entrada_contralor","=",false],
     ]);
     $render->setOrder(["pro__numero_documento" => "ASC"]);
     return EntitySqlo::getInstanceRequire("toma")->all($render);
