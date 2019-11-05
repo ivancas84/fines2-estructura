@@ -18,7 +18,7 @@ autorizada (aut): boolean nf. NOT NULL.
 apertura (ape): boolean nf. NOT NULL.
 publicar (pub): boolean nf. NOT NULL.
 fecha_anio (fa): year nf. NOT NULL.
-fecha_semestre (fs): integer nf. NOT NULL.
+feche_semestre (fs): integer nf.
 tramo (tr): string nf. NOT NULL. NOT ADMIN.
 horario (hoa): string nf. NOT NULL. NOT ADMIN.
 periodo (pe): string nf. NOT ADMIN.
