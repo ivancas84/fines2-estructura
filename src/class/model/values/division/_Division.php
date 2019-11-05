@@ -1,14 +1,15 @@
 <?php
 
+require_once("class/Format.php");
 require_once("class/model/Values.php");
 
 class _Division extends EntityValues {
-  public $id = UNDEFINED;
-  public $serie = UNDEFINED;
-  public $turno = UNDEFINED;
-  public $numero = UNDEFINED;
-  public $plan = UNDEFINED;
-  public $sede = UNDEFINED;
+  protected $id = UNDEFINED;
+  protected $serie = UNDEFINED;
+  protected $turno = UNDEFINED;
+  protected $numero = UNDEFINED;
+  protected $plan = UNDEFINED;
+  protected $sede = UNDEFINED;
 
   public function _setDefault(){
     $this->setId(DEFAULT_VALUE);
@@ -31,49 +32,94 @@ class _Division extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->serie !== UNDEFINED) $row["serie"] = $this->serie();
-    if($this->turno !== UNDEFINED) $row["turno"] = $this->turno();
-    if($this->numero !== UNDEFINED) $row["numero"] = $this->numero();
-    if($this->plan !== UNDEFINED) $row["plan"] = $this->plan();
-    if($this->sede !== UNDEFINED) $row["sede"] = $this->sede();
+    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
+    if($this->serie !== UNDEFINED) $row["serie"] = $this->serie("");
+    if($this->turno !== UNDEFINED) $row["turno"] = $this->turno("");
+    if($this->numero !== UNDEFINED) $row["numero"] = $this->numero("");
+    if($this->plan !== UNDEFINED) $row["plan"] = $this->plan("");
+    if($this->sede !== UNDEFINED) $row["sede"] = $this->sede("");
     return $row;
   }
 
+  public function _isEmpty(){
+    if(!Validation::is_empty($this->id)) return false;
+    if(!Validation::is_empty($this->serie)) return false;
+    if(!Validation::is_empty($this->turno)) return false;
+    if(!Validation::is_empty($this->numero)) return false;
+    if(!Validation::is_empty($this->plan)) return false;
+    if(!Validation::is_empty($this->sede)) return false;
+    return true;
+  }
+
   public function id() { return $this->id; }
-  public function serie($format = null) { return $this->_formatString($this->serie, $format); }
-  public function turno($format = null) { return $this->_formatString($this->turno, $format); }
-  public function numero($format = null) { return $this->_formatString($this->numero, $format); }
+  public function serie($format = null) { return Format::convertCase($this->serie, $format); }
+  public function turno($format = null) { return Format::convertCase($this->turno, $format); }
+  public function numero($format = null) { return Format::convertCase($this->numero, $format); }
   public function plan() { return $this->plan; }
   public function sede() { return $this->sede; }
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $this->id = (empty($p)) ? null : (string)$p;
+    $p = (is_null($p)) ? null : (string)$p;
+    if($this->checkId($p)) $this->id = $p;
   }
 
   public function setSerie($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $this->serie = (empty($p)) ? null : (string)$p;
+    $p = (is_null($p)) ? null : (string)$p;
+    if($this->checkSerie($p)) $this->serie = $p;
   }
 
   public function setTurno($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $this->turno = (empty($p)) ? null : (string)$p;
+    $p = (is_null($p)) ? null : (string)$p;
+    if($this->checkTurno($p)) $this->turno = $p;
   }
 
   public function setNumero($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $this->numero = (empty($p)) ? null : (string)$p;
+    $p = (is_null($p)) ? null : (string)$p;
+    if($this->checkNumero($p)) $this->numero = $p;
   }
 
   public function setPlan($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $this->plan = (empty($p)) ? null : (string)$p;
+    $p = (is_null($p)) ? null : (string)$p;
+    if($this->checkPlan($p)) $this->plan = $p;
   }
 
   public function setSede($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $this->sede = (empty($p)) ? null : (string)$p;
+    $p = (is_null($p)) ? null : (string)$p;
+    if($this->checkSede($p)) $this->sede = $p;
+  }
+
+  public function checkId($value) { 
+      return true; 
+  }
+
+  public function checkSerie($value) { 
+    $v = Validation::getInstanceValue($value)->string()->required();
+    return $this->_setLogsValidation("serie", $v);
+  }
+
+  public function checkTurno($value) { 
+    $v = Validation::getInstanceValue($value)->string();
+    return $this->_setLogsValidation("turno", $v);
+  }
+
+  public function checkNumero($value) { 
+    $v = Validation::getInstanceValue($value)->string()->required();
+    return $this->_setLogsValidation("numero", $v);
+  }
+
+  public function checkPlan($value) { 
+    $v = Validation::getInstanceValue($value)->integer()->required();
+    return $this->_setLogsValidation("plan", $v);
+  }
+
+  public function checkSede($value) { 
+    $v = Validation::getInstanceValue($value)->integer()->required();
+    return $this->_setLogsValidation("sede", $v);
   }
 
 

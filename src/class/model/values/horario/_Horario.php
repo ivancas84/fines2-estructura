@@ -1,14 +1,15 @@
 <?php
 
+require_once("class/Format.php");
 require_once("class/model/Values.php");
 
 class _Horario extends EntityValues {
-  public $id = UNDEFINED;
-  public $horaInicio = UNDEFINED;
-  public $horaFin = UNDEFINED;
-  public $horasCatedra = UNDEFINED;
-  public $dia = UNDEFINED;
-  public $curso = UNDEFINED;
+  protected $id = UNDEFINED;
+  protected $horaInicio = UNDEFINED;
+  protected $horaFin = UNDEFINED;
+  protected $horasCatedra = UNDEFINED;
+  protected $dia = UNDEFINED;
+  protected $curso = UNDEFINED;
 
   public function _setDefault(){
     $this->setId(DEFAULT_VALUE);
@@ -31,59 +32,104 @@ class _Horario extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->horaInicio !== UNDEFINED) $row["hora_inicio"] = $this->horaInicio();
-    if($this->horaFin !== UNDEFINED) $row["hora_fin"] = $this->horaFin();
-    if($this->horasCatedra !== UNDEFINED) $row["horas_catedra"] = $this->horasCatedra();
-    if($this->dia !== UNDEFINED) $row["dia"] = $this->dia();
-    if($this->curso !== UNDEFINED) $row["curso"] = $this->curso();
+    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
+    if($this->horaInicio !== UNDEFINED) $row["hora_inicio"] = $this->horaInicio("h:i:s");
+    if($this->horaFin !== UNDEFINED) $row["hora_fin"] = $this->horaFin("h:i:s");
+    if($this->horasCatedra !== UNDEFINED) $row["horas_catedra"] = $this->horasCatedra("");
+    if($this->dia !== UNDEFINED) $row["dia"] = $this->dia("");
+    if($this->curso !== UNDEFINED) $row["curso"] = $this->curso("");
     return $row;
   }
 
+  public function _isEmpty(){
+    if(!Validation::is_empty($this->id)) return false;
+    if(!Validation::is_empty($this->horaInicio)) return false;
+    if(!Validation::is_empty($this->horaFin)) return false;
+    if(!Validation::is_empty($this->horasCatedra)) return false;
+    if(!Validation::is_empty($this->dia)) return false;
+    if(!Validation::is_empty($this->curso)) return false;
+    return true;
+  }
+
   public function id() { return $this->id; }
-  public function horaInicio($format = 'H:i') { return $this->_formatDate($this->horaInicio, $format); }
-  public function horaFin($format = 'H:i') { return $this->_formatDate($this->horaFin, $format); }
+  public function horaInicio($format = null) { return Format::date($this->horaInicio, $format); }
+  public function horaFin($format = null) { return Format::date($this->horaFin, $format); }
   public function horasCatedra() { return $this->horasCatedra; }
   public function dia() { return $this->dia; }
   public function curso() { return $this->curso; }
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $this->id = (empty($p)) ? null : (string)$p;
+    $p = (is_null($p)) ? null : (string)$p;
+    if($this->checkId($p)) $this->id = $p;
   }
 
   public function _setHoraInicio(DateTime $p = null) {
-    $this->horaInicio = $p;
+      if($this->checkHoraInicio($p)) $this->horaInicio = $p;  
   }
 
   public function setHoraInicio($p, $format = "H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? '' : trim($p);
-    $p = SpanishDateTime::createFromFormat($format, $p);
-    $this->horaInicio = (empty($p)) ? null : $p;
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    if(is_null($p)) $p = null;
+    else $p = SpanishDateTime::createFromFormat($format, $p);
+    if($this->checkHoraInicio($p)) $this->horaInicio = $p;
   }
 
   public function _setHoraFin(DateTime $p = null) {
-    $this->horaFin = $p;
+      if($this->checkHoraFin($p)) $this->horaFin = $p;  
   }
 
   public function setHoraFin($p, $format = "H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? '' : trim($p);
-    $p = SpanishDateTime::createFromFormat($format, $p);
-    $this->horaFin = (empty($p)) ? null : $p;
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    if(is_null($p)) $p = null;
+    else $p = SpanishDateTime::createFromFormat($format, $p);
+    if($this->checkHoraFin($p)) $this->horaFin = $p;
   }
 
   public function setHorasCatedra($p) {
     if ($p == DEFAULT_VALUE) $p = null;
-    $this->horasCatedra = (is_null($p)) ? null : intval(trim($p));
+    (is_null($p)) ? null : intval(trim($p));
+    if($this->checkHorasCatedra($p)) $this->horasCatedra = $p;
   }
 
   public function setDia($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $this->dia = (empty($p)) ? null : (string)$p;
+    $p = (is_null($p)) ? null : (string)$p;
+    if($this->checkDia($p)) $this->dia = $p;
   }
 
   public function setCurso($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $this->curso = (empty($p)) ? null : (string)$p;
+    $p = (is_null($p)) ? null : (string)$p;
+    if($this->checkCurso($p)) $this->curso = $p;
+  }
+
+  public function checkId($value) { 
+      return true; 
+  }
+
+  public function checkHoraInicio($value) { 
+    $v = Validation::getInstanceValue($value)->date()->required();
+    return $this->_setLogsValidation("hora_inicio", $v);
+  }
+
+  public function checkHoraFin($value) { 
+    $v = Validation::getInstanceValue($value)->date()->required();
+    return $this->_setLogsValidation("hora_fin", $v);
+  }
+
+  public function checkHorasCatedra($value) { 
+    $v = Validation::getInstanceValue($value)->integer()->required();
+    return $this->_setLogsValidation("horas_catedra", $v);
+  }
+
+  public function checkDia($value) { 
+    $v = Validation::getInstanceValue($value)->integer()->required();
+    return $this->_setLogsValidation("dia", $v);
+  }
+
+  public function checkCurso($value) { 
+    $v = Validation::getInstanceValue($value)->integer()->required();
+    return $this->_setLogsValidation("curso", $v);
   }
 
 

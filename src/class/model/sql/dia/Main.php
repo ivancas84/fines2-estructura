@@ -85,7 +85,6 @@ class DiaSqlMain extends EntitySql{
     return $data;
   }
 
-  //Formato SQL
   public function format(array $row){
     $row_ = array();
     if(isset($row['id']) ) $row_['id'] = $this->format->positiveIntegerWithoutZerofill($row['id']);

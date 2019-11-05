@@ -1,11 +1,12 @@
 <?php
 
+require_once("class/Format.php");
 require_once("class/model/Values.php");
 
 class _ClasificacionPlan extends EntityValues {
-  public $id = UNDEFINED;
-  public $clasificacion = UNDEFINED;
-  public $plan = UNDEFINED;
+  protected $id = UNDEFINED;
+  protected $clasificacion = UNDEFINED;
+  protected $plan = UNDEFINED;
 
   public function _setDefault(){
     $this->setId(DEFAULT_VALUE);
@@ -22,10 +23,17 @@ class _ClasificacionPlan extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->clasificacion !== UNDEFINED) $row["clasificacion"] = $this->clasificacion();
-    if($this->plan !== UNDEFINED) $row["plan"] = $this->plan();
+    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
+    if($this->clasificacion !== UNDEFINED) $row["clasificacion"] = $this->clasificacion("");
+    if($this->plan !== UNDEFINED) $row["plan"] = $this->plan("");
     return $row;
+  }
+
+  public function _isEmpty(){
+    if(!Validation::is_empty($this->id)) return false;
+    if(!Validation::is_empty($this->clasificacion)) return false;
+    if(!Validation::is_empty($this->plan)) return false;
+    return true;
   }
 
   public function id() { return $this->id; }
@@ -33,17 +41,34 @@ class _ClasificacionPlan extends EntityValues {
   public function plan() { return $this->plan; }
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $this->id = (empty($p)) ? null : (string)$p;
+    $p = (is_null($p)) ? null : (string)$p;
+    if($this->checkId($p)) $this->id = $p;
   }
 
   public function setClasificacion($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $this->clasificacion = (empty($p)) ? null : (string)$p;
+    $p = (is_null($p)) ? null : (string)$p;
+    if($this->checkClasificacion($p)) $this->clasificacion = $p;
   }
 
   public function setPlan($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $this->plan = (empty($p)) ? null : (string)$p;
+    $p = (is_null($p)) ? null : (string)$p;
+    if($this->checkPlan($p)) $this->plan = $p;
+  }
+
+  public function checkId($value) { 
+      return true; 
+  }
+
+  public function checkClasificacion($value) { 
+    $v = Validation::getInstanceValue($value)->integer()->required();
+    return $this->_setLogsValidation("clasificacion", $v);
+  }
+
+  public function checkPlan($value) { 
+    $v = Validation::getInstanceValue($value)->integer()->required();
+    return $this->_setLogsValidation("plan", $v);
   }
 
 

@@ -25,7 +25,7 @@ class ComisionEntityMain extends Entity {
       Field::getInstanceRequire("comision", "apertura"),
       Field::getInstanceRequire("comision", "publicar"),
       Field::getInstanceRequire("comision", "fecha_anio"),
-      Field::getInstanceRequire("comision", "fecha_semestre"),
+      Field::getInstanceRequire("comision", "feche_semestre"),
     );
   }
 

@@ -1,10 +1,11 @@
 <?php
 
+require_once("class/Format.php");
 require_once("class/model/Values.php");
 
 class _Clasificacion extends EntityValues {
-  public $id = UNDEFINED;
-  public $nombre = UNDEFINED;
+  protected $id = UNDEFINED;
+  protected $nombre = UNDEFINED;
 
   public function _setDefault(){
     $this->setId(DEFAULT_VALUE);
@@ -19,21 +20,38 @@ class _Clasificacion extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->nombre !== UNDEFINED) $row["nombre"] = $this->nombre();
+    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
+    if($this->nombre !== UNDEFINED) $row["nombre"] = $this->nombre("");
     return $row;
   }
 
+  public function _isEmpty(){
+    if(!Validation::is_empty($this->id)) return false;
+    if(!Validation::is_empty($this->nombre)) return false;
+    return true;
+  }
+
   public function id() { return $this->id; }
-  public function nombre($format = null) { return $this->_formatString($this->nombre, $format); }
+  public function nombre($format = null) { return Format::convertCase($this->nombre, $format); }
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $this->id = (empty($p)) ? null : (string)$p;
+    $p = (is_null($p)) ? null : (string)$p;
+    if($this->checkId($p)) $this->id = $p;
   }
 
   public function setNombre($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $this->nombre = (empty($p)) ? null : (string)$p;
+    $p = (is_null($p)) ? null : (string)$p;
+    if($this->checkNombre($p)) $this->nombre = $p;
+  }
+
+  public function checkId($value) { 
+      return true; 
+  }
+
+  public function checkNombre($value) { 
+    $v = Validation::getInstanceValue($value)->string()->required();
+    return $this->_setLogsValidation("nombre", $v);
   }
 
 
