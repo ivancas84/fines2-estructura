@@ -99,7 +99,7 @@ class Data {
   }
 
 
-  public static function contralor($fechaAnio, $fechaSemestre, $clasificacion, $fechaEntradaContralor = null, $fechaAlta = null){
+  public static function contralor($fechaAnio, $fechaSemestre, $clasificacion, $fechaEntradaContralor){
     $render = new Render();
     $render->setCondition([
         ["cur_com_dvi__clasificacion_nombre", "=", $clasificacion],
@@ -111,22 +111,10 @@ class Data {
             ["estado","=","Baja","OR"],
         ],
         ["profesor","=",true],
-        ["estado_contralor","=","Pasar"],
-        ["fecha_entrada_contralor","=",$fechaEntradaContralor]
+        ["fecha_entrada_contralor","=",$fechaEntradaContralor],
+        ["estado_contralor","=","Pasar"]
     ]);
-    if($fechaAlta) $render->addCondition(["alta","<",$fechaAlta]);
     $render->setOrder(["pro__numero_documento" => "ASC"]);
-    return EntitySqlo::getInstanceRequire("toma")->all($render);
-  }
-
-  public static function contralorRenunciasPendientes($fechaAnio, $fechaSemestre){
-    $render = new Render();
-    $render->setCondition([
-        ["cur_com_fecha_anio", "=", $fechaAnio],
-        ["cur_com_fecha_semestre", "=", $fechaSemestre],
-        ["cur_toma_activa", "=", false],
-        ["estado","=","Renuncia"],
-    ]);
     return EntitySqlo::getInstanceRequire("toma")->all($render);
   }
 
@@ -149,7 +137,8 @@ class Data {
           ["fecha_fin","!=",$fechaFin, "OR"],
           ["fecha_toma",">",$fechaFin, "OR"],
         ],
-        ["estado_contralor","=","Pasar"]
+        ["estado_contralor","=","Pasar"],
+        ["fecha_entrada_contralor","=",false],
     ]);
     $render->setOrder(["pro__numero_documento" => "ASC"]);
     return EntitySqlo::getInstanceRequire("toma")->all($render);

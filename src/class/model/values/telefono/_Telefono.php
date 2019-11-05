@@ -1,16 +1,15 @@
 <?php
 
-require_once("class/Format.php");
 require_once("class/model/Values.php");
 
 class _Telefono extends EntityValues {
-  protected $id = UNDEFINED;
-  protected $prefijo = UNDEFINED;
-  protected $numero = UNDEFINED;
-  protected $tipo = UNDEFINED;
-  protected $alta = UNDEFINED;
-  protected $baja = UNDEFINED;
-  protected $persona = UNDEFINED;
+  public $id = UNDEFINED;
+  public $prefijo = UNDEFINED;
+  public $numero = UNDEFINED;
+  public $tipo = UNDEFINED;
+  public $alta = UNDEFINED;
+  public $baja = UNDEFINED;
+  public $persona = UNDEFINED;
 
   public function _setDefault(){
     $this->setId(DEFAULT_VALUE);
@@ -35,116 +34,66 @@ class _Telefono extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
-    if($this->prefijo !== UNDEFINED) $row["prefijo"] = $this->prefijo("");
-    if($this->numero !== UNDEFINED) $row["numero"] = $this->numero("");
-    if($this->tipo !== UNDEFINED) $row["tipo"] = $this->tipo("");
-    if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d h:i:s");
-    if($this->baja !== UNDEFINED) $row["baja"] = $this->baja("Y-m-d h:i:s");
-    if($this->persona !== UNDEFINED) $row["persona"] = $this->persona("");
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
+    if($this->prefijo !== UNDEFINED) $row["prefijo"] = $this->prefijo();
+    if($this->numero !== UNDEFINED) $row["numero"] = $this->numero();
+    if($this->tipo !== UNDEFINED) $row["tipo"] = $this->tipo();
+    if($this->alta !== UNDEFINED) $row["alta"] = $this->alta();
+    if($this->baja !== UNDEFINED) $row["baja"] = $this->baja();
+    if($this->persona !== UNDEFINED) $row["persona"] = $this->persona();
     return $row;
-  }
-
-  public function _isEmpty(){
-    if(!Validation::is_empty($this->id)) return false;
-    if(!Validation::is_empty($this->prefijo)) return false;
-    if(!Validation::is_empty($this->numero)) return false;
-    if(!Validation::is_empty($this->tipo)) return false;
-    if(!Validation::is_empty($this->alta)) return false;
-    if(!Validation::is_empty($this->baja)) return false;
-    if(!Validation::is_empty($this->persona)) return false;
-    return true;
   }
 
   public function id() { return $this->id; }
   public function prefijo() { return $this->prefijo; }
   public function numero() { return $this->numero; }
-  public function tipo($format = null) { return Format::convertCase($this->tipo, $format); }
-  public function alta($format = null) { return Format::date($this->alta, $format); }
-  public function baja($format = null) { return Format::date($this->baja, $format); }
+  public function tipo($format = null) { return $this->_formatString($this->tipo, $format); }
+  public function alta($format = 'Y-m-d H:i:s') { return $this->_formatDate($this->alta, $format); }
+  public function baja($format = 'Y-m-d H:i:s') { return $this->_formatDate($this->baja, $format); }
   public function persona() { return $this->persona; }
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkId($p)) $this->id = $p;
+    $this->id = (empty($p)) ? null : (string)$p;
   }
 
   public function setPrefijo($p) {
     if ($p == DEFAULT_VALUE) $p = null;
-    (is_null($p)) ? null : intval(trim($p));
-    if($this->checkPrefijo($p)) $this->prefijo = $p;
+    $this->prefijo = (is_null($p)) ? null : intval(trim($p));
   }
 
   public function setNumero($p) {
     if ($p == DEFAULT_VALUE) $p = null;
-    (is_null($p)) ? null : intval(trim($p));
-    if($this->checkNumero($p)) $this->numero = $p;
+    $this->numero = (is_null($p)) ? null : intval(trim($p));
   }
 
   public function setTipo($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkTipo($p)) $this->tipo = $p;
+    $this->tipo = (empty($p)) ? null : (string)$p;
   }
 
   public function _setAlta(DateTime $p = null) {
-      if($this->checkAlta($p)) $this->alta = $p;  
+    $this->alta = $p;
   }
 
   public function setAlta($p, $format = "Y-m-d H:i:s") {
     $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
-    $p = (is_null($p)) ? null : SpanishDateTime::createFromFormat($format, $p);
-    if($this->checkAlta($p)) $this->alta = $p;
+    $p = SpanishDateTime::createFromFormat($format, $p);
+    $this->alta = (empty($p)) ? null : $p;
   }
 
   public function _setBaja(DateTime $p = null) {
-      if($this->checkBaja($p)) $this->baja = $p;  
+    $this->baja = $p;
   }
 
   public function setBaja($p, $format = "Y-m-d H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : SpanishDateTime::createFromFormat($format, $p);
-    if($this->checkBaja($p)) $this->baja = $p;
+    $p = ($p == DEFAULT_VALUE) ? '' : trim($p);
+    $p = SpanishDateTime::createFromFormat($format, $p);
+    $this->baja = (empty($p)) ? null : $p;
   }
 
   public function setPersona($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkPersona($p)) $this->persona = $p;
-  }
-
-  public function checkId($value) { 
-      return true; 
-  }
-
-  public function checkPrefijo($value) { 
-    $v = Validation::getInstanceValue($value)->integer()->required();
-    return $this->_setLogsValidation("prefijo", $v);
-  }
-
-  public function checkNumero($value) { 
-    $v = Validation::getInstanceValue($value)->integer()->required();
-    return $this->_setLogsValidation("numero", $v);
-  }
-
-  public function checkTipo($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("tipo", $v);
-  }
-
-  public function checkAlta($value) { 
-    $v = Validation::getInstanceValue($value)->date()->required();
-    return $this->_setLogsValidation("alta", $v);
-  }
-
-  public function checkBaja($value) { 
-    $v = Validation::getInstanceValue($value)->date();
-    return $this->_setLogsValidation("baja", $v);
-  }
-
-  public function checkPersona($value) { 
-    $v = Validation::getInstanceValue($value)->integer()->required();
-    return $this->_setLogsValidation("persona", $v);
+    $this->persona = (empty($p)) ? null : (string)$p;
   }
 
 

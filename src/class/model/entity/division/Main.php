@@ -13,7 +13,6 @@ class DivisionEntityMain extends Entity {
 
   public function getFieldsNf(){
     return array(
-      Field::getInstanceRequire("division", "numero"),
       Field::getInstanceRequire("division", "serie"),
       Field::getInstanceRequire("division", "turno"),
     );
