@@ -16,7 +16,7 @@ class _Comision extends EntityValues {
   protected $apertura = UNDEFINED;
   protected $publicar = UNDEFINED;
   protected $fechaAnio = UNDEFINED;
-  protected $fecheSemestre = UNDEFINED;
+  protected $fechaSemestre = UNDEFINED;
   protected $tramo = UNDEFINED;
   protected $horario = UNDEFINED;
   protected $periodo = UNDEFINED;
@@ -36,7 +36,7 @@ class _Comision extends EntityValues {
     $this->setApertura(DEFAULT_VALUE);
     $this->setPublicar(DEFAULT_VALUE);
     $this->setFechaAnio(DEFAULT_VALUE);
-    $this->setFecheSemestre(DEFAULT_VALUE);
+    $this->setFechaSemestre(DEFAULT_VALUE);
     $this->setTramo(DEFAULT_VALUE);
     $this->setHorario(DEFAULT_VALUE);
     $this->setPeriodo(DEFAULT_VALUE);
@@ -58,7 +58,7 @@ class _Comision extends EntityValues {
     if(isset($row[$p."apertura"])) $this->setApertura($row[$p."apertura"]);
     if(isset($row[$p."publicar"])) $this->setPublicar($row[$p."publicar"]);
     if(isset($row[$p."fecha_anio"])) $this->setFechaAnio($row[$p."fecha_anio"]);
-    if(isset($row[$p."feche_semestre"])) $this->setFecheSemestre($row[$p."feche_semestre"]);
+    if(isset($row[$p."fecha_semestre"])) $this->setFechaSemestre($row[$p."fecha_semestre"]);
     if(isset($row[$p."tramo"])) $this->setTramo($row[$p."tramo"]);
     if(isset($row[$p."horario"])) $this->setHorario($row[$p."horario"]);
     if(isset($row[$p."periodo"])) $this->setPeriodo($row[$p."periodo"]);
@@ -80,7 +80,7 @@ class _Comision extends EntityValues {
     if($this->apertura !== UNDEFINED) $row["apertura"] = $this->apertura("");
     if($this->publicar !== UNDEFINED) $row["publicar"] = $this->publicar("");
     if($this->fechaAnio !== UNDEFINED) $row["fecha_anio"] = $this->fechaAnio("Y");
-    if($this->fecheSemestre !== UNDEFINED) $row["feche_semestre"] = $this->fecheSemestre("");
+    if($this->fechaSemestre !== UNDEFINED) $row["fecha_semestre"] = $this->fechaSemestre("");
     if($this->tramo !== UNDEFINED) $row["tramo"] = $this->tramo("");
     if($this->horario !== UNDEFINED) $row["horario"] = $this->horario("");
     if($this->periodo !== UNDEFINED) $row["periodo"] = $this->periodo("");
@@ -102,7 +102,7 @@ class _Comision extends EntityValues {
     if(!Validation::is_empty($this->apertura)) return false;
     if(!Validation::is_empty($this->publicar)) return false;
     if(!Validation::is_empty($this->fechaAnio)) return false;
-    if(!Validation::is_empty($this->fecheSemestre)) return false;
+    if(!Validation::is_empty($this->fechaSemestre)) return false;
     if(!Validation::is_empty($this->tramo)) return false;
     if(!Validation::is_empty($this->horario)) return false;
     if(!Validation::is_empty($this->periodo)) return false;
@@ -123,7 +123,7 @@ class _Comision extends EntityValues {
   public function apertura($format = null) { return Format::boolean($this->apertura, $format); }
   public function publicar($format = null) { return Format::boolean($this->publicar, $format); }
   public function fechaAnio($format = null) { return Format::date($this->fechaAnio, $format); }
-  public function fecheSemestre() { return $this->fecheSemestre; }
+  public function fechaSemestre() { return $this->fechaSemestre; }
   public function tramo($format = null) { return Format::convertCase($this->tramo, $format); }
   public function horario($format = null) { return Format::convertCase($this->horario, $format); }
   public function periodo($format = null) { return Format::convertCase($this->periodo, $format); }
@@ -223,10 +223,10 @@ class _Comision extends EntityValues {
     if($this->checkFechaAnio($p)) $this->fechaAnio = $p;
   }
 
-  public function setFecheSemestre($p) {
+  public function setFechaSemestre($p) {
     if ($p == DEFAULT_VALUE) $p = null;
     (is_null($p)) ? null : intval(trim($p));
-    if($this->checkFecheSemestre($p)) $this->fecheSemestre = $p;
+    if($this->checkFechaSemestre($p)) $this->fechaSemestre = $p;
   }
 
   public function setTramo($p) {
@@ -318,9 +318,9 @@ class _Comision extends EntityValues {
     return $this->_setLogsValidation("fecha_anio", $v);
   }
 
-  public function checkFecheSemestre($value) { 
-    $v = Validation::getInstanceValue($value)->integer();
-    return $this->_setLogsValidation("feche_semestre", $v);
+  public function checkFechaSemestre($value) { 
+    $v = Validation::getInstanceValue($value)->integer()->required();
+    return $this->_setLogsValidation("fecha_semestre", $v);
   }
 
   public function checkTramo($value) { 
