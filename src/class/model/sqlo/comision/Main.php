@@ -28,7 +28,7 @@ class ComisionSqloMain extends EntitySqlo {
     $sql .= "apertura, " ;
     $sql .= "publicar, " ;
     $sql .= "fecha_anio, " ;
-    $sql .= "feche_semestre, " ;
+    $sql .= "fecha_semestre, " ;
     $sql .= "comision_siguiente, " ;
     $sql .= "division, " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
@@ -44,7 +44,7 @@ VALUES ( ";
     $sql .= $row['apertura'] . ", " ;
     $sql .= $row['publicar'] . ", " ;
     $sql .= $row['fecha_anio'] . ", " ;
-    $sql .= $row['feche_semestre'] . ", " ;
+    $sql .= $row['fecha_semestre'] . ", " ;
     $sql .= $row['comision_siguiente'] . ", " ;
     $sql .= $row['division'] . ", " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
@@ -67,7 +67,7 @@ UPDATE " . $this->entity->sn_() . " SET
     if (isset($row['apertura'] )) $sql .= "apertura = " . $row['apertura'] . " ," ;
     if (isset($row['publicar'] )) $sql .= "publicar = " . $row['publicar'] . " ," ;
     if (isset($row['fecha_anio'] )) $sql .= "fecha_anio = " . $row['fecha_anio'] . " ," ;
-    if (isset($row['feche_semestre'] )) $sql .= "feche_semestre = " . $row['feche_semestre'] . " ," ;
+    if (isset($row['fecha_semestre'] )) $sql .= "fecha_semestre = " . $row['fecha_semestre'] . " ," ;
     if (isset($row['comision_siguiente'] )) $sql .= "comision_siguiente = " . $row['comision_siguiente'] . " ," ;
     if (isset($row['division'] )) $sql .= "division = " . $row['division'] . " ," ;
     //eliminar ultima coma

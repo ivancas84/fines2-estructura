@@ -26,7 +26,7 @@ class ComisionSqlMain extends EntitySql{
       case $p.'apertura': return $t.".apertura";
       case $p.'publicar': return $t.".publicar";
       case $p.'fecha_anio': return $t.".fecha_anio";
-      case $p.'feche_semestre': return $t.".feche_semestre";
+      case $p.'fecha_semestre': return $t.".fecha_semestre";
       case $p.'tramo': return $t.".tramo";
       case $p.'horario': return $t.".horario";
       case $p.'periodo': return $t.".periodo";
@@ -72,11 +72,11 @@ class ComisionSqlMain extends EntitySql{
       case $p.'max_baja': return "MAX({$t}.baja)";
       case $p.'count_baja': return "COUNT({$t}.baja)";
 
-      case $p.'sum_feche_semestre': return "SUM({$t}.feche_semestre)";
-      case $p.'avg_feche_semestre': return "AVG({$t}.feche_semestre)";
-      case $p.'min_feche_semestre': return "MIN({$t}.feche_semestre)";
-      case $p.'max_feche_semestre': return "MAX({$t}.feche_semestre)";
-      case $p.'count_feche_semestre': return "COUNT({$t}.feche_semestre)";
+      case $p.'sum_fecha_semestre': return "SUM({$t}.fecha_semestre)";
+      case $p.'avg_fecha_semestre': return "AVG({$t}.fecha_semestre)";
+      case $p.'min_fecha_semestre': return "MIN({$t}.fecha_semestre)";
+      case $p.'max_fecha_semestre': return "MAX({$t}.fecha_semestre)";
+      case $p.'count_fecha_semestre': return "COUNT({$t}.fecha_semestre)";
 
       case $p.'min_comision_siguiente': return "MIN({$t}.comision_siguiente)";
       case $p.'max_comision_siguiente': return "MAX({$t}.comision_siguiente)";
@@ -106,14 +106,14 @@ class ComisionSqlMain extends EntitySql{
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'anio') . ' AS ' . $p.'anio, ' . $this->_mappingField($p.'semestre') . ' AS ' . $p.'semestre, ' . $this->_mappingField($p.'observaciones') . ' AS ' . $p.'observaciones, ' . $this->_mappingField($p.'fecha') . ' AS ' . $p.'fecha, ' . $this->_mappingField($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingField($p.'baja') . ' AS ' . $p.'baja, ' . $this->_mappingField($p.'comentario') . ' AS ' . $p.'comentario, ' . $this->_mappingField($p.'autorizada') . ' AS ' . $p.'autorizada, ' . $this->_mappingField($p.'apertura') . ' AS ' . $p.'apertura, ' . $this->_mappingField($p.'publicar') . ' AS ' . $p.'publicar, ' . $this->_mappingField($p.'fecha_anio') . ' AS ' . $p.'fecha_anio, ' . $this->_mappingField($p.'feche_semestre') . ' AS ' . $p.'feche_semestre, ' . $this->_mappingField($p.'tramo') . ' AS ' . $p.'tramo, ' . $this->_mappingField($p.'horario') . ' AS ' . $p.'horario, ' . $this->_mappingField($p.'periodo') . ' AS ' . $p.'periodo, ' . $this->_mappingField($p.'comision_siguiente') . ' AS ' . $p.'comision_siguiente, ' . $this->_mappingField($p.'division') . ' AS ' . $p.'division';
+' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'anio') . ' AS ' . $p.'anio, ' . $this->_mappingField($p.'semestre') . ' AS ' . $p.'semestre, ' . $this->_mappingField($p.'observaciones') . ' AS ' . $p.'observaciones, ' . $this->_mappingField($p.'fecha') . ' AS ' . $p.'fecha, ' . $this->_mappingField($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingField($p.'baja') . ' AS ' . $p.'baja, ' . $this->_mappingField($p.'comentario') . ' AS ' . $p.'comentario, ' . $this->_mappingField($p.'autorizada') . ' AS ' . $p.'autorizada, ' . $this->_mappingField($p.'apertura') . ' AS ' . $p.'apertura, ' . $this->_mappingField($p.'publicar') . ' AS ' . $p.'publicar, ' . $this->_mappingField($p.'fecha_anio') . ' AS ' . $p.'fecha_anio, ' . $this->_mappingField($p.'fecha_semestre') . ' AS ' . $p.'fecha_semestre, ' . $this->_mappingField($p.'tramo') . ' AS ' . $p.'tramo, ' . $this->_mappingField($p.'horario') . ' AS ' . $p.'horario, ' . $this->_mappingField($p.'periodo') . ' AS ' . $p.'periodo, ' . $this->_mappingField($p.'comision_siguiente') . ' AS ' . $p.'comision_siguiente, ' . $this->_mappingField($p.'division') . ' AS ' . $p.'division';
   }
 
   public function _fieldsDb(){
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'anio') . ', ' . $this->_mappingField($p.'semestre') . ', ' . $this->_mappingField($p.'observaciones') . ', ' . $this->_mappingField($p.'fecha') . ', ' . $this->_mappingField($p.'alta') . ', ' . $this->_mappingField($p.'baja') . ', ' . $this->_mappingField($p.'comentario') . ', ' . $this->_mappingField($p.'autorizada') . ', ' . $this->_mappingField($p.'apertura') . ', ' . $this->_mappingField($p.'publicar') . ', ' . $this->_mappingField($p.'fecha_anio') . ', ' . $this->_mappingField($p.'feche_semestre') . ', ' . $this->_mappingField($p.'comision_siguiente') . ', ' . $this->_mappingField($p.'division') . '';
+' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'anio') . ', ' . $this->_mappingField($p.'semestre') . ', ' . $this->_mappingField($p.'observaciones') . ', ' . $this->_mappingField($p.'fecha') . ', ' . $this->_mappingField($p.'alta') . ', ' . $this->_mappingField($p.'baja') . ', ' . $this->_mappingField($p.'comentario') . ', ' . $this->_mappingField($p.'autorizada') . ', ' . $this->_mappingField($p.'apertura') . ', ' . $this->_mappingField($p.'publicar') . ', ' . $this->_mappingField($p.'fecha_anio') . ', ' . $this->_mappingField($p.'fecha_semestre') . ', ' . $this->_mappingField($p.'comision_siguiente') . ', ' . $this->_mappingField($p.'division') . '';
   }
 
   public function fields(){
@@ -156,7 +156,7 @@ class ComisionSqlMain extends EntitySql{
       case "{$p}apertura": return $this->format->conditionBoolean($f, $value);
       case "{$p}publicar": return $this->format->conditionBoolean($f, $value);
       case "{$p}fecha_anio": return $this->format->conditionText($f, $value, $option);
-      case "{$p}feche_semestre": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}fecha_semestre": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}tramo": return $this->format->conditionText($f, $value, $option);
       case "{$p}horario": return $this->format->conditionText($f, $value, $option);
       case "{$p}periodo": return $this->format->conditionText($f, $value, $option);
@@ -211,7 +211,7 @@ class ComisionSqlMain extends EntitySql{
     if(!isset($data['apertura']) || ($data['apertura'] == '')) $data['apertura'] = "false";
     if(!isset($data['publicar']) || ($data['publicar'] == '')) $data['publicar'] = "false";
     if(!isset($data['fecha_anio']))  throw new Exception('fecha/hora obligatoria sin valor: fecha_anio');
-    if(!isset($data['feche_semestre']) || ($data['feche_semestre'] == '')) $data['feche_semestre'] = "null";
+    if(!isset($data['fecha_semestre']) || ($data['fecha_semestre'] == '')) throw new Exception('dato obligatorio sin valor: fecha_semestre');
     if(empty($data['comision_siguiente'])) $data['comision_siguiente'] = "null";
       if(empty($data['division'])) throw new Exception('dato obligatorio sin valor: division');
   
@@ -229,7 +229,7 @@ class ComisionSqlMain extends EntitySql{
     if(array_key_exists('apertura', $data)) { if(!isset($data['apertura']) || ($data['apertura'] == '')) $data['apertura'] = "false"; }
     if(array_key_exists('publicar', $data)) { if(!isset($data['publicar']) || ($data['publicar'] == '')) $data['publicar'] = "false"; }
     if(array_key_exists('fecha_anio', $data)) { if(empty($data['fecha_anio']))  throw new Exception('fecha/hora obligatoria sin valor: fecha_anio'); }
-    if(array_key_exists('feche_semestre', $data)) { if(!isset($data['feche_semestre']) || ($data['feche_semestre'] == '')) $data['feche_semestre'] = "null"; }
+    if(array_key_exists('fecha_semestre', $data)) { if(!isset($data['fecha_semestre']) || ($data['fecha_semestre'] == '')) throw new Exception('dato obligatorio sin valor: fecha_semestre'); }
     if(array_key_exists('comision_siguiente', $data)) { if(!isset($data['comision_siguiente']) || ($data['comision_siguiente'] == '')) $data['comision_siguiente'] = "null"; }
     if(array_key_exists('division', $data)) { if(!isset($data['division']) || ($data['division'] == '')) throw new Exception('dato obligatorio sin valor: division'); }
 
@@ -250,7 +250,7 @@ class ComisionSqlMain extends EntitySql{
     if(isset($row['apertura'])) $row_['apertura'] = $this->format->boolean($row['apertura']);
     if(isset($row['publicar'])) $row_['publicar'] = $this->format->boolean($row['publicar']);
     if(isset($row['fecha_anio'])) $row_['fecha_anio'] = $this->format->year($row['fecha_anio']);
-    if(isset($row['feche_semestre'])) $row_['feche_semestre'] = $this->format->numeric($row['feche_semestre']);
+    if(isset($row['fecha_semestre'])) $row_['fecha_semestre'] = $this->format->numeric($row['fecha_semestre']);
     if(isset($row['tramo'])) $row_['tramo'] = $this->format->escapeString($row['tramo']);
     if(isset($row['horario'])) $row_['horario'] = $this->format->escapeString($row['horario']);
     if(isset($row['periodo'])) $row_['periodo'] = $this->format->escapeString($row['periodo']);
@@ -275,7 +275,7 @@ class ComisionSqlMain extends EntitySql{
     $row_["apertura"] = (is_null($row[$prefix . "apertura"])) ? null : settypebool($row[$prefix . "apertura"]);
     $row_["publicar"] = (is_null($row[$prefix . "publicar"])) ? null : settypebool($row[$prefix . "publicar"]);
     $row_["fecha_anio"] = (is_null($row[$prefix . "fecha_anio"])) ? null : (string)$row[$prefix . "fecha_anio"];
-    $row_["feche_semestre"] = (is_null($row[$prefix . "feche_semestre"])) ? null : intval($row[$prefix . "feche_semestre"]);
+    $row_["fecha_semestre"] = (is_null($row[$prefix . "fecha_semestre"])) ? null : intval($row[$prefix . "fecha_semestre"]);
     $row_["tramo"] = (is_null($row[$prefix . "tramo"])) ? null : (string)$row[$prefix . "tramo"];
     $row_["horario"] = (is_null($row[$prefix . "horario"])) ? null : (string)$row[$prefix . "horario"];
     $row_["periodo"] = (is_null($row[$prefix . "periodo"])) ? null : (string)$row[$prefix . "periodo"];
