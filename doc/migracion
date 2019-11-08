@@ -17,3 +17,41 @@ UPDATE comision SET fecha_anio = year(fecha);
 UPDATE comision SET fecha_semestre = 1 WHERE month(fecha) < 7;
 UPDATE comision SET fecha_semestre = 2 WHERE month(fecha) >= 7;
 
+
+UPDATE comision SET fecha_anio = year(fecha)
+WHERE id IN (
+  SELECT id FROM (
+    SELECT comision.id 
+    FROM comision
+    INNER JOIN division ON (comision.division = division.id)
+    INNER JOIN sede ON (division.sede = sede.id)
+    WHERE sede.numero = 
+  )
+);
+
+
+UPDATE comision SET fecha_anio = '2019'
+WHERE id IN (
+  SELECT id FROM (
+    SELECT comision.id 
+    FROM comision
+    INNER JOIN division ON (comision.division = division.id)
+    INNER JOIN sede ON (division.sede = sede.id)
+    WHERE sede.numero IN ('S01', 'S02', 'S03', 'S04', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10') 
+  ) AS sub
+);
+
+UPDATE comision SET fecha_semestre = 2 
+WHERE id IN (
+  SELECT id FROM (
+    SELECT comision.id 
+    FROM comision
+    INNER JOIN division ON (comision.division = division.id)
+    INNER JOIN sede ON (division.sede = sede.id)
+    WHERE sede.numero IN ('S01', 'S02', 'S03', 'S04', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10') 
+  ) AS sub
+) AND fecha_semestre IS NULL;
+
+
+UPDATE sede SET dependencia = 1532435439156616
+WHERE numero IN ('S01', 'S02', 'S03', 'S04', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10') 
