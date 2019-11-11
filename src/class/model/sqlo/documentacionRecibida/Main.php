@@ -1,7 +1,7 @@
 <?php
 
 require_once("class/model/Sqlo.php");
-require_once("class/db/SqlFormat.php");
+require_once("class/model/db/SqlFormat.php");
 
 //Implementacion principal de Sqlo para una entidad especifica
 class DocumentacionRecibidaSqloMain extends EntitySqlo {
