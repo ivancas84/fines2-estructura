@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/model/Dba.php");
+require_once("class/controller/Dba.php");
 require_once("class/model/Render.php");
 require_once("class/model/RenderAux.php");
 require_once("class/model/Sqlo.php");

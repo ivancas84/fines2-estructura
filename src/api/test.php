@@ -3,8 +3,8 @@
 /**
  * @todo Implementar render en el getall
  */
-require_once("class/Filter.php");
-require_once("class/model/Dba.php");
+require_once("class/tools/Filter.php");
+require_once("class/controller/Dba.php");
 require_once("class/model/RenderAux.php");
 
 require_once("config/structure.php");

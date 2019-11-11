@@ -4,7 +4,7 @@ require_once("./config.php");
 require_once("config/modelClasses.php");
 require_once("config/entityClasses.php");
 require_once("config/valuesClasses.php");
-require_once("class/model/Dba.php");
+require_once("class/controller/Dba.php");
 
 $nuevaFecha = "2019-03-01";
 

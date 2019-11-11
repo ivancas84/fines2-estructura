@@ -1,7 +1,7 @@
 <?php
 
 require_once("../config/config.php");
-require_once("class/model/Dba.php");
+require_once("class/controller/Dba.php");
 require_once("class/model/Render.php");
 require_once("function/array_unique_key.php");
 require_once("function/array_group_value.php");
