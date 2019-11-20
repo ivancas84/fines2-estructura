@@ -52,7 +52,7 @@ class TipoSedeSqlMain extends EntitySql{
 
     $f = $this->_mappingField($field);
     switch ($field){
-      case "{$p}id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}id": return $this->format->conditionText($f, $value, $option);
       case "{$p}descripcion": return $this->format->conditionText($f, $value, $option);
       default: return parent::_conditionFieldStruct($field, $option, $value);
     }
@@ -69,7 +69,7 @@ class TipoSedeSqlMain extends EntitySql{
 
   //@override
   public function initializeUpdate(array $data){
-    if(array_key_exists('id', $data)) { if(!isset($data['id']) || ($data['id'] == '')) throw new Exception('dato obligatorio sin valor: id'); }
+    if(array_key_exists('id', $data)) { if(empty($data['id'])) throw new Exception('dato obligatorio sin valor: id'); }
     if(array_key_exists('descripcion', $data)) { if(empty($data['descripcion'])) throw new Exception('dato obligatorio sin valor: descripcion'); }
 
     return $data;
@@ -77,7 +77,7 @@ class TipoSedeSqlMain extends EntitySql{
 
   public function format(array $row){
     $row_ = array();
-    if(isset($row['id']) ) $row_['id'] = $this->format->positiveIntegerWithoutZerofill($row['id']);
+   if(isset($row['id']) )  $row_['id'] = $this->format->escapeString($row['id']);
     if(isset($row['descripcion'])) $row_['descripcion'] = $this->format->escapeString($row['descripcion']);
 
     return $row_;

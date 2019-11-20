@@ -4,12 +4,12 @@ require_once("class/model/Field.php");
 
 class FieldTipoSedeIdMain extends Field {
 
-  public $type = "bigint";
+  public $type = "varchar";
   public $fieldType = "pk";
   public $unique = true;
   public $notNull = true;
   public $default = false;
-  public $length = "19";
+  public $length = "45";
   public $main = true;
   public $name = "id";
   public $alias = "id";

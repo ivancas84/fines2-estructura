@@ -21,7 +21,6 @@ class DomicilioSqloMain extends EntitySqlo {
   INSERT INTO " . $this->entity->sn_() . " (";
       $sql .= "id, " ;
     $sql .= "calle, " ;
-    $sql .= "entre, " ;
     $sql .= "numero, " ;
     $sql .= "piso, " ;
     $sql .= "departamento, " ;
@@ -33,7 +32,6 @@ class DomicilioSqloMain extends EntitySqlo {
 VALUES ( ";
     $sql .= $row['id'] . ", " ;
     $sql .= $row['calle'] . ", " ;
-    $sql .= $row['entre'] . ", " ;
     $sql .= $row['numero'] . ", " ;
     $sql .= $row['piso'] . ", " ;
     $sql .= $row['departamento'] . ", " ;
@@ -52,7 +50,6 @@ VALUES ( ";
 UPDATE " . $this->entity->sn_() . " SET
 ";
     if (isset($row['calle'] )) $sql .= "calle = " . $row['calle'] . " ," ;
-    if (isset($row['entre'] )) $sql .= "entre = " . $row['entre'] . " ," ;
     if (isset($row['numero'] )) $sql .= "numero = " . $row['numero'] . " ," ;
     if (isset($row['piso'] )) $sql .= "piso = " . $row['piso'] . " ," ;
     if (isset($row['departamento'] )) $sql .= "departamento = " . $row['departamento'] . " ," ;
@@ -62,19 +59,6 @@ UPDATE " . $this->entity->sn_() . " SET
     $sql = substr($sql, 0, -2);
 
     return $sql;
-  }
-
-  public function json(array $row){
-    if(empty($row)) return null;
-    $row_ = $this->sql->_json($row);
-    return $row_;
-  }
-
-  public function values(array $row){
-    $row_ = [];
-
-    $row_["domicilio"] = EntityValues::getInstanceRequire("domicilio", $row);
-    return $row_;
   }
 
 

@@ -8,7 +8,7 @@ class FieldDomicilioNumeroMain extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = true;
-  public $default = "S/N";
+  public $default = false;
   public $length = "45";
   public $main = false;
   public $name = "numero";

@@ -2,20 +2,22 @@
 
 require_once("class/model/Field.php");
 
-class FieldSedeNumeroMain extends Field {
+class FieldSedeCentroEducativoMain extends Field {
 
   public $type = "varchar";
-  public $fieldType = "nf";
+  public $fieldType = "mu";
   public $unique = false;
   public $notNull = true;
   public $default = false;
   public $length = "45";
   public $main = false;
-  public $name = "numero";
-  public $alias = "num";
+  public $name = "centro_educativo";
+  public $alias = "ce";
 
 
   public function getEntity(){ return new SedeEntity; }
+
+  public function getEntityRef(){ return new CentroEducativoEntity; }
 
 
 }

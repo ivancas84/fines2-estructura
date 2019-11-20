@@ -22,13 +22,11 @@ class SedeSqloMain extends EntitySqlo {
       $sql .= "id, " ;
     $sql .= "numero, " ;
     $sql .= "nombre, " ;
-    $sql .= "organizacion, " ;
     $sql .= "observaciones, " ;
-    $sql .= "tipo, " ;
     $sql .= "baja, " ;
-    $sql .= "dependencia, " ;
-    $sql .= "tipo_sede, " ;
     $sql .= "domicilio, " ;
+    $sql .= "tipo_sede, " ;
+    $sql .= "centro_educativo, " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
 
     $sql .= ")
@@ -36,13 +34,11 @@ VALUES ( ";
     $sql .= $row['id'] . ", " ;
     $sql .= $row['numero'] . ", " ;
     $sql .= $row['nombre'] . ", " ;
-    $sql .= $row['organizacion'] . ", " ;
     $sql .= $row['observaciones'] . ", " ;
-    $sql .= $row['tipo'] . ", " ;
     $sql .= $row['baja'] . ", " ;
-    $sql .= $row['dependencia'] . ", " ;
-    $sql .= $row['tipo_sede'] . ", " ;
     $sql .= $row['domicilio'] . ", " ;
+    $sql .= $row['tipo_sede'] . ", " ;
+    $sql .= $row['centro_educativo'] . ", " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
 
     $sql .= ");
@@ -57,13 +53,11 @@ UPDATE " . $this->entity->sn_() . " SET
 ";
     if (isset($row['numero'] )) $sql .= "numero = " . $row['numero'] . " ," ;
     if (isset($row['nombre'] )) $sql .= "nombre = " . $row['nombre'] . " ," ;
-    if (isset($row['organizacion'] )) $sql .= "organizacion = " . $row['organizacion'] . " ," ;
     if (isset($row['observaciones'] )) $sql .= "observaciones = " . $row['observaciones'] . " ," ;
-    if (isset($row['tipo'] )) $sql .= "tipo = " . $row['tipo'] . " ," ;
     if (isset($row['baja'] )) $sql .= "baja = " . $row['baja'] . " ," ;
-    if (isset($row['dependencia'] )) $sql .= "dependencia = " . $row['dependencia'] . " ," ;
-    if (isset($row['tipo_sede'] )) $sql .= "tipo_sede = " . $row['tipo_sede'] . " ," ;
     if (isset($row['domicilio'] )) $sql .= "domicilio = " . $row['domicilio'] . " ," ;
+    if (isset($row['tipo_sede'] )) $sql .= "tipo_sede = " . $row['tipo_sede'] . " ," ;
+    if (isset($row['centro_educativo'] )) $sql .= "centro_educativo = " . $row['centro_educativo'] . " ," ;
     //eliminar ultima coma
     $sql = substr($sql, 0, -2);
 
@@ -73,21 +67,21 @@ UPDATE " . $this->entity->sn_() . " SET
   public function json(array $row){
     if(empty($row)) return null;
     $row_ = $this->sql->_json($row);
-    if(!is_null($row['ts_id'])){
-      $json = EntitySql::getInstanceRequire('tipo_sede', 'ts')->_json($row);
-      $row_["tipo_sede_"] = $json;
-    }
     if(!is_null($row['dom_id'])){
       $json = EntitySql::getInstanceRequire('domicilio', 'dom')->_json($row);
       $row_["domicilio_"] = $json;
     }
-    if(!is_null($row['coo_id'])){
-      $json = EntitySql::getInstanceRequire('id_persona', 'coo')->_json($row);
-      $row_["coordinador_"] = $json;
+    if(!is_null($row['ts_id'])){
+      $json = EntitySql::getInstanceRequire('tipo_sede', 'ts')->_json($row);
+      $row_["tipo_sede_"] = $json;
     }
-    if(!is_null($row['ref_id'])){
-      $json = EntitySql::getInstanceRequire('id_persona', 'ref')->_json($row);
-      $row_["referente_"] = $json;
+    if(!is_null($row['ce_id'])){
+      $json = EntitySql::getInstanceRequire('centro_educativo', 'ce')->_json($row);
+      $row_["centro_educativo_"] = $json;
+    }
+    if(!is_null($row['ce_dom_id'])){
+      $json = EntitySql::getInstanceRequire('domicilio', 'ce_dom')->_json($row);
+      $row_["centro_educativo_"]["domicilio_"] = $json;
     }
     return $row_;
   }
@@ -96,10 +90,10 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_ = [];
 
     $row_["sede"] = EntityValues::getInstanceRequire("sede", $row);
-    $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede', $row, 'ts_');
     $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $row, 'dom_');
-    $row_["coordinador"] = EntityValues::getInstanceRequire('id_persona', $row, 'coo_');
-    $row_["referente"] = EntityValues::getInstanceRequire('id_persona', $row, 'ref_');
+    $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede', $row, 'ts_');
+    $row_["centro_educativo"] = EntityValues::getInstanceRequire('centro_educativo', $row, 'ce_');
+    $row_["domicilio1"] = EntityValues::getInstanceRequire('domicilio', $row, 'ce_dom_');
     return $row_;
   }
 

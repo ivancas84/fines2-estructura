@@ -9,7 +9,6 @@ class SedeEntity extends SedeEntityMain {
 
     for($j = 0; $j < 2; $j++){
       for($i = 0; $i < count($array); $i++){
-        if($array[$i] instanceof FieldSedeUsuario) break;
         if($array[$i] instanceof FieldSedeAlta) break;
       }
       if($i < count($array)) unset($array[$i]);
@@ -19,11 +18,11 @@ class SedeEntity extends SedeEntityMain {
     return $array;
   }
 
-  public function getFieldsFk(){
+  /*public function getFieldsFk(){
     $array = parent::getFieldsFk();
     array_push($array, Field::getInstanceRequire("sede","coordinador"));
     array_push($array, Field::getInstanceRequire("sede","referente"));
 
     return $array;
-  }
+  }*/
 }

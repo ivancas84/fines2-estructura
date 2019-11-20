@@ -8,8 +8,8 @@ class FieldDomicilioLocalidadMain extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = true;
-  public $default = "La Plata";
-  public $length = "45";
+  public $default = false;
+  public $length = "255";
   public $main = false;
   public $name = "localidad";
   public $alias = "loc";

@@ -1,0 +1,6 @@
+domicilio - dom
+
+id (id): string pk. NOT NULL. MAIN. UNIQUE.
+nombre (nom): string nf. NOT NULL.
+cue (cue): string nf.
+domicilio (dom): string mu. NOT NULL.

@@ -2,7 +2,7 @@
 
 require_once("class/model/Field.php");
 
-class FieldSedeDomicilioMain extends Field {
+class FieldCentroEducativoDomicilioMain extends Field {
 
   public $type = "varchar";
   public $fieldType = "mu";
@@ -15,7 +15,7 @@ class FieldSedeDomicilioMain extends Field {
   public $alias = "dom";
 
 
-  public function getEntity(){ return new SedeEntity; }
+  public function getEntity(){ return new CentroEducativoEntity; }
 
   public function getEntityRef(){ return new DomicilioEntity; }
 
