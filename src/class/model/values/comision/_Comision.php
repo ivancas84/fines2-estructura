@@ -137,13 +137,13 @@ class _Comision extends EntityValues {
 
   public function setAnio($p) {
     if ($p == DEFAULT_VALUE) $p = null;
-    (is_null($p)) ? null : intval(trim($p));
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkAnio($p)) $this->anio = $p;
   }
 
   public function setSemestre($p) {
     if ($p == DEFAULT_VALUE) $p = null;
-    (is_null($p)) ? null : intval(trim($p));
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkSemestre($p)) $this->semestre = $p;
   }
 
@@ -225,7 +225,7 @@ class _Comision extends EntityValues {
 
   public function setFechaSemestre($p) {
     if ($p == DEFAULT_VALUE) $p = null;
-    (is_null($p)) ? null : intval(trim($p));
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkFechaSemestre($p)) $this->fechaSemestre = $p;
   }
 

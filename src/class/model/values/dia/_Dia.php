@@ -47,7 +47,7 @@ class _Dia extends EntityValues {
 
   public function setNumero($p) {
     if ($p == DEFAULT_VALUE) $p = null;
-    (is_null($p)) ? null : intval(trim($p));
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkNumero($p)) $this->numero = $p;
   }
 

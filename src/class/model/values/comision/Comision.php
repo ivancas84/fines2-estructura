@@ -9,7 +9,7 @@ class Comision extends _Comision {
 
   public function background() {
     if(!$this->autorizada) return "table-danger";
-    return ($this->_isEmptyValue($this->comentario)) ? "table-success" : "table-warning";
+    return (Validation::is_empty($this->comentario)) ? "table-success" : "table-warning";
   }
 
   public function anioSiguiente(){

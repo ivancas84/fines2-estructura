@@ -65,7 +65,7 @@ class _Nota extends EntityValues {
 
   public function setNota($p) {
     if ($p == DEFAULT_VALUE) $p = null;
-    (is_null($p)) ? null : intval(trim($p));
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkNota($p)) $this->nota = $p;
   }
 

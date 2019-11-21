@@ -53,13 +53,13 @@ class _DistribucionHoraria extends EntityValues {
 
   public function setDia($p) {
     if ($p == DEFAULT_VALUE) $p = null;
-    (is_null($p)) ? null : intval(trim($p));
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkDia($p)) $this->dia = $p;
   }
 
   public function setHorasCatedra($p) {
     if ($p == DEFAULT_VALUE) $p = null;
-    (is_null($p)) ? null : intval(trim($p));
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkHorasCatedra($p)) $this->horasCatedra = $p;
   }
 

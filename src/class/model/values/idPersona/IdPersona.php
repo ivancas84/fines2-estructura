@@ -32,8 +32,8 @@ class IdPersona extends _IdPersona{
   }
   
   public function nombrePrincipal($format = "Xx Yy") {
-    if (!$this->_isEmptyValue($this->sobrenombre)) return $this->sobrenombre($format);
-    elseif (!$this->_isEmptyValue($this->nombres)) return explode(" ", $this->nombres($format))[0];
+    if (!Validation::is_empty($this->sobrenombre)) return $this->sobrenombre($format);
+    elseif (!Validation::is_empty($this->nombres)) return explode(" ", $this->nombres($format))[0];
     else return null;    
   }
 
@@ -44,9 +44,9 @@ class IdPersona extends _IdPersona{
 
   public function _check(){ //true | "error"
     $error = [];
-    if($this->_isEmptyValue($this->numeroDocumento())) $error["numero_documento"] = "Vacío";
+    if(Validation::is_empty($this->numeroDocumento())) $error["numero_documento"] = "Vacío";
     elseif((strlen($this->numeroDocumento()) < 7) || (strlen($this->numeroDocumento()) > 8)) $error["numero_documento"] = "Error de longitud";
-    if($this->_isEmptyValue($this->genero())) $error["genero"] = "Genero vacío";
+    if(Validation::is_empty($this->genero())) $error["genero"] = "Genero vacío";
     elseif((strpos($this->genero("x"), 'f') === false) && (strpos($this->genero("x"), 'm') === false)) $error["genero"] = "Datos incorrectos";
     return (empty($error)) ? true : $error;    
   }

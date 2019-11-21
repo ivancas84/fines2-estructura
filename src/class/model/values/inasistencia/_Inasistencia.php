@@ -109,13 +109,13 @@ class _Inasistencia extends EntityValues {
 
   public function setModulosSemanales($p) {
     if ($p == DEFAULT_VALUE) $p = null;
-    (is_null($p)) ? null : intval(trim($p));
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkModulosSemanales($p)) $this->modulosSemanales = $p;
   }
 
   public function setModulosMensuales($p) {
     if ($p == DEFAULT_VALUE) $p = null;
-    (is_null($p)) ? null : intval(trim($p));
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkModulosMensuales($p)) $this->modulosMensuales = $p;
   }
 

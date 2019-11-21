@@ -136,7 +136,7 @@ class _Nomina2 extends EntityValues {
 
   public function setAnioIngreso($p) {
     if ($p == DEFAULT_VALUE) $p = null;
-    (is_null($p)) ? null : intval(trim($p));
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkAnioIngreso($p)) $this->anioIngreso = $p;
   }
 

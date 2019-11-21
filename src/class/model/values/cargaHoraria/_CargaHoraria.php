@@ -71,19 +71,19 @@ class _CargaHoraria extends EntityValues {
 
   public function setAnio($p) {
     if ($p == DEFAULT_VALUE) $p = null;
-    (is_null($p)) ? null : intval(trim($p));
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkAnio($p)) $this->anio = $p;
   }
 
   public function setSemestre($p) {
     if ($p == DEFAULT_VALUE) $p = null;
-    (is_null($p)) ? null : intval(trim($p));
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkSemestre($p)) $this->semestre = $p;
   }
 
   public function setHorasCatedra($p) {
     if ($p == DEFAULT_VALUE) $p = null;
-    (is_null($p)) ? null : intval(trim($p));
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkHorasCatedra($p)) $this->horasCatedra = $p;
   }
 
