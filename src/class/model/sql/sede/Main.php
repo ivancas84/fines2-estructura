@@ -145,9 +145,9 @@ class SedeSqlMain extends EntitySql{
     if(empty($data['nombre'])) throw new Exception('dato obligatorio sin valor: nombre');
     if(empty($data['observaciones'])) $data['observaciones'] = "null";
     if(!isset($data['baja']))  $data['baja'] = "null";
-    if(empty($data['domicilio'])) throw new Exception('dato obligatorio sin valor: domicilio');
-      if(empty($data['tipo_sede'])) throw new Exception('dato obligatorio sin valor: tipo_sede');
-      if(empty($data['centro_educativo'])) throw new Exception('dato obligatorio sin valor: centro_educativo');
+    if(empty($data['domicilio'])) $data['domicilio'] = "null";
+      if(empty($data['tipo_sede'])) $data['tipo_sede'] = "null";
+      if(empty($data['centro_educativo'])) $data['centro_educativo'] = "null";
   
     return $data;
   }
@@ -159,9 +159,9 @@ class SedeSqlMain extends EntitySql{
     if(array_key_exists('nombre', $data)) { if(empty($data['nombre'])) throw new Exception('dato obligatorio sin valor: nombre'); }
     if(array_key_exists('observaciones', $data)) { if(empty($data['observaciones'])) $data['observaciones'] = "null"; }
     if(array_key_exists('baja', $data)) { if(empty($data['baja']))  $data['baja'] = "null"; }
-    if(array_key_exists('domicilio', $data)) { if(!isset($data['domicilio']) || ($data['domicilio'] == '')) throw new Exception('dato obligatorio sin valor: domicilio'); }
-    if(array_key_exists('tipo_sede', $data)) { if(!isset($data['tipo_sede']) || ($data['tipo_sede'] == '')) throw new Exception('dato obligatorio sin valor: tipo_sede'); }
-    if(array_key_exists('centro_educativo', $data)) { if(!isset($data['centro_educativo']) || ($data['centro_educativo'] == '')) throw new Exception('dato obligatorio sin valor: centro_educativo'); }
+    if(array_key_exists('domicilio', $data)) { if(!isset($data['domicilio']) || ($data['domicilio'] == '')) $data['domicilio'] = "null"; }
+    if(array_key_exists('tipo_sede', $data)) { if(!isset($data['tipo_sede']) || ($data['tipo_sede'] == '')) $data['tipo_sede'] = "null"; }
+    if(array_key_exists('centro_educativo', $data)) { if(!isset($data['centro_educativo']) || ($data['centro_educativo'] == '')) $data['centro_educativo'] = "null"; }
 
     return $data;
   }

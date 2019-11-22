@@ -8,6 +8,6 @@ numero (num): string nf. NOT NULL. MAIN.
 nombre (nom): string nf. NOT NULL. MAIN.
 observaciones (obs): text nf.
 baja (baj): timestamp nf.
-domicilio (dom): string mu. NOT NULL.
-tipo_sede (ts): string mu. NOT NULL.
-centro_educativo (ce): string mu. NOT NULL.
+domicilio (dom): string mu.
+tipo_sede (ts): string mu.
+centro_educativo (ce): string mu.

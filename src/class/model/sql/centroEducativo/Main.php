@@ -104,7 +104,7 @@ class CentroEducativoSqlMain extends EntitySql{
     $data['id'] = (!empty($data['id'])) ? $data['id'] : Dba::nextId('centro_educativo');
     if(empty($data['nombre'])) throw new Exception('dato obligatorio sin valor: nombre');
     if(empty($data['cue'])) $data['cue'] = "null";
-    if(empty($data['domicilio'])) throw new Exception('dato obligatorio sin valor: domicilio');
+    if(empty($data['domicilio'])) $data['domicilio'] = "null";
   
     return $data;
   }
@@ -114,7 +114,7 @@ class CentroEducativoSqlMain extends EntitySql{
     if(array_key_exists('id', $data)) { if(empty($data['id'])) throw new Exception('dato obligatorio sin valor: id'); }
     if(array_key_exists('nombre', $data)) { if(empty($data['nombre'])) throw new Exception('dato obligatorio sin valor: nombre'); }
     if(array_key_exists('cue', $data)) { if(empty($data['cue'])) $data['cue'] = "null"; }
-    if(array_key_exists('domicilio', $data)) { if(!isset($data['domicilio']) || ($data['domicilio'] == '')) throw new Exception('dato obligatorio sin valor: domicilio'); }
+    if(array_key_exists('domicilio', $data)) { if(!isset($data['domicilio']) || ($data['domicilio'] == '')) $data['domicilio'] = "null"; }
 
     return $data;
   }

@@ -147,17 +147,17 @@ class _Sede extends EntityValues {
   }
 
   public function checkDomicilio($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
+    $v = Validation::getInstanceValue($value)->string();
     return $this->_setLogsValidation("domicilio", $v);
   }
 
   public function checkTipoSede($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
+    $v = Validation::getInstanceValue($value)->string();
     return $this->_setLogsValidation("tipo_sede", $v);
   }
 
   public function checkCentroEducativo($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
+    $v = Validation::getInstanceValue($value)->string();
     return $this->_setLogsValidation("centro_educativo", $v);
   }
 

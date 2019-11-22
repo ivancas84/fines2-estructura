@@ -84,7 +84,7 @@ class _CentroEducativo extends EntityValues {
   }
 
   public function checkDomicilio($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
+    $v = Validation::getInstanceValue($value)->string();
     return $this->_setLogsValidation("domicilio", $v);
   }
 
