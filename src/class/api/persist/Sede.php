@@ -29,12 +29,14 @@ class SedePersistApi extends PersistApi {
             $sede["id"] = $ce_bd["id"];
             if(isset($domicilio)) {
                 if (!empty($ce_bd["domicilio"])) $domicilio["id"] = $ce_bd["domicilio"];    
-                $sede["domicilio"] = $this->persist->row("domicilio", $domicilio);        
             } else {
                 if (!empty($ce_bd["domicilio"])) $deleteDomicilio = $ce_bd["domicilio"];
                 $sede["domicilio"] = null;
             }
         }
+
+        if(isset($domicilio)) $centroEducativo["domicilio"] = $this->persist->row("domicilio", $domicilio);
+
 
         $this->persist->row("sede", $sede);
         if($deleteDomicilio) $this->persist->delete("domicilio", $deleteDomicilio);
