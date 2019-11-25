@@ -4,7 +4,7 @@ require_once("class/controller/Persist.php");
 
 class CentroEducativoPersist extends Persist {
 
-    public function main($data){
+    public function persist($data){
         foreach($data as $d) {
             switch($d["entity"]) {
                 case "domicilio": $domicilio = $d["row"]; break;
@@ -15,28 +15,30 @@ class CentroEducativoPersist extends Persist {
         if(empty($centroEducativo["cue"])){
           $centroEducativo["cue"] = null;
         }
-
-        $row_ = Dba::one("centro_educativo", [
-            ["nombre","=",$centroEducativo["nombre"]],
-            ["cue","=",$centroEducativo["cue"]],
-        ]);    
-    
-        if (!empty($row_)){
-            $centroEducativo["id"] = $row_["id"];
-            $centroEducativo["domicilio"] = $row_["domicilio"];
-            if(isset($domicilio) && !empty($row_["domicilio"])) $domicilio["id"] = $row_["domicilio"];
+        
+        if($centroEducativo["id"]) {
+            $ce_bd = Dba::getOrNull("centro_educativo", $centroEducativo["id"]);
+        } else {
+            $ce_bd = Dba::oneOrNull("centro_educativo", [
+                ["nombre","=",$centroEducativo["nombre"]],
+                ["cue","=",$centroEducativo["cue"]],
+            ]);    
         }
         
-
-        if(isset($domicilio)) {
-            $idDomicilio = $this->row("domicilio", $domicilio);
-            $centroEducativo["domicilio"] = $idDomicilio;
+        $deleteDomicilio = false;
+        if (!empty($ce_bd)){
+            $centroEducativo["id"] = $ce_bd["id"];
+            if(isset($domicilio)) {
+                if (!empty($ce_bd["domicilio"])) $domicilio["id"] = $ce_bd["domicilio"];    
+                $centroEducativo["domicilio"] = $this->row("domicilio", $domicilio);        
+            } else {
+                if (!empty($ce_bd["domicilio"])) $deleteDomicilio = $ce_bd["domicilio"];
+                $centroEducativo["domicilio"] = null;
+            }
         }
 
         $this->row("centro_educativo", $centroEducativo);
-        echo "<pre>";
-        print_r($this->logs);
-
+        if($deleteDomicilio) $this->delete("domicilio", $deleteDomicilio);
         return $this->logs;
     }
 
