@@ -1,5 +1,5 @@
 -- MySQL Workbench Synchronization
--- Generated: 2019-11-22 09:02
+-- Generated: 2019-11-25 19:26
 -- Model: New Model
 -- Version: 1.0
 -- Project: Name of the project
@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS `fines2_2020`.`centro_educativo` (
   `domicilio` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_centro_educativo_domicilio1_idx` (`domicilio` ASC) ,
+  UNIQUE INDEX `cue_UNIQUE` (`cue` ASC) ,
   CONSTRAINT `fk_centro_educativo_domicilio1`
     FOREIGN KEY (`domicilio`)
     REFERENCES `fines2_2020`.`domicilio` (`id`)
@@ -30,6 +31,7 @@ COLLATE = utf8_spanish_ci;
 CREATE TABLE IF NOT EXISTS `fines2_2020`.`domicilio` (
   `id` VARCHAR(45) NOT NULL,
   `calle` VARCHAR(45) NOT NULL,
+  `entre` VARCHAR(45) NULL DEFAULT NULL,
   `numero` VARCHAR(45) NOT NULL,
   `piso` VARCHAR(45) NULL DEFAULT NULL,
   `departamento` VARCHAR(45) NULL DEFAULT NULL,
