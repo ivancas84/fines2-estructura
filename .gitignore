@@ -2,3 +2,7 @@
 /api
 /cache
 /config
+
+
+# IDE - VSCode
+.vscode/*
