@@ -1,8 +1,8 @@
 <?php
 
-require_once("class/controller/Persist.php");
+require_once("class/api/Persist.php");
 
-class CentroEducativoPersist extends Persist {
+class CentroEducativoPersistApi extends PersistApi {
 
     public function persist($data){
         foreach($data as $d) {
