@@ -1,10 +1,9 @@
-lugar_nacimiento - ln
-id_persona - ip
-domicilio - dom
-
-id (id): integer pk. NOT NULL. MAIN. UNIQUE.
+id (id): string pk. NOT NULL. MAIN. UNIQUE.
+nombres (nom): string nf. NOT NULL.
+apellidos (ape): string nf.
+apodo (apo): string nf.
+numero_documento (nd): string nf. NOT NULL. UNIQUE.
+cuil (cui): string nf. UNIQUE.
+email (ema): string nf.
+genero (gen): string nf.
 alta (alt): timestamp nf. NOT NULL. DEFAULT: CURRENT_TIMESTAMP.
-baja (baj): timestamp nf. NOT ADMIN.
-lugar_nacimiento (ln): integer mu.
-id_persona (ip): integer mu. NOT NULL.
-domicilio (dom): integer mu.

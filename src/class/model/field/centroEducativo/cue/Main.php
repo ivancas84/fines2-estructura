@@ -6,7 +6,7 @@ class FieldCentroEducativoCueMain extends Field {
 
   public $type = "varchar";
   public $fieldType = "nf";
-  public $unique = false;
+  public $unique = true;
   public $notNull = false;
   public $default = false;
   public $length = "45";

@@ -99,8 +99,9 @@ class _Sede extends EntityValues {
 
   public function setBaja($p, $format = "Y-m-d H:i:s") {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(is_null($p)) $p = null;
-    else $p = SpanishDateTime::createFromFormat($format, $p);
+    if(!is_null($p)) {
+      $p = SpanishDateTime::createFromFormat($format, $p);
+    }
     if($this->checkBaja($p)) $this->baja = $p;
   }
 
