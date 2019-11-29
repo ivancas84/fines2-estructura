@@ -1,14 +1,14 @@
 <?php
 
 require_once("../config/config.php");
-require_once("class/controller/Dba.php");
+require_once("class/controller/Model.php");
 require_once("class/model/Render.php");
 
 $render = new Render();
 $render->setCondition([
   ["numero","=",["97","98","99"]]
 ]);
-$rows = Dba::all("sede",$render);
+$rows = Model::all("sede",$render);
 
 imprimir_rows($rows);
 

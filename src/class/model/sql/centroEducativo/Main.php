@@ -98,10 +98,8 @@ class CentroEducativoSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('domicilio','dom')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
-
-  //@override
   public function initializeInsert(array $data){
-    $data['id'] = (!empty($data['id'])) ? $data['id'] : Dba::nextId('centro_educativo');
+    $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('centro_educativo');
     if(empty($data['nombre'])) throw new Exception('dato obligatorio sin valor: nombre');
     if(empty($data['cue'])) $data['cue'] = "null";
     if(empty($data['domicilio'])) $data['domicilio'] = "null";

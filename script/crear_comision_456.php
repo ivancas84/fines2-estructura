@@ -1,7 +1,7 @@
 <?php
 
 require_once("../config/config.php");
-require_once("class/controller/Dba.php");
+require_once("class/controller/Model.php");
 require_once("class/model/Values.php");
 require_once("class/model/Render.php");
 
@@ -14,7 +14,7 @@ $render = new Render();
 $render->setCondition([
   ["com_dvi_serie","=","C_191"]
 ]);
-$rows = Dba::all("curso",$render);
+$rows = Model::all("curso",$render);
 
 echo "<table>";
 foreach($rows as $row){

@@ -2,17 +2,17 @@
 
 require_once("class/model/Field.php");
 
-class FieldPersonaAltaMain extends Field {
+class FieldPersonaFechaNacimientoMain extends Field {
 
-  public $type = "timestamp";
+  public $type = "date";
   public $fieldType = "nf";
   public $unique = false;
-  public $notNull = true;
-  public $default = "CURRENT_TIMESTAMP";
+  public $notNull = false;
+  public $default = false;
   public $length = false;
   public $main = false;
-  public $name = "alta";
-  public $alias = "alt";
+  public $name = "fecha_nacimiento";
+  public $alias = "fn";
 
 
   public function getEntity(){ return new PersonaEntity; }

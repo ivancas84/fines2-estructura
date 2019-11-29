@@ -58,10 +58,8 @@ class CargoSqlMain extends EntitySql{
     }
   }
 
-
-  //@override
   public function initializeInsert(array $data){
-    $data['id'] = (!empty($data['id'])) ? $data['id'] : Dba::nextId('cargo');
+    $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('cargo');
     if(empty($data['descripcion'])) throw new Exception('dato obligatorio sin valor: descripcion');
 
     return $data;

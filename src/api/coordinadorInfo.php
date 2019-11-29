@@ -4,7 +4,7 @@
  * @todo Implementar render en el getall
  */
 require_once("class/tools/Filter.php");
-require_once("class/controller/Dba.php");
+require_once("class/model/Ma.php");
 require_once("class/model/Sqlo.php");
 
 require_once("config/structure.php");
@@ -18,8 +18,8 @@ try{
   //el uso de parametros es dinamico
   //se puede definir un parametro opcional "display" que posee un string en formato json para facilitar el uso de tipos basicos
 
-  $display = Dba::displayParams($params, "data");
-  $idsPlanes = Dba::field("clasificacion_plan", "plan", [["clasificacion", "=", $display["aux"]["clasificacion"]]]);
+  //$display = Dba::displayParams($params, "data");
+  $idsPlanes = Ma::field("clasificacion_plan", "plan", [["clasificacion", "=", $display["aux"]["clasificacion"]]]);
   $sqlo = EntitySqlo::getInstanceString(ENTITY);
   $sql = $sqlo->idInfoCoordinadoresFiltros($display["aux"]["fecha_anio"],$display["aux"]["fecha_semestre"],$display["aux"]["dependencia"],$idsPlanes);
   $datos = Dba::fetchAll($sql);
@@ -27,7 +27,7 @@ try{
   function id($p){ return $p["id"]; }
   $ids = array_map("id", $datos);
 
-  $rows = Dba::getAll(ENTITY, $ids);
+  $rows = Ma::getAll(ENTITY, $ids);
 
   for($i = 0; $i < count($datos); $i++){
     for($j = 0; $j < count($rows); $j++){

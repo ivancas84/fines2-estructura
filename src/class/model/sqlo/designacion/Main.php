@@ -20,20 +20,20 @@ class DesignacionSqloMain extends EntitySqlo {
       $sql = "
   INSERT INTO " . $this->entity->sn_() . " (";
       $sql .= "id, " ;
+    $sql .= "persona, " ;
     $sql .= "alta, " ;
     $sql .= "baja, " ;
     $sql .= "cargo, " ;
-    $sql .= "persona, " ;
     $sql .= "sede, " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
 
     $sql .= ")
 VALUES ( ";
     $sql .= $row['id'] . ", " ;
+    $sql .= $row['persona'] . ", " ;
     $sql .= $row['alta'] . ", " ;
     $sql .= $row['baja'] . ", " ;
     $sql .= $row['cargo'] . ", " ;
-    $sql .= $row['persona'] . ", " ;
     $sql .= $row['sede'] . ", " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
 
@@ -47,10 +47,10 @@ VALUES ( ";
     $sql = "
 UPDATE " . $this->entity->sn_() . " SET
 ";
+    if (isset($row['persona'] )) $sql .= "persona = " . $row['persona'] . " ," ;
     if (isset($row['alta'] )) $sql .= "alta = " . $row['alta'] . " ," ;
     if (isset($row['baja'] )) $sql .= "baja = " . $row['baja'] . " ," ;
     if (isset($row['cargo'] )) $sql .= "cargo = " . $row['cargo'] . " ," ;
-    if (isset($row['persona'] )) $sql .= "persona = " . $row['persona'] . " ," ;
     if (isset($row['sede'] )) $sql .= "sede = " . $row['sede'] . " ," ;
     //eliminar ultima coma
     $sql = substr($sql, 0, -2);
@@ -64,10 +64,6 @@ UPDATE " . $this->entity->sn_() . " SET
     if(!is_null($row['car_id'])){
       $json = EntitySql::getInstanceRequire('cargo', 'car')->_json($row);
       $row_["cargo_"] = $json;
-    }
-    if(!is_null($row['per_id'])){
-      $json = EntitySql::getInstanceRequire('persona', 'per')->_json($row);
-      $row_["persona_"] = $json;
     }
     if(!is_null($row['sed_id'])){
       $json = EntitySql::getInstanceRequire('sede', 'sed')->_json($row);
@@ -97,7 +93,6 @@ UPDATE " . $this->entity->sn_() . " SET
 
     $row_["designacion"] = EntityValues::getInstanceRequire("designacion", $row);
     $row_["cargo"] = EntityValues::getInstanceRequire('cargo', $row, 'car_');
-    $row_["persona"] = EntityValues::getInstanceRequire('persona', $row, 'per_');
     $row_["sede"] = EntityValues::getInstanceRequire('sede', $row, 'sed_');
     $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $row, 'sed_dom_');
     $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede', $row, 'sed_ts_');

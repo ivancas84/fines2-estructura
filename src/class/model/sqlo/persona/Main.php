@@ -22,11 +22,12 @@ class PersonaSqloMain extends EntitySqlo {
       $sql .= "id, " ;
     $sql .= "nombres, " ;
     $sql .= "apellidos, " ;
-    $sql .= "apodo, " ;
+    $sql .= "fecha_nacimiento, " ;
     $sql .= "numero_documento, " ;
     $sql .= "cuil, " ;
     $sql .= "email, " ;
     $sql .= "genero, " ;
+    $sql .= "apodo, " ;
     $sql .= "alta, " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
 
@@ -35,11 +36,12 @@ VALUES ( ";
     $sql .= $row['id'] . ", " ;
     $sql .= $row['nombres'] . ", " ;
     $sql .= $row['apellidos'] . ", " ;
-    $sql .= $row['apodo'] . ", " ;
+    $sql .= $row['fecha_nacimiento'] . ", " ;
     $sql .= $row['numero_documento'] . ", " ;
     $sql .= $row['cuil'] . ", " ;
     $sql .= $row['email'] . ", " ;
     $sql .= $row['genero'] . ", " ;
+    $sql .= $row['apodo'] . ", " ;
     $sql .= $row['alta'] . ", " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
 
@@ -55,11 +57,12 @@ UPDATE " . $this->entity->sn_() . " SET
 ";
     if (isset($row['nombres'] )) $sql .= "nombres = " . $row['nombres'] . " ," ;
     if (isset($row['apellidos'] )) $sql .= "apellidos = " . $row['apellidos'] . " ," ;
-    if (isset($row['apodo'] )) $sql .= "apodo = " . $row['apodo'] . " ," ;
+    if (isset($row['fecha_nacimiento'] )) $sql .= "fecha_nacimiento = " . $row['fecha_nacimiento'] . " ," ;
     if (isset($row['numero_documento'] )) $sql .= "numero_documento = " . $row['numero_documento'] . " ," ;
     if (isset($row['cuil'] )) $sql .= "cuil = " . $row['cuil'] . " ," ;
     if (isset($row['email'] )) $sql .= "email = " . $row['email'] . " ," ;
     if (isset($row['genero'] )) $sql .= "genero = " . $row['genero'] . " ," ;
+    if (isset($row['apodo'] )) $sql .= "apodo = " . $row['apodo'] . " ," ;
     if (isset($row['alta'] )) $sql .= "alta = " . $row['alta'] . " ," ;
     //eliminar ultima coma
     $sql = substr($sql, 0, -2);

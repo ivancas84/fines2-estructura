@@ -1,5 +1,6 @@
 <?php
 
+require_once("class/model/Ma.php");
 require_once("class/api/Persist.php");
 
 class CentroEducativoPersistApi extends PersistApi {
@@ -17,9 +18,9 @@ class CentroEducativoPersistApi extends PersistApi {
         }
         
         if($centroEducativo["id"]) {
-            $ce_bd = Dba::getOrNull("centro_educativo", $centroEducativo["id"]);
+            $ce_bd = Ma::getOrNull("centro_educativo", $centroEducativo["id"]);
         } else {
-            $ce_bd = Dba::oneOrNull("centro_educativo", [
+            $ce_bd = Ma::oneOrNull("centro_educativo", [
                 ["nombre","=",$centroEducativo["nombre"]],
                 ["cue","=",$centroEducativo["cue"]],
             ]);    

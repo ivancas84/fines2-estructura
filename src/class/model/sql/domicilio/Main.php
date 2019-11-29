@@ -70,10 +70,8 @@ class DomicilioSqlMain extends EntitySql{
     }
   }
 
-
-  //@override
   public function initializeInsert(array $data){
-    $data['id'] = (!empty($data['id'])) ? $data['id'] : Dba::nextId('domicilio');
+    $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('domicilio');
     if(empty($data['calle'])) throw new Exception('dato obligatorio sin valor: calle');
     if(empty($data['entre'])) $data['entre'] = "null";
     if(empty($data['numero'])) throw new Exception('dato obligatorio sin valor: numero');

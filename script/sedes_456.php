@@ -1,7 +1,7 @@
 <?php
 
 require_once("../config/config.php");
-require_once("class/controller/Dba.php");
+require_once("class/controller/Model.php");
 require_once("class/model/Render.php");
 require_once("function/array_unique_key.php");
 require_once("function/array_group_value.php");
@@ -11,7 +11,7 @@ $render->setCondition([
   ["numero","=", true]
 ]);
 $render->setOrder(["numero"=>"ASC"]);
-$sedes =Dba::all("sede",$render);
+$sedes =Model::all("sede",$render);
 $idSedes = array_unique_key($sedes, "id");
 
 
@@ -19,7 +19,7 @@ $render = new Render();
 $render->setCondition([
   ["sed_id","=", $idSedes]
 ]);
-$referentes =Dba::all("referente",$render);
+$referentes =Model::all("referente",$render);
 $sedesReferentes = array_group_value($referentes, "sede");
 
   echo "<table>";

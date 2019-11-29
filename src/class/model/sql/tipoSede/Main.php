@@ -58,10 +58,8 @@ class TipoSedeSqlMain extends EntitySql{
     }
   }
 
-
-  //@override
   public function initializeInsert(array $data){
-    $data['id'] = (!empty($data['id'])) ? $data['id'] : Dba::nextId('tipo_sede');
+    $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('tipo_sede');
     if(empty($data['descripcion'])) throw new Exception('dato obligatorio sin valor: descripcion');
 
     return $data;

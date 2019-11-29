@@ -15,10 +15,10 @@ class DesignacionSqlMain extends EntitySql{
 
     switch ($field) {
       case $p.'id': return $t.".id";
+      case $p.'persona': return $t.".persona";
       case $p.'alta': return $t.".alta";
       case $p.'baja': return $t.".baja";
       case $p.'cargo': return $t.".cargo";
-      case $p.'persona': return $t.".persona";
       case $p.'sede': return $t.".sede";
       default: return null;
     }
@@ -47,10 +47,6 @@ class DesignacionSqlMain extends EntitySql{
       case $p.'max_cargo': return "MAX({$t}.cargo)";
       case $p.'count_cargo': return "COUNT({$t}.cargo)";
 
-      case $p.'min_persona': return "MIN({$t}.persona)";
-      case $p.'max_persona': return "MAX({$t}.persona)";
-      case $p.'count_persona': return "COUNT({$t}.persona)";
-
       case $p.'min_sede': return "MIN({$t}.sede)";
       case $p.'max_sede': return "MAX({$t}.sede)";
       case $p.'count_sede': return "COUNT({$t}.sede)";
@@ -62,7 +58,6 @@ class DesignacionSqlMain extends EntitySql{
   public function mappingField($field){
     if($f = $this->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('cargo', 'car')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('persona', 'per')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('sede', 'sed')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('domicilio', 'sed_dom')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('tipo_sede', 'sed_ts')->_mappingField($field)) return $f;
@@ -75,20 +70,19 @@ class DesignacionSqlMain extends EntitySql{
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingField($p.'baja') . ' AS ' . $p.'baja, ' . $this->_mappingField($p.'cargo') . ' AS ' . $p.'cargo, ' . $this->_mappingField($p.'persona') . ' AS ' . $p.'persona, ' . $this->_mappingField($p.'sede') . ' AS ' . $p.'sede';
+' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'persona') . ' AS ' . $p.'persona, ' . $this->_mappingField($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingField($p.'baja') . ' AS ' . $p.'baja, ' . $this->_mappingField($p.'cargo') . ' AS ' . $p.'cargo, ' . $this->_mappingField($p.'sede') . ' AS ' . $p.'sede';
   }
 
   public function _fieldsDb(){
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'alta') . ', ' . $this->_mappingField($p.'baja') . ', ' . $this->_mappingField($p.'cargo') . ', ' . $this->_mappingField($p.'persona') . ', ' . $this->_mappingField($p.'sede') . '';
+' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'persona') . ', ' . $this->_mappingField($p.'alta') . ', ' . $this->_mappingField($p.'baja') . ', ' . $this->_mappingField($p.'cargo') . ', ' . $this->_mappingField($p.'sede') . '';
   }
 
   public function fields(){
     return $this->_fields() . ',
 ' . EntitySql::getInstanceRequire('cargo', 'car')->_fields() . ',
-' . EntitySql::getInstanceRequire('persona', 'per')->_fields() . ',
 ' . EntitySql::getInstanceRequire('sede', 'sed')->_fields() . ',
 ' . EntitySql::getInstanceRequire('domicilio', 'sed_dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('tipo_sede', 'sed_ts')->_fields() . ',
@@ -99,7 +93,6 @@ class DesignacionSqlMain extends EntitySql{
 
   public function join(Render $render){
     return EntitySql::getInstanceRequire('cargo', 'car')->_join('cargo', 'desi', $render) . '
-' . EntitySql::getInstanceRequire('persona', 'per')->_join('persona', 'desi', $render) . '
 ' . EntitySql::getInstanceRequire('sede', 'sed')->_join('sede', 'desi', $render) . '
 ' . EntitySql::getInstanceRequire('domicilio', 'sed_dom')->_join('domicilio', 'sed', $render) . '
 ' . EntitySql::getInstanceRequire('tipo_sede', 'sed_ts')->_join('tipo_sede', 'sed', $render) . '
@@ -114,10 +107,10 @@ class DesignacionSqlMain extends EntitySql{
     $f = $this->_mappingField($field);
     switch ($field){
       case "{$p}id": return $this->format->conditionText($f, $value, $option);
+      case "{$p}persona": return $this->format->conditionText($f, $value, $option);
       case "{$p}alta": return $this->format->conditionTimestamp($f, $value, $option);
       case "{$p}baja": return $this->format->conditionTimestamp($f, $value, $option);
       case "{$p}cargo": return $this->format->conditionText($f, $value, $option);
-      case "{$p}persona": return $this->format->conditionText($f, $value, $option);
       case "{$p}sede": return $this->format->conditionText($f, $value, $option);
       default: return parent::_conditionFieldStruct($field, $option, $value);
     }
@@ -126,7 +119,6 @@ class DesignacionSqlMain extends EntitySql{
   protected function conditionFieldStruct($field, $option, $value) {
     if($c = $this->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('cargo','car')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('persona','per')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('sede','sed')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','sed_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('tipo_sede','sed_ts')->_conditionFieldStruct($field, $option, $value)) return $c;
@@ -137,7 +129,6 @@ class DesignacionSqlMain extends EntitySql{
   protected function conditionFieldAux($field, $option, $value) {
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('cargo','car')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('persona','per')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('sede','sed')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','sed_dom')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('tipo_sede','sed_ts')->_conditionFieldAux($field, $option, $value)) return $c;
@@ -148,7 +139,6 @@ class DesignacionSqlMain extends EntitySql{
   protected function conditionFieldHaving($field, $option, $value) {
     if($c = $this->_conditionFieldHaving($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('cargo','car')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('persona','per')->_conditionFieldHaving($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('sede','sed')->_conditionFieldHaving($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','sed_dom')->_conditionFieldHaving($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('tipo_sede','sed_ts')->_conditionFieldHaving($field, $option, $value)) return $c;
@@ -156,14 +146,12 @@ class DesignacionSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('domicilio','sed_ce_dom')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
-
-  //@override
   public function initializeInsert(array $data){
-    $data['id'] = (!empty($data['id'])) ? $data['id'] : Dba::nextId('designacion');
+    $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('designacion');
+    if(empty($data['persona'])) throw new Exception('dato obligatorio sin valor: persona');
     if(!isset($data['alta']))  $data['alta'] = date("Y-m-d H:i:s");
     if(!isset($data['baja']))  $data['baja'] = "null";
     if(empty($data['cargo'])) throw new Exception('dato obligatorio sin valor: cargo');
-      if(empty($data['persona'])) throw new Exception('dato obligatorio sin valor: persona');
       if(empty($data['sede'])) throw new Exception('dato obligatorio sin valor: sede');
   
     return $data;
@@ -172,10 +160,10 @@ class DesignacionSqlMain extends EntitySql{
   //@override
   public function initializeUpdate(array $data){
     if(array_key_exists('id', $data)) { if(empty($data['id'])) throw new Exception('dato obligatorio sin valor: id'); }
+    if(array_key_exists('persona', $data)) { if(empty($data['persona'])) throw new Exception('dato obligatorio sin valor: persona'); }
     if(array_key_exists('alta', $data)) { if(empty($data['alta']))  $data['alta'] = date("Y-m-d H:i:s"); }
     if(array_key_exists('baja', $data)) { if(empty($data['baja']))  $data['baja'] = "null"; }
     if(array_key_exists('cargo', $data)) { if(!isset($data['cargo']) || ($data['cargo'] == '')) throw new Exception('dato obligatorio sin valor: cargo'); }
-    if(array_key_exists('persona', $data)) { if(!isset($data['persona']) || ($data['persona'] == '')) throw new Exception('dato obligatorio sin valor: persona'); }
     if(array_key_exists('sede', $data)) { if(!isset($data['sede']) || ($data['sede'] == '')) throw new Exception('dato obligatorio sin valor: sede'); }
 
     return $data;
@@ -184,10 +172,10 @@ class DesignacionSqlMain extends EntitySql{
   public function format(array $row){
     $row_ = array();
    if(isset($row['id']) )  $row_['id'] = $this->format->escapeString($row['id']);
+    if(isset($row['persona'])) $row_['persona'] = $this->format->escapeString($row['persona']);
     if(isset($row['alta'])) $row_['alta'] = $this->format->timestamp($row['alta']);
     if(isset($row['baja'])) $row_['baja'] = $this->format->timestamp($row['baja']);
     if(isset($row['cargo'])) $row_['cargo'] = $this->format->escapeString($row['cargo']);
-    if(isset($row['persona'])) $row_['persona'] = $this->format->escapeString($row['persona']);
     if(isset($row['sede'])) $row_['sede'] = $this->format->escapeString($row['sede']);
 
     return $row_;
@@ -197,10 +185,10 @@ class DesignacionSqlMain extends EntitySql{
     $prefix = $this->prf();
     $row_ = [];
     $row_["id"] = (is_null($row[$prefix . "id"])) ? null : (string)$row[$prefix . "id"]; //la pk se trata como string debido a un comportamiento erratico en angular 2 que al tratarlo como integer resta 1 en el valor
+    $row_["persona"] = (is_null($row[$prefix . "persona"])) ? null : (string)$row[$prefix . "persona"];
     $row_["alta"] = (is_null($row[$prefix . "alta"])) ? null : (string)$row[$prefix . "alta"];
     $row_["baja"] = (is_null($row[$prefix . "baja"])) ? null : (string)$row[$prefix . "baja"];
     $row_["cargo"] = (is_null($row[$prefix . "cargo"])) ? null : (string)$row[$prefix . "cargo"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
-    $row_["persona"] = (is_null($row[$prefix . "persona"])) ? null : (string)$row[$prefix . "persona"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
     $row_["sede"] = (is_null($row[$prefix . "sede"])) ? null : (string)$row[$prefix . "sede"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
     return $row_;
   }

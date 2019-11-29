@@ -5,7 +5,7 @@ require_once("class/model/Field.php");
 class FieldDesignacionPersonaMain extends Field {
 
   public $type = "varchar";
-  public $fieldType = "mu";
+  public $fieldType = "nf";
   public $unique = false;
   public $notNull = true;
   public $default = false;
@@ -16,8 +16,6 @@ class FieldDesignacionPersonaMain extends Field {
 
 
   public function getEntity(){ return new DesignacionEntity; }
-
-  public function getEntityRef(){ return new PersonaEntity; }
 
 
 }

@@ -1,9 +1,10 @@
 id (id): string pk. NOT NULL. MAIN. UNIQUE.
 nombres (nom): string nf. NOT NULL.
 apellidos (ape): string nf.
-apodo (apo): string nf.
+fecha_nacimiento (fn): date nf.
 numero_documento (nd): string nf. NOT NULL. UNIQUE.
 cuil (cui): string nf. UNIQUE.
 email (ema): string nf.
 genero (gen): string nf.
+apodo (apo): string nf.
 alta (alt): timestamp nf. NOT NULL. DEFAULT: CURRENT_TIMESTAMP.

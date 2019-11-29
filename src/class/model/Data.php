@@ -1,6 +1,7 @@
 <?php
 
-require_once("class/controller/Dba.php");
+require_once("class/model/Ma.php");
+require_once("class/model/db/Dba.php");
 require_once("class/model/Render.php");
 require_once("class/model/RenderAux.php");
 require_once("class/model/Sqlo.php");
@@ -258,7 +259,7 @@ class Data {
     $o = ($orden == "tramo") ? ["anio"=>"asc", "semestre"=>"asc", "dvi_sed_numero"=>"asc"] : ["dvi_sed_numero"=>"asc", "anio"=>"asc", "semestre"=>"asc"];
     $render->setOrder($o);
 
-    return Dba::all("comision",$render);
+    return Ma::all("comision",$render);
   }
 
   public static function comisionesPublicadasPorCoordinador($fecha, $orden = "tramo"){
@@ -412,7 +413,7 @@ ORDER BY com_dvi_sed_numero, com_dvi_numero, com_anio, com_semestre, ch_asi_nomb
   public function buscarAlumnos($search) {
     $render = new Render();
     $render->setSearch($search);
-    return Dba::all("nomina2", $render);
+    return Ma::all("nomina2", $render);
   }
 
 
@@ -1083,7 +1084,7 @@ ORDER BY asignatura.nombre, sede.numero, comision.anio, comision.semestre;
     $render = new Render();
     $render->addAdvanced(["profesor", "=", $profesor]);
     $render->setOrder(["cur_com_fecha" => "DESC"]);
-    $tomas = Dba::all("toma", $render);
+    $tomas = Ma::all("toma", $render);
     $tomas_ = [];
 
     foreach($tomas as $toma){
@@ -1104,7 +1105,7 @@ ORDER BY asignatura.nombre, sede.numero, comision.anio, comision.semestre;
     $render = new Render();
     $render->addAdvanced(["persona", "=", $alumno]);
     $render->setOrder(["com_fecha" => "DESC"]);
-    $nominas = Dba::all("nomina2", $render);
+    $nominas = Ma::all("nomina2", $render);
     $nominas_ = [];
 
     foreach($nominas as $nomina){

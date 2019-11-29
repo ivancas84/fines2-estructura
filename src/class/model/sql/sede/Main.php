@@ -137,10 +137,8 @@ class SedeSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('domicilio','ce_dom')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
-
-  //@override
   public function initializeInsert(array $data){
-    $data['id'] = (!empty($data['id'])) ? $data['id'] : Dba::nextId('sede');
+    $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('sede');
     if(empty($data['numero'])) throw new Exception('dato obligatorio sin valor: numero');
     if(empty($data['nombre'])) throw new Exception('dato obligatorio sin valor: nombre');
     if(empty($data['observaciones'])) $data['observaciones'] = "null";
