@@ -64,8 +64,8 @@ class _DistribucionHoraria extends EntityValues {
   }
 
   public function setCargaHoraria($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
+    if ($p == DEFAULT_VALUE) $p = null;
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkCargaHoraria($p)) $this->cargaHoraria = $p;
   }
 

@@ -135,38 +135,39 @@ class _Sede extends EntityValues {
 
   public function setBaja($p, $format = "Y-m-d H:i:s") {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(is_null($p)) $p = null;
-    else $p = SpanishDateTime::createFromFormat($format, $p);
+    if(!is_null($p)) {
+      $p = SpanishDateTime::createFromFormat($format, $p);
+    }
     if($this->checkBaja($p)) $this->baja = $p;
   }
 
   public function setDependencia($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
+    if ($p == DEFAULT_VALUE) $p = null;
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkDependencia($p)) $this->dependencia = $p;
   }
 
   public function setTipoSede($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
+    if ($p == DEFAULT_VALUE) $p = null;
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkTipoSede($p)) $this->tipoSede = $p;
   }
 
   public function setDomicilio($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
+    if ($p == DEFAULT_VALUE) $p = null;
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkDomicilio($p)) $this->domicilio = $p;
   }
 
   public function setCoordinador($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
+    if ($p == DEFAULT_VALUE) $p = null;
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkCoordinador($p)) $this->coordinador = $p;
   }
 
   public function setReferente($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
+    if ($p == DEFAULT_VALUE) $p = null;
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkReferente($p)) $this->referente = $p;
   }
 

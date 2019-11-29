@@ -69,8 +69,9 @@ class _Horario extends EntityValues {
 
   public function setHoraInicio($p, $format = "H:i:s") {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(is_null($p)) $p = null;
-    else $p = SpanishDateTime::createFromFormat($format, $p);
+    if(!is_null($p)) {
+      $p = SpanishDateTime::createFromFormat($format, $p);
+    }
     if($this->checkHoraInicio($p)) $this->horaInicio = $p;
   }
 
@@ -80,8 +81,9 @@ class _Horario extends EntityValues {
 
   public function setHoraFin($p, $format = "H:i:s") {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(is_null($p)) $p = null;
-    else $p = SpanishDateTime::createFromFormat($format, $p);
+    if(!is_null($p)) {
+      $p = SpanishDateTime::createFromFormat($format, $p);
+    }
     if($this->checkHoraFin($p)) $this->horaFin = $p;
   }
 
@@ -92,14 +94,14 @@ class _Horario extends EntityValues {
   }
 
   public function setDia($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
+    if ($p == DEFAULT_VALUE) $p = null;
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkDia($p)) $this->dia = $p;
   }
 
   public function setCurso($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
+    if ($p == DEFAULT_VALUE) $p = null;
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkCurso($p)) $this->curso = $p;
   }
 

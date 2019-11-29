@@ -112,8 +112,8 @@ class _Alumno extends EntityValues {
   }
 
   public function setPersona($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
+    if ($p == DEFAULT_VALUE) $p = null;
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkPersona($p)) $this->persona = $p;
   }
 

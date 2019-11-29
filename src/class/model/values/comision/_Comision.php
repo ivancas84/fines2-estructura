@@ -159,8 +159,7 @@ class _Comision extends EntityValues {
 
   public function setFecha($p, $format = UNDEFINED) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(is_null($p)) $p = null;
-    else {
+    if(!is_null($p)) {
       $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);
     }
     if($this->checkFecha($p)) $this->fecha = $p;
@@ -172,8 +171,9 @@ class _Comision extends EntityValues {
 
   public function setAlta($p, $format = "Y-m-d H:i:s") {
     $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
-    if(is_null($p)) $p = null;
-    else $p = SpanishDateTime::createFromFormat($format, $p);
+    if(!is_null($p)) {
+      $p = SpanishDateTime::createFromFormat($format, $p);
+    }
     if($this->checkAlta($p)) $this->alta = $p;
   }
 
@@ -183,8 +183,9 @@ class _Comision extends EntityValues {
 
   public function setBaja($p, $format = "Y-m-d H:i:s") {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(is_null($p)) $p = null;
-    else $p = SpanishDateTime::createFromFormat($format, $p);
+    if(!is_null($p)) {
+      $p = SpanishDateTime::createFromFormat($format, $p);
+    }
     if($this->checkBaja($p)) $this->baja = $p;
   }
 
@@ -218,8 +219,9 @@ class _Comision extends EntityValues {
 
   public function setFechaAnio($p, $format = "Y") {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(is_null($p)) $p = null;
-    else $p = SpanishDateTime::createFromFormat($format, $p);
+    if(!is_null($p)) {
+      $p = SpanishDateTime::createFromFormat($format, $p);
+    }
     if($this->checkFechaAnio($p)) $this->fechaAnio = $p;
   }
 
@@ -248,14 +250,14 @@ class _Comision extends EntityValues {
   }
 
   public function setComisionSiguiente($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
+    if ($p == DEFAULT_VALUE) $p = null;
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkComisionSiguiente($p)) $this->comisionSiguiente = $p;
   }
 
   public function setDivision($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
+    if ($p == DEFAULT_VALUE) $p = null;
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkDivision($p)) $this->division = $p;
   }
 

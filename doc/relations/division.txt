@@ -6,6 +6,7 @@ id_persona - sed_coo
 id_persona - sed_ref
 
 id (id): integer pk. NOT NULL. UNIQUE.
+numero (num): string nf. NOT NULL. MAIN. UNIQUE. NOT ADMIN.
 serie (ser): string nf. NOT NULL.
 turno (tur): string nf.
 numero (num): string nf. NOT NULL. MAIN. UNIQUE. NOT ADMIN.

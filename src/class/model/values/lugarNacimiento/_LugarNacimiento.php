@@ -81,8 +81,9 @@ class _LugarNacimiento extends EntityValues {
 
   public function setAlta($p, $format = "Y-m-d H:i:s") {
     $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
-    if(is_null($p)) $p = null;
-    else $p = SpanishDateTime::createFromFormat($format, $p);
+    if(!is_null($p)) {
+      $p = SpanishDateTime::createFromFormat($format, $p);
+    }
     if($this->checkAlta($p)) $this->alta = $p;
   }
 

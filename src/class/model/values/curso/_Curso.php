@@ -87,8 +87,9 @@ class _Curso extends EntityValues {
 
   public function setAlta($p, $format = "Y-m-d H:i:s") {
     $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
-    if(is_null($p)) $p = null;
-    else $p = SpanishDateTime::createFromFormat($format, $p);
+    if(!is_null($p)) {
+      $p = SpanishDateTime::createFromFormat($format, $p);
+    }
     if($this->checkAlta($p)) $this->alta = $p;
   }
 
@@ -98,8 +99,9 @@ class _Curso extends EntityValues {
 
   public function setBaja($p, $format = "Y-m-d H:i:s") {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(is_null($p)) $p = null;
-    else $p = SpanishDateTime::createFromFormat($format, $p);
+    if(!is_null($p)) {
+      $p = SpanishDateTime::createFromFormat($format, $p);
+    }
     if($this->checkBaja($p)) $this->baja = $p;
   }
 
@@ -110,20 +112,20 @@ class _Curso extends EntityValues {
   }
 
   public function setComision($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
+    if ($p == DEFAULT_VALUE) $p = null;
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkComision($p)) $this->comision = $p;
   }
 
   public function setCargaHoraria($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
+    if ($p == DEFAULT_VALUE) $p = null;
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkCargaHoraria($p)) $this->cargaHoraria = $p;
   }
 
   public function setTomaActiva($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
+    if ($p == DEFAULT_VALUE) $p = null;
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkTomaActiva($p)) $this->tomaActiva = $p;
   }
 

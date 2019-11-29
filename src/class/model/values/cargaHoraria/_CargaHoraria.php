@@ -94,14 +94,14 @@ class _CargaHoraria extends EntityValues {
   }
 
   public function setAsignatura($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
+    if ($p == DEFAULT_VALUE) $p = null;
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkAsignatura($p)) $this->asignatura = $p;
   }
 
   public function setPlan($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
+    if ($p == DEFAULT_VALUE) $p = null;
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkPlan($p)) $this->plan = $p;
   }
 

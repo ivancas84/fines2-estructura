@@ -87,8 +87,7 @@ class _Inasistencia extends EntityValues {
 
   public function setFechaDesde($p, $format = UNDEFINED) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(is_null($p)) $p = null;
-    else {
+    if(!is_null($p)) {
       $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);
     }
     if($this->checkFechaDesde($p)) $this->fechaDesde = $p;
@@ -100,8 +99,7 @@ class _Inasistencia extends EntityValues {
 
   public function setFechaHasta($p, $format = UNDEFINED) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(is_null($p)) $p = null;
-    else {
+    if(!is_null($p)) {
       $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);
     }
     if($this->checkFechaHasta($p)) $this->fechaHasta = $p;
@@ -138,8 +136,8 @@ class _Inasistencia extends EntityValues {
   }
 
   public function setToma($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
+    if ($p == DEFAULT_VALUE) $p = null;
+    $p = (is_null($p)) ? null : intval(trim($p));
     if($this->checkToma($p)) $this->toma = $p;
   }
 
