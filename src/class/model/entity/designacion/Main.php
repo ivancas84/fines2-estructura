@@ -13,9 +13,9 @@ class DesignacionEntityMain extends Entity {
 
   public function getFieldsNf(){
     return array(
-      Field::getInstanceRequire("designacion", "persona"),
+      Field::getInstanceRequire("designacion", "desde"),
+      Field::getInstanceRequire("designacion", "hasta"),
       Field::getInstanceRequire("designacion", "alta"),
-      Field::getInstanceRequire("designacion", "baja"),
     );
   }
 
@@ -23,6 +23,7 @@ class DesignacionEntityMain extends Entity {
     return array(
       Field::getInstanceRequire("designacion", "cargo"),
       Field::getInstanceRequire("designacion", "sede"),
+      Field::getInstanceRequire("designacion", "persona"),
     );
   }
 

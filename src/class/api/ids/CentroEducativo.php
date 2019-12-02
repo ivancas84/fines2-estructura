@@ -1,7 +1,7 @@
 <?php
 
-require_once("class/api/All.php");
+require_once("class/api/Ids.php");
 
-class CentroEducativoAllApi extends AllApi {
+class CentroEducativoIdsApi extends AllApi {
   protected $entityName = "centro_educativo";
 }
