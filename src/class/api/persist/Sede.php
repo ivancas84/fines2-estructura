@@ -20,8 +20,8 @@ class SedePersistApi extends PersistApi {
             $ce_bd = Ma::getOrNull("sede", $sede["id"]);
         } else {
             $ce_bd = Ma::oneOrNull("sede", [
-                ["numero","=",$sede["nombre"]],
-                ["centro_educativo","=",$sede["centro_educativo"]],
+                ["numero","=",$sede["numero"]],
+                ["sede","=",$sede["sede"]],
             ]);    
         }
         
@@ -36,7 +36,7 @@ class SedePersistApi extends PersistApi {
             }
         }
 
-        if(isset($domicilio)) $centroEducativo["domicilio"] = $this->persist->row("domicilio", $domicilio);
+        if(isset($domicilio)) $sede["domicilio"] = $this->persist->row("domicilio", $domicilio);
 
 
         $this->persist->row("sede", $sede);
