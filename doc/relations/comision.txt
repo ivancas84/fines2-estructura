@@ -1,26 +1,23 @@
-division - dvi
-plan - dvi_pla
-sede - dvi_sed
-tipo_sede - dvi_sed_ts
-domicilio - dvi_sed_dom
-id_persona - dvi_sed_coo
-id_persona - dvi_sed_ref
+sede - sed
+domicilio - sed_dom
+tipo_sede - sed_ts
+centro_educativo - sed_ce
+domicilio - sed_ce_dom
+plan - pla
 
-id (id): integer pk. NOT NULL. UNIQUE.
-anio (ani): integer nf. NOT NULL. MAIN.
-semestre (sem): integer nf. NOT NULL. MAIN.
-observaciones (obs): text nf.
-fecha (fec): date nf. NOT ADMIN.
-alta (alt): timestamp nf. NOT NULL. NOT ADMIN. DEFAULT: CURRENT_TIMESTAMP.
-baja (baj): timestamp nf. NOT ADMIN.
-comentario (com): string nf.
+id (id): string pk. NOT NULL. UNIQUE.
+turno (tur): string nf.
+division (dia): string nf. NOT NULL. MAIN.
+anio (ani): string nf. NOT NULL. MAIN.
+semestre (sem): string nf. MAIN.
+comentario (com): text nf.
 autorizada (aut): boolean nf. NOT NULL.
 apertura (ape): boolean nf. NOT NULL.
-publicar (pub): boolean nf. NOT NULL.
+publicada (pub): boolean nf. NOT NULL.
 fecha_anio (fa): year nf. NOT NULL.
 fecha_semestre (fs): integer nf. NOT NULL.
-tramo (tr): string nf. NOT NULL. NOT ADMIN.
-horario (hoa): string nf. NOT NULL. NOT ADMIN.
-periodo (pe): string nf. NOT ADMIN.
-comision_siguiente (cs): integer mu.
-division (dvi): integer mu. NOT NULL. MAIN.
+observaciones (obs): text nf.
+alta (alt): timestamp nf. NOT NULL. DEFAULT: CURRENT_TIMESTAMP.
+sede (sed): string mu. NOT NULL. MAIN.
+plan (pla): string mu. NOT NULL.
+comision_siguiente (cs): string mu.
