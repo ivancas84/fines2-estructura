@@ -60,18 +60,19 @@ class CargoSqlMain extends EntitySql{
 
   public function initializeInsert(array $data){
     $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('cargo');
-    if(empty($data['descripcion'])) throw new Exception('dato obligatorio sin valor: descripcion');
+    if(!isset($data['descripcion']) || is_null($data['descripcion']) || $data['descripcion'] == "") throw new Exception('dato obligatorio sin valor: descripcion');
 
     return $data;
   }
 
-  //@override
+
   public function initializeUpdate(array $data){
-    if(array_key_exists('id', $data)) { if(empty($data['id'])) throw new Exception('dato obligatorio sin valor: id'); }
-    if(array_key_exists('descripcion', $data)) { if(empty($data['descripcion'])) throw new Exception('dato obligatorio sin valor: descripcion'); }
+    if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
+    if(array_key_exists('descripcion', $data)) { if(is_null($data['descripcion']) || $data['descripcion'] == "") throw new Exception('dato obligatorio sin valor: descripcion'); }
 
     return $data;
   }
+
 
   public function format(array $row){
     $row_ = array();

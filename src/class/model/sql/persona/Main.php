@@ -86,34 +86,35 @@ class PersonaSqlMain extends EntitySql{
 
   public function initializeInsert(array $data){
     $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('persona');
-    if(empty($data['nombres'])) throw new Exception('dato obligatorio sin valor: nombres');
-    if(empty($data['apellidos'])) $data['apellidos'] = "null";
+    if(!isset($data['nombres']) || is_null($data['nombres']) || $data['nombres'] == "") throw new Exception('dato obligatorio sin valor: nombres');
+    if(!isset($data['apellidos']) || is_null($data['apellidos']) || $data['apellidos'] == "") $data['apellidos'] = "null";
     if(!isset($data['fecha_nacimiento']))  $data['fecha_nacimiento'] = "null";
-    if(empty($data['numero_documento'])) throw new Exception('dato obligatorio sin valor: numero_documento');
-    if(empty($data['cuil'])) $data['cuil'] = "null";
-    if(empty($data['email'])) $data['email'] = "null";
-    if(empty($data['genero'])) $data['genero'] = "null";
-    if(empty($data['apodo'])) $data['apodo'] = "null";
+    if(!isset($data['numero_documento']) || is_null($data['numero_documento']) || $data['numero_documento'] == "") throw new Exception('dato obligatorio sin valor: numero_documento');
+    if(!isset($data['cuil']) || is_null($data['cuil']) || $data['cuil'] == "") $data['cuil'] = "null";
+    if(!isset($data['email']) || is_null($data['email']) || $data['email'] == "") $data['email'] = "null";
+    if(!isset($data['genero']) || is_null($data['genero']) || $data['genero'] == "") $data['genero'] = "null";
+    if(!isset($data['apodo']) || is_null($data['apodo']) || $data['apodo'] == "") $data['apodo'] = "null";
     if(!isset($data['alta']))  $data['alta'] = date("Y-m-d H:i:s");
 
     return $data;
   }
 
-  //@override
+
   public function initializeUpdate(array $data){
-    if(array_key_exists('id', $data)) { if(empty($data['id'])) throw new Exception('dato obligatorio sin valor: id'); }
-    if(array_key_exists('nombres', $data)) { if(empty($data['nombres'])) throw new Exception('dato obligatorio sin valor: nombres'); }
-    if(array_key_exists('apellidos', $data)) { if(empty($data['apellidos'])) $data['apellidos'] = "null"; }
+    if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
+    if(array_key_exists('nombres', $data)) { if(is_null($data['nombres']) || $data['nombres'] == "") throw new Exception('dato obligatorio sin valor: nombres'); }
+    if(array_key_exists('apellidos', $data)) { if(is_null($data['apellidos']) || $data['apellidos'] == "") $data['apellidos'] = "null"; }
     if(array_key_exists('fecha_nacimiento', $data)) { if(empty($data['fecha_nacimiento']))  $data['fecha_nacimiento'] = "null"; }
-    if(array_key_exists('numero_documento', $data)) { if(empty($data['numero_documento'])) throw new Exception('dato obligatorio sin valor: numero_documento'); }
-    if(array_key_exists('cuil', $data)) { if(empty($data['cuil'])) $data['cuil'] = "null"; }
-    if(array_key_exists('email', $data)) { if(empty($data['email'])) $data['email'] = "null"; }
-    if(array_key_exists('genero', $data)) { if(empty($data['genero'])) $data['genero'] = "null"; }
-    if(array_key_exists('apodo', $data)) { if(empty($data['apodo'])) $data['apodo'] = "null"; }
+    if(array_key_exists('numero_documento', $data)) { if(is_null($data['numero_documento']) || $data['numero_documento'] == "") throw new Exception('dato obligatorio sin valor: numero_documento'); }
+    if(array_key_exists('cuil', $data)) { if(is_null($data['cuil']) || $data['cuil'] == "") $data['cuil'] = "null"; }
+    if(array_key_exists('email', $data)) { if(is_null($data['email']) || $data['email'] == "") $data['email'] = "null"; }
+    if(array_key_exists('genero', $data)) { if(is_null($data['genero']) || $data['genero'] == "") $data['genero'] = "null"; }
+    if(array_key_exists('apodo', $data)) { if(is_null($data['apodo']) || $data['apodo'] == "") $data['apodo'] = "null"; }
     if(array_key_exists('alta', $data)) { if(empty($data['alta']))  $data['alta'] = date("Y-m-d H:i:s"); }
 
     return $data;
   }
+
 
   public function format(array $row){
     $row_ = array();

@@ -114,26 +114,27 @@ class CargaHorariaSqlMain extends EntitySql{
 
   public function initializeInsert(array $data){
     $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('carga_horaria');
-    if(empty($data['anio'])) throw new Exception('dato obligatorio sin valor: anio');
-    if(empty($data['semestre'])) throw new Exception('dato obligatorio sin valor: semestre');
-    if(empty($data['horas_catedra'])) throw new Exception('dato obligatorio sin valor: horas_catedra');
+    if(!isset($data['anio']) || is_null($data['anio']) || $data['anio'] == "") throw new Exception('dato obligatorio sin valor: anio');
+    if(!isset($data['semestre']) || is_null($data['semestre']) || $data['semestre'] == "") throw new Exception('dato obligatorio sin valor: semestre');
+    if(!isset($data['horas_catedra']) || is_null($data['horas_catedra']) || $data['horas_catedra'] == "") throw new Exception('dato obligatorio sin valor: horas_catedra');
     if(empty($data['plan'])) throw new Exception('dato obligatorio sin valor: plan');
-      if(empty($data['asignatura'])) throw new Exception('dato obligatorio sin valor: asignatura');
-  
+    if(empty($data['asignatura'])) throw new Exception('dato obligatorio sin valor: asignatura');
+
     return $data;
   }
 
-  //@override
+
   public function initializeUpdate(array $data){
-    if(array_key_exists('id', $data)) { if(empty($data['id'])) throw new Exception('dato obligatorio sin valor: id'); }
-    if(array_key_exists('anio', $data)) { if(empty($data['anio'])) throw new Exception('dato obligatorio sin valor: anio'); }
-    if(array_key_exists('semestre', $data)) { if(empty($data['semestre'])) throw new Exception('dato obligatorio sin valor: semestre'); }
-    if(array_key_exists('horas_catedra', $data)) { if(empty($data['horas_catedra'])) throw new Exception('dato obligatorio sin valor: horas_catedra'); }
+    if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
+    if(array_key_exists('anio', $data)) { if(is_null($data['anio']) || $data['anio'] == "") throw new Exception('dato obligatorio sin valor: anio'); }
+    if(array_key_exists('semestre', $data)) { if(is_null($data['semestre']) || $data['semestre'] == "") throw new Exception('dato obligatorio sin valor: semestre'); }
+    if(array_key_exists('horas_catedra', $data)) { if(is_null($data['horas_catedra']) || $data['horas_catedra'] == "") throw new Exception('dato obligatorio sin valor: horas_catedra'); }
     if(array_key_exists('plan', $data)) { if(!isset($data['plan']) || ($data['plan'] == '')) throw new Exception('dato obligatorio sin valor: plan'); }
     if(array_key_exists('asignatura', $data)) { if(!isset($data['asignatura']) || ($data['asignatura'] == '')) throw new Exception('dato obligatorio sin valor: asignatura'); }
 
     return $data;
   }
+
 
   public function format(array $row){
     $row_ = array();

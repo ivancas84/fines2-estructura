@@ -62,20 +62,21 @@ class PlanSqlMain extends EntitySql{
 
   public function initializeInsert(array $data){
     $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('plan');
-    if(empty($data['orientacion'])) throw new Exception('dato obligatorio sin valor: orientacion');
-    if(empty($data['resolucion'])) $data['resolucion'] = "null";
+    if(!isset($data['orientacion']) || is_null($data['orientacion']) || $data['orientacion'] == "") throw new Exception('dato obligatorio sin valor: orientacion');
+    if(!isset($data['resolucion']) || is_null($data['resolucion']) || $data['resolucion'] == "") $data['resolucion'] = "null";
 
     return $data;
   }
 
-  //@override
+
   public function initializeUpdate(array $data){
-    if(array_key_exists('id', $data)) { if(empty($data['id'])) throw new Exception('dato obligatorio sin valor: id'); }
-    if(array_key_exists('orientacion', $data)) { if(empty($data['orientacion'])) throw new Exception('dato obligatorio sin valor: orientacion'); }
-    if(array_key_exists('resolucion', $data)) { if(empty($data['resolucion'])) $data['resolucion'] = "null"; }
+    if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
+    if(array_key_exists('orientacion', $data)) { if(is_null($data['orientacion']) || $data['orientacion'] == "") throw new Exception('dato obligatorio sin valor: orientacion'); }
+    if(array_key_exists('resolucion', $data)) { if(is_null($data['resolucion']) || $data['resolucion'] == "") $data['resolucion'] = "null"; }
 
     return $data;
   }
+
 
   public function format(array $row){
     $row_ = array();

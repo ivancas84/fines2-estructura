@@ -173,39 +173,39 @@ class ComisionSqlMain extends EntitySql{
 
   public function initializeInsert(array $data){
     $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('comision');
-    if(empty($data['turno'])) $data['turno'] = "null";
-    if(empty($data['division'])) throw new Exception('dato obligatorio sin valor: division');
-    if(empty($data['anio'])) throw new Exception('dato obligatorio sin valor: anio');
-    if(empty($data['semestre'])) $data['semestre'] = "null";
-    if(empty($data['comentario'])) $data['comentario'] = "null";
+    if(!isset($data['turno']) || is_null($data['turno']) || $data['turno'] == "") $data['turno'] = "null";
+    if(!isset($data['division']) || is_null($data['division']) || $data['division'] == "") throw new Exception('dato obligatorio sin valor: division');
+    if(!isset($data['anio']) || is_null($data['anio']) || $data['anio'] == "") throw new Exception('dato obligatorio sin valor: anio');
+    if(!isset($data['semestre']) || is_null($data['semestre']) || $data['semestre'] == "") $data['semestre'] = "null";
+    if(!isset($data['comentario']) || is_null($data['comentario']) || $data['comentario'] == "") $data['comentario'] = "null";
     if(!isset($data['autorizada']) || ($data['autorizada'] == '')) $data['autorizada'] = "false";
     if(!isset($data['apertura']) || ($data['apertura'] == '')) $data['apertura'] = "false";
     if(!isset($data['publicada']) || ($data['publicada'] == '')) $data['publicada'] = "false";
     if(!isset($data['fecha_anio']))  throw new Exception('fecha/hora obligatoria sin valor: fecha_anio');
     if(!isset($data['fecha_semestre']) || ($data['fecha_semestre'] == '')) throw new Exception('dato obligatorio sin valor: fecha_semestre');
-    if(empty($data['observaciones'])) $data['observaciones'] = "null";
+    if(!isset($data['observaciones']) || is_null($data['observaciones']) || $data['observaciones'] == "") $data['observaciones'] = "null";
     if(!isset($data['alta']))  $data['alta'] = date("Y-m-d H:i:s");
     if(empty($data['sede'])) throw new Exception('dato obligatorio sin valor: sede');
-      if(empty($data['plan'])) throw new Exception('dato obligatorio sin valor: plan');
-      if(empty($data['comision_siguiente'])) $data['comision_siguiente'] = "null";
-  
+    if(empty($data['plan'])) throw new Exception('dato obligatorio sin valor: plan');
+    if(empty($data['comision_siguiente'])) $data['comision_siguiente'] = "null";
+
     return $data;
   }
 
-  //@override
+
   public function initializeUpdate(array $data){
-    if(array_key_exists('id', $data)) { if(empty($data['id'])) throw new Exception('dato obligatorio sin valor: id'); }
-    if(array_key_exists('turno', $data)) { if(empty($data['turno'])) $data['turno'] = "null"; }
-    if(array_key_exists('division', $data)) { if(empty($data['division'])) throw new Exception('dato obligatorio sin valor: division'); }
-    if(array_key_exists('anio', $data)) { if(empty($data['anio'])) throw new Exception('dato obligatorio sin valor: anio'); }
-    if(array_key_exists('semestre', $data)) { if(empty($data['semestre'])) $data['semestre'] = "null"; }
-    if(array_key_exists('comentario', $data)) { if(empty($data['comentario'])) $data['comentario'] = "null"; }
+    if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
+    if(array_key_exists('turno', $data)) { if(is_null($data['turno']) || $data['turno'] == "") $data['turno'] = "null"; }
+    if(array_key_exists('division', $data)) { if(is_null($data['division']) || $data['division'] == "") throw new Exception('dato obligatorio sin valor: division'); }
+    if(array_key_exists('anio', $data)) { if(is_null($data['anio']) || $data['anio'] == "") throw new Exception('dato obligatorio sin valor: anio'); }
+    if(array_key_exists('semestre', $data)) { if(is_null($data['semestre']) || $data['semestre'] == "") $data['semestre'] = "null"; }
+    if(array_key_exists('comentario', $data)) { if(is_null($data['comentario']) || $data['comentario'] == "") $data['comentario'] = "null"; }
     if(array_key_exists('autorizada', $data)) { if(!isset($data['autorizada']) || ($data['autorizada'] == '')) $data['autorizada'] = "false"; }
     if(array_key_exists('apertura', $data)) { if(!isset($data['apertura']) || ($data['apertura'] == '')) $data['apertura'] = "false"; }
     if(array_key_exists('publicada', $data)) { if(!isset($data['publicada']) || ($data['publicada'] == '')) $data['publicada'] = "false"; }
     if(array_key_exists('fecha_anio', $data)) { if(empty($data['fecha_anio']))  throw new Exception('fecha/hora obligatoria sin valor: fecha_anio'); }
     if(array_key_exists('fecha_semestre', $data)) { if(!isset($data['fecha_semestre']) || ($data['fecha_semestre'] == '')) throw new Exception('dato obligatorio sin valor: fecha_semestre'); }
-    if(array_key_exists('observaciones', $data)) { if(empty($data['observaciones'])) $data['observaciones'] = "null"; }
+    if(array_key_exists('observaciones', $data)) { if(is_null($data['observaciones']) || $data['observaciones'] == "") $data['observaciones'] = "null"; }
     if(array_key_exists('alta', $data)) { if(empty($data['alta']))  $data['alta'] = date("Y-m-d H:i:s"); }
     if(array_key_exists('sede', $data)) { if(!isset($data['sede']) || ($data['sede'] == '')) throw new Exception('dato obligatorio sin valor: sede'); }
     if(array_key_exists('plan', $data)) { if(!isset($data['plan']) || ($data['plan'] == '')) throw new Exception('dato obligatorio sin valor: plan'); }
@@ -213,6 +213,7 @@ class ComisionSqlMain extends EntitySql{
 
     return $data;
   }
+
 
   public function format(array $row){
     $row_ = array();

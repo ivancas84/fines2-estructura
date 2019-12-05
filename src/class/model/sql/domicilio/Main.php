@@ -72,30 +72,31 @@ class DomicilioSqlMain extends EntitySql{
 
   public function initializeInsert(array $data){
     $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('domicilio');
-    if(empty($data['calle'])) throw new Exception('dato obligatorio sin valor: calle');
-    if(empty($data['entre'])) $data['entre'] = "null";
-    if(empty($data['numero'])) throw new Exception('dato obligatorio sin valor: numero');
-    if(empty($data['piso'])) $data['piso'] = "null";
-    if(empty($data['departamento'])) $data['departamento'] = "null";
-    if(empty($data['barrio'])) $data['barrio'] = "null";
-    if(empty($data['localidad'])) throw new Exception('dato obligatorio sin valor: localidad');
+    if(!isset($data['calle']) || is_null($data['calle']) || $data['calle'] == "") throw new Exception('dato obligatorio sin valor: calle');
+    if(!isset($data['entre']) || is_null($data['entre']) || $data['entre'] == "") $data['entre'] = "null";
+    if(!isset($data['numero']) || is_null($data['numero']) || $data['numero'] == "") throw new Exception('dato obligatorio sin valor: numero');
+    if(!isset($data['piso']) || is_null($data['piso']) || $data['piso'] == "") $data['piso'] = "null";
+    if(!isset($data['departamento']) || is_null($data['departamento']) || $data['departamento'] == "") $data['departamento'] = "null";
+    if(!isset($data['barrio']) || is_null($data['barrio']) || $data['barrio'] == "") $data['barrio'] = "null";
+    if(!isset($data['localidad']) || is_null($data['localidad']) || $data['localidad'] == "") throw new Exception('dato obligatorio sin valor: localidad');
 
     return $data;
   }
 
-  //@override
+
   public function initializeUpdate(array $data){
-    if(array_key_exists('id', $data)) { if(empty($data['id'])) throw new Exception('dato obligatorio sin valor: id'); }
-    if(array_key_exists('calle', $data)) { if(empty($data['calle'])) throw new Exception('dato obligatorio sin valor: calle'); }
-    if(array_key_exists('entre', $data)) { if(empty($data['entre'])) $data['entre'] = "null"; }
-    if(array_key_exists('numero', $data)) { if(empty($data['numero'])) throw new Exception('dato obligatorio sin valor: numero'); }
-    if(array_key_exists('piso', $data)) { if(empty($data['piso'])) $data['piso'] = "null"; }
-    if(array_key_exists('departamento', $data)) { if(empty($data['departamento'])) $data['departamento'] = "null"; }
-    if(array_key_exists('barrio', $data)) { if(empty($data['barrio'])) $data['barrio'] = "null"; }
-    if(array_key_exists('localidad', $data)) { if(empty($data['localidad'])) throw new Exception('dato obligatorio sin valor: localidad'); }
+    if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
+    if(array_key_exists('calle', $data)) { if(is_null($data['calle']) || $data['calle'] == "") throw new Exception('dato obligatorio sin valor: calle'); }
+    if(array_key_exists('entre', $data)) { if(is_null($data['entre']) || $data['entre'] == "") $data['entre'] = "null"; }
+    if(array_key_exists('numero', $data)) { if(is_null($data['numero']) || $data['numero'] == "") throw new Exception('dato obligatorio sin valor: numero'); }
+    if(array_key_exists('piso', $data)) { if(is_null($data['piso']) || $data['piso'] == "") $data['piso'] = "null"; }
+    if(array_key_exists('departamento', $data)) { if(is_null($data['departamento']) || $data['departamento'] == "") $data['departamento'] = "null"; }
+    if(array_key_exists('barrio', $data)) { if(is_null($data['barrio']) || $data['barrio'] == "") $data['barrio'] = "null"; }
+    if(array_key_exists('localidad', $data)) { if(is_null($data['localidad']) || $data['localidad'] == "") throw new Exception('dato obligatorio sin valor: localidad'); }
 
     return $data;
   }
+
 
   public function format(array $row){
     $row_ = array();
