@@ -1,0 +1,13 @@
+* se registran comisiones
+* las comisiones se agrupan en diferentes sedes
+* las comisiones se clasifican segun el plan: Gestión y Administración (res 713), Ciencias Sociales (res 713), etc
+* planes conocidos: Educacion a Distancia, Ciencias Sociales 713, Gestion y Administracion 713, Cs Soc 6392 (obsoleto), G y A 6392 (obsoleto), G y A anual 713, coordinacion
+* modalidades conocidas: Educacion a Distancia, fines, presencial, secundaria con oficios, coordinacion.
+* las comisiones se clasifican en una modalidad: Fines 2, Secundaria con Oficios, Presencial.
+* en el caso mas general las comisiones van evolucionando en tramo (anio, semestre, fecha_anio, fecha_semestre)
+* en el caso mas particular las comisiones van evolucionando en otros aspectos (se mudan, se fusionan, se dividen, etc).
+* para la modalidad Presencial, las comisiones tienen preceptores.
+* las sedes son administradas por centros de educación.
+* un centro de educacion tambien tiene comisiones, para simplificar se define opcionalmente el centro de educacion tambien como sede
+* las comisiones son administradas por coordinadores / tutores que tambien deben ser cargados al sistema, para simplificar se define una comision para coordinacion donde se registran estas caracteristicas.
+* Ejemplo comisiones de administracion: clasificacion (Coordinacion), Modalidad (dependiendo de la necesidad administrativa se puede definir una modalidad coordinacion, o se puede asignar a las modalidades ya existentes, como por ejemplo Secundaria con oficios)
