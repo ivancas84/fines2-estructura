@@ -16,4 +16,4 @@ TOMAS DE POSESIÓN
 * Un curso puede tener varias tomas pero solo una activa
 * Una toma activa tiene estado Pendiente o Aprobada y estado contralor Pasar o No Pasar
 * Una toma no activa tiene estado Pendiente o Aprobada, y estado contralor Modificar o Licencia
-* Una toma no activa tiene estado diferente de Pendiente o Aprobada.
+* Una toma no activa tiene estado diferente de Pendiente o Aprobada
