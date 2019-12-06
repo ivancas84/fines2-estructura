@@ -1,23 +1,16 @@
 comision - com
-division - com_dvi
-plan - com_dvi_pla
-sede - com_dvi_sed
-tipo_sede - com_dvi_sed_ts
-domicilio - com_dvi_sed_dom
-id_persona - com_dvi_sed_coo
-id_persona - com_dvi_sed_ref
+sede - com_sed
+domicilio - com_sed_dom
+tipo_sede - com_sed_ts
+centro_educativo - com_sed_ce
+domicilio - com_sed_ce_dom
+plan - com_pla
 carga_horaria - ch
-asignatura - ch_asi
 plan - ch_pla
-toma - ta
-id_persona - ta_pro
-id_persona - ta_ree
+asignatura - ch_asi
 
-id (id): integer pk. NOT NULL. MAIN. UNIQUE.
-estado (est): string nf.
+id (id): string pk. NOT NULL. MAIN. UNIQUE.
+observaciones (obs): text nf.
 alta (alt): timestamp nf. NOT NULL. DEFAULT: CURRENT_TIMESTAMP.
-baja (baj): timestamp nf.
-horario (hor): string nf. NOT ADMIN.
-comision (com): integer mu. NOT NULL.
-carga_horaria (ch): integer mu. NOT NULL.
-toma_activa (ta): integer mu. NOT NULL. NOT ADMIN.
+comision (com): string mu. NOT NULL.
+carga_horaria (ch): string mu. NOT NULL.
