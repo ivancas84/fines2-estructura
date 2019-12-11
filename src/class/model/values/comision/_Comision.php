@@ -240,7 +240,7 @@ class _Comision extends EntityValues {
   }
 
   public function checkAnio($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
+    $v = Validation::getInstanceValue($value)->string();
     return $this->_setLogsValidation("anio", $v);
   }
 

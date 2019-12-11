@@ -8,7 +8,7 @@ plan - pla
 id (id): string pk. NOT NULL. UNIQUE.
 turno (tur): string nf.
 division (dia): string nf. NOT NULL. MAIN.
-anio (ani): string nf. NOT NULL. MAIN.
+anio (ani): string nf. MAIN.
 semestre (sem): string nf. MAIN.
 comentario (com): text nf.
 autorizada (aut): boolean nf. NOT NULL.

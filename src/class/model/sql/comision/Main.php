@@ -175,7 +175,7 @@ class ComisionSqlMain extends EntitySql{
     $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('comision');
     if(!isset($data['turno']) || is_null($data['turno']) || $data['turno'] == "") $data['turno'] = "null";
     if(!isset($data['division']) || is_null($data['division']) || $data['division'] == "") throw new Exception('dato obligatorio sin valor: division');
-    if(!isset($data['anio']) || is_null($data['anio']) || $data['anio'] == "") throw new Exception('dato obligatorio sin valor: anio');
+    if(!isset($data['anio']) || is_null($data['anio']) || $data['anio'] == "") $data['anio'] = "null";
     if(!isset($data['semestre']) || is_null($data['semestre']) || $data['semestre'] == "") $data['semestre'] = "null";
     if(!isset($data['comentario']) || is_null($data['comentario']) || $data['comentario'] == "") $data['comentario'] = "null";
     if(!isset($data['autorizada']) || ($data['autorizada'] == '')) $data['autorizada'] = "false";
@@ -197,7 +197,7 @@ class ComisionSqlMain extends EntitySql{
     if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
     if(array_key_exists('turno', $data)) { if(is_null($data['turno']) || $data['turno'] == "") $data['turno'] = "null"; }
     if(array_key_exists('division', $data)) { if(is_null($data['division']) || $data['division'] == "") throw new Exception('dato obligatorio sin valor: division'); }
-    if(array_key_exists('anio', $data)) { if(is_null($data['anio']) || $data['anio'] == "") throw new Exception('dato obligatorio sin valor: anio'); }
+    if(array_key_exists('anio', $data)) { if(is_null($data['anio']) || $data['anio'] == "") $data['anio'] = "null"; }
     if(array_key_exists('semestre', $data)) { if(is_null($data['semestre']) || $data['semestre'] == "") $data['semestre'] = "null"; }
     if(array_key_exists('comentario', $data)) { if(is_null($data['comentario']) || $data['comentario'] == "") $data['comentario'] = "null"; }
     if(array_key_exists('autorizada', $data)) { if(!isset($data['autorizada']) || ($data['autorizada'] == '')) $data['autorizada'] = "false"; }
