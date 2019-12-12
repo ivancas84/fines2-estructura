@@ -21,7 +21,7 @@ class SedePersistApi extends PersistApi {
         } else {
             $ce_bd = Ma::oneOrNull("sede", [
                 ["numero","=",$sede["numero"]],
-                ["sede","=",$sede["sede"]],
+                ["centro_educativo","=",$sede["centro_educativo"]],
             ]);    
         }
         

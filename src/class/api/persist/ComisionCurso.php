@@ -1,16 +1,22 @@
 <?php
 
-require_once("class/model/Ma.php");
 require_once("class/api/Persist.php");
 
-class CentroEducativoPersistApi extends PersistApi {
-    protected $entityName = "centro_educativo";
+class ComisionCursoPersistApi extends PersistApi {
+    protected $entityName = "comision";
+
+    /**
+     * actualizacion:
+     *   si tiene cursos no se realiza carga de cursos
+     *   si no tiene cursos, si se realiza la carga de cursos
+     * insercion:
+     *   se realiza la carga de cursos
+     */
 
     public function persist($data){
         foreach($data as $d) {
             switch($d["entity"]) {
-                case "domicilio": $domicilio = $d["row"]; break;
-                case "centro_educativo": $centroEducativo = $d["row"]; break;
+                case "comision": $comision = $d["row"]; break;
             }                    
         }
 
@@ -43,5 +49,4 @@ class CentroEducativoPersistApi extends PersistApi {
         $this->persist->row("centro_educativo", $centroEducativo);
         if($deleteDomicilio) $this->persist->delete("domicilio", $deleteDomicilio);
     }
-
 }
