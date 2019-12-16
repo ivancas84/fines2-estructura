@@ -9,10 +9,11 @@ class TomaSqlMain extends EntitySql{
   }
 
 
-  public function _mappingFieldStruct($field){
+  public function _mappingField($field){
     $p = $this->prf();
     $t = $this->prt();
 
+    if($f = $this->_mappingFieldMain($field)) return $f;
     switch ($field) {
       case $p.'id': return $t.".id";
       case $p.'fecha_toma': return $t.".fecha_toma";
@@ -29,15 +30,7 @@ class TomaSqlMain extends EntitySql{
       case $p.'curso': return $t.".curso";
       case $p.'docente': return $t.".docente";
       case $p.'reemplazo': return $t.".reemplazo";
-      default: return null;
-    }
-  }
 
-  public function _mappingFieldAggregate($field){
-    $p = $this->prf();
-    $t = $this->prt();
-
-    switch ($field) {
       case $p.'min_id': return "MIN({$t}.id)";
       case $p.'max_id': return "MAX({$t}.id)";
       case $p.'count_id': return "COUNT({$t}.id)";
@@ -103,7 +96,7 @@ class TomaSqlMain extends EntitySql{
     if($f = EntitySql::getInstanceRequire('asignatura', 'cur_ch_asi')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('persona', 'doc')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('persona', 'ree')->_mappingField($field)) return $f;
-    throw new Exception("Campo no reconocido " . $field);
+    throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
   }
 
   public function _fields(){
@@ -134,7 +127,7 @@ class TomaSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('plan', 'cur_ch_pla')->_fields() . ',
 ' . EntitySql::getInstanceRequire('asignatura', 'cur_ch_asi')->_fields() . ',
 ' . EntitySql::getInstanceRequire('persona', 'doc')->_fields() . ',
-' . EntitySql::getInstanceRequire('persona', 'ree')->_fields() . '
+' . EntitySql::getInstanceRequire('persona', 'ree')->_fields() . ' 
 ';
   }
 

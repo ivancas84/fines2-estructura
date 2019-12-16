@@ -9,10 +9,11 @@ class PersonaSqlMain extends EntitySql{
   }
 
 
-  public function _mappingFieldStruct($field){
+  public function _mappingField($field){
     $p = $this->prf();
     $t = $this->prt();
 
+    if($f = $this->_mappingFieldMain($field)) return $f;
     switch ($field) {
       case $p.'id': return $t.".id";
       case $p.'nombres': return $t.".nombres";
@@ -24,15 +25,7 @@ class PersonaSqlMain extends EntitySql{
       case $p.'genero': return $t.".genero";
       case $p.'apodo': return $t.".apodo";
       case $p.'alta': return $t.".alta";
-      default: return null;
-    }
-  }
 
-  public function _mappingFieldAggregate($field){
-    $p = $this->prf();
-    $t = $this->prt();
-
-    switch ($field) {
       case $p.'min_id': return "MIN({$t}.id)";
       case $p.'max_id': return "MAX({$t}.id)";
       case $p.'count_id': return "COUNT({$t}.id)";

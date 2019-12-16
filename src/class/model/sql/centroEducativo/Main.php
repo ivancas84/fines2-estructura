@@ -9,24 +9,17 @@ class CentroEducativoSqlMain extends EntitySql{
   }
 
 
-  public function _mappingFieldStruct($field){
+  public function _mappingField($field){
     $p = $this->prf();
     $t = $this->prt();
 
+    if($f = $this->_mappingFieldMain($field)) return $f;
     switch ($field) {
       case $p.'id': return $t.".id";
       case $p.'nombre': return $t.".nombre";
       case $p.'cue': return $t.".cue";
       case $p.'domicilio': return $t.".domicilio";
-      default: return null;
-    }
-  }
 
-  public function _mappingFieldAggregate($field){
-    $p = $this->prf();
-    $t = $this->prt();
-
-    switch ($field) {
       case $p.'min_id': return "MIN({$t}.id)";
       case $p.'max_id': return "MAX({$t}.id)";
       case $p.'count_id': return "COUNT({$t}.id)";
@@ -42,7 +35,7 @@ class CentroEducativoSqlMain extends EntitySql{
   public function mappingField($field){
     if($f = $this->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('domicilio', 'dom')->_mappingField($field)) return $f;
-    throw new Exception("Campo no reconocido " . $field);
+    throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
   }
 
   public function _fields(){
@@ -61,7 +54,7 @@ class CentroEducativoSqlMain extends EntitySql{
 
   public function fields(){
     return $this->_fields() . ',
-' . EntitySql::getInstanceRequire('domicilio', 'dom')->_fields() . '
+' . EntitySql::getInstanceRequire('domicilio', 'dom')->_fields() . ' 
 ';
   }
 

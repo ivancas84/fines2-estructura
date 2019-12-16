@@ -9,10 +9,11 @@ class DesignacionSqlMain extends EntitySql{
   }
 
 
-  public function _mappingFieldStruct($field){
+  public function _mappingField($field){
     $p = $this->prf();
     $t = $this->prt();
 
+    if($f = $this->_mappingFieldMain($field)) return $f;
     switch ($field) {
       case $p.'id': return $t.".id";
       case $p.'desde': return $t.".desde";
@@ -21,15 +22,7 @@ class DesignacionSqlMain extends EntitySql{
       case $p.'cargo': return $t.".cargo";
       case $p.'sede': return $t.".sede";
       case $p.'persona': return $t.".persona";
-      default: return null;
-    }
-  }
 
-  public function _mappingFieldAggregate($field){
-    $p = $this->prf();
-    $t = $this->prt();
-
-    switch ($field) {
       case $p.'min_id': return "MIN({$t}.id)";
       case $p.'max_id': return "MAX({$t}.id)";
       case $p.'count_id': return "COUNT({$t}.id)";
@@ -74,7 +67,7 @@ class DesignacionSqlMain extends EntitySql{
     if($f = EntitySql::getInstanceRequire('centro_educativo', 'sed_ce')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('domicilio', 'sed_ce_dom')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('persona', 'per')->_mappingField($field)) return $f;
-    throw new Exception("Campo no reconocido " . $field);
+    throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
   }
 
   public function _fields(){
@@ -99,7 +92,7 @@ class DesignacionSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('tipo_sede', 'sed_ts')->_fields() . ',
 ' . EntitySql::getInstanceRequire('centro_educativo', 'sed_ce')->_fields() . ',
 ' . EntitySql::getInstanceRequire('domicilio', 'sed_ce_dom')->_fields() . ',
-' . EntitySql::getInstanceRequire('persona', 'per')->_fields() . '
+' . EntitySql::getInstanceRequire('persona', 'per')->_fields() . ' 
 ';
   }
 

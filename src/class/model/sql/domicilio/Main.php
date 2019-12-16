@@ -9,10 +9,11 @@ class DomicilioSqlMain extends EntitySql{
   }
 
 
-  public function _mappingFieldStruct($field){
+  public function _mappingField($field){
     $p = $this->prf();
     $t = $this->prt();
 
+    if($f = $this->_mappingFieldMain($field)) return $f;
     switch ($field) {
       case $p.'id': return $t.".id";
       case $p.'calle': return $t.".calle";
@@ -22,15 +23,7 @@ class DomicilioSqlMain extends EntitySql{
       case $p.'departamento': return $t.".departamento";
       case $p.'barrio': return $t.".barrio";
       case $p.'localidad': return $t.".localidad";
-      default: return null;
-    }
-  }
 
-  public function _mappingFieldAggregate($field){
-    $p = $this->prf();
-    $t = $this->prt();
-
-    switch ($field) {
       case $p.'min_id': return "MIN({$t}.id)";
       case $p.'max_id': return "MAX({$t}.id)";
       case $p.'count_id': return "COUNT({$t}.id)";

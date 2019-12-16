@@ -9,10 +9,11 @@ class CargaHorariaSqlMain extends EntitySql{
   }
 
 
-  public function _mappingFieldStruct($field){
+  public function _mappingField($field){
     $p = $this->prf();
     $t = $this->prt();
 
+    if($f = $this->_mappingFieldMain($field)) return $f;
     switch ($field) {
       case $p.'id': return $t.".id";
       case $p.'anio': return $t.".anio";
@@ -20,15 +21,7 @@ class CargaHorariaSqlMain extends EntitySql{
       case $p.'horas_catedra': return $t.".horas_catedra";
       case $p.'plan': return $t.".plan";
       case $p.'asignatura': return $t.".asignatura";
-      default: return null;
-    }
-  }
 
-  public function _mappingFieldAggregate($field){
-    $p = $this->prf();
-    $t = $this->prt();
-
-    switch ($field) {
       case $p.'min_id': return "MIN({$t}.id)";
       case $p.'max_id': return "MAX({$t}.id)";
       case $p.'count_id': return "COUNT({$t}.id)";
@@ -49,7 +42,7 @@ class CargaHorariaSqlMain extends EntitySql{
     if($f = $this->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('plan', 'pla')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('asignatura', 'asi')->_mappingField($field)) return $f;
-    throw new Exception("Campo no reconocido " . $field);
+    throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
   }
 
   public function _fields(){
@@ -69,7 +62,7 @@ class CargaHorariaSqlMain extends EntitySql{
   public function fields(){
     return $this->_fields() . ',
 ' . EntitySql::getInstanceRequire('plan', 'pla')->_fields() . ',
-' . EntitySql::getInstanceRequire('asignatura', 'asi')->_fields() . '
+' . EntitySql::getInstanceRequire('asignatura', 'asi')->_fields() . ' 
 ';
   }
 
