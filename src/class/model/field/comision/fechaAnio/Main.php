@@ -7,7 +7,7 @@ class FieldComisionFechaAnioMain extends Field {
   public $type = "year";
   public $fieldType = "nf";
   public $unique = false;
-  public $notNull = true;
+  public $notNull = false;
   public $default = false;
   public $length = false;
   public $main = false;

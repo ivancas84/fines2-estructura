@@ -19,6 +19,7 @@ class _Comision extends EntityValues {
   protected $alta = UNDEFINED;
   protected $sede = UNDEFINED;
   protected $plan = UNDEFINED;
+  protected $modalidad = UNDEFINED;
   protected $comisionSiguiente = UNDEFINED;
 
   public function _setDefault(){
@@ -37,6 +38,7 @@ class _Comision extends EntityValues {
     $this->setAlta(DEFAULT_VALUE);
     $this->setSede(DEFAULT_VALUE);
     $this->setPlan(DEFAULT_VALUE);
+    $this->setModalidad(DEFAULT_VALUE);
     $this->setComisionSiguiente(DEFAULT_VALUE);
   }
 
@@ -57,6 +59,7 @@ class _Comision extends EntityValues {
     if(isset($row[$p."alta"])) $this->setAlta($row[$p."alta"]);
     if(isset($row[$p."sede"])) $this->setSede($row[$p."sede"]);
     if(isset($row[$p."plan"])) $this->setPlan($row[$p."plan"]);
+    if(isset($row[$p."modalidad"])) $this->setModalidad($row[$p."modalidad"]);
     if(isset($row[$p."comision_siguiente"])) $this->setComisionSiguiente($row[$p."comision_siguiente"]);
   }
 
@@ -77,6 +80,7 @@ class _Comision extends EntityValues {
     if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d h:i:s");
     if($this->sede !== UNDEFINED) $row["sede"] = $this->sede("");
     if($this->plan !== UNDEFINED) $row["plan"] = $this->plan("");
+    if($this->modalidad !== UNDEFINED) $row["modalidad"] = $this->modalidad("");
     if($this->comisionSiguiente !== UNDEFINED) $row["comision_siguiente"] = $this->comisionSiguiente("");
     return $row;
   }
@@ -97,6 +101,7 @@ class _Comision extends EntityValues {
     if(!Validation::is_empty($this->alta)) return false;
     if(!Validation::is_empty($this->sede)) return false;
     if(!Validation::is_empty($this->plan)) return false;
+    if(!Validation::is_empty($this->modalidad)) return false;
     if(!Validation::is_empty($this->comisionSiguiente)) return false;
     return true;
   }
@@ -116,6 +121,7 @@ class _Comision extends EntityValues {
   public function alta($format = null) { return Format::date($this->alta, $format); }
   public function sede($format = null) { return Format::convertCase($this->sede, $format); }
   public function plan($format = null) { return Format::convertCase($this->plan, $format); }
+  public function modalidad($format = null) { return Format::convertCase($this->modalidad, $format); }
   public function comisionSiguiente($format = null) { return Format::convertCase($this->comisionSiguiente, $format); }
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
@@ -219,6 +225,12 @@ class _Comision extends EntityValues {
     if($this->checkPlan($p)) $this->plan = $p;
   }
 
+  public function setModalidad($p) {
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = (is_null($p)) ? null : (string)$p;
+    if($this->checkModalidad($p)) $this->modalidad = $p;
+  }
+
   public function setComisionSiguiente($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
@@ -270,12 +282,12 @@ class _Comision extends EntityValues {
   }
 
   public function checkFechaAnio($value) { 
-    $v = Validation::getInstanceValue($value)->date()->required();
+    $v = Validation::getInstanceValue($value)->date();
     return $this->_setLogsValidation("fecha_anio", $v);
   }
 
   public function checkFechaSemestre($value) { 
-    $v = Validation::getInstanceValue($value)->integer()->required();
+    $v = Validation::getInstanceValue($value)->integer();
     return $this->_setLogsValidation("fecha_semestre", $v);
   }
 
@@ -297,6 +309,11 @@ class _Comision extends EntityValues {
   public function checkPlan($value) { 
     $v = Validation::getInstanceValue($value)->string()->required();
     return $this->_setLogsValidation("plan", $v);
+  }
+
+  public function checkModalidad($value) { 
+    $v = Validation::getInstanceValue($value)->string()->required();
+    return $this->_setLogsValidation("modalidad", $v);
   }
 
   public function checkComisionSiguiente($value) { 

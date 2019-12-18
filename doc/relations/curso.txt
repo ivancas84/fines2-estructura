@@ -5,6 +5,7 @@ tipo_sede - com_sed_ts
 centro_educativo - com_sed_ce
 domicilio - com_sed_ce_dom
 plan - com_pla
+modalidad - com_mod
 carga_horaria - ch
 plan - ch_pla
 asignatura - ch_asi

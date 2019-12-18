@@ -11,6 +11,7 @@ $structure = array (
   Entity::getInstanceRequire("curso"),
   Entity::getInstanceRequire("designacion"),
   Entity::getInstanceRequire("domicilio"),
+  Entity::getInstanceRequire("modalidad"),
   Entity::getInstanceRequire("persona"),
   Entity::getInstanceRequire("plan"),
   Entity::getInstanceRequire("sede"),

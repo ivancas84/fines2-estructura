@@ -34,6 +34,7 @@ class ComisionSqloMain extends EntitySqlo {
     $sql .= "alta, " ;
     $sql .= "sede, " ;
     $sql .= "plan, " ;
+    $sql .= "modalidad, " ;
     $sql .= "comision_siguiente, " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
 
@@ -54,6 +55,7 @@ VALUES ( ";
     $sql .= $row['alta'] . ", " ;
     $sql .= $row['sede'] . ", " ;
     $sql .= $row['plan'] . ", " ;
+    $sql .= $row['modalidad'] . ", " ;
     $sql .= $row['comision_siguiente'] . ", " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
 
@@ -81,6 +83,7 @@ UPDATE " . $this->entity->sn_() . " SET
     if (isset($row['alta'] )) $sql .= "alta = " . $row['alta'] . " ," ;
     if (isset($row['sede'] )) $sql .= "sede = " . $row['sede'] . " ," ;
     if (isset($row['plan'] )) $sql .= "plan = " . $row['plan'] . " ," ;
+    if (isset($row['modalidad'] )) $sql .= "modalidad = " . $row['modalidad'] . " ," ;
     if (isset($row['comision_siguiente'] )) $sql .= "comision_siguiente = " . $row['comision_siguiente'] . " ," ;
     //eliminar ultima coma
     $sql = substr($sql, 0, -2);
@@ -115,6 +118,10 @@ UPDATE " . $this->entity->sn_() . " SET
       $json = EntitySql::getInstanceRequire('plan', 'pla')->_json($row);
       $row_["plan_"] = $json;
     }
+    if(!is_null($row['mod_id'])){
+      $json = EntitySql::getInstanceRequire('modalidad', 'mod')->_json($row);
+      $row_["modalidad_"] = $json;
+    }
     return $row_;
   }
 
@@ -128,6 +135,7 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_["centro_educativo"] = EntityValues::getInstanceRequire('centro_educativo', $row, 'sed_ce_');
     $row_["domicilio1"] = EntityValues::getInstanceRequire('domicilio', $row, 'sed_ce_dom_');
     $row_["plan"] = EntityValues::getInstanceRequire('plan', $row, 'pla_');
+    $row_["modalidad"] = EntityValues::getInstanceRequire('modalidad', $row, 'mod_');
     return $row_;
   }
 

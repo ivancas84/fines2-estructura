@@ -30,6 +30,7 @@ class ComisionSqlMain extends EntitySql{
       case $p.'alta': return $t.".alta";
       case $p.'sede': return $t.".sede";
       case $p.'plan': return $t.".plan";
+      case $p.'modalidad': return $t.".modalidad";
       case $p.'comision_siguiente': return $t.".comision_siguiente";
 
       case $p.'min_id': return "MIN({$t}.id)";
@@ -55,6 +56,10 @@ class ComisionSqlMain extends EntitySql{
       case $p.'max_plan': return "MAX({$t}.plan)";
       case $p.'count_plan': return "COUNT({$t}.plan)";
 
+      case $p.'min_modalidad': return "MIN({$t}.modalidad)";
+      case $p.'max_modalidad': return "MAX({$t}.modalidad)";
+      case $p.'count_modalidad': return "COUNT({$t}.modalidad)";
+
       case $p.'min_comision_siguiente': return "MIN({$t}.comision_siguiente)";
       case $p.'max_comision_siguiente': return "MAX({$t}.comision_siguiente)";
       case $p.'count_comision_siguiente': return "COUNT({$t}.comision_siguiente)";
@@ -71,6 +76,7 @@ class ComisionSqlMain extends EntitySql{
     if($f = EntitySql::getInstanceRequire('centro_educativo', 'sed_ce')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('domicilio', 'sed_ce_dom')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('plan', 'pla')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('modalidad', 'mod')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
   }
 
@@ -78,14 +84,14 @@ class ComisionSqlMain extends EntitySql{
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'turno') . ' AS ' . $p.'turno, ' . $this->_mappingField($p.'division') . ' AS ' . $p.'division, ' . $this->_mappingField($p.'anio') . ' AS ' . $p.'anio, ' . $this->_mappingField($p.'semestre') . ' AS ' . $p.'semestre, ' . $this->_mappingField($p.'comentario') . ' AS ' . $p.'comentario, ' . $this->_mappingField($p.'autorizada') . ' AS ' . $p.'autorizada, ' . $this->_mappingField($p.'apertura') . ' AS ' . $p.'apertura, ' . $this->_mappingField($p.'publicada') . ' AS ' . $p.'publicada, ' . $this->_mappingField($p.'fecha_anio') . ' AS ' . $p.'fecha_anio, ' . $this->_mappingField($p.'fecha_semestre') . ' AS ' . $p.'fecha_semestre, ' . $this->_mappingField($p.'observaciones') . ' AS ' . $p.'observaciones, ' . $this->_mappingField($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingField($p.'sede') . ' AS ' . $p.'sede, ' . $this->_mappingField($p.'plan') . ' AS ' . $p.'plan, ' . $this->_mappingField($p.'comision_siguiente') . ' AS ' . $p.'comision_siguiente';
+' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'turno') . ' AS ' . $p.'turno, ' . $this->_mappingField($p.'division') . ' AS ' . $p.'division, ' . $this->_mappingField($p.'anio') . ' AS ' . $p.'anio, ' . $this->_mappingField($p.'semestre') . ' AS ' . $p.'semestre, ' . $this->_mappingField($p.'comentario') . ' AS ' . $p.'comentario, ' . $this->_mappingField($p.'autorizada') . ' AS ' . $p.'autorizada, ' . $this->_mappingField($p.'apertura') . ' AS ' . $p.'apertura, ' . $this->_mappingField($p.'publicada') . ' AS ' . $p.'publicada, ' . $this->_mappingField($p.'fecha_anio') . ' AS ' . $p.'fecha_anio, ' . $this->_mappingField($p.'fecha_semestre') . ' AS ' . $p.'fecha_semestre, ' . $this->_mappingField($p.'observaciones') . ' AS ' . $p.'observaciones, ' . $this->_mappingField($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingField($p.'sede') . ' AS ' . $p.'sede, ' . $this->_mappingField($p.'plan') . ' AS ' . $p.'plan, ' . $this->_mappingField($p.'modalidad') . ' AS ' . $p.'modalidad, ' . $this->_mappingField($p.'comision_siguiente') . ' AS ' . $p.'comision_siguiente';
   }
 
   public function _fieldsDb(){
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'turno') . ', ' . $this->_mappingField($p.'division') . ', ' . $this->_mappingField($p.'anio') . ', ' . $this->_mappingField($p.'semestre') . ', ' . $this->_mappingField($p.'comentario') . ', ' . $this->_mappingField($p.'autorizada') . ', ' . $this->_mappingField($p.'apertura') . ', ' . $this->_mappingField($p.'publicada') . ', ' . $this->_mappingField($p.'fecha_anio') . ', ' . $this->_mappingField($p.'fecha_semestre') . ', ' . $this->_mappingField($p.'observaciones') . ', ' . $this->_mappingField($p.'alta') . ', ' . $this->_mappingField($p.'sede') . ', ' . $this->_mappingField($p.'plan') . ', ' . $this->_mappingField($p.'comision_siguiente') . '';
+' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'turno') . ', ' . $this->_mappingField($p.'division') . ', ' . $this->_mappingField($p.'anio') . ', ' . $this->_mappingField($p.'semestre') . ', ' . $this->_mappingField($p.'comentario') . ', ' . $this->_mappingField($p.'autorizada') . ', ' . $this->_mappingField($p.'apertura') . ', ' . $this->_mappingField($p.'publicada') . ', ' . $this->_mappingField($p.'fecha_anio') . ', ' . $this->_mappingField($p.'fecha_semestre') . ', ' . $this->_mappingField($p.'observaciones') . ', ' . $this->_mappingField($p.'alta') . ', ' . $this->_mappingField($p.'sede') . ', ' . $this->_mappingField($p.'plan') . ', ' . $this->_mappingField($p.'modalidad') . ', ' . $this->_mappingField($p.'comision_siguiente') . '';
   }
 
   public function fields(){
@@ -95,7 +101,8 @@ class ComisionSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('tipo_sede', 'sed_ts')->_fields() . ',
 ' . EntitySql::getInstanceRequire('centro_educativo', 'sed_ce')->_fields() . ',
 ' . EntitySql::getInstanceRequire('domicilio', 'sed_ce_dom')->_fields() . ',
-' . EntitySql::getInstanceRequire('plan', 'pla')->_fields() . ' 
+' . EntitySql::getInstanceRequire('plan', 'pla')->_fields() . ',
+' . EntitySql::getInstanceRequire('modalidad', 'mod')->_fields() . '
 ';
   }
 
@@ -106,6 +113,7 @@ class ComisionSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('centro_educativo', 'sed_ce')->_join('centro_educativo', 'sed', $render) . '
 ' . EntitySql::getInstanceRequire('domicilio', 'sed_ce_dom')->_join('domicilio', 'sed_ce', $render) . '
 ' . EntitySql::getInstanceRequire('plan', 'pla')->_join('plan', 'comi', $render) . '
+' . EntitySql::getInstanceRequire('modalidad', 'mod')->_join('modalidad', 'comi', $render) . '
 ' ;
   }
 
@@ -129,6 +137,7 @@ class ComisionSqlMain extends EntitySql{
       case "{$p}alta": return $this->format->conditionTimestamp($f, $value, $option);
       case "{$p}sede": return $this->format->conditionText($f, $value, $option);
       case "{$p}plan": return $this->format->conditionText($f, $value, $option);
+      case "{$p}modalidad": return $this->format->conditionText($f, $value, $option);
       case "{$p}comision_siguiente": return $this->format->conditionText($f, $value, $option);
       default: return parent::_conditionFieldStruct($field, $option, $value);
     }
@@ -142,6 +151,7 @@ class ComisionSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('centro_educativo','sed_ce')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','sed_ce_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','pla')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('modalidad','mod')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldAux($field, $option, $value) {
@@ -152,6 +162,7 @@ class ComisionSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('centro_educativo','sed_ce')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','sed_ce_dom')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','pla')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('modalidad','mod')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldHaving($field, $option, $value) {
@@ -162,6 +173,7 @@ class ComisionSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('centro_educativo','sed_ce')->_conditionFieldHaving($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','sed_ce_dom')->_conditionFieldHaving($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','pla')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('modalidad','mod')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
   public function initializeInsert(array $data){
@@ -174,12 +186,13 @@ class ComisionSqlMain extends EntitySql{
     if(!isset($data['autorizada']) || ($data['autorizada'] == '')) $data['autorizada'] = "false";
     if(!isset($data['apertura']) || ($data['apertura'] == '')) $data['apertura'] = "false";
     if(!isset($data['publicada']) || ($data['publicada'] == '')) $data['publicada'] = "false";
-    if(!isset($data['fecha_anio']))  throw new Exception('fecha/hora obligatoria sin valor: fecha_anio');
-    if(!isset($data['fecha_semestre']) || ($data['fecha_semestre'] == '')) throw new Exception('dato obligatorio sin valor: fecha_semestre');
+    if(!isset($data['fecha_anio']))  $data['fecha_anio'] = "null";
+    if(!isset($data['fecha_semestre']) || ($data['fecha_semestre'] == '')) $data['fecha_semestre'] = "null";
     if(!isset($data['observaciones']) || is_null($data['observaciones']) || $data['observaciones'] == "") $data['observaciones'] = "null";
     if(!isset($data['alta']))  $data['alta'] = date("Y-m-d H:i:s");
     if(empty($data['sede'])) throw new Exception('dato obligatorio sin valor: sede');
     if(empty($data['plan'])) throw new Exception('dato obligatorio sin valor: plan');
+    if(empty($data['modalidad'])) throw new Exception('dato obligatorio sin valor: modalidad');
     if(empty($data['comision_siguiente'])) $data['comision_siguiente'] = "null";
 
     return $data;
@@ -196,12 +209,13 @@ class ComisionSqlMain extends EntitySql{
     if(array_key_exists('autorizada', $data)) { if(!isset($data['autorizada']) || ($data['autorizada'] == '')) $data['autorizada'] = "false"; }
     if(array_key_exists('apertura', $data)) { if(!isset($data['apertura']) || ($data['apertura'] == '')) $data['apertura'] = "false"; }
     if(array_key_exists('publicada', $data)) { if(!isset($data['publicada']) || ($data['publicada'] == '')) $data['publicada'] = "false"; }
-    if(array_key_exists('fecha_anio', $data)) { if(empty($data['fecha_anio']))  throw new Exception('fecha/hora obligatoria sin valor: fecha_anio'); }
-    if(array_key_exists('fecha_semestre', $data)) { if(!isset($data['fecha_semestre']) || ($data['fecha_semestre'] == '')) throw new Exception('dato obligatorio sin valor: fecha_semestre'); }
+    if(array_key_exists('fecha_anio', $data)) { if(empty($data['fecha_anio']))  $data['fecha_anio'] = "null"; }
+    if(array_key_exists('fecha_semestre', $data)) { if(!isset($data['fecha_semestre']) || ($data['fecha_semestre'] == '')) $data['fecha_semestre'] = "null"; }
     if(array_key_exists('observaciones', $data)) { if(is_null($data['observaciones']) || $data['observaciones'] == "") $data['observaciones'] = "null"; }
     if(array_key_exists('alta', $data)) { if(empty($data['alta']))  $data['alta'] = date("Y-m-d H:i:s"); }
     if(array_key_exists('sede', $data)) { if(!isset($data['sede']) || ($data['sede'] == '')) throw new Exception('dato obligatorio sin valor: sede'); }
     if(array_key_exists('plan', $data)) { if(!isset($data['plan']) || ($data['plan'] == '')) throw new Exception('dato obligatorio sin valor: plan'); }
+    if(array_key_exists('modalidad', $data)) { if(!isset($data['modalidad']) || ($data['modalidad'] == '')) throw new Exception('dato obligatorio sin valor: modalidad'); }
     if(array_key_exists('comision_siguiente', $data)) { if(!isset($data['comision_siguiente']) || ($data['comision_siguiente'] == '')) $data['comision_siguiente'] = "null"; }
 
     return $data;
@@ -225,6 +239,7 @@ class ComisionSqlMain extends EntitySql{
     if(isset($row['alta'])) $row_['alta'] = $this->format->timestamp($row['alta']);
     if(isset($row['sede'])) $row_['sede'] = $this->format->escapeString($row['sede']);
     if(isset($row['plan'])) $row_['plan'] = $this->format->escapeString($row['plan']);
+    if(isset($row['modalidad'])) $row_['modalidad'] = $this->format->escapeString($row['modalidad']);
     if(isset($row['comision_siguiente'])) $row_['comision_siguiente'] = $this->format->escapeString($row['comision_siguiente']);
 
     return $row_;
@@ -248,6 +263,7 @@ class ComisionSqlMain extends EntitySql{
     $row_["alta"] = (is_null($row[$prefix . "alta"])) ? null : (string)$row[$prefix . "alta"];
     $row_["sede"] = (is_null($row[$prefix . "sede"])) ? null : (string)$row[$prefix . "sede"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
     $row_["plan"] = (is_null($row[$prefix . "plan"])) ? null : (string)$row[$prefix . "plan"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
+    $row_["modalidad"] = (is_null($row[$prefix . "modalidad"])) ? null : (string)$row[$prefix . "modalidad"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
     $row_["comision_siguiente"] = (is_null($row[$prefix . "comision_siguiente"])) ? null : (string)$row[$prefix . "comision_siguiente"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
     return $row_;
   }

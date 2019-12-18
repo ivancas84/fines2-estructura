@@ -7,7 +7,7 @@ class FieldComisionFechaSemestreMain extends Field {
   public $type = "int";
   public $fieldType = "nf";
   public $unique = false;
-  public $notNull = true;
+  public $notNull = false;
   public $default = false;
   public $length = "10";
   public $main = false;

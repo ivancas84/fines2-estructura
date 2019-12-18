@@ -51,6 +51,7 @@ class CursoSqlMain extends EntitySql{
     if($f = EntitySql::getInstanceRequire('centro_educativo', 'com_sed_ce')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('domicilio', 'com_sed_ce_dom')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('plan', 'com_pla')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('modalidad', 'com_mod')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('carga_horaria', 'ch')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('plan', 'ch_pla')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('asignatura', 'ch_asi')->_mappingField($field)) return $f;
@@ -80,9 +81,10 @@ class CursoSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('centro_educativo', 'com_sed_ce')->_fields() . ',
 ' . EntitySql::getInstanceRequire('domicilio', 'com_sed_ce_dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('plan', 'com_pla')->_fields() . ',
+' . EntitySql::getInstanceRequire('modalidad', 'com_mod')->_fields() . ',
 ' . EntitySql::getInstanceRequire('carga_horaria', 'ch')->_fields() . ',
 ' . EntitySql::getInstanceRequire('plan', 'ch_pla')->_fields() . ',
-' . EntitySql::getInstanceRequire('asignatura', 'ch_asi')->_fields() . ' 
+' . EntitySql::getInstanceRequire('asignatura', 'ch_asi')->_fields() . '
 ';
   }
 
@@ -94,6 +96,7 @@ class CursoSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('centro_educativo', 'com_sed_ce')->_join('centro_educativo', 'com_sed', $render) . '
 ' . EntitySql::getInstanceRequire('domicilio', 'com_sed_ce_dom')->_join('domicilio', 'com_sed_ce', $render) . '
 ' . EntitySql::getInstanceRequire('plan', 'com_pla')->_join('plan', 'com', $render) . '
+' . EntitySql::getInstanceRequire('modalidad', 'com_mod')->_join('modalidad', 'com', $render) . '
 ' . EntitySql::getInstanceRequire('carga_horaria', 'ch')->_join('carga_horaria', 'curs', $render) . '
 ' . EntitySql::getInstanceRequire('plan', 'ch_pla')->_join('plan', 'ch', $render) . '
 ' . EntitySql::getInstanceRequire('asignatura', 'ch_asi')->_join('asignatura', 'ch', $render) . '
@@ -123,6 +126,7 @@ class CursoSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('centro_educativo','com_sed_ce')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','com_sed_ce_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','com_pla')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('modalidad','com_mod')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('carga_horaria','ch')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','ch_pla')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('asignatura','ch_asi')->_conditionFieldStruct($field, $option, $value)) return $c;
@@ -137,6 +141,7 @@ class CursoSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('centro_educativo','com_sed_ce')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','com_sed_ce_dom')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','com_pla')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('modalidad','com_mod')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('carga_horaria','ch')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','ch_pla')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('asignatura','ch_asi')->_conditionFieldAux($field, $option, $value)) return $c;
@@ -151,6 +156,7 @@ class CursoSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('centro_educativo','com_sed_ce')->_conditionFieldHaving($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','com_sed_ce_dom')->_conditionFieldHaving($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','com_pla')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('modalidad','com_mod')->_conditionFieldHaving($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('carga_horaria','ch')->_conditionFieldHaving($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','ch_pla')->_conditionFieldHaving($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('asignatura','ch_asi')->_conditionFieldHaving($field, $option, $value)) return $c;

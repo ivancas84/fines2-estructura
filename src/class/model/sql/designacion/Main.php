@@ -92,7 +92,7 @@ class DesignacionSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('tipo_sede', 'sed_ts')->_fields() . ',
 ' . EntitySql::getInstanceRequire('centro_educativo', 'sed_ce')->_fields() . ',
 ' . EntitySql::getInstanceRequire('domicilio', 'sed_ce_dom')->_fields() . ',
-' . EntitySql::getInstanceRequire('persona', 'per')->_fields() . ' 
+' . EntitySql::getInstanceRequire('persona', 'per')->_fields() . '
 ';
   }
 

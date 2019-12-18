@@ -4,6 +4,7 @@ tipo_sede - sed_ts
 centro_educativo - sed_ce
 domicilio - sed_ce_dom
 plan - pla
+modalidad - mod
 
 id (id): string pk. NOT NULL. UNIQUE.
 turno (tur): string nf.
@@ -14,10 +15,11 @@ comentario (com): text nf.
 autorizada (aut): boolean nf. NOT NULL.
 apertura (ape): boolean nf. NOT NULL.
 publicada (pub): boolean nf. NOT NULL.
-fecha_anio (fa): year nf. NOT NULL.
-fecha_semestre (fs): integer nf. NOT NULL.
+fecha_anio (fa): year nf.
+fecha_semestre (fs): integer nf.
 observaciones (obs): text nf.
 alta (alt): timestamp nf. NOT NULL. DEFAULT: CURRENT_TIMESTAMP.
 sede (sed): string mu. NOT NULL. MAIN.
 plan (pla): string mu. NOT NULL.
+modalidad (mod): string mu. NOT NULL.
 comision_siguiente (cs): string mu.

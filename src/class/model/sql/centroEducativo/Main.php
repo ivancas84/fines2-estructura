@@ -54,7 +54,7 @@ class CentroEducativoSqlMain extends EntitySql{
 
   public function fields(){
     return $this->_fields() . ',
-' . EntitySql::getInstanceRequire('domicilio', 'dom')->_fields() . ' 
+' . EntitySql::getInstanceRequire('domicilio', 'dom')->_fields() . '
 ';
   }
 

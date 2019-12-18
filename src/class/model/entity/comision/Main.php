@@ -32,6 +32,7 @@ class ComisionEntityMain extends Entity {
     return array(
       Field::getInstanceRequire("comision", "sede"),
       Field::getInstanceRequire("comision", "plan"),
+      Field::getInstanceRequire("comision", "modalidad"),
       Field::getInstanceRequire("comision", "comision_siguiente"),
     );
   }
