@@ -12,7 +12,7 @@ class FieldComisionModalidadMain extends Field {
   public $length = "45";
   public $main = false;
   public $name = "modalidad";
-  public $alias = "mod";
+  public $alias = "moa";
 
 
   public function getEntity(){ return new ComisionEntity; }

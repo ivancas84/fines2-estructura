@@ -118,8 +118,8 @@ UPDATE " . $this->entity->sn_() . " SET
       $json = EntitySql::getInstanceRequire('plan', 'pla')->_json($row);
       $row_["plan_"] = $json;
     }
-    if(!is_null($row['mod_id'])){
-      $json = EntitySql::getInstanceRequire('modalidad', 'mod')->_json($row);
+    if(!is_null($row['moa_id'])){
+      $json = EntitySql::getInstanceRequire('modalidad', 'moa')->_json($row);
       $row_["modalidad_"] = $json;
     }
     return $row_;
@@ -135,7 +135,7 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_["centro_educativo"] = EntityValues::getInstanceRequire('centro_educativo', $row, 'sed_ce_');
     $row_["domicilio1"] = EntityValues::getInstanceRequire('domicilio', $row, 'sed_ce_dom_');
     $row_["plan"] = EntityValues::getInstanceRequire('plan', $row, 'pla_');
-    $row_["modalidad"] = EntityValues::getInstanceRequire('modalidad', $row, 'mod_');
+    $row_["modalidad"] = EntityValues::getInstanceRequire('modalidad', $row, 'moa_');
     return $row_;
   }
 

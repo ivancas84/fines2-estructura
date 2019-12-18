@@ -76,7 +76,7 @@ class ComisionSqlMain extends EntitySql{
     if($f = EntitySql::getInstanceRequire('centro_educativo', 'sed_ce')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('domicilio', 'sed_ce_dom')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('plan', 'pla')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('modalidad', 'mod')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('modalidad', 'moa')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
   }
 
@@ -102,7 +102,7 @@ class ComisionSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('centro_educativo', 'sed_ce')->_fields() . ',
 ' . EntitySql::getInstanceRequire('domicilio', 'sed_ce_dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('plan', 'pla')->_fields() . ',
-' . EntitySql::getInstanceRequire('modalidad', 'mod')->_fields() . '
+' . EntitySql::getInstanceRequire('modalidad', 'moa')->_fields() . '
 ';
   }
 
@@ -113,7 +113,7 @@ class ComisionSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('centro_educativo', 'sed_ce')->_join('centro_educativo', 'sed', $render) . '
 ' . EntitySql::getInstanceRequire('domicilio', 'sed_ce_dom')->_join('domicilio', 'sed_ce', $render) . '
 ' . EntitySql::getInstanceRequire('plan', 'pla')->_join('plan', 'comi', $render) . '
-' . EntitySql::getInstanceRequire('modalidad', 'mod')->_join('modalidad', 'comi', $render) . '
+' . EntitySql::getInstanceRequire('modalidad', 'moa')->_join('modalidad', 'comi', $render) . '
 ' ;
   }
 
@@ -151,7 +151,7 @@ class ComisionSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('centro_educativo','sed_ce')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','sed_ce_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','pla')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('modalidad','mod')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('modalidad','moa')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldAux($field, $option, $value) {
@@ -162,7 +162,7 @@ class ComisionSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('centro_educativo','sed_ce')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','sed_ce_dom')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','pla')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('modalidad','mod')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('modalidad','moa')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldHaving($field, $option, $value) {
@@ -173,7 +173,7 @@ class ComisionSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('centro_educativo','sed_ce')->_conditionFieldHaving($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','sed_ce_dom')->_conditionFieldHaving($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','pla')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('modalidad','mod')->_conditionFieldHaving($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('modalidad','moa')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
   public function initializeInsert(array $data){

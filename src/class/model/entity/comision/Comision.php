@@ -7,6 +7,8 @@ class ComisionEntity extends ComisionEntityMain {
         return array(
           Field::getInstanceRequire("comision", "division"),
           Field::getInstanceRequire("comision", "sede"),
+          Field::getInstanceRequire("comision", "anio"),
+          Field::getInstanceRequire("comision", "semestre"),
         );
       }
 }
