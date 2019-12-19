@@ -23,25 +23,33 @@ class ComisionCursosPersist extends Persist {
         ["plan", "=", $comision["plan"]]            
     ];
 
-    $cargaHorarias = Ma::all("carga_horaria", $display);
-    if(!count($cargaHorarias)) throw new Exception("No existen cargas horarias asociadas");
+    $cargasHorarias = Ma::all("carga_horaria", $display);
+    if(!count($cargasHorarias)) throw new Exception("No existen cargas horarias asociadas");
 
-    $comisionBd = Ma::uniqueOrNull("comision", $comision);
+    $comisionBd = Ma::unique("comision", $comision);
     
     if (!empty($comisionBd)){
         $comision["id"] = $comisionBd["id"];
-        Sqlo::getInstanceRequire("comision")->update($comision);
+        $this->update("comision", $comision);
+        $cursos = Ma::ids("curso",["comision","=",$comision["id"]]);
+        $tieneCursos = (count($cursos)) ? true : false;
+    } else {
+        $comision["id"] = $this->insert("comision", $comision);
+        $tieneCursos = false;
     }
 
-
-
-        if(isset($domicilio)) {
-            if (!empty($ce_bd["domicilio"])) $domicilio["id"] = $ce_bd["domicilio"];    
-        } else {
-            if (!empty($ce_bd["domicilio"])) $deleteDomicilio = $ce_bd["domicilio"];
-            $centroEducativo["domicilio"] = null;
+    if(!$tieneCursos){
+        foreach($cargasHorarias as $ch){
+            $curso = [
+                "comision" => $comision["id"],
+                "carga_horaria" => $ch["id"],
+            ];
+            $this->insert("curso", $curso);
         }
     }
+
+  }
+
 
 }
 
