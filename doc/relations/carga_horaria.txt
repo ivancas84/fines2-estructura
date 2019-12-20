@@ -2,8 +2,8 @@ plan - pla
 asignatura - asi
 
 id (id): string pk. NOT NULL. MAIN. UNIQUE.
-anio (ani): string nf. NOT NULL.
-semestre (sem): string nf. NOT NULL.
-horas_catedra (hc): string nf. NOT NULL.
-plan (pla): string mu. NOT NULL.
-asignatura (asi): string mu. NOT NULL.
+anio (ani): string nf. NOT NULL. MAIN.
+semestre (sem): string nf. NOT NULL. MAIN.
+horas_catedra (hc): string nf. NOT NULL. MAIN.
+plan (pla): string mu. NOT NULL. MAIN.
+asignatura (asi): string mu. NOT NULL. MAIN.

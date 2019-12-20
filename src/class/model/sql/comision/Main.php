@@ -102,7 +102,7 @@ class ComisionSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('centro_educativo', 'sed_ce')->_fields() . ',
 ' . EntitySql::getInstanceRequire('domicilio', 'sed_ce_dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('plan', 'pla')->_fields() . ',
-' . EntitySql::getInstanceRequire('modalidad', 'moa')->_fields() . '
+' . EntitySql::getInstanceRequire('modalidad', 'moa')->_fields() . ' 
 ';
   }
 
