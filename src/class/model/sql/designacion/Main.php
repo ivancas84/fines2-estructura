@@ -119,7 +119,39 @@ class DesignacionSqlMain extends EntitySql{
       case "{$p}cargo": return $this->format->conditionText($f, $value, $option);
       case "{$p}sede": return $this->format->conditionText($f, $value, $option);
       case "{$p}persona": return $this->format->conditionText($f, $value, $option);
-      default: return parent::_conditionFieldStruct($field, $option, $value);
+
+      case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_id": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}avg_desde": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}max_desde": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_desde": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_desde": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}avg_hasta": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}max_hasta": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_hasta": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_hasta": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}avg_alta": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}max_alta": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_alta": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_alta": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_cargo": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_cargo": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_cargo": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_sede": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_sede": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_sede": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_persona": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_persona": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_persona": return $this->format->conditionNumber($f, $value, $option);
+
+      default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
   }
 
@@ -143,17 +175,6 @@ class DesignacionSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('centro_educativo','sed_ce')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','sed_ce_dom')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('persona','per')->_conditionFieldAux($field, $option, $value)) return $c;
-  }
-
-  protected function conditionFieldHaving($field, $option, $value) {
-    if($c = $this->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('cargo','car')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('sede','sed')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','sed_dom')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('tipo_sede','sed_ts')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('centro_educativo','sed_ce')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','sed_ce_dom')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('persona','per')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
   public function initializeInsert(array $data){

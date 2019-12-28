@@ -30,10 +30,38 @@ class PersonaSqlMain extends EntitySql{
       case $p.'max_id': return "MAX({$t}.id)";
       case $p.'count_id': return "COUNT({$t}.id)";
 
+      case $p.'min_nombres': return "MIN({$t}.nombres)";
+      case $p.'max_nombres': return "MAX({$t}.nombres)";
+      case $p.'count_nombres': return "COUNT({$t}.nombres)";
+
+      case $p.'min_apellidos': return "MIN({$t}.apellidos)";
+      case $p.'max_apellidos': return "MAX({$t}.apellidos)";
+      case $p.'count_apellidos': return "COUNT({$t}.apellidos)";
+
       case $p.'avg_fecha_nacimiento': return "AVG({$t}.fecha_nacimiento)";
       case $p.'min_fecha_nacimiento': return "MIN({$t}.fecha_nacimiento)";
       case $p.'max_fecha_nacimiento': return "MAX({$t}.fecha_nacimiento)";
       case $p.'count_fecha_nacimiento': return "COUNT({$t}.fecha_nacimiento)";
+
+      case $p.'min_numero_documento': return "MIN({$t}.numero_documento)";
+      case $p.'max_numero_documento': return "MAX({$t}.numero_documento)";
+      case $p.'count_numero_documento': return "COUNT({$t}.numero_documento)";
+
+      case $p.'min_cuil': return "MIN({$t}.cuil)";
+      case $p.'max_cuil': return "MAX({$t}.cuil)";
+      case $p.'count_cuil': return "COUNT({$t}.cuil)";
+
+      case $p.'min_email': return "MIN({$t}.email)";
+      case $p.'max_email': return "MAX({$t}.email)";
+      case $p.'count_email': return "COUNT({$t}.email)";
+
+      case $p.'min_genero': return "MIN({$t}.genero)";
+      case $p.'max_genero': return "MAX({$t}.genero)";
+      case $p.'count_genero': return "COUNT({$t}.genero)";
+
+      case $p.'min_apodo': return "MIN({$t}.apodo)";
+      case $p.'max_apodo': return "MAX({$t}.apodo)";
+      case $p.'count_apodo': return "COUNT({$t}.apodo)";
 
       case $p.'avg_alta': return "AVG({$t}.alta)";
       case $p.'min_alta': return "MIN({$t}.alta)";
@@ -73,7 +101,50 @@ class PersonaSqlMain extends EntitySql{
       case "{$p}genero": return $this->format->conditionText($f, $value, $option);
       case "{$p}apodo": return $this->format->conditionText($f, $value, $option);
       case "{$p}alta": return $this->format->conditionTimestamp($f, $value, $option);
-      default: return parent::_conditionFieldStruct($field, $option, $value);
+
+      case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_id": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_nombres": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_nombres": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_nombres": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_apellidos": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_apellidos": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_apellidos": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}avg_fecha_nacimiento": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}max_fecha_nacimiento": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_fecha_nacimiento": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_fecha_nacimiento": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_numero_documento": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_numero_documento": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_numero_documento": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_cuil": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_cuil": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_cuil": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_email": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_email": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_email": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_genero": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_genero": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_genero": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_apodo": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_apodo": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_apodo": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}avg_alta": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}max_alta": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_alta": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_alta": return $this->format->conditionNumber($f, $value, $option);
+
+      default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
   }
 

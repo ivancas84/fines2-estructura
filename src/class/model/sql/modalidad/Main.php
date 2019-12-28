@@ -22,6 +22,10 @@ class ModalidadSqlMain extends EntitySql{
       case $p.'max_id': return "MAX({$t}.id)";
       case $p.'count_id': return "COUNT({$t}.id)";
 
+      case $p.'min_nombre': return "MIN({$t}.nombre)";
+      case $p.'max_nombre': return "MAX({$t}.nombre)";
+      case $p.'count_nombre': return "COUNT({$t}.nombre)";
+
       default: return null;
     }
   }
@@ -47,7 +51,16 @@ class ModalidadSqlMain extends EntitySql{
     switch ($field){
       case "{$p}id": return $this->format->conditionText($f, $value, $option);
       case "{$p}nombre": return $this->format->conditionText($f, $value, $option);
-      default: return parent::_conditionFieldStruct($field, $option, $value);
+
+      case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_id": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_nombre": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_nombre": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_nombre": return $this->format->conditionNumber($f, $value, $option);
+
+      default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
   }
 

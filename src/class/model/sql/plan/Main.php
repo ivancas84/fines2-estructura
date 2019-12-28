@@ -23,6 +23,14 @@ class PlanSqlMain extends EntitySql{
       case $p.'max_id': return "MAX({$t}.id)";
       case $p.'count_id': return "COUNT({$t}.id)";
 
+      case $p.'min_orientacion': return "MIN({$t}.orientacion)";
+      case $p.'max_orientacion': return "MAX({$t}.orientacion)";
+      case $p.'count_orientacion': return "COUNT({$t}.orientacion)";
+
+      case $p.'min_resolucion': return "MIN({$t}.resolucion)";
+      case $p.'max_resolucion': return "MAX({$t}.resolucion)";
+      case $p.'count_resolucion': return "COUNT({$t}.resolucion)";
+
       default: return null;
     }
   }
@@ -49,7 +57,20 @@ class PlanSqlMain extends EntitySql{
       case "{$p}id": return $this->format->conditionText($f, $value, $option);
       case "{$p}orientacion": return $this->format->conditionText($f, $value, $option);
       case "{$p}resolucion": return $this->format->conditionText($f, $value, $option);
-      default: return parent::_conditionFieldStruct($field, $option, $value);
+
+      case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_id": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_orientacion": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_orientacion": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_orientacion": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_resolucion": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_resolucion": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_resolucion": return $this->format->conditionNumber($f, $value, $option);
+
+      default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
   }
 

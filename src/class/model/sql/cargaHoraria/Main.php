@@ -26,6 +26,18 @@ class CargaHorariaSqlMain extends EntitySql{
       case $p.'max_id': return "MAX({$t}.id)";
       case $p.'count_id': return "COUNT({$t}.id)";
 
+      case $p.'min_anio': return "MIN({$t}.anio)";
+      case $p.'max_anio': return "MAX({$t}.anio)";
+      case $p.'count_anio': return "COUNT({$t}.anio)";
+
+      case $p.'min_semestre': return "MIN({$t}.semestre)";
+      case $p.'max_semestre': return "MAX({$t}.semestre)";
+      case $p.'count_semestre': return "COUNT({$t}.semestre)";
+
+      case $p.'min_horas_catedra': return "MIN({$t}.horas_catedra)";
+      case $p.'max_horas_catedra': return "MAX({$t}.horas_catedra)";
+      case $p.'count_horas_catedra': return "COUNT({$t}.horas_catedra)";
+
       case $p.'min_plan': return "MIN({$t}.plan)";
       case $p.'max_plan': return "MAX({$t}.plan)";
       case $p.'count_plan': return "COUNT({$t}.plan)";
@@ -83,7 +95,32 @@ class CargaHorariaSqlMain extends EntitySql{
       case "{$p}horas_catedra": return $this->format->conditionText($f, $value, $option);
       case "{$p}plan": return $this->format->conditionText($f, $value, $option);
       case "{$p}asignatura": return $this->format->conditionText($f, $value, $option);
-      default: return parent::_conditionFieldStruct($field, $option, $value);
+
+      case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_id": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_anio": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_anio": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_anio": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_semestre": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_semestre": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_semestre": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_horas_catedra": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_horas_catedra": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_horas_catedra": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_plan": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_plan": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_plan": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_asignatura": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_asignatura": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_asignatura": return $this->format->conditionNumber($f, $value, $option);
+
+      default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
   }
 
@@ -97,12 +134,6 @@ class CargaHorariaSqlMain extends EntitySql{
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','pla')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('asignatura','asi')->_conditionFieldAux($field, $option, $value)) return $c;
-  }
-
-  protected function conditionFieldHaving($field, $option, $value) {
-    if($c = $this->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('plan','pla')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('asignatura','asi')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
   public function initializeInsert(array $data){

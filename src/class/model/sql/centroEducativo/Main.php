@@ -24,6 +24,14 @@ class CentroEducativoSqlMain extends EntitySql{
       case $p.'max_id': return "MAX({$t}.id)";
       case $p.'count_id': return "COUNT({$t}.id)";
 
+      case $p.'min_nombre': return "MIN({$t}.nombre)";
+      case $p.'max_nombre': return "MAX({$t}.nombre)";
+      case $p.'count_nombre': return "COUNT({$t}.nombre)";
+
+      case $p.'min_cue': return "MIN({$t}.cue)";
+      case $p.'max_cue': return "MAX({$t}.cue)";
+      case $p.'count_cue': return "COUNT({$t}.cue)";
+
       case $p.'min_domicilio': return "MIN({$t}.domicilio)";
       case $p.'max_domicilio': return "MAX({$t}.domicilio)";
       case $p.'count_domicilio': return "COUNT({$t}.domicilio)";
@@ -72,7 +80,24 @@ class CentroEducativoSqlMain extends EntitySql{
       case "{$p}nombre": return $this->format->conditionText($f, $value, $option);
       case "{$p}cue": return $this->format->conditionText($f, $value, $option);
       case "{$p}domicilio": return $this->format->conditionText($f, $value, $option);
-      default: return parent::_conditionFieldStruct($field, $option, $value);
+
+      case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_id": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_nombre": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_nombre": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_nombre": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_cue": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_cue": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_cue": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_domicilio": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_domicilio": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_domicilio": return $this->format->conditionNumber($f, $value, $option);
+
+      default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
   }
 
@@ -84,11 +109,6 @@ class CentroEducativoSqlMain extends EntitySql{
   protected function conditionFieldAux($field, $option, $value) {
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','dom')->_conditionFieldAux($field, $option, $value)) return $c;
-  }
-
-  protected function conditionFieldHaving($field, $option, $value) {
-    if($c = $this->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','dom')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
   public function initializeInsert(array $data){

@@ -26,6 +26,26 @@ class AsignaturaSqlMain extends EntitySql{
       case $p.'max_id': return "MAX({$t}.id)";
       case $p.'count_id': return "COUNT({$t}.id)";
 
+      case $p.'min_nombre': return "MIN({$t}.nombre)";
+      case $p.'max_nombre': return "MAX({$t}.nombre)";
+      case $p.'count_nombre': return "COUNT({$t}.nombre)";
+
+      case $p.'min_formacion': return "MIN({$t}.formacion)";
+      case $p.'max_formacion': return "MAX({$t}.formacion)";
+      case $p.'count_formacion': return "COUNT({$t}.formacion)";
+
+      case $p.'min_clasificacion': return "MIN({$t}.clasificacion)";
+      case $p.'max_clasificacion': return "MAX({$t}.clasificacion)";
+      case $p.'count_clasificacion': return "COUNT({$t}.clasificacion)";
+
+      case $p.'min_codigo': return "MIN({$t}.codigo)";
+      case $p.'max_codigo': return "MAX({$t}.codigo)";
+      case $p.'count_codigo': return "COUNT({$t}.codigo)";
+
+      case $p.'min_perfil': return "MIN({$t}.perfil)";
+      case $p.'max_perfil': return "MAX({$t}.perfil)";
+      case $p.'count_perfil': return "COUNT({$t}.perfil)";
+
       default: return null;
     }
   }
@@ -55,7 +75,32 @@ class AsignaturaSqlMain extends EntitySql{
       case "{$p}clasificacion": return $this->format->conditionText($f, $value, $option);
       case "{$p}codigo": return $this->format->conditionText($f, $value, $option);
       case "{$p}perfil": return $this->format->conditionText($f, $value, $option);
-      default: return parent::_conditionFieldStruct($field, $option, $value);
+
+      case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_id": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_nombre": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_nombre": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_nombre": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_formacion": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_formacion": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_formacion": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_clasificacion": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_clasificacion": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_clasificacion": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_codigo": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_codigo": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_codigo": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_perfil": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_perfil": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_perfil": return $this->format->conditionNumber($f, $value, $option);
+
+      default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
   }
 

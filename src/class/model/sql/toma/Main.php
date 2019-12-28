@@ -60,6 +60,26 @@ class TomaSqlMain extends EntitySql{
       case $p.'max_fecha_consejo': return "MAX({$t}.fecha_consejo)";
       case $p.'count_fecha_consejo': return "COUNT({$t}.fecha_consejo)";
 
+      case $p.'min_estado': return "MIN({$t}.estado)";
+      case $p.'max_estado': return "MAX({$t}.estado)";
+      case $p.'count_estado': return "COUNT({$t}.estado)";
+
+      case $p.'min_observaciones': return "MIN({$t}.observaciones)";
+      case $p.'max_observaciones': return "MAX({$t}.observaciones)";
+      case $p.'count_observaciones': return "COUNT({$t}.observaciones)";
+
+      case $p.'min_comentario': return "MIN({$t}.comentario)";
+      case $p.'max_comentario': return "MAX({$t}.comentario)";
+      case $p.'count_comentario': return "COUNT({$t}.comentario)";
+
+      case $p.'min_tipo_movimiento': return "MIN({$t}.tipo_movimiento)";
+      case $p.'max_tipo_movimiento': return "MAX({$t}.tipo_movimiento)";
+      case $p.'count_tipo_movimiento': return "COUNT({$t}.tipo_movimiento)";
+
+      case $p.'min_estado_contralor': return "MIN({$t}.estado_contralor)";
+      case $p.'max_estado_contralor': return "MAX({$t}.estado_contralor)";
+      case $p.'count_estado_contralor': return "COUNT({$t}.estado_contralor)";
+
       case $p.'avg_alta': return "AVG({$t}.alta)";
       case $p.'min_alta': return "MIN({$t}.alta)";
       case $p.'max_alta': return "MAX({$t}.alta)";
@@ -171,7 +191,74 @@ class TomaSqlMain extends EntitySql{
       case "{$p}curso": return $this->format->conditionText($f, $value, $option);
       case "{$p}docente": return $this->format->conditionText($f, $value, $option);
       case "{$p}reemplazo": return $this->format->conditionText($f, $value, $option);
-      default: return parent::_conditionFieldStruct($field, $option, $value);
+
+      case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_id": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}avg_fecha_toma": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}max_fecha_toma": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_fecha_toma": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_fecha_toma": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}avg_fecha_inicio": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}max_fecha_inicio": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_fecha_inicio": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_fecha_inicio": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}avg_fecha_fin": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}max_fecha_fin": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_fecha_fin": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_fecha_fin": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}avg_fecha_contralor": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}max_fecha_contralor": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_fecha_contralor": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_fecha_contralor": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}avg_fecha_consejo": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}max_fecha_consejo": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_fecha_consejo": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_fecha_consejo": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_estado": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_estado": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_estado": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_observaciones": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_observaciones": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_observaciones": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_comentario": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_comentario": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_comentario": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_tipo_movimiento": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_tipo_movimiento": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_tipo_movimiento": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_estado_contralor": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_estado_contralor": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_estado_contralor": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}avg_alta": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}max_alta": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_alta": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_alta": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_curso": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_curso": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_curso": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_docente": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_docente": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_docente": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_reemplazo": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_reemplazo": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_reemplazo": return $this->format->conditionNumber($f, $value, $option);
+
+      default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
   }
 
@@ -209,24 +296,6 @@ class TomaSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('asignatura','cur_ch_asi')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('persona','doc')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('persona','ree')->_conditionFieldAux($field, $option, $value)) return $c;
-  }
-
-  protected function conditionFieldHaving($field, $option, $value) {
-    if($c = $this->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('curso','cur')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('comision','cur_com')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('sede','cur_com_sed')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','cur_com_sed_dom')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('tipo_sede','cur_com_sed_ts')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('centro_educativo','cur_com_sed_ce')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','cur_com_sed_ce_dom')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('plan','cur_com_pla')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('modalidad','cur_com_moa')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('carga_horaria','cur_ch')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('plan','cur_ch_pla')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('asignatura','cur_ch_asi')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('persona','doc')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('persona','ree')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
   public function initializeInsert(array $data){

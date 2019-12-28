@@ -28,6 +28,34 @@ class DomicilioSqlMain extends EntitySql{
       case $p.'max_id': return "MAX({$t}.id)";
       case $p.'count_id': return "COUNT({$t}.id)";
 
+      case $p.'min_calle': return "MIN({$t}.calle)";
+      case $p.'max_calle': return "MAX({$t}.calle)";
+      case $p.'count_calle': return "COUNT({$t}.calle)";
+
+      case $p.'min_entre': return "MIN({$t}.entre)";
+      case $p.'max_entre': return "MAX({$t}.entre)";
+      case $p.'count_entre': return "COUNT({$t}.entre)";
+
+      case $p.'min_numero': return "MIN({$t}.numero)";
+      case $p.'max_numero': return "MAX({$t}.numero)";
+      case $p.'count_numero': return "COUNT({$t}.numero)";
+
+      case $p.'min_piso': return "MIN({$t}.piso)";
+      case $p.'max_piso': return "MAX({$t}.piso)";
+      case $p.'count_piso': return "COUNT({$t}.piso)";
+
+      case $p.'min_departamento': return "MIN({$t}.departamento)";
+      case $p.'max_departamento': return "MAX({$t}.departamento)";
+      case $p.'count_departamento': return "COUNT({$t}.departamento)";
+
+      case $p.'min_barrio': return "MIN({$t}.barrio)";
+      case $p.'max_barrio': return "MAX({$t}.barrio)";
+      case $p.'count_barrio': return "COUNT({$t}.barrio)";
+
+      case $p.'min_localidad': return "MIN({$t}.localidad)";
+      case $p.'max_localidad': return "MAX({$t}.localidad)";
+      case $p.'count_localidad': return "COUNT({$t}.localidad)";
+
       default: return null;
     }
   }
@@ -59,7 +87,40 @@ class DomicilioSqlMain extends EntitySql{
       case "{$p}departamento": return $this->format->conditionText($f, $value, $option);
       case "{$p}barrio": return $this->format->conditionText($f, $value, $option);
       case "{$p}localidad": return $this->format->conditionText($f, $value, $option);
-      default: return parent::_conditionFieldStruct($field, $option, $value);
+
+      case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_id": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_calle": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_calle": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_calle": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_entre": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_entre": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_entre": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_numero": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_numero": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_numero": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_piso": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_piso": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_piso": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_departamento": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_departamento": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_departamento": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_barrio": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_barrio": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_barrio": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_localidad": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_localidad": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_localidad": return $this->format->conditionNumber($f, $value, $option);
+
+      default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
   }
 

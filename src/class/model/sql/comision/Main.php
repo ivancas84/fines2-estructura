@@ -37,11 +37,51 @@ class ComisionSqlMain extends EntitySql{
       case $p.'max_id': return "MAX({$t}.id)";
       case $p.'count_id': return "COUNT({$t}.id)";
 
+      case $p.'min_turno': return "MIN({$t}.turno)";
+      case $p.'max_turno': return "MAX({$t}.turno)";
+      case $p.'count_turno': return "COUNT({$t}.turno)";
+
+      case $p.'min_division': return "MIN({$t}.division)";
+      case $p.'max_division': return "MAX({$t}.division)";
+      case $p.'count_division': return "COUNT({$t}.division)";
+
+      case $p.'min_anio': return "MIN({$t}.anio)";
+      case $p.'max_anio': return "MAX({$t}.anio)";
+      case $p.'count_anio': return "COUNT({$t}.anio)";
+
+      case $p.'min_semestre': return "MIN({$t}.semestre)";
+      case $p.'max_semestre': return "MAX({$t}.semestre)";
+      case $p.'count_semestre': return "COUNT({$t}.semestre)";
+
+      case $p.'min_comentario': return "MIN({$t}.comentario)";
+      case $p.'max_comentario': return "MAX({$t}.comentario)";
+      case $p.'count_comentario': return "COUNT({$t}.comentario)";
+
+      case $p.'min_autorizada': return "MIN({$t}.autorizada)";
+      case $p.'max_autorizada': return "MAX({$t}.autorizada)";
+      case $p.'count_autorizada': return "COUNT({$t}.autorizada)";
+
+      case $p.'min_apertura': return "MIN({$t}.apertura)";
+      case $p.'max_apertura': return "MAX({$t}.apertura)";
+      case $p.'count_apertura': return "COUNT({$t}.apertura)";
+
+      case $p.'min_publicada': return "MIN({$t}.publicada)";
+      case $p.'max_publicada': return "MAX({$t}.publicada)";
+      case $p.'count_publicada': return "COUNT({$t}.publicada)";
+
+      case $p.'min_fecha_anio': return "MIN({$t}.fecha_anio)";
+      case $p.'max_fecha_anio': return "MAX({$t}.fecha_anio)";
+      case $p.'count_fecha_anio': return "COUNT({$t}.fecha_anio)";
+
       case $p.'sum_fecha_semestre': return "SUM({$t}.fecha_semestre)";
       case $p.'avg_fecha_semestre': return "AVG({$t}.fecha_semestre)";
       case $p.'min_fecha_semestre': return "MIN({$t}.fecha_semestre)";
       case $p.'max_fecha_semestre': return "MAX({$t}.fecha_semestre)";
       case $p.'count_fecha_semestre': return "COUNT({$t}.fecha_semestre)";
+
+      case $p.'min_observaciones': return "MIN({$t}.observaciones)";
+      case $p.'max_observaciones': return "MAX({$t}.observaciones)";
+      case $p.'count_observaciones': return "COUNT({$t}.observaciones)";
 
       case $p.'avg_alta': return "AVG({$t}.alta)";
       case $p.'min_alta': return "MIN({$t}.alta)";
@@ -139,7 +179,79 @@ class ComisionSqlMain extends EntitySql{
       case "{$p}plan": return $this->format->conditionText($f, $value, $option);
       case "{$p}modalidad": return $this->format->conditionText($f, $value, $option);
       case "{$p}comision_siguiente": return $this->format->conditionText($f, $value, $option);
-      default: return parent::_conditionFieldStruct($field, $option, $value);
+
+      case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_id": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_turno": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_turno": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_turno": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_division": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_division": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_division": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_anio": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_anio": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_anio": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_semestre": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_semestre": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_semestre": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_comentario": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_comentario": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_comentario": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_autorizada": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_autorizada": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_autorizada": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_apertura": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_apertura": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_apertura": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_publicada": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_publicada": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_publicada": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_fecha_anio": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_fecha_anio": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_fecha_anio": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}sum_fecha_semestre": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}avg_fecha_semestre": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}max_fecha_semestre": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_fecha_semestre": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_fecha_semestre": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_observaciones": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_observaciones": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_observaciones": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}avg_alta": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}max_alta": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_alta": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_alta": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_sede": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_sede": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_sede": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_plan": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_plan": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_plan": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_modalidad": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_modalidad": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_modalidad": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_comision_siguiente": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_comision_siguiente": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_comision_siguiente": return $this->format->conditionNumber($f, $value, $option);
+
+      default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
   }
 
@@ -163,17 +275,6 @@ class ComisionSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('domicilio','sed_ce_dom')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','pla')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('modalidad','moa')->_conditionFieldAux($field, $option, $value)) return $c;
-  }
-
-  protected function conditionFieldHaving($field, $option, $value) {
-    if($c = $this->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('sede','sed')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','sed_dom')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('tipo_sede','sed_ts')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('centro_educativo','sed_ce')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','sed_ce_dom')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('plan','pla')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('modalidad','moa')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
   public function initializeInsert(array $data){

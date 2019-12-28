@@ -28,6 +28,18 @@ class SedeSqlMain extends EntitySql{
       case $p.'max_id': return "MAX({$t}.id)";
       case $p.'count_id': return "COUNT({$t}.id)";
 
+      case $p.'min_numero': return "MIN({$t}.numero)";
+      case $p.'max_numero': return "MAX({$t}.numero)";
+      case $p.'count_numero': return "COUNT({$t}.numero)";
+
+      case $p.'min_nombre': return "MIN({$t}.nombre)";
+      case $p.'max_nombre': return "MAX({$t}.nombre)";
+      case $p.'count_nombre': return "COUNT({$t}.nombre)";
+
+      case $p.'min_observaciones': return "MIN({$t}.observaciones)";
+      case $p.'max_observaciones': return "MAX({$t}.observaciones)";
+      case $p.'count_observaciones': return "COUNT({$t}.observaciones)";
+
       case $p.'avg_baja': return "AVG({$t}.baja)";
       case $p.'min_baja': return "MIN({$t}.baja)";
       case $p.'max_baja': return "MAX({$t}.baja)";
@@ -102,7 +114,41 @@ class SedeSqlMain extends EntitySql{
       case "{$p}domicilio": return $this->format->conditionText($f, $value, $option);
       case "{$p}tipo_sede": return $this->format->conditionText($f, $value, $option);
       case "{$p}centro_educativo": return $this->format->conditionText($f, $value, $option);
-      default: return parent::_conditionFieldStruct($field, $option, $value);
+
+      case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_id": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_numero": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_numero": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_numero": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_nombre": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_nombre": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_nombre": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_observaciones": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_observaciones": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_observaciones": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}avg_baja": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}max_baja": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_baja": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_baja": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_domicilio": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_domicilio": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_domicilio": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_tipo_sede": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_tipo_sede": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_tipo_sede": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_centro_educativo": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_centro_educativo": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_centro_educativo": return $this->format->conditionNumber($f, $value, $option);
+
+      default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
   }
 
@@ -120,14 +166,6 @@ class SedeSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('tipo_sede','ts')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('centro_educativo','ce')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','ce_dom')->_conditionFieldAux($field, $option, $value)) return $c;
-  }
-
-  protected function conditionFieldHaving($field, $option, $value) {
-    if($c = $this->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','dom')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('tipo_sede','ts')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('centro_educativo','ce')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','ce_dom')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
   public function initializeInsert(array $data){

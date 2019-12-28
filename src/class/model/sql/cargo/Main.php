@@ -22,6 +22,10 @@ class CargoSqlMain extends EntitySql{
       case $p.'max_id': return "MAX({$t}.id)";
       case $p.'count_id': return "COUNT({$t}.id)";
 
+      case $p.'min_descripcion': return "MIN({$t}.descripcion)";
+      case $p.'max_descripcion': return "MAX({$t}.descripcion)";
+      case $p.'count_descripcion': return "COUNT({$t}.descripcion)";
+
       default: return null;
     }
   }
@@ -47,7 +51,16 @@ class CargoSqlMain extends EntitySql{
     switch ($field){
       case "{$p}id": return $this->format->conditionText($f, $value, $option);
       case "{$p}descripcion": return $this->format->conditionText($f, $value, $option);
-      default: return parent::_conditionFieldStruct($field, $option, $value);
+
+      case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_id": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_descripcion": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_descripcion": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_descripcion": return $this->format->conditionNumber($f, $value, $option);
+
+      default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
   }
 

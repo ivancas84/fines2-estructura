@@ -1,7 +1,7 @@
 plan - pla
 asignatura - asi
 
-id (id): string pk. NOT NULL. MAIN. UNIQUE.
+id (id): string pk. NOT NULL. UNIQUE.
 anio (ani): string nf. NOT NULL. MAIN.
 semestre (sem): string nf. NOT NULL. MAIN.
 horas_catedra (hc): string nf. NOT NULL. MAIN.

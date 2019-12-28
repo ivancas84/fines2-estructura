@@ -25,6 +25,10 @@ class CursoSqlMain extends EntitySql{
       case $p.'max_id': return "MAX({$t}.id)";
       case $p.'count_id': return "COUNT({$t}.id)";
 
+      case $p.'min_observaciones': return "MIN({$t}.observaciones)";
+      case $p.'max_observaciones': return "MAX({$t}.observaciones)";
+      case $p.'count_observaciones': return "COUNT({$t}.observaciones)";
+
       case $p.'avg_alta': return "AVG({$t}.alta)";
       case $p.'min_alta': return "MIN({$t}.alta)";
       case $p.'max_alta': return "MAX({$t}.alta)";
@@ -113,7 +117,29 @@ class CursoSqlMain extends EntitySql{
       case "{$p}alta": return $this->format->conditionTimestamp($f, $value, $option);
       case "{$p}comision": return $this->format->conditionText($f, $value, $option);
       case "{$p}carga_horaria": return $this->format->conditionText($f, $value, $option);
-      default: return parent::_conditionFieldStruct($field, $option, $value);
+
+      case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_id": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_observaciones": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_observaciones": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_observaciones": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}avg_alta": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}max_alta": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_alta": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_alta": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_comision": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_comision": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_comision": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_carga_horaria": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_carga_horaria": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_carga_horaria": return $this->format->conditionNumber($f, $value, $option);
+
+      default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
   }
 
@@ -145,21 +171,6 @@ class CursoSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('carga_horaria','ch')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','ch_pla')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('asignatura','ch_asi')->_conditionFieldAux($field, $option, $value)) return $c;
-  }
-
-  protected function conditionFieldHaving($field, $option, $value) {
-    if($c = $this->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('comision','com')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('sede','com_sed')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','com_sed_dom')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('tipo_sede','com_sed_ts')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('centro_educativo','com_sed_ce')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','com_sed_ce_dom')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('plan','com_pla')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('modalidad','com_moa')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('carga_horaria','ch')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('plan','ch_pla')->_conditionFieldHaving($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('asignatura','ch_asi')->_conditionFieldHaving($field, $option, $value)) return $c;
   }
 
   public function initializeInsert(array $data){
