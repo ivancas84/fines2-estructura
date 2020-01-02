@@ -18,11 +18,11 @@ class SedeEntity extends SedeEntityMain {
     return $array;
   }
 
-  /*public function getFieldsFk(){
+  public function getFieldsFk(){
     $array = parent::getFieldsFk();
     array_push($array, Field::getInstanceRequire("sede","coordinador"));
-    array_push($array, Field::getInstanceRequire("sede","referente"));
+    //array_push($array, Field::getInstanceRequire("sede","referente"));
 
     return $array;
-  }*/
+  }
 }

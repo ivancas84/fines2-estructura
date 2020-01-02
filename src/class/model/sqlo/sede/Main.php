@@ -83,6 +83,10 @@ UPDATE " . $this->entity->sn_() . " SET
       $json = EntitySql::getInstanceRequire('domicilio', 'ce_dom')->_json($row);
       $row_["centro_educativo_"]["domicilio_"] = $json;
     }
+    if(!is_null($row['coo_id'])){
+      $json = EntitySql::getInstanceRequire('persona', 'coo')->_json($row);
+      $row_["coordinador_"] = $json;
+    }
     return $row_;
   }
 
@@ -94,6 +98,7 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede', $row, 'ts_');
     $row_["centro_educativo"] = EntityValues::getInstanceRequire('centro_educativo', $row, 'ce_');
     $row_["domicilio1"] = EntityValues::getInstanceRequire('domicilio', $row, 'ce_dom_');
+    $row_["coordinador"] = EntityValues::getInstanceRequire('persona', $row, 'coo_');
     return $row_;
   }
 

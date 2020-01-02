@@ -5,6 +5,7 @@ domicilio - cur_com_sed_dom
 tipo_sede - cur_com_sed_ts
 centro_educativo - cur_com_sed_ce
 domicilio - cur_com_sed_ce_dom
+persona - cur_com_sed_coo
 plan - cur_com_pla
 modalidad - cur_com_moa
 carga_horaria - cur_ch

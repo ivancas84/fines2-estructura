@@ -82,6 +82,10 @@ UPDATE " . $this->entity->sn_() . " SET
       $json = EntitySql::getInstanceRequire('domicilio', 'com_sed_ce_dom')->_json($row);
       $row_["comision_"]["sede_"]["centro_educativo_"]["domicilio_"] = $json;
     }
+    if(!is_null($row['com_sed_coo_id'])){
+      $json = EntitySql::getInstanceRequire('persona', 'com_sed_coo')->_json($row);
+      $row_["comision_"]["sede_"]["coordinador_"] = $json;
+    }
     if(!is_null($row['com_pla_id'])){
       $json = EntitySql::getInstanceRequire('plan', 'com_pla')->_json($row);
       $row_["comision_"]["plan_"] = $json;
@@ -115,6 +119,7 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede', $row, 'com_sed_ts_');
     $row_["centro_educativo"] = EntityValues::getInstanceRequire('centro_educativo', $row, 'com_sed_ce_');
     $row_["domicilio1"] = EntityValues::getInstanceRequire('domicilio', $row, 'com_sed_ce_dom_');
+    $row_["coordinador"] = EntityValues::getInstanceRequire('persona', $row, 'com_sed_coo_');
     $row_["plan"] = EntityValues::getInstanceRequire('plan', $row, 'com_pla_');
     $row_["modalidad"] = EntityValues::getInstanceRequire('modalidad', $row, 'com_moa_');
     $row_["carga_horaria"] = EntityValues::getInstanceRequire('carga_horaria', $row, 'ch_');

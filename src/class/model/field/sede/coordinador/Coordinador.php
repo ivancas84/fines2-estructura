@@ -18,7 +18,7 @@ class FieldSedeCoordinador extends Field {
 
   public function getEntity(){ return new SedeEntity; }
 
-  public function getEntityRef(){ return new IdPersonaEntity; }
+  public function getEntityRef(){ return new PersonaEntity; }
 
 
 }

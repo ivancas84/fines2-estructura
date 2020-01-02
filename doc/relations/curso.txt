@@ -4,6 +4,7 @@ domicilio - com_sed_dom
 tipo_sede - com_sed_ts
 centro_educativo - com_sed_ce
 domicilio - com_sed_ce_dom
+persona - com_sed_coo
 plan - com_pla
 modalidad - com_moa
 carga_horaria - ch

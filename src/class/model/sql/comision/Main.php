@@ -115,6 +115,7 @@ class ComisionSqlMain extends EntitySql{
     if($f = EntitySql::getInstanceRequire('tipo_sede', 'sed_ts')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('centro_educativo', 'sed_ce')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('domicilio', 'sed_ce_dom')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('persona', 'sed_coo')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('plan', 'pla')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('modalidad', 'moa')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
@@ -141,8 +142,9 @@ class ComisionSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('tipo_sede', 'sed_ts')->_fields() . ',
 ' . EntitySql::getInstanceRequire('centro_educativo', 'sed_ce')->_fields() . ',
 ' . EntitySql::getInstanceRequire('domicilio', 'sed_ce_dom')->_fields() . ',
+' . EntitySql::getInstanceRequire('persona', 'sed_coo')->_fields() . ',
 ' . EntitySql::getInstanceRequire('plan', 'pla')->_fields() . ',
-' . EntitySql::getInstanceRequire('modalidad', 'moa')->_fields() . ' 
+' . EntitySql::getInstanceRequire('modalidad', 'moa')->_fields() . '
 ';
   }
 
@@ -152,6 +154,7 @@ class ComisionSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('tipo_sede', 'sed_ts')->_join('tipo_sede', 'sed', $render) . '
 ' . EntitySql::getInstanceRequire('centro_educativo', 'sed_ce')->_join('centro_educativo', 'sed', $render) . '
 ' . EntitySql::getInstanceRequire('domicilio', 'sed_ce_dom')->_join('domicilio', 'sed_ce', $render) . '
+' . EntitySql::getInstanceRequire('persona', 'sed_coo')->_join('coordinador', 'sed', $render) . '
 ' . EntitySql::getInstanceRequire('plan', 'pla')->_join('plan', 'comi', $render) . '
 ' . EntitySql::getInstanceRequire('modalidad', 'moa')->_join('modalidad', 'comi', $render) . '
 ' ;
@@ -262,6 +265,7 @@ class ComisionSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('tipo_sede','sed_ts')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('centro_educativo','sed_ce')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','sed_ce_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('persona','sed_coo')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','pla')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('modalidad','moa')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
@@ -273,6 +277,7 @@ class ComisionSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('tipo_sede','sed_ts')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('centro_educativo','sed_ce')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','sed_ce_dom')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('persona','sed_coo')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','pla')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('modalidad','moa')->_conditionFieldAux($field, $option, $value)) return $c;
   }

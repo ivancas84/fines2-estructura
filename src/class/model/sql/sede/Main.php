@@ -23,6 +23,7 @@ class SedeSqlMain extends EntitySql{
       case $p.'domicilio': return $t.".domicilio";
       case $p.'tipo_sede': return $t.".tipo_sede";
       case $p.'centro_educativo': return $t.".centro_educativo";
+      case $p.'coordinador': return $t.".coordinador";
 
       case $p.'min_id': return "MIN({$t}.id)";
       case $p.'max_id': return "MAX({$t}.id)";
@@ -57,6 +58,10 @@ class SedeSqlMain extends EntitySql{
       case $p.'max_centro_educativo': return "MAX({$t}.centro_educativo)";
       case $p.'count_centro_educativo': return "COUNT({$t}.centro_educativo)";
 
+      case $p.'min_coordinador': return "MIN({$t}.coordinador)";
+      case $p.'max_coordinador': return "MAX({$t}.coordinador)";
+      case $p.'count_coordinador': return "COUNT({$t}.coordinador)";
+
       default: return null;
     }
   }
@@ -67,6 +72,7 @@ class SedeSqlMain extends EntitySql{
     if($f = EntitySql::getInstanceRequire('tipo_sede', 'ts')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('centro_educativo', 'ce')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('domicilio', 'ce_dom')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('persona', 'coo')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
   }
 
@@ -74,7 +80,7 @@ class SedeSqlMain extends EntitySql{
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'numero') . ' AS ' . $p.'numero, ' . $this->_mappingField($p.'nombre') . ' AS ' . $p.'nombre, ' . $this->_mappingField($p.'observaciones') . ' AS ' . $p.'observaciones, ' . $this->_mappingField($p.'baja') . ' AS ' . $p.'baja, ' . $this->_mappingField($p.'domicilio') . ' AS ' . $p.'domicilio, ' . $this->_mappingField($p.'tipo_sede') . ' AS ' . $p.'tipo_sede, ' . $this->_mappingField($p.'centro_educativo') . ' AS ' . $p.'centro_educativo';
+' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'numero') . ' AS ' . $p.'numero, ' . $this->_mappingField($p.'nombre') . ' AS ' . $p.'nombre, ' . $this->_mappingField($p.'observaciones') . ' AS ' . $p.'observaciones, ' . $this->_mappingField($p.'baja') . ' AS ' . $p.'baja, ' . $this->_mappingField($p.'domicilio') . ' AS ' . $p.'domicilio, ' . $this->_mappingField($p.'tipo_sede') . ' AS ' . $p.'tipo_sede, ' . $this->_mappingField($p.'centro_educativo') . ' AS ' . $p.'centro_educativo, ' . $this->_mappingField($p.'coordinador') . ' AS ' . $p.'coordinador';
   }
 
   public function _fieldsDb(){
@@ -89,7 +95,8 @@ class SedeSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('domicilio', 'dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('tipo_sede', 'ts')->_fields() . ',
 ' . EntitySql::getInstanceRequire('centro_educativo', 'ce')->_fields() . ',
-' . EntitySql::getInstanceRequire('domicilio', 'ce_dom')->_fields() . ' 
+' . EntitySql::getInstanceRequire('domicilio', 'ce_dom')->_fields() . ',
+' . EntitySql::getInstanceRequire('persona', 'coo')->_fields() . '
 ';
   }
 
@@ -98,6 +105,7 @@ class SedeSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('tipo_sede', 'ts')->_join('tipo_sede', 'sede', $render) . '
 ' . EntitySql::getInstanceRequire('centro_educativo', 'ce')->_join('centro_educativo', 'sede', $render) . '
 ' . EntitySql::getInstanceRequire('domicilio', 'ce_dom')->_join('domicilio', 'ce', $render) . '
+' . EntitySql::getInstanceRequire('persona', 'coo')->_join('coordinador', 'sede', $render) . '
 ' ;
   }
 
@@ -114,6 +122,7 @@ class SedeSqlMain extends EntitySql{
       case "{$p}domicilio": return $this->format->conditionText($f, $value, $option);
       case "{$p}tipo_sede": return $this->format->conditionText($f, $value, $option);
       case "{$p}centro_educativo": return $this->format->conditionText($f, $value, $option);
+      case "{$p}coordinador": return $this->format->conditionNumber($f, $value, $option);
 
       case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
@@ -148,6 +157,10 @@ class SedeSqlMain extends EntitySql{
       case "{$p}min_centro_educativo": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}count_centro_educativo": return $this->format->conditionNumber($f, $value, $option);
 
+      case "{$p}max_coordinador": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_coordinador": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_coordinador": return $this->format->conditionNumber($f, $value, $option);
+
       default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
   }
@@ -158,6 +171,7 @@ class SedeSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('tipo_sede','ts')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('centro_educativo','ce')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','ce_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('persona','coo')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldAux($field, $option, $value) {
@@ -166,6 +180,7 @@ class SedeSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('tipo_sede','ts')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('centro_educativo','ce')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','ce_dom')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('persona','coo')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
   public function initializeInsert(array $data){
@@ -206,6 +221,7 @@ class SedeSqlMain extends EntitySql{
     if(isset($row['domicilio'])) $row_['domicilio'] = $this->format->escapeString($row['domicilio']);
     if(isset($row['tipo_sede'])) $row_['tipo_sede'] = $this->format->escapeString($row['tipo_sede']);
     if(isset($row['centro_educativo'])) $row_['centro_educativo'] = $this->format->escapeString($row['centro_educativo']);
+    if(isset($row['coordinador']) ) $row_['coordinador'] = $this->format->positiveIntegerWithoutZerofill($row['coordinador']);
 
     return $row_;
   }
@@ -221,6 +237,7 @@ class SedeSqlMain extends EntitySql{
     $row_["domicilio"] = (is_null($row[$prefix . "domicilio"])) ? null : (string)$row[$prefix . "domicilio"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
     $row_["tipo_sede"] = (is_null($row[$prefix . "tipo_sede"])) ? null : (string)$row[$prefix . "tipo_sede"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
     $row_["centro_educativo"] = (is_null($row[$prefix . "centro_educativo"])) ? null : (string)$row[$prefix . "centro_educativo"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
+    $row_["coordinador"] = (is_null($row[$prefix . "coordinador"])) ? null : (string)$row[$prefix . "coordinador"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
     return $row_;
   }
 
