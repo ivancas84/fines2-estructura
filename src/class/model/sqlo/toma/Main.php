@@ -120,6 +120,10 @@ UPDATE " . $this->entity->sn_() . " SET
       $json = EntitySql::getInstanceRequire('persona', 'cur_com_sed_coo')->_json($row);
       $row_["curso_"]["comision_"]["sede_"]["coordinador_"] = $json;
     }
+    if(!is_null($row['cur_com_sed_coo_dom_id'])){
+      $json = EntitySql::getInstanceRequire('domicilio', 'cur_com_sed_coo_dom')->_json($row);
+      $row_["curso_"]["comision_"]["sede_"]["coordinador_"]["domicilio_"] = $json;
+    }
     if(!is_null($row['cur_com_pla_id'])){
       $json = EntitySql::getInstanceRequire('plan', 'cur_com_pla')->_json($row);
       $row_["curso_"]["comision_"]["plan_"] = $json;
@@ -144,9 +148,17 @@ UPDATE " . $this->entity->sn_() . " SET
       $json = EntitySql::getInstanceRequire('persona', 'doc')->_json($row);
       $row_["docente_"] = $json;
     }
+    if(!is_null($row['doc_dom_id'])){
+      $json = EntitySql::getInstanceRequire('domicilio', 'doc_dom')->_json($row);
+      $row_["docente_"]["domicilio_"] = $json;
+    }
     if(!is_null($row['ree_id'])){
       $json = EntitySql::getInstanceRequire('persona', 'ree')->_json($row);
       $row_["reemplazo_"] = $json;
+    }
+    if(!is_null($row['ree_dom_id'])){
+      $json = EntitySql::getInstanceRequire('domicilio', 'ree_dom')->_json($row);
+      $row_["reemplazo_"]["domicilio_"] = $json;
     }
     return $row_;
   }
@@ -163,13 +175,16 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_["centro_educativo"] = EntityValues::getInstanceRequire('centro_educativo', $row, 'cur_com_sed_ce_');
     $row_["domicilio1"] = EntityValues::getInstanceRequire('domicilio', $row, 'cur_com_sed_ce_dom_');
     $row_["coordinador"] = EntityValues::getInstanceRequire('persona', $row, 'cur_com_sed_coo_');
+    $row_["domicilio2"] = EntityValues::getInstanceRequire('domicilio', $row, 'cur_com_sed_coo_dom_');
     $row_["plan"] = EntityValues::getInstanceRequire('plan', $row, 'cur_com_pla_');
     $row_["modalidad"] = EntityValues::getInstanceRequire('modalidad', $row, 'cur_com_moa_');
     $row_["carga_horaria"] = EntityValues::getInstanceRequire('carga_horaria', $row, 'cur_ch_');
     $row_["plan1"] = EntityValues::getInstanceRequire('plan', $row, 'cur_ch_pla_');
     $row_["asignatura"] = EntityValues::getInstanceRequire('asignatura', $row, 'cur_ch_asi_');
     $row_["docente"] = EntityValues::getInstanceRequire('persona', $row, 'doc_');
+    $row_["domicilio3"] = EntityValues::getInstanceRequire('domicilio', $row, 'doc_dom_');
     $row_["reemplazo"] = EntityValues::getInstanceRequire('persona', $row, 'ree_');
+    $row_["domicilio4"] = EntityValues::getInstanceRequire('domicilio', $row, 'ree_dom_');
     return $row_;
   }
 

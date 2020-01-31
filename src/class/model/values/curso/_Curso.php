@@ -5,14 +5,12 @@ require_once("class/model/Values.php");
 
 class _Curso extends EntityValues {
   protected $id = UNDEFINED;
-  protected $observaciones = UNDEFINED;
   protected $alta = UNDEFINED;
   protected $comision = UNDEFINED;
   protected $cargaHoraria = UNDEFINED;
 
   public function _setDefault(){
     $this->setId(DEFAULT_VALUE);
-    $this->setObservaciones(DEFAULT_VALUE);
     $this->setAlta(DEFAULT_VALUE);
     $this->setComision(DEFAULT_VALUE);
     $this->setCargaHoraria(DEFAULT_VALUE);
@@ -21,7 +19,6 @@ class _Curso extends EntityValues {
   public function _fromArray(array $row = NULL, $p = ""){
     if(empty($row)) return;
     if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
-    if(isset($row[$p."observaciones"])) $this->setObservaciones($row[$p."observaciones"]);
     if(isset($row[$p."alta"])) $this->setAlta($row[$p."alta"]);
     if(isset($row[$p."comision"])) $this->setComision($row[$p."comision"]);
     if(isset($row[$p."carga_horaria"])) $this->setCargaHoraria($row[$p."carga_horaria"]);
@@ -30,7 +27,6 @@ class _Curso extends EntityValues {
   public function _toArray(){
     $row = [];
     if($this->id !== UNDEFINED) $row["id"] = $this->id("");
-    if($this->observaciones !== UNDEFINED) $row["observaciones"] = $this->observaciones("");
     if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d h:i:s");
     if($this->comision !== UNDEFINED) $row["comision"] = $this->comision("");
     if($this->cargaHoraria !== UNDEFINED) $row["carga_horaria"] = $this->cargaHoraria("");
@@ -39,7 +35,6 @@ class _Curso extends EntityValues {
 
   public function _isEmpty(){
     if(!Validation::is_empty($this->id)) return false;
-    if(!Validation::is_empty($this->observaciones)) return false;
     if(!Validation::is_empty($this->alta)) return false;
     if(!Validation::is_empty($this->comision)) return false;
     if(!Validation::is_empty($this->cargaHoraria)) return false;
@@ -47,7 +42,6 @@ class _Curso extends EntityValues {
   }
 
   public function id() { return $this->id; }
-  public function observaciones($format = null) { return Format::convertCase($this->observaciones, $format); }
   public function alta($format = null) { return Format::date($this->alta, $format); }
   public function comision($format = null) { return Format::convertCase($this->comision, $format); }
   public function cargaHoraria($format = null) { return Format::convertCase($this->cargaHoraria, $format); }
@@ -55,12 +49,6 @@ class _Curso extends EntityValues {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     if($this->checkId($p)) $this->id = $p;
-  }
-
-  public function setObservaciones($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkObservaciones($p)) $this->observaciones = $p;
   }
 
   public function _setAlta(DateTime $p = null) {
@@ -89,11 +77,6 @@ class _Curso extends EntityValues {
 
   public function checkId($value) { 
       return true; 
-  }
-
-  public function checkObservaciones($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("observaciones", $v);
   }
 
   public function checkAlta($value) { 

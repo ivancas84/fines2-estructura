@@ -111,13 +111,16 @@ class TomaSqlMain extends EntitySql{
     if($f = EntitySql::getInstanceRequire('centro_educativo', 'cur_com_sed_ce')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('domicilio', 'cur_com_sed_ce_dom')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('persona', 'cur_com_sed_coo')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('domicilio', 'cur_com_sed_coo_dom')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('plan', 'cur_com_pla')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('modalidad', 'cur_com_moa')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('carga_horaria', 'cur_ch')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('plan', 'cur_ch_pla')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('asignatura', 'cur_ch_asi')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('persona', 'doc')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('domicilio', 'doc_dom')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('persona', 'ree')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('domicilio', 'ree_dom')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
   }
 
@@ -145,13 +148,16 @@ class TomaSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('centro_educativo', 'cur_com_sed_ce')->_fields() . ',
 ' . EntitySql::getInstanceRequire('domicilio', 'cur_com_sed_ce_dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('persona', 'cur_com_sed_coo')->_fields() . ',
+' . EntitySql::getInstanceRequire('domicilio', 'cur_com_sed_coo_dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('plan', 'cur_com_pla')->_fields() . ',
 ' . EntitySql::getInstanceRequire('modalidad', 'cur_com_moa')->_fields() . ',
 ' . EntitySql::getInstanceRequire('carga_horaria', 'cur_ch')->_fields() . ',
 ' . EntitySql::getInstanceRequire('plan', 'cur_ch_pla')->_fields() . ',
 ' . EntitySql::getInstanceRequire('asignatura', 'cur_ch_asi')->_fields() . ',
 ' . EntitySql::getInstanceRequire('persona', 'doc')->_fields() . ',
-' . EntitySql::getInstanceRequire('persona', 'ree')->_fields() . '
+' . EntitySql::getInstanceRequire('domicilio', 'doc_dom')->_fields() . ',
+' . EntitySql::getInstanceRequire('persona', 'ree')->_fields() . ',
+' . EntitySql::getInstanceRequire('domicilio', 'ree_dom')->_fields() . ' 
 ';
   }
 
@@ -164,13 +170,16 @@ class TomaSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('centro_educativo', 'cur_com_sed_ce')->_join('centro_educativo', 'cur_com_sed', $render) . '
 ' . EntitySql::getInstanceRequire('domicilio', 'cur_com_sed_ce_dom')->_join('domicilio', 'cur_com_sed_ce', $render) . '
 ' . EntitySql::getInstanceRequire('persona', 'cur_com_sed_coo')->_join('coordinador', 'cur_com_sed', $render) . '
+' . EntitySql::getInstanceRequire('domicilio', 'cur_com_sed_coo_dom')->_join('domicilio', 'cur_com_sed_coo', $render) . '
 ' . EntitySql::getInstanceRequire('plan', 'cur_com_pla')->_join('plan', 'cur_com', $render) . '
 ' . EntitySql::getInstanceRequire('modalidad', 'cur_com_moa')->_join('modalidad', 'cur_com', $render) . '
 ' . EntitySql::getInstanceRequire('carga_horaria', 'cur_ch')->_join('carga_horaria', 'cur', $render) . '
 ' . EntitySql::getInstanceRequire('plan', 'cur_ch_pla')->_join('plan', 'cur_ch', $render) . '
 ' . EntitySql::getInstanceRequire('asignatura', 'cur_ch_asi')->_join('asignatura', 'cur_ch', $render) . '
 ' . EntitySql::getInstanceRequire('persona', 'doc')->_join('docente', 'toma', $render) . '
+' . EntitySql::getInstanceRequire('domicilio', 'doc_dom')->_join('domicilio', 'doc', $render) . '
 ' . EntitySql::getInstanceRequire('persona', 'ree')->_join('reemplazo', 'toma', $render) . '
+' . EntitySql::getInstanceRequire('domicilio', 'ree_dom')->_join('domicilio', 'ree', $render) . '
 ' ;
   }
 
@@ -275,13 +284,16 @@ class TomaSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('centro_educativo','cur_com_sed_ce')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','cur_com_sed_ce_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('persona','cur_com_sed_coo')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','cur_com_sed_coo_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','cur_com_pla')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('modalidad','cur_com_moa')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('carga_horaria','cur_ch')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','cur_ch_pla')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('asignatura','cur_ch_asi')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('persona','doc')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','doc_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('persona','ree')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','ree_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldAux($field, $option, $value) {
@@ -294,13 +306,16 @@ class TomaSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('centro_educativo','cur_com_sed_ce')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','cur_com_sed_ce_dom')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('persona','cur_com_sed_coo')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','cur_com_sed_coo_dom')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','cur_com_pla')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('modalidad','cur_com_moa')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('carga_horaria','cur_ch')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','cur_ch_pla')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('asignatura','cur_ch_asi')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('persona','doc')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','doc_dom')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('persona','ree')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','ree_dom')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
   public function initializeInsert(array $data){

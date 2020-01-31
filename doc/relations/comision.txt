@@ -4,6 +4,7 @@ tipo_sede - sed_ts
 centro_educativo - sed_ce
 domicilio - sed_ce_dom
 persona - sed_coo
+domicilio - sed_coo_dom
 plan - pla
 modalidad - moa
 

@@ -13,7 +13,6 @@ class CursoEntityMain extends Entity {
 
   public function getFieldsNf(){
     return array(
-      Field::getInstanceRequire("curso", "observaciones"),
       Field::getInstanceRequire("curso", "alta"),
     );
   }

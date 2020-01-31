@@ -14,6 +14,7 @@ class _Persona extends EntityValues {
   protected $genero = UNDEFINED;
   protected $apodo = UNDEFINED;
   protected $alta = UNDEFINED;
+  protected $domicilio = UNDEFINED;
 
   public function _setDefault(){
     $this->setId(DEFAULT_VALUE);
@@ -26,6 +27,7 @@ class _Persona extends EntityValues {
     $this->setGenero(DEFAULT_VALUE);
     $this->setApodo(DEFAULT_VALUE);
     $this->setAlta(DEFAULT_VALUE);
+    $this->setDomicilio(DEFAULT_VALUE);
   }
 
   public function _fromArray(array $row = NULL, $p = ""){
@@ -40,6 +42,7 @@ class _Persona extends EntityValues {
     if(isset($row[$p."genero"])) $this->setGenero($row[$p."genero"]);
     if(isset($row[$p."apodo"])) $this->setApodo($row[$p."apodo"]);
     if(isset($row[$p."alta"])) $this->setAlta($row[$p."alta"]);
+    if(isset($row[$p."domicilio"])) $this->setDomicilio($row[$p."domicilio"]);
   }
 
   public function _toArray(){
@@ -54,6 +57,7 @@ class _Persona extends EntityValues {
     if($this->genero !== UNDEFINED) $row["genero"] = $this->genero("");
     if($this->apodo !== UNDEFINED) $row["apodo"] = $this->apodo("");
     if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d h:i:s");
+    if($this->domicilio !== UNDEFINED) $row["domicilio"] = $this->domicilio("");
     return $row;
   }
 
@@ -68,6 +72,7 @@ class _Persona extends EntityValues {
     if(!Validation::is_empty($this->genero)) return false;
     if(!Validation::is_empty($this->apodo)) return false;
     if(!Validation::is_empty($this->alta)) return false;
+    if(!Validation::is_empty($this->domicilio)) return false;
     return true;
   }
 
@@ -81,6 +86,7 @@ class _Persona extends EntityValues {
   public function genero($format = null) { return Format::convertCase($this->genero, $format); }
   public function apodo($format = null) { return Format::convertCase($this->apodo, $format); }
   public function alta($format = null) { return Format::date($this->alta, $format); }
+  public function domicilio($format = null) { return Format::convertCase($this->domicilio, $format); }
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
@@ -153,6 +159,12 @@ class _Persona extends EntityValues {
     if($this->checkAlta($p)) $this->alta = $p;
   }
 
+  public function setDomicilio($p) {
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = (is_null($p)) ? null : (string)$p;
+    if($this->checkDomicilio($p)) $this->domicilio = $p;
+  }
+
   public function checkId($value) { 
       return true; 
   }
@@ -200,6 +212,11 @@ class _Persona extends EntityValues {
   public function checkAlta($value) { 
     $v = Validation::getInstanceValue($value)->date()->required();
     return $this->_setLogsValidation("alta", $v);
+  }
+
+  public function checkDomicilio($value) { 
+    $v = Validation::getInstanceValue($value)->string();
+    return $this->_setLogsValidation("domicilio", $v);
   }
 
 

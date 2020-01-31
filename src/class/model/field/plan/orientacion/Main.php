@@ -6,7 +6,7 @@ class FieldPlanOrientacionMain extends Field {
 
   public $type = "varchar";
   public $fieldType = "nf";
-  public $unique = true;
+  public $unique = false;
   public $notNull = true;
   public $default = false;
   public $length = "45";

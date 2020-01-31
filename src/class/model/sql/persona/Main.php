@@ -25,6 +25,7 @@ class PersonaSqlMain extends EntitySql{
       case $p.'genero': return $t.".genero";
       case $p.'apodo': return $t.".apodo";
       case $p.'alta': return $t.".alta";
+      case $p.'domicilio': return $t.".domicilio";
 
       case $p.'min_id': return "MIN({$t}.id)";
       case $p.'max_id': return "MAX({$t}.id)";
@@ -68,22 +69,43 @@ class PersonaSqlMain extends EntitySql{
       case $p.'max_alta': return "MAX({$t}.alta)";
       case $p.'count_alta': return "COUNT({$t}.alta)";
 
+      case $p.'min_domicilio': return "MIN({$t}.domicilio)";
+      case $p.'max_domicilio': return "MAX({$t}.domicilio)";
+      case $p.'count_domicilio': return "COUNT({$t}.domicilio)";
+
       default: return null;
     }
+  }
+
+  public function mappingField($field){
+    if($f = $this->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('domicilio', 'dom')->_mappingField($field)) return $f;
+    throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
   }
 
   public function _fields(){
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'nombres') . ' AS ' . $p.'nombres, ' . $this->_mappingField($p.'apellidos') . ' AS ' . $p.'apellidos, ' . $this->_mappingField($p.'fecha_nacimiento') . ' AS ' . $p.'fecha_nacimiento, ' . $this->_mappingField($p.'numero_documento') . ' AS ' . $p.'numero_documento, ' . $this->_mappingField($p.'cuil') . ' AS ' . $p.'cuil, ' . $this->_mappingField($p.'email') . ' AS ' . $p.'email, ' . $this->_mappingField($p.'genero') . ' AS ' . $p.'genero, ' . $this->_mappingField($p.'apodo') . ' AS ' . $p.'apodo, ' . $this->_mappingField($p.'alta') . ' AS ' . $p.'alta';
+' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'nombres') . ' AS ' . $p.'nombres, ' . $this->_mappingField($p.'apellidos') . ' AS ' . $p.'apellidos, ' . $this->_mappingField($p.'fecha_nacimiento') . ' AS ' . $p.'fecha_nacimiento, ' . $this->_mappingField($p.'numero_documento') . ' AS ' . $p.'numero_documento, ' . $this->_mappingField($p.'cuil') . ' AS ' . $p.'cuil, ' . $this->_mappingField($p.'email') . ' AS ' . $p.'email, ' . $this->_mappingField($p.'genero') . ' AS ' . $p.'genero, ' . $this->_mappingField($p.'apodo') . ' AS ' . $p.'apodo, ' . $this->_mappingField($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingField($p.'domicilio') . ' AS ' . $p.'domicilio';
   }
 
   public function _fieldsDb(){
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'nombres') . ', ' . $this->_mappingField($p.'apellidos') . ', ' . $this->_mappingField($p.'fecha_nacimiento') . ', ' . $this->_mappingField($p.'numero_documento') . ', ' . $this->_mappingField($p.'cuil') . ', ' . $this->_mappingField($p.'email') . ', ' . $this->_mappingField($p.'genero') . ', ' . $this->_mappingField($p.'apodo') . ', ' . $this->_mappingField($p.'alta') . '';
+' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'nombres') . ', ' . $this->_mappingField($p.'apellidos') . ', ' . $this->_mappingField($p.'fecha_nacimiento') . ', ' . $this->_mappingField($p.'numero_documento') . ', ' . $this->_mappingField($p.'cuil') . ', ' . $this->_mappingField($p.'email') . ', ' . $this->_mappingField($p.'genero') . ', ' . $this->_mappingField($p.'apodo') . ', ' . $this->_mappingField($p.'alta') . ', ' . $this->_mappingField($p.'domicilio') . '';
+  }
+
+  public function fields(){
+    return $this->_fields() . ',
+' . EntitySql::getInstanceRequire('domicilio', 'dom')->_fields() . ' 
+';
+  }
+
+  public function join(Render $render){
+    return EntitySql::getInstanceRequire('domicilio', 'dom')->_join('domicilio', 'pers', $render) . '
+' ;
   }
 
   public function _conditionFieldStruct($field, $option, $value){
@@ -101,6 +123,7 @@ class PersonaSqlMain extends EntitySql{
       case "{$p}genero": return $this->format->conditionText($f, $value, $option);
       case "{$p}apodo": return $this->format->conditionText($f, $value, $option);
       case "{$p}alta": return $this->format->conditionTimestamp($f, $value, $option);
+      case "{$p}domicilio": return $this->format->conditionText($f, $value, $option);
 
       case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
@@ -144,8 +167,22 @@ class PersonaSqlMain extends EntitySql{
       case "{$p}min_alta": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}count_alta": return $this->format->conditionNumber($f, $value, $option);
 
+      case "{$p}max_domicilio": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_domicilio": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_domicilio": return $this->format->conditionNumber($f, $value, $option);
+
       default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
+  }
+
+  protected function conditionFieldStruct($field, $option, $value) {
+    if($c = $this->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','dom')->_conditionFieldStruct($field, $option, $value)) return $c;
+  }
+
+  protected function conditionFieldAux($field, $option, $value) {
+    if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','dom')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
   public function initializeInsert(array $data){
@@ -159,6 +196,7 @@ class PersonaSqlMain extends EntitySql{
     if(!isset($data['genero']) || is_null($data['genero']) || $data['genero'] == "") $data['genero'] = "null";
     if(!isset($data['apodo']) || is_null($data['apodo']) || $data['apodo'] == "") $data['apodo'] = "null";
     if(!isset($data['alta']))  $data['alta'] = date("Y-m-d H:i:s");
+    if(empty($data['domicilio'])) $data['domicilio'] = "null";
 
     return $data;
   }
@@ -175,6 +213,7 @@ class PersonaSqlMain extends EntitySql{
     if(array_key_exists('genero', $data)) { if(is_null($data['genero']) || $data['genero'] == "") $data['genero'] = "null"; }
     if(array_key_exists('apodo', $data)) { if(is_null($data['apodo']) || $data['apodo'] == "") $data['apodo'] = "null"; }
     if(array_key_exists('alta', $data)) { if(empty($data['alta']))  $data['alta'] = date("Y-m-d H:i:s"); }
+    if(array_key_exists('domicilio', $data)) { if(!isset($data['domicilio']) || ($data['domicilio'] == '')) $data['domicilio'] = "null"; }
 
     return $data;
   }
@@ -192,6 +231,7 @@ class PersonaSqlMain extends EntitySql{
     if(isset($row['genero'])) $row_['genero'] = $this->format->escapeString($row['genero']);
     if(isset($row['apodo'])) $row_['apodo'] = $this->format->escapeString($row['apodo']);
     if(isset($row['alta'])) $row_['alta'] = $this->format->timestamp($row['alta']);
+    if(isset($row['domicilio'])) $row_['domicilio'] = $this->format->escapeString($row['domicilio']);
 
     return $row_;
   }
@@ -209,6 +249,7 @@ class PersonaSqlMain extends EntitySql{
     $row_["genero"] = (is_null($row[$prefix . "genero"])) ? null : (string)$row[$prefix . "genero"];
     $row_["apodo"] = (is_null($row[$prefix . "apodo"])) ? null : (string)$row[$prefix . "apodo"];
     $row_["alta"] = (is_null($row[$prefix . "alta"])) ? null : (string)$row[$prefix . "alta"];
+    $row_["domicilio"] = (is_null($row[$prefix . "domicilio"])) ? null : (string)$row[$prefix . "domicilio"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
     return $row_;
   }
 

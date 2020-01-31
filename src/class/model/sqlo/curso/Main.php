@@ -20,7 +20,6 @@ class CursoSqloMain extends EntitySqlo {
       $sql = "
   INSERT INTO " . $this->entity->sn_() . " (";
       $sql .= "id, " ;
-    $sql .= "observaciones, " ;
     $sql .= "alta, " ;
     $sql .= "comision, " ;
     $sql .= "carga_horaria, " ;
@@ -29,7 +28,6 @@ class CursoSqloMain extends EntitySqlo {
     $sql .= ")
 VALUES ( ";
     $sql .= $row['id'] . ", " ;
-    $sql .= $row['observaciones'] . ", " ;
     $sql .= $row['alta'] . ", " ;
     $sql .= $row['comision'] . ", " ;
     $sql .= $row['carga_horaria'] . ", " ;
@@ -45,7 +43,6 @@ VALUES ( ";
     $sql = "
 UPDATE " . $this->entity->sn_() . " SET
 ";
-    if (isset($row['observaciones'] )) $sql .= "observaciones = " . $row['observaciones'] . " ," ;
     if (isset($row['alta'] )) $sql .= "alta = " . $row['alta'] . " ," ;
     if (isset($row['comision'] )) $sql .= "comision = " . $row['comision'] . " ," ;
     if (isset($row['carga_horaria'] )) $sql .= "carga_horaria = " . $row['carga_horaria'] . " ," ;
@@ -86,6 +83,10 @@ UPDATE " . $this->entity->sn_() . " SET
       $json = EntitySql::getInstanceRequire('persona', 'com_sed_coo')->_json($row);
       $row_["comision_"]["sede_"]["coordinador_"] = $json;
     }
+    if(!is_null($row['com_sed_coo_dom_id'])){
+      $json = EntitySql::getInstanceRequire('domicilio', 'com_sed_coo_dom')->_json($row);
+      $row_["comision_"]["sede_"]["coordinador_"]["domicilio_"] = $json;
+    }
     if(!is_null($row['com_pla_id'])){
       $json = EntitySql::getInstanceRequire('plan', 'com_pla')->_json($row);
       $row_["comision_"]["plan_"] = $json;
@@ -120,6 +121,7 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_["centro_educativo"] = EntityValues::getInstanceRequire('centro_educativo', $row, 'com_sed_ce_');
     $row_["domicilio1"] = EntityValues::getInstanceRequire('domicilio', $row, 'com_sed_ce_dom_');
     $row_["coordinador"] = EntityValues::getInstanceRequire('persona', $row, 'com_sed_coo_');
+    $row_["domicilio2"] = EntityValues::getInstanceRequire('domicilio', $row, 'com_sed_coo_dom_');
     $row_["plan"] = EntityValues::getInstanceRequire('plan', $row, 'com_pla_');
     $row_["modalidad"] = EntityValues::getInstanceRequire('modalidad', $row, 'com_moa_');
     $row_["carga_horaria"] = EntityValues::getInstanceRequire('carga_horaria', $row, 'ch_');

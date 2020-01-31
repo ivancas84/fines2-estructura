@@ -25,5 +25,11 @@ class PersonaEntityMain extends Entity {
     );
   }
 
+  public function getFieldsMu(){
+    return array(
+      Field::getInstanceRequire("persona", "domicilio"),
+    );
+  }
+
 
 }

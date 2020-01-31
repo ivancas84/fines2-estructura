@@ -29,6 +29,7 @@ class PersonaSqloMain extends EntitySqlo {
     $sql .= "genero, " ;
     $sql .= "apodo, " ;
     $sql .= "alta, " ;
+    $sql .= "domicilio, " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
 
     $sql .= ")
@@ -43,6 +44,7 @@ VALUES ( ";
     $sql .= $row['genero'] . ", " ;
     $sql .= $row['apodo'] . ", " ;
     $sql .= $row['alta'] . ", " ;
+    $sql .= $row['domicilio'] . ", " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
 
     $sql .= ");
@@ -64,10 +66,29 @@ UPDATE " . $this->entity->sn_() . " SET
     if (isset($row['genero'] )) $sql .= "genero = " . $row['genero'] . " ," ;
     if (isset($row['apodo'] )) $sql .= "apodo = " . $row['apodo'] . " ," ;
     if (isset($row['alta'] )) $sql .= "alta = " . $row['alta'] . " ," ;
+    if (isset($row['domicilio'] )) $sql .= "domicilio = " . $row['domicilio'] . " ," ;
     //eliminar ultima coma
     $sql = substr($sql, 0, -2);
 
     return $sql;
+  }
+
+  public function json(array $row){
+    if(empty($row)) return null;
+    $row_ = $this->sql->_json($row);
+    if(!is_null($row['dom_id'])){
+      $json = EntitySql::getInstanceRequire('domicilio', 'dom')->_json($row);
+      $row_["domicilio_"] = $json;
+    }
+    return $row_;
+  }
+
+  public function values(array $row){
+    $row_ = [];
+
+    $row_["persona"] = EntityValues::getInstanceRequire("persona", $row);
+    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $row, 'dom_');
+    return $row_;
   }
 
 

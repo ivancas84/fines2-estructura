@@ -73,6 +73,7 @@ class SedeSqlMain extends EntitySql{
     if($f = EntitySql::getInstanceRequire('centro_educativo', 'ce')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('domicilio', 'ce_dom')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('persona', 'coo')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('domicilio', 'coo_dom')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
   }
 
@@ -96,7 +97,8 @@ class SedeSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('tipo_sede', 'ts')->_fields() . ',
 ' . EntitySql::getInstanceRequire('centro_educativo', 'ce')->_fields() . ',
 ' . EntitySql::getInstanceRequire('domicilio', 'ce_dom')->_fields() . ',
-' . EntitySql::getInstanceRequire('persona', 'coo')->_fields() . '
+' . EntitySql::getInstanceRequire('persona', 'coo')->_fields() . ',
+' . EntitySql::getInstanceRequire('domicilio', 'coo_dom')->_fields() . ' 
 ';
   }
 
@@ -106,6 +108,7 @@ class SedeSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('centro_educativo', 'ce')->_join('centro_educativo', 'sede', $render) . '
 ' . EntitySql::getInstanceRequire('domicilio', 'ce_dom')->_join('domicilio', 'ce', $render) . '
 ' . EntitySql::getInstanceRequire('persona', 'coo')->_join('coordinador', 'sede', $render) . '
+' . EntitySql::getInstanceRequire('domicilio', 'coo_dom')->_join('domicilio', 'coo', $render) . '
 ' ;
   }
 
@@ -172,6 +175,7 @@ class SedeSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('centro_educativo','ce')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','ce_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('persona','coo')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','coo_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldAux($field, $option, $value) {
@@ -181,6 +185,7 @@ class SedeSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('centro_educativo','ce')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','ce_dom')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('persona','coo')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','coo_dom')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
   public function initializeInsert(array $data){
