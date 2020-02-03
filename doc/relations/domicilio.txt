@@ -1,8 +1,8 @@
-id (id): string pk. NOT NULL. UNIQUE.
-calle (cal): string nf. NOT NULL. MAIN.
+id (id): string pk. NOT NULL. MAIN. UNIQUE.
+calle (cal): string nf. NOT NULL.
 entre (ent): string nf.
-numero (num): string nf. NOT NULL. MAIN.
+numero (num): string nf. NOT NULL.
 piso (pis): string nf.
 departamento (dep): string nf.
-barrio (bar): string nf. MAIN.
+barrio (bar): string nf.
 localidad (loc): string nf. NOT NULL.

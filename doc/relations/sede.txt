@@ -5,9 +5,9 @@ domicilio - ce_dom
 persona - coo
 domicilio - coo_dom
 
-id (id): string pk. NOT NULL. UNIQUE.
-numero (num): string nf. NOT NULL. MAIN.
-nombre (nom): string nf. NOT NULL. MAIN.
+id (id): string pk. NOT NULL. MAIN. UNIQUE.
+numero (num): string nf. NOT NULL.
+nombre (nom): string nf. NOT NULL.
 observaciones (obs): text nf.
 baja (baj): timestamp nf.
 domicilio (dom): string mu.

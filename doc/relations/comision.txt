@@ -8,11 +8,11 @@ domicilio - sed_coo_dom
 plan - pla
 modalidad - moa
 
-id (id): string pk. NOT NULL. UNIQUE.
+id (id): string pk. NOT NULL. MAIN. UNIQUE.
 turno (tur): string nf.
-division (dia): string nf. NOT NULL. MAIN.
-anio (ani): string nf. MAIN.
-semestre (sem): string nf. MAIN.
+division (dia): string nf. NOT NULL.
+anio (ani): string nf.
+semestre (sem): string nf.
 comentario (com): text nf.
 autorizada (aut): boolean nf. NOT NULL.
 apertura (ape): boolean nf. NOT NULL.
@@ -21,7 +21,7 @@ fecha_anio (fa): year nf.
 fecha_semestre (fs): integer nf.
 observaciones (obs): text nf.
 alta (alt): timestamp nf. NOT NULL. DEFAULT: CURRENT_TIMESTAMP.
-sede (sed): string mu. NOT NULL. MAIN.
+sede (sed): string mu. NOT NULL.
 plan (pla): string mu. NOT NULL.
 modalidad (moa): string mu. NOT NULL.
 comision_siguiente (cs): string mu.

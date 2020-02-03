@@ -1,3 +1,3 @@
-id (id): string pk. NOT NULL. UNIQUE.
-orientacion (ori): string nf. NOT NULL. MAIN.
-resolucion (res): string nf. MAIN.
+id (id): string pk. NOT NULL. MAIN. UNIQUE.
+orientacion (ori): string nf. NOT NULL.
+resolucion (res): string nf.
