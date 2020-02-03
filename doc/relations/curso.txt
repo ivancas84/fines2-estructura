@@ -14,5 +14,6 @@ asignatura - ch_asi
 
 id (id): string pk. NOT NULL. MAIN. UNIQUE.
 alta (alt): timestamp nf. NOT NULL. DEFAULT: CURRENT_TIMESTAMP.
+horario (hor): string nf. NOT ADMIN.
 comision (com): string mu. NOT NULL.
 carga_horaria (ch): string mu. NOT NULL.

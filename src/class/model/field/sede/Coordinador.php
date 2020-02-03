@@ -2,7 +2,7 @@
 
 require_once("class/model/Field.php");
 
-class FieldSedeReferente extends Field {
+class FieldSedeCoordinador extends Field {
 
   public $type = "bigint";
   public $fieldType = "fk";
@@ -12,13 +12,13 @@ class FieldSedeReferente extends Field {
   public $length = "20";
   public $main = false;
   public $admin = false;
-  public $name = "referente";
-  public $alias = "ref";
+  public $name = "coordinador";
+  public $alias = "coo";
   public $db = false;
 
   public function getEntity(){ return new SedeEntity; }
 
-  public function getEntityRef(){ return new IdPersonaEntity; }
+  public function getEntityRef(){ return new PersonaEntity; }
 
 
 }

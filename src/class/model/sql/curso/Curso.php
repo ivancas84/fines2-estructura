@@ -16,8 +16,7 @@ LEFT OUTER JOIN (
   INNER JOIN horario ON (horario.curso = curso.id)
   INNER JOIN dia ON (dia.id = horario.dia)
   INNER JOIN comision ON (comision.id = curso.comision)
-  INNER JOIN division ON ( comision.division = division.id )
-  INNER JOIN plan ON ( division.plan = plan.id )
+  INNER JOIN plan ON ( comision.plan = plan.id )
   GROUP BY curso.id
 ) AS horario ON (horario.curso = {$t}.id)
 LEFT OUTER JOIN (

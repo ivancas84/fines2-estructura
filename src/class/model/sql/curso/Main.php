@@ -17,6 +17,7 @@ class CursoSqlMain extends EntitySql{
     switch ($field) {
       case $p.'id': return $t.".id";
       case $p.'alta': return $t.".alta";
+      case $p.'horario': return $t.".horario";
       case $p.'comision': return $t.".comision";
       case $p.'carga_horaria': return $t.".carga_horaria";
 
@@ -28,6 +29,10 @@ class CursoSqlMain extends EntitySql{
       case $p.'min_alta': return "MIN({$t}.alta)";
       case $p.'max_alta': return "MAX({$t}.alta)";
       case $p.'count_alta': return "COUNT({$t}.alta)";
+
+      case $p.'min_horario': return "MIN({$t}.horario)";
+      case $p.'max_horario': return "MAX({$t}.horario)";
+      case $p.'count_horario': return "COUNT({$t}.horario)";
 
       case $p.'min_comision': return "MIN({$t}.comision)";
       case $p.'max_comision': return "MAX({$t}.comision)";
@@ -63,7 +68,7 @@ class CursoSqlMain extends EntitySql{
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingField($p.'comision') . ' AS ' . $p.'comision, ' . $this->_mappingField($p.'carga_horaria') . ' AS ' . $p.'carga_horaria';
+' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingField($p.'horario') . ' AS ' . $p.'horario, ' . $this->_mappingField($p.'comision') . ' AS ' . $p.'comision, ' . $this->_mappingField($p.'carga_horaria') . ' AS ' . $p.'carga_horaria';
   }
 
   public function _fieldsDb(){
@@ -87,7 +92,7 @@ class CursoSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('modalidad', 'com_moa')->_fields() . ',
 ' . EntitySql::getInstanceRequire('carga_horaria', 'ch')->_fields() . ',
 ' . EntitySql::getInstanceRequire('plan', 'ch_pla')->_fields() . ',
-' . EntitySql::getInstanceRequire('asignatura', 'ch_asi')->_fields() . ' 
+' . EntitySql::getInstanceRequire('asignatura', 'ch_asi')->_fields() . '
 ';
   }
 
@@ -115,6 +120,7 @@ class CursoSqlMain extends EntitySql{
     switch ($field){
       case "{$p}id": return $this->format->conditionText($f, $value, $option);
       case "{$p}alta": return $this->format->conditionTimestamp($f, $value, $option);
+      case "{$p}horario": return $this->format->conditionText($f, $value, $option);
       case "{$p}comision": return $this->format->conditionText($f, $value, $option);
       case "{$p}carga_horaria": return $this->format->conditionText($f, $value, $option);
 
@@ -126,6 +132,10 @@ class CursoSqlMain extends EntitySql{
       case "{$p}max_alta": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}min_alta": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}count_alta": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_horario": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}min_horario": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}count_horario": return $this->format->conditionNumber($f, $value, $option);
 
       case "{$p}max_comision": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}min_comision": return $this->format->conditionNumber($f, $value, $option);
@@ -197,6 +207,7 @@ class CursoSqlMain extends EntitySql{
     $row_ = array();
    if(isset($row['id']) )  $row_['id'] = $this->format->escapeString($row['id']);
     if(isset($row['alta'])) $row_['alta'] = $this->format->timestamp($row['alta']);
+    if(isset($row['horario'])) $row_['horario'] = $this->format->escapeString($row['horario']);
     if(isset($row['comision'])) $row_['comision'] = $this->format->escapeString($row['comision']);
     if(isset($row['carga_horaria'])) $row_['carga_horaria'] = $this->format->escapeString($row['carga_horaria']);
 
@@ -208,6 +219,7 @@ class CursoSqlMain extends EntitySql{
     $row_ = [];
     $row_["id"] = (is_null($row[$prefix . "id"])) ? null : (string)$row[$prefix . "id"]; //la pk se trata como string debido a un comportamiento erratico en angular 2 que al tratarlo como integer resta 1 en el valor
     $row_["alta"] = (is_null($row[$prefix . "alta"])) ? null : (string)$row[$prefix . "alta"];
+    $row_["horario"] = (is_null($row[$prefix . "horario"])) ? null : (string)$row[$prefix . "horario"];
     $row_["comision"] = (is_null($row[$prefix . "comision"])) ? null : (string)$row[$prefix . "comision"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
     $row_["carga_horaria"] = (is_null($row[$prefix . "carga_horaria"])) ? null : (string)$row[$prefix . "carga_horaria"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
     return $row_;
