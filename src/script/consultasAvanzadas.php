@@ -7,7 +7,7 @@ require_once("../src/config/config.php");
 require_once("class/tools/Filter.php");
 require_once("class/controller/Dba.php");
 require_once("class/model/Data.php");
-require_once("class/model/RenderAux.php");
+require_once("class/model/RenderPlus.php");
 
 require_once("config/structure.php");
 require_once("config/modelClasses.php");
@@ -15,7 +15,7 @@ require_once("config/entityClasses.php");
 require_once("config/valuesClasses.php");
 
 
-$render = new RenderAux();
+$render = new RenderPlus();
 $render->setCondition([
   ["cur_com_fecha_anio", "=", "2018"],
   ["cur_com_fecha_semestre", "=", "1"]
@@ -31,7 +31,7 @@ echo $sql;
 
 $rows = Dba::fetchAll($sql);
 print_r($rows);
-//$render = new RenderAux();
+//$render = new RenderPlus();
 //$render->setGroup(["pro_numero_documento"]);
 //$render->setSum(["suma_horas_catedra" => "cur_ch_horas_catedra"]);
 

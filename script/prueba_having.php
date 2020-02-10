@@ -1,15 +1,15 @@
 <?php
 
 require_once("../config/config.php");
-require_once("class/model/RenderAux.php");
+require_once("class/model/RenderPlus.php");
 require_once("class/model/Sqlo.php");
 
-$renderAux = new RenderAux();
-$renderAux->setAggregate(["cur_ch_sum_horas_catedra"]);
-$renderAux->setGroup(["profesor"]);
+$renderPlus = new RenderPlus();
+$renderPlus->setAggregate(["cur_ch_sum_horas_catedra"]);
+$renderPlus->setGroup(["profesor"]);
 
 echo "<pre>";
-echo EntitySqlo::getInstanceRequire("toma")->advanced($renderAux);
+echo EntitySqlo::getInstanceRequire("toma")->advanced($renderPlus);
 
 
 ?>

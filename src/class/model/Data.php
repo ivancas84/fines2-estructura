@@ -3,7 +3,7 @@
 require_once("class/model/Ma.php");
 require_once("class/model/db/Dba.php");
 require_once("class/model/Render.php");
-require_once("class/model/RenderAux.php");
+require_once("class/model/RenderPlus.php");
 require_once("class/model/Sqlo.php");
 
 
@@ -11,7 +11,7 @@ class Data {
 
   
   public static function alumnosActivosRepetidosFiltros($fechaAnio, $fechaSemestre, $clasificacion, $dependencia){
-    $render = new RenderAux();
+    $render = new RenderPlus();
     $render->setAggregate(["_count"]);
     $render->setGroup(["persona"]);
     $render->setHaving(["_count",">",1]);
@@ -33,7 +33,7 @@ class Data {
 
 
   public static function alumnosActivosTodos1RepetidosFiltros($fechaAnio, $fechaSemestre, $clasificacion, $dependencia){
-    $render = new RenderAux();
+    $render = new RenderPlus();
     $render->setAggregate(["_count"]);
     $render->setGroup(["persona"]);
     $render->setHaving(["_count",">",1]);
