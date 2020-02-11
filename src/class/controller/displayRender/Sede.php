@@ -48,7 +48,7 @@ class SedeDisplayRender extends DisplayRender {
       }
     }
 
-    $render = RenderPlus::getInstanceDisplay($this->display);
+    $render = Render::getInstanceDisplay($this->display);
     if(isset($sedes)) $render->addCondition("id","=",$sedes);
 
     return $render;
