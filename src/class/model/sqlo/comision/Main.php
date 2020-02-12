@@ -31,7 +31,6 @@ class ComisionSqloMain extends EntitySqlo {
     $sql .= "fecha_anio, " ;
     $sql .= "fecha_semestre, " ;
     $sql .= "observaciones, " ;
-    $sql .= "alta, " ;
     $sql .= "sede, " ;
     $sql .= "plan, " ;
     $sql .= "modalidad, " ;
@@ -52,7 +51,6 @@ VALUES ( ";
     $sql .= $row['fecha_anio'] . ", " ;
     $sql .= $row['fecha_semestre'] . ", " ;
     $sql .= $row['observaciones'] . ", " ;
-    $sql .= $row['alta'] . ", " ;
     $sql .= $row['sede'] . ", " ;
     $sql .= $row['plan'] . ", " ;
     $sql .= $row['modalidad'] . ", " ;
@@ -80,7 +78,6 @@ UPDATE " . $this->entity->sn_() . " SET
     if (isset($row['fecha_anio'] )) $sql .= "fecha_anio = " . $row['fecha_anio'] . " ," ;
     if (isset($row['fecha_semestre'] )) $sql .= "fecha_semestre = " . $row['fecha_semestre'] . " ," ;
     if (isset($row['observaciones'] )) $sql .= "observaciones = " . $row['observaciones'] . " ," ;
-    if (isset($row['alta'] )) $sql .= "alta = " . $row['alta'] . " ," ;
     if (isset($row['sede'] )) $sql .= "sede = " . $row['sede'] . " ," ;
     if (isset($row['plan'] )) $sql .= "plan = " . $row['plan'] . " ," ;
     if (isset($row['modalidad'] )) $sql .= "modalidad = " . $row['modalidad'] . " ," ;

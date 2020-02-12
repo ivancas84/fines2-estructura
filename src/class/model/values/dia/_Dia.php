@@ -23,9 +23,9 @@ class _Dia extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->numero !== UNDEFINED) $row["numero"] = $this->numero();
-    if($this->dia !== UNDEFINED) $row["dia"] = $this->dia();
+    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
+    if($this->numero !== UNDEFINED) $row["numero"] = $this->numero("");
+    if($this->dia !== UNDEFINED) $row["dia"] = $this->dia("");
     return $row;
   }
 

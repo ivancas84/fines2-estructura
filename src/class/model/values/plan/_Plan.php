@@ -23,9 +23,9 @@ class _Plan extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->orientacion !== UNDEFINED) $row["orientacion"] = $this->orientacion();
-    if($this->resolucion !== UNDEFINED) $row["resolucion"] = $this->resolucion();
+    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
+    if($this->orientacion !== UNDEFINED) $row["orientacion"] = $this->orientacion("");
+    if($this->resolucion !== UNDEFINED) $row["resolucion"] = $this->resolucion("");
     return $row;
   }
 

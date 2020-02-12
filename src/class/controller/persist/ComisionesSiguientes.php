@@ -3,12 +3,17 @@
 
 require_once("class/controller/Persist.php");
 require_once("class/model/Ma.php");
+require_once("class/model/Values.php");
+require_once("class/controller/persist/ComisionCursos.php");
+
 
 
 class ComisionesSiguientesPersist extends Persist {
   /**
    * Persistencia de cursos y comisiones
    */
+  protected $entityName = "comisiones_siguientes";
+
 
   public function consultarComisiones(array $p){
     /**
@@ -49,6 +54,7 @@ class ComisionesSiguientesPersist extends Persist {
   }
 
   public function main($data){
+
     /**
      * @param $data["fecha_anio"] //fecha anio a calcular
      * @param $data["fecha_semestre"] //fecha semestre a calcular
@@ -61,20 +67,22 @@ class ComisionesSiguientesPersist extends Persist {
     if(count($this->consultarComisiones($data))) throw new Exception("Ya existen comisiones para los parametros ingresados");
     $param = $this->definirParametros($data);
     $comisionesAnteriores = $this->consultarComisiones($param);
-    if(!count($rows)) throw new Exception("No existen comisiones anteriores para tomar de referencia");
+    if(!count($comisionesAnteriores)) throw new Exception("No existen comisiones anteriores para tomar de referencia");
   
     foreach($comisionesAnteriores as $comision){
-      $nuevaComision = Comision::_fromArray($comision);
+      $nuevaComision = EntityValues::getInstanceRequire("comision");
+      $nuevaComision->_fromArray($comision);
       $nuevaComision->setId(null);
-      $nuevaComision->setFechaAnio($param["fecha_anio"]);
-      $nuevaComision->setFechaSemestre($param["fecha_semestre"]);
+      $nuevaComision->setFechaAnio($data["fecha_anio"]);
+      $nuevaComision->setFechaSemestre($data["fecha_semestre"]);
       $nuevaComision->resetTramoSiguiente();
-      if($nuevaComision->_logs->isError()) {
-        
-      }
-      print_r($nuevaComision->_toArray());
-      
+      if($nuevaComision->_logs()->isError()) continue;
+
+      $controller = new ComisionCursosPersist();
+      $controller->main($nuevaComision->_toArray());
+      array_push($this->logs, ["sql"=>$controller->getSql(), "detail"=>$controller->getDetail()]);
     }
+  
   }
 
 

@@ -157,7 +157,7 @@ class TomaSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('persona', 'doc')->_fields() . ',
 ' . EntitySql::getInstanceRequire('domicilio', 'doc_dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('persona', 'ree')->_fields() . ',
-' . EntitySql::getInstanceRequire('domicilio', 'ree_dom')->_fields() . ' 
+' . EntitySql::getInstanceRequire('domicilio', 'ree_dom')->_fields() . '
 ';
   }
 

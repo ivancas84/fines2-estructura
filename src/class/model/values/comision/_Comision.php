@@ -65,23 +65,23 @@ class _Comision extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->turno !== UNDEFINED) $row["turno"] = $this->turno();
-    if($this->division !== UNDEFINED) $row["division"] = $this->division();
-    if($this->anio !== UNDEFINED) $row["anio"] = $this->anio();
-    if($this->semestre !== UNDEFINED) $row["semestre"] = $this->semestre();
-    if($this->comentario !== UNDEFINED) $row["comentario"] = $this->comentario();
-    if($this->autorizada !== UNDEFINED) $row["autorizada"] = $this->autorizada();
-    if($this->apertura !== UNDEFINED) $row["apertura"] = $this->apertura();
-    if($this->publicada !== UNDEFINED) $row["publicada"] = $this->publicada();
+    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
+    if($this->turno !== UNDEFINED) $row["turno"] = $this->turno("");
+    if($this->division !== UNDEFINED) $row["division"] = $this->division("");
+    if($this->anio !== UNDEFINED) $row["anio"] = $this->anio("");
+    if($this->semestre !== UNDEFINED) $row["semestre"] = $this->semestre("");
+    if($this->comentario !== UNDEFINED) $row["comentario"] = $this->comentario("");
+    if($this->autorizada !== UNDEFINED) $row["autorizada"] = $this->autorizada("");
+    if($this->apertura !== UNDEFINED) $row["apertura"] = $this->apertura("");
+    if($this->publicada !== UNDEFINED) $row["publicada"] = $this->publicada("");
     if($this->fechaAnio !== UNDEFINED) $row["fecha_anio"] = $this->fechaAnio("Y");
-    if($this->fechaSemestre !== UNDEFINED) $row["fecha_semestre"] = $this->fechaSemestre();
-    if($this->observaciones !== UNDEFINED) $row["observaciones"] = $this->observaciones();
+    if($this->fechaSemestre !== UNDEFINED) $row["fecha_semestre"] = $this->fechaSemestre("");
+    if($this->observaciones !== UNDEFINED) $row["observaciones"] = $this->observaciones("");
     if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d h:i:s");
-    if($this->sede !== UNDEFINED) $row["sede"] = $this->sede();
-    if($this->plan !== UNDEFINED) $row["plan"] = $this->plan();
-    if($this->modalidad !== UNDEFINED) $row["modalidad"] = $this->modalidad();
-    if($this->comisionSiguiente !== UNDEFINED) $row["comision_siguiente"] = $this->comisionSiguiente();
+    if($this->sede !== UNDEFINED) $row["sede"] = $this->sede("");
+    if($this->plan !== UNDEFINED) $row["plan"] = $this->plan("");
+    if($this->modalidad !== UNDEFINED) $row["modalidad"] = $this->modalidad("");
+    if($this->comisionSiguiente !== UNDEFINED) $row["comision_siguiente"] = $this->comisionSiguiente("");
     return $row;
   }
 
@@ -180,8 +180,8 @@ class _Comision extends EntityValues {
   }
 
   public function setApertura($p) {
-    if ($p == DEFAULT_VALUE) $p = null;
-    $p = (is_null($p)) ? null : settypebool(trim($p));
+    if ($p == DEFAULT_VALUE) $p = false;
+    $p = (is_null($p)) ? false : settypebool(trim($p));
     $check = $this->checkApertura($p); 
     if($check) $this->apertura = $p;
     return $check;

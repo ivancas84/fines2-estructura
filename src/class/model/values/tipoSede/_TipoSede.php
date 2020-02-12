@@ -20,8 +20,8 @@ class _TipoSede extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->descripcion !== UNDEFINED) $row["descripcion"] = $this->descripcion();
+    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
+    if($this->descripcion !== UNDEFINED) $row["descripcion"] = $this->descripcion("");
     return $row;
   }
 

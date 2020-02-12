@@ -2,4 +2,8 @@
 
 require_once("class/controller/Persist.php");
 
-class AsignaturaPersist extends Persist { }
+class AsignaturaPersist extends Persist { 
+
+    protected $entityName = "asignatura";
+
+}

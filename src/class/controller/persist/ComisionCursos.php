@@ -7,13 +7,7 @@ class ComisionCursosPersist extends Persist {
   /**
    * Persistencia de cursos y comisiones
    */
-  public function main($data){
-    foreach($data as $d) {
-        switch($d["entity"]) {
-            case "comision": $comision = $d["row"]; break;
-        }                    
-    }
-
+  public function main($comision){
     if(empty($comision["anio"])) throw new Exception("No se encuentran definido el año");
     if(empty($comision["semestre"])) throw new Exception("No se encuentran definido el semestre");
 
@@ -31,8 +25,7 @@ class ComisionCursosPersist extends Persist {
     if (!empty($comisionBd)){
         $comision["id"] = $comisionBd["id"];
         $this->update("comision", $comision);
-        $cursos = Ma::ids("curso",["comision","=",$comision["id"]]);
-        $tieneCursos = (count($cursos)) ? true : false;
+        $tieneCursos =  Ma::count("curso",["comision","=",$comision["id"]]);
     } else {
         $comision["id"] = $this->insert("comision", $comision);
         $tieneCursos = false;

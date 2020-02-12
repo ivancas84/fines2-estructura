@@ -10,8 +10,8 @@ class Comision extends _Comision{
      */
 
     $p = [
-      "anio" => intval($data["anio"]),
-      "semestre" => intval($data["semestre"]),
+      "anio" => intval($this->anio()),
+      "semestre" => intval($this->semestre()),
     ];
 
     switch($p["semestre"]){
@@ -32,11 +32,10 @@ class Comision extends _Comision{
         $p["anio"]++;
     }
 
-    if ((!$this->setAnio($p["semestre"])) 
-    || (!$this->setSemestre($p["semestre"]))
-    ) return false; 
-    
-    return true;
+    $a = $this->setAnio($p["anio"]);
+    $s = $this->setSemestre($p["semestre"]);
+
+    return (!$a || !$s) ? false : true; 
   }
 
 }

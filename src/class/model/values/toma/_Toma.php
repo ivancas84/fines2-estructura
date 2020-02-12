@@ -59,21 +59,21 @@ class _Toma extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
+    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
     if($this->fechaToma !== UNDEFINED) $row["fecha_toma"] = $this->fechaToma("Y-m-d");
     if($this->fechaInicio !== UNDEFINED) $row["fecha_inicio"] = $this->fechaInicio("Y-m-d");
     if($this->fechaFin !== UNDEFINED) $row["fecha_fin"] = $this->fechaFin("Y-m-d");
     if($this->fechaContralor !== UNDEFINED) $row["fecha_contralor"] = $this->fechaContralor("Y-m-d");
     if($this->fechaConsejo !== UNDEFINED) $row["fecha_consejo"] = $this->fechaConsejo("Y-m-d");
-    if($this->estado !== UNDEFINED) $row["estado"] = $this->estado();
-    if($this->observaciones !== UNDEFINED) $row["observaciones"] = $this->observaciones();
-    if($this->comentario !== UNDEFINED) $row["comentario"] = $this->comentario();
-    if($this->tipoMovimiento !== UNDEFINED) $row["tipo_movimiento"] = $this->tipoMovimiento();
-    if($this->estadoContralor !== UNDEFINED) $row["estado_contralor"] = $this->estadoContralor();
+    if($this->estado !== UNDEFINED) $row["estado"] = $this->estado("");
+    if($this->observaciones !== UNDEFINED) $row["observaciones"] = $this->observaciones("");
+    if($this->comentario !== UNDEFINED) $row["comentario"] = $this->comentario("");
+    if($this->tipoMovimiento !== UNDEFINED) $row["tipo_movimiento"] = $this->tipoMovimiento("");
+    if($this->estadoContralor !== UNDEFINED) $row["estado_contralor"] = $this->estadoContralor("");
     if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d h:i:s");
-    if($this->curso !== UNDEFINED) $row["curso"] = $this->curso();
-    if($this->docente !== UNDEFINED) $row["docente"] = $this->docente();
-    if($this->reemplazo !== UNDEFINED) $row["reemplazo"] = $this->reemplazo();
+    if($this->curso !== UNDEFINED) $row["curso"] = $this->curso("");
+    if($this->docente !== UNDEFINED) $row["docente"] = $this->docente("");
+    if($this->reemplazo !== UNDEFINED) $row["reemplazo"] = $this->reemplazo("");
     return $row;
   }
 

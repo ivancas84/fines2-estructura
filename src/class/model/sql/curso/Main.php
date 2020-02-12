@@ -92,7 +92,7 @@ class CursoSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('modalidad', 'com_moa')->_fields() . ',
 ' . EntitySql::getInstanceRequire('carga_horaria', 'ch')->_fields() . ',
 ' . EntitySql::getInstanceRequire('plan', 'ch_pla')->_fields() . ',
-' . EntitySql::getInstanceRequire('asignatura', 'ch_asi')->_fields() . ' 
+' . EntitySql::getInstanceRequire('asignatura', 'ch_asi')->_fields() . '
 ';
   }
 

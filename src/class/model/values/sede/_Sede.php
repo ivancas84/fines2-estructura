@@ -41,15 +41,15 @@ class _Sede extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->numero !== UNDEFINED) $row["numero"] = $this->numero();
-    if($this->nombre !== UNDEFINED) $row["nombre"] = $this->nombre();
-    if($this->observaciones !== UNDEFINED) $row["observaciones"] = $this->observaciones();
+    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
+    if($this->numero !== UNDEFINED) $row["numero"] = $this->numero("");
+    if($this->nombre !== UNDEFINED) $row["nombre"] = $this->nombre("");
+    if($this->observaciones !== UNDEFINED) $row["observaciones"] = $this->observaciones("");
     if($this->baja !== UNDEFINED) $row["baja"] = $this->baja("Y-m-d h:i:s");
-    if($this->domicilio !== UNDEFINED) $row["domicilio"] = $this->domicilio();
-    if($this->tipoSede !== UNDEFINED) $row["tipo_sede"] = $this->tipoSede();
-    if($this->centroEducativo !== UNDEFINED) $row["centro_educativo"] = $this->centroEducativo();
-    if($this->coordinador !== UNDEFINED) $row["coordinador"] = $this->coordinador();
+    if($this->domicilio !== UNDEFINED) $row["domicilio"] = $this->domicilio("");
+    if($this->tipoSede !== UNDEFINED) $row["tipo_sede"] = $this->tipoSede("");
+    if($this->centroEducativo !== UNDEFINED) $row["centro_educativo"] = $this->centroEducativo("");
+    if($this->coordinador !== UNDEFINED) $row["coordinador"] = $this->coordinador("");
     return $row;
   }
 

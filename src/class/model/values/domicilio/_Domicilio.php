@@ -38,14 +38,14 @@ class _Domicilio extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->calle !== UNDEFINED) $row["calle"] = $this->calle();
-    if($this->entre !== UNDEFINED) $row["entre"] = $this->entre();
-    if($this->numero !== UNDEFINED) $row["numero"] = $this->numero();
-    if($this->piso !== UNDEFINED) $row["piso"] = $this->piso();
-    if($this->departamento !== UNDEFINED) $row["departamento"] = $this->departamento();
-    if($this->barrio !== UNDEFINED) $row["barrio"] = $this->barrio();
-    if($this->localidad !== UNDEFINED) $row["localidad"] = $this->localidad();
+    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
+    if($this->calle !== UNDEFINED) $row["calle"] = $this->calle("");
+    if($this->entre !== UNDEFINED) $row["entre"] = $this->entre("");
+    if($this->numero !== UNDEFINED) $row["numero"] = $this->numero("");
+    if($this->piso !== UNDEFINED) $row["piso"] = $this->piso("");
+    if($this->departamento !== UNDEFINED) $row["departamento"] = $this->departamento("");
+    if($this->barrio !== UNDEFINED) $row["barrio"] = $this->barrio("");
+    if($this->localidad !== UNDEFINED) $row["localidad"] = $this->localidad("");
     return $row;
   }
 

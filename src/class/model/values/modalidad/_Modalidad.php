@@ -20,8 +20,8 @@ class _Modalidad extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->nombre !== UNDEFINED) $row["nombre"] = $this->nombre();
+    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
+    if($this->nombre !== UNDEFINED) $row["nombre"] = $this->nombre("");
     return $row;
   }
 

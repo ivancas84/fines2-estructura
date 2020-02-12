@@ -4,6 +4,8 @@ require_once("class/controller/Persist.php");
 
 class SedePersist extends Persist { 
 
+    protected $entityName = "sede";
+
     public function main($data){
         foreach($data as $d) {
             switch($d["entity"]) {

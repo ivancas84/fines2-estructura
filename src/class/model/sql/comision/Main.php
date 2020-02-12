@@ -146,7 +146,7 @@ class ComisionSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('persona', 'sed_coo')->_fields() . ',
 ' . EntitySql::getInstanceRequire('domicilio', 'sed_coo_dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('plan', 'pla')->_fields() . ',
-' . EntitySql::getInstanceRequire('modalidad', 'moa')->_fields() . ' 
+' . EntitySql::getInstanceRequire('modalidad', 'moa')->_fields() . '
 ';
   }
 
@@ -300,7 +300,6 @@ class ComisionSqlMain extends EntitySql{
     if(!isset($data['fecha_anio']))  $data['fecha_anio'] = "null";
     if(!isset($data['fecha_semestre']) || ($data['fecha_semestre'] == '')) $data['fecha_semestre'] = "null";
     if(!isset($data['observaciones']) || is_null($data['observaciones']) || $data['observaciones'] == "") $data['observaciones'] = "null";
-    if(!isset($data['alta']))  $data['alta'] = date("Y-m-d H:i:s");
     if(empty($data['sede'])) throw new Exception('dato obligatorio sin valor: sede');
     if(empty($data['plan'])) throw new Exception('dato obligatorio sin valor: plan');
     if(empty($data['modalidad'])) throw new Exception('dato obligatorio sin valor: modalidad');
@@ -323,7 +322,6 @@ class ComisionSqlMain extends EntitySql{
     if(array_key_exists('fecha_anio', $data)) { if(empty($data['fecha_anio']))  $data['fecha_anio'] = "null"; }
     if(array_key_exists('fecha_semestre', $data)) { if(!isset($data['fecha_semestre']) || ($data['fecha_semestre'] == '')) $data['fecha_semestre'] = "null"; }
     if(array_key_exists('observaciones', $data)) { if(is_null($data['observaciones']) || $data['observaciones'] == "") $data['observaciones'] = "null"; }
-    if(array_key_exists('alta', $data)) { if(empty($data['alta']))  $data['alta'] = date("Y-m-d H:i:s"); }
     if(array_key_exists('sede', $data)) { if(!isset($data['sede']) || ($data['sede'] == '')) throw new Exception('dato obligatorio sin valor: sede'); }
     if(array_key_exists('plan', $data)) { if(!isset($data['plan']) || ($data['plan'] == '')) throw new Exception('dato obligatorio sin valor: plan'); }
     if(array_key_exists('modalidad', $data)) { if(!isset($data['modalidad']) || ($data['modalidad'] == '')) throw new Exception('dato obligatorio sin valor: modalidad'); }
@@ -355,6 +353,7 @@ class ComisionSqlMain extends EntitySql{
 
     return $row_;
   }
+  
   public function _json(array $row = NULL){
     if(empty($row)) return null;
     $prefix = $this->prf();
