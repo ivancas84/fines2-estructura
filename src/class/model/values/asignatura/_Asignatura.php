@@ -32,12 +32,12 @@ class _Asignatura extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
-    if($this->nombre !== UNDEFINED) $row["nombre"] = $this->nombre("");
-    if($this->formacion !== UNDEFINED) $row["formacion"] = $this->formacion("");
-    if($this->clasificacion !== UNDEFINED) $row["clasificacion"] = $this->clasificacion("");
-    if($this->codigo !== UNDEFINED) $row["codigo"] = $this->codigo("");
-    if($this->perfil !== UNDEFINED) $row["perfil"] = $this->perfil("");
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
+    if($this->nombre !== UNDEFINED) $row["nombre"] = $this->nombre();
+    if($this->formacion !== UNDEFINED) $row["formacion"] = $this->formacion();
+    if($this->clasificacion !== UNDEFINED) $row["clasificacion"] = $this->clasificacion();
+    if($this->codigo !== UNDEFINED) $row["codigo"] = $this->codigo();
+    if($this->perfil !== UNDEFINED) $row["perfil"] = $this->perfil();
     return $row;
   }
 
@@ -60,37 +60,49 @@ class _Asignatura extends EntityValues {
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkId($p)) $this->id = $p;
+    $check = $this->checkId($p); 
+    if($check) $this->id = $p;
+    return $check;
   }
 
   public function setNombre($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkNombre($p)) $this->nombre = $p;
+    $check = $this->checkNombre($p); 
+    if($check) $this->nombre = $p;
+    return $check;
   }
 
   public function setFormacion($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkFormacion($p)) $this->formacion = $p;
+    $check = $this->checkFormacion($p); 
+    if($check) $this->formacion = $p;
+    return $check;
   }
 
   public function setClasificacion($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkClasificacion($p)) $this->clasificacion = $p;
+    $check = $this->checkClasificacion($p); 
+    if($check) $this->clasificacion = $p;
+    return $check;
   }
 
   public function setCodigo($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkCodigo($p)) $this->codigo = $p;
+    $check = $this->checkCodigo($p); 
+    if($check) $this->codigo = $p;
+    return $check;
   }
 
   public function setPerfil($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkPerfil($p)) $this->perfil = $p;
+    $check = $this->checkPerfil($p); 
+    if($check) $this->perfil = $p;
+    return $check;
   }
 
   public function checkId($value) { 

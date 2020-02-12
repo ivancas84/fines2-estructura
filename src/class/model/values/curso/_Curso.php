@@ -29,11 +29,11 @@ class _Curso extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
     if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d h:i:s");
-    if($this->horario !== UNDEFINED) $row["horario"] = $this->horario("");
-    if($this->comision !== UNDEFINED) $row["comision"] = $this->comision("");
-    if($this->cargaHoraria !== UNDEFINED) $row["carga_horaria"] = $this->cargaHoraria("");
+    if($this->horario !== UNDEFINED) $row["horario"] = $this->horario();
+    if($this->comision !== UNDEFINED) $row["comision"] = $this->comision();
+    if($this->cargaHoraria !== UNDEFINED) $row["carga_horaria"] = $this->cargaHoraria();
     return $row;
   }
 
@@ -54,37 +54,47 @@ class _Curso extends EntityValues {
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkId($p)) $this->id = $p;
+    $check = $this->checkId($p); 
+    if($check) $this->id = $p;
+    return $check;
   }
 
   public function _setAlta(DateTime $p = null) {
-      if($this->checkAlta($p)) $this->alta = $p;  
+      $check = $this->checkAlta($p); 
+      if($check) $this->alta = $p;  
+      return $check;
   }
 
   public function setAlta($p, $format = "Y-m-d H:i:s") {
     $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
-    if(!is_null($p)) {
-      $p = SpanishDateTime::createFromFormat($format, $p);
-    }
-    if($this->checkAlta($p)) $this->alta = $p;
+    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
+    $check = $this->checkAlta($p); 
+    if($check) $this->alta = $p;  
+    return $check;
   }
 
   public function setHorario($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkHorario($p)) $this->horario = $p;
+    $check = $this->checkHorario($p); 
+    if($check) $this->horario = $p;
+    return $check;
   }
 
   public function setComision($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkComision($p)) $this->comision = $p;
+    $check = $this->checkComision($p); 
+    if($check) $this->comision = $p;
+    return $check;
   }
 
   public function setCargaHoraria($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkCargaHoraria($p)) $this->cargaHoraria = $p;
+    $check = $this->checkCargaHoraria($p); 
+    if($check) $this->cargaHoraria = $p;
+    return $check;
   }
 
   public function checkId($value) { 

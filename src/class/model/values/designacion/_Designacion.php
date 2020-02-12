@@ -35,13 +35,13 @@ class _Designacion extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
     if($this->desde !== UNDEFINED) $row["desde"] = $this->desde("Y-m-d");
     if($this->hasta !== UNDEFINED) $row["hasta"] = $this->hasta("Y-m-d");
     if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d h:i:s");
-    if($this->cargo !== UNDEFINED) $row["cargo"] = $this->cargo("");
-    if($this->sede !== UNDEFINED) $row["sede"] = $this->sede("");
-    if($this->persona !== UNDEFINED) $row["persona"] = $this->persona("");
+    if($this->cargo !== UNDEFINED) $row["cargo"] = $this->cargo();
+    if($this->sede !== UNDEFINED) $row["sede"] = $this->sede();
+    if($this->persona !== UNDEFINED) $row["persona"] = $this->persona();
     return $row;
   }
 
@@ -66,61 +66,75 @@ class _Designacion extends EntityValues {
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkId($p)) $this->id = $p;
+    $check = $this->checkId($p); 
+    if($check) $this->id = $p;
+    return $check;
   }
 
   public function _setDesde(DateTime $p = null) {
-      if($this->checkDesde($p)) $this->desde = $p;  
+      $check = $this->checkDesde($p); 
+      if($check) $this->desde = $p;  
+      return $check;      
   }
 
   public function setDesde($p, $format = UNDEFINED) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(!is_null($p)) {
-      $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);
-    }
-    if($this->checkDesde($p)) $this->desde = $p;
+    if(!is_null($p)) $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);    
+    $check = $this->checkDesde($p); 
+    if($check) $this->desde = $p;  
+    return $check;
   }
 
   public function _setHasta(DateTime $p = null) {
-      if($this->checkHasta($p)) $this->hasta = $p;  
+      $check = $this->checkHasta($p); 
+      if($check) $this->hasta = $p;  
+      return $check;      
   }
 
   public function setHasta($p, $format = UNDEFINED) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(!is_null($p)) {
-      $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);
-    }
-    if($this->checkHasta($p)) $this->hasta = $p;
+    if(!is_null($p)) $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);    
+    $check = $this->checkHasta($p); 
+    if($check) $this->hasta = $p;  
+    return $check;
   }
 
   public function _setAlta(DateTime $p = null) {
-      if($this->checkAlta($p)) $this->alta = $p;  
+      $check = $this->checkAlta($p); 
+      if($check) $this->alta = $p;  
+      return $check;
   }
 
   public function setAlta($p, $format = "Y-m-d H:i:s") {
     $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
-    if(!is_null($p)) {
-      $p = SpanishDateTime::createFromFormat($format, $p);
-    }
-    if($this->checkAlta($p)) $this->alta = $p;
+    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
+    $check = $this->checkAlta($p); 
+    if($check) $this->alta = $p;  
+    return $check;
   }
 
   public function setCargo($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkCargo($p)) $this->cargo = $p;
+    $check = $this->checkCargo($p); 
+    if($check) $this->cargo = $p;
+    return $check;
   }
 
   public function setSede($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkSede($p)) $this->sede = $p;
+    $check = $this->checkSede($p); 
+    if($check) $this->sede = $p;
+    return $check;
   }
 
   public function setPersona($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkPersona($p)) $this->persona = $p;
+    $check = $this->checkPersona($p); 
+    if($check) $this->persona = $p;
+    return $check;
   }
 
   public function checkId($value) { 

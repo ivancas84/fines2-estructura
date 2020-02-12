@@ -47,17 +47,17 @@ class _Persona extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
-    if($this->nombres !== UNDEFINED) $row["nombres"] = $this->nombres("");
-    if($this->apellidos !== UNDEFINED) $row["apellidos"] = $this->apellidos("");
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
+    if($this->nombres !== UNDEFINED) $row["nombres"] = $this->nombres();
+    if($this->apellidos !== UNDEFINED) $row["apellidos"] = $this->apellidos();
     if($this->fechaNacimiento !== UNDEFINED) $row["fecha_nacimiento"] = $this->fechaNacimiento("Y-m-d");
-    if($this->numeroDocumento !== UNDEFINED) $row["numero_documento"] = $this->numeroDocumento("");
-    if($this->cuil !== UNDEFINED) $row["cuil"] = $this->cuil("");
-    if($this->email !== UNDEFINED) $row["email"] = $this->email("");
-    if($this->genero !== UNDEFINED) $row["genero"] = $this->genero("");
-    if($this->apodo !== UNDEFINED) $row["apodo"] = $this->apodo("");
+    if($this->numeroDocumento !== UNDEFINED) $row["numero_documento"] = $this->numeroDocumento();
+    if($this->cuil !== UNDEFINED) $row["cuil"] = $this->cuil();
+    if($this->email !== UNDEFINED) $row["email"] = $this->email();
+    if($this->genero !== UNDEFINED) $row["genero"] = $this->genero();
+    if($this->apodo !== UNDEFINED) $row["apodo"] = $this->apodo();
     if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d h:i:s");
-    if($this->domicilio !== UNDEFINED) $row["domicilio"] = $this->domicilio("");
+    if($this->domicilio !== UNDEFINED) $row["domicilio"] = $this->domicilio();
     return $row;
   }
 
@@ -90,79 +90,101 @@ class _Persona extends EntityValues {
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkId($p)) $this->id = $p;
+    $check = $this->checkId($p); 
+    if($check) $this->id = $p;
+    return $check;
   }
 
   public function setNombres($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkNombres($p)) $this->nombres = $p;
+    $check = $this->checkNombres($p); 
+    if($check) $this->nombres = $p;
+    return $check;
   }
 
   public function setApellidos($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkApellidos($p)) $this->apellidos = $p;
+    $check = $this->checkApellidos($p); 
+    if($check) $this->apellidos = $p;
+    return $check;
   }
 
   public function _setFechaNacimiento(DateTime $p = null) {
-      if($this->checkFechaNacimiento($p)) $this->fechaNacimiento = $p;  
+      $check = $this->checkFechaNacimiento($p); 
+      if($check) $this->fechaNacimiento = $p;  
+      return $check;      
   }
 
   public function setFechaNacimiento($p, $format = UNDEFINED) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(!is_null($p)) {
-      $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);
-    }
-    if($this->checkFechaNacimiento($p)) $this->fechaNacimiento = $p;
+    if(!is_null($p)) $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);    
+    $check = $this->checkFechaNacimiento($p); 
+    if($check) $this->fechaNacimiento = $p;  
+    return $check;
   }
 
   public function setNumeroDocumento($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkNumeroDocumento($p)) $this->numeroDocumento = $p;
+    $check = $this->checkNumeroDocumento($p); 
+    if($check) $this->numeroDocumento = $p;
+    return $check;
   }
 
   public function setCuil($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkCuil($p)) $this->cuil = $p;
+    $check = $this->checkCuil($p); 
+    if($check) $this->cuil = $p;
+    return $check;
   }
 
   public function setEmail($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkEmail($p)) $this->email = $p;
+    $check = $this->checkEmail($p); 
+    if($check) $this->email = $p;
+    return $check;
   }
 
   public function setGenero($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkGenero($p)) $this->genero = $p;
+    $check = $this->checkGenero($p); 
+    if($check) $this->genero = $p;
+    return $check;
   }
 
   public function setApodo($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkApodo($p)) $this->apodo = $p;
+    $check = $this->checkApodo($p); 
+    if($check) $this->apodo = $p;
+    return $check;
   }
 
   public function _setAlta(DateTime $p = null) {
-      if($this->checkAlta($p)) $this->alta = $p;  
+      $check = $this->checkAlta($p); 
+      if($check) $this->alta = $p;  
+      return $check;
   }
 
   public function setAlta($p, $format = "Y-m-d H:i:s") {
     $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
-    if(!is_null($p)) {
-      $p = SpanishDateTime::createFromFormat($format, $p);
-    }
-    if($this->checkAlta($p)) $this->alta = $p;
+    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
+    $check = $this->checkAlta($p); 
+    if($check) $this->alta = $p;  
+    return $check;
   }
 
   public function setDomicilio($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkDomicilio($p)) $this->domicilio = $p;
+    $check = $this->checkDomicilio($p); 
+    if($check) $this->domicilio = $p;
+    return $check;
   }
 
   public function checkId($value) { 

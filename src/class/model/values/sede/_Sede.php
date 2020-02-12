@@ -41,15 +41,15 @@ class _Sede extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
-    if($this->numero !== UNDEFINED) $row["numero"] = $this->numero("");
-    if($this->nombre !== UNDEFINED) $row["nombre"] = $this->nombre("");
-    if($this->observaciones !== UNDEFINED) $row["observaciones"] = $this->observaciones("");
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
+    if($this->numero !== UNDEFINED) $row["numero"] = $this->numero();
+    if($this->nombre !== UNDEFINED) $row["nombre"] = $this->nombre();
+    if($this->observaciones !== UNDEFINED) $row["observaciones"] = $this->observaciones();
     if($this->baja !== UNDEFINED) $row["baja"] = $this->baja("Y-m-d h:i:s");
-    if($this->domicilio !== UNDEFINED) $row["domicilio"] = $this->domicilio("");
-    if($this->tipoSede !== UNDEFINED) $row["tipo_sede"] = $this->tipoSede("");
-    if($this->centroEducativo !== UNDEFINED) $row["centro_educativo"] = $this->centroEducativo("");
-    if($this->coordinador !== UNDEFINED) $row["coordinador"] = $this->coordinador("");
+    if($this->domicilio !== UNDEFINED) $row["domicilio"] = $this->domicilio();
+    if($this->tipoSede !== UNDEFINED) $row["tipo_sede"] = $this->tipoSede();
+    if($this->centroEducativo !== UNDEFINED) $row["centro_educativo"] = $this->centroEducativo();
+    if($this->coordinador !== UNDEFINED) $row["coordinador"] = $this->coordinador();
     return $row;
   }
 
@@ -78,61 +78,79 @@ class _Sede extends EntityValues {
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkId($p)) $this->id = $p;
+    $check = $this->checkId($p); 
+    if($check) $this->id = $p;
+    return $check;
   }
 
   public function setNumero($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkNumero($p)) $this->numero = $p;
+    $check = $this->checkNumero($p); 
+    if($check) $this->numero = $p;
+    return $check;
   }
 
   public function setNombre($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkNombre($p)) $this->nombre = $p;
+    $check = $this->checkNombre($p); 
+    if($check) $this->nombre = $p;
+    return $check;
   }
 
   public function setObservaciones($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkObservaciones($p)) $this->observaciones = $p;
+    $check = $this->checkObservaciones($p); 
+    if($check) $this->observaciones = $p;
+    return $check;
   }
 
   public function _setBaja(DateTime $p = null) {
-      if($this->checkBaja($p)) $this->baja = $p;  
+      $check = $this->checkBaja($p); 
+      if($check) $this->baja = $p;  
+      return $check;
   }
 
   public function setBaja($p, $format = "Y-m-d H:i:s") {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(!is_null($p)) {
-      $p = SpanishDateTime::createFromFormat($format, $p);
-    }
-    if($this->checkBaja($p)) $this->baja = $p;
+    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
+    $check = $this->checkBaja($p); 
+    if($check) $this->baja = $p;  
+    return $check;
   }
 
   public function setDomicilio($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkDomicilio($p)) $this->domicilio = $p;
+    $check = $this->checkDomicilio($p); 
+    if($check) $this->domicilio = $p;
+    return $check;
   }
 
   public function setTipoSede($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkTipoSede($p)) $this->tipoSede = $p;
+    $check = $this->checkTipoSede($p); 
+    if($check) $this->tipoSede = $p;
+    return $check;
   }
 
   public function setCentroEducativo($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkCentroEducativo($p)) $this->centroEducativo = $p;
+    $check = $this->checkCentroEducativo($p); 
+    if($check) $this->centroEducativo = $p;
+    return $check;
   }
 
   public function setCoordinador($p) {
     if ($p == DEFAULT_VALUE) $p = null;
     $p = (is_null($p)) ? null : intval(trim($p));
-    if($this->checkCoordinador($p)) $this->coordinador = $p;
+    $check = $this->checkCoordinador($p); 
+    if($check) $this->coordinador = $p;
+    return $check;
   }
 
   public function checkId($value) { 

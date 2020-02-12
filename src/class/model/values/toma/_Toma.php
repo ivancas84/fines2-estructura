@@ -59,21 +59,21 @@ class _Toma extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
     if($this->fechaToma !== UNDEFINED) $row["fecha_toma"] = $this->fechaToma("Y-m-d");
     if($this->fechaInicio !== UNDEFINED) $row["fecha_inicio"] = $this->fechaInicio("Y-m-d");
     if($this->fechaFin !== UNDEFINED) $row["fecha_fin"] = $this->fechaFin("Y-m-d");
     if($this->fechaContralor !== UNDEFINED) $row["fecha_contralor"] = $this->fechaContralor("Y-m-d");
     if($this->fechaConsejo !== UNDEFINED) $row["fecha_consejo"] = $this->fechaConsejo("Y-m-d");
-    if($this->estado !== UNDEFINED) $row["estado"] = $this->estado("");
-    if($this->observaciones !== UNDEFINED) $row["observaciones"] = $this->observaciones("");
-    if($this->comentario !== UNDEFINED) $row["comentario"] = $this->comentario("");
-    if($this->tipoMovimiento !== UNDEFINED) $row["tipo_movimiento"] = $this->tipoMovimiento("");
-    if($this->estadoContralor !== UNDEFINED) $row["estado_contralor"] = $this->estadoContralor("");
+    if($this->estado !== UNDEFINED) $row["estado"] = $this->estado();
+    if($this->observaciones !== UNDEFINED) $row["observaciones"] = $this->observaciones();
+    if($this->comentario !== UNDEFINED) $row["comentario"] = $this->comentario();
+    if($this->tipoMovimiento !== UNDEFINED) $row["tipo_movimiento"] = $this->tipoMovimiento();
+    if($this->estadoContralor !== UNDEFINED) $row["estado_contralor"] = $this->estadoContralor();
     if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d h:i:s");
-    if($this->curso !== UNDEFINED) $row["curso"] = $this->curso("");
-    if($this->docente !== UNDEFINED) $row["docente"] = $this->docente("");
-    if($this->reemplazo !== UNDEFINED) $row["reemplazo"] = $this->reemplazo("");
+    if($this->curso !== UNDEFINED) $row["curso"] = $this->curso();
+    if($this->docente !== UNDEFINED) $row["docente"] = $this->docente();
+    if($this->reemplazo !== UNDEFINED) $row["reemplazo"] = $this->reemplazo();
     return $row;
   }
 
@@ -114,127 +114,157 @@ class _Toma extends EntityValues {
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkId($p)) $this->id = $p;
+    $check = $this->checkId($p); 
+    if($check) $this->id = $p;
+    return $check;
   }
 
   public function _setFechaToma(DateTime $p = null) {
-      if($this->checkFechaToma($p)) $this->fechaToma = $p;  
+      $check = $this->checkFechaToma($p); 
+      if($check) $this->fechaToma = $p;  
+      return $check;      
   }
 
   public function setFechaToma($p, $format = UNDEFINED) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(!is_null($p)) {
-      $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);
-    }
-    if($this->checkFechaToma($p)) $this->fechaToma = $p;
+    if(!is_null($p)) $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);    
+    $check = $this->checkFechaToma($p); 
+    if($check) $this->fechaToma = $p;  
+    return $check;
   }
 
   public function _setFechaInicio(DateTime $p = null) {
-      if($this->checkFechaInicio($p)) $this->fechaInicio = $p;  
+      $check = $this->checkFechaInicio($p); 
+      if($check) $this->fechaInicio = $p;  
+      return $check;      
   }
 
   public function setFechaInicio($p, $format = UNDEFINED) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(!is_null($p)) {
-      $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);
-    }
-    if($this->checkFechaInicio($p)) $this->fechaInicio = $p;
+    if(!is_null($p)) $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);    
+    $check = $this->checkFechaInicio($p); 
+    if($check) $this->fechaInicio = $p;  
+    return $check;
   }
 
   public function _setFechaFin(DateTime $p = null) {
-      if($this->checkFechaFin($p)) $this->fechaFin = $p;  
+      $check = $this->checkFechaFin($p); 
+      if($check) $this->fechaFin = $p;  
+      return $check;      
   }
 
   public function setFechaFin($p, $format = UNDEFINED) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(!is_null($p)) {
-      $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);
-    }
-    if($this->checkFechaFin($p)) $this->fechaFin = $p;
+    if(!is_null($p)) $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);    
+    $check = $this->checkFechaFin($p); 
+    if($check) $this->fechaFin = $p;  
+    return $check;
   }
 
   public function _setFechaContralor(DateTime $p = null) {
-      if($this->checkFechaContralor($p)) $this->fechaContralor = $p;  
+      $check = $this->checkFechaContralor($p); 
+      if($check) $this->fechaContralor = $p;  
+      return $check;      
   }
 
   public function setFechaContralor($p, $format = UNDEFINED) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(!is_null($p)) {
-      $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);
-    }
-    if($this->checkFechaContralor($p)) $this->fechaContralor = $p;
+    if(!is_null($p)) $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);    
+    $check = $this->checkFechaContralor($p); 
+    if($check) $this->fechaContralor = $p;  
+    return $check;
   }
 
   public function _setFechaConsejo(DateTime $p = null) {
-      if($this->checkFechaConsejo($p)) $this->fechaConsejo = $p;  
+      $check = $this->checkFechaConsejo($p); 
+      if($check) $this->fechaConsejo = $p;  
+      return $check;      
   }
 
   public function setFechaConsejo($p, $format = UNDEFINED) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(!is_null($p)) {
-      $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);
-    }
-    if($this->checkFechaConsejo($p)) $this->fechaConsejo = $p;
+    if(!is_null($p)) $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);    
+    $check = $this->checkFechaConsejo($p); 
+    if($check) $this->fechaConsejo = $p;  
+    return $check;
   }
 
   public function setEstado($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkEstado($p)) $this->estado = $p;
+    $check = $this->checkEstado($p); 
+    if($check) $this->estado = $p;
+    return $check;
   }
 
   public function setObservaciones($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkObservaciones($p)) $this->observaciones = $p;
+    $check = $this->checkObservaciones($p); 
+    if($check) $this->observaciones = $p;
+    return $check;
   }
 
   public function setComentario($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkComentario($p)) $this->comentario = $p;
+    $check = $this->checkComentario($p); 
+    if($check) $this->comentario = $p;
+    return $check;
   }
 
   public function setTipoMovimiento($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkTipoMovimiento($p)) $this->tipoMovimiento = $p;
+    $check = $this->checkTipoMovimiento($p); 
+    if($check) $this->tipoMovimiento = $p;
+    return $check;
   }
 
   public function setEstadoContralor($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkEstadoContralor($p)) $this->estadoContralor = $p;
+    $check = $this->checkEstadoContralor($p); 
+    if($check) $this->estadoContralor = $p;
+    return $check;
   }
 
   public function _setAlta(DateTime $p = null) {
-      if($this->checkAlta($p)) $this->alta = $p;  
+      $check = $this->checkAlta($p); 
+      if($check) $this->alta = $p;  
+      return $check;
   }
 
   public function setAlta($p, $format = "Y-m-d H:i:s") {
     $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
-    if(!is_null($p)) {
-      $p = SpanishDateTime::createFromFormat($format, $p);
-    }
-    if($this->checkAlta($p)) $this->alta = $p;
+    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
+    $check = $this->checkAlta($p); 
+    if($check) $this->alta = $p;  
+    return $check;
   }
 
   public function setCurso($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkCurso($p)) $this->curso = $p;
+    $check = $this->checkCurso($p); 
+    if($check) $this->curso = $p;
+    return $check;
   }
 
   public function setDocente($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkDocente($p)) $this->docente = $p;
+    $check = $this->checkDocente($p); 
+    if($check) $this->docente = $p;
+    return $check;
   }
 
   public function setReemplazo($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkReemplazo($p)) $this->reemplazo = $p;
+    $check = $this->checkReemplazo($p); 
+    if($check) $this->reemplazo = $p;
+    return $check;
   }
 
   public function checkId($value) { 

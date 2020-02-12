@@ -26,10 +26,10 @@ class _CentroEducativo extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
-    if($this->nombre !== UNDEFINED) $row["nombre"] = $this->nombre("");
-    if($this->cue !== UNDEFINED) $row["cue"] = $this->cue("");
-    if($this->domicilio !== UNDEFINED) $row["domicilio"] = $this->domicilio("");
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
+    if($this->nombre !== UNDEFINED) $row["nombre"] = $this->nombre();
+    if($this->cue !== UNDEFINED) $row["cue"] = $this->cue();
+    if($this->domicilio !== UNDEFINED) $row["domicilio"] = $this->domicilio();
     return $row;
   }
 
@@ -48,25 +48,33 @@ class _CentroEducativo extends EntityValues {
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkId($p)) $this->id = $p;
+    $check = $this->checkId($p); 
+    if($check) $this->id = $p;
+    return $check;
   }
 
   public function setNombre($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkNombre($p)) $this->nombre = $p;
+    $check = $this->checkNombre($p); 
+    if($check) $this->nombre = $p;
+    return $check;
   }
 
   public function setCue($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkCue($p)) $this->cue = $p;
+    $check = $this->checkCue($p); 
+    if($check) $this->cue = $p;
+    return $check;
   }
 
   public function setDomicilio($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkDomicilio($p)) $this->domicilio = $p;
+    $check = $this->checkDomicilio($p); 
+    if($check) $this->domicilio = $p;
+    return $check;
   }
 
   public function checkId($value) { 

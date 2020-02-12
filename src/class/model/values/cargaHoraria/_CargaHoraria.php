@@ -32,12 +32,12 @@ class _CargaHoraria extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
-    if($this->anio !== UNDEFINED) $row["anio"] = $this->anio("");
-    if($this->semestre !== UNDEFINED) $row["semestre"] = $this->semestre("");
-    if($this->horasCatedra !== UNDEFINED) $row["horas_catedra"] = $this->horasCatedra("");
-    if($this->plan !== UNDEFINED) $row["plan"] = $this->plan("");
-    if($this->asignatura !== UNDEFINED) $row["asignatura"] = $this->asignatura("");
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
+    if($this->anio !== UNDEFINED) $row["anio"] = $this->anio();
+    if($this->semestre !== UNDEFINED) $row["semestre"] = $this->semestre();
+    if($this->horasCatedra !== UNDEFINED) $row["horas_catedra"] = $this->horasCatedra();
+    if($this->plan !== UNDEFINED) $row["plan"] = $this->plan();
+    if($this->asignatura !== UNDEFINED) $row["asignatura"] = $this->asignatura();
     return $row;
   }
 
@@ -60,37 +60,49 @@ class _CargaHoraria extends EntityValues {
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkId($p)) $this->id = $p;
+    $check = $this->checkId($p); 
+    if($check) $this->id = $p;
+    return $check;
   }
 
   public function setAnio($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkAnio($p)) $this->anio = $p;
+    $check = $this->checkAnio($p); 
+    if($check) $this->anio = $p;
+    return $check;
   }
 
   public function setSemestre($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkSemestre($p)) $this->semestre = $p;
+    $check = $this->checkSemestre($p); 
+    if($check) $this->semestre = $p;
+    return $check;
   }
 
   public function setHorasCatedra($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkHorasCatedra($p)) $this->horasCatedra = $p;
+    $check = $this->checkHorasCatedra($p); 
+    if($check) $this->horasCatedra = $p;
+    return $check;
   }
 
   public function setPlan($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkPlan($p)) $this->plan = $p;
+    $check = $this->checkPlan($p); 
+    if($check) $this->plan = $p;
+    return $check;
   }
 
   public function setAsignatura($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkAsignatura($p)) $this->asignatura = $p;
+    $check = $this->checkAsignatura($p); 
+    if($check) $this->asignatura = $p;
+    return $check;
   }
 
   public function checkId($value) { 

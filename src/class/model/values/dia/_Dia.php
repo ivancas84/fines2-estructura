@@ -23,9 +23,9 @@ class _Dia extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
-    if($this->numero !== UNDEFINED) $row["numero"] = $this->numero("");
-    if($this->dia !== UNDEFINED) $row["dia"] = $this->dia("");
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
+    if($this->numero !== UNDEFINED) $row["numero"] = $this->numero();
+    if($this->dia !== UNDEFINED) $row["dia"] = $this->dia();
     return $row;
   }
 
@@ -42,19 +42,25 @@ class _Dia extends EntityValues {
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkId($p)) $this->id = $p;
+    $check = $this->checkId($p); 
+    if($check) $this->id = $p;
+    return $check;
   }
 
   public function setNumero($p) {
     if ($p == DEFAULT_VALUE) $p = null;
     $p = (is_null($p)) ? null : intval(trim($p));
-    if($this->checkNumero($p)) $this->numero = $p;
+    $check = $this->checkNumero($p); 
+    if($check) $this->numero = $p;
+    return $check;
   }
 
   public function setDia($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkDia($p)) $this->dia = $p;
+    $check = $this->checkDia($p); 
+    if($check) $this->dia = $p;
+    return $check;
   }
 
   public function checkId($value) { 

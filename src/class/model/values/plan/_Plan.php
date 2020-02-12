@@ -23,9 +23,9 @@ class _Plan extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
-    if($this->orientacion !== UNDEFINED) $row["orientacion"] = $this->orientacion("");
-    if($this->resolucion !== UNDEFINED) $row["resolucion"] = $this->resolucion("");
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
+    if($this->orientacion !== UNDEFINED) $row["orientacion"] = $this->orientacion();
+    if($this->resolucion !== UNDEFINED) $row["resolucion"] = $this->resolucion();
     return $row;
   }
 
@@ -42,19 +42,25 @@ class _Plan extends EntityValues {
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkId($p)) $this->id = $p;
+    $check = $this->checkId($p); 
+    if($check) $this->id = $p;
+    return $check;
   }
 
   public function setOrientacion($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkOrientacion($p)) $this->orientacion = $p;
+    $check = $this->checkOrientacion($p); 
+    if($check) $this->orientacion = $p;
+    return $check;
   }
 
   public function setResolucion($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkResolucion($p)) $this->resolucion = $p;
+    $check = $this->checkResolucion($p); 
+    if($check) $this->resolucion = $p;
+    return $check;
   }
 
   public function checkId($value) { 

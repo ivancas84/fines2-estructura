@@ -20,8 +20,8 @@ class _Modalidad extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
-    if($this->nombre !== UNDEFINED) $row["nombre"] = $this->nombre("");
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
+    if($this->nombre !== UNDEFINED) $row["nombre"] = $this->nombre();
     return $row;
   }
 
@@ -36,13 +36,17 @@ class _Modalidad extends EntityValues {
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkId($p)) $this->id = $p;
+    $check = $this->checkId($p); 
+    if($check) $this->id = $p;
+    return $check;
   }
 
   public function setNombre($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkNombre($p)) $this->nombre = $p;
+    $check = $this->checkNombre($p); 
+    if($check) $this->nombre = $p;
+    return $check;
   }
 
   public function checkId($value) { 

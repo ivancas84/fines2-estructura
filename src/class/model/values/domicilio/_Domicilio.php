@@ -38,14 +38,14 @@ class _Domicilio extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
-    if($this->calle !== UNDEFINED) $row["calle"] = $this->calle("");
-    if($this->entre !== UNDEFINED) $row["entre"] = $this->entre("");
-    if($this->numero !== UNDEFINED) $row["numero"] = $this->numero("");
-    if($this->piso !== UNDEFINED) $row["piso"] = $this->piso("");
-    if($this->departamento !== UNDEFINED) $row["departamento"] = $this->departamento("");
-    if($this->barrio !== UNDEFINED) $row["barrio"] = $this->barrio("");
-    if($this->localidad !== UNDEFINED) $row["localidad"] = $this->localidad("");
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
+    if($this->calle !== UNDEFINED) $row["calle"] = $this->calle();
+    if($this->entre !== UNDEFINED) $row["entre"] = $this->entre();
+    if($this->numero !== UNDEFINED) $row["numero"] = $this->numero();
+    if($this->piso !== UNDEFINED) $row["piso"] = $this->piso();
+    if($this->departamento !== UNDEFINED) $row["departamento"] = $this->departamento();
+    if($this->barrio !== UNDEFINED) $row["barrio"] = $this->barrio();
+    if($this->localidad !== UNDEFINED) $row["localidad"] = $this->localidad();
     return $row;
   }
 
@@ -72,49 +72,65 @@ class _Domicilio extends EntityValues {
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkId($p)) $this->id = $p;
+    $check = $this->checkId($p); 
+    if($check) $this->id = $p;
+    return $check;
   }
 
   public function setCalle($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkCalle($p)) $this->calle = $p;
+    $check = $this->checkCalle($p); 
+    if($check) $this->calle = $p;
+    return $check;
   }
 
   public function setEntre($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkEntre($p)) $this->entre = $p;
+    $check = $this->checkEntre($p); 
+    if($check) $this->entre = $p;
+    return $check;
   }
 
   public function setNumero($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkNumero($p)) $this->numero = $p;
+    $check = $this->checkNumero($p); 
+    if($check) $this->numero = $p;
+    return $check;
   }
 
   public function setPiso($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkPiso($p)) $this->piso = $p;
+    $check = $this->checkPiso($p); 
+    if($check) $this->piso = $p;
+    return $check;
   }
 
   public function setDepartamento($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkDepartamento($p)) $this->departamento = $p;
+    $check = $this->checkDepartamento($p); 
+    if($check) $this->departamento = $p;
+    return $check;
   }
 
   public function setBarrio($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkBarrio($p)) $this->barrio = $p;
+    $check = $this->checkBarrio($p); 
+    if($check) $this->barrio = $p;
+    return $check;
   }
 
   public function setLocalidad($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkLocalidad($p)) $this->localidad = $p;
+    $check = $this->checkLocalidad($p); 
+    if($check) $this->localidad = $p;
+    return $check;
   }
 
   public function checkId($value) { 

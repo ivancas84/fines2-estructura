@@ -65,23 +65,23 @@ class _Comision extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
-    if($this->turno !== UNDEFINED) $row["turno"] = $this->turno("");
-    if($this->division !== UNDEFINED) $row["division"] = $this->division("");
-    if($this->anio !== UNDEFINED) $row["anio"] = $this->anio("");
-    if($this->semestre !== UNDEFINED) $row["semestre"] = $this->semestre("");
-    if($this->comentario !== UNDEFINED) $row["comentario"] = $this->comentario("");
-    if($this->autorizada !== UNDEFINED) $row["autorizada"] = $this->autorizada("");
-    if($this->apertura !== UNDEFINED) $row["apertura"] = $this->apertura("");
-    if($this->publicada !== UNDEFINED) $row["publicada"] = $this->publicada("");
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
+    if($this->turno !== UNDEFINED) $row["turno"] = $this->turno();
+    if($this->division !== UNDEFINED) $row["division"] = $this->division();
+    if($this->anio !== UNDEFINED) $row["anio"] = $this->anio();
+    if($this->semestre !== UNDEFINED) $row["semestre"] = $this->semestre();
+    if($this->comentario !== UNDEFINED) $row["comentario"] = $this->comentario();
+    if($this->autorizada !== UNDEFINED) $row["autorizada"] = $this->autorizada();
+    if($this->apertura !== UNDEFINED) $row["apertura"] = $this->apertura();
+    if($this->publicada !== UNDEFINED) $row["publicada"] = $this->publicada();
     if($this->fechaAnio !== UNDEFINED) $row["fecha_anio"] = $this->fechaAnio("Y");
-    if($this->fechaSemestre !== UNDEFINED) $row["fecha_semestre"] = $this->fechaSemestre("");
-    if($this->observaciones !== UNDEFINED) $row["observaciones"] = $this->observaciones("");
+    if($this->fechaSemestre !== UNDEFINED) $row["fecha_semestre"] = $this->fechaSemestre();
+    if($this->observaciones !== UNDEFINED) $row["observaciones"] = $this->observaciones();
     if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d h:i:s");
-    if($this->sede !== UNDEFINED) $row["sede"] = $this->sede("");
-    if($this->plan !== UNDEFINED) $row["plan"] = $this->plan("");
-    if($this->modalidad !== UNDEFINED) $row["modalidad"] = $this->modalidad("");
-    if($this->comisionSiguiente !== UNDEFINED) $row["comision_siguiente"] = $this->comisionSiguiente("");
+    if($this->sede !== UNDEFINED) $row["sede"] = $this->sede();
+    if($this->plan !== UNDEFINED) $row["plan"] = $this->plan();
+    if($this->modalidad !== UNDEFINED) $row["modalidad"] = $this->modalidad();
+    if($this->comisionSiguiente !== UNDEFINED) $row["comision_siguiente"] = $this->comisionSiguiente();
     return $row;
   }
 
@@ -126,115 +126,149 @@ class _Comision extends EntityValues {
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkId($p)) $this->id = $p;
+    $check = $this->checkId($p); 
+    if($check) $this->id = $p;
+    return $check;
   }
 
   public function setTurno($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkTurno($p)) $this->turno = $p;
+    $check = $this->checkTurno($p); 
+    if($check) $this->turno = $p;
+    return $check;
   }
 
   public function setDivision($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkDivision($p)) $this->division = $p;
+    $check = $this->checkDivision($p); 
+    if($check) $this->division = $p;
+    return $check;
   }
 
   public function setAnio($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkAnio($p)) $this->anio = $p;
+    $check = $this->checkAnio($p); 
+    if($check) $this->anio = $p;
+    return $check;
   }
 
   public function setSemestre($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkSemestre($p)) $this->semestre = $p;
+    $check = $this->checkSemestre($p); 
+    if($check) $this->semestre = $p;
+    return $check;
   }
 
   public function setComentario($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkComentario($p)) $this->comentario = $p;
+    $check = $this->checkComentario($p); 
+    if($check) $this->comentario = $p;
+    return $check;
   }
 
   public function setAutorizada($p) {
     if ($p == DEFAULT_VALUE) $p = null;
     $p = (is_null($p)) ? null : settypebool(trim($p));
-    if($this->checkAutorizada($p)) $this->autorizada = $p;
+    $check = $this->checkAutorizada($p); 
+    if($check) $this->autorizada = $p;
+    return $check;
   }
 
   public function setApertura($p) {
     if ($p == DEFAULT_VALUE) $p = null;
     $p = (is_null($p)) ? null : settypebool(trim($p));
-    if($this->checkApertura($p)) $this->apertura = $p;
+    $check = $this->checkApertura($p); 
+    if($check) $this->apertura = $p;
+    return $check;
   }
 
   public function setPublicada($p) {
     if ($p == DEFAULT_VALUE) $p = null;
     $p = (is_null($p)) ? null : settypebool(trim($p));
-    if($this->checkPublicada($p)) $this->publicada = $p;
+    $check = $this->checkPublicada($p); 
+    if($check) $this->publicada = $p;
+    return $check;
   }
 
   public function _setFechaAnio(DateTime $p = null) {
-      if($this->checkFechaAnio($p)) $this->fechaAnio = $p;  
+      $check = $this->checkFechaAnio($p); 
+      if($check) $this->fechaAnio = $p;  
+      return $check;
   }
 
   public function setFechaAnio($p, $format = "Y") {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(!is_null($p)) {
-      $p = SpanishDateTime::createFromFormat($format, $p);
-    }
-    if($this->checkFechaAnio($p)) $this->fechaAnio = $p;
+    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
+    $check = $this->checkFechaAnio($p); 
+    if($check) $this->fechaAnio = $p;  
+    return $check;
   }
 
   public function setFechaSemestre($p) {
     if ($p == DEFAULT_VALUE) $p = null;
     $p = (is_null($p)) ? null : intval(trim($p));
-    if($this->checkFechaSemestre($p)) $this->fechaSemestre = $p;
+    $check = $this->checkFechaSemestre($p); 
+    if($check) $this->fechaSemestre = $p;
+    return $check;
   }
 
   public function setObservaciones($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkObservaciones($p)) $this->observaciones = $p;
+    $check = $this->checkObservaciones($p); 
+    if($check) $this->observaciones = $p;
+    return $check;
   }
 
   public function _setAlta(DateTime $p = null) {
-      if($this->checkAlta($p)) $this->alta = $p;  
+      $check = $this->checkAlta($p); 
+      if($check) $this->alta = $p;  
+      return $check;
   }
 
   public function setAlta($p, $format = "Y-m-d H:i:s") {
     $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
-    if(!is_null($p)) {
-      $p = SpanishDateTime::createFromFormat($format, $p);
-    }
-    if($this->checkAlta($p)) $this->alta = $p;
+    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
+    $check = $this->checkAlta($p); 
+    if($check) $this->alta = $p;  
+    return $check;
   }
 
   public function setSede($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkSede($p)) $this->sede = $p;
+    $check = $this->checkSede($p); 
+    if($check) $this->sede = $p;
+    return $check;
   }
 
   public function setPlan($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkPlan($p)) $this->plan = $p;
+    $check = $this->checkPlan($p); 
+    if($check) $this->plan = $p;
+    return $check;
   }
 
   public function setModalidad($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkModalidad($p)) $this->modalidad = $p;
+    $check = $this->checkModalidad($p); 
+    if($check) $this->modalidad = $p;
+    return $check;
   }
 
   public function setComisionSiguiente($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkComisionSiguiente($p)) $this->comisionSiguiente = $p;
+    $check = $this->checkComisionSiguiente($p); 
+    if($check) $this->comisionSiguiente = $p;
+    return $check;
   }
 
   public function checkId($value) { 

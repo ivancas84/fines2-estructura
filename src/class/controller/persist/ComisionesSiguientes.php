@@ -66,7 +66,12 @@ class ComisionesSiguientesPersist extends Persist {
     foreach($comisionesAnteriores as $comision){
       $nuevaComision = Comision::_fromArray($comision);
       $nuevaComision->setId(null);
-      $nuevaComision->setTramoSiguiente();
+      $nuevaComision->setFechaAnio($param["fecha_anio"]);
+      $nuevaComision->setFechaSemestre($param["fecha_semestre"]);
+      $nuevaComision->resetTramoSiguiente();
+      if($nuevaComision->_logs->isError()) {
+        
+      }
       print_r($nuevaComision->_toArray());
       
     }

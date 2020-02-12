@@ -29,11 +29,11 @@ class _Horario extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
     if($this->horaInicio !== UNDEFINED) $row["hora_inicio"] = $this->horaInicio("h:i:s");
     if($this->horaFin !== UNDEFINED) $row["hora_fin"] = $this->horaFin("h:i:s");
-    if($this->curso !== UNDEFINED) $row["curso"] = $this->curso("");
-    if($this->dia !== UNDEFINED) $row["dia"] = $this->dia("");
+    if($this->curso !== UNDEFINED) $row["curso"] = $this->curso();
+    if($this->dia !== UNDEFINED) $row["dia"] = $this->dia();
     return $row;
   }
 
@@ -54,43 +54,53 @@ class _Horario extends EntityValues {
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkId($p)) $this->id = $p;
+    $check = $this->checkId($p); 
+    if($check) $this->id = $p;
+    return $check;
   }
 
   public function _setHoraInicio(DateTime $p = null) {
-      if($this->checkHoraInicio($p)) $this->horaInicio = $p;  
+      $check = $this->checkHoraInicio($p); 
+      if($check) $this->horaInicio = $p;  
+      return $check;
   }
 
   public function setHoraInicio($p, $format = "H:i:s") {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(!is_null($p)) {
-      $p = SpanishDateTime::createFromFormat($format, $p);
-    }
-    if($this->checkHoraInicio($p)) $this->horaInicio = $p;
+    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
+    $check = $this->checkHoraInicio($p); 
+    if($check) $this->horaInicio = $p;  
+    return $check;
   }
 
   public function _setHoraFin(DateTime $p = null) {
-      if($this->checkHoraFin($p)) $this->horaFin = $p;  
+      $check = $this->checkHoraFin($p); 
+      if($check) $this->horaFin = $p;  
+      return $check;
   }
 
   public function setHoraFin($p, $format = "H:i:s") {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(!is_null($p)) {
-      $p = SpanishDateTime::createFromFormat($format, $p);
-    }
-    if($this->checkHoraFin($p)) $this->horaFin = $p;
+    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
+    $check = $this->checkHoraFin($p); 
+    if($check) $this->horaFin = $p;  
+    return $check;
   }
 
   public function setCurso($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkCurso($p)) $this->curso = $p;
+    $check = $this->checkCurso($p); 
+    if($check) $this->curso = $p;
+    return $check;
   }
 
   public function setDia($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    if($this->checkDia($p)) $this->dia = $p;
+    $check = $this->checkDia($p); 
+    if($check) $this->dia = $p;
+    return $check;
   }
 
   public function checkId($value) { 
