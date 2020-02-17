@@ -8,17 +8,19 @@ require_once("class/controller/persist/ComisionCursos.php");
 
 
 
-class HorariosCursosPersist extends Persist {
+class HorariosCursosGrupoPersist extends Persist {
   /**
-   * Persistencia de cursos y comisiones
+   * Define los horarios de todos los cursos de un grupo basandose en la comisión anterior
+   * En el caso de que encuenrtre un horario definido de al menos un curso ignora toda la comision
    */
-  protected $entityName = "horarios_cursos";
+  protected $entityName = "horarios_cursos_grupo";
 
 
   public function consultarComisiones(array $p){
     /**
      * Si existe al menos una comision para los parametros indicados no se realiza la consulta
      */
+
     $render = [
       ["fecha_anio", "=", $p["fecha_anio"]],
       ["fecha_semestre", "=", $p["fecha_semestre"]],
@@ -54,17 +56,17 @@ class HorariosCursosPersist extends Persist {
   }
 
   public function main($data){
-
     /**
-     * @param $data["fecha_anio"] //fecha anio a calcular
-     * @param $data["fecha_semestre"] //fecha semestre a calcular
-     * @param $data["modalidad"] //modalidad a calcular
-     * 
+     * @param $data["fecha_anio"]
+     * @param $data["fecha_semestre"]
+     * @param $data["modalidad"]
+     * @param $data["centro_educativo"]
      */
     if(empty($data["fecha_anio"])) throw new Exception("Dato no definido: fecha anio");
     if(empty($data["fecha_semestre"])) throw new Exception("Dato no definido: fecha semestre");
     if(empty($data["modalidad"])) throw new Exception("Dato no definido: modalidad");
-    if(empty($data["centro_educativo"])) throw new Exception("Dato no definido: centro_educativo");
+    if(empty($data["sed_centro_educativo"])) throw new Exception("Dato no definido: centro_educativo");
+
 
     //if(!count($this->consultarCursos($data))) throw new Exception("Ya existen comisiones para los parametros ingresados");
     //$param = $this->definirParametros($data);
