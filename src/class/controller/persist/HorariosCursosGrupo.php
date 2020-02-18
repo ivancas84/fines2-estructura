@@ -24,7 +24,6 @@ class HorariosCursosGrupoPersist extends Persist {
 
   protected $comisionesGrupoAnterior;
 
-
   protected $grupo;
 
   protected $grupoAnterior;
@@ -72,6 +71,8 @@ class HorariosCursosGrupoPersist extends Persist {
   }
 
   protected static function quitarComisionesGrupoAnteriorSinHorario(){
+    $this->consultarHorariosComisionesGrupoAnterior();
+
     $idsComisionesGrupoAnterior = array_column($this->comisionesGrupoAnterior, "id");
     $idComisionesGrupoAnteriorConHorarios = array_unique(array_column($this->horariosGrupoAnterior, "cur_comision"));
     for($i = 0; $i < count($idsComisionesGrupoAnterior); $i++) {
@@ -94,10 +95,12 @@ class HorariosCursosGrupoPersist extends Persist {
     $this->consultarComisionesGrupoAnteriorConSiguiente();
     
     $this->quitarComisionesGrupoAnteriorMismoSiguiente();
-
-    $this->consultarHorariosComisionesGrupoAnterior();
-
+    
     $this->quitarComisionesGrupoAnteriorSinHorario();
+
+    $this->quitarComisionesGrupoActualConHorario();
+
+    //$this->definirHorariosComisionSiguiente();
 
   }
 
