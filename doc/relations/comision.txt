@@ -21,6 +21,9 @@ fecha_anio (fa): year nf.
 fecha_semestre (fs): integer nf.
 observaciones (obs): text nf.
 alta (alt): timestamp nf. NOT NULL. NOT ADMIN. DEFAULT: CURRENT_TIMESTAMP.
+dias (dia): string nf. NOT ADMIN.
+hora_inicio (hi): time nf. NOT NULL. NOT ADMIN.
+hora_fin (hf): time nf. NOT NULL. NOT ADMIN.
 sede (sed): string mu. NOT NULL. MAIN.
 plan (pla): string mu. NOT NULL.
 modalidad (moa): string mu. NOT NULL.

@@ -4,6 +4,12 @@
 require_once("class/controller/Persist.php");
 
 class ComisionCursosPersist extends Persist {
+
+  public $id;
+  /**
+   * id de la comision persistida
+   */
+
   /**
    * Persistencia de cursos y comisiones
    */
@@ -41,6 +47,7 @@ class ComisionCursosPersist extends Persist {
         }
     }
 
+    return $comision["id"];
   }
 
 

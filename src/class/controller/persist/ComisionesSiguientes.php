@@ -5,6 +5,8 @@ require_once("class/controller/Persist.php");
 require_once("class/model/Ma.php");
 require_once("class/model/Values.php");
 require_once("class/controller/persist/ComisionCursos.php");
+require_once("class/controller/ModelTools.php");
+
 
 
 
@@ -14,22 +16,22 @@ class ComisionesSiguientesPersist extends Persist {
    */
   protected $entityName = "comisiones_siguientes";
 
-  public function main($data){
+  public function main($grupo){
      /**
      * @param $data["fecha_anio"] //fecha anio a calcular
      * @param $data["fecha_semestre"] //fecha semestre a calcular
      * @param $data["modalidad"] //modalidad a calcular
      */
-    if(empty($data["fecha_anio"])) throw new Exception("Dato no definido: fecha anio");
-    if(empty($data["fecha_semestre"])) throw new Exception("Dato no definido: fecha semestre");
-    if(empty($data["modalidad"])) throw new Exception("Dato no definido: modalidad");
-    if(empty($data["sed_centro_educativo"])) throw new Exception("Dato no definido: centro educativo");
+    if(empty($grupo["fecha_anio"])) throw new Exception("Dato no definido: fecha anio");
+    if(empty($grupo["fecha_semestre"])) throw new Exception("Dato no definido: fecha semestre");
+    if(empty($grupo["modalidad"])) throw new Exception("Dato no definido: modalidad");
+    if(empty($grupo["sed_centro_educativo"])) throw new Exception("Dato no definido: centro educativo");
    
-    $render = Render::getInstanceParams($data);
+    $render = Render::getInstanceParams($grupo);
     if(Ma::count("comision",$render)) throw new Exception("Ya existen comisiones para los parametros ingresados");
     
-    $dataAnterior = ModelTools::intervaloAnterior($data);
-    $render = Render::getInstanceParams($dataAnterior);
+    $grupoAnterior = ModelTools::intervaloAnterior($grupo);
+    $render = Render::getInstanceParams($grupoAnterior);
     $comisionesAnteriores = Ma::all("comision",$render);
     if(!count($comisionesAnteriores)) throw new Exception("No existen comisiones anteriores para tomar de referencia");
   
@@ -37,14 +39,15 @@ class ComisionesSiguientesPersist extends Persist {
       $nuevaComision = EntityValues::getInstanceRequire("comision");
       $nuevaComision->_fromArray($comision);
       $nuevaComision->setId(null);
-      $nuevaComision->setFechaAnio($data["fecha_anio"]);
-      $nuevaComision->setFechaSemestre($data["fecha_semestre"]);
+      $nuevaComision->setFechaAnio($grupo["fecha_anio"]);
+      $nuevaComision->setFechaSemestre($grupo["fecha_semestre"]);
       $nuevaComision->resetTramoSiguiente();
       if($nuevaComision->_logs()->isError()) continue;
 
       $controller = new ComisionCursosPersist();
-      $controller->main($nuevaComision->_toArray());
+      $comision["comision_siguiente"] = $controller->main($nuevaComision->_toArray());
       array_push($this->logs, ["sql"=>$controller->getSql(), "detail"=>$controller->getDetail()]);
+      $this->update("comision", $comision);
     }
   
   }

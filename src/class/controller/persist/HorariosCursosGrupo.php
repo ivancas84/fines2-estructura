@@ -5,6 +5,9 @@ require_once("class/controller/Persist.php");
 require_once("class/model/Ma.php");
 require_once("class/model/Values.php");
 require_once("class/controller/persist/ComisionCursos.php");
+require_once("class/controller/ModelTools.php");
+require_once("class/model/Render.php");
+
 
 
 
@@ -36,7 +39,7 @@ class HorariosCursosGrupoPersist extends Persist {
   }
 
   protected function consultarComisionesGrupoAnteriorConSiguiente(){
-    $render::getInstanceParams($this->grupoAnterior);
+    $render = Render::getInstanceParams($this->grupoAnterior);
     $render->addCondition(["comision_siguiente","=",true]);
     $this->comisionesGrupoAnterior = Ma::all("comision",$render);
   }
@@ -86,21 +89,21 @@ class HorariosCursosGrupoPersist extends Persist {
     if(empty($grupo["fecha_anio"])) throw new Exception("Dato no definido: fecha anio");
     if(empty($grupo["fecha_semestre"])) throw new Exception("Dato no definido: fecha semestre");
     if(empty($grupo["modalidad"])) throw new Exception("Dato no definido: modalidad");
-    if(empty($grupo["sed_centro_educativo"])) throw new Exception("Dato no definido: centro educativo");
+    if(empty($grupo["sed_centro_educativo"])) throw new Exception("Dato no definido: centro educativo (sed_centro_educativo)");
    
     $this->grupo = $grupo;
     
     $this->definirGrupoAnterior();
     
     $this->consultarComisionesGrupoAnteriorConSiguiente();
-    
+    /*
     $this->quitarComisionesGrupoAnteriorMismoSiguiente();
     
     $this->quitarComisionesGrupoAnteriorSinHorario();
 
     $this->quitarComisionesGrupoActualConHorario();
 
-    //$this->definirHorariosComisionSiguiente();
+    $this->definirHorariosComisionSiguiente();*/
 
   }
 
