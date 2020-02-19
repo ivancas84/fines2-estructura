@@ -4,6 +4,8 @@ require_once("../config/config.php");
 
 require_once("class/controller/persist/ComisionesSiguientes.php");
 require_once("class/controller/persist/HorariosCursosGrupo.php");
+require_once("class/controller/persist/HorariosComision.php");
+
 
 
 $grupo = [
@@ -13,13 +15,19 @@ $grupo = [
     "sed_centro_educativo"=>"1"
 ];
 
-$controller = new HorariosCursosGrupoPersist();
+$data = [
+    "dia_" => [1,2,4],
+    "hora_inicio" => "10:00",
+    "id" => "5e4c1eb8d8621",
+];
+
+//$controller = new HorariosCursosGrupoPersist();
 //$controller = new ComisionesSiguientesPersist();
-$controller->main($grupo);
+$controller = new HorariosComisionPersist();
+$controller->main($data);
 
 
 //Dba::dbInstance()->multiQueryTransaction($controller->getSql());
 //Dba::dbClose();
-echo "<pre>";
-
-print_r($controller);
+//echo "<pre>";
+//print_r($controller);

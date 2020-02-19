@@ -2,6 +2,28 @@
 
 class ModelTools {
 
+  public static function sumaHorasCatedraAsignaturasGrupo($fechaAnio, $fechaSemestre, $modalidad, $centroEducativo){
+    /**
+     * @param fechaAnio
+     * @param fechaSemestre
+     * @param modalidad
+     * @param centroEducativo
+     */
+    $params = [
+      "com_fecha_anio" => $fechaAnio,
+      "com_fecha_semestre" => $fechaSemestre,
+      "com_modalidad" =>  $modalidad,
+      "com_sed_centro_educativo" => $centroEducativo
+    ];
+
+    $render = Render::getInstanceParams($params);
+    $render->setAggregate(["ch_sum_horas_catedra"]);
+    $render->setGroup(["ch_asignatura"]);
+    $render->setOrder(["ch_sum_horas_catedra" =>"desc"]);
+
+    return Ma::advanced("curso",$render);
+  }
+
   public static function intervaloAnterior(array $grupo){
     /**
      * un intervalo es la combinación de fecha_anio, fecha_semestre
