@@ -26,10 +26,10 @@ class _CentroEducativo extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
-    if($this->nombre !== UNDEFINED) $row["nombre"] = $this->nombre("");
-    if($this->cue !== UNDEFINED) $row["cue"] = $this->cue("");
-    if($this->domicilio !== UNDEFINED) $row["domicilio"] = $this->domicilio("");
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
+    if($this->nombre !== UNDEFINED) $row["nombre"] = $this->nombre();
+    if($this->cue !== UNDEFINED) $row["cue"] = $this->cue();
+    if($this->domicilio !== UNDEFINED) $row["domicilio"] = $this->domicilio();
     return $row;
   }
 

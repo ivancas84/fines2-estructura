@@ -35,13 +35,13 @@ class _Designacion extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
     if($this->desde !== UNDEFINED) $row["desde"] = $this->desde("Y-m-d");
     if($this->hasta !== UNDEFINED) $row["hasta"] = $this->hasta("Y-m-d");
     if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d h:i:s");
-    if($this->cargo !== UNDEFINED) $row["cargo"] = $this->cargo("");
-    if($this->sede !== UNDEFINED) $row["sede"] = $this->sede("");
-    if($this->persona !== UNDEFINED) $row["persona"] = $this->persona("");
+    if($this->cargo !== UNDEFINED) $row["cargo"] = $this->cargo();
+    if($this->sede !== UNDEFINED) $row["sede"] = $this->sede();
+    if($this->persona !== UNDEFINED) $row["persona"] = $this->persona();
     return $row;
   }
 

@@ -47,17 +47,17 @@ class _Persona extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
-    if($this->nombres !== UNDEFINED) $row["nombres"] = $this->nombres("");
-    if($this->apellidos !== UNDEFINED) $row["apellidos"] = $this->apellidos("");
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
+    if($this->nombres !== UNDEFINED) $row["nombres"] = $this->nombres();
+    if($this->apellidos !== UNDEFINED) $row["apellidos"] = $this->apellidos();
     if($this->fechaNacimiento !== UNDEFINED) $row["fecha_nacimiento"] = $this->fechaNacimiento("Y-m-d");
-    if($this->numeroDocumento !== UNDEFINED) $row["numero_documento"] = $this->numeroDocumento("");
-    if($this->cuil !== UNDEFINED) $row["cuil"] = $this->cuil("");
-    if($this->email !== UNDEFINED) $row["email"] = $this->email("");
-    if($this->genero !== UNDEFINED) $row["genero"] = $this->genero("");
-    if($this->apodo !== UNDEFINED) $row["apodo"] = $this->apodo("");
+    if($this->numeroDocumento !== UNDEFINED) $row["numero_documento"] = $this->numeroDocumento();
+    if($this->cuil !== UNDEFINED) $row["cuil"] = $this->cuil();
+    if($this->email !== UNDEFINED) $row["email"] = $this->email();
+    if($this->genero !== UNDEFINED) $row["genero"] = $this->genero();
+    if($this->apodo !== UNDEFINED) $row["apodo"] = $this->apodo();
     if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d h:i:s");
-    if($this->domicilio !== UNDEFINED) $row["domicilio"] = $this->domicilio("");
+    if($this->domicilio !== UNDEFINED) $row["domicilio"] = $this->domicilio();
     return $row;
   }
 

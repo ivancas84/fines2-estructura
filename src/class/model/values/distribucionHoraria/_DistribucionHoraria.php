@@ -26,10 +26,10 @@ class _DistribucionHoraria extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
-    if($this->horasCatedra !== UNDEFINED) $row["horas_catedra"] = $this->horasCatedra("");
-    if($this->dia !== UNDEFINED) $row["dia"] = $this->dia("");
-    if($this->cargaHoraria !== UNDEFINED) $row["carga_horaria"] = $this->cargaHoraria("");
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
+    if($this->horasCatedra !== UNDEFINED) $row["horas_catedra"] = $this->horasCatedra();
+    if($this->dia !== UNDEFINED) $row["dia"] = $this->dia();
+    if($this->cargaHoraria !== UNDEFINED) $row["carga_horaria"] = $this->cargaHoraria();
     return $row;
   }
 

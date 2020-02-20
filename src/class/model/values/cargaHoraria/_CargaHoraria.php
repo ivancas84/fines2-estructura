@@ -32,12 +32,12 @@ class _CargaHoraria extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
-    if($this->anio !== UNDEFINED) $row["anio"] = $this->anio("");
-    if($this->semestre !== UNDEFINED) $row["semestre"] = $this->semestre("");
-    if($this->horasCatedra !== UNDEFINED) $row["horas_catedra"] = $this->horasCatedra("");
-    if($this->plan !== UNDEFINED) $row["plan"] = $this->plan("");
-    if($this->asignatura !== UNDEFINED) $row["asignatura"] = $this->asignatura("");
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
+    if($this->anio !== UNDEFINED) $row["anio"] = $this->anio();
+    if($this->semestre !== UNDEFINED) $row["semestre"] = $this->semestre();
+    if($this->horasCatedra !== UNDEFINED) $row["horas_catedra"] = $this->horasCatedra();
+    if($this->plan !== UNDEFINED) $row["plan"] = $this->plan();
+    if($this->asignatura !== UNDEFINED) $row["asignatura"] = $this->asignatura();
     return $row;
   }
 

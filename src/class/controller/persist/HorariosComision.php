@@ -5,6 +5,7 @@ require_once("class/controller/Persist.php");
 require_once("class/model/Ma.php");
 require_once("class/model/Values.php");
 require_once("class/controller/persist/ComisionCursos.php");
+require_once("function/array_combine_keys.php");
 
 
 
@@ -12,6 +13,23 @@ class HorariosComisionPersist extends Persist {
 
   protected $curso_ = [];
   protected $distribucion_horaria_ = [];
+
+  public function main($data) {
+    /**
+     * @param $data["id"] Id de la comision a la cual se definiran los horarios
+     * @param $data["dias"] Dias de la comision a la cual se definiran los horarios
+     * @param $data["hora_inicio"] Hora de inicio
+     */
+    if(empty($data["id"])) throw new Exception("Dato no definido: id comision");
+    if(empty($data["dia_"])) throw new Exception("Dato no definido: dia_");
+    if(empty($data["hora_inicio"])) throw new Exception("Dato no definido: hora inicio");
+    
+    $this->checkHorario_($data["id"]);
+    $this->getCurso_($data["id"]);
+    $this->getDia_($data["dia_"]);
+    $this->getDistribucionHoraria_();
+    $this->definirHorario_($data["hora_inicio"]);
+  }
 
   public function checkHorario_($comision){
     if(Ma::count("horario", ["cur_comision","=", $comision])) throw new Exception("Ya existen horarios para la comision indicada");
@@ -27,8 +45,7 @@ class HorariosComisionPersist extends Persist {
     $this->dia_ = $dia_;
   }
 
-
-  public function getDistribucionHoraria_(){
+  public function getDistribucionHoraria_() {
     $params = [
       "ch_plan" => $this->curso_[0]["com_plan"],
       "ch_anio" => $this->curso_[0]["com_anio"],
@@ -47,56 +64,39 @@ class HorariosComisionPersist extends Persist {
   }
 
   public function definirHorario_($horaInicio){
-
+    $carga_horaria_x_curso = array_combine_keys($this->curso_,"carga_horaria","id");
+ 
     $horasCatedrasAsignadasPorDia = [];
     
     foreach($this->distribucionHoraria_ as $dh){
-      $hora = DateTime::createFromFormat("H:i", $horaInicio);  
-      if(!key_exists($dh["dia"], $horasCatedrasAsignadasPorDia)) $horasCatedrasAsignadasPorDia[$dh["dia"]] = 0;
-      $minutos = $horasCatedrasAsignadasPorDia[$dh["dia"]] * 40;
-      $hora->modify("+{$minutos} minute");
-      $horario["hora_inicio"] = $hora->format("H:i") . ":00";
+      $horario = EntityValues::getInstanceRequire("horario");
       
+      $hora = DateTime::createFromFormat("H:i", $horaInicio);  
+      
+      if(!key_exists($dh["dia"], $horasCatedrasAsignadasPorDia)) $horasCatedrasAsignadasPorDia[$dh["dia"]] = 0;
+      $minutos = $horasCatedrasAsignadasPorDia[$dh["dia"]];
+
+      $hora->modify("+{$minutos} minute");
+      $horario->_setHoraInicio(clone $hora);
+
+      //$horario["hora_inicio"] = $hora->format("H:i") . ":00";
+
       $minutos = intval($dh["horas_catedra"]) * 40;
       $hora->modify("+{$minutos} minute");
-      $horario["hora_fin"] = $hora->format("H:i") . ":00";
+      $horario->_setHoraFin(clone $hora);
+      //$horario["hora_fin"] = $hora->format("H:i") . ":00";
+
       $horasCatedrasAsignadasPorDia[$dh["dia"]] += $minutos;
       
-      $horario["dia"] = $this->dia_[intval($dh["dia"])-1];
-      //$horario["curso"] = $this->cargaHorariaCurso_[$dh["carga_horaria"]];
-      echo "<pre>";
-      print_r($horario);
+      $horario->setDia($this->dia_[intval($dh["dia"])-1]);
+      $horario->setCurso($carga_horaria_x_curso[$dh["carga_horaria"]]);
 
+      $this->insert("horario", $horario->_toArray());
     }
 
   }
 
-  public function main($data) {
-    /**
-     * @param $data["id"] Id de la comision a la cual se definiran los horarios
-     * @param $data["dias"] Dias de la comision a la cual se definiran los horarios
-     * @param $data["hora_inicio"] Hora de inicio
-     */
-    if(empty($data["id"])) throw new Exception("Dato no definido: id comision");
-    if(empty($data["dia_"])) throw new Exception("Dato no definido: dia_");
-    if(empty($data["hora_inicio"])) throw new Exception("Dato no definido: hora inicio");
-    
-    $this->checkHorario_($data["id"]);
-    $this->getCurso_($data["id"]);
-    $this->getDia_($data["dia_"]);
-    $this->getDistribucionHoraria_();
-    $this->definirHorario_($data["hora_inicio"]);
-    
-    
-    //$this->consultarComision($data["id"]);
-    //$this->consultarDistribucionHoraria();
-    //$this->consultarCargaHorariaMateriasModalidad();
-
-    
-
-   
-
-  }
+  
 
 
   

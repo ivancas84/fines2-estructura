@@ -32,12 +32,12 @@ class _Asignatura extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
-    if($this->nombre !== UNDEFINED) $row["nombre"] = $this->nombre("");
-    if($this->formacion !== UNDEFINED) $row["formacion"] = $this->formacion("");
-    if($this->clasificacion !== UNDEFINED) $row["clasificacion"] = $this->clasificacion("");
-    if($this->codigo !== UNDEFINED) $row["codigo"] = $this->codigo("");
-    if($this->perfil !== UNDEFINED) $row["perfil"] = $this->perfil("");
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
+    if($this->nombre !== UNDEFINED) $row["nombre"] = $this->nombre();
+    if($this->formacion !== UNDEFINED) $row["formacion"] = $this->formacion();
+    if($this->clasificacion !== UNDEFINED) $row["clasificacion"] = $this->clasificacion();
+    if($this->codigo !== UNDEFINED) $row["codigo"] = $this->codigo();
+    if($this->perfil !== UNDEFINED) $row["perfil"] = $this->perfil();
     return $row;
   }
 

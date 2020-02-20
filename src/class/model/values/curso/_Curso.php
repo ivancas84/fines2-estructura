@@ -29,11 +29,11 @@ class _Curso extends EntityValues {
 
   public function _toArray(){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id("");
+    if($this->id !== UNDEFINED) $row["id"] = $this->id();
     if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d h:i:s");
-    if($this->horario !== UNDEFINED) $row["horario"] = $this->horario("");
-    if($this->comision !== UNDEFINED) $row["comision"] = $this->comision("");
-    if($this->cargaHoraria !== UNDEFINED) $row["carga_horaria"] = $this->cargaHoraria("");
+    if($this->horario !== UNDEFINED) $row["horario"] = $this->horario();
+    if($this->comision !== UNDEFINED) $row["comision"] = $this->comision();
+    if($this->cargaHoraria !== UNDEFINED) $row["carga_horaria"] = $this->cargaHoraria();
     return $row;
   }
 

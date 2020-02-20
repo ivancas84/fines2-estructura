@@ -1,5 +1,8 @@
 <?php
 
+echo "<script>window.close();</script>";
+
+
 require_once("../config/config.php");
 
 require_once("class/controller/persist/ComisionesSiguientes.php");
@@ -25,6 +28,8 @@ $data = [
 //$controller = new ComisionesSiguientesPersist();
 $controller = new HorariosComisionPersist();
 $controller->main($data);
+echo "<pre>";
+echo $controller->getSql();
 
 
 //Dba::dbInstance()->multiQueryTransaction($controller->getSql());
