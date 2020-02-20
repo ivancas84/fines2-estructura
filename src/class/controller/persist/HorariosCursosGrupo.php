@@ -21,25 +21,11 @@ class HorariosCursosGrupoPersist extends Persist {
    * Define los horarios de todos los cursos de un grupo basandose en la comisión anterior
    * En el caso de que encuenrtre un horario definido de al menos un curso ignora toda la comision
    */
-  protected $entityName = "horarios_cursos_grupo";
-
-  protected $comisiones;
-
   protected $comisionesGrupoAnterior;
-
-  protected $grupo;
-
-  protected $grupoAnterior;
-
-  protected $horariosGrupoAnterior;
-
-
-  protected function definirGrupoAnterior(){
-    $this->grupoAnterior = ModelTools::intervaloAnterior($this->grupo);
-  }
-
-  protected function consultarComisionesGrupoAnteriorConSiguiente(){
-    $render = Render::getInstanceParams($this->grupoAnterior);
+  
+  protected function consultarComisionesGrupoAnteriorConSiguiente($grupo){
+    $grupoAnterior = ModelTools::intervaloAnterior($grupo);
+    $render = Render::getInstanceParams($grupoAnterior);
     $render->addCondition(["comision_siguiente","=",true]);
     $this->comisionesGrupoAnterior = Ma::all("comision",$render);
   }
@@ -66,18 +52,15 @@ class HorariosCursosGrupoPersist extends Persist {
 
       $this->comisionesGrupoAnterior = array_values($this->comisionesGrupoAnterior);
     }
+
   }
 
-  protected static function consultarHorariosComisionesGrupoAnterior(){
+  protected  function quitarComisionesGrupoAnteriorSinHorario(){
     $idsComisionesGrupoAnterior = array_column($this->comisionesGrupoAnterior, "id");
-    $this->horariosGrupoAnterior = Ma::all("horario",["cur_comision","=",$idsComisionesGrupoAnterior]);
-  }
-
-  protected static function quitarComisionesGrupoAnteriorSinHorario(){
-    $this->consultarHorariosComisionesGrupoAnterior();
+    $horariosGrupoAnterior = Ma::all("horario",["cur_comision","=",$idsComisionesGrupoAnterior]);
 
     $idsComisionesGrupoAnterior = array_column($this->comisionesGrupoAnterior, "id");
-    $idComisionesGrupoAnteriorConHorarios = array_unique(array_column($this->horariosGrupoAnterior, "cur_comision"));
+    $idComisionesGrupoAnteriorConHorarios = array_values(array_unique(array_column($horariosGrupoAnterior, "cur_comision")));
     for($i = 0; $i < count($idsComisionesGrupoAnterior); $i++) {
       if(!in_array($idsComisionesGrupoAnterior[$i], $idComisionesGrupoAnteriorConHorarios)){
         unset($this->comisionesGrupoAnterior[$i]);
@@ -85,25 +68,40 @@ class HorariosCursosGrupoPersist extends Persist {
     }
   }
 
+  protected  function quitarComisionesGrupoAnteriorConHorarioGrupoActual(){
+    $idsComisionesGrupoActual = array_column($this->comisionesGrupoAnterior, "comision_siguiente");
+    $horariosGrupoActual = Ma::all("horario",["cur_comision","=",$idsComisionesGrupoActual]);
+
+    $idComisionesGrupoActualConHorarios = array_values(array_unique(array_column($horariosGrupoActual, "cur_comision")));
+    for($i = 0; $i < count($idsComisionesGrupoActual); $i++) {
+      if(in_array($idsComisionesGrupoActual[$i], $idComisionesGrupoActualConHorarios)){
+        unset($this->comisionesGrupoAnterior[$i]);
+      }
+    }
+  }
+
+
   public function main($grupo){
     if(empty($grupo["fecha_anio"])) throw new Exception("Dato no definido: fecha anio");
     if(empty($grupo["fecha_semestre"])) throw new Exception("Dato no definido: fecha semestre");
     if(empty($grupo["modalidad"])) throw new Exception("Dato no definido: modalidad");
     if(empty($grupo["sed_centro_educativo"])) throw new Exception("Dato no definido: centro educativo (sed_centro_educativo)");
-   
-    $this->grupo = $grupo;
+       
+    $this->consultarComisionesGrupoAnteriorConSiguiente($grupo);
     
-    $this->definirGrupoAnterior();
-    
-    $this->consultarComisionesGrupoAnteriorConSiguiente();
-    /*
     $this->quitarComisionesGrupoAnteriorMismoSiguiente();
     
     $this->quitarComisionesGrupoAnteriorSinHorario();
+    
+    $this->quitarComisionesGrupoAnteriorConHorarioGrupoActual();
 
-    $this->quitarComisionesGrupoActualConHorario();
+    foreach($this->comisionesGrupoAnterior as $comision){
 
-    $this->definirHorariosComisionSiguiente();*/
+
+
+    }
+
+    
 
   }
 
