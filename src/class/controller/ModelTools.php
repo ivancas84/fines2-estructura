@@ -1,5 +1,7 @@
 <?php
 
+require_once("class/model/db/Dba.php");
+
 class ModelTools {
 
   public static function sumaHorasCatedraAsignaturasGrupo($fechaAnio, $fechaSemestre, $modalidad, $centroEducativo){
@@ -50,5 +52,47 @@ class ModelTools {
     }
 
     return $param;
+  }
+
+  public function diasHorariosComision(array $ids) {
+    $ids_ = implode("','", $ids);
+
+    $sql =  "
+
+    SELECT comision.id AS comision, dias.dias_dias, dias.dias_ids, horas.hora_inicio, horas.hora_fin    
+    FROM comision
+    INNER JOIN (
+    
+    
+      SELECT DISTINCT dias_.comision AS comision, GROUP_CONCAT(dias_.dia ORDER BY dias_.numero) AS dias_dias, GROUP_CONCAT(dias_.id ORDER BY dias_.numero) AS dias_ids
+      FROM (
+        SELECT DISTINCT comision.id AS comision, dia.dia, dia.id, dia.numero
+        FROM horario
+        INNER JOIN dia ON (dia.id = horario.dia)
+        INNER JOIN curso ON (curso.id = horario.curso)
+        INNER JOIN comision ON (comision.id = curso.comision)
+        WHERE comision.id IN ('{$ids_}')
+        ORDER BY dia.numero
+      ) AS dias_
+      GROUP BY comision
+      
+      
+    ) AS dias ON (dias.comision = comision.id)
+    INNER JOIN (
+
+
+      SELECT DISTINCT comision.id AS comision, MIN(horario.hora_inicio) AS hora_inicio, MAX(horario.hora_fin) AS hora_fin
+      FROM horario
+      INNER JOIN curso ON (curso.id = horario.curso)
+      INNER JOIN comision ON (comision.id = curso.comision)
+      WHERE comision.id IN ('{$ids_}')    
+      GROUP BY comision
+    
+    
+    ) AS horas ON (horas.comision = comision.id)
+    
+";
+
+    return Dba::fetchAll($sql);    
   }
 }

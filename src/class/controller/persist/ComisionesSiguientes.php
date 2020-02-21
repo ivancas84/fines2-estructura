@@ -7,14 +7,21 @@ require_once("class/model/Values.php");
 require_once("class/controller/persist/ComisionCursos.php");
 require_once("class/controller/ModelTools.php");
 
-
-
-
 class ComisionesSiguientesPersist extends Persist {
   /**
    * Persistencia de cursos y comisiones
    */
-  protected $entityName = "comisiones_siguientes";
+  public function checkComisionesGrupo($grupo){
+    $render = Render::getInstanceParams($grupo);
+    if(Ma::count("comision",$render)) throw new Exception("Ya existen comisiones para los parametros ingresados");
+  }
+
+  public function getComisionesGrupoAnterior($grupoAnterior){
+    $render = Render::getInstanceParams($grupoAnterior);
+    $this->comisionAnterior_ = Ma::all("comision",$render);
+    if(!count($this->comisionAnterior_)) throw new Exception("No existen comisiones anteriores para tomar de referencia");
+  }
+
 
   public function main($grupo){
      /**
@@ -27,15 +34,11 @@ class ComisionesSiguientesPersist extends Persist {
     if(empty($grupo["modalidad"])) throw new Exception("Dato no definido: modalidad");
     if(empty($grupo["sed_centro_educativo"])) throw new Exception("Dato no definido: centro educativo");
    
-    $render = Render::getInstanceParams($grupo);
-    if(Ma::count("comision",$render)) throw new Exception("Ya existen comisiones para los parametros ingresados");
-    
+    $this->checkComisionesGrupo($grupo);
     $grupoAnterior = ModelTools::intervaloAnterior($grupo);
-    $render = Render::getInstanceParams($grupoAnterior);
-    $comisionesAnteriores = Ma::all("comision",$render);
-    if(!count($comisionesAnteriores)) throw new Exception("No existen comisiones anteriores para tomar de referencia");
-  
-    foreach($comisionesAnteriores as $comision){
+    $this->getComisionesGrupoAnterior($grupoAnterior);
+    
+    foreach($this->comisionAnterior_ as $comision){
       $nuevaComision = EntityValues::getInstanceRequire("comision");
       $nuevaComision->_fromArray($comision);
       $nuevaComision->setId(null);

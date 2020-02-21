@@ -1,13 +1,10 @@
 <?php
 
-
 require_once("class/controller/Persist.php");
 require_once("class/model/Ma.php");
 require_once("class/model/Values.php");
 require_once("class/controller/persist/ComisionCursos.php");
 require_once("function/array_combine_keys.php");
-
-
 
 class HorariosComisionPersist extends Persist {
 
@@ -66,27 +63,24 @@ class HorariosComisionPersist extends Persist {
   public function definirHorario_($horaInicio){
     $carga_horaria_x_curso = array_combine_keys($this->curso_,"carga_horaria","id");
  
-    $horasCatedrasAsignadasPorDia = [];
+    $horasCatedrasDia = [];
     
     foreach($this->distribucionHoraria_ as $dh){
       $horario = EntityValues::getInstanceRequire("horario");
       
-      $hora = DateTime::createFromFormat("H:i", $horaInicio);  
+      $hora = DateTime::createFromFormat("H:i:s", $horaInicio);  
       
-      if(!key_exists($dh["dia"], $horasCatedrasAsignadasPorDia)) $horasCatedrasAsignadasPorDia[$dh["dia"]] = 0;
-      $minutos = $horasCatedrasAsignadasPorDia[$dh["dia"]];
+      if(!key_exists($dh["dia"], $horasCatedrasDia)) $horasCatedrasDia[$dh["dia"]] = 0;
+      $minutos = $horasCatedrasDia[$dh["dia"]];
 
       $hora->modify("+{$minutos} minute");
       $horario->_setHoraInicio(clone $hora);
 
-      //$horario["hora_inicio"] = $hora->format("H:i") . ":00";
-
       $minutos = intval($dh["horas_catedra"]) * 40;
       $hora->modify("+{$minutos} minute");
       $horario->_setHoraFin(clone $hora);
-      //$horario["hora_fin"] = $hora->format("H:i") . ":00";
 
-      $horasCatedrasAsignadasPorDia[$dh["dia"]] += $minutos;
+      $horasCatedrasDia[$dh["dia"]] += $minutos;
       
       $horario->setDia($this->dia_[intval($dh["dia"])-1]);
       $horario->setCurso($carga_horaria_x_curso[$dh["carga_horaria"]]);
