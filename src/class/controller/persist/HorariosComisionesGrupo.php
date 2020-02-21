@@ -135,15 +135,9 @@ class HorariosComisionesGrupoPersist extends Persist {
       ];
 
       $controller->main($data);
-      echo "<pre>";
-      echo  $controller->getSql();
-
-      //$dias = 
-      //$controller->main()
     }
 
-    //echo "<pre>";
-    //echo $controller->getSql();
+    array_push($this->logs, ["sql"=>$controller->getSql(), "detail"=>$controller->getDetail()]);
   }
 
 

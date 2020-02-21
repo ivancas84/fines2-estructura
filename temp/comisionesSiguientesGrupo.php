@@ -1,9 +1,12 @@
 <?php
 
+echo "<script>window.close();</script>";
+
+
 require_once("../config/config.php");
 
-require_once("class/controller/persist/HorariosComisionesGrupo.php");
-require_once("class/controller/persist/HorariosComision.php");
+require_once("class/controller/persist/ComisionesSiguientesGrupo.php");
+
 
 
 $grupo = [
@@ -14,11 +17,12 @@ $grupo = [
 ];
 
 
-$controller = new HorariosComisionesGrupoPersist();
-$controller->main($grupo);
 
+$controller = new ComisionesSiguientesGrupoPersist();
+$controller->main($grupo);
 echo "<pre>";
-echo  $controller->getSql();
+echo $controller->getSql();
+
 
 //Dba::dbInstance()->multiQueryTransaction($controller->getSql());
 //Dba::dbClose();

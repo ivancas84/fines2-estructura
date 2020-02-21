@@ -7,7 +7,7 @@ require_once("class/model/Values.php");
 require_once("class/controller/persist/ComisionCursos.php");
 require_once("class/controller/ModelTools.php");
 
-class ComisionesSiguientesPersist extends Persist {
+class ComisionesSiguientesGrupoPersist extends Persist {
   /**
    * Persistencia de cursos y comisiones
    */
