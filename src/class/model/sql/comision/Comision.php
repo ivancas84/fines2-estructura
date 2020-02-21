@@ -3,9 +3,11 @@
 require_once("class/model/sql/comision/Main.php");
 
 class ComisionSql extends ComisionSqlMain {
+
+  /*
     public function _subSql(Render $render){
         $t = $this->prt();
-        return "SELECT * /*envoltura {$t}*/
+        return "SELECT *
     FROM (
   SELECT DISTINCT
   {$this->_fieldsDb()}, horario_.dias, horario_.hora_inicio, horario_.hora_fin
@@ -40,5 +42,5 @@ class ComisionSql extends ComisionSqlMain {
 ) AS {$t}
   " . concat($this->_condition($render), 'WHERE ') . "
   ";
-    }
+    }*/
 }

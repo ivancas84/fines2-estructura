@@ -28,9 +28,6 @@ class ComisionSqlMain extends EntitySql{
       case $p.'fecha_semestre': return $t.".fecha_semestre";
       case $p.'observaciones': return $t.".observaciones";
       case $p.'alta': return $t.".alta";
-      case $p.'dias': return $t.".dias";
-      case $p.'hora_inicio': return $t.".hora_inicio";
-      case $p.'hora_fin': return $t.".hora_fin";
       case $p.'sede': return $t.".sede";
       case $p.'plan': return $t.".plan";
       case $p.'modalidad': return $t.".modalidad";
@@ -91,18 +88,6 @@ class ComisionSqlMain extends EntitySql{
       case $p.'max_alta': return "MAX({$t}.alta)";
       case $p.'count_alta': return "COUNT({$t}.alta)";
 
-      case $p.'min_dias': return "MIN({$t}.dias)";
-      case $p.'max_dias': return "MAX({$t}.dias)";
-      case $p.'count_dias': return "COUNT({$t}.dias)";
-
-      case $p.'min_hora_inicio': return "MIN({$t}.hora_inicio)";
-      case $p.'max_hora_inicio': return "MAX({$t}.hora_inicio)";
-      case $p.'count_hora_inicio': return "COUNT({$t}.hora_inicio)";
-
-      case $p.'min_hora_fin': return "MIN({$t}.hora_fin)";
-      case $p.'max_hora_fin': return "MAX({$t}.hora_fin)";
-      case $p.'count_hora_fin': return "COUNT({$t}.hora_fin)";
-
       case $p.'min_sede': return "MIN({$t}.sede)";
       case $p.'max_sede': return "MAX({$t}.sede)";
       case $p.'count_sede': return "COUNT({$t}.sede)";
@@ -141,7 +126,7 @@ class ComisionSqlMain extends EntitySql{
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'turno') . ' AS ' . $p.'turno, ' . $this->_mappingField($p.'division') . ' AS ' . $p.'division, ' . $this->_mappingField($p.'anio') . ' AS ' . $p.'anio, ' . $this->_mappingField($p.'semestre') . ' AS ' . $p.'semestre, ' . $this->_mappingField($p.'comentario') . ' AS ' . $p.'comentario, ' . $this->_mappingField($p.'autorizada') . ' AS ' . $p.'autorizada, ' . $this->_mappingField($p.'apertura') . ' AS ' . $p.'apertura, ' . $this->_mappingField($p.'publicada') . ' AS ' . $p.'publicada, ' . $this->_mappingField($p.'fecha_anio') . ' AS ' . $p.'fecha_anio, ' . $this->_mappingField($p.'fecha_semestre') . ' AS ' . $p.'fecha_semestre, ' . $this->_mappingField($p.'observaciones') . ' AS ' . $p.'observaciones, ' . $this->_mappingField($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingField($p.'dias') . ' AS ' . $p.'dias, ' . $this->_mappingField($p.'hora_inicio') . ' AS ' . $p.'hora_inicio, ' . $this->_mappingField($p.'hora_fin') . ' AS ' . $p.'hora_fin, ' . $this->_mappingField($p.'sede') . ' AS ' . $p.'sede, ' . $this->_mappingField($p.'plan') . ' AS ' . $p.'plan, ' . $this->_mappingField($p.'modalidad') . ' AS ' . $p.'modalidad, ' . $this->_mappingField($p.'comision_siguiente') . ' AS ' . $p.'comision_siguiente';
+' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'turno') . ' AS ' . $p.'turno, ' . $this->_mappingField($p.'division') . ' AS ' . $p.'division, ' . $this->_mappingField($p.'anio') . ' AS ' . $p.'anio, ' . $this->_mappingField($p.'semestre') . ' AS ' . $p.'semestre, ' . $this->_mappingField($p.'comentario') . ' AS ' . $p.'comentario, ' . $this->_mappingField($p.'autorizada') . ' AS ' . $p.'autorizada, ' . $this->_mappingField($p.'apertura') . ' AS ' . $p.'apertura, ' . $this->_mappingField($p.'publicada') . ' AS ' . $p.'publicada, ' . $this->_mappingField($p.'fecha_anio') . ' AS ' . $p.'fecha_anio, ' . $this->_mappingField($p.'fecha_semestre') . ' AS ' . $p.'fecha_semestre, ' . $this->_mappingField($p.'observaciones') . ' AS ' . $p.'observaciones, ' . $this->_mappingField($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingField($p.'sede') . ' AS ' . $p.'sede, ' . $this->_mappingField($p.'plan') . ' AS ' . $p.'plan, ' . $this->_mappingField($p.'modalidad') . ' AS ' . $p.'modalidad, ' . $this->_mappingField($p.'comision_siguiente') . ' AS ' . $p.'comision_siguiente';
   }
 
   public function _fieldsDb(){
@@ -196,9 +181,6 @@ class ComisionSqlMain extends EntitySql{
       case "{$p}fecha_semestre": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}observaciones": return $this->format->conditionText($f, $value, $option);
       case "{$p}alta": return $this->format->conditionTimestamp($f, $value, $option);
-      case "{$p}dias": return $this->format->conditionText($f, $value, $option);
-      case "{$p}hora_inicio": return $this->format->conditionTime($f, $value, $option);
-      case "{$p}hora_fin": return $this->format->conditionTime($f, $value, $option);
       case "{$p}sede": return $this->format->conditionText($f, $value, $option);
       case "{$p}plan": return $this->format->conditionText($f, $value, $option);
       case "{$p}modalidad": return $this->format->conditionText($f, $value, $option);
@@ -258,18 +240,6 @@ class ComisionSqlMain extends EntitySql{
       case "{$p}max_alta": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}min_alta": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}count_alta": return $this->format->conditionNumber($f, $value, $option);
-
-      case "{$p}max_dias": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_dias": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_dias": return $this->format->conditionNumber($f, $value, $option);
-
-      case "{$p}max_hora_inicio": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_hora_inicio": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_hora_inicio": return $this->format->conditionNumber($f, $value, $option);
-
-      case "{$p}max_hora_fin": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_hora_fin": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_hora_fin": return $this->format->conditionNumber($f, $value, $option);
 
       case "{$p}max_sede": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}min_sede": return $this->format->conditionNumber($f, $value, $option);
@@ -376,9 +346,6 @@ class ComisionSqlMain extends EntitySql{
     if(isset($row['fecha_semestre'])) $row_['fecha_semestre'] = $this->format->numeric($row['fecha_semestre']);
     if(isset($row['observaciones'])) $row_['observaciones'] = $this->format->escapeString($row['observaciones']);
     if(isset($row['alta'])) $row_['alta'] = $this->format->timestamp($row['alta']);
-    if(isset($row['dias'])) $row_['dias'] = $this->format->escapeString($row['dias']);
-    if(isset($row['hora_inicio'])) $row_['hora_inicio'] = $this->format->time($row['hora_inicio']);
-    if(isset($row['hora_fin'])) $row_['hora_fin'] = $this->format->time($row['hora_fin']);
     if(isset($row['sede'])) $row_['sede'] = $this->format->escapeString($row['sede']);
     if(isset($row['plan'])) $row_['plan'] = $this->format->escapeString($row['plan']);
     if(isset($row['modalidad'])) $row_['modalidad'] = $this->format->escapeString($row['modalidad']);
@@ -403,9 +370,6 @@ class ComisionSqlMain extends EntitySql{
     $row_["fecha_semestre"] = (is_null($row[$prefix . "fecha_semestre"])) ? null : intval($row[$prefix . "fecha_semestre"]);
     $row_["observaciones"] = (is_null($row[$prefix . "observaciones"])) ? null : (string)$row[$prefix . "observaciones"];
     $row_["alta"] = (is_null($row[$prefix . "alta"])) ? null : (string)$row[$prefix . "alta"];
-    $row_["dias"] = (is_null($row[$prefix . "dias"])) ? null : (string)$row[$prefix . "dias"];
-    $row_["hora_inicio"] = (is_null($row[$prefix . "hora_inicio"])) ? null : (string)$row[$prefix . "hora_inicio"];
-    $row_["hora_fin"] = (is_null($row[$prefix . "hora_fin"])) ? null : (string)$row[$prefix . "hora_fin"];
     $row_["sede"] = (is_null($row[$prefix . "sede"])) ? null : (string)$row[$prefix . "sede"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
     $row_["plan"] = (is_null($row[$prefix . "plan"])) ? null : (string)$row[$prefix . "plan"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
     $row_["modalidad"] = (is_null($row[$prefix . "modalidad"])) ? null : (string)$row[$prefix . "modalidad"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor

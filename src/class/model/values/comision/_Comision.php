@@ -17,9 +17,6 @@ class _Comision extends EntityValues {
   protected $fechaSemestre = UNDEFINED;
   protected $observaciones = UNDEFINED;
   protected $alta = UNDEFINED;
-  protected $dias = UNDEFINED;
-  protected $horaInicio = UNDEFINED;
-  protected $horaFin = UNDEFINED;
   protected $sede = UNDEFINED;
   protected $plan = UNDEFINED;
   protected $modalidad = UNDEFINED;
@@ -39,9 +36,6 @@ class _Comision extends EntityValues {
     $this->setFechaSemestre(DEFAULT_VALUE);
     $this->setObservaciones(DEFAULT_VALUE);
     $this->setAlta(DEFAULT_VALUE);
-    $this->setDias(DEFAULT_VALUE);
-    $this->setHoraInicio(DEFAULT_VALUE);
-    $this->setHoraFin(DEFAULT_VALUE);
     $this->setSede(DEFAULT_VALUE);
     $this->setPlan(DEFAULT_VALUE);
     $this->setModalidad(DEFAULT_VALUE);
@@ -63,9 +57,6 @@ class _Comision extends EntityValues {
     if(isset($row[$p."fecha_semestre"])) $this->setFechaSemestre($row[$p."fecha_semestre"]);
     if(isset($row[$p."observaciones"])) $this->setObservaciones($row[$p."observaciones"]);
     if(isset($row[$p."alta"])) $this->setAlta($row[$p."alta"]);
-    if(isset($row[$p."dias"])) $this->setDias($row[$p."dias"]);
-    if(isset($row[$p."hora_inicio"])) $this->setHoraInicio($row[$p."hora_inicio"]);
-    if(isset($row[$p."hora_fin"])) $this->setHoraFin($row[$p."hora_fin"]);
     if(isset($row[$p."sede"])) $this->setSede($row[$p."sede"]);
     if(isset($row[$p."plan"])) $this->setPlan($row[$p."plan"]);
     if(isset($row[$p."modalidad"])) $this->setModalidad($row[$p."modalidad"]);
@@ -87,9 +78,6 @@ class _Comision extends EntityValues {
     if($this->fechaSemestre !== UNDEFINED) $row["fecha_semestre"] = $this->fechaSemestre();
     if($this->observaciones !== UNDEFINED) $row["observaciones"] = $this->observaciones();
     if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d h:i:s");
-    if($this->dias !== UNDEFINED) $row["dias"] = $this->dias();
-    if($this->horaInicio !== UNDEFINED) $row["hora_inicio"] = $this->horaInicio("h:i:s");
-    if($this->horaFin !== UNDEFINED) $row["hora_fin"] = $this->horaFin("h:i:s");
     if($this->sede !== UNDEFINED) $row["sede"] = $this->sede();
     if($this->plan !== UNDEFINED) $row["plan"] = $this->plan();
     if($this->modalidad !== UNDEFINED) $row["modalidad"] = $this->modalidad();
@@ -111,9 +99,6 @@ class _Comision extends EntityValues {
     if(!Validation::is_empty($this->fechaSemestre)) return false;
     if(!Validation::is_empty($this->observaciones)) return false;
     if(!Validation::is_empty($this->alta)) return false;
-    if(!Validation::is_empty($this->dias)) return false;
-    if(!Validation::is_empty($this->horaInicio)) return false;
-    if(!Validation::is_empty($this->horaFin)) return false;
     if(!Validation::is_empty($this->sede)) return false;
     if(!Validation::is_empty($this->plan)) return false;
     if(!Validation::is_empty($this->modalidad)) return false;
@@ -134,9 +119,6 @@ class _Comision extends EntityValues {
   public function fechaSemestre() { return $this->fechaSemestre; }
   public function observaciones($format = null) { return Format::convertCase($this->observaciones, $format); }
   public function alta($format = null) { return Format::date($this->alta, $format); }
-  public function dias($format = null) { return Format::convertCase($this->dias, $format); }
-  public function horaInicio($format = null) { return Format::date($this->horaInicio, $format); }
-  public function horaFin($format = null) { return Format::date($this->horaFin, $format); }
   public function sede($format = null) { return Format::convertCase($this->sede, $format); }
   public function plan($format = null) { return Format::convertCase($this->plan, $format); }
   public function modalidad($format = null) { return Format::convertCase($this->modalidad, $format); }
@@ -257,42 +239,6 @@ class _Comision extends EntityValues {
     return $check;
   }
 
-  public function setDias($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkDias($p); 
-    if($check) $this->dias = $p;
-    return $check;
-  }
-
-  public function _setHoraInicio(DateTime $p = null) {
-      $check = $this->checkHoraInicio($p); 
-      if($check) $this->horaInicio = $p;  
-      return $check;
-  }
-
-  public function setHoraInicio($p, $format = "H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
-    $check = $this->checkHoraInicio($p); 
-    if($check) $this->horaInicio = $p;  
-    return $check;
-  }
-
-  public function _setHoraFin(DateTime $p = null) {
-      $check = $this->checkHoraFin($p); 
-      if($check) $this->horaFin = $p;  
-      return $check;
-  }
-
-  public function setHoraFin($p, $format = "H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
-    $check = $this->checkHoraFin($p); 
-    if($check) $this->horaFin = $p;  
-    return $check;
-  }
-
   public function setSede($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
@@ -387,21 +333,6 @@ class _Comision extends EntityValues {
   public function checkAlta($value) { 
     $v = Validation::getInstanceValue($value)->date()->required();
     return $this->_setLogsValidation("alta", $v);
-  }
-
-  public function checkDias($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("dias", $v);
-  }
-
-  public function checkHoraInicio($value) { 
-    $v = Validation::getInstanceValue($value)->date()->required();
-    return $this->_setLogsValidation("hora_inicio", $v);
-  }
-
-  public function checkHoraFin($value) { 
-    $v = Validation::getInstanceValue($value)->date()->required();
-    return $this->_setLogsValidation("hora_fin", $v);
   }
 
   public function checkSede($value) { 
