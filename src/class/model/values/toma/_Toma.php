@@ -70,7 +70,7 @@ class _Toma extends EntityValues {
     if($this->comentario !== UNDEFINED) $row["comentario"] = $this->comentario();
     if($this->tipoMovimiento !== UNDEFINED) $row["tipo_movimiento"] = $this->tipoMovimiento();
     if($this->estadoContralor !== UNDEFINED) $row["estado_contralor"] = $this->estadoContralor();
-    if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d h:i:s");
+    if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d H:i:s");
     if($this->curso !== UNDEFINED) $row["curso"] = $this->curso();
     if($this->docente !== UNDEFINED) $row["docente"] = $this->docente();
     if($this->reemplazo !== UNDEFINED) $row["reemplazo"] = $this->reemplazo();

@@ -30,8 +30,8 @@ class _Horario extends EntityValues {
   public function _toArray(){
     $row = [];
     if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->horaInicio !== UNDEFINED) $row["hora_inicio"] = $this->horaInicio("h:i:s");
-    if($this->horaFin !== UNDEFINED) $row["hora_fin"] = $this->horaFin("h:i:s");
+    if($this->horaInicio !== UNDEFINED) $row["hora_inicio"] = $this->horaInicio("H:i:s");
+    if($this->horaFin !== UNDEFINED) $row["hora_fin"] = $this->horaFin("H:i:s");
     if($this->curso !== UNDEFINED) $row["curso"] = $this->curso();
     if($this->dia !== UNDEFINED) $row["dia"] = $this->dia();
     return $row;

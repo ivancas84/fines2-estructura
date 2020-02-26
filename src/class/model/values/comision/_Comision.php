@@ -77,7 +77,7 @@ class _Comision extends EntityValues {
     if($this->fechaAnio !== UNDEFINED) $row["fecha_anio"] = $this->fechaAnio("Y");
     if($this->fechaSemestre !== UNDEFINED) $row["fecha_semestre"] = $this->fechaSemestre();
     if($this->observaciones !== UNDEFINED) $row["observaciones"] = $this->observaciones();
-    if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d h:i:s");
+    if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d H:i:s");
     if($this->sede !== UNDEFINED) $row["sede"] = $this->sede();
     if($this->plan !== UNDEFINED) $row["plan"] = $this->plan();
     if($this->modalidad !== UNDEFINED) $row["modalidad"] = $this->modalidad();

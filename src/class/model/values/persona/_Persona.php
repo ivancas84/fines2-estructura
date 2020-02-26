@@ -56,7 +56,7 @@ class _Persona extends EntityValues {
     if($this->email !== UNDEFINED) $row["email"] = $this->email();
     if($this->genero !== UNDEFINED) $row["genero"] = $this->genero();
     if($this->apodo !== UNDEFINED) $row["apodo"] = $this->apodo();
-    if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d h:i:s");
+    if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d H:i:s");
     if($this->domicilio !== UNDEFINED) $row["domicilio"] = $this->domicilio();
     return $row;
   }
