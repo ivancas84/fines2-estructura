@@ -107,8 +107,6 @@ class HorariosComisionesGrupoPersist extends Persist {
     $ids = array_column($this->comisionesAnteriores, "id");
     $diasHorarios = ModelTools::diasHorariosComision($ids);
     $this->diasHorarios = array_combine_key($diasHorarios, "comision");
-    echo "<pre>";
-
     /*
     $controller = new HorariosComisionPersist();
 
