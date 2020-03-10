@@ -10,7 +10,7 @@ class FieldCursoHorario extends Field {
   public $notNull = false;
   public $default = false;
   public $length = "100";
-  public $main = false;
+  public $main = true;
   public $name = "horario";
   public $alias = "hor";
   public $admin = false;
