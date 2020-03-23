@@ -95,7 +95,7 @@ class HorarioSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('carga_horaria', 'cur_ch')->_fields() . ',
 ' . EntitySql::getInstanceRequire('plan', 'cur_ch_pla')->_fields() . ',
 ' . EntitySql::getInstanceRequire('asignatura', 'cur_ch_asi')->_fields() . ',
-' . EntitySql::getInstanceRequire('dia', 'dia')->_fields() . '
+' . EntitySql::getInstanceRequire('dia', 'dia')->_fields() . ' 
 ';
   }
 
