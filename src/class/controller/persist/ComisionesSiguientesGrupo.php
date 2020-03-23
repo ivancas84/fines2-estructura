@@ -24,11 +24,6 @@ class ComisionesSiguientesGrupoPersist extends Persist {
 
 
   public function main($grupo){
-     /**
-     * @param $data["fecha_anio"] //fecha anio a calcular
-     * @param $data["fecha_semestre"] //fecha semestre a calcular
-     * @param $data["modalidad"] //modalidad a calcular
-     */
     if(empty($grupo["fecha_anio"])) throw new Exception("Dato no definido: fecha anio");
     if(empty($grupo["fecha_semestre"])) throw new Exception("Dato no definido: fecha semestre");
     if(empty($grupo["modalidad"])) throw new Exception("Dato no definido: modalidad");
@@ -41,6 +36,7 @@ class ComisionesSiguientesGrupoPersist extends Persist {
     foreach($this->comisionAnterior_ as $comision){
       $nuevaComision = EntityValues::getInstanceRequire("comision");
       $nuevaComision->_fromArray($comision);
+      $nuevaComision->setApertura(false);
       $nuevaComision->setId(null);
       $nuevaComision->setFechaAnio($grupo["fecha_anio"]);
       $nuevaComision->setFechaSemestre($grupo["fecha_semestre"]);
@@ -52,7 +48,6 @@ class ComisionesSiguientesGrupoPersist extends Persist {
       array_push($this->logs, ["sql"=>$controller->getSql(), "detail"=>$controller->getDetail()]);
       $this->update("comision", $comision);
     }
-  
   }
 
 
