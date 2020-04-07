@@ -7,7 +7,8 @@ class SedePersist extends Persist {
     protected $entityName = "sede";
 
     public function main($data){
-        foreach($data as $d) {
+        print_r($data);
+        /*foreach($data as $d) {
             switch($d["entity"]) {
                 case "domicilio": $domicilio = $d["row"]; break;
                 case "sede": $sede = $d["row"]; break;
@@ -38,7 +39,7 @@ class SedePersist extends Persist {
 
 
         $this->row("sede", $sede);
-        if($deleteDomicilio) $this->delete("domicilio", $deleteDomicilio);
+        if($deleteDomicilio) $this->delete("domicilio", $deleteDomicilio);*/
     }
 
 }
