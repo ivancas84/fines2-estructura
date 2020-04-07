@@ -8,10 +8,13 @@ class SedePersist extends Persist {
 
     public function main($data){
 
+        /**
+         * Se inserta o actualiza una sede
+         * Se inserta, actualiza o elimina un domicilio
+         */
         if(!array_key_exists($data["sede"])) throw new Exception ("Sede no definida");
         
-        //Si una sede no tiene el domicilio definido, no estara en el array $data
-        $existeDomicilio = (array_key_exists($data["domicilio"])) ? true : false;
+        $existsDomicilio = (array_key_exists($data["domicilio"])) ? true : false;
 
         if($data["sede"]["id"]) {
             $sede_bd = Ma::getOrNull("sede", $data["sede"]["id"]);
@@ -25,15 +28,20 @@ class SedePersist extends Persist {
         $deleteDomicilio = false;
         if (!empty($sede_bd)){
             $data["sede"]["id"] = $sede_bd["id"];
-            if(isset($domiclilio)) {
-                if (!empty($sede_bd["domicilio"])) $domicilio["id"] = $sede_bd["domicilio"];    
+            if($existsDomicilio) {
+                if (!empty($sede_bd["domicilio"])) {
+                    $data["domicilio"]["id"] = $sede_bd["domicilio"];
+                    $this->update("domicilio", $data["domicilio"]);    
+                /**
+                 * Actualizar domicilio
+                 */
             } else {
-                if (!empty($sede_bd["domicilio"])) $deleteDomicilio = $sede_bd["domicilio"];
+                if (!empty($sede_bd["domicilio"])) $this->delete("domicilio", $sede_bd["domicilio"]);
                 $data["sede"]["domicilio"] = null;
             }
         }
 
-        if(isset($domicilio)) $data["sede"]["domicilio"] = $this->row("domicilio", $domicilio);
+        if(isset($domicilio)) $data["sede"]["domicilio"] = $this->save("domicilio", $domicilio);
 
         $this->row("sede", $data["sede"]);
         if($deleteDomicilio) $this->delete("domicilio", $deleteDomicilio);
