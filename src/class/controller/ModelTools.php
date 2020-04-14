@@ -41,6 +41,7 @@ class ModelTools {
       case 2:  
         $param["fecha_semestre"] = 1; 
       break;
+      
       case 1: 
         $param["fecha_anio"]--;
         $param["fecha_semestre"] = 2; 

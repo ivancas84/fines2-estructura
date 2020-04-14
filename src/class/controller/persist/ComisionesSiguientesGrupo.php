@@ -9,19 +9,8 @@ require_once("class/controller/ModelTools.php");
 
 class ComisionesSiguientesGrupoPersist extends Persist {
   /**
-   * Persistencia de cursos y comisiones
+   * Persistencia de cursos y comisiones para un cierto grupo
    */
-  public function checkComisionesGrupo($grupo){
-    $render = Render::getInstanceParams($grupo);
-    if(Ma::count("comision",$render)) throw new Exception("Ya existen comisiones para los parametros ingresados");
-  }
-
-  public function getComisionesGrupoAnterior($grupoAnterior){
-    $render = Render::getInstanceParams($grupoAnterior);
-    $this->comisionAnterior_ = Ma::all("comision",$render);
-    if(!count($this->comisionAnterior_)) throw new Exception("No existen comisiones anteriores para tomar de referencia");
-  }
-
 
   public function main($grupo){
     if(empty($grupo["fecha_anio"])) throw new Exception("Dato no definido: fecha anio");
@@ -49,6 +38,20 @@ class ComisionesSiguientesGrupoPersist extends Persist {
       $this->update("comision", $comision);
     }
   }
+
+  public function checkComisionesGrupo($grupo){
+    $render = Render::getInstanceParams($grupo);
+    if(Ma::count("comision",$render)) throw new Exception("Ya existen comisiones para los parametros ingresados");
+  }
+
+  public function getComisionesGrupoAnterior($grupoAnterior){
+    $render = Render::getInstanceParams($grupoAnterior);
+    $this->comisionAnterior_ = Ma::all("comision",$render);
+    if(!count($this->comisionAnterior_)) throw new Exception("No existen comisiones anteriores para tomar de referencia");
+  }
+
+
+  
 
 
 }

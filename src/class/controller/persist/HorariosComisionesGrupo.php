@@ -14,13 +14,11 @@ require_once("function/array_combine_key.php");
 
 class HorariosComisionesGrupoPersist extends Persist {
   /**
+   * Definir horarios de todos los cursos de un grupo basandose en la comision anterior
+   * 
    * si una comision es siguiente de mas de una comision, no se define el horario
    * si una comision ya tiene el horario definido, no se define el horario
-   */
-
-  /**
-   * Define los horarios de todos los cursos de un grupo basandose en la comisión anterior
-   * En el caso de que encuenrtre un horario definido de al menos un curso ignora toda la comision
+   * si el horario de al menos un curso está definido, se ignora toda la comision
    */
   protected $comisionesAnteriores;
   protected $diasHorarios;
@@ -52,7 +50,7 @@ class HorariosComisionesGrupoPersist extends Persist {
     $this->comisionesAnteriores = Ma::all("comision",$render);
   }
 
-  protected function quitarComisionesAnterioresMismoSiguiente(){
+  protected function quitarComisionesAnterioresMismoSiguiente() {
     $contadorComisionSiguiente = [];
     $idsComisionSiguienteMultiple = [];
 
@@ -64,7 +62,6 @@ class HorariosComisionesGrupoPersist extends Persist {
         array_push($idsComisionSiguienteMultiple, $comision["comision_siguiente"]);
     }
 
-    
     if(!empty($idsComisionSiguienteMultiple)){
       $idsComisionSiguienteMultiple = array_unique($idsComisionSiguienteMultiple);
       for($i = 0; $i < count($this->comisionesAnteriores); $i++){
@@ -74,7 +71,6 @@ class HorariosComisionesGrupoPersist extends Persist {
 
       $this->comisionesAnteriores = array_values($this->comisionesAnteriores);
     }
-
   }
 
   protected  function quitarComisionesAnterioresSinHorario(){
@@ -103,20 +99,9 @@ class HorariosComisionesGrupoPersist extends Persist {
   }
 
   protected function definirDiasHorariosComisionesAnteriores (){
-    
     $ids = array_column($this->comisionesAnteriores, "id");
     $diasHorarios = ModelTools::diasHorariosComision($ids);
     $this->diasHorarios = array_combine_key($diasHorarios, "comision");
-    /*
-    $controller = new HorariosComisionPersist();
-
-    foreach($this->comisionesAnteriores as $comision){
-      echo "<pre>";
-      print_r($comision);
-      //$dias = 
-      //$controller->main()
-
-    }*/
   }
 
   protected function definirHorariosComisiones(){
@@ -128,7 +113,7 @@ class HorariosComisionesGrupoPersist extends Persist {
       $hora_inicio = $this->diasHorarios[$comision["id"]]["hora_inicio"];
       $data = [
         "id" => $comision["comision_siguiente"],
-        "dia_" => explode(",",$dias),
+        "dias" => explode(",",$dias),
         "hora_inicio" => $hora_inicio
       ];
 

@@ -2,12 +2,12 @@
 
 require_once("../config/config.php");
 require_once("class/tools/Filter.php");
-require_once("class/controller/persist/ComisionesSiguientesGrupo.php");
+require_once("class/controller/persist/HorariosComisionesGrupoPersist.php");
 require_once("class/model/db/Dba.php");
 
 try {
     $grupo = Filter::getAll();
-    $controller = new ComisionesSiguientesGrupoPersist();
+    $controller = new HorariosComisionesGrupoPersist();
     $controller->main($grupo);
 
     echo "<pre>".$controller->getSql();

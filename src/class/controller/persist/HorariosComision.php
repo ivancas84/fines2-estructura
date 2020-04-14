@@ -8,8 +8,8 @@ require_once("function/array_combine_keys.php");
 
 class HorariosComisionPersist extends Persist {
 
-  protected $curso_ = [];
-  protected $distribucion_horaria_ = [];
+  protected $cursos = [];
+  protected $distribucionesHorarias = [];
 
   public function main($data) {
     /**
@@ -18,54 +18,54 @@ class HorariosComisionPersist extends Persist {
      * @param $data["hora_inicio"] Hora de inicio
      */
     if(empty($data["id"])) throw new Exception("Dato no definido: id comision");
-    if(empty($data["dia_"])) throw new Exception("Dato no definido: dia_");
+    if(empty($data["dias"])) throw new Exception("Dato no definido: dias");
     if(empty($data["hora_inicio"])) throw new Exception("Dato no definido: hora inicio");
     
-    $this->checkHorario_($data["id"]);
-    $this->getCurso_($data["id"]);
-    $this->getDia_($data["dia_"]);
-    $this->getDistribucionHoraria_();
-    $this->definirHorario_($data["hora_inicio"]);
+    $this->checkHorarios($data["id"]);
+    $this->getCursos($data["id"]);
+    $this->getDias($data["dias"]);
+    $this->getDistribucionesHorarias();
+    $this->definirHorarios($data["hora_inicio"]);
   }
 
-  public function checkHorario_($comision){
+  public function checkHorarios($comision){
     if(Ma::count("horario", ["cur_comision","=", $comision])) throw new Exception("Ya existen horarios para la comision indicada");
   }
 
-  public function getCurso_($comision){
-    $this->curso_ = Ma::all("curso", ["comision","=", $comision]);  
-    if(empty($this->curso_)) throw new Exception("No existen cursos para la comision indicada");
+  public function getCursos($comision){
+    $this->cursos = Ma::all("curso", ["comision","=", $comision]);  
+    if(empty($this->cursos)) throw new Exception("No existen cursos para la comision indicada");
   }
 
-  public function getDia_($dia_){
-    if(!shuffle($dia_)) throw new Exception("No se pudo asignar un orden aleatorio a los días");
-    $this->dia_ = $dia_;
+  public function getDias($dias){
+    if(!shuffle($dias)) throw new Exception("No se pudo asignar un orden aleatorio a los días");
+    $this->dias = $dias;
   }
 
-  public function getDistribucionHoraria_() {
+  public function getDistribucionesHorarias() {
     $params = [
-      "ch_plan" => $this->curso_[0]["com_plan"],
-      "ch_anio" => $this->curso_[0]["com_anio"],
-      "ch_semestre" => $this->curso_[0]["com_semestre"],
+      "ch_plan" => $this->cursos[0]["com_plan"],
+      "ch_anio" => $this->cursos[0]["com_anio"],
+      "ch_semestre" => $this->cursos[0]["com_semestre"],
     ];
 
     $render = Render::getInstanceParams($params);
 
-    $this->distribucionHoraria_ = Ma::all("distribucion_horaria", $render);
-    if(empty($this->distribucionHoraria_)) throw new Exception("No existen distribuciones horarias para la comision indicada");
-    if(!shuffle($this->distribucionHoraria_)) throw new Exception("No se pudo asignar orden aleatorio a la distribucion horaria");
+    $this->distribucionesHorarias = Ma::all("distribucion_horaria", $render);
+    if(empty($this->distribucionesHorarias)) throw new Exception("No existen distribuciones horarias para la comision indicada");
+    if(!shuffle($this->distribucionesHorarias)) throw new Exception("No se pudo asignar orden aleatorio a la distribucion horaria");
     if(
-      count(array_unique(array_column($this->distribucionHoraria_, "dia"))) 
-      != count($this->dia_)
+      count(array_unique(array_column($this->distribucionesHorarias, "dia"))) 
+      != count($this->dias)
     ) throw new Exception("La cantidad de dias de la distribucion horaria no coincide con la cantidad de dias definidos");
   }
 
-  public function definirHorario_($horaInicio){
-    $carga_horaria_x_curso = array_combine_keys($this->curso_,"carga_horaria","id");
+  public function definirHorarios($horaInicio){
+    $carga_horaria_x_curso = array_combine_keys($this->cursos,"carga_horaria","id");
  
     $horasCatedrasDia = [];
     
-    foreach($this->distribucionHoraria_ as $dh){
+    foreach($this->distribucionesHorarias as $dh){
       $horario = EntityValues::getInstanceRequire("horario");
       
       $hora = DateTime::createFromFormat("H:i:s", $horaInicio);  
@@ -82,7 +82,7 @@ class HorariosComisionPersist extends Persist {
 
       $horasCatedrasDia[$dh["dia"]] += $minutos;
       
-      $horario->setDia($this->dia_[intval($dh["dia"])-1]);
+      $horario->setDia($this->dias[intval($dh["dia"])-1]);
       $horario->setCurso($carga_horaria_x_curso[$dh["carga_horaria"]]);
 
       $this->insert("horario", $horario->_toArray());
