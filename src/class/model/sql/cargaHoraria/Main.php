@@ -34,8 +34,6 @@ class CargaHorariaSqlMain extends EntitySql{
       case $p.'max_semestre': return "MAX({$t}.semestre)";
       case $p.'count_semestre': return "COUNT({$t}.semestre)";
 
-      case $p.'sum_horas_catedra': return "SUM({$t}.horas_catedra)";
-      case $p.'avg_horas_catedra': return "AVG({$t}.horas_catedra)";
       case $p.'min_horas_catedra': return "MIN({$t}.horas_catedra)";
       case $p.'max_horas_catedra': return "MAX({$t}.horas_catedra)";
       case $p.'count_horas_catedra': return "COUNT({$t}.horas_catedra)";
@@ -94,7 +92,7 @@ class CargaHorariaSqlMain extends EntitySql{
       case "{$p}id": return $this->format->conditionText($f, $value, $option);
       case "{$p}anio": return $this->format->conditionText($f, $value, $option);
       case "{$p}semestre": return $this->format->conditionText($f, $value, $option);
-      case "{$p}horas_catedra": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}horas_catedra": return $this->format->conditionText($f, $value, $option);
       case "{$p}plan": return $this->format->conditionText($f, $value, $option);
       case "{$p}asignatura": return $this->format->conditionText($f, $value, $option);
 
@@ -110,8 +108,6 @@ class CargaHorariaSqlMain extends EntitySql{
       case "{$p}min_semestre": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}count_semestre": return $this->format->conditionNumber($f, $value, $option);
 
-      case "{$p}sum_horas_catedra": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}avg_horas_catedra": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}max_horas_catedra": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}min_horas_catedra": return $this->format->conditionNumber($f, $value, $option);
       case "{$p}count_horas_catedra": return $this->format->conditionNumber($f, $value, $option);
@@ -144,7 +140,7 @@ class CargaHorariaSqlMain extends EntitySql{
     $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('carga_horaria');
     if(!isset($data['anio']) || is_null($data['anio']) || $data['anio'] == "") throw new Exception('dato obligatorio sin valor: anio');
     if(!isset($data['semestre']) || is_null($data['semestre']) || $data['semestre'] == "") throw new Exception('dato obligatorio sin valor: semestre');
-    if(!isset($data['horas_catedra']) || ($data['horas_catedra'] == '')) throw new Exception('dato obligatorio sin valor: horas_catedra');
+    if(!isset($data['horas_catedra']) || is_null($data['horas_catedra']) || $data['horas_catedra'] == "") throw new Exception('dato obligatorio sin valor: horas_catedra');
     if(empty($data['plan'])) throw new Exception('dato obligatorio sin valor: plan');
     if(empty($data['asignatura'])) throw new Exception('dato obligatorio sin valor: asignatura');
 
@@ -156,7 +152,7 @@ class CargaHorariaSqlMain extends EntitySql{
     if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
     if(array_key_exists('anio', $data)) { if(is_null($data['anio']) || $data['anio'] == "") throw new Exception('dato obligatorio sin valor: anio'); }
     if(array_key_exists('semestre', $data)) { if(is_null($data['semestre']) || $data['semestre'] == "") throw new Exception('dato obligatorio sin valor: semestre'); }
-    if(array_key_exists('horas_catedra', $data)) { if(!isset($data['horas_catedra']) || ($data['horas_catedra'] == '')) throw new Exception('dato obligatorio sin valor: horas_catedra'); }
+    if(array_key_exists('horas_catedra', $data)) { if(is_null($data['horas_catedra']) || $data['horas_catedra'] == "") throw new Exception('dato obligatorio sin valor: horas_catedra'); }
     if(array_key_exists('plan', $data)) { if(!isset($data['plan']) || ($data['plan'] == '')) throw new Exception('dato obligatorio sin valor: plan'); }
     if(array_key_exists('asignatura', $data)) { if(!isset($data['asignatura']) || ($data['asignatura'] == '')) throw new Exception('dato obligatorio sin valor: asignatura'); }
 
@@ -169,7 +165,7 @@ class CargaHorariaSqlMain extends EntitySql{
    if(isset($row['id']) )  $row_['id'] = $this->format->escapeString($row['id']);
     if(isset($row['anio'])) $row_['anio'] = $this->format->escapeString($row['anio']);
     if(isset($row['semestre'])) $row_['semestre'] = $this->format->escapeString($row['semestre']);
-    if(isset($row['horas_catedra'])) $row_['horas_catedra'] = $this->format->numeric($row['horas_catedra']);
+    if(isset($row['horas_catedra'])) $row_['horas_catedra'] = $this->format->escapeString($row['horas_catedra']);
     if(isset($row['plan'])) $row_['plan'] = $this->format->escapeString($row['plan']);
     if(isset($row['asignatura'])) $row_['asignatura'] = $this->format->escapeString($row['asignatura']);
 
@@ -182,7 +178,7 @@ class CargaHorariaSqlMain extends EntitySql{
     $row_["id"] = (is_null($row[$prefix . "id"])) ? null : (string)$row[$prefix . "id"]; //la pk se trata como string debido a un comportamiento erratico en angular 2 que al tratarlo como integer resta 1 en el valor
     $row_["anio"] = (is_null($row[$prefix . "anio"])) ? null : (string)$row[$prefix . "anio"];
     $row_["semestre"] = (is_null($row[$prefix . "semestre"])) ? null : (string)$row[$prefix . "semestre"];
-    $row_["horas_catedra"] = (is_null($row[$prefix . "horas_catedra"])) ? null : intval($row[$prefix . "horas_catedra"]);
+    $row_["horas_catedra"] = (is_null($row[$prefix . "horas_catedra"])) ? null : (string)$row[$prefix . "horas_catedra"];
     $row_["plan"] = (is_null($row[$prefix . "plan"])) ? null : (string)$row[$prefix . "plan"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
     $row_["asignatura"] = (is_null($row[$prefix . "asignatura"])) ? null : (string)$row[$prefix . "asignatura"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
     return $row_;

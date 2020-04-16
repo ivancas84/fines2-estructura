@@ -7,11 +7,13 @@ class _Plan extends EntityValues {
   protected $id = UNDEFINED;
   protected $orientacion = UNDEFINED;
   protected $resolucion = UNDEFINED;
+  protected $distribucionHoraria = UNDEFINED;
 
   public function _setDefault(){
     $this->setId(DEFAULT_VALUE);
     $this->setOrientacion(DEFAULT_VALUE);
     $this->setResolucion(DEFAULT_VALUE);
+    $this->setDistribucionHoraria(DEFAULT_VALUE);
   }
 
   public function _fromArray(array $row = NULL, $p = ""){
@@ -19,6 +21,7 @@ class _Plan extends EntityValues {
     if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
     if(isset($row[$p."orientacion"])) $this->setOrientacion($row[$p."orientacion"]);
     if(isset($row[$p."resolucion"])) $this->setResolucion($row[$p."resolucion"]);
+    if(isset($row[$p."distribucion_horaria"])) $this->setDistribucionHoraria($row[$p."distribucion_horaria"]);
   }
 
   public function _toArray(){
@@ -26,6 +29,7 @@ class _Plan extends EntityValues {
     if($this->id !== UNDEFINED) $row["id"] = $this->id();
     if($this->orientacion !== UNDEFINED) $row["orientacion"] = $this->orientacion();
     if($this->resolucion !== UNDEFINED) $row["resolucion"] = $this->resolucion();
+    if($this->distribucionHoraria !== UNDEFINED) $row["distribucion_horaria"] = $this->distribucionHoraria();
     return $row;
   }
 
@@ -33,12 +37,14 @@ class _Plan extends EntityValues {
     if(!Validation::is_empty($this->id)) return false;
     if(!Validation::is_empty($this->orientacion)) return false;
     if(!Validation::is_empty($this->resolucion)) return false;
+    if(!Validation::is_empty($this->distribucionHoraria)) return false;
     return true;
   }
 
   public function id() { return $this->id; }
   public function orientacion($format = null) { return Format::convertCase($this->orientacion, $format); }
   public function resolucion($format = null) { return Format::convertCase($this->resolucion, $format); }
+  public function distribucionHoraria($format = null) { return Format::convertCase($this->distribucionHoraria, $format); }
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
@@ -63,6 +69,14 @@ class _Plan extends EntityValues {
     return $check;
   }
 
+  public function setDistribucionHoraria($p) {
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = (is_null($p)) ? null : (string)$p;
+    $check = $this->checkDistribucionHoraria($p); 
+    if($check) $this->distribucionHoraria = $p;
+    return $check;
+  }
+
   public function checkId($value) { 
       return true; 
   }
@@ -75,6 +89,11 @@ class _Plan extends EntityValues {
   public function checkResolucion($value) { 
     $v = Validation::getInstanceValue($value)->string();
     return $this->_setLogsValidation("resolucion", $v);
+  }
+
+  public function checkDistribucionHoraria($value) { 
+    $v = Validation::getInstanceValue($value)->string();
+    return $this->_setLogsValidation("distribucion_horaria", $v);
   }
 
 

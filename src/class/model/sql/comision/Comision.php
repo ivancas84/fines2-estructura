@@ -4,6 +4,17 @@ require_once("class/model/sql/comision/Main.php");
 
 class ComisionSql extends ComisionSqlMain {
 
+  public function _mappingField($field){
+    $p = $this->prf();
+    $t = $this->prt();
+
+    if($f = parent::_mappingField($field)) return $f;
+    switch ($field) {
+      case $p.'tramo': return concat($t.".anio", $t.".semestre");
+      default: return null;
+    }
+  }
+
   /*
     public function _subSql(Render $render){
         $t = $this->prt();

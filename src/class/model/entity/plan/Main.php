@@ -15,6 +15,7 @@ class PlanEntityMain extends Entity {
     return array(
       Field::getInstanceRequire("plan", "orientacion"),
       Field::getInstanceRequire("plan", "resolucion"),
+      Field::getInstanceRequire("plan", "distribucion_horaria"),
     );
   }
 

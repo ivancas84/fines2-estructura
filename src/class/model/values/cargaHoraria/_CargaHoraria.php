@@ -54,7 +54,7 @@ class _CargaHoraria extends EntityValues {
   public function id() { return $this->id; }
   public function anio($format = null) { return Format::convertCase($this->anio, $format); }
   public function semestre($format = null) { return Format::convertCase($this->semestre, $format); }
-  public function horasCatedra() { return $this->horasCatedra; }
+  public function horasCatedra($format = null) { return Format::convertCase($this->horasCatedra, $format); }
   public function plan($format = null) { return Format::convertCase($this->plan, $format); }
   public function asignatura($format = null) { return Format::convertCase($this->asignatura, $format); }
   public function setId($p) {
@@ -82,8 +82,8 @@ class _CargaHoraria extends EntityValues {
   }
 
   public function setHorasCatedra($p) {
-    if ($p == DEFAULT_VALUE) $p = null;
-    $p = (is_null($p)) ? null : intval(trim($p));
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkHorasCatedra($p); 
     if($check) $this->horasCatedra = $p;
     return $check;
@@ -120,7 +120,7 @@ class _CargaHoraria extends EntityValues {
   }
 
   public function checkHorasCatedra($value) { 
-    $v = Validation::getInstanceValue($value)->integer()->required();
+    $v = Validation::getInstanceValue($value)->string()->required();
     return $this->_setLogsValidation("horas_catedra", $v);
   }
 

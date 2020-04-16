@@ -22,6 +22,7 @@ class PlanSqloMain extends EntitySqlo {
       $sql .= "id, " ;
     $sql .= "orientacion, " ;
     $sql .= "resolucion, " ;
+    $sql .= "distribucion_horaria, " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
 
     $sql .= ")
@@ -29,6 +30,7 @@ VALUES ( ";
     $sql .= $row['id'] . ", " ;
     $sql .= $row['orientacion'] . ", " ;
     $sql .= $row['resolucion'] . ", " ;
+    $sql .= $row['distribucion_horaria'] . ", " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
 
     $sql .= ");
@@ -43,6 +45,7 @@ UPDATE " . $this->entity->sn_() . " SET
 ";
     if (isset($row['orientacion'] )) $sql .= "orientacion = " . $row['orientacion'] . " ," ;
     if (isset($row['resolucion'] )) $sql .= "resolucion = " . $row['resolucion'] . " ," ;
+    if (isset($row['distribucion_horaria'] )) $sql .= "distribucion_horaria = " . $row['distribucion_horaria'] . " ," ;
     //eliminar ultima coma
     $sql = substr($sql, 0, -2);
 
