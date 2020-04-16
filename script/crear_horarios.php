@@ -2,7 +2,7 @@
 
 require_once("../config/config.php");
 require_once("class/tools/Filter.php");
-require_once("class/controller/persist/HorariosComisionesGrupoPersist.php");
+require_once("class/controller/persist/HorariosComisionesGrupo.php");
 require_once("class/model/db/Dba.php");
 
 try {
