@@ -9,7 +9,18 @@ require_once("class/controller/ModelTools.php");
 
 class ComisionesSiguientesGrupoPersist extends Persist {
   /**
-   * Persistencia de cursos y comisiones para un cierto grupo
+   * Persistencia de cursos y comisiones para un cierto grupo autorizado
+   */
+
+  protected $grupo;
+  /**
+   * grupo al que se definiran las comisiones
+   */
+
+  protected $comisionesAnteriores;
+  /**
+   * comisiones anteriores con las cuales se realizara la definicion del nuevo grupo
+   * se obtienen solo las comisiones autorizadas
    */
 
   public function main($grupo){
@@ -17,12 +28,12 @@ class ComisionesSiguientesGrupoPersist extends Persist {
     if(empty($grupo["fecha_semestre"])) throw new Exception("Dato no definido: fecha semestre");
     if(empty($grupo["modalidad"])) throw new Exception("Dato no definido: modalidad");
     if(empty($grupo["sed_centro_educativo"])) throw new Exception("Dato no definido: centro educativo");
+    $this->grupo = $grupo;
    
-    $this->checkComisionesGrupo($grupo);
-    $grupoAnterior = ModelTools::intervaloAnterior($grupo);
-    $this->getComisionesGrupoAnterior($grupoAnterior);
+    $this->checkComisionesGrupo();
+    $this->getComisionesGrupoAnterior();
     
-    foreach($this->comisionAnterior_ as $comision){
+    foreach($this->comisionesAnteriores as $comision){
       $nuevaComision = EntityValues::getInstanceRequire("comision");
       $nuevaComision->_fromArray($comision);
       $nuevaComision->setApertura(false);
@@ -39,15 +50,19 @@ class ComisionesSiguientesGrupoPersist extends Persist {
     }
   }
 
-  public function checkComisionesGrupo($grupo){
-    $render = Render::getInstanceParams($grupo);
-    if(Ma::count("comision",$render)) throw new Exception("Ya existen comisiones para los parametros ingresados");
+  public function checkComisionesGrupo(){
+    $render = Render::getInstanceParams($this->grupo);
+    $render->addCondition(["autorizada","=",true]);
+    if(Ma::count("comision",$render)) throw new Exception("Ya existen comisiones para el grupo: " . implode(" " , $this->grupo));
   }
 
-  public function getComisionesGrupoAnterior($grupoAnterior){
+  public function getComisionesGrupoAnterior(){
+    $grupoAnterior = ModelTools::intervaloAnterior($this->grupo);
     $render = Render::getInstanceParams($grupoAnterior);
-    $this->comisionAnterior_ = Ma::all("comision",$render);
-    if(!count($this->comisionAnterior_)) throw new Exception("No existen comisiones anteriores para tomar de referencia");
+    $render->addCondition(["autorizada","=",true]);
+    //$render->addCondition(["anio","=",true]);
+    $this->comisionesAnteriores = Ma::all("comision",$render);
+    if(!count($this->comisionesAnteriores)) throw new Exception("No existen comisiones anteriores del grupo: " . implode(" " , $this->grupo));
   }
 
 

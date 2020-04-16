@@ -7,6 +7,10 @@ require_once("class/controller/persist/ComisionCursos.php");
 require_once("function/array_combine_keys.php");
 
 class HorariosComisionPersist extends Persist {
+  /**
+   * Definir horarios de todos los cursos de una comision
+   * Los días y horarios se acomodan aleatoriamente
+   */
 
   protected $cursos = [];
   protected $distribucionesHorarias = [];
@@ -20,6 +24,8 @@ class HorariosComisionPersist extends Persist {
     if(empty($data["id"])) throw new Exception("Dato no definido: id comision");
     if(empty($data["dias"])) throw new Exception("Dato no definido: dias");
     if(empty($data["hora_inicio"])) throw new Exception("Dato no definido: hora inicio");
+
+    $this->id = $data["id"];
     
     $this->checkHorarios($data["id"]);
     $this->getCursos($data["id"]);
@@ -52,12 +58,12 @@ class HorariosComisionPersist extends Persist {
     $render = Render::getInstanceParams($params);
 
     $this->distribucionesHorarias = Ma::all("distribucion_horaria", $render);
-    if(empty($this->distribucionesHorarias)) throw new Exception("No existen distribuciones horarias para la comision indicada");
+    if(empty($this->distribucionesHorarias)) throw new Exception("No existen distribuciones horarias para la comision indicada: " . $this->id);
     if(!shuffle($this->distribucionesHorarias)) throw new Exception("No se pudo asignar orden aleatorio a la distribucion horaria");
     if(
       count(array_unique(array_column($this->distribucionesHorarias, "dia"))) 
       != count($this->dias)
-    ) throw new Exception("La cantidad de dias de la distribucion horaria no coincide con la cantidad de dias definidos");
+    ) throw new Exception("La cantidad de dias de la distribucion horaria no coincide con la cantidad de dias definidos en comision: " . $this->id);
   }
 
   public function definirHorarios($horaInicio){
@@ -84,6 +90,10 @@ class HorariosComisionPersist extends Persist {
       
       $horario->setDia($this->dias[intval($dh["dia"])-1]);
       $horario->setCurso($carga_horaria_x_curso[$dh["carga_horaria"]]);
+
+      if($horario->_logs()->isError()){
+        throw new Exception("El horario posee errores en la asignacion de valores");
+      }
 
       $this->insert("horario", $horario->_toArray());
     }
