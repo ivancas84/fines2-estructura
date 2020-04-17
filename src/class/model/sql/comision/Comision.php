@@ -10,7 +10,7 @@ class ComisionSql extends ComisionSqlMain {
 
     if($f = parent::_mappingField($field)) return $f;
     switch ($field) {
-      case $p.'tramo': return concat($t.".anio", $t.".semestre");
+      case $p.'tramo': return "CONCAT(COALESCE({$t}.anio,''), COALESCE({$t}.semestre,''))";
       default: return null;
     }
   }
