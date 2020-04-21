@@ -1,6 +1,10 @@
 <?php
 
 require_once("class/model/db/Dba.php");
+require_once("class/model/Render.php");
+require_once("class/model/Ma.php");
+
+
 
 class ModelTools {
 
@@ -24,6 +28,21 @@ class ModelTools {
     $render->setOrder(["ch_sum_horas_catedra" =>"desc"]);
 
     return Ma::advanced("curso",$render);
+  }
+
+  public static function cargasHorarias($plan, $anio, $semestre){
+    $params = [
+      "plan" => $plan,
+      "anio" => $anio,
+      "semestre" => $semestre,
+    ];
+
+    $render = Render::getInstanceParams($params);
+    $render->setAggregate(["sum_horas_catedra"]);
+    $render->setGroup(["plan", "anio", "semestre", "asignatura"]);
+    $render->setOrder(["sum_horas_catedra" => "desc"]);
+
+    return Ma::advanced("distribucion_horaria",$render);
   }
 
   public static function intervaloAnterior(array $grupo){
