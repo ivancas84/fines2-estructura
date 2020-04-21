@@ -23,7 +23,7 @@ class ComisionCursosPersist extends Persist {
         ["plan", "=", $comision["plan"]]            
     ];
 
-    $cargasHorarias = Ma::all("carga_horaria", $display);
+    $cargasHorarias = ModelTools::cargasHorarias($comision["plan"], $comision["anio"], $comision["semestre"]);
     if(!count($cargasHorarias)) throw new Exception("No existen cargas horarias asociadas");
 
     $comisionBd = Ma::unique("comision", $comision);
@@ -41,7 +41,8 @@ class ComisionCursosPersist extends Persist {
         foreach($cargasHorarias as $ch){
             $curso = [
                 "comision" => $comision["id"],
-                "carga_horaria" => $ch["id"],
+                "asignatura" => $ch["asignatura"],
+                "horas_catedra" => $ch["sum_horas_catedra"],
             ];
             $this->insert("curso", $curso);
         }
