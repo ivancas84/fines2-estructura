@@ -27,20 +27,21 @@ class HorariosComisionPersist extends Persist {
 
     $this->id = $data["id"];
     
-    $this->checkHorarios($data["id"]);
-    $this->getCursos($data["id"]);
+    $this->checkHorarios();
+    $this->getCursos();
     $this->getDias($data["dias"]);
     $this->getDistribucionesHorarias();
+    $this->horasCatedraXAsignaturas = ModelTools::cargasHorariasDeDistribucionesHorarias($this->distribucionesHorarias);
     $this->definirHorarios($data["hora_inicio"]);
   }
 
-  public function checkHorarios($comision){
-    if(Ma::count("horario", ["cur_comision","=", $comision])) throw new Exception("Ya existen horarios para la comision indicada");
+  public function checkHorarios(){
+    if(Ma::count("horario", ["cur_comision","=", $this->id])) throw new Exception("Ya existen horarios para la comision " . $this->id);
   }
 
-  public function getCursos($comision){
-    $this->cursos = Ma::all("curso", ["comision","=", $comision]);  
-    if(empty($this->cursos)) throw new Exception("No existen cursos para la comision indicada");
+  public function getCursos(){
+    $this->cursos = Ma::all("curso", ["comision","=", $this->id]);  
+    if(empty($this->cursos)) throw new Exception("No existen cursos para la comision " . $this->id);
   }
 
   public function getDias($dias){
@@ -50,9 +51,9 @@ class HorariosComisionPersist extends Persist {
 
   public function getDistribucionesHorarias() {
     $params = [
-      "ch_plan" => $this->cursos[0]["com_plan"],
-      "ch_anio" => $this->cursos[0]["com_anio"],
-      "ch_semestre" => $this->cursos[0]["com_semestre"],
+      "plan" => $this->cursos[0]["com_plan"],
+      "anio" => $this->cursos[0]["com_anio"],
+      "semestre" => $this->cursos[0]["com_semestre"],
     ];
 
     $render = Render::getInstanceParams($params);
@@ -63,11 +64,12 @@ class HorariosComisionPersist extends Persist {
     if(
       count(array_unique(array_column($this->distribucionesHorarias, "dia"))) 
       != count($this->dias)
-    ) throw new Exception("La cantidad de dias de la distribucion horaria no coincide con la cantidad de dias definidos en comision: " . $this->id);
+    ) throw new Exception("La cantidad de dias de la distribucion horaria no coincide con la cantidad de dias definidos en comision: " . $this->id);  
   }
 
   public function definirHorarios($horaInicio){
-    $carga_horaria_x_curso = array_combine_keys($this->cursos,"carga_horaria","id");
+    //$carga_horaria_x_curso = array_combine_keys($this->cursos,"carga_horaria","id");
+    $cursos_x_asignaturas = array_combine_keys($this->cursos,"asignatura","id");
  
     $horasCatedrasDia = [];
     
