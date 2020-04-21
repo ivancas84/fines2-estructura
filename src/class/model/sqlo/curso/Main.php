@@ -20,17 +20,19 @@ class CursoSqloMain extends EntitySqlo {
       $sql = "
   INSERT INTO " . $this->entity->sn_() . " (";
       $sql .= "id, " ;
+    $sql .= "horas_catedra, " ;
     $sql .= "alta, " ;
     $sql .= "comision, " ;
-    $sql .= "carga_horaria, " ;
+    $sql .= "asignatura, " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
 
     $sql .= ")
 VALUES ( ";
     $sql .= $row['id'] . ", " ;
+    $sql .= $row['horas_catedra'] . ", " ;
     $sql .= $row['alta'] . ", " ;
     $sql .= $row['comision'] . ", " ;
-    $sql .= $row['carga_horaria'] . ", " ;
+    $sql .= $row['asignatura'] . ", " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
 
     $sql .= ");
@@ -43,9 +45,10 @@ VALUES ( ";
     $sql = "
 UPDATE " . $this->entity->sn_() . " SET
 ";
+    if (isset($row['horas_catedra'] )) $sql .= "horas_catedra = " . $row['horas_catedra'] . " ," ;
     if (isset($row['alta'] )) $sql .= "alta = " . $row['alta'] . " ," ;
     if (isset($row['comision'] )) $sql .= "comision = " . $row['comision'] . " ," ;
-    if (isset($row['carga_horaria'] )) $sql .= "carga_horaria = " . $row['carga_horaria'] . " ," ;
+    if (isset($row['asignatura'] )) $sql .= "asignatura = " . $row['asignatura'] . " ," ;
     //eliminar ultima coma
     $sql = substr($sql, 0, -2);
 
@@ -95,17 +98,9 @@ UPDATE " . $this->entity->sn_() . " SET
       $json = EntitySql::getInstanceRequire('modalidad', 'com_moa')->_json($row);
       $row_["comision_"]["modalidad_"] = $json;
     }
-    if(!is_null($row['ch_id'])){
-      $json = EntitySql::getInstanceRequire('carga_horaria', 'ch')->_json($row);
-      $row_["carga_horaria_"] = $json;
-    }
-    if(!is_null($row['ch_pla_id'])){
-      $json = EntitySql::getInstanceRequire('plan', 'ch_pla')->_json($row);
-      $row_["carga_horaria_"]["plan_"] = $json;
-    }
-    if(!is_null($row['ch_asi_id'])){
-      $json = EntitySql::getInstanceRequire('asignatura', 'ch_asi')->_json($row);
-      $row_["carga_horaria_"]["asignatura_"] = $json;
+    if(!is_null($row['asi_id'])){
+      $json = EntitySql::getInstanceRequire('asignatura', 'asi')->_json($row);
+      $row_["asignatura_"] = $json;
     }
     return $row_;
   }
@@ -124,9 +119,7 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_["domicilio2"] = EntityValues::getInstanceRequire('domicilio', $row, 'com_sed_coo_dom_');
     $row_["plan"] = EntityValues::getInstanceRequire('plan', $row, 'com_pla_');
     $row_["modalidad"] = EntityValues::getInstanceRequire('modalidad', $row, 'com_moa_');
-    $row_["carga_horaria"] = EntityValues::getInstanceRequire('carga_horaria', $row, 'ch_');
-    $row_["plan1"] = EntityValues::getInstanceRequire('plan', $row, 'ch_pla_');
-    $row_["asignatura"] = EntityValues::getInstanceRequire('asignatura', $row, 'ch_asi_');
+    $row_["asignatura"] = EntityValues::getInstanceRequire('asignatura', $row, 'asi_');
     return $row_;
   }
 

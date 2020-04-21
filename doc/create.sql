@@ -1,3 +1,6 @@
+CREATE SCHEMA IF NOT EXISTS `fines2_2020` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci ;
+USE fines2_2020;
+
 CREATE TABLE IF NOT EXISTS `domicilio` (
   `id` VARCHAR(45) NOT NULL,
   `calle` VARCHAR(45) NOT NULL,
@@ -82,13 +85,19 @@ CREATE TABLE IF NOT EXISTS `persona` (
   `genero` VARCHAR(45) NULL DEFAULT NULL,
   `apodo` VARCHAR(255) NULL DEFAULT NULL,
   `alta` TIMESTAMP NOT NULL DEFAULT current_timestamp,
+  `domicilio` VARCHAR(45) NULL DEFAULT NULL,
   UNIQUE INDEX `cuil_UNIQUE` (`cuil` ASC),
   UNIQUE INDEX `numero_documento_UNIQUE` (`numero_documento` ASC),
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  INDEX `fk_persona_domicilio1_idx` (`domicilio` ASC),
+  CONSTRAINT `fk_persona_domicilio1`
+    FOREIGN KEY (`domicilio`)
+    REFERENCES `domicilio` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
-
 
 CREATE TABLE IF NOT EXISTS `cargo` (
   `id` VARCHAR(45) NOT NULL,
@@ -130,13 +139,12 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
 
-
 CREATE TABLE IF NOT EXISTS `plan` (
   `id` VARCHAR(45) NOT NULL,
   `orientacion` VARCHAR(45) NOT NULL,
   `resolucion` VARCHAR(45) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `orientacion_UNIQUE` (`orientacion` ASC))
+  `distribucion_horaria` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
@@ -154,30 +162,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
 
-CREATE TABLE IF NOT EXISTS `carga_horaria` (
-  `id` VARCHAR(45) NOT NULL,
-  `anio` VARCHAR(45) NOT NULL,
-  `semestre` VARCHAR(45) NOT NULL,
-  `horas_catedra` VARCHAR(45) NOT NULL,
-  `plan` VARCHAR(45) NOT NULL,
-  `asignatura` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_carga_horaria_plan1_idx` (`plan` ASC),
-  INDEX `fk_carga_horaria_asignatura1_idx` (`asignatura` ASC),
-  CONSTRAINT `fk_carga_horaria_plan1`
-    FOREIGN KEY (`plan`)
-    REFERENCES `plan` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_carga_horaria_asignatura1`
-    FOREIGN KEY (`asignatura`)
-    REFERENCES `asignatura` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_spanish_ci;
-
 CREATE TABLE IF NOT EXISTS `modalidad` (
   `id` VARCHAR(45) NOT NULL,
   `nombre` VARCHAR(45) NOT NULL,
@@ -186,7 +170,6 @@ CREATE TABLE IF NOT EXISTS `modalidad` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
-
 
 CREATE TABLE IF NOT EXISTS `comision` (
   `id` VARCHAR(45) NOT NULL,
@@ -238,27 +221,26 @@ COLLATE = utf8_spanish_ci;
 
 CREATE TABLE IF NOT EXISTS `curso` (
   `id` VARCHAR(45) NOT NULL,
-  `observaciones` TEXT NULL DEFAULT NULL,
+  `horas_catedra` INT(11) NOT NULL,
   `comision` VARCHAR(45) NOT NULL,
-  `carga_horaria` VARCHAR(45) NOT NULL,
+  `asignatura` VARCHAR(45) NOT NULL,
   `alta` TIMESTAMP NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_curso_comision1_idx` (`comision` ASC),
-  INDEX `fk_curso_carga_horaria1_idx` (`carga_horaria` ASC),
+  INDEX `fk_curso_asignatura1_idx` (`asignatura` ASC),
   CONSTRAINT `fk_curso_comision1`
     FOREIGN KEY (`comision`)
     REFERENCES `comision` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_curso_carga_horaria1`
-    FOREIGN KEY (`carga_horaria`)
-    REFERENCES `carga_horaria` (`id`)
+  CONSTRAINT `fk_curso_asignatura1`
+    FOREIGN KEY (`asignatura`)
+    REFERENCES `asignatura` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
-
 
 CREATE TABLE IF NOT EXISTS `dia` (
   `id` VARCHAR(45) NOT NULL,
@@ -293,7 +275,6 @@ CREATE TABLE IF NOT EXISTS `horario` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
-
 
 CREATE TABLE IF NOT EXISTS `toma` (
   `id` VARCHAR(45) NOT NULL,
@@ -334,3 +315,27 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
 
+CREATE TABLE IF NOT EXISTS `distribucion_horaria` (
+  `id` VARCHAR(45) NOT NULL,
+  `horas_catedra` INT(11) NOT NULL,
+  `dia` INT(11) NOT NULL,
+  `anio` VARCHAR(45) NOT NULL,
+  `semestre` VARCHAR(45) NOT NULL,
+  `plan` VARCHAR(45) NOT NULL,
+  `asignatura` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_distribucion_horaria_plan1_idx` (`plan` ASC),
+  INDEX `fk_distribucion_horaria_asignatura1_idx` (`asignatura` ASC),
+  CONSTRAINT `fk_distribucion_horaria_plan1`
+    FOREIGN KEY (`plan`)
+    REFERENCES `plan` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_distribucion_horaria_asignatura1`
+    FOREIGN KEY (`asignatura`)
+    REFERENCES `asignatura` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;

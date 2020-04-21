@@ -4,7 +4,6 @@ require_once("class/model/Entity.php");
 
 $structure = array (
   Entity::getInstanceRequire("asignatura"),
-  Entity::getInstanceRequire("carga_horaria"),
   Entity::getInstanceRequire("cargo"),
   Entity::getInstanceRequire("centro_educativo"),
   Entity::getInstanceRequire("comision"),

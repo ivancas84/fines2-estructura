@@ -132,17 +132,9 @@ UPDATE " . $this->entity->sn_() . " SET
       $json = EntitySql::getInstanceRequire('modalidad', 'cur_com_moa')->_json($row);
       $row_["curso_"]["comision_"]["modalidad_"] = $json;
     }
-    if(!is_null($row['cur_ch_id'])){
-      $json = EntitySql::getInstanceRequire('carga_horaria', 'cur_ch')->_json($row);
-      $row_["curso_"]["carga_horaria_"] = $json;
-    }
-    if(!is_null($row['cur_ch_pla_id'])){
-      $json = EntitySql::getInstanceRequire('plan', 'cur_ch_pla')->_json($row);
-      $row_["curso_"]["carga_horaria_"]["plan_"] = $json;
-    }
-    if(!is_null($row['cur_ch_asi_id'])){
-      $json = EntitySql::getInstanceRequire('asignatura', 'cur_ch_asi')->_json($row);
-      $row_["curso_"]["carga_horaria_"]["asignatura_"] = $json;
+    if(!is_null($row['cur_asi_id'])){
+      $json = EntitySql::getInstanceRequire('asignatura', 'cur_asi')->_json($row);
+      $row_["curso_"]["asignatura_"] = $json;
     }
     if(!is_null($row['doc_id'])){
       $json = EntitySql::getInstanceRequire('persona', 'doc')->_json($row);
@@ -178,9 +170,7 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_["domicilio2"] = EntityValues::getInstanceRequire('domicilio', $row, 'cur_com_sed_coo_dom_');
     $row_["plan"] = EntityValues::getInstanceRequire('plan', $row, 'cur_com_pla_');
     $row_["modalidad"] = EntityValues::getInstanceRequire('modalidad', $row, 'cur_com_moa_');
-    $row_["carga_horaria"] = EntityValues::getInstanceRequire('carga_horaria', $row, 'cur_ch_');
-    $row_["plan1"] = EntityValues::getInstanceRequire('plan', $row, 'cur_ch_pla_');
-    $row_["asignatura"] = EntityValues::getInstanceRequire('asignatura', $row, 'cur_ch_asi_');
+    $row_["asignatura"] = EntityValues::getInstanceRequire('asignatura', $row, 'cur_asi_');
     $row_["docente"] = EntityValues::getInstanceRequire('persona', $row, 'doc_');
     $row_["domicilio3"] = EntityValues::getInstanceRequire('domicilio', $row, 'doc_dom_');
     $row_["reemplazo"] = EntityValues::getInstanceRequire('persona', $row, 'ree_');

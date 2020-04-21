@@ -1,0 +1,2 @@
+INSERT INTO persona (id, nombres, apellidos, fecha_nacimiento, numero_documento, cuil, email, genero, apodo, alta, domicilio)
+SELECT id, nombres, apellidos, fecha_nacimiento, numero_documento, cuil, email, genero, apodo, alta, domicilio FROM planfi10_2020.persona;

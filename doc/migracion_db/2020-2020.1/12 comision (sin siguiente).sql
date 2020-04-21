@@ -1,0 +1,2 @@
+INSERT INTO comision (id, turno, division, anio, semestre, comentario, autorizada, apertura, publicada, fecha_anio, fecha_semestre, observaciones, alta, sede, plan, modalidad)
+SELECT id, turno, division, anio, semestre, comentario, autorizada, apertura, publicada, fecha_anio, fecha_semestre, observaciones, alta, sede, plan, modalidad FROM planfi10_2020.comision;

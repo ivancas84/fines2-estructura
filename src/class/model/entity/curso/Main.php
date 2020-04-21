@@ -13,6 +13,7 @@ class CursoEntityMain extends Entity {
 
   public function getFieldsNf(){
     return array(
+      Field::getInstanceRequire("curso", "horas_catedra"),
       Field::getInstanceRequire("curso", "alta"),
     );
   }
@@ -20,7 +21,7 @@ class CursoEntityMain extends Entity {
   public function getFieldsMu(){
     return array(
       Field::getInstanceRequire("curso", "comision"),
-      Field::getInstanceRequire("curso", "carga_horaria"),
+      Field::getInstanceRequire("curso", "asignatura"),
     );
   }
 

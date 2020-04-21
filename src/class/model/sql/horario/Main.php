@@ -58,9 +58,7 @@ class HorarioSqlMain extends EntitySql{
     if($f = EntitySql::getInstanceRequire('domicilio', 'cur_com_sed_coo_dom')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('plan', 'cur_com_pla')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('modalidad', 'cur_com_moa')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('carga_horaria', 'cur_ch')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('plan', 'cur_ch_pla')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('asignatura', 'cur_ch_asi')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('asignatura', 'cur_asi')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('dia', 'dia')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
   }
@@ -92,9 +90,7 @@ class HorarioSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('domicilio', 'cur_com_sed_coo_dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('plan', 'cur_com_pla')->_fields() . ',
 ' . EntitySql::getInstanceRequire('modalidad', 'cur_com_moa')->_fields() . ',
-' . EntitySql::getInstanceRequire('carga_horaria', 'cur_ch')->_fields() . ',
-' . EntitySql::getInstanceRequire('plan', 'cur_ch_pla')->_fields() . ',
-' . EntitySql::getInstanceRequire('asignatura', 'cur_ch_asi')->_fields() . ',
+' . EntitySql::getInstanceRequire('asignatura', 'cur_asi')->_fields() . ',
 ' . EntitySql::getInstanceRequire('dia', 'dia')->_fields() . ' 
 ';
   }
@@ -111,9 +107,7 @@ class HorarioSqlMain extends EntitySql{
 ' . EntitySql::getInstanceRequire('domicilio', 'cur_com_sed_coo_dom')->_join('domicilio', 'cur_com_sed_coo', $render) . '
 ' . EntitySql::getInstanceRequire('plan', 'cur_com_pla')->_join('plan', 'cur_com', $render) . '
 ' . EntitySql::getInstanceRequire('modalidad', 'cur_com_moa')->_join('modalidad', 'cur_com', $render) . '
-' . EntitySql::getInstanceRequire('carga_horaria', 'cur_ch')->_join('carga_horaria', 'cur', $render) . '
-' . EntitySql::getInstanceRequire('plan', 'cur_ch_pla')->_join('plan', 'cur_ch', $render) . '
-' . EntitySql::getInstanceRequire('asignatura', 'cur_ch_asi')->_join('asignatura', 'cur_ch', $render) . '
+' . EntitySql::getInstanceRequire('asignatura', 'cur_asi')->_join('asignatura', 'cur', $render) . '
 ' . EntitySql::getInstanceRequire('dia', 'dia')->_join('dia', 'hora', $render) . '
 ' ;
   }
@@ -166,9 +160,7 @@ class HorarioSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('domicilio','cur_com_sed_coo_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','cur_com_pla')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('modalidad','cur_com_moa')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('carga_horaria','cur_ch')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('plan','cur_ch_pla')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('asignatura','cur_ch_asi')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('asignatura','cur_asi')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('dia','dia')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
 
@@ -185,9 +177,7 @@ class HorarioSqlMain extends EntitySql{
     if($c = EntitySql::getInstanceRequire('domicilio','cur_com_sed_coo_dom')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','cur_com_pla')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('modalidad','cur_com_moa')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('carga_horaria','cur_ch')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('plan','cur_ch_pla')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('asignatura','cur_ch_asi')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('asignatura','cur_asi')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('dia','dia')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
