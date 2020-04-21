@@ -45,6 +45,22 @@ class ModelTools {
     return Ma::advanced("distribucion_horaria",$render);
   }
 
+  public static function cargasHorariasDeDistribucionesHorarias($distribucionesHorarias){
+    /**
+     * Calcular cargas horarias de un conjunto de distribuciones
+     * Recorre todas las distribuciones sin verificar si corresponden al mismo plan, anio o semestre
+     * Devuelve un array asociativo "asignatura" => "suma de horas catedra"
+     */
+    $cargasHorarias = [];
+
+    foreach($distribucionesHorarias as $dh){
+      if(!array_key_exists($dh["asignatura"], $cargasHorarias) $cargasHorarias[$dh["asignatura"]] = 0;
+      $cargasHorarias[$dh["asignatura"]] += intval($dh["horas_catedra"]);
+    }
+
+    return $cargasHorarias;
+  }
+
   public static function intervaloAnterior(array $grupo){
     /**
      * un intervalo es la combinación de fecha_anio, fecha_semestre
