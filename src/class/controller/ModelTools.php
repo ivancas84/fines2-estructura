@@ -30,7 +30,7 @@ class ModelTools {
     return Ma::advanced("curso",$render);
   }
 
-  public static function cargasHorarias($plan, $anio, $semestre){
+  public static function cargasHorariasDePlanAnioSemestre($plan, $anio, $semestre){
     $params = [
       "plan" => $plan,
       "anio" => $anio,
@@ -47,18 +47,20 @@ class ModelTools {
 
   public static function cargasHorariasDeDistribucionesHorarias($distribucionesHorarias){
     /**
-     * Calcular cargas horarias de un conjunto de distribuciones
+     * Sumar horas catedra de asignaturas para un conjunto de distribuciones horarias
      * Recorre todas las distribuciones sin verificar si corresponden al mismo plan, anio o semestre
      * Devuelve un array asociativo "asignatura" => "suma de horas catedra"
+     * El concepto horasCatedraXAsignatura esta muy ligado a Carga Horaria
+     * Como el metodo no hace distincion de plan, anio, semestre se renombro diferente.
      */
-    $cargasHorarias = [];
+    $horasCatedraXAsignaturas = [];
 
     foreach($distribucionesHorarias as $dh){
-      if(!array_key_exists($dh["asignatura"], $cargasHorarias) $cargasHorarias[$dh["asignatura"]] = 0;
-      $cargasHorarias[$dh["asignatura"]] += intval($dh["horas_catedra"]);
+      if(!array_key_exists($dh["asignatura"], $horasCatedraXAsignaturas)) $horasCatedraXAsignaturas[$dh["asignatura"]] = 0;
+      $horasCatedraXAsignaturas[$dh["asignatura"]] += intval($dh["horas_catedra"]);
     }
 
-    return $cargasHorarias;
+    return $horasCatedraXAsignaturas;
   }
 
   public static function intervaloAnterior(array $grupo){

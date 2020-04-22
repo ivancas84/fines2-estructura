@@ -28,7 +28,16 @@ class HorariosComisionPersist extends Persist {
     $this->id = $data["id"];
     
     $this->checkHorarios();
+    /**
+     * si la comision tiene horarios, no seran definidos
+     */
+
     $this->getCursos();
+    /**
+     * obtener los cursos de la comision para poder asignar los horarios
+     * las asignaturas de los cursos deben coincidir con los de las distribuciones horarias
+     */
+
     $this->getDias($data["dias"]);
     $this->getDistribucionesHorarias();
     $this->horasCatedraXAsignaturas = ModelTools::cargasHorariasDeDistribucionesHorarias($this->distribucionesHorarias);
