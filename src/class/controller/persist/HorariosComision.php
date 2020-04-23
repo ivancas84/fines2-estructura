@@ -36,11 +36,35 @@ class HorariosComisionPersist extends Persist {
     /**
      * obtener los cursos de la comision para poder asignar los horarios
      * las asignaturas de los cursos deben coincidir con los de las distribuciones horarias
+     * sin embargo la comision puede tener cursos adicionales los cuales no seran considerados
+     * la comision no puede tener dos cursos referidos a la misma asignatura, se efectuara un error al combinar
      */
 
-    $this->getDias($data["dias"]);
+    $this->cursosXAsignaturas = array_combine_key($this->cursos,"asignatura");
+    /**
+     * Agrupar los cursos por asignatura
+     */
+
+    if(!($this->dias = shuffle($data["dias"]))) throw new Exception("No se pudo asignar un orden aleatorio a los días");
+    /**
+     * asignar un orden aleatorio a los dias
+     */
+    
     $this->getDistribucionesHorarias();
-    $this->horasCatedraXAsignaturas = ModelTools::cargasHorariasDeDistribucionesHorarias($this->distribucionesHorarias);
+    /**
+     * Obtener las distribuciones horarias utilizando el plan, año y semestre de la comision
+     */
+
+    $this->cargasHorariasXAsignatura = ModelTools::cargasHorariasXAsignaturaDeDistribucionesHorarias($this->distribucionesHorarias);
+    /**
+     * Definir las cargas horarias de las asignaturas
+     */
+
+    $this->controlarCargasHorariasDeCursos();
+    /**
+     * Las horas catedra definidas en los cursos deben coincidir con la carga horaria de las asignaturas de las distribuciones horarias.
+     */
+
     $this->definirHorarios($data["hora_inicio"]);
   }
 
@@ -53,10 +77,6 @@ class HorariosComisionPersist extends Persist {
     if(empty($this->cursos)) throw new Exception("No existen cursos para la comision " . $this->id);
   }
 
-  public function getDias($dias){
-    if(!shuffle($dias)) throw new Exception("No se pudo asignar un orden aleatorio a los días");
-    $this->dias = $dias;
-  }
 
   public function getDistribucionesHorarias() {
     $params = [
@@ -76,10 +96,14 @@ class HorariosComisionPersist extends Persist {
     ) throw new Exception("La cantidad de dias de la distribucion horaria no coincide con la cantidad de dias definidos en comision: " . $this->id);  
   }
 
+  public function controlarCargasHorariasDeCursos(){
+    foreach($this->cargasHorariasXAsignatura as $asignatura => $horasCatedras){
+      $curso = $this->cursosXAsignatura[$asignatura];
+      if(intval($horasCatedra) != intval($curso["horas_catedra"])) throw new Exception("No coincide la carga horaria obtenida de la distribucion horaria con las horas catedra del curso en comision " . $this->id . " para el curso " . $curso["id"]);
+    }
+  }
+
   public function definirHorarios($horaInicio){
-    //$carga_horaria_x_curso = array_combine_keys($this->cursos,"carga_horaria","id");
-    $cursos_x_asignaturas = array_combine_keys($this->cursos,"asignatura","id");
- 
     $horasCatedrasDia = [];
     
     foreach($this->distribucionesHorarias as $dh){
@@ -100,11 +124,9 @@ class HorariosComisionPersist extends Persist {
       $horasCatedrasDia[$dh["dia"]] += $minutos;
       
       $horario->setDia($this->dias[intval($dh["dia"])-1]);
-      $horario->setCurso($carga_horaria_x_curso[$dh["carga_horaria"]]);
+      $horario->setCurso($this->cursosXAsignaturas[$dh["asignatura"]]["id"]);
 
-      if($horario->_logs()->isError()){
-        throw new Exception("El horario posee errores en la asignacion de valores");
-      }
+      if($horario->_logs()->isError()) throw new Exception("El horario posee errores en la asignacion de valores");
 
       $this->insert("horario", $horario->_toArray());
     }
