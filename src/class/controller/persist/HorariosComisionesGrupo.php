@@ -30,23 +30,35 @@ class HorariosComisionesGrupoPersist extends Persist {
     if(empty($grupo["modalidad"])) throw new Exception("Dato no definido: modalidad");
     if(empty($grupo["sed_centro_educativo"])) throw new Exception("Dato no definido: centro educativo (sed_centro_educativo)");
        
-    echo "consultar comisiones anteriores del grupo, que tengan el campo siguiente definido<br>";
     $this->consultarComisionesAnterioresConSiguiente($grupo);
+    /**
+     * Consultar comisiones anteriores dle grupo, que tengan el campo siguiente definido
+     */
     
-    echo "quitar comisiones que tengan el campo siguiente repetido<br>";
     $this->quitarComisionesAnterioresMismoSiguiente();
+    /**
+     * Quitar comisiones que tengan el campo siguiente repetido
+     */
     
-    echo "quitar comisiones anteriores que no tengan el horario definido<br>";
     $this->quitarComisionesAnterioresSinHorario();
-    
-    echo "quitar comisiones anteriores cuyo horario de la comision siguiente este definido<br>";
+    /**
+     * quitar comisiones anteriores que no tengan el horario definido
+     */
+
     $this->quitarComisionesAnterioresConHorarioGrupoActual();
+    /**
+     *  "quitar comisiones anteriores cuyo horario de la comision siguiente este definido";
+     */
 
-    echo "obtener dias y horarios de las comisiones anteriores<br>";
     $this->definirDiasHorariosComisionesAnteriores();
+    /**
+     * obtener dias y horarios de las comisiones anteriores
+     */
 
-    echo "definir dias y horarios para las comisiones actuales<br>";
     $this->definirHorariosComisiones();
+    /**
+     * definir dias y horarios para las comisiones actuales
+     */
   }
   
   protected function consultarComisionesAnterioresConSiguiente($grupo){
