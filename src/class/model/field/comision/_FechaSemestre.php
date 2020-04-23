@@ -8,7 +8,7 @@ class _FieldComisionFechaSemestre extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = false;
-  public $default = false;
+  public $default = "NULL";
   public $length = "10";
   public $main = false;
   public $name = "fecha_semestre";

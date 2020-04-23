@@ -107,10 +107,10 @@ class AsignaturaSqlMain extends EntitySql{
   public function initializeInsert(array $data){
     $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('asignatura');
     if(!isset($data['nombre']) || is_null($data['nombre']) || $data['nombre'] == "") throw new Exception('dato obligatorio sin valor: nombre');
-    if(!isset($data['formacion']) || is_null($data['formacion']) || $data['formacion'] == "") $data['formacion'] = "null";
-    if(!isset($data['clasificacion']) || is_null($data['clasificacion']) || $data['clasificacion'] == "") $data['clasificacion'] = "null";
-    if(!isset($data['codigo']) || is_null($data['codigo']) || $data['codigo'] == "") $data['codigo'] = "null";
-    if(!isset($data['perfil']) || is_null($data['perfil']) || $data['perfil'] == "") $data['perfil'] = "null";
+    if(!isset($data['formacion']) || is_null($data['formacion']) || $data['formacion'] == "") $data['formacion'] = "NULL";
+    if(!isset($data['clasificacion']) || is_null($data['clasificacion']) || $data['clasificacion'] == "") $data['clasificacion'] = "NULL";
+    if(!isset($data['codigo']) || is_null($data['codigo']) || $data['codigo'] == "") $data['codigo'] = "NULL";
+    if(!isset($data['perfil']) || is_null($data['perfil']) || $data['perfil'] == "") $data['perfil'] = "NULL";
 
     return $data;
   }
@@ -119,10 +119,10 @@ class AsignaturaSqlMain extends EntitySql{
   public function initializeUpdate(array $data){
     if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
     if(array_key_exists('nombre', $data)) { if(is_null($data['nombre']) || $data['nombre'] == "") throw new Exception('dato obligatorio sin valor: nombre'); }
-    if(array_key_exists('formacion', $data)) { if(is_null($data['formacion']) || $data['formacion'] == "") $data['formacion'] = "null"; }
-    if(array_key_exists('clasificacion', $data)) { if(is_null($data['clasificacion']) || $data['clasificacion'] == "") $data['clasificacion'] = "null"; }
-    if(array_key_exists('codigo', $data)) { if(is_null($data['codigo']) || $data['codigo'] == "") $data['codigo'] = "null"; }
-    if(array_key_exists('perfil', $data)) { if(is_null($data['perfil']) || $data['perfil'] == "") $data['perfil'] = "null"; }
+    if(array_key_exists('formacion', $data)) { if(is_null($data['formacion']) || $data['formacion'] == "") $data['formacion'] = "NULL"; }
+    if(array_key_exists('clasificacion', $data)) { if(is_null($data['clasificacion']) || $data['clasificacion'] == "") $data['clasificacion'] = "NULL"; }
+    if(array_key_exists('codigo', $data)) { if(is_null($data['codigo']) || $data['codigo'] == "") $data['codigo'] = "NULL"; }
+    if(array_key_exists('perfil', $data)) { if(is_null($data['perfil']) || $data['perfil'] == "") $data['perfil'] = "NULL"; }
 
     return $data;
   }

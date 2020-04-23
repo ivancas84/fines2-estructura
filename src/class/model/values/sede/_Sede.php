@@ -100,7 +100,7 @@ class _Sede extends EntityValues {
   }
 
   public function setObservaciones($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkObservaciones($p); 
     if($check) $this->observaciones = $p;
@@ -114,7 +114,7 @@ class _Sede extends EntityValues {
   }
 
   public function setBaja($p, $format = "Y-m-d H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
     $check = $this->checkBaja($p); 
     if($check) $this->baja = $p;  
@@ -122,7 +122,7 @@ class _Sede extends EntityValues {
   }
 
   public function setDomicilio($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkDomicilio($p); 
     if($check) $this->domicilio = $p;
@@ -130,7 +130,7 @@ class _Sede extends EntityValues {
   }
 
   public function setTipoSede($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkTipoSede($p); 
     if($check) $this->tipoSede = $p;
@@ -138,7 +138,7 @@ class _Sede extends EntityValues {
   }
 
   public function setCentroEducativo($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkCentroEducativo($p); 
     if($check) $this->centroEducativo = $p;

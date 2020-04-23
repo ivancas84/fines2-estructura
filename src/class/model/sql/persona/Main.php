@@ -188,15 +188,15 @@ class PersonaSqlMain extends EntitySql{
   public function initializeInsert(array $data){
     $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('persona');
     if(!isset($data['nombres']) || is_null($data['nombres']) || $data['nombres'] == "") throw new Exception('dato obligatorio sin valor: nombres');
-    if(!isset($data['apellidos']) || is_null($data['apellidos']) || $data['apellidos'] == "") $data['apellidos'] = "null";
-    if(!isset($data['fecha_nacimiento']))  $data['fecha_nacimiento'] = "null";
+    if(!isset($data['apellidos']) || is_null($data['apellidos']) || $data['apellidos'] == "") $data['apellidos'] = "NULL";
+    if(!isset($data['fecha_nacimiento']))  $data['fecha_nacimiento'] = "NULL";
     if(!isset($data['numero_documento']) || is_null($data['numero_documento']) || $data['numero_documento'] == "") throw new Exception('dato obligatorio sin valor: numero_documento');
-    if(!isset($data['cuil']) || is_null($data['cuil']) || $data['cuil'] == "") $data['cuil'] = "null";
-    if(!isset($data['email']) || is_null($data['email']) || $data['email'] == "") $data['email'] = "null";
-    if(!isset($data['genero']) || is_null($data['genero']) || $data['genero'] == "") $data['genero'] = "null";
-    if(!isset($data['apodo']) || is_null($data['apodo']) || $data['apodo'] == "") $data['apodo'] = "null";
-    if(!isset($data['alta']))  $data['alta'] = date("Y-m-d H:i:s");
-    if(empty($data['domicilio'])) $data['domicilio'] = "null";
+    if(!isset($data['cuil']) || is_null($data['cuil']) || $data['cuil'] == "") $data['cuil'] = "NULL";
+    if(!isset($data['email']) || is_null($data['email']) || $data['email'] == "") $data['email'] = "NULL";
+    if(!isset($data['genero']) || is_null($data['genero']) || $data['genero'] == "") $data['genero'] = "NULL";
+    if(!isset($data['apodo']) || is_null($data['apodo']) || $data['apodo'] == "") $data['apodo'] = "NULL";
+    if(!isset($data['alta']))  $data['alta'] = "current_timestamp()";
+    if(empty($data['domicilio'])) $data['domicilio'] = NULL;
 
     return $data;
   }
@@ -205,15 +205,15 @@ class PersonaSqlMain extends EntitySql{
   public function initializeUpdate(array $data){
     if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
     if(array_key_exists('nombres', $data)) { if(is_null($data['nombres']) || $data['nombres'] == "") throw new Exception('dato obligatorio sin valor: nombres'); }
-    if(array_key_exists('apellidos', $data)) { if(is_null($data['apellidos']) || $data['apellidos'] == "") $data['apellidos'] = "null"; }
-    if(array_key_exists('fecha_nacimiento', $data)) { if(empty($data['fecha_nacimiento']))  $data['fecha_nacimiento'] = "null"; }
+    if(array_key_exists('apellidos', $data)) { if(is_null($data['apellidos']) || $data['apellidos'] == "") $data['apellidos'] = "NULL"; }
+    if(array_key_exists('fecha_nacimiento', $data)) { if(empty($data['fecha_nacimiento']))  $data['fecha_nacimiento'] = "NULL"; }
     if(array_key_exists('numero_documento', $data)) { if(is_null($data['numero_documento']) || $data['numero_documento'] == "") throw new Exception('dato obligatorio sin valor: numero_documento'); }
-    if(array_key_exists('cuil', $data)) { if(is_null($data['cuil']) || $data['cuil'] == "") $data['cuil'] = "null"; }
-    if(array_key_exists('email', $data)) { if(is_null($data['email']) || $data['email'] == "") $data['email'] = "null"; }
-    if(array_key_exists('genero', $data)) { if(is_null($data['genero']) || $data['genero'] == "") $data['genero'] = "null"; }
-    if(array_key_exists('apodo', $data)) { if(is_null($data['apodo']) || $data['apodo'] == "") $data['apodo'] = "null"; }
-    if(array_key_exists('alta', $data)) { if(empty($data['alta']))  $data['alta'] = date("Y-m-d H:i:s"); }
-    if(array_key_exists('domicilio', $data)) { if(!isset($data['domicilio']) || ($data['domicilio'] == '')) $data['domicilio'] = "null"; }
+    if(array_key_exists('cuil', $data)) { if(is_null($data['cuil']) || $data['cuil'] == "") $data['cuil'] = "NULL"; }
+    if(array_key_exists('email', $data)) { if(is_null($data['email']) || $data['email'] == "") $data['email'] = "NULL"; }
+    if(array_key_exists('genero', $data)) { if(is_null($data['genero']) || $data['genero'] == "") $data['genero'] = "NULL"; }
+    if(array_key_exists('apodo', $data)) { if(is_null($data['apodo']) || $data['apodo'] == "") $data['apodo'] = "NULL"; }
+    if(array_key_exists('alta', $data)) { if(empty($data['alta']))  $data['alta'] = "current_timestamp()"; }
+    if(array_key_exists('domicilio', $data)) { if(!isset($data['domicilio']) || ($data['domicilio'] == '')) $data['domicilio'] = NULL; }
 
     return $data;
   }

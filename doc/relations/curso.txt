@@ -12,7 +12,6 @@ asignatura - asi
 
 id (id): string pk. NOT NULL. UNIQUE.
 horas_catedra (hc): integer nf. NOT NULL.
-alta (alt): timestamp nf. NOT NULL. DEFAULT: CURRENT_TIMESTAMP.
-horario (hor): string nf. MAIN. NOT ADMIN.
+alta (alt): timestamp nf. NOT NULL. DEFAULT: current_timestamp().
 comision (com): string mu. NOT NULL. MAIN.
-asignatura (asi): string mu. NOT NULL.
+asignatura (asi): string mu. NOT NULL. MAIN.

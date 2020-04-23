@@ -104,7 +104,7 @@ class _Persona extends EntityValues {
   }
 
   public function setApellidos($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkApellidos($p); 
     if($check) $this->apellidos = $p;
@@ -118,7 +118,7 @@ class _Persona extends EntityValues {
   }
 
   public function setFechaNacimiento($p, $format = UNDEFINED) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     if(!is_null($p)) $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);    
     $check = $this->checkFechaNacimiento($p); 
     if($check) $this->fechaNacimiento = $p;  
@@ -134,7 +134,7 @@ class _Persona extends EntityValues {
   }
 
   public function setCuil($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkCuil($p); 
     if($check) $this->cuil = $p;
@@ -142,7 +142,7 @@ class _Persona extends EntityValues {
   }
 
   public function setEmail($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkEmail($p); 
     if($check) $this->email = $p;
@@ -150,7 +150,7 @@ class _Persona extends EntityValues {
   }
 
   public function setGenero($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkGenero($p); 
     if($check) $this->genero = $p;
@@ -158,7 +158,7 @@ class _Persona extends EntityValues {
   }
 
   public function setApodo($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkApodo($p); 
     if($check) $this->apodo = $p;
@@ -172,7 +172,7 @@ class _Persona extends EntityValues {
   }
 
   public function setAlta($p, $format = "Y-m-d H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'current_timestamp()' : trim($p);
     if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
     $check = $this->checkAlta($p); 
     if($check) $this->alta = $p;  
@@ -180,7 +180,7 @@ class _Persona extends EntityValues {
   }
 
   public function setDomicilio($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkDomicilio($p); 
     if($check) $this->domicilio = $p;

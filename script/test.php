@@ -3,7 +3,9 @@
 require_once("../config/config.php");
 require_once("class/controller/ModelTools.php");
 
-$cargasHorarias = ModelTools::cargasHorarias(4,1,1);
+require_once("class/model/Sqlo.php");
+
 
 echo "<pre>";
-print_r($cargasHorarias);
+echo EntitySqlo::getInstanceRequire("curso")->all(["asi_nombre","=",'Matemática']);
+

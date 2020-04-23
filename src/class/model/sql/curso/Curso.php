@@ -6,19 +6,12 @@ class CursoSql extends CursoSqlMain {
   public function _subSql(Render $render){ //subconsulta sql (en construccion)
     $t = $this->prt();
 
-    return "SELECT *
+    return "(
+
+SELECT *
 FROM (
-SELECT DISTINCT {$this->_fieldsDb()}, horario.horario, toma_activa.toma_activa
+SELECT DISTINCT {$this->_fieldsDb()}, toma_activa.toma_activa
 {$this->_from($render)}
-LEFT OUTER JOIN (
-  SELECT curso.id AS curso, GROUP_CONCAT(dia.dia, \" \", TIME_FORMAT(horario.hora_inicio, '%H:%i'), \" a \", TIME_FORMAT(horario.hora_fin, '%H:%i') ORDER BY dia.numero ASC) AS horario
-  FROM curso
-  INNER JOIN horario ON (horario.curso = curso.id)
-  INNER JOIN dia ON (dia.id = horario.dia)
-  INNER JOIN comision ON (comision.id = curso.comision)
-  INNER JOIN plan ON ( comision.plan = plan.id )
-  GROUP BY curso.id
-) AS horario ON (horario.curso = {$t}.id)
 LEFT OUTER JOIN (
   SELECT id AS toma_activa, curso
   FROM toma
@@ -26,6 +19,8 @@ LEFT OUTER JOIN (
 ) AS toma_activa ON (toma_activa.curso = {$t}.id)
 ) AS {$t}
 " . concat($this->_condition($render), 'WHERE ') . "
+
+)
 ";
   }
 

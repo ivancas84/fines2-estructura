@@ -8,7 +8,7 @@ class _FieldPlanDistribucionHoraria extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = false;
-  public $default = false;
+  public $default = "NULL";
   public $length = "45";
   public $main = false;
   public $name = "distribucion_horaria";

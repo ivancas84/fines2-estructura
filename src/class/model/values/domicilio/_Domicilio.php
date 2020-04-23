@@ -86,7 +86,7 @@ class _Domicilio extends EntityValues {
   }
 
   public function setEntre($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkEntre($p); 
     if($check) $this->entre = $p;
@@ -102,7 +102,7 @@ class _Domicilio extends EntityValues {
   }
 
   public function setPiso($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkPiso($p); 
     if($check) $this->piso = $p;
@@ -110,7 +110,7 @@ class _Domicilio extends EntityValues {
   }
 
   public function setDepartamento($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkDepartamento($p); 
     if($check) $this->departamento = $p;
@@ -118,7 +118,7 @@ class _Domicilio extends EntityValues {
   }
 
   public function setBarrio($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkBarrio($p); 
     if($check) $this->barrio = $p;

@@ -192,11 +192,11 @@ class SedeSqlMain extends EntitySql{
     $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('sede');
     if(!isset($data['numero']) || is_null($data['numero']) || $data['numero'] == "") throw new Exception('dato obligatorio sin valor: numero');
     if(!isset($data['nombre']) || is_null($data['nombre']) || $data['nombre'] == "") throw new Exception('dato obligatorio sin valor: nombre');
-    if(!isset($data['observaciones']) || is_null($data['observaciones']) || $data['observaciones'] == "") $data['observaciones'] = "null";
-    if(!isset($data['baja']))  $data['baja'] = "null";
-    if(empty($data['domicilio'])) $data['domicilio'] = "null";
-    if(empty($data['tipo_sede'])) $data['tipo_sede'] = "null";
-    if(empty($data['centro_educativo'])) $data['centro_educativo'] = "null";
+    if(!isset($data['observaciones']) || is_null($data['observaciones']) || $data['observaciones'] == "") $data['observaciones'] = "NULL";
+    if(!isset($data['baja']))  $data['baja'] = "NULL";
+    if(empty($data['domicilio'])) $data['domicilio'] = NULL;
+    if(empty($data['tipo_sede'])) $data['tipo_sede'] = NULL;
+    if(empty($data['centro_educativo'])) $data['centro_educativo'] = NULL;
 
     return $data;
   }
@@ -206,11 +206,11 @@ class SedeSqlMain extends EntitySql{
     if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
     if(array_key_exists('numero', $data)) { if(is_null($data['numero']) || $data['numero'] == "") throw new Exception('dato obligatorio sin valor: numero'); }
     if(array_key_exists('nombre', $data)) { if(is_null($data['nombre']) || $data['nombre'] == "") throw new Exception('dato obligatorio sin valor: nombre'); }
-    if(array_key_exists('observaciones', $data)) { if(is_null($data['observaciones']) || $data['observaciones'] == "") $data['observaciones'] = "null"; }
-    if(array_key_exists('baja', $data)) { if(empty($data['baja']))  $data['baja'] = "null"; }
-    if(array_key_exists('domicilio', $data)) { if(!isset($data['domicilio']) || ($data['domicilio'] == '')) $data['domicilio'] = "null"; }
-    if(array_key_exists('tipo_sede', $data)) { if(!isset($data['tipo_sede']) || ($data['tipo_sede'] == '')) $data['tipo_sede'] = "null"; }
-    if(array_key_exists('centro_educativo', $data)) { if(!isset($data['centro_educativo']) || ($data['centro_educativo'] == '')) $data['centro_educativo'] = "null"; }
+    if(array_key_exists('observaciones', $data)) { if(is_null($data['observaciones']) || $data['observaciones'] == "") $data['observaciones'] = "NULL"; }
+    if(array_key_exists('baja', $data)) { if(empty($data['baja']))  $data['baja'] = "NULL"; }
+    if(array_key_exists('domicilio', $data)) { if(!isset($data['domicilio']) || ($data['domicilio'] == '')) $data['domicilio'] = NULL; }
+    if(array_key_exists('tipo_sede', $data)) { if(!isset($data['tipo_sede']) || ($data['tipo_sede'] == '')) $data['tipo_sede'] = NULL; }
+    if(array_key_exists('centro_educativo', $data)) { if(!isset($data['centro_educativo']) || ($data['centro_educativo'] == '')) $data['centro_educativo'] = NULL; }
 
     return $data;
   }

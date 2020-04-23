@@ -126,7 +126,7 @@ class _Toma extends EntityValues {
   }
 
   public function setFechaToma($p, $format = UNDEFINED) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     if(!is_null($p)) $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);    
     $check = $this->checkFechaToma($p); 
     if($check) $this->fechaToma = $p;  
@@ -140,7 +140,7 @@ class _Toma extends EntityValues {
   }
 
   public function setFechaInicio($p, $format = UNDEFINED) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     if(!is_null($p)) $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);    
     $check = $this->checkFechaInicio($p); 
     if($check) $this->fechaInicio = $p;  
@@ -154,7 +154,7 @@ class _Toma extends EntityValues {
   }
 
   public function setFechaFin($p, $format = UNDEFINED) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     if(!is_null($p)) $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);    
     $check = $this->checkFechaFin($p); 
     if($check) $this->fechaFin = $p;  
@@ -168,7 +168,7 @@ class _Toma extends EntityValues {
   }
 
   public function setFechaContralor($p, $format = UNDEFINED) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     if(!is_null($p)) $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);    
     $check = $this->checkFechaContralor($p); 
     if($check) $this->fechaContralor = $p;  
@@ -182,7 +182,7 @@ class _Toma extends EntityValues {
   }
 
   public function setFechaConsejo($p, $format = UNDEFINED) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     if(!is_null($p)) $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);    
     $check = $this->checkFechaConsejo($p); 
     if($check) $this->fechaConsejo = $p;  
@@ -190,7 +190,7 @@ class _Toma extends EntityValues {
   }
 
   public function setEstado($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkEstado($p); 
     if($check) $this->estado = $p;
@@ -198,7 +198,7 @@ class _Toma extends EntityValues {
   }
 
   public function setObservaciones($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkObservaciones($p); 
     if($check) $this->observaciones = $p;
@@ -206,7 +206,7 @@ class _Toma extends EntityValues {
   }
 
   public function setComentario($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkComentario($p); 
     if($check) $this->comentario = $p;
@@ -222,7 +222,7 @@ class _Toma extends EntityValues {
   }
 
   public function setEstadoContralor($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkEstadoContralor($p); 
     if($check) $this->estadoContralor = $p;
@@ -236,7 +236,7 @@ class _Toma extends EntityValues {
   }
 
   public function setAlta($p, $format = "Y-m-d H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'current_timestamp()' : trim($p);
     if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
     $check = $this->checkAlta($p); 
     if($check) $this->alta = $p;  
@@ -252,7 +252,7 @@ class _Toma extends EntityValues {
   }
 
   public function setDocente($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkDocente($p); 
     if($check) $this->docente = $p;
@@ -260,7 +260,7 @@ class _Toma extends EntityValues {
   }
 
   public function setReemplazo($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkReemplazo($p); 
     if($check) $this->reemplazo = $p;

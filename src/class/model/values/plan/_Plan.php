@@ -62,7 +62,7 @@ class _Plan extends EntityValues {
   }
 
   public function setResolucion($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkResolucion($p); 
     if($check) $this->resolucion = $p;
@@ -70,7 +70,7 @@ class _Plan extends EntityValues {
   }
 
   public function setDistribucionHoraria($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkDistribucionHoraria($p); 
     if($check) $this->distribucionHoraria = $p;

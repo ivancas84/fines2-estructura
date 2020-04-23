@@ -7,7 +7,6 @@ class _Curso extends EntityValues {
   protected $id = UNDEFINED;
   protected $horasCatedra = UNDEFINED;
   protected $alta = UNDEFINED;
-  protected $horario = UNDEFINED;
   protected $comision = UNDEFINED;
   protected $asignatura = UNDEFINED;
 
@@ -15,7 +14,6 @@ class _Curso extends EntityValues {
     $this->setId(DEFAULT_VALUE);
     $this->setHorasCatedra(DEFAULT_VALUE);
     $this->setAlta(DEFAULT_VALUE);
-    $this->setHorario(DEFAULT_VALUE);
     $this->setComision(DEFAULT_VALUE);
     $this->setAsignatura(DEFAULT_VALUE);
   }
@@ -25,7 +23,6 @@ class _Curso extends EntityValues {
     if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
     if(isset($row[$p."horas_catedra"])) $this->setHorasCatedra($row[$p."horas_catedra"]);
     if(isset($row[$p."alta"])) $this->setAlta($row[$p."alta"]);
-    if(isset($row[$p."horario"])) $this->setHorario($row[$p."horario"]);
     if(isset($row[$p."comision"])) $this->setComision($row[$p."comision"]);
     if(isset($row[$p."asignatura"])) $this->setAsignatura($row[$p."asignatura"]);
   }
@@ -35,7 +32,6 @@ class _Curso extends EntityValues {
     if($this->id !== UNDEFINED) $row["id"] = $this->id();
     if($this->horasCatedra !== UNDEFINED) $row["horas_catedra"] = $this->horasCatedra();
     if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d H:i:s");
-    if($this->horario !== UNDEFINED) $row["horario"] = $this->horario();
     if($this->comision !== UNDEFINED) $row["comision"] = $this->comision();
     if($this->asignatura !== UNDEFINED) $row["asignatura"] = $this->asignatura();
     return $row;
@@ -45,7 +41,6 @@ class _Curso extends EntityValues {
     if(!Validation::is_empty($this->id)) return false;
     if(!Validation::is_empty($this->horasCatedra)) return false;
     if(!Validation::is_empty($this->alta)) return false;
-    if(!Validation::is_empty($this->horario)) return false;
     if(!Validation::is_empty($this->comision)) return false;
     if(!Validation::is_empty($this->asignatura)) return false;
     return true;
@@ -54,7 +49,6 @@ class _Curso extends EntityValues {
   public function id() { return $this->id; }
   public function horasCatedra() { return $this->horasCatedra; }
   public function alta($format = null) { return Format::date($this->alta, $format); }
-  public function horario($format = null) { return Format::convertCase($this->horario, $format); }
   public function comision($format = null) { return Format::convertCase($this->comision, $format); }
   public function asignatura($format = null) { return Format::convertCase($this->asignatura, $format); }
   public function setId($p) {
@@ -80,18 +74,10 @@ class _Curso extends EntityValues {
   }
 
   public function setAlta($p, $format = "Y-m-d H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'current_timestamp()' : trim($p);
     if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
     $check = $this->checkAlta($p); 
     if($check) $this->alta = $p;  
-    return $check;
-  }
-
-  public function setHorario($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkHorario($p); 
-    if($check) $this->horario = $p;
     return $check;
   }
 
@@ -123,11 +109,6 @@ class _Curso extends EntityValues {
   public function checkAlta($value) { 
     $v = Validation::getInstanceValue($value)->date()->required();
     return $this->_setLogsValidation("alta", $v);
-  }
-
-  public function checkHorario($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("horario", $v);
   }
 
   public function checkComision($value) { 

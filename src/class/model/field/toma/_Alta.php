@@ -8,7 +8,7 @@ class _FieldTomaAlta extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = true;
-  public $default = "CURRENT_TIMESTAMP";
+  public $default = "current_timestamp()";
   public $length = false;
   public $main = false;
   public $name = "alta";

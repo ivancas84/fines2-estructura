@@ -74,7 +74,7 @@ class _Asignatura extends EntityValues {
   }
 
   public function setFormacion($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkFormacion($p); 
     if($check) $this->formacion = $p;
@@ -82,7 +82,7 @@ class _Asignatura extends EntityValues {
   }
 
   public function setClasificacion($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkClasificacion($p); 
     if($check) $this->clasificacion = $p;
@@ -90,7 +90,7 @@ class _Asignatura extends EntityValues {
   }
 
   public function setCodigo($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkCodigo($p); 
     if($check) $this->codigo = $p;
@@ -98,7 +98,7 @@ class _Asignatura extends EntityValues {
   }
 
   public function setPerfil($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkPerfil($p); 
     if($check) $this->perfil = $p;

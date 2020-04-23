@@ -6,7 +6,9 @@ class SedeSql extends SedeSqlMain {
 
   public function _subSql(Render $render) {
     $t = $this->prt();
-    return "SELECT * FROM (
+    return "(
+      
+SELECT * FROM (
         
 SELECT DISTINCT {$this->_fieldsDb()}, coordinador.persona AS coordinador
 {$this->_from($render)}
@@ -20,6 +22,7 @@ SELECT DISTINCT {$this->_fieldsDb()}, coordinador.persona AS coordinador
     ) AS coordinador ON (coordinador.sede = {$t}.id)
 ) AS {$t}
 " . concat($this->_condition($render), 'WHERE ') . "
-";
+
+)";
   }
 }

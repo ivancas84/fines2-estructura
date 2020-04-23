@@ -310,20 +310,20 @@ class TomaSqlMain extends EntitySql{
 
   public function initializeInsert(array $data){
     $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('toma');
-    if(!isset($data['fecha_toma']))  $data['fecha_toma'] = "null";
-    if(!isset($data['fecha_inicio']))  $data['fecha_inicio'] = "null";
-    if(!isset($data['fecha_fin']))  $data['fecha_fin'] = "null";
-    if(!isset($data['fecha_contralor']))  $data['fecha_contralor'] = "null";
-    if(!isset($data['fecha_consejo']))  $data['fecha_consejo'] = "null";
-    if(!isset($data['estado']) || is_null($data['estado']) || $data['estado'] == "") $data['estado'] = "null";
-    if(!isset($data['observaciones']) || is_null($data['observaciones']) || $data['observaciones'] == "") $data['observaciones'] = "null";
-    if(!isset($data['comentario']) || is_null($data['comentario']) || $data['comentario'] == "") $data['comentario'] = "null";
+    if(!isset($data['fecha_toma']))  $data['fecha_toma'] = "NULL";
+    if(!isset($data['fecha_inicio']))  $data['fecha_inicio'] = "NULL";
+    if(!isset($data['fecha_fin']))  $data['fecha_fin'] = "NULL";
+    if(!isset($data['fecha_contralor']))  $data['fecha_contralor'] = "NULL";
+    if(!isset($data['fecha_consejo']))  $data['fecha_consejo'] = "NULL";
+    if(!isset($data['estado']) || is_null($data['estado']) || $data['estado'] == "") $data['estado'] = "NULL";
+    if(!isset($data['observaciones']) || is_null($data['observaciones']) || $data['observaciones'] == "") $data['observaciones'] = "NULL";
+    if(!isset($data['comentario']) || is_null($data['comentario']) || $data['comentario'] == "") $data['comentario'] = "NULL";
     if(!isset($data['tipo_movimiento']) || is_null($data['tipo_movimiento']) || $data['tipo_movimiento'] == "") throw new Exception('dato obligatorio sin valor: tipo_movimiento');
-    if(!isset($data['estado_contralor']) || is_null($data['estado_contralor']) || $data['estado_contralor'] == "") $data['estado_contralor'] = "null";
-    if(!isset($data['alta']))  $data['alta'] = date("Y-m-d H:i:s");
+    if(!isset($data['estado_contralor']) || is_null($data['estado_contralor']) || $data['estado_contralor'] == "") $data['estado_contralor'] = "NULL";
+    if(!isset($data['alta']))  $data['alta'] = "current_timestamp()";
     if(empty($data['curso'])) throw new Exception('dato obligatorio sin valor: curso');
-    if(empty($data['docente'])) $data['docente'] = "null";
-    if(empty($data['reemplazo'])) $data['reemplazo'] = "null";
+    if(empty($data['docente'])) $data['docente'] = NULL;
+    if(empty($data['reemplazo'])) $data['reemplazo'] = NULL;
 
     return $data;
   }
@@ -331,20 +331,20 @@ class TomaSqlMain extends EntitySql{
 
   public function initializeUpdate(array $data){
     if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
-    if(array_key_exists('fecha_toma', $data)) { if(empty($data['fecha_toma']))  $data['fecha_toma'] = "null"; }
-    if(array_key_exists('fecha_inicio', $data)) { if(empty($data['fecha_inicio']))  $data['fecha_inicio'] = "null"; }
-    if(array_key_exists('fecha_fin', $data)) { if(empty($data['fecha_fin']))  $data['fecha_fin'] = "null"; }
-    if(array_key_exists('fecha_contralor', $data)) { if(empty($data['fecha_contralor']))  $data['fecha_contralor'] = "null"; }
-    if(array_key_exists('fecha_consejo', $data)) { if(empty($data['fecha_consejo']))  $data['fecha_consejo'] = "null"; }
-    if(array_key_exists('estado', $data)) { if(is_null($data['estado']) || $data['estado'] == "") $data['estado'] = "null"; }
-    if(array_key_exists('observaciones', $data)) { if(is_null($data['observaciones']) || $data['observaciones'] == "") $data['observaciones'] = "null"; }
-    if(array_key_exists('comentario', $data)) { if(is_null($data['comentario']) || $data['comentario'] == "") $data['comentario'] = "null"; }
+    if(array_key_exists('fecha_toma', $data)) { if(empty($data['fecha_toma']))  $data['fecha_toma'] = "NULL"; }
+    if(array_key_exists('fecha_inicio', $data)) { if(empty($data['fecha_inicio']))  $data['fecha_inicio'] = "NULL"; }
+    if(array_key_exists('fecha_fin', $data)) { if(empty($data['fecha_fin']))  $data['fecha_fin'] = "NULL"; }
+    if(array_key_exists('fecha_contralor', $data)) { if(empty($data['fecha_contralor']))  $data['fecha_contralor'] = "NULL"; }
+    if(array_key_exists('fecha_consejo', $data)) { if(empty($data['fecha_consejo']))  $data['fecha_consejo'] = "NULL"; }
+    if(array_key_exists('estado', $data)) { if(is_null($data['estado']) || $data['estado'] == "") $data['estado'] = "NULL"; }
+    if(array_key_exists('observaciones', $data)) { if(is_null($data['observaciones']) || $data['observaciones'] == "") $data['observaciones'] = "NULL"; }
+    if(array_key_exists('comentario', $data)) { if(is_null($data['comentario']) || $data['comentario'] == "") $data['comentario'] = "NULL"; }
     if(array_key_exists('tipo_movimiento', $data)) { if(is_null($data['tipo_movimiento']) || $data['tipo_movimiento'] == "") throw new Exception('dato obligatorio sin valor: tipo_movimiento'); }
-    if(array_key_exists('estado_contralor', $data)) { if(is_null($data['estado_contralor']) || $data['estado_contralor'] == "") $data['estado_contralor'] = "null"; }
-    if(array_key_exists('alta', $data)) { if(empty($data['alta']))  $data['alta'] = date("Y-m-d H:i:s"); }
+    if(array_key_exists('estado_contralor', $data)) { if(is_null($data['estado_contralor']) || $data['estado_contralor'] == "") $data['estado_contralor'] = "NULL"; }
+    if(array_key_exists('alta', $data)) { if(empty($data['alta']))  $data['alta'] = "current_timestamp()"; }
     if(array_key_exists('curso', $data)) { if(!isset($data['curso']) || ($data['curso'] == '')) throw new Exception('dato obligatorio sin valor: curso'); }
-    if(array_key_exists('docente', $data)) { if(!isset($data['docente']) || ($data['docente'] == '')) $data['docente'] = "null"; }
-    if(array_key_exists('reemplazo', $data)) { if(!isset($data['reemplazo']) || ($data['reemplazo'] == '')) $data['reemplazo'] = "null"; }
+    if(array_key_exists('docente', $data)) { if(!isset($data['docente']) || ($data['docente'] == '')) $data['docente'] = NULL; }
+    if(array_key_exists('reemplazo', $data)) { if(!isset($data['reemplazo']) || ($data['reemplazo'] == '')) $data['reemplazo'] = NULL; }
 
     return $data;
   }
