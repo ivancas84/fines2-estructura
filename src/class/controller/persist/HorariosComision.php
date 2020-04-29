@@ -4,7 +4,11 @@ require_once("class/controller/Persist.php");
 require_once("class/model/Ma.php");
 require_once("class/model/Values.php");
 require_once("class/controller/persist/ComisionCursos.php");
+require_once("class/controller/ModelTools.php");
+
 require_once("function/array_combine_keys.php");
+require_once("function/array_combine_key.php");
+
 
 class HorariosComisionPersist extends Persist {
   /**
@@ -45,7 +49,8 @@ class HorariosComisionPersist extends Persist {
      * Agrupar los cursos por asignatura
      */
 
-    if(!($this->dias = shuffle($data["dias"]))) throw new Exception("No se pudo asignar un orden aleatorio a los días");
+    $this->dias = $data["dias"];
+    if(!shuffle($this->dias)) throw new Exception("No se pudo asignar un orden aleatorio a los días");
     /**
      * asignar un orden aleatorio a los dias
      */
@@ -98,8 +103,8 @@ class HorariosComisionPersist extends Persist {
 
   public function controlarCargasHorariasDeCursos(){
     foreach($this->cargasHorariasXAsignatura as $asignatura => $horasCatedras){
-      $curso = $this->cursosXAsignatura[$asignatura];
-      if(intval($horasCatedra) != intval($curso["horas_catedra"])) throw new Exception("No coincide la carga horaria obtenida de la distribucion horaria con las horas catedra del curso en comision " . $this->id . " para el curso " . $curso["id"]);
+      $curso = $this->cursosXAsignaturas[$asignatura];
+      if(intval($horasCatedras) != intval($curso["horas_catedra"])) throw new Exception("No coincide la carga horaria obtenida de la distribucion horaria con las horas catedra del curso en comision " . $this->id . " para el curso " . $curso["id"]);
     }
   }
 
