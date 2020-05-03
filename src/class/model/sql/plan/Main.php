@@ -87,8 +87,8 @@ class PlanSqlMain extends EntitySql{
   public function initializeInsert(array $data){
     $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('plan');
     if(!isset($data['orientacion']) || is_null($data['orientacion']) || $data['orientacion'] == "") throw new Exception('dato obligatorio sin valor: orientacion');
-    if(!isset($data['resolucion']) || is_null($data['resolucion']) || $data['resolucion'] == "") $data['resolucion'] = "NULL";
-    if(!isset($data['distribucion_horaria']) || is_null($data['distribucion_horaria']) || $data['distribucion_horaria'] == "") $data['distribucion_horaria'] = "NULL";
+    if(!isset($data['resolucion']) || is_null($data['resolucion']) || $data['resolucion'] == "") $data['resolucion'] = "null";
+    if(!isset($data['distribucion_horaria']) || is_null($data['distribucion_horaria']) || $data['distribucion_horaria'] == "") $data['distribucion_horaria'] = "null";
 
     return $data;
   }
@@ -97,8 +97,8 @@ class PlanSqlMain extends EntitySql{
   public function initializeUpdate(array $data){
     if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
     if(array_key_exists('orientacion', $data)) { if(is_null($data['orientacion']) || $data['orientacion'] == "") throw new Exception('dato obligatorio sin valor: orientacion'); }
-    if(array_key_exists('resolucion', $data)) { if(is_null($data['resolucion']) || $data['resolucion'] == "") $data['resolucion'] = "NULL"; }
-    if(array_key_exists('distribucion_horaria', $data)) { if(is_null($data['distribucion_horaria']) || $data['distribucion_horaria'] == "") $data['distribucion_horaria'] = "NULL"; }
+    if(array_key_exists('resolucion', $data)) { if(is_null($data['resolucion']) || $data['resolucion'] == "") $data['resolucion'] = "null"; }
+    if(array_key_exists('distribucion_horaria', $data)) { if(is_null($data['distribucion_horaria']) || $data['distribucion_horaria'] == "") $data['distribucion_horaria'] = "null"; }
 
     return $data;
   }

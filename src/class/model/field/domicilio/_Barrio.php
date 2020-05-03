@@ -8,7 +8,7 @@ class _FieldDomicilioBarrio extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = false;
-  public $default = "NULL";
+  public $default = false;
   public $length = "255";
   public $main = false;
   public $name = "barrio";

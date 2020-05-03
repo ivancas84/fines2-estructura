@@ -74,7 +74,7 @@ class _Curso extends EntityValues {
   }
 
   public function setAlta($p, $format = "Y-m-d H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? 'current_timestamp()' : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
     if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
     $check = $this->checkAlta($p); 
     if($check) $this->alta = $p;  

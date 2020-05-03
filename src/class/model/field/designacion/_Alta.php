@@ -8,7 +8,7 @@ class _FieldDesignacionAlta extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = true;
-  public $default = "current_timestamp()";
+  public $default = "CURRENT_TIMESTAMP";
   public $length = false;
   public $main = false;
   public $name = "alta";

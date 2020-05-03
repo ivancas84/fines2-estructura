@@ -1,9 +1,10 @@
-id_persona - per
+persona - per
+domicilio - per_dom
 
-id (id): integer pk. NOT NULL. MAIN. UNIQUE.
-prefijo (pre): integer nf. NOT NULL.
-numero (num): integer nf. NOT NULL.
-tipo (tip): string nf. NOT NULL.
-alta (alt): timestamp nf. NOT NULL. NOT ADMIN. DEFAULT: CURRENT_TIMESTAMP.
-baja (baj): timestamp nf.
-persona (per): integer mu. NOT NULL.
+id (id): string pk. NOT NULL. MAIN. UNIQUE.
+tipo (tip): string nf.
+prefijo (pre): string nf.
+numero (num): string nf. NOT NULL.
+insertado (ins): timestamp nf. NOT NULL. DEFAULT: CURRENT_TIMESTAMP.
+eliminado (eli): timestamp nf.
+persona (per): string mu. NOT NULL.

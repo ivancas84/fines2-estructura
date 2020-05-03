@@ -8,7 +8,7 @@ class _FieldTomaFechaInicio extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = false;
-  public $default = "NULL";
+  public $default = false;
   public $length = false;
   public $main = false;
   public $name = "fecha_inicio";

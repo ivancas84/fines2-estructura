@@ -12,11 +12,13 @@ $structure = array (
   Entity::getInstanceRequire("dia"),
   Entity::getInstanceRequire("distribucion_horaria"),
   Entity::getInstanceRequire("domicilio"),
+  Entity::getInstanceRequire("email"),
   Entity::getInstanceRequire("horario"),
   Entity::getInstanceRequire("modalidad"),
   Entity::getInstanceRequire("persona"),
   Entity::getInstanceRequire("plan"),
   Entity::getInstanceRequire("sede"),
+  Entity::getInstanceRequire("telefono"),
   Entity::getInstanceRequire("tipo_sede"),
   Entity::getInstanceRequire("toma"),
 );

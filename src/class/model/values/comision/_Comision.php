@@ -132,7 +132,7 @@ class _Comision extends EntityValues {
   }
 
   public function setTurno($p) {
-    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkTurno($p); 
     if($check) $this->turno = $p;
@@ -148,7 +148,7 @@ class _Comision extends EntityValues {
   }
 
   public function setAnio($p) {
-    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkAnio($p); 
     if($check) $this->anio = $p;
@@ -156,7 +156,7 @@ class _Comision extends EntityValues {
   }
 
   public function setSemestre($p) {
-    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkSemestre($p); 
     if($check) $this->semestre = $p;
@@ -164,7 +164,7 @@ class _Comision extends EntityValues {
   }
 
   public function setComentario($p) {
-    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkComentario($p); 
     if($check) $this->comentario = $p;
@@ -202,7 +202,7 @@ class _Comision extends EntityValues {
   }
 
   public function setFechaAnio($p, $format = "Y") {
-    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
     $check = $this->checkFechaAnio($p); 
     if($check) $this->fechaAnio = $p;  
@@ -210,7 +210,7 @@ class _Comision extends EntityValues {
   }
 
   public function setFechaSemestre($p) {
-    if ($p == DEFAULT_VALUE) $p = NULL;
+    if ($p == DEFAULT_VALUE) $p = null;
     $p = (is_null($p)) ? null : intval(trim($p));
     $check = $this->checkFechaSemestre($p); 
     if($check) $this->fechaSemestre = $p;
@@ -218,7 +218,7 @@ class _Comision extends EntityValues {
   }
 
   public function setObservaciones($p) {
-    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkObservaciones($p); 
     if($check) $this->observaciones = $p;
@@ -232,7 +232,7 @@ class _Comision extends EntityValues {
   }
 
   public function setAlta($p, $format = "Y-m-d H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? 'current_timestamp()' : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
     if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
     $check = $this->checkAlta($p); 
     if($check) $this->alta = $p;  
@@ -264,7 +264,7 @@ class _Comision extends EntityValues {
   }
 
   public function setComisionSiguiente($p) {
-    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkComisionSiguiente($p); 
     if($check) $this->comisionSiguiente = $p;

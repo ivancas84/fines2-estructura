@@ -18,7 +18,6 @@ class PersonaEntityMain extends Entity {
       Field::getInstanceRequire("persona", "fecha_nacimiento"),
       Field::getInstanceRequire("persona", "numero_documento"),
       Field::getInstanceRequire("persona", "cuil"),
-      Field::getInstanceRequire("persona", "email"),
       Field::getInstanceRequire("persona", "genero"),
       Field::getInstanceRequire("persona", "apodo"),
       Field::getInstanceRequire("persona", "alta"),

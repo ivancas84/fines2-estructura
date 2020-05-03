@@ -114,8 +114,8 @@ class CentroEducativoSqlMain extends EntitySql{
   public function initializeInsert(array $data){
     $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('centro_educativo');
     if(!isset($data['nombre']) || is_null($data['nombre']) || $data['nombre'] == "") throw new Exception('dato obligatorio sin valor: nombre');
-    if(!isset($data['cue']) || is_null($data['cue']) || $data['cue'] == "") $data['cue'] = "NULL";
-    if(empty($data['domicilio'])) $data['domicilio'] = NULL;
+    if(!isset($data['cue']) || is_null($data['cue']) || $data['cue'] == "") $data['cue'] = "null";
+    if(empty($data['domicilio'])) $data['domicilio'] = "null";
 
     return $data;
   }
@@ -124,8 +124,8 @@ class CentroEducativoSqlMain extends EntitySql{
   public function initializeUpdate(array $data){
     if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
     if(array_key_exists('nombre', $data)) { if(is_null($data['nombre']) || $data['nombre'] == "") throw new Exception('dato obligatorio sin valor: nombre'); }
-    if(array_key_exists('cue', $data)) { if(is_null($data['cue']) || $data['cue'] == "") $data['cue'] = "NULL"; }
-    if(array_key_exists('domicilio', $data)) { if(!isset($data['domicilio']) || ($data['domicilio'] == '')) $data['domicilio'] = NULL; }
+    if(array_key_exists('cue', $data)) { if(is_null($data['cue']) || $data['cue'] == "") $data['cue'] = "null"; }
+    if(array_key_exists('domicilio', $data)) { if(!isset($data['domicilio']) || ($data['domicilio'] == '')) $data['domicilio'] = "null"; }
 
     return $data;
   }

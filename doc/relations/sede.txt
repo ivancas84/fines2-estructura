@@ -8,9 +8,9 @@ domicilio - coo_dom
 id (id): string pk. NOT NULL. UNIQUE.
 numero (num): string nf. NOT NULL. MAIN.
 nombre (nom): string nf. NOT NULL. MAIN.
-observaciones (obs): text nf. DEFAULT: NULL.
-baja (baj): timestamp nf. DEFAULT: NULL.
-domicilio (dom): string mu. DEFAULT: NULL.
-tipo_sede (ts): string mu. DEFAULT: NULL.
-centro_educativo (ce): string mu. DEFAULT: NULL.
+observaciones (obs): text nf.
+baja (baj): timestamp nf.
+domicilio (dom): string mu.
+tipo_sede (ts): string mu.
+centro_educativo (ce): string mu.
 coordinador (coo): integer fk. NOT ADMIN.

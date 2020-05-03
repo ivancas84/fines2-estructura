@@ -8,7 +8,7 @@ class _FieldCentroEducativoCue extends Field {
   public $fieldType = "nf";
   public $unique = true;
   public $notNull = false;
-  public $default = "NULL";
+  public $default = false;
   public $length = "45";
   public $main = false;
   public $name = "cue";

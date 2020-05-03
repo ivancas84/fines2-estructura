@@ -10,7 +10,6 @@ class _Persona extends EntityValues {
   protected $fechaNacimiento = UNDEFINED;
   protected $numeroDocumento = UNDEFINED;
   protected $cuil = UNDEFINED;
-  protected $email = UNDEFINED;
   protected $genero = UNDEFINED;
   protected $apodo = UNDEFINED;
   protected $alta = UNDEFINED;
@@ -23,7 +22,6 @@ class _Persona extends EntityValues {
     $this->setFechaNacimiento(DEFAULT_VALUE);
     $this->setNumeroDocumento(DEFAULT_VALUE);
     $this->setCuil(DEFAULT_VALUE);
-    $this->setEmail(DEFAULT_VALUE);
     $this->setGenero(DEFAULT_VALUE);
     $this->setApodo(DEFAULT_VALUE);
     $this->setAlta(DEFAULT_VALUE);
@@ -38,7 +36,6 @@ class _Persona extends EntityValues {
     if(isset($row[$p."fecha_nacimiento"])) $this->setFechaNacimiento($row[$p."fecha_nacimiento"]);
     if(isset($row[$p."numero_documento"])) $this->setNumeroDocumento($row[$p."numero_documento"]);
     if(isset($row[$p."cuil"])) $this->setCuil($row[$p."cuil"]);
-    if(isset($row[$p."email"])) $this->setEmail($row[$p."email"]);
     if(isset($row[$p."genero"])) $this->setGenero($row[$p."genero"]);
     if(isset($row[$p."apodo"])) $this->setApodo($row[$p."apodo"]);
     if(isset($row[$p."alta"])) $this->setAlta($row[$p."alta"]);
@@ -53,7 +50,6 @@ class _Persona extends EntityValues {
     if($this->fechaNacimiento !== UNDEFINED) $row["fecha_nacimiento"] = $this->fechaNacimiento("Y-m-d");
     if($this->numeroDocumento !== UNDEFINED) $row["numero_documento"] = $this->numeroDocumento();
     if($this->cuil !== UNDEFINED) $row["cuil"] = $this->cuil();
-    if($this->email !== UNDEFINED) $row["email"] = $this->email();
     if($this->genero !== UNDEFINED) $row["genero"] = $this->genero();
     if($this->apodo !== UNDEFINED) $row["apodo"] = $this->apodo();
     if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d H:i:s");
@@ -68,7 +64,6 @@ class _Persona extends EntityValues {
     if(!Validation::is_empty($this->fechaNacimiento)) return false;
     if(!Validation::is_empty($this->numeroDocumento)) return false;
     if(!Validation::is_empty($this->cuil)) return false;
-    if(!Validation::is_empty($this->email)) return false;
     if(!Validation::is_empty($this->genero)) return false;
     if(!Validation::is_empty($this->apodo)) return false;
     if(!Validation::is_empty($this->alta)) return false;
@@ -82,7 +77,6 @@ class _Persona extends EntityValues {
   public function fechaNacimiento($format = null) { return Format::date($this->fechaNacimiento, $format); }
   public function numeroDocumento($format = null) { return Format::convertCase($this->numeroDocumento, $format); }
   public function cuil($format = null) { return Format::convertCase($this->cuil, $format); }
-  public function email($format = null) { return Format::convertCase($this->email, $format); }
   public function genero($format = null) { return Format::convertCase($this->genero, $format); }
   public function apodo($format = null) { return Format::convertCase($this->apodo, $format); }
   public function alta($format = null) { return Format::date($this->alta, $format); }
@@ -104,7 +98,7 @@ class _Persona extends EntityValues {
   }
 
   public function setApellidos($p) {
-    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkApellidos($p); 
     if($check) $this->apellidos = $p;
@@ -118,7 +112,7 @@ class _Persona extends EntityValues {
   }
 
   public function setFechaNacimiento($p, $format = UNDEFINED) {
-    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     if(!is_null($p)) $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);    
     $check = $this->checkFechaNacimiento($p); 
     if($check) $this->fechaNacimiento = $p;  
@@ -134,23 +128,15 @@ class _Persona extends EntityValues {
   }
 
   public function setCuil($p) {
-    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkCuil($p); 
     if($check) $this->cuil = $p;
     return $check;
   }
 
-  public function setEmail($p) {
-    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkEmail($p); 
-    if($check) $this->email = $p;
-    return $check;
-  }
-
   public function setGenero($p) {
-    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkGenero($p); 
     if($check) $this->genero = $p;
@@ -158,7 +144,7 @@ class _Persona extends EntityValues {
   }
 
   public function setApodo($p) {
-    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkApodo($p); 
     if($check) $this->apodo = $p;
@@ -172,7 +158,7 @@ class _Persona extends EntityValues {
   }
 
   public function setAlta($p, $format = "Y-m-d H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? 'current_timestamp()' : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
     if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
     $check = $this->checkAlta($p); 
     if($check) $this->alta = $p;  
@@ -180,7 +166,7 @@ class _Persona extends EntityValues {
   }
 
   public function setDomicilio($p) {
-    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkDomicilio($p); 
     if($check) $this->domicilio = $p;
@@ -214,11 +200,6 @@ class _Persona extends EntityValues {
   public function checkCuil($value) { 
     $v = Validation::getInstanceValue($value)->string();
     return $this->_setLogsValidation("cuil", $v);
-  }
-
-  public function checkEmail($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("email", $v);
   }
 
   public function checkGenero($value) { 

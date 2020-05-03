@@ -78,7 +78,7 @@ class _Designacion extends EntityValues {
   }
 
   public function setDesde($p, $format = UNDEFINED) {
-    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     if(!is_null($p)) $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);    
     $check = $this->checkDesde($p); 
     if($check) $this->desde = $p;  
@@ -92,7 +92,7 @@ class _Designacion extends EntityValues {
   }
 
   public function setHasta($p, $format = UNDEFINED) {
-    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     if(!is_null($p)) $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);    
     $check = $this->checkHasta($p); 
     if($check) $this->hasta = $p;  
@@ -106,7 +106,7 @@ class _Designacion extends EntityValues {
   }
 
   public function setAlta($p, $format = "Y-m-d H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? 'current_timestamp()' : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
     if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
     $check = $this->checkAlta($p); 
     if($check) $this->alta = $p;  

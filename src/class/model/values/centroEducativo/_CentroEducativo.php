@@ -62,7 +62,7 @@ class _CentroEducativo extends EntityValues {
   }
 
   public function setCue($p) {
-    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkCue($p); 
     if($check) $this->cue = $p;
@@ -70,7 +70,7 @@ class _CentroEducativo extends EntityValues {
   }
 
   public function setDomicilio($p) {
-    $p = ($p == DEFAULT_VALUE) ? 'NULL' : trim($p);
+    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkDomicilio($p); 
     if($check) $this->domicilio = $p;

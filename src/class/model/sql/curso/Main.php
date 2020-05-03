@@ -180,7 +180,7 @@ class CursoSqlMain extends EntitySql{
   public function initializeInsert(array $data){
     $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('curso');
     if(!isset($data['horas_catedra']) || ($data['horas_catedra'] == '')) throw new Exception('dato obligatorio sin valor: horas_catedra');
-    if(!isset($data['alta']))  $data['alta'] = "current_timestamp()";
+    if(!isset($data['alta']))  $data['alta'] = date("Y-m-d H:i:s");
     if(empty($data['comision'])) throw new Exception('dato obligatorio sin valor: comision');
     if(empty($data['asignatura'])) throw new Exception('dato obligatorio sin valor: asignatura');
 
@@ -191,7 +191,7 @@ class CursoSqlMain extends EntitySql{
   public function initializeUpdate(array $data){
     if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
     if(array_key_exists('horas_catedra', $data)) { if(!isset($data['horas_catedra']) || ($data['horas_catedra'] == '')) throw new Exception('dato obligatorio sin valor: horas_catedra'); }
-    if(array_key_exists('alta', $data)) { if(empty($data['alta']))  $data['alta'] = "current_timestamp()"; }
+    if(array_key_exists('alta', $data)) { if(empty($data['alta']))  $data['alta'] = date("Y-m-d H:i:s"); }
     if(array_key_exists('comision', $data)) { if(!isset($data['comision']) || ($data['comision'] == '')) throw new Exception('dato obligatorio sin valor: comision'); }
     if(array_key_exists('asignatura', $data)) { if(!isset($data['asignatura']) || ($data['asignatura'] == '')) throw new Exception('dato obligatorio sin valor: asignatura'); }
 

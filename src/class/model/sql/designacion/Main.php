@@ -194,9 +194,9 @@ class DesignacionSqlMain extends EntitySql{
 
   public function initializeInsert(array $data){
     $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('designacion');
-    if(!isset($data['desde']))  $data['desde'] = "NULL";
-    if(!isset($data['hasta']))  $data['hasta'] = "NULL";
-    if(!isset($data['alta']))  $data['alta'] = "current_timestamp()";
+    if(!isset($data['desde']))  $data['desde'] = "null";
+    if(!isset($data['hasta']))  $data['hasta'] = "null";
+    if(!isset($data['alta']))  $data['alta'] = date("Y-m-d H:i:s");
     if(empty($data['cargo'])) throw new Exception('dato obligatorio sin valor: cargo');
     if(empty($data['sede'])) throw new Exception('dato obligatorio sin valor: sede');
     if(empty($data['persona'])) throw new Exception('dato obligatorio sin valor: persona');
@@ -207,9 +207,9 @@ class DesignacionSqlMain extends EntitySql{
 
   public function initializeUpdate(array $data){
     if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
-    if(array_key_exists('desde', $data)) { if(empty($data['desde']))  $data['desde'] = "NULL"; }
-    if(array_key_exists('hasta', $data)) { if(empty($data['hasta']))  $data['hasta'] = "NULL"; }
-    if(array_key_exists('alta', $data)) { if(empty($data['alta']))  $data['alta'] = "current_timestamp()"; }
+    if(array_key_exists('desde', $data)) { if(empty($data['desde']))  $data['desde'] = "null"; }
+    if(array_key_exists('hasta', $data)) { if(empty($data['hasta']))  $data['hasta'] = "null"; }
+    if(array_key_exists('alta', $data)) { if(empty($data['alta']))  $data['alta'] = date("Y-m-d H:i:s"); }
     if(array_key_exists('cargo', $data)) { if(!isset($data['cargo']) || ($data['cargo'] == '')) throw new Exception('dato obligatorio sin valor: cargo'); }
     if(array_key_exists('sede', $data)) { if(!isset($data['sede']) || ($data['sede'] == '')) throw new Exception('dato obligatorio sin valor: sede'); }
     if(array_key_exists('persona', $data)) { if(!isset($data['persona']) || ($data['persona'] == '')) throw new Exception('dato obligatorio sin valor: persona'); }
