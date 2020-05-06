@@ -70,7 +70,7 @@ UPDATE " . $this->entity->sn_() . " SET
     return $sql;
   }
 
-  public function json(array $row){
+  public function json(array $row = null){
     if(empty($row)) return null;
     $row_ = $this->sql->_json($row);
     if(!is_null($row['dom_id'])){
