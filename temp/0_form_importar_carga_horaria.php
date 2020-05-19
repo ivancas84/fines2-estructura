@@ -6,7 +6,7 @@
 
 <h2>Importar Carga Horaria</h2>
 
-<form action="<?=PATH_HTTP?>script/1_importar_carga_horaria.php" method="POST">
+<form action="<?=URL?>script/1_importar_carga_horaria.php" method="POST">
   Source:<br>
   <textarea name="source"></textarea>
   <br>  
