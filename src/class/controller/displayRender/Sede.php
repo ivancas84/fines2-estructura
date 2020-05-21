@@ -25,7 +25,6 @@ class SedeDisplayRender extends DisplayRender {
             /** 
              * parametros de sede 
              */
-            continue;
           break;
           case "modalidad":
             /**
