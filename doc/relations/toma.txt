@@ -26,7 +26,7 @@ observaciones (obs): text nf.
 comentario (com): string nf.
 tipo_movimiento (tm): string nf. NOT NULL.
 estado_contralor (ec): string nf.
-alta (alt): timestamp nf. NOT NULL. DEFAULT: CURRENT_TIMESTAMP.
+alta (alt): timestamp nf. NOT NULL. DEFAULT: current_timestamp().
 curso (cur): string mu. NOT NULL.
 docente (doc): string mu.
 reemplazo (ree): string mu.

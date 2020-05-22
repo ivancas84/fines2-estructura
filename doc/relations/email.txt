@@ -4,6 +4,6 @@ domicilio - per_dom
 id (id): string pk. NOT NULL. MAIN. UNIQUE.
 email (ema): string nf. NOT NULL.
 verificado (ver): boolean nf. NOT NULL.
-insertado (ins): timestamp nf. NOT NULL. DEFAULT: CURRENT_TIMESTAMP.
+insertado (ins): timestamp nf. NOT NULL. DEFAULT: current_timestamp().
 eliminado (eli): timestamp nf.
 persona (per): string mu. NOT NULL.

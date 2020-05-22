@@ -8,5 +8,5 @@ numero_documento (nd): string nf. NOT NULL. MAIN. UNIQUE.
 cuil (cui): string nf. UNIQUE.
 genero (gen): string nf.
 apodo (apo): string nf.
-alta (alt): timestamp nf. NOT NULL. DEFAULT: CURRENT_TIMESTAMP.
+alta (alt): timestamp nf. NOT NULL. DEFAULT: current_timestamp().
 domicilio (dom): string mu.
