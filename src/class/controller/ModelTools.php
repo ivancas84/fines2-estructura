@@ -99,19 +99,19 @@ class ModelTools {
 SELECT id AS toma_activa, curso
 FROM toma
 WHERE (toma.estado = 'Aprobada' OR toma.estado = 'Pendiente') AND (toma.estado_contralor != 'Modificar')
-AND curso.id IN ({$idCursos_})
+AND curso.id IN ('{$idCursos_}')
 ";
   }
 
-  public static function cursosConHorarios($idCursos){
+  public static function cursoHorario($idCursos){
     $idCursos_ = implode("','",$idCursos);
     
     $sql = "
-SELECT curso.id AS curso, GROUP_CONCAT(dia.dia, \" \", TIME_FORMAT(horario.hora_inicio, '%H:%i'), \" a \", TIME_FORMAT(horario.hora_fin, '%H:%i') ORDER BY dia.numero ASC) AS horario
+SELECT curso.id AS curso, GROUP_CONCAT(dia.dia, \" \", TIME_FORMAT(horario.hora_inicio, '%H:%i'), \" a \", TIME_FORMAT(horario.hora_fin, '%H:%i') ORDER BY dia.numero ASC SEPARATOR ', ') AS horario
 FROM curso
 INNER JOIN horario ON (horario.curso = curso.id)
 INNER JOIN dia ON (dia.id = horario.dia)
-WHERE curso.id IN ({$idCursos_})
+WHERE curso.id IN ('{$idCursos_}')
 GROUP BY curso.id 
   ";
 
@@ -121,7 +121,7 @@ GROUP BY curso.id
   public static function cursosConHorariosDeComision($idComision){
     
     $sql = "
-  SELECT curso.id AS curso, GROUP_CONCAT(dia.dia, \" \", TIME_FORMAT(horario.hora_inicio, '%H:%i'), \" a \", TIME_FORMAT(horario.hora_fin, '%H:%i') ORDER BY dia.numero ASC) AS horario
+  SELECT curso.id AS curso, GROUP_CONCAT(dia.dia, \" \", TIME_FORMAT(horario.hora_inicio, '%H:%i'), \" a \", TIME_FORMAT(horario.hora_fin, '%H:%i') ORDER BY dia.numero ASC SEPARATOR ', ') AS horario
   FROM curso
   INNER JOIN horario ON (horario.curso = curso.id)
   INNER JOIN dia ON (dia.id = horario.dia)
