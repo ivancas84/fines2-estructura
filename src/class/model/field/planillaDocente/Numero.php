@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/model/field/_FieldPlanillaDocenteNumero.php");
+require_once("class/model/field/planillaDocente/_Numero.php");
 
 class FieldPlanillaDocenteNumero extends _FieldPlanillaDocenteNumero {
 

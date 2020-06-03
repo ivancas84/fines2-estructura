@@ -16,9 +16,9 @@ class FieldSedeCoordinador extends Field {
   public $alias = "coo";
   public $db = false;
 
-  public function getEntity(){ return new SedeEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire("sede"); }
 
-  public function getEntityRef(){ return new PersonaEntity; }
+  public function getEntityRef(){ return Entity::getInstanceRequire("persona"); }
 
 
 }
