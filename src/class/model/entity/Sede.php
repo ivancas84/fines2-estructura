@@ -1,8 +1,8 @@
 <?php
 
-require_once("class/model/entity/sede/Main.php");
+require_once("class/model/entity/_sede.php");
 
-class SedeEntity extends SedeEntityMain {
+class SedeEntity extends _SedeEntity  {
 
   public function getFieldsNf(){
     $array = parent::getFieldsNf();

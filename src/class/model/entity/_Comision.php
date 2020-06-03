@@ -15,14 +15,10 @@ class _ComisionEntity extends Entity {
     return array(
       Field::getInstanceRequire("comision", "turno"),
       Field::getInstanceRequire("comision", "division"),
-      Field::getInstanceRequire("comision", "anio"),
-      Field::getInstanceRequire("comision", "semestre"),
       Field::getInstanceRequire("comision", "comentario"),
       Field::getInstanceRequire("comision", "autorizada"),
       Field::getInstanceRequire("comision", "apertura"),
       Field::getInstanceRequire("comision", "publicada"),
-      Field::getInstanceRequire("comision", "fecha_anio"),
-      Field::getInstanceRequire("comision", "fecha_semestre"),
       Field::getInstanceRequire("comision", "observaciones"),
       Field::getInstanceRequire("comision", "alta"),
     );
@@ -31,9 +27,10 @@ class _ComisionEntity extends Entity {
   public function getFieldsMu(){
     return array(
       Field::getInstanceRequire("comision", "sede"),
-      Field::getInstanceRequire("comision", "plan"),
       Field::getInstanceRequire("comision", "modalidad"),
+      Field::getInstanceRequire("comision", "planificacion"),
       Field::getInstanceRequire("comision", "comision_siguiente"),
+      Field::getInstanceRequire("comision", "calendario"),
     );
   }
 

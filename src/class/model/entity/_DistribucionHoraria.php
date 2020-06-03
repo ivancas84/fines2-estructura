@@ -15,15 +15,13 @@ class _DistribucionHorariaEntity extends Entity {
     return array(
       Field::getInstanceRequire("distribucion_horaria", "horas_catedra"),
       Field::getInstanceRequire("distribucion_horaria", "dia"),
-      Field::getInstanceRequire("distribucion_horaria", "anio"),
-      Field::getInstanceRequire("distribucion_horaria", "semestre"),
     );
   }
 
   public function getFieldsMu(){
     return array(
-      Field::getInstanceRequire("distribucion_horaria", "plan"),
       Field::getInstanceRequire("distribucion_horaria", "asignatura"),
+      Field::getInstanceRequire("distribucion_horaria", "planificacion"),
     );
   }
 

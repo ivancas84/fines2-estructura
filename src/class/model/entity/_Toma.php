@@ -14,10 +14,6 @@ class _TomaEntity extends Entity {
   public function getFieldsNf(){
     return array(
       Field::getInstanceRequire("toma", "fecha_toma"),
-      Field::getInstanceRequire("toma", "fecha_inicio"),
-      Field::getInstanceRequire("toma", "fecha_fin"),
-      Field::getInstanceRequire("toma", "fecha_contralor"),
-      Field::getInstanceRequire("toma", "fecha_consejo"),
       Field::getInstanceRequire("toma", "estado"),
       Field::getInstanceRequire("toma", "observaciones"),
       Field::getInstanceRequire("toma", "comentario"),
@@ -32,6 +28,7 @@ class _TomaEntity extends Entity {
       Field::getInstanceRequire("toma", "curso"),
       Field::getInstanceRequire("toma", "docente"),
       Field::getInstanceRequire("toma", "reemplazo"),
+      Field::getInstanceRequire("toma", "planilla_docente"),
     );
   }
 
