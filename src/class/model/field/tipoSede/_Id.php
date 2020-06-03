@@ -15,7 +15,7 @@ class _FieldTipoSedeId extends Field {
   public $alias = "id";
 
 
-  public function getEntity(){ return new TipoSedeEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('tipo_sede'); }
 
 
 }

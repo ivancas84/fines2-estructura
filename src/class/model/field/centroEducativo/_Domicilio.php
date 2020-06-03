@@ -15,9 +15,9 @@ class _FieldCentroEducativoDomicilio extends Field {
   public $alias = "dom";
 
 
-  public function getEntity(){ return new CentroEducativoEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('centro_educativo'); }
 
-  public function getEntityRef(){ return new DomicilioEntity; }
+  public function getEntityRef(){ return Entity::getInstanceRequire('centro_educativo'); }
 
 
 }

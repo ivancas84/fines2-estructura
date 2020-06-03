@@ -15,7 +15,7 @@ class _FieldCursoId extends Field {
   public $alias = "id";
 
 
-  public function getEntity(){ return new CursoEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('curso'); }
 
 
 }

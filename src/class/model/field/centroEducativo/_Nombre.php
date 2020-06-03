@@ -15,7 +15,7 @@ class _FieldCentroEducativoNombre extends Field {
   public $alias = "nom";
 
 
-  public function getEntity(){ return new CentroEducativoEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('centro_educativo'); }
 
 
 }

@@ -15,9 +15,9 @@ class _FieldComisionSede extends Field {
   public $alias = "sed";
 
 
-  public function getEntity(){ return new ComisionEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('comision'); }
 
-  public function getEntityRef(){ return new SedeEntity; }
+  public function getEntityRef(){ return Entity::getInstanceRequire('comision'); }
 
 
 }

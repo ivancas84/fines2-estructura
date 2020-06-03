@@ -15,7 +15,7 @@ class _FieldSedeNumero extends Field {
   public $alias = "num";
 
 
-  public function getEntity(){ return new SedeEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('sede'); }
 
 
 }

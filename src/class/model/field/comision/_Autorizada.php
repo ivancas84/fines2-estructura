@@ -15,7 +15,7 @@ class _FieldComisionAutorizada extends Field {
   public $alias = "aut";
 
 
-  public function getEntity(){ return new ComisionEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('comision'); }
 
 
 }

@@ -15,7 +15,7 @@ class _FieldCargoDescripcion extends Field {
   public $alias = "des";
 
 
-  public function getEntity(){ return new CargoEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('cargo'); }
 
 
 }

@@ -15,9 +15,9 @@ class _FieldEmailPersona extends Field {
   public $alias = "per";
 
 
-  public function getEntity(){ return new EmailEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('email'); }
 
-  public function getEntityRef(){ return new PersonaEntity; }
+  public function getEntityRef(){ return Entity::getInstanceRequire('email'); }
 
 
 }

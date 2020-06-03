@@ -15,9 +15,9 @@ class _FieldSedeDomicilio extends Field {
   public $alias = "dom";
 
 
-  public function getEntity(){ return new SedeEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('sede'); }
 
-  public function getEntityRef(){ return new DomicilioEntity; }
+  public function getEntityRef(){ return Entity::getInstanceRequire('sede'); }
 
 
 }

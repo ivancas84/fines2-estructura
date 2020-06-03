@@ -15,7 +15,7 @@ class _FieldCursoAlta extends Field {
   public $alias = "alt";
 
 
-  public function getEntity(){ return new CursoEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('curso'); }
 
 
 }

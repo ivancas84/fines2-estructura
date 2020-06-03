@@ -15,7 +15,7 @@ class _FieldDomicilioNumero extends Field {
   public $alias = "num";
 
 
-  public function getEntity(){ return new DomicilioEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('domicilio'); }
 
 
 }

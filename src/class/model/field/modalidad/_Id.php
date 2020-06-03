@@ -15,7 +15,7 @@ class _FieldModalidadId extends Field {
   public $alias = "id";
 
 
-  public function getEntity(){ return new ModalidadEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('modalidad'); }
 
 
 }

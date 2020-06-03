@@ -15,7 +15,7 @@ class _FieldEmailEliminado extends Field {
   public $alias = "eli";
 
 
-  public function getEntity(){ return new EmailEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('email'); }
 
 
 }

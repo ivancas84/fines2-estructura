@@ -15,9 +15,9 @@ class _FieldTomaDocente extends Field {
   public $alias = "doc";
 
 
-  public function getEntity(){ return new TomaEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('toma'); }
 
-  public function getEntityRef(){ return new PersonaEntity; }
+  public function getEntityRef(){ return Entity::getInstanceRequire('toma'); }
 
 
 }

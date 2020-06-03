@@ -15,7 +15,7 @@ class _FieldDomicilioPiso extends Field {
   public $alias = "pis";
 
 
-  public function getEntity(){ return new DomicilioEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('domicilio'); }
 
 
 }

@@ -15,7 +15,7 @@ class _FieldTelefonoTipo extends Field {
   public $alias = "tip";
 
 
-  public function getEntity(){ return new TelefonoEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('telefono'); }
 
 
 }

@@ -15,7 +15,7 @@ class _FieldHorarioHoraInicio extends Field {
   public $alias = "hi";
 
 
-  public function getEntity(){ return new HorarioEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('horario'); }
 
 
 }

@@ -15,7 +15,7 @@ class _FieldPlanId extends Field {
   public $alias = "id";
 
 
-  public function getEntity(){ return new PlanEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('plan'); }
 
 
 }

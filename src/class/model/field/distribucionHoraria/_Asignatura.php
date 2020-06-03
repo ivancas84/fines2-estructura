@@ -15,9 +15,9 @@ class _FieldDistribucionHorariaAsignatura extends Field {
   public $alias = "asi";
 
 
-  public function getEntity(){ return new DistribucionHorariaEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('distribucion_horaria'); }
 
-  public function getEntityRef(){ return new AsignaturaEntity; }
+  public function getEntityRef(){ return Entity::getInstanceRequire('distribucion_horaria'); }
 
 
 }

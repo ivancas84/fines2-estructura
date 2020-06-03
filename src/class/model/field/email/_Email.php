@@ -15,7 +15,7 @@ class _FieldEmailEmail extends Field {
   public $alias = "ema";
 
 
-  public function getEntity(){ return new EmailEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('email'); }
 
 
 }

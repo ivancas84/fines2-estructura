@@ -15,7 +15,7 @@ class _FieldTelefonoNumero extends Field {
   public $alias = "num";
 
 
-  public function getEntity(){ return new TelefonoEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('telefono'); }
 
 
 }

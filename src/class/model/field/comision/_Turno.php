@@ -15,7 +15,7 @@ class _FieldComisionTurno extends Field {
   public $alias = "tur";
 
 
-  public function getEntity(){ return new ComisionEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('comision'); }
 
 
 }

@@ -15,7 +15,7 @@ class _FieldPersonaCuil extends Field {
   public $alias = "cui";
 
 
-  public function getEntity(){ return new PersonaEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('persona'); }
 
 
 }

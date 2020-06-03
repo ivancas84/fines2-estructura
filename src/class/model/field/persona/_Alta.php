@@ -15,7 +15,7 @@ class _FieldPersonaAlta extends Field {
   public $alias = "alt";
 
 
-  public function getEntity(){ return new PersonaEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('persona'); }
 
 
 }

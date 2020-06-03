@@ -15,7 +15,7 @@ class _FieldAsignaturaPerfil extends Field {
   public $alias = "per";
 
 
-  public function getEntity(){ return new AsignaturaEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('asignatura'); }
 
 
 }

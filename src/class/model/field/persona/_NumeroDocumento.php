@@ -15,7 +15,7 @@ class _FieldPersonaNumeroDocumento extends Field {
   public $alias = "nd";
 
 
-  public function getEntity(){ return new PersonaEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('persona'); }
 
 
 }

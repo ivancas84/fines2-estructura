@@ -15,7 +15,7 @@ class _FieldPersonaGenero extends Field {
   public $alias = "gen";
 
 
-  public function getEntity(){ return new PersonaEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('persona'); }
 
 
 }

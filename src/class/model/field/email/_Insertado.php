@@ -15,7 +15,7 @@ class _FieldEmailInsertado extends Field {
   public $alias = "ins";
 
 
-  public function getEntity(){ return new EmailEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('email'); }
 
 
 }

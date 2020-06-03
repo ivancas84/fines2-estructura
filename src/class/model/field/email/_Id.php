@@ -15,7 +15,7 @@ class _FieldEmailId extends Field {
   public $alias = "id";
 
 
-  public function getEntity(){ return new EmailEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('email'); }
 
 
 }

@@ -15,7 +15,7 @@ class _FieldPersonaApodo extends Field {
   public $alias = "apo";
 
 
-  public function getEntity(){ return new PersonaEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('persona'); }
 
 
 }

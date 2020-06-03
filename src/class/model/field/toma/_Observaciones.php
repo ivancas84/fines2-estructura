@@ -15,7 +15,7 @@ class _FieldTomaObservaciones extends Field {
   public $alias = "obs";
 
 
-  public function getEntity(){ return new TomaEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('toma'); }
 
 
 }

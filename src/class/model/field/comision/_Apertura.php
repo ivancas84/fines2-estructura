@@ -15,7 +15,7 @@ class _FieldComisionApertura extends Field {
   public $alias = "ape";
 
 
-  public function getEntity(){ return new ComisionEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('comision'); }
 
 
 }

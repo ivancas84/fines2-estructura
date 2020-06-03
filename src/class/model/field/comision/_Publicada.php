@@ -15,7 +15,7 @@ class _FieldComisionPublicada extends Field {
   public $alias = "pub";
 
 
-  public function getEntity(){ return new ComisionEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('comision'); }
 
 
 }

@@ -15,7 +15,7 @@ class _FieldTomaTipoMovimiento extends Field {
   public $alias = "tm";
 
 
-  public function getEntity(){ return new TomaEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('toma'); }
 
 
 }

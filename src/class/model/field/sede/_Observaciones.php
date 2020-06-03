@@ -15,7 +15,7 @@ class _FieldSedeObservaciones extends Field {
   public $alias = "obs";
 
 
-  public function getEntity(){ return new SedeEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('sede'); }
 
 
 }

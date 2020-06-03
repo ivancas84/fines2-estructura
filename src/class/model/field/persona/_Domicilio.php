@@ -15,9 +15,9 @@ class _FieldPersonaDomicilio extends Field {
   public $alias = "dom";
 
 
-  public function getEntity(){ return new PersonaEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('persona'); }
 
-  public function getEntityRef(){ return new DomicilioEntity; }
+  public function getEntityRef(){ return Entity::getInstanceRequire('persona'); }
 
 
 }

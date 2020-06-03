@@ -15,9 +15,9 @@ class _FieldComisionModalidad extends Field {
   public $alias = "moa";
 
 
-  public function getEntity(){ return new ComisionEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('comision'); }
 
-  public function getEntityRef(){ return new ModalidadEntity; }
+  public function getEntityRef(){ return Entity::getInstanceRequire('comision'); }
 
 
 }

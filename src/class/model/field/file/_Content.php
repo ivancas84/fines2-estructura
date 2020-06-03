@@ -15,7 +15,7 @@ class _FieldFileContent extends Field {
   public $alias = "con";
 
 
-  public function getEntity(){ return new FileEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('file'); }
 
 
 }

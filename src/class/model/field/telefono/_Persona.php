@@ -15,9 +15,9 @@ class _FieldTelefonoPersona extends Field {
   public $alias = "per";
 
 
-  public function getEntity(){ return new TelefonoEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('telefono'); }
 
-  public function getEntityRef(){ return new PersonaEntity; }
+  public function getEntityRef(){ return Entity::getInstanceRequire('telefono'); }
 
 
 }

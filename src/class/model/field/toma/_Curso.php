@@ -15,9 +15,9 @@ class _FieldTomaCurso extends Field {
   public $alias = "cur";
 
 
-  public function getEntity(){ return new TomaEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('toma'); }
 
-  public function getEntityRef(){ return new CursoEntity; }
+  public function getEntityRef(){ return Entity::getInstanceRequire('toma'); }
 
 
 }

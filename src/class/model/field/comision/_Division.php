@@ -15,7 +15,7 @@ class _FieldComisionDivision extends Field {
   public $alias = "dia";
 
 
-  public function getEntity(){ return new ComisionEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('comision'); }
 
 
 }

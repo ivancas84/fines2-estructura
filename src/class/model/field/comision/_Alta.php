@@ -15,7 +15,7 @@ class _FieldComisionAlta extends Field {
   public $alias = "alt";
 
 
-  public function getEntity(){ return new ComisionEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('comision'); }
 
 
 }

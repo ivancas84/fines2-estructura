@@ -15,7 +15,7 @@ class _FieldSedeAlta extends Field {
   public $alias = "alt";
 
 
-  public function getEntity(){ return new SedeEntity; }
+  public function getEntity(){ return Entity::getInstanceRequire('sede'); }
 
 
 }
