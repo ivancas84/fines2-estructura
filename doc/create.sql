@@ -321,6 +321,34 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
 
+CREATE TABLE IF NOT EXISTS `planfi10_20203`.`planilla_docente` (
+  `id` VARCHAR(45) NOT NULL,
+  `numero` VARCHAR(255) NOT NULL,
+  `insertado` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
+
+
+CREATE TABLE IF NOT EXISTS `planfi10_20203`.`contralor` (
+  `id` VARCHAR(45) NOT NULL,
+  `fecha_contralor` DATE NULL DEFAULT NULL,
+  `fecha_consejo` DATE NULL DEFAULT NULL,
+  `insertado` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `planilla_docente` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_contralor_planilla_docente1_idx` (`planilla_docente` ASC),
+  CONSTRAINT `fk_contralor_planilla_docente1`
+    FOREIGN KEY (`planilla_docente`)
+    REFERENCES `planfi10_20203`.`planilla_docente` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
+
+
 CREATE TABLE IF NOT EXISTS `planfi10_20203`.`toma` (
   `id` VARCHAR(45) NOT NULL,
   `fecha_toma` DATE NULL DEFAULT NULL,
@@ -333,12 +361,12 @@ CREATE TABLE IF NOT EXISTS `planfi10_20203`.`toma` (
   `curso` VARCHAR(45) NOT NULL,
   `docente` VARCHAR(45) NULL DEFAULT NULL,
   `reemplazo` VARCHAR(45) NULL DEFAULT NULL,
-  `contralor` VARCHAR(45) NULL DEFAULT NULL,
+  `planilla_docente` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_toma_curso1_idx` (`curso` ASC),
   INDEX `fk_toma_persona1_idx` (`docente` ASC),
   INDEX `fk_toma_persona2_idx` (`reemplazo` ASC),
-  INDEX `fk_toma_contralor1_idx` (`contralor` ASC),
+  INDEX `fk_toma_planilla_docente1_idx` (`planilla_docente` ASC),
   CONSTRAINT `fk_toma_curso1`
     FOREIGN KEY (`curso`)
     REFERENCES `planfi10_20203`.`curso` (`id`)
@@ -354,9 +382,9 @@ CREATE TABLE IF NOT EXISTS `planfi10_20203`.`toma` (
     REFERENCES `planfi10_20203`.`persona` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_toma_contralor1`
-    FOREIGN KEY (`contralor`)
-    REFERENCES `planfi10_20203`.`contralor` (`id`)
+  CONSTRAINT `fk_toma_planilla_docente1`
+    FOREIGN KEY (`planilla_docente`)
+    REFERENCES `planfi10_20203`.`planilla_docente` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -440,14 +468,5 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
 
-CREATE TABLE IF NOT EXISTS `planfi10_20203`.`contralor` (
-  `id` VARCHAR(45) NOT NULL,
-  `fecha_contralor` DATE NULL DEFAULT NULL,
-  `fecha_consejo` DATE NULL DEFAULT NULL,
-  `observaciones` TEXT NULL DEFAULT NULL,
-  `insertado` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_spanish_ci;
+
 
