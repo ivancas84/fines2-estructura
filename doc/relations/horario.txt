@@ -1,16 +1,3 @@
-curso - cur
-comision - cur_com
-sede - cur_com_sed
-domicilio - cur_com_sed_dom
-tipo_sede - cur_com_sed_ts
-centro_educativo - cur_com_sed_ce
-domicilio - cur_com_sed_ce_dom
-persona - cur_com_sed_coo
-domicilio - cur_com_sed_coo_dom
-plan - cur_com_pla
-modalidad - cur_com_moa
-asignatura - cur_asi
-dia - dia
 
 id (id): string pk. NOT NULL. MAIN. UNIQUE.
 hora_inicio (hi): time nf. NOT NULL.

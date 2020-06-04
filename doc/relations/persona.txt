@@ -1,4 +1,3 @@
-domicilio - dom
 
 id (id): string pk. NOT NULL. UNIQUE.
 nombres (nom): string nf. NOT NULL. MAIN.

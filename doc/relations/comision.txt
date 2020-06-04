@@ -1,27 +1,15 @@
-sede - sed
-domicilio - sed_dom
-tipo_sede - sed_ts
-centro_educativo - sed_ce
-domicilio - sed_ce_dom
-persona - sed_coo
-domicilio - sed_coo_dom
-plan - pla
-modalidad - moa
 
 id (id): string pk. NOT NULL. UNIQUE.
 turno (tur): string nf.
 division (dia): string nf. NOT NULL.
-anio (ani): string nf. MAIN.
-semestre (sem): string nf. MAIN.
 comentario (com): text nf.
 autorizada (aut): boolean nf. NOT NULL.
 apertura (ape): boolean nf. NOT NULL.
 publicada (pub): boolean nf. NOT NULL.
-fecha_anio (fa): year nf.
-fecha_semestre (fs): integer nf.
 observaciones (obs): text nf.
 alta (alt): timestamp nf. NOT NULL. NOT ADMIN. DEFAULT: current_timestamp().
 sede (sed): string mu. NOT NULL. MAIN.
-plan (pla): string mu. NOT NULL.
 modalidad (moa): string mu. NOT NULL.
+planificacion (pla): string mu.
 comision_siguiente (cs): string mu.
+calendario (cal): string mu.

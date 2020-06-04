@@ -1,14 +1,3 @@
-comision - com
-sede - com_sed
-domicilio - com_sed_dom
-tipo_sede - com_sed_ts
-centro_educativo - com_sed_ce
-domicilio - com_sed_ce_dom
-persona - com_sed_coo
-domicilio - com_sed_coo_dom
-plan - com_pla
-modalidad - com_moa
-asignatura - asi
 
 id (id): string pk. NOT NULL. UNIQUE.
 horas_catedra (hc): integer nf. NOT NULL.

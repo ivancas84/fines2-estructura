@@ -1,5 +1,3 @@
-persona - per
-domicilio - per_dom
 
 id (id): string pk. NOT NULL. MAIN. UNIQUE.
 email (ema): string nf. NOT NULL.

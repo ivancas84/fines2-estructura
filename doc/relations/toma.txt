@@ -1,26 +1,6 @@
-curso - cur
-comision - cur_com
-sede - cur_com_sed
-domicilio - cur_com_sed_dom
-tipo_sede - cur_com_sed_ts
-centro_educativo - cur_com_sed_ce
-domicilio - cur_com_sed_ce_dom
-persona - cur_com_sed_coo
-domicilio - cur_com_sed_coo_dom
-plan - cur_com_pla
-modalidad - cur_com_moa
-asignatura - cur_asi
-persona - doc
-domicilio - doc_dom
-persona - ree
-domicilio - ree_dom
 
 id (id): string pk. NOT NULL. MAIN. UNIQUE.
 fecha_toma (ft): date nf.
-fecha_inicio (fi): date nf.
-fecha_fin (ff): date nf.
-fecha_contralor (fc): date nf.
-fecha_consejo (fca): date nf.
 estado (est): string nf.
 observaciones (obs): text nf.
 comentario (com): string nf.
@@ -30,3 +10,4 @@ alta (alt): timestamp nf. NOT NULL. DEFAULT: current_timestamp().
 curso (cur): string mu. NOT NULL.
 docente (doc): string mu.
 reemplazo (ree): string mu.
+planilla_docente (pd): string mu.
