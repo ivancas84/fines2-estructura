@@ -241,19 +241,19 @@ class Data {
 
   public static function sqlcomisionesPublicadas($fecha, $orden = "tramo"){
     $render = new Render();
-    $advanced = EntitySql::getInstanceString("comision")->_advancedComisionesPublicadas($fecha);
+    $advanced = EntitySql::getInstanceRequire("comision")->_advancedComisionesPublicadas($fecha);
     $render->setCondition($advanced);
 
     $o = ($orden == "tramo") ? ["anio"=>"asc", "semestre"=>"asc", "dvi_sed_numero"=>"asc"] : ["dvi_sed_numero"=>"asc", "anio"=>"asc", "semestre"=>"asc"];
     $render->setOrder($o);
 
-    return EntitySqlo::getInstanceString("comision")->all($render);
+    return EntitySqlo::getInstanceRequire("comision")->all($render);
   }
 
 
   public static function comisionesPublicadas($fecha, $orden = "tramo"){
     $render = new Render();
-    $advanced = EntitySql::getInstanceString("comision")->_advancedComisionesPublicadas($fecha);
+    $advanced = EntitySql::getInstanceRequire("comision")->_advancedComisionesPublicadas($fecha);
     $render->setCondition($advanced);
 
     $o = ($orden == "tramo") ? ["anio"=>"asc", "semestre"=>"asc", "dvi_sed_numero"=>"asc"] : ["dvi_sed_numero"=>"asc", "anio"=>"asc", "semestre"=>"asc"];
@@ -269,17 +269,17 @@ FROM coordinador
 INNER JOIN sede ON (coordinador.sede = sede.id)
 INNER JOIN division ON (division.sede = sede.id)
 INNER JOIN ({$sqlComisionesPublicadas}) AS comisiones_publicadas ON (comisiones_publicadas.division = division.id)
-LEFT JOIN (" . EntitySqlo::getInstanceString("comision")->cantidadAlumnosActivos($fecha) . ") AS cantidad_alumnos_activos ON (cantidad_alumnos_activos.comision = comisiones_publicadas.id);
+LEFT JOIN (" . EntitySqlo::getInstanceRequire("comision")->cantidadAlumnosActivos($fecha) . ") AS cantidad_alumnos_activos ON (cantidad_alumnos_activos.comision = comisiones_publicadas.id);
 ";
   }
 
   public static function comisionesPublicadasCantidadAlumnos($fecha, $orden = "tramo"){
     $comisiones = self::comisionesPublicadas($fecha, $orden);
 
-    $sql = EntitySqlo::getInstanceString("comision")->cantidadAlumnosActivos($fecha);
+    $sql = EntitySqlo::getInstanceRequire("comision")->cantidadAlumnosActivos($fecha);
     $cantidadActivos = Dba::fetchAll($sql);
 
-    $sql = EntitySqlo::getInstanceString("comision")->cantidadAlumnosNoActivos($fecha);
+    $sql = EntitySqlo::getInstanceRequire("comision")->cantidadAlumnosNoActivos($fecha);
     $cantidadNoActivos = Dba::fetchAll($sql);
 
     self::asignarCantidadAComisiones($comisiones, $cantidadActivos, "cantidad_activos");
@@ -290,41 +290,41 @@ LEFT JOIN (" . EntitySqlo::getInstanceString("comision")->cantidadAlumnosActivos
   public static function nominaActivos($fecha){
     $render = new Render();
     $render->setOrder(["com_dvi_sed_numero"=>"asc", "com_anio" => "asc", "com_semestre" => "asc", "com_dvi_numero" => "asc", "per_apellidos" => "asc", "per_nombres" => "asc"]);
-    $sql = EntitySqlo::getInstanceString("nomina2")->activos($fecha, $render);
+    $sql = EntitySqlo::getInstanceRequire("nomina2")->activos($fecha, $render);
     $rows = Dba::fetchAll($sql);
-    return EntitySql::getInstanceString("nomina2")->jsonAll($rows);
+    return EntitySql::getInstanceRequire("nomina2")->jsonAll($rows);
   }
 
   public static function nominaActivosGraduados($fecha){
     $render = new Render();
     $render->setOrder(["com_dvi_sed_numero"=>"asc", "com_anio" => "asc", "com_semestre" => "asc", "com_dvi_numero" => "asc", "per_apellidos" => "asc", "per_nombres" => "asc"]);
-    $sql = EntitySqlo::getInstanceString("nomina2")->activos($fecha, $render);
+    $sql = EntitySqlo::getInstanceRequire("nomina2")->activos($fecha, $render);
     $rows = Dba::fetchAll($sql);
-    return EntitySql::getInstanceString("nomina2")->jsonAll($rows);
+    return EntitySql::getInstanceRequire("nomina2")->jsonAll($rows);
   }
 
   public static function nominaNoActivos($fecha){
     $render = new Render();
     $render->setOrder(["com_dvi_sed_numero"=>"asc", "com_anio" => "asc", "com_semestre" => "asc", "per_apellidos" => "asc", "per_nombres" => "asc"]);
-    $sql = EntitySqlo::getInstanceString("nomina2")->noActivos($fecha, $render);
+    $sql = EntitySqlo::getInstanceRequire("nomina2")->noActivos($fecha, $render);
     $rows = Dba::fetchAll($sql);
-    return EntitySql::getInstanceString("nomina2")->jsonAll($rows);
+    return EntitySql::getInstanceRequire("nomina2")->jsonAll($rows);
   }
 
   public static function nominaActivosDuplicados($fecha){
     $render = new Render();
     $render->setOrder(["com_dvi_sed_numero"=>"asc", "com_anio" => "asc", "com_semestre" => "asc", "com_dvi_numero" => "asc", "per_apellidos" => "asc", "per_nombres" => "asc"]);
-    $sql = EntitySqlo::getInstanceString("nomina2")->activosDuplicados($fecha);
+    $sql = EntitySqlo::getInstanceRequire("nomina2")->activosDuplicados($fecha);
     $rows = Dba::fetchAll($sql);
-    return EntitySql::getInstanceString("nomina2")->jsonAll($rows);
+    return EntitySql::getInstanceRequire("nomina2")->jsonAll($rows);
   }
 
   public static function consolidado($fecha){
-    $tomaSql = EntitySql::getInstanceString('toma', 'toma');
-    $profesorSql = EntitySql::getInstanceString('id_persona', 'pro');
-    $reemplazoSql = EntitySql::getInstanceString('id_persona', 'ree');
+    $tomaSql = EntitySql::getInstanceRequire('toma', 'toma');
+    $profesorSql = EntitySql::getInstanceRequire('id_persona', 'pro');
+    $reemplazoSql = EntitySql::getInstanceRequire('id_persona', 'ree');
 
-    $sqlCursos = EntitySqlo::getInstanceString("curso")->all([
+    $sqlCursos = EntitySqlo::getInstanceRequire("curso")->all([
     	["com_fecha", "=", $fecha],
     	["com_publicar", "=", true]
     ]);
@@ -354,7 +354,7 @@ ORDER BY com_dvi_sed_numero, com_dvi_numero, com_anio, com_semestre, ch_asi_nomb
     $comisiones = [];
     $i = -1;
 
-    $sql = EntitySqlo::getInstanceString("comision")->cantidadAlumnosActivos($fecha);
+    $sql = EntitySqlo::getInstanceRequire("comision")->cantidadAlumnosActivos($fecha);
 
 
     $cantidadActivos = Dba::fetchAll($sql);
@@ -366,14 +366,14 @@ ORDER BY com_dvi_sed_numero, com_dvi_numero, com_anio, com_semestre, ch_asi_nomb
 
           $i++;
           $j = -1;
-          $comisiones[$i] = EntitySql::getInstanceString("comision", "com")->_json($row);
-          $comisiones[$i]["division_"] =  EntitySql::getInstanceString("division", "com_dvi")->_json($row);
-          $comisiones[$i]["division_"]["sede_"] =  EntitySql::getInstanceString("sede", "com_dvi_sed")->_json($row);
-          $comisiones[$i]["division_"]["sede_"]["domicilio_"] =  EntitySql::getInstanceString("domicilio", "com_dvi_sed_dom")->_json($row);
-          $comisiones[$i]["division_"]["sede_"]["coordinador_"] =  EntitySql::getInstanceString("id_persona", "com_dvi_sed_coo")->_json($row);
-          $comisiones[$i]["division_"]["plan_"] =  EntitySql::getInstanceString("plan", "com_dvi_pla")->_json($row);
+          $comisiones[$i] = EntitySql::getInstanceRequire("comision", "com")->_json($row);
+          $comisiones[$i]["division_"] =  EntitySql::getInstanceRequire("division", "com_dvi")->_json($row);
+          $comisiones[$i]["division_"]["sede_"] =  EntitySql::getInstanceRequire("sede", "com_dvi_sed")->_json($row);
+          $comisiones[$i]["division_"]["sede_"]["domicilio_"] =  EntitySql::getInstanceRequire("domicilio", "com_dvi_sed_dom")->_json($row);
+          $comisiones[$i]["division_"]["sede_"]["coordinador_"] =  EntitySql::getInstanceRequire("id_persona", "com_dvi_sed_coo")->_json($row);
+          $comisiones[$i]["division_"]["plan_"] =  EntitySql::getInstanceRequire("plan", "com_dvi_pla")->_json($row);
 
-          $coordinador = EntitySql::getInstanceString("id_persona", "com_dvi_sed_coo")->_json($row);
+          $coordinador = EntitySql::getInstanceRequire("id_persona", "com_dvi_sed_coo")->_json($row);
           if(!empty($coordinador)) $comisiones[$i]["division_"]["sede_"]["coordinador_"] = $coordinador;
           $comisiones[$i]["cursos"] = [];
           $comisiones[$i]["cantidad_activos"] = 0;
@@ -384,9 +384,9 @@ ORDER BY com_dvi_sed_numero, com_dvi_numero, com_anio, com_semestre, ch_asi_nomb
 
         $idCurso = $row["id"];
         $j++;
-        $comisiones[$i]["cursos"][$j] = EntitySql::getInstanceString("curso")->_json($row);
-        $comisiones[$i]["cursos"][$j]["carga_horaria_"] = EntitySql::getInstanceString("carga_horaria", "ch")->_json($row);
-        $comisiones[$i]["cursos"][$j]["carga_horaria_"]["asignatura_"] = EntitySql::getInstanceString("asignatura", "ch_asi")->_json($row);
+        $comisiones[$i]["cursos"][$j] = EntitySql::getInstanceRequire("curso")->_json($row);
+        $comisiones[$i]["cursos"][$j]["carga_horaria_"] = EntitySql::getInstanceRequire("carga_horaria", "ch")->_json($row);
+        $comisiones[$i]["cursos"][$j]["carga_horaria_"]["asignatura_"] = EntitySql::getInstanceRequire("asignatura", "ch_asi")->_json($row);
         $comisiones[$i]["cursos"][$j]["tomas"] = [];
       }
 
@@ -420,8 +420,8 @@ ORDER BY com_dvi_sed_numero, com_dvi_numero, com_anio, com_semestre, ch_asi_nomb
 
 
     public function cantidadAlumnos($fecha){
-      $sqlF = EntitySqlo::getInstanceString("nomina2")->cantidadActivosPorSexo($fecha, "Femenino");
-      $sqlM = EntitySqlo::getInstanceString("nomina2")->cantidadActivosPorSexo($fecha, "Masculino");
+      $sqlF = EntitySqlo::getInstanceRequire("nomina2")->cantidadActivosPorSexo($fecha, "Femenino");
+      $sqlM = EntitySqlo::getInstanceRequire("nomina2")->cantidadActivosPorSexo($fecha, "Masculino");
 
      $sql = "
   SELECT mujeres.anio, mujeres.semestre, mujeres.cantidad AS cantidad_mujeres, hombres.cantidad AS cantidad_hombres
