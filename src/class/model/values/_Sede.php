@@ -8,6 +8,7 @@ class _Sede extends EntityValues {
   protected $numero = UNDEFINED;
   protected $nombre = UNDEFINED;
   protected $observaciones = UNDEFINED;
+  protected $alta = UNDEFINED;
   protected $baja = UNDEFINED;
   protected $domicilio = UNDEFINED;
   protected $tipoSede = UNDEFINED;
@@ -19,6 +20,7 @@ class _Sede extends EntityValues {
     $this->setNumero(DEFAULT_VALUE);
     $this->setNombre(DEFAULT_VALUE);
     $this->setObservaciones(DEFAULT_VALUE);
+    $this->setAlta(DEFAULT_VALUE);
     $this->setBaja(DEFAULT_VALUE);
     $this->setDomicilio(DEFAULT_VALUE);
     $this->setTipoSede(DEFAULT_VALUE);
@@ -32,6 +34,7 @@ class _Sede extends EntityValues {
     if(isset($row[$p."numero"])) $this->setNumero($row[$p."numero"]);
     if(isset($row[$p."nombre"])) $this->setNombre($row[$p."nombre"]);
     if(isset($row[$p."observaciones"])) $this->setObservaciones($row[$p."observaciones"]);
+    if(isset($row[$p."alta"])) $this->setAlta($row[$p."alta"]);
     if(isset($row[$p."baja"])) $this->setBaja($row[$p."baja"]);
     if(isset($row[$p."domicilio"])) $this->setDomicilio($row[$p."domicilio"]);
     if(isset($row[$p."tipo_sede"])) $this->setTipoSede($row[$p."tipo_sede"]);
@@ -45,6 +48,7 @@ class _Sede extends EntityValues {
     if($this->numero !== UNDEFINED) $row["numero"] = $this->numero();
     if($this->nombre !== UNDEFINED) $row["nombre"] = $this->nombre();
     if($this->observaciones !== UNDEFINED) $row["observaciones"] = $this->observaciones();
+    if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d H:i:s");
     if($this->baja !== UNDEFINED) $row["baja"] = $this->baja("Y-m-d H:i:s");
     if($this->domicilio !== UNDEFINED) $row["domicilio"] = $this->domicilio();
     if($this->tipoSede !== UNDEFINED) $row["tipo_sede"] = $this->tipoSede();
@@ -58,6 +62,7 @@ class _Sede extends EntityValues {
     if(!Validation::is_empty($this->numero)) return false;
     if(!Validation::is_empty($this->nombre)) return false;
     if(!Validation::is_empty($this->observaciones)) return false;
+    if(!Validation::is_empty($this->alta)) return false;
     if(!Validation::is_empty($this->baja)) return false;
     if(!Validation::is_empty($this->domicilio)) return false;
     if(!Validation::is_empty($this->tipoSede)) return false;
@@ -70,6 +75,7 @@ class _Sede extends EntityValues {
   public function numero($format = null) { return Format::convertCase($this->numero, $format); }
   public function nombre($format = null) { return Format::convertCase($this->nombre, $format); }
   public function observaciones($format = null) { return Format::convertCase($this->observaciones, $format); }
+  public function alta($format = null) { return Format::date($this->alta, $format); }
   public function baja($format = null) { return Format::date($this->baja, $format); }
   public function domicilio($format = null) { return Format::convertCase($this->domicilio, $format); }
   public function tipoSede($format = null) { return Format::convertCase($this->tipoSede, $format); }
@@ -104,6 +110,20 @@ class _Sede extends EntityValues {
     $p = (is_null($p)) ? null : (string)$p;
     $check = $this->checkObservaciones($p); 
     if($check) $this->observaciones = $p;
+    return $check;
+  }
+
+  public function _setAlta(DateTime $p = null) {
+      $check = $this->checkAlta($p); 
+      if($check) $this->alta = $p;  
+      return $check;
+  }
+
+  public function setAlta($p, $format = "Y-m-d H:i:s") {
+    $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
+    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
+    $check = $this->checkAlta($p); 
+    if($check) $this->alta = $p;  
     return $check;
   }
 
@@ -170,6 +190,11 @@ class _Sede extends EntityValues {
   public function checkObservaciones($value) { 
     $v = Validation::getInstanceValue($value)->string();
     return $this->_setLogsValidation("observaciones", $v);
+  }
+
+  public function checkAlta($value) { 
+    $v = Validation::getInstanceValue($value)->date()->required();
+    return $this->_setLogsValidation("alta", $v);
   }
 
   public function checkBaja($value) { 
