@@ -17,7 +17,7 @@ class _FieldTomaPlanillaDocente extends Field {
 
   public function getEntity(){ return Entity::getInstanceRequire('toma'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('toma'); }
+  public function getEntityRef(){ return Entity::getInstanceRequire('planilla_docente'); }
 
 
 }

@@ -1,3 +1,4 @@
+plan - pla
 
 id (id): string pk. NOT NULL. MAIN. UNIQUE.
 anio (ani): string nf. NOT NULL. MAIN.

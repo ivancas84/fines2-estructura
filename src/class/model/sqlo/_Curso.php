@@ -58,6 +58,58 @@ UPDATE " . $this->entity->sn_() . " SET
   public function json(array $row = null){
     if(empty($row)) return null;
     $row_ = $this->sql->_json($row);
+    if(!is_null($row['com_id'])){
+      $json = EntitySql::getInstanceRequire('comision', 'com')->_json($row);
+      $row_["comision_"] = $json;
+    }
+    if(!is_null($row['com_sed_id'])){
+      $json = EntitySql::getInstanceRequire('sede', 'com_sed')->_json($row);
+      $row_["comision_"]["sede_"] = $json;
+    }
+    if(!is_null($row['com_sed_dom_id'])){
+      $json = EntitySql::getInstanceRequire('domicilio', 'com_sed_dom')->_json($row);
+      $row_["comision_"]["sede_"]["domicilio_"] = $json;
+    }
+    if(!is_null($row['com_sed_ts_id'])){
+      $json = EntitySql::getInstanceRequire('tipo_sede', 'com_sed_ts')->_json($row);
+      $row_["comision_"]["sede_"]["tipo_sede_"] = $json;
+    }
+    if(!is_null($row['com_sed_ce_id'])){
+      $json = EntitySql::getInstanceRequire('centro_educativo', 'com_sed_ce')->_json($row);
+      $row_["comision_"]["sede_"]["centro_educativo_"] = $json;
+    }
+    if(!is_null($row['com_sed_ce_dom_id'])){
+      $json = EntitySql::getInstanceRequire('domicilio', 'com_sed_ce_dom')->_json($row);
+      $row_["comision_"]["sede_"]["centro_educativo_"]["domicilio_"] = $json;
+    }
+    if(!is_null($row['com_sed_coo_id'])){
+      $json = EntitySql::getInstanceRequire('persona', 'com_sed_coo')->_json($row);
+      $row_["comision_"]["sede_"]["coordinador_"] = $json;
+    }
+    if(!is_null($row['com_sed_coo_dom_id'])){
+      $json = EntitySql::getInstanceRequire('domicilio', 'com_sed_coo_dom')->_json($row);
+      $row_["comision_"]["sede_"]["coordinador_"]["domicilio_"] = $json;
+    }
+    if(!is_null($row['com_moa_id'])){
+      $json = EntitySql::getInstanceRequire('modalidad', 'com_moa')->_json($row);
+      $row_["comision_"]["modalidad_"] = $json;
+    }
+    if(!is_null($row['com_pla_id'])){
+      $json = EntitySql::getInstanceRequire('planificacion', 'com_pla')->_json($row);
+      $row_["comision_"]["planificacion_"] = $json;
+    }
+    if(!is_null($row['com_pla_pla_id'])){
+      $json = EntitySql::getInstanceRequire('plan', 'com_pla_pla')->_json($row);
+      $row_["comision_"]["planificacion_"]["plan_"] = $json;
+    }
+    if(!is_null($row['com_cal_id'])){
+      $json = EntitySql::getInstanceRequire('calendario', 'com_cal')->_json($row);
+      $row_["comision_"]["calendario_"] = $json;
+    }
+    if(!is_null($row['asi_id'])){
+      $json = EntitySql::getInstanceRequire('asignatura', 'asi')->_json($row);
+      $row_["asignatura_"] = $json;
+    }
     return $row_;
   }
 
@@ -65,6 +117,19 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_ = [];
 
     $row_["curso"] = EntityValues::getInstanceRequire("curso", $row);
+    $row_["comision"] = EntityValues::getInstanceRequire('comision', $row, 'com_');
+    $row_["sede"] = EntityValues::getInstanceRequire('sede', $row, 'com_sed_');
+    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $row, 'com_sed_dom_');
+    $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede', $row, 'com_sed_ts_');
+    $row_["centro_educativo"] = EntityValues::getInstanceRequire('centro_educativo', $row, 'com_sed_ce_');
+    $row_["domicilio1"] = EntityValues::getInstanceRequire('domicilio', $row, 'com_sed_ce_dom_');
+    $row_["coordinador"] = EntityValues::getInstanceRequire('persona', $row, 'com_sed_coo_');
+    $row_["domicilio2"] = EntityValues::getInstanceRequire('domicilio', $row, 'com_sed_coo_dom_');
+    $row_["modalidad"] = EntityValues::getInstanceRequire('modalidad', $row, 'com_moa_');
+    $row_["planificacion"] = EntityValues::getInstanceRequire('planificacion', $row, 'com_pla_');
+    $row_["plan"] = EntityValues::getInstanceRequire('plan', $row, 'com_pla_pla_');
+    $row_["calendario"] = EntityValues::getInstanceRequire('calendario', $row, 'com_cal_');
+    $row_["asignatura"] = EntityValues::getInstanceRequire('asignatura', $row, 'asi_');
     return $row_;
   }
 

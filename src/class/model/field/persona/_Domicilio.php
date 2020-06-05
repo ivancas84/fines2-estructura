@@ -17,7 +17,7 @@ class _FieldPersonaDomicilio extends Field {
 
   public function getEntity(){ return Entity::getInstanceRequire('persona'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('persona'); }
+  public function getEntityRef(){ return Entity::getInstanceRequire('domicilio'); }
 
 
 }

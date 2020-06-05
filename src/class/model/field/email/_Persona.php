@@ -17,7 +17,7 @@ class _FieldEmailPersona extends Field {
 
   public function getEntity(){ return Entity::getInstanceRequire('email'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('email'); }
+  public function getEntityRef(){ return Entity::getInstanceRequire('persona'); }
 
 
 }

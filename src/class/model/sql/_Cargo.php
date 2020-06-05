@@ -1,11 +1,11 @@
 <?php
 require_once("class/model/Sql.php");
 
-class _TipoSedeSqlMain extends EntitySql{
+class _CargoSql extends EntitySql{
 
   public function __construct(){
     parent::__construct();
-    $this->entity = Entity::getInstanceRequire('tipo_sede');
+    $this->entity = Entity::getInstanceRequire('cargo');
   }
 
 
@@ -65,7 +65,7 @@ class _TipoSedeSqlMain extends EntitySql{
   }
 
   public function initializeInsert(array $data){
-    $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('tipo_sede');
+    $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('cargo');
     if(!isset($data['descripcion']) || is_null($data['descripcion']) || $data['descripcion'] == "") throw new Exception('dato obligatorio sin valor: descripcion');
 
     return $data;

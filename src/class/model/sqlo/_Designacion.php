@@ -64,6 +64,46 @@ UPDATE " . $this->entity->sn_() . " SET
   public function json(array $row = null){
     if(empty($row)) return null;
     $row_ = $this->sql->_json($row);
+    if(!is_null($row['car_id'])){
+      $json = EntitySql::getInstanceRequire('cargo', 'car')->_json($row);
+      $row_["cargo_"] = $json;
+    }
+    if(!is_null($row['sed_id'])){
+      $json = EntitySql::getInstanceRequire('sede', 'sed')->_json($row);
+      $row_["sede_"] = $json;
+    }
+    if(!is_null($row['sed_dom_id'])){
+      $json = EntitySql::getInstanceRequire('domicilio', 'sed_dom')->_json($row);
+      $row_["sede_"]["domicilio_"] = $json;
+    }
+    if(!is_null($row['sed_ts_id'])){
+      $json = EntitySql::getInstanceRequire('tipo_sede', 'sed_ts')->_json($row);
+      $row_["sede_"]["tipo_sede_"] = $json;
+    }
+    if(!is_null($row['sed_ce_id'])){
+      $json = EntitySql::getInstanceRequire('centro_educativo', 'sed_ce')->_json($row);
+      $row_["sede_"]["centro_educativo_"] = $json;
+    }
+    if(!is_null($row['sed_ce_dom_id'])){
+      $json = EntitySql::getInstanceRequire('domicilio', 'sed_ce_dom')->_json($row);
+      $row_["sede_"]["centro_educativo_"]["domicilio_"] = $json;
+    }
+    if(!is_null($row['sed_coo_id'])){
+      $json = EntitySql::getInstanceRequire('persona', 'sed_coo')->_json($row);
+      $row_["sede_"]["coordinador_"] = $json;
+    }
+    if(!is_null($row['sed_coo_dom_id'])){
+      $json = EntitySql::getInstanceRequire('domicilio', 'sed_coo_dom')->_json($row);
+      $row_["sede_"]["coordinador_"]["domicilio_"] = $json;
+    }
+    if(!is_null($row['per_id'])){
+      $json = EntitySql::getInstanceRequire('persona', 'per')->_json($row);
+      $row_["persona_"] = $json;
+    }
+    if(!is_null($row['per_dom_id'])){
+      $json = EntitySql::getInstanceRequire('domicilio', 'per_dom')->_json($row);
+      $row_["persona_"]["domicilio_"] = $json;
+    }
     return $row_;
   }
 
@@ -71,6 +111,16 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_ = [];
 
     $row_["designacion"] = EntityValues::getInstanceRequire("designacion", $row);
+    $row_["cargo"] = EntityValues::getInstanceRequire('cargo', $row, 'car_');
+    $row_["sede"] = EntityValues::getInstanceRequire('sede', $row, 'sed_');
+    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $row, 'sed_dom_');
+    $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede', $row, 'sed_ts_');
+    $row_["centro_educativo"] = EntityValues::getInstanceRequire('centro_educativo', $row, 'sed_ce_');
+    $row_["domicilio1"] = EntityValues::getInstanceRequire('domicilio', $row, 'sed_ce_dom_');
+    $row_["coordinador"] = EntityValues::getInstanceRequire('persona', $row, 'sed_coo_');
+    $row_["domicilio2"] = EntityValues::getInstanceRequire('domicilio', $row, 'sed_coo_dom_');
+    $row_["persona"] = EntityValues::getInstanceRequire('persona', $row, 'per_');
+    $row_["domicilio3"] = EntityValues::getInstanceRequire('domicilio', $row, 'per_dom_');
     return $row_;
   }
 

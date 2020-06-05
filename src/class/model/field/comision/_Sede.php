@@ -17,7 +17,7 @@ class _FieldComisionSede extends Field {
 
   public function getEntity(){ return Entity::getInstanceRequire('comision'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('comision'); }
+  public function getEntityRef(){ return Entity::getInstanceRequire('sede'); }
 
 
 }

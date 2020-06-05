@@ -67,9 +67,29 @@ UPDATE " . $this->entity->sn_() . " SET
   public function json(array $row = null){
     if(empty($row)) return null;
     $row_ = $this->sql->_json($row);
+    if(!is_null($row['dom_id'])){
+      $json = EntitySql::getInstanceRequire('domicilio', 'dom')->_json($row);
+      $row_["domicilio_"] = $json;
+    }
+    if(!is_null($row['ts_id'])){
+      $json = EntitySql::getInstanceRequire('tipo_sede', 'ts')->_json($row);
+      $row_["tipo_sede_"] = $json;
+    }
+    if(!is_null($row['ce_id'])){
+      $json = EntitySql::getInstanceRequire('centro_educativo', 'ce')->_json($row);
+      $row_["centro_educativo_"] = $json;
+    }
+    if(!is_null($row['ce_dom_id'])){
+      $json = EntitySql::getInstanceRequire('domicilio', 'ce_dom')->_json($row);
+      $row_["centro_educativo_"]["domicilio_"] = $json;
+    }
     if(!is_null($row['coo_id'])){
       $json = EntitySql::getInstanceRequire('persona', 'coo')->_json($row);
       $row_["coordinador_"] = $json;
+    }
+    if(!is_null($row['coo_dom_id'])){
+      $json = EntitySql::getInstanceRequire('domicilio', 'coo_dom')->_json($row);
+      $row_["coordinador_"]["domicilio_"] = $json;
     }
     return $row_;
   }
@@ -78,7 +98,12 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_ = [];
 
     $row_["sede"] = EntityValues::getInstanceRequire("sede", $row);
+    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $row, 'dom_');
+    $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede', $row, 'ts_');
+    $row_["centro_educativo"] = EntityValues::getInstanceRequire('centro_educativo', $row, 'ce_');
+    $row_["domicilio1"] = EntityValues::getInstanceRequire('domicilio', $row, 'ce_dom_');
     $row_["coordinador"] = EntityValues::getInstanceRequire('persona', $row, 'coo_');
+    $row_["domicilio2"] = EntityValues::getInstanceRequire('domicilio', $row, 'coo_dom_');
     return $row_;
   }
 

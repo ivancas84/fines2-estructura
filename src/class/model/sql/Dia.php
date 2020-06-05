@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/model/sql/_DiaSql.php");
+require_once("class/model/sql/_Dia.php");
 
 class DiaSql extends _DiaSql {
     protected function orderDefault(){

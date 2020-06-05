@@ -17,7 +17,7 @@ class _FieldTelefonoPersona extends Field {
 
   public function getEntity(){ return Entity::getInstanceRequire('telefono'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('telefono'); }
+  public function getEntityRef(){ return Entity::getInstanceRequire('persona'); }
 
 
 }

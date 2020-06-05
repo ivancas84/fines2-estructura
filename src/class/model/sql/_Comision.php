@@ -1,7 +1,7 @@
 <?php
 require_once("class/model/Sql.php");
 
-class _ComisionSqlMain extends EntitySql{
+class _ComisionSql extends EntitySql{
 
   public function __construct(){
     parent::__construct();
@@ -93,6 +93,17 @@ class _ComisionSqlMain extends EntitySql{
 
   public function mappingField($field){
     if($f = $this->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('sede', 'sed')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('domicilio', 'sed_dom')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('tipo_sede', 'sed_ts')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('centro_educativo', 'sed_ce')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('domicilio', 'sed_ce_dom')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('persona', 'sed_coo')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('domicilio', 'sed_coo_dom')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('modalidad', 'moa')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('planificacion', 'pla')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('plan', 'pla_pla')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('calendario', 'cal')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
   }
 
@@ -111,12 +122,34 @@ class _ComisionSqlMain extends EntitySql{
   }
 
   public function fields(){
-    return $this->_fields() . ' 
+    return $this->_fields() . ',
+' . EntitySql::getInstanceRequire('sede', 'sed')->_fields() . ',
+' . EntitySql::getInstanceRequire('domicilio', 'sed_dom')->_fields() . ',
+' . EntitySql::getInstanceRequire('tipo_sede', 'sed_ts')->_fields() . ',
+' . EntitySql::getInstanceRequire('centro_educativo', 'sed_ce')->_fields() . ',
+' . EntitySql::getInstanceRequire('domicilio', 'sed_ce_dom')->_fields() . ',
+' . EntitySql::getInstanceRequire('persona', 'sed_coo')->_fields() . ',
+' . EntitySql::getInstanceRequire('domicilio', 'sed_coo_dom')->_fields() . ',
+' . EntitySql::getInstanceRequire('modalidad', 'moa')->_fields() . ',
+' . EntitySql::getInstanceRequire('planificacion', 'pla')->_fields() . ',
+' . EntitySql::getInstanceRequire('plan', 'pla_pla')->_fields() . ',
+' . EntitySql::getInstanceRequire('calendario', 'cal')->_fields() . ' 
 ';
   }
 
-;ublic function join(Render $render){
-    return 
+  public function join(Render $render){
+    return EntitySql::getInstanceRequire('sede', 'sed')->_join('sede', 'comi', $render) . '
+' . EntitySql::getInstanceRequire('domicilio', 'sed_dom')->_join('domicilio', 'sed', $render) . '
+' . EntitySql::getInstanceRequire('tipo_sede', 'sed_ts')->_join('tipo_sede', 'sed', $render) . '
+' . EntitySql::getInstanceRequire('centro_educativo', 'sed_ce')->_join('centro_educativo', 'sed', $render) . '
+' . EntitySql::getInstanceRequire('domicilio', 'sed_ce_dom')->_join('domicilio', 'sed_ce', $render) . '
+' . EntitySql::getInstanceRequire('persona', 'sed_coo')->_join('coordinador', 'sed', $render) . '
+' . EntitySql::getInstanceRequire('domicilio', 'sed_coo_dom')->_join('domicilio', 'sed_coo', $render) . '
+' . EntitySql::getInstanceRequire('modalidad', 'moa')->_join('modalidad', 'comi', $render) . '
+' . EntitySql::getInstanceRequire('planificacion', 'pla')->_join('planificacion', 'comi', $render) . '
+' . EntitySql::getInstanceRequire('plan', 'pla_pla')->_join('plan', 'pla', $render) . '
+' . EntitySql::getInstanceRequire('calendario', 'cal')->_join('calendario', 'comi', $render) . '
+' ;
   }
 
   public function _conditionFieldStruct($field, $option, $value){
@@ -202,10 +235,32 @@ class _ComisionSqlMain extends EntitySql{
 
   protected function conditionFieldStruct($field, $option, $value) {
     if($c = $this->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('sede','sed')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','sed_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('tipo_sede','sed_ts')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('centro_educativo','sed_ce')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','sed_ce_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('persona','sed_coo')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','sed_coo_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('modalidad','moa')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('planificacion','pla')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','pla_pla')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('calendario','cal')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldAux($field, $option, $value) {
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('sede','sed')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','sed_dom')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('tipo_sede','sed_ts')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('centro_educativo','sed_ce')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','sed_ce_dom')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('persona','sed_coo')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('domicilio','sed_coo_dom')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('modalidad','moa')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('planificacion','pla')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','pla_pla')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('calendario','cal')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
   public function initializeInsert(array $data){

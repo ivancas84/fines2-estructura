@@ -1,7 +1,7 @@
 <?php
 require_once("class/model/Sql.php");
 
-class _AsignaturaSqlMain extends EntitySql{
+class _AsignaturaSql extends EntitySql{
 
   public function __construct(){
     parent::__construct();

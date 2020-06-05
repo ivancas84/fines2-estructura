@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/model/sql/_SedeSql.php");
+require_once("class/model/sql/_Sede.php");
 
 class SedeSql extends _SedeSql {
 

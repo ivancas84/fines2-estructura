@@ -1,7 +1,7 @@
 <?php
 require_once("class/model/Sql.php");
 
-class _ContralorSqlMain extends EntitySql{
+class _ContralorSql extends EntitySql{
 
   public function __construct(){
     parent::__construct();
@@ -50,6 +50,7 @@ class _ContralorSqlMain extends EntitySql{
 
   public function mappingField($field){
     if($f = $this->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('planilla_docente', 'pd')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
   }
 
@@ -68,12 +69,14 @@ class _ContralorSqlMain extends EntitySql{
   }
 
   public function fields(){
-    return $this->_fields() . ' 
+    return $this->_fields() . ',
+' . EntitySql::getInstanceRequire('planilla_docente', 'pd')->_fields() . ' 
 ';
   }
 
-;ublic function join(Render $render){
-    return 
+  public function join(Render $render){
+    return EntitySql::getInstanceRequire('planilla_docente', 'pd')->_join('planilla_docente', 'cont', $render) . '
+' ;
   }
 
   public function _conditionFieldStruct($field, $option, $value){
@@ -116,10 +119,12 @@ class _ContralorSqlMain extends EntitySql{
 
   protected function conditionFieldStruct($field, $option, $value) {
     if($c = $this->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('planilla_docente','pd')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldAux($field, $option, $value) {
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('planilla_docente','pd')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
   public function initializeInsert(array $data){

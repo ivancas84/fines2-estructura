@@ -1,7 +1,7 @@
 <?php
 require_once("class/model/Sql.php");
 
-class _FileSqlMain extends EntitySql{
+class _FileSql extends EntitySql{
 
   public function __construct(){
     parent::__construct();

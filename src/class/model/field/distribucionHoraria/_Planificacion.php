@@ -17,7 +17,7 @@ class _FieldDistribucionHorariaPlanificacion extends Field {
 
   public function getEntity(){ return Entity::getInstanceRequire('distribucion_horaria'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('distribucion_horaria'); }
+  public function getEntityRef(){ return Entity::getInstanceRequire('planificacion'); }
 
 
 }

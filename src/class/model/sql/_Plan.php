@@ -1,7 +1,7 @@
 <?php
 require_once("class/model/Sql.php");
 
-class _PlanSqlMain extends EntitySql{
+class _PlanSql extends EntitySql{
 
   public function __construct(){
     parent::__construct();

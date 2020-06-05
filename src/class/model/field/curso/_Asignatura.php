@@ -17,7 +17,7 @@ class _FieldCursoAsignatura extends Field {
 
   public function getEntity(){ return Entity::getInstanceRequire('curso'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('curso'); }
+  public function getEntityRef(){ return Entity::getInstanceRequire('asignatura'); }
 
 
 }

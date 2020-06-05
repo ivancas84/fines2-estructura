@@ -17,7 +17,7 @@ class _FieldHorarioDia extends Field {
 
   public function getEntity(){ return Entity::getInstanceRequire('horario'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('horario'); }
+  public function getEntityRef(){ return Entity::getInstanceRequire('dia'); }
 
 
 }

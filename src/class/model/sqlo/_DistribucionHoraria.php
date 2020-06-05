@@ -58,6 +58,18 @@ UPDATE " . $this->entity->sn_() . " SET
   public function json(array $row = null){
     if(empty($row)) return null;
     $row_ = $this->sql->_json($row);
+    if(!is_null($row['asi_id'])){
+      $json = EntitySql::getInstanceRequire('asignatura', 'asi')->_json($row);
+      $row_["asignatura_"] = $json;
+    }
+    if(!is_null($row['pla_id'])){
+      $json = EntitySql::getInstanceRequire('planificacion', 'pla')->_json($row);
+      $row_["planificacion_"] = $json;
+    }
+    if(!is_null($row['pla_pla_id'])){
+      $json = EntitySql::getInstanceRequire('plan', 'pla_pla')->_json($row);
+      $row_["planificacion_"]["plan_"] = $json;
+    }
     return $row_;
   }
 
@@ -65,6 +77,9 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_ = [];
 
     $row_["distribucion_horaria"] = EntityValues::getInstanceRequire("distribucion_horaria", $row);
+    $row_["asignatura"] = EntityValues::getInstanceRequire('asignatura', $row, 'asi_');
+    $row_["planificacion"] = EntityValues::getInstanceRequire('planificacion', $row, 'pla_');
+    $row_["plan"] = EntityValues::getInstanceRequire('plan', $row, 'pla_pla_');
     return $row_;
   }
 

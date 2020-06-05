@@ -1,7 +1,7 @@
 <?php
 require_once("class/model/Sql.php");
 
-class _CalendarioSqlMain extends EntitySql{
+class _CalendarioSql extends EntitySql{
 
   public function __construct(){
     parent::__construct();

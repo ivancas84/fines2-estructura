@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/model/sql/_ComisionSql.php");
+require_once("class/model/sql/_Comision.php");
 
 class ComisionSql extends _ComisionSql {
 

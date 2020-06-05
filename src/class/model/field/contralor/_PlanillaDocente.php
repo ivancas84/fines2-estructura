@@ -17,7 +17,7 @@ class _FieldContralorPlanillaDocente extends Field {
 
   public function getEntity(){ return Entity::getInstanceRequire('contralor'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('contralor'); }
+  public function getEntityRef(){ return Entity::getInstanceRequire('planilla_docente'); }
 
 
 }

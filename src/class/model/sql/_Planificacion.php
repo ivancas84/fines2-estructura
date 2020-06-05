@@ -1,7 +1,7 @@
 <?php
 require_once("class/model/Sql.php");
 
-class _PlanificacionSqlMain extends EntitySql{
+class _PlanificacionSql extends EntitySql{
 
   public function __construct(){
     parent::__construct();
@@ -42,6 +42,7 @@ class _PlanificacionSqlMain extends EntitySql{
 
   public function mappingField($field){
     if($f = $this->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('plan', 'pla')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
   }
 
@@ -60,12 +61,14 @@ class _PlanificacionSqlMain extends EntitySql{
   }
 
   public function fields(){
-    return $this->_fields() . ' 
+    return $this->_fields() . ',
+' . EntitySql::getInstanceRequire('plan', 'pla')->_fields() . ' 
 ';
   }
 
-;ublic function join(Render $render){
-    return 
+  public function join(Render $render){
+    return EntitySql::getInstanceRequire('plan', 'pla')->_join('plan', 'pla', $render) . '
+' ;
   }
 
   public function _conditionFieldStruct($field, $option, $value){
@@ -100,10 +103,12 @@ class _PlanificacionSqlMain extends EntitySql{
 
   protected function conditionFieldStruct($field, $option, $value) {
     if($c = $this->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','pla')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldAux($field, $option, $value) {
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','pla')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
   public function initializeInsert(array $data){

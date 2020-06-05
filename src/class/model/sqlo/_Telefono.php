@@ -64,6 +64,14 @@ UPDATE " . $this->entity->sn_() . " SET
   public function json(array $row = null){
     if(empty($row)) return null;
     $row_ = $this->sql->_json($row);
+    if(!is_null($row['per_id'])){
+      $json = EntitySql::getInstanceRequire('persona', 'per')->_json($row);
+      $row_["persona_"] = $json;
+    }
+    if(!is_null($row['per_dom_id'])){
+      $json = EntitySql::getInstanceRequire('domicilio', 'per_dom')->_json($row);
+      $row_["persona_"]["domicilio_"] = $json;
+    }
     return $row_;
   }
 
@@ -71,6 +79,8 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_ = [];
 
     $row_["telefono"] = EntityValues::getInstanceRequire("telefono", $row);
+    $row_["persona"] = EntityValues::getInstanceRequire('persona', $row, 'per_');
+    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $row, 'per_dom_');
     return $row_;
   }
 

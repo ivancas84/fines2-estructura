@@ -17,7 +17,7 @@ class _FieldPlanificacionPlan extends Field {
 
   public function getEntity(){ return Entity::getInstanceRequire('planificacion'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('planificacion'); }
+  public function getEntityRef(){ return Entity::getInstanceRequire('plan'); }
 
 
 }

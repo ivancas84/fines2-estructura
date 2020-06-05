@@ -58,6 +58,10 @@ UPDATE " . $this->entity->sn_() . " SET
   public function json(array $row = null){
     if(empty($row)) return null;
     $row_ = $this->sql->_json($row);
+    if(!is_null($row['pd_id'])){
+      $json = EntitySql::getInstanceRequire('planilla_docente', 'pd')->_json($row);
+      $row_["planilla_docente_"] = $json;
+    }
     return $row_;
   }
 
@@ -65,6 +69,7 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_ = [];
 
     $row_["contralor"] = EntityValues::getInstanceRequire("contralor", $row);
+    $row_["planilla_docente"] = EntityValues::getInstanceRequire('planilla_docente', $row, 'pd_');
     return $row_;
   }
 

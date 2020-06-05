@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/model/sql/_CursoSql.php");
+require_once("class/model/sql/_Curso.php");
 
 class CursoSql extends _CursoSql {
   public function _subSql(Render $render){ //subconsulta sql (en construccion)

@@ -17,7 +17,7 @@ class _FieldSedeTipoSede extends Field {
 
   public function getEntity(){ return Entity::getInstanceRequire('sede'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('sede'); }
+  public function getEntityRef(){ return Entity::getInstanceRequire('tipo_sede'); }
 
 
 }

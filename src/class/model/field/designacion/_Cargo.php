@@ -17,7 +17,7 @@ class _FieldDesignacionCargo extends Field {
 
   public function getEntity(){ return Entity::getInstanceRequire('designacion'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('designacion'); }
+  public function getEntityRef(){ return Entity::getInstanceRequire('cargo'); }
 
 
 }

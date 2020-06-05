@@ -1,7 +1,7 @@
 <?php
 require_once("class/model/Sql.php");
 
-class _DomicilioSqlMain extends EntitySql{
+class _DomicilioSql extends EntitySql{
 
   public function __construct(){
     parent::__construct();
