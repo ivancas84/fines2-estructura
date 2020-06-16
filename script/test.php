@@ -6,7 +6,9 @@ require_once("class/controller/ModelTools.php");
 require_once("class/model/Sqlo.php");
 
 
-$field = Field::getInstanceRequire("curso","alta");
+$sqlo = EntitySqlo::getInstanceRequire("planificacion");
 echo "<pre>";
+
+echo $sqlo->all();
 
 print_r($field);
