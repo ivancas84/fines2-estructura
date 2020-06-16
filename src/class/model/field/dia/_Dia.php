@@ -12,7 +12,7 @@ class _FieldDiaDia extends Field {
   public $length = "9";
   public $main = false;
   public $name = "dia";
-  public $alias = "dia";
+  public $alias = "dib";
 
 
   public function getEntity(){ return Entity::getInstanceRequire('dia'); }

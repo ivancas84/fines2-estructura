@@ -60,7 +60,7 @@ class _CursoSql extends EntitySql{
     if($f = EntitySql::getInstanceRequire('domicilio', 'com_sed_coo_dom')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('modalidad', 'com_moa')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('planificacion', 'com_pla')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('plan', 'com_pla_pla')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('plan', 'com_pla_plb')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('calendario', 'com_cal')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('asignatura', 'asi')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
@@ -92,7 +92,7 @@ class _CursoSql extends EntitySql{
 ' . EntitySql::getInstanceRequire('domicilio', 'com_sed_coo_dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('modalidad', 'com_moa')->_fields() . ',
 ' . EntitySql::getInstanceRequire('planificacion', 'com_pla')->_fields() . ',
-' . EntitySql::getInstanceRequire('plan', 'com_pla_pla')->_fields() . ',
+' . EntitySql::getInstanceRequire('plan', 'com_pla_plb')->_fields() . ',
 ' . EntitySql::getInstanceRequire('calendario', 'com_cal')->_fields() . ',
 ' . EntitySql::getInstanceRequire('asignatura', 'asi')->_fields() . ' 
 ';
@@ -109,7 +109,7 @@ class _CursoSql extends EntitySql{
 ' . EntitySql::getInstanceRequire('domicilio', 'com_sed_coo_dom')->_join('domicilio', 'com_sed_coo', $render) . '
 ' . EntitySql::getInstanceRequire('modalidad', 'com_moa')->_join('modalidad', 'com', $render) . '
 ' . EntitySql::getInstanceRequire('planificacion', 'com_pla')->_join('planificacion', 'com', $render) . '
-' . EntitySql::getInstanceRequire('plan', 'com_pla_pla')->_join('plan', 'com_pla', $render) . '
+' . EntitySql::getInstanceRequire('plan', 'com_pla_plb')->_join('plan', 'com_pla', $render) . '
 ' . EntitySql::getInstanceRequire('calendario', 'com_cal')->_join('calendario', 'com', $render) . '
 ' . EntitySql::getInstanceRequire('asignatura', 'asi')->_join('asignatura', 'curs', $render) . '
 ' ;
@@ -165,7 +165,7 @@ class _CursoSql extends EntitySql{
     if($c = EntitySql::getInstanceRequire('domicilio','com_sed_coo_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('modalidad','com_moa')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('planificacion','com_pla')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('plan','com_pla_pla')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','com_pla_plb')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('calendario','com_cal')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('asignatura','asi')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
@@ -182,7 +182,7 @@ class _CursoSql extends EntitySql{
     if($c = EntitySql::getInstanceRequire('domicilio','com_sed_coo_dom')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('modalidad','com_moa')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('planificacion','com_pla')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('plan','com_pla_pla')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','com_pla_plb')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('calendario','com_cal')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('asignatura','asi')->_conditionFieldAux($field, $option, $value)) return $c;
   }

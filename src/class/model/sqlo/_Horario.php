@@ -102,8 +102,8 @@ UPDATE " . $this->entity->sn_() . " SET
       $json = EntitySql::getInstanceRequire('planificacion', 'cur_com_pla')->_json($row);
       $row_["curso_"]["comision_"]["planificacion_"] = $json;
     }
-    if(!is_null($row['cur_com_pla_pla_id'])){
-      $json = EntitySql::getInstanceRequire('plan', 'cur_com_pla_pla')->_json($row);
+    if(!is_null($row['cur_com_pla_plb_id'])){
+      $json = EntitySql::getInstanceRequire('plan', 'cur_com_pla_plb')->_json($row);
       $row_["curso_"]["comision_"]["planificacion_"]["plan_"] = $json;
     }
     if(!is_null($row['cur_com_cal_id'])){
@@ -136,7 +136,7 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_["domicilio2"] = EntityValues::getInstanceRequire('domicilio', $row, 'cur_com_sed_coo_dom_');
     $row_["modalidad"] = EntityValues::getInstanceRequire('modalidad', $row, 'cur_com_moa_');
     $row_["planificacion"] = EntityValues::getInstanceRequire('planificacion', $row, 'cur_com_pla_');
-    $row_["plan"] = EntityValues::getInstanceRequire('plan', $row, 'cur_com_pla_pla_');
+    $row_["plan"] = EntityValues::getInstanceRequire('plan', $row, 'cur_com_pla_plb_');
     $row_["calendario"] = EntityValues::getInstanceRequire('calendario', $row, 'cur_com_cal_');
     $row_["asignatura"] = EntityValues::getInstanceRequire('asignatura', $row, 'cur_asi_');
     $row_["dia"] = EntityValues::getInstanceRequire('dia', $row, 'dia_');
