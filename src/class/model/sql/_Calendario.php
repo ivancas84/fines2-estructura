@@ -120,7 +120,6 @@ class _CalendarioSql extends EntitySql{
     if(!isset($data['fin']))  $data['fin'] = "null";
     if(!isset($data['anio']))  throw new Exception('fecha/hora obligatoria sin valor: anio');
     if(!isset($data['semestre']) || ($data['semestre'] == '')) throw new Exception('dato obligatorio sin valor: semestre');
-    if(!isset($data['insertado']))  $data['insertado'] = date("Y-m-d H:i:s");
 
     return $data;
   }
@@ -132,7 +131,6 @@ class _CalendarioSql extends EntitySql{
     if(array_key_exists('fin', $data)) { if(empty($data['fin']))  $data['fin'] = "null"; }
     if(array_key_exists('anio', $data)) { if(empty($data['anio']))  throw new Exception('fecha/hora obligatoria sin valor: anio'); }
     if(array_key_exists('semestre', $data)) { if(!isset($data['semestre']) || ($data['semestre'] == '')) throw new Exception('dato obligatorio sin valor: semestre'); }
-    if(array_key_exists('insertado', $data)) { if(empty($data['insertado']))  $data['insertado'] = date("Y-m-d H:i:s"); }
 
     return $data;
   }
