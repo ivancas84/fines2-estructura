@@ -10,10 +10,38 @@ class ComisionSql extends _ComisionSql {
 
     if($f = parent::_mappingField($field)) return $f;
     switch ($field) {
-      case $p.'tramo': return "CONCAT(COALESCE({$t}.anio,''), COALESCE({$t}.semestre,''))";
+      case $p.'tramo': return "CONCAT(COALESCE({$p}pla.anio,''), COALESCE({$p}pla.semestre,''))";
+      case $p.'label': return "CONCAT(
+  {$p}sed.numero, {$t}.division,
+  IF({$p}pla.id, CONCAT({$p}pla.anio,{$p}pla.semestre), ''),
+  IF({$p}cal.id, CONCAT(' ',{$p}cal.anio,'-',{$p}cal.semestre), ''),
+  IF({$p}cal.inicio,CONCAT(' ', {$p}cal.inicio),''),
+  IF({$p}cal.fin,CONCAT(' ', {$p}cal.fin),'')
+)";
+
       default: return null;
     }
   }
+
+   
+  public function _conditionFieldStruct($field, $option, $value){
+    $p = $this->prf();
+    $f = $this->_mappingField($field);
+    switch ($field) {
+      case $p.'tramo': return $this->format->conditionText($f, $value, $option);
+      case $p.'label': return $this->format->conditionText($f, $value, $option);
+      
+      default: return parent::_conditionFieldStruct($field, $option, $value);
+    }
+  }
+
+  protected function _conditionSearch($option, $value){
+    if(($option != "=~") && ($option != "=")) throw new Exception("Opción no permitida para condición " . $this->entity->getName("XxYy") . "Sql._conditionSearch([\"_search\",\"{$option}\",\"{$value}\"]). Solo se admite opcion = o =~");
+    $option = "=~";
+    //condicion estructurada de busqueda que involucra a todos los campos estructurales (excepto booleanos)
+    return $this->_conditionFieldStruct($this->prf()."label","=~",$value);
+  }
+
 
   /*
     public function _subSql(Render $render){
@@ -47,10 +75,10 @@ class ComisionSql extends _ComisionSql {
         INNER JOIN comision ON (comision.id = curso.comision)
         GROUP BY comision
     ) AS horas ON (horas.comision = comision.id)
-  ) AS horario_ ON (horario_.comision = {$t}.id)
+  ) AS horario_ ON (horario_.comision = {$p}.id)
   
   
-) AS {$t}
+) AS {$p}
   " . concat($this->_condition($render), 'WHERE ') . "
   ";
     }*/
