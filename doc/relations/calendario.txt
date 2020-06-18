@@ -1,6 +1,6 @@
-id (id): string pk. NOT NULL. MAIN. UNIQUE.
-inicio (ini): date nf.
-fin (fin): date nf.
+id (id): string pk. NOT NULL. UNIQUE.
+inicio (ini): date nf. MAIN.
+fin (fin): date nf. MAIN.
 anio (ani): year nf. NOT NULL.
-semestre (sem): integer nf. NOT NULL.
+semestre (sem): integer nf. NOT NULL. MAIN.
 insertado (ins): timestamp nf. NOT NULL. DEFAULT: current_timestamp().

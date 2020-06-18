@@ -1,6 +1,6 @@
 plan - plb
 
-id (id): string pk. NOT NULL. MAIN. UNIQUE.
+id (id): string pk. NOT NULL. UNIQUE.
 anio (ani): string nf. NOT NULL. MAIN.
 semestre (sem): string nf. NOT NULL. MAIN.
-plan (plb): string mu. NOT NULL.
+plan (plb): string mu. NOT NULL. MAIN.

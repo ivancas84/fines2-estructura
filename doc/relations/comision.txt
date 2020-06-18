@@ -12,7 +12,7 @@ calendario - cal
 
 id (id): string pk. NOT NULL. UNIQUE.
 turno (tur): string nf.
-division (dia): string nf. NOT NULL.
+division (dia): string nf. NOT NULL. MAIN.
 comentario (com): text nf.
 autorizada (aut): boolean nf. NOT NULL.
 apertura (ape): boolean nf. NOT NULL.
@@ -21,6 +21,6 @@ observaciones (obs): text nf.
 alta (alt): timestamp nf. NOT NULL. NOT ADMIN. DEFAULT: current_timestamp().
 sede (sed): string mu. NOT NULL. MAIN.
 modalidad (moa): string mu. NOT NULL.
-planificacion (pla): string mu.
+planificacion (pla): string mu. MAIN.
 comision_siguiente (cs): string mu.
-calendario (cal): string mu.
+calendario (cal): string mu. MAIN.
