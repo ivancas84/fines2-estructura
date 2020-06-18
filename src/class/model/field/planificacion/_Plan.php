@@ -12,7 +12,7 @@ class _FieldPlanificacionPlan extends Field {
   public $length = "45";
   public $main = false;
   public $name = "plan";
-  public $alias = "pla";
+  public $alias = "plb";
 
 
   public function getEntity(){ return Entity::getInstanceRequire('planificacion'); }

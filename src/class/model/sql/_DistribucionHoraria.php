@@ -53,7 +53,7 @@ class _DistribucionHorariaSql extends EntitySql{
     if($f = $this->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('asignatura', 'asi')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('planificacion', 'pla')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('plan', 'pla_pla')->_mappingField($field)) return $f;
+    if($f = EntitySql::getInstanceRequire('plan', 'pla_plb')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
   }
 
@@ -75,14 +75,14 @@ class _DistribucionHorariaSql extends EntitySql{
     return $this->_fields() . ',
 ' . EntitySql::getInstanceRequire('asignatura', 'asi')->_fields() . ',
 ' . EntitySql::getInstanceRequire('planificacion', 'pla')->_fields() . ',
-' . EntitySql::getInstanceRequire('plan', 'pla_pla')->_fields() . ' 
+' . EntitySql::getInstanceRequire('plan', 'pla_plb')->_fields() . ' 
 ';
   }
 
   public function join(Render $render){
     return EntitySql::getInstanceRequire('asignatura', 'asi')->_join('asignatura', 'dh', $render) . '
 ' . EntitySql::getInstanceRequire('planificacion', 'pla')->_join('planificacion', 'dh', $render) . '
-' . EntitySql::getInstanceRequire('plan', 'pla_pla')->_join('plan', 'pla', $render) . '
+' . EntitySql::getInstanceRequire('plan', 'pla_plb')->_join('plan', 'pla', $render) . '
 ' ;
   }
 
@@ -129,14 +129,14 @@ class _DistribucionHorariaSql extends EntitySql{
     if($c = $this->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('asignatura','asi')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('planificacion','pla')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('plan','pla_pla')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','pla_plb')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldAux($field, $option, $value) {
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('asignatura','asi')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('planificacion','pla')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('plan','pla_pla')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = EntitySql::getInstanceRequire('plan','pla_plb')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
   public function initializeInsert(array $data){

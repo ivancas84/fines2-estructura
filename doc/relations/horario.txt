@@ -9,7 +9,7 @@ persona - cur_com_sed_coo
 domicilio - cur_com_sed_coo_dom
 modalidad - cur_com_moa
 planificacion - cur_com_pla
-plan - cur_com_pla_pla
+plan - cur_com_pla_plb
 calendario - cur_com_cal
 asignatura - cur_asi
 dia - dia

@@ -7,7 +7,7 @@ persona - sed_coo
 domicilio - sed_coo_dom
 modalidad - moa
 planificacion - pla
-plan - pla_pla
+plan - pla_plb
 calendario - cal
 
 id (id): string pk. NOT NULL. UNIQUE.
