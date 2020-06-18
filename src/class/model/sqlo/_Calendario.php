@@ -24,6 +24,7 @@ class _CalendarioSqlo extends EntitySqlo {
     $sql .= "fin, " ;
     $sql .= "anio, " ;
     $sql .= "semestre, " ;
+    $sql .= "insertado, " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
 
     $sql .= ")
@@ -33,6 +34,7 @@ VALUES ( ";
     $sql .= $row['fin'] . ", " ;
     $sql .= $row['anio'] . ", " ;
     $sql .= $row['semestre'] . ", " ;
+    $sql .= $row['insertado'] . ", " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
 
     $sql .= ");
@@ -49,6 +51,7 @@ UPDATE " . $this->entity->sn_() . " SET
     if (isset($row['fin'] )) $sql .= "fin = " . $row['fin'] . " ," ;
     if (isset($row['anio'] )) $sql .= "anio = " . $row['anio'] . " ," ;
     if (isset($row['semestre'] )) $sql .= "semestre = " . $row['semestre'] . " ," ;
+    if (isset($row['insertado'] )) $sql .= "insertado = " . $row['insertado'] . " ," ;
     //eliminar ultima coma
     $sql = substr($sql, 0, -2);
 
