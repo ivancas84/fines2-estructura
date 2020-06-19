@@ -23,4 +23,4 @@ sede (sed): string mu. NOT NULL. MAIN.
 modalidad (moa): string mu. NOT NULL.
 planificacion (pla): string mu. MAIN.
 comision_siguiente (cs): string mu.
-calendario (cal): string mu. MAIN.
+calendario (cal): string mu. NOT NULL. MAIN.
