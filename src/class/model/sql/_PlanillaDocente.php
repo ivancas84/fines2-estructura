@@ -32,6 +32,9 @@ class _PlanillaDocenteSql extends EntitySql{
       case $p.'max_insertado': return "MAX({$t}.insertado)";
       case $p.'count_insertado': return "COUNT({$t}.insertado)";
 
+      case $p.'_label': return "CONCAT_WS(' ',
+{$t}.numero
+)";
       default: return null;
     }
   }

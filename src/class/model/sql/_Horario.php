@@ -41,6 +41,9 @@ class _HorarioSql extends EntitySql{
       case $p.'max_dia': return "MAX({$t}.dia)";
       case $p.'count_dia': return "COUNT({$t}.dia)";
 
+      case $p.'_label': return "CONCAT_WS(' ',
+{$t}.id
+)";
       default: return null;
     }
   }

@@ -51,6 +51,12 @@ class _CalendarioSql extends EntitySql{
       case $p.'max_insertado': return "MAX({$t}.insertado)";
       case $p.'count_insertado': return "COUNT({$t}.insertado)";
 
+      case $p.'_label': return "CONCAT_WS(' ',
+{$t}.inicio, 
+{$t}.fin, 
+{$t}.anio, 
+{$t}.semestre
+)";
       default: return null;
     }
   }

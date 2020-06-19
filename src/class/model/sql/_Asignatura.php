@@ -46,6 +46,9 @@ class _AsignaturaSql extends EntitySql{
       case $p.'max_perfil': return "MAX({$t}.perfil)";
       case $p.'count_perfil': return "COUNT({$t}.perfil)";
 
+      case $p.'_label': return "CONCAT_WS(' ',
+{$t}.nombre
+)";
       default: return null;
     }
   }

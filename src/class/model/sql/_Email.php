@@ -48,6 +48,9 @@ class _EmailSql extends EntitySql{
       case $p.'max_persona': return "MAX({$t}.persona)";
       case $p.'count_persona': return "COUNT({$t}.persona)";
 
+      case $p.'_label': return "CONCAT_WS(' ',
+{$t}.id
+)";
       default: return null;
     }
   }

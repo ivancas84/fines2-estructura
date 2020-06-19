@@ -68,6 +68,11 @@ class _PersonaSql extends EntitySql{
       case $p.'max_domicilio': return "MAX({$t}.domicilio)";
       case $p.'count_domicilio': return "COUNT({$t}.domicilio)";
 
+      case $p.'_label': return "CONCAT_WS(' ',
+{$t}.nombres, 
+{$t}.apellidos, 
+{$t}.numero_documento
+)";
       default: return null;
     }
   }

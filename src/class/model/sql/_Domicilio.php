@@ -56,6 +56,11 @@ class _DomicilioSql extends EntitySql{
       case $p.'max_localidad': return "MAX({$t}.localidad)";
       case $p.'count_localidad': return "COUNT({$t}.localidad)";
 
+      case $p.'_label': return "CONCAT_WS(' ',
+{$t}.calle, 
+{$t}.numero, 
+{$t}.barrio
+)";
       default: return null;
     }
   }
