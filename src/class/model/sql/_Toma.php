@@ -78,6 +78,9 @@ class _TomaSql extends EntitySql{
       case $p.'max_planilla_docente': return "MAX({$t}.planilla_docente)";
       case $p.'count_planilla_docente': return "COUNT({$t}.planilla_docente)";
 
+      case $p.'_label': return "CONCAT_WS(' ',
+{$t}.id
+)";
       default: return null;
     }
   }

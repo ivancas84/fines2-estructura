@@ -36,6 +36,10 @@ class _PlanSql extends EntitySql{
       case $p.'max_distribucion_horaria': return "MAX({$t}.distribucion_horaria)";
       case $p.'count_distribucion_horaria': return "COUNT({$t}.distribucion_horaria)";
 
+      case $p.'_label': return "CONCAT_WS(' ',
+{$t}.orientacion, 
+{$t}.distribucion_horaria
+)";
       default: return null;
     }
   }

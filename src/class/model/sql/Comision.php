@@ -8,12 +8,27 @@ class ComisionSql extends _ComisionSql {
     $p = $this->prf();
     $t = $this->prt();
 
-    if($f = parent::_mappingField($field)) return $f;
     switch ($field) {
-      case $p.'tramo': return "CONCAT(COALESCE({$t}.anio,''), COALESCE({$t}.semestre,''))";
-      default: return null;
+      case $p.'tramo': return "CONCAT(COALESCE({$p}pla.anio,''), COALESCE({$p}pla.semestre,''))";
+      case $p.'_label': return "CONCAT(
+  {$p}sed.numero, {$t}.division,
+  IF({$p}pla.id, CONCAT({$p}pla.anio,{$p}pla.semestre), ''),
+  IF({$p}cal.id, CONCAT(' ',{$p}cal.anio,'-',{$p}cal.semestre), ''),
+  IF({$p}cal.inicio,CONCAT(' ', {$p}cal.inicio),''),
+  IF({$p}cal.fin,CONCAT(' ', {$p}cal.fin),'')
+)";
+      default: return parent::_mappingField($field);
     }
   }
+
+   
+  protected function _conditionSearch($option, $value){
+    if(($option != "=~") && ($option != "=")) throw new Exception("Opción no permitida para condición " . $this->entity->getName("XxYy") . "Sql._conditionSearch([\"_search\",\"{$option}\",\"{$value}\"]). Solo se admite opcion = o =~");
+    $option = "=~";
+    //condicion estructurada de busqueda que involucra a todos los campos estructurales (excepto booleanos)
+    return $this->_conditionFieldStruct($this->prf()."_label","=~",$value);
+  }
+
 
   /*
     public function _subSql(Render $render){
@@ -47,10 +62,10 @@ class ComisionSql extends _ComisionSql {
         INNER JOIN comision ON (comision.id = curso.comision)
         GROUP BY comision
     ) AS horas ON (horas.comision = comision.id)
-  ) AS horario_ ON (horario_.comision = {$t}.id)
+  ) AS horario_ ON (horario_.comision = {$p}.id)
   
   
-) AS {$t}
+) AS {$p}
   " . concat($this->_condition($render), 'WHERE ') . "
   ";
     }*/

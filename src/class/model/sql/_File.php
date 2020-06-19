@@ -49,6 +49,9 @@ class _FileSql extends EntitySql{
       case $p.'max_created': return "MAX({$t}.created)";
       case $p.'count_created': return "COUNT({$t}.created)";
 
+      case $p.'_label': return "CONCAT_WS(' ',
+{$t}.id
+)";
       default: return null;
     }
   }

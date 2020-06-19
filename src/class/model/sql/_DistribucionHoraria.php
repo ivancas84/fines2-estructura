@@ -45,6 +45,9 @@ class _DistribucionHorariaSql extends EntitySql{
       case $p.'max_planificacion': return "MAX({$t}.planificacion)";
       case $p.'count_planificacion': return "COUNT({$t}.planificacion)";
 
+      case $p.'_label': return "CONCAT_WS(' ',
+{$t}.id
+)";
       default: return null;
     }
   }

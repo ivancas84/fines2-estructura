@@ -68,6 +68,10 @@ class _SedeSql extends EntitySql{
       case $p.'max_coordinador': return "MAX({$t}.coordinador)";
       case $p.'count_coordinador': return "COUNT({$t}.coordinador)";
 
+      case $p.'_label': return "CONCAT_WS(' ',
+{$t}.numero, 
+{$t}.nombre
+)";
       default: return null;
     }
   }

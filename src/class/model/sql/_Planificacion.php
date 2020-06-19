@@ -36,6 +36,12 @@ class _PlanificacionSql extends EntitySql{
       case $p.'max_plan': return "MAX({$t}.plan)";
       case $p.'count_plan': return "COUNT({$t}.plan)";
 
+      case $p.'_label': return "CONCAT_WS(' ',
+{$t}.anio, 
+{$t}.semestre, 
+{$p}plb.orientacion, 
+{$p}plb.distribucion_horaria
+)";
       default: return null;
     }
   }

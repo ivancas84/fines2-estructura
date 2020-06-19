@@ -44,6 +44,20 @@ class _CursoSql extends EntitySql{
       case $p.'max_asignatura': return "MAX({$t}.asignatura)";
       case $p.'count_asignatura': return "COUNT({$t}.asignatura)";
 
+      case $p.'_label': return "CONCAT_WS(' ',
+{$p}com.division, 
+{$p}com_sed.numero, 
+{$p}com_sed.nombre, 
+{$p}com_pla.anio, 
+{$p}com_pla.semestre, 
+{$p}com_pla_plb.orientacion, 
+{$p}com_pla_plb.distribucion_horaria, 
+{$p}com_cal.inicio, 
+{$p}com_cal.fin, 
+{$p}com_cal.anio, 
+{$p}com_cal.semestre, 
+{$p}asi.nombre
+)";
       default: return null;
     }
   }

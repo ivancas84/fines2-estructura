@@ -87,6 +87,19 @@ class _ComisionSql extends EntitySql{
       case $p.'max_calendario': return "MAX({$t}.calendario)";
       case $p.'count_calendario': return "COUNT({$t}.calendario)";
 
+      case $p.'_label': return "CONCAT_WS(' ',
+{$t}.division, 
+{$p}sed.numero, 
+{$p}sed.nombre, 
+{$p}pla.anio, 
+{$p}pla.semestre, 
+{$p}pla_plb.orientacion, 
+{$p}pla_plb.distribucion_horaria, 
+{$p}cal.inicio, 
+{$p}cal.fin, 
+{$p}cal.anio, 
+{$p}cal.semestre
+)";
       default: return null;
     }
   }
