@@ -288,7 +288,7 @@ class _Comision extends EntityValues {
   }
 
   public function checkCalendario($value) { 
-    $v = Validation::getInstanceValue($value)->string();
+    $v = Validation::getInstanceValue($value)->string()->required();
     return $this->_setLogsValidation("calendario", $v);
   }
 

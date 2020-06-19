@@ -289,7 +289,7 @@ class _ComisionSql extends EntitySql{
     if(empty($data['modalidad'])) throw new Exception('dato obligatorio sin valor: modalidad');
     if(empty($data['planificacion'])) $data['planificacion'] = "null";
     if(empty($data['comision_siguiente'])) $data['comision_siguiente'] = "null";
-    if(empty($data['calendario'])) $data['calendario'] = "null";
+    if(empty($data['calendario'])) throw new Exception('dato obligatorio sin valor: calendario');
 
     return $data;
   }
@@ -308,7 +308,7 @@ class _ComisionSql extends EntitySql{
     if(array_key_exists('modalidad', $data)) { if(!isset($data['modalidad']) || ($data['modalidad'] == '')) throw new Exception('dato obligatorio sin valor: modalidad'); }
     if(array_key_exists('planificacion', $data)) { if(!isset($data['planificacion']) || ($data['planificacion'] == '')) $data['planificacion'] = "null"; }
     if(array_key_exists('comision_siguiente', $data)) { if(!isset($data['comision_siguiente']) || ($data['comision_siguiente'] == '')) $data['comision_siguiente'] = "null"; }
-    if(array_key_exists('calendario', $data)) { if(!isset($data['calendario']) || ($data['calendario'] == '')) $data['calendario'] = "null"; }
+    if(array_key_exists('calendario', $data)) { if(!isset($data['calendario']) || ($data['calendario'] == '')) throw new Exception('dato obligatorio sin valor: calendario'); }
 
     return $data;
   }

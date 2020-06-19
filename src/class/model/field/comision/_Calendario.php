@@ -7,7 +7,7 @@ class _FieldComisionCalendario extends Field {
   public $type = "varchar";
   public $fieldType = "mu";
   public $unique = false;
-  public $notNull = false;
+  public $notNull = true;
   public $default = false;
   public $length = "45";
   public $main = false;
