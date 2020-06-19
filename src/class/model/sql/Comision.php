@@ -21,14 +21,6 @@ class ComisionSql extends _ComisionSql {
     }
   }
 
-   
-  protected function _conditionSearch($option, $value){
-    if(($option != "=~") && ($option != "=")) throw new Exception("Opción no permitida para condición " . $this->entity->getName("XxYy") . "Sql._conditionSearch([\"_search\",\"{$option}\",\"{$value}\"]). Solo se admite opcion = o =~");
-    $option = "=~";
-    //condicion estructurada de busqueda que involucra a todos los campos estructurales (excepto booleanos)
-    return $this->_conditionFieldStruct($this->prf()."_label","=~",$value);
-  }
-
 
   /*
     public function _subSql(Render $render){
