@@ -11,4 +11,11 @@ class SedeEntity extends _SedeEntity  {
 
     return $array;
   }
+
+  public function getFieldsUniqueMultiple(){ 
+    return array(
+      Field::getInstanceRequire("sede", "numero"),
+      Field::getInstanceRequire("sede", "centro_educativo"),
+    ); 
+  }
 }
