@@ -7,14 +7,14 @@ class _DetallePersona extends EntityValues {
   protected $id = UNDEFINED;
   protected $descripcion = UNDEFINED;
   protected $creado = UNDEFINED;
-  protected $file = UNDEFINED;
+  protected $archivo = UNDEFINED;
   protected $persona = UNDEFINED;
 
   public function _setDefault(){
     $this->setId(DEFAULT_VALUE);
     $this->setDescripcion(DEFAULT_VALUE);
     $this->setCreado(DEFAULT_VALUE);
-    $this->setFile(DEFAULT_VALUE);
+    $this->setArchivo(DEFAULT_VALUE);
     $this->setPersona(DEFAULT_VALUE);
   }
 
@@ -23,7 +23,7 @@ class _DetallePersona extends EntityValues {
     if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
     if(isset($row[$p."descripcion"])) $this->setDescripcion($row[$p."descripcion"]);
     if(isset($row[$p."creado"])) $this->setCreado($row[$p."creado"]);
-    if(isset($row[$p."file"])) $this->setFile($row[$p."file"]);
+    if(isset($row[$p."archivo"])) $this->setArchivo($row[$p."archivo"]);
     if(isset($row[$p."persona"])) $this->setPersona($row[$p."persona"]);
   }
 
@@ -32,7 +32,7 @@ class _DetallePersona extends EntityValues {
     if($this->id !== UNDEFINED) $row["id"] = $this->id();
     if($this->descripcion !== UNDEFINED) $row["descripcion"] = $this->descripcion();
     if($this->creado !== UNDEFINED) $row["creado"] = $this->creado("Y-m-d H:i:s");
-    if($this->file !== UNDEFINED) $row["file"] = $this->file();
+    if($this->archivo !== UNDEFINED) $row["archivo"] = $this->archivo();
     if($this->persona !== UNDEFINED) $row["persona"] = $this->persona();
     return $row;
   }
@@ -41,7 +41,7 @@ class _DetallePersona extends EntityValues {
     if(!Validation::is_empty($this->id)) return false;
     if(!Validation::is_empty($this->descripcion)) return false;
     if(!Validation::is_empty($this->creado)) return false;
-    if(!Validation::is_empty($this->file)) return false;
+    if(!Validation::is_empty($this->archivo)) return false;
     if(!Validation::is_empty($this->persona)) return false;
     return true;
   }
@@ -49,7 +49,7 @@ class _DetallePersona extends EntityValues {
   public function id() { return $this->id; }
   public function descripcion($format = null) { return Format::convertCase($this->descripcion, $format); }
   public function creado($format = null) { return Format::date($this->creado, $format); }
-  public function file($format = null) { return Format::convertCase($this->file, $format); }
+  public function archivo($format = null) { return Format::convertCase($this->archivo, $format); }
   public function persona($format = null) { return Format::convertCase($this->persona, $format); }
   public function setId($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
@@ -81,11 +81,11 @@ class _DetallePersona extends EntityValues {
     return $check;
   }
 
-  public function setFile($p) {
+  public function setArchivo($p) {
     $p = ($p == DEFAULT_VALUE) ? null : trim($p);
     $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkFile($p); 
-    if($check) $this->file = $p;
+    $check = $this->checkArchivo($p); 
+    if($check) $this->archivo = $p;
     return $check;
   }
 
@@ -111,9 +111,9 @@ class _DetallePersona extends EntityValues {
     return $this->_setLogsValidation("creado", $v);
   }
 
-  public function checkFile($value) { 
+  public function checkArchivo($value) { 
     $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("file", $v);
+    return $this->_setLogsValidation("archivo", $v);
   }
 
   public function checkPersona($value) { 

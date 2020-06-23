@@ -20,7 +20,7 @@ class _DetallePersonaEntity extends Entity {
 
   public function getFieldsMu(){
     return array(
-      Field::getInstanceRequire("detalle_persona", "file"),
+      Field::getInstanceRequire("detalle_persona", "archivo"),
       Field::getInstanceRequire("detalle_persona", "persona"),
     );
   }
