@@ -22,7 +22,7 @@ class _DetallePersonaSqlo extends EntitySqlo {
       $sql .= "id, " ;
     $sql .= "descripcion, " ;
     $sql .= "creado, " ;
-    $sql .= "file, " ;
+    $sql .= "archivo, " ;
     $sql .= "persona, " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
 
@@ -31,7 +31,7 @@ VALUES ( ";
     $sql .= $row['id'] . ", " ;
     $sql .= $row['descripcion'] . ", " ;
     $sql .= $row['creado'] . ", " ;
-    $sql .= $row['file'] . ", " ;
+    $sql .= $row['archivo'] . ", " ;
     $sql .= $row['persona'] . ", " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
 
@@ -47,7 +47,7 @@ UPDATE " . $this->entity->sn_() . " SET
 ";
     if (isset($row['descripcion'] )) $sql .= "descripcion = " . $row['descripcion'] . " ," ;
     if (isset($row['creado'] )) $sql .= "creado = " . $row['creado'] . " ," ;
-    if (isset($row['file'] )) $sql .= "file = " . $row['file'] . " ," ;
+    if (isset($row['archivo'] )) $sql .= "archivo = " . $row['archivo'] . " ," ;
     if (isset($row['persona'] )) $sql .= "persona = " . $row['persona'] . " ," ;
     //eliminar ultima coma
     $sql = substr($sql, 0, -2);
@@ -58,9 +58,9 @@ UPDATE " . $this->entity->sn_() . " SET
   public function json(array $row = null){
     if(empty($row)) return null;
     $row_ = $this->sql->_json($row);
-    if(!is_null($row['fil_id'])){
-      $json = EntitySql::getInstanceRequire('file', 'fil')->_json($row);
-      $row_["file_"] = $json;
+    if(!is_null($row['arc_id'])){
+      $json = EntitySql::getInstanceRequire('file', 'arc')->_json($row);
+      $row_["archivo_"] = $json;
     }
     if(!is_null($row['per_id'])){
       $json = EntitySql::getInstanceRequire('persona', 'per')->_json($row);
@@ -77,7 +77,7 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_ = [];
 
     $row_["detalle_persona"] = EntityValues::getInstanceRequire("detalle_persona", $row);
-    $row_["file"] = EntityValues::getInstanceRequire('file', $row, 'fil_');
+    $row_["archivo"] = EntityValues::getInstanceRequire('file', $row, 'arc_');
     $row_["persona"] = EntityValues::getInstanceRequire('persona', $row, 'per_');
     $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $row, 'per_dom_');
     return $row_;
