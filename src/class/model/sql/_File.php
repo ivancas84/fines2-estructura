@@ -50,7 +50,7 @@ class _FileSql extends EntitySql{
       case $p.'count_created': return "COUNT({$t}.created)";
 
       case $p.'_label': return "CONCAT_WS(' ',
-{$t}.id
+{$t}.name
 )";
       default: return null;
     }

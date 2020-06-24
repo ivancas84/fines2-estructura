@@ -15,3 +15,5 @@ domicilio (dom): string mu.
 tipo_sede (ts): string mu.
 centro_educativo (ce): string mu.
 coordinador (coo): integer fk. NOT ADMIN.
+
+UNIQUE MULTIPLE: numero, centro_educativo
