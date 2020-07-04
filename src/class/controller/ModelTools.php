@@ -8,6 +8,11 @@ require_once("class/model/Ma.php");
 
 class ModelTools {
 
+  public static function distribucionesHorarias($planificacion){
+    if(empty($planificacion)) throw new Exception("Planificacion vacia");
+    return Ma::all("distribucion_horaria", ["planificacion"=>$planificacion]);
+  }
+
   public static function sumaHorasCatedraAsignaturasGrupo($fechaAnio, $fechaSemestre, $modalidad, $centroEducativo){
     /**
      * @param fechaAnio
@@ -30,16 +35,11 @@ class ModelTools {
     return Ma::advanced("curso",$render);
   }
 
-  public static function cargasHorariasDePlanAnioSemestre($plan, $anio, $semestre){
-    $params = [
-      "plan" => $plan,
-      "anio" => $anio,
-      "semestre" => $semestre,
-    ];
-
-    $render = Render::getInstanceParams($params);
+  public static function cargasHorariasDePlanificacion($planificacion){
+    if(empty($planificacion)) throw new Exception("Planificacion no definida");
+    $render = Render::getInstanceParams(["planificacion" => $planificacion]);
     $render->setAggregate(["sum_horas_catedra"]);
-    $render->setGroup(["plan", "anio", "semestre", "asignatura"]);
+    $render->setGroup(["planificacion", "asignatura"]);
     $render->setOrder(["sum_horas_catedra" => "desc"]);
 
     return Ma::advanced("distribucion_horaria",$render);
@@ -174,4 +174,6 @@ GROUP BY curso.id
 
     return Dba::fetchAll($sql);    
   }
+
+
 }

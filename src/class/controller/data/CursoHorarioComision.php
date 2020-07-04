@@ -9,8 +9,8 @@ require_once("class/controller/ModelTools.php");
 
 
 
-class CursosConHorariosDeComisionData extends Data {
-  public $entityName = "cursos_con_horarios_de_comision";
+class CursoHorarioComisionData extends Data {
+  public $entityName = "curso_horario_comision";
 
   public function main($idComision) {
     return ModelTools::cursosConHorariosDeComision($idComision);

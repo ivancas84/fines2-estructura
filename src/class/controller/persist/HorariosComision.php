@@ -3,7 +3,6 @@
 require_once("class/controller/Persist.php");
 require_once("class/model/Ma.php");
 require_once("class/model/Values.php");
-require_once("class/controller/persist/ComisionCursos.php");
 require_once("class/controller/ModelTools.php");
 
 require_once("function/array_combine_keys.php");
@@ -85,9 +84,7 @@ class HorariosComisionPersist extends Persist {
 
   public function getDistribucionesHorarias() {
     $params = [
-      "plan" => $this->cursos[0]["com_plan"],
-      "anio" => $this->cursos[0]["com_anio"],
-      "semestre" => $this->cursos[0]["com_semestre"],
+      "planificacion" => $this->cursos[0]["com_planificacion"],
     ];
 
     $render = Render::getInstanceParams($params);
