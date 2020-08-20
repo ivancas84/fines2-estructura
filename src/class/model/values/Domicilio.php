@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/model/values/domicilio/_Domicilio.php");
+require_once("class/model/values/_Domicilio.php");
 
 //***** implementacion de Values para una determinada tabla *****
 class Domicilio extends _Domicilio{
