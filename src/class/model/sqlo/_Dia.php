@@ -7,14 +7,7 @@ require_once("class/model/Values.php");
 
 class _DiaSqlo extends EntitySqlo {
 
-  public function __construct(){
-    /**
-     * Se definen todos los recursos de forma independiente, sin parametros en el constructor, para facilitar el polimorfismo de las subclases
-     */
-    $this->db = Dba::dbInstance();
-    $this->entity = Entity::getInstanceRequire('dia');
-    $this->sql = EntitySql::getInstanceRequire('dia');
-  }
+  public $entityName = "dia";
 
   protected function _insert(array $row){ //@override
       $sql = "

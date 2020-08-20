@@ -12,15 +12,16 @@ class _Email extends EntityValues {
   protected $persona = UNDEFINED;
 
   public function _setDefault(){
-    $this->setId(DEFAULT_VALUE);
-    $this->setEmail(DEFAULT_VALUE);
-    $this->setVerificado(DEFAULT_VALUE);
-    $this->setInsertado(DEFAULT_VALUE);
-    $this->setEliminado(DEFAULT_VALUE);
-    $this->setPersona(DEFAULT_VALUE);
+    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->email == UNDEFINED) $this->setEmail(null);
+    if($this->verificado == UNDEFINED) $this->setVerificado(false);
+    if($this->insertado == UNDEFINED) $this->setInsertado(date('c'));
+    if($this->eliminado == UNDEFINED) $this->setEliminado(null);
+    if($this->persona == UNDEFINED) $this->setPersona(null);
+    return $this;
   }
 
-  public function _fromArray(array $row = NULL, $p = ""){
+  public function _fromArray(array $row = NULL, string $p = ""){
     if(empty($row)) return;
     if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
     if(isset($row[$p."email"])) $this->setEmail($row[$p."email"]);
@@ -28,16 +29,17 @@ class _Email extends EntityValues {
     if(isset($row[$p."insertado"])) $this->setInsertado($row[$p."insertado"]);
     if(isset($row[$p."eliminado"])) $this->setEliminado($row[$p."eliminado"]);
     if(isset($row[$p."persona"])) $this->setPersona($row[$p."persona"]);
+    return $this;
   }
 
-  public function _toArray(){
+  public function _toArray(string $p = ""){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->email !== UNDEFINED) $row["email"] = $this->email();
-    if($this->verificado !== UNDEFINED) $row["verificado"] = $this->verificado();
-    if($this->insertado !== UNDEFINED) $row["insertado"] = $this->insertado("Y-m-d H:i:s");
-    if($this->eliminado !== UNDEFINED) $row["eliminado"] = $this->eliminado("Y-m-d H:i:s");
-    if($this->persona !== UNDEFINED) $row["persona"] = $this->persona();
+    if($this->id !== UNDEFINED) $row[$p."id"] = $this->id();
+    if($this->email !== UNDEFINED) $row[$p."email"] = $this->email();
+    if($this->verificado !== UNDEFINED) $row[$p."verificado"] = $this->verificado();
+    if($this->insertado !== UNDEFINED) $row[$p."insertado"] = $this->insertado("c");
+    if($this->eliminado !== UNDEFINED) $row[$p."eliminado"] = $this->eliminado("c");
+    if($this->persona !== UNDEFINED) $row[$p."persona"] = $this->persona();
     return $row;
   }
 
@@ -57,93 +59,89 @@ class _Email extends EntityValues {
   public function insertado($format = null) { return Format::date($this->insertado, $format); }
   public function eliminado($format = null) { return Format::date($this->eliminado, $format); }
   public function persona($format = null) { return Format::convertCase($this->persona, $format); }
-  public function setId($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkId($p); 
-    if($check) $this->id = $p;
-    return $check;
+
+  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
+  public function setEmail($p) { $this->email = (is_null($p)) ? null : (string)$p; }
+  public function setVerificado($p) { $this->verificado = settypebool($p); }
+  public function _setInsertado(DateTime $p = null) { $this->insertado = $p; }
+
+  public function setInsertado($p) {
+    if(!is_null($p)) {
+      $p = new SpanishDateTime($p);    
+      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    }
+    $this->insertado = $p;  
   }
 
-  public function setEmail($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkEmail($p); 
-    if($check) $this->email = $p;
-    return $check;
+  public function _setEliminado(DateTime $p = null) { $this->eliminado = $p; }
+
+  public function setEliminado($p) {
+    if(!is_null($p)) {
+      $p = new SpanishDateTime($p);    
+      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    }
+    $this->eliminado = $p;  
   }
 
-  public function setVerificado($p) {
-    if ($p == DEFAULT_VALUE) $p = null;
-    $p = (is_null($p)) ? null : settypebool(trim($p));
-    $check = $this->checkVerificado($p); 
-    if($check) $this->verificado = $p;
-    return $check;
-  }
+  public function setPersona($p) { $this->persona = (is_null($p)) ? null : (string)$p; }
 
-  public function _setInsertado(DateTime $p = null) {
-      $check = $this->checkInsertado($p); 
-      if($check) $this->insertado = $p;  
-      return $check;
-  }
-
-  public function setInsertado($p, $format = "Y-m-d H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
-    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
-    $check = $this->checkInsertado($p); 
-    if($check) $this->insertado = $p;  
-    return $check;
-  }
-
-  public function _setEliminado(DateTime $p = null) {
-      $check = $this->checkEliminado($p); 
-      if($check) $this->eliminado = $p;  
-      return $check;
-  }
-
-  public function setEliminado($p, $format = "Y-m-d H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
-    $check = $this->checkEliminado($p); 
-    if($check) $this->eliminado = $p;  
-    return $check;
-  }
-
-  public function setPersona($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkPersona($p); 
-    if($check) $this->persona = $p;
-    return $check;
-  }
+  public function resetEmail() { if(!Validation::is_empty($this->email)) $this->email = preg_replace('/\s\s+/', ' ', trim($this->email)); }
 
   public function checkId($value) { 
+      if(Validation::is_undefined($value)) return null;
       return true; 
   }
 
   public function checkEmail($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("email", $v);
+    $this->_logs->resetLogs("email");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("email", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkVerificado($value) { 
-    $v = Validation::getInstanceValue($value)->boolean()->required();
-    return $this->_setLogsValidation("verificado", $v);
+    $this->_logs->resetLogs("verificado");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("verificado", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkInsertado($value) { 
-    $v = Validation::getInstanceValue($value)->date()->required();
-    return $this->_setLogsValidation("insertado", $v);
+    $this->_logs->resetLogs("insertado");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("insertado", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkEliminado($value) { 
-    $v = Validation::getInstanceValue($value)->date();
-    return $this->_setLogsValidation("eliminado", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkPersona($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("persona", $v);
+    $this->_logs->resetLogs("persona");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("persona", "error", $error); }
+    return $v->isSuccess();
+  }
+
+  public function _check(){
+    $this->checkId($this->id);
+    $this->checkEmail($this->email);
+    $this->checkVerificado($this->verificado);
+    $this->checkInsertado($this->insertado);
+    $this->checkEliminado($this->eliminado);
+    $this->checkPersona($this->persona);
+    return !$this->_getLogs()->isError();
+  }
+
+  public function _reset(){
+    $this->resetEmail();
+    return $this;
   }
 
 

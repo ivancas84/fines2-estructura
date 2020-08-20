@@ -41,9 +41,7 @@ class _HorarioSql extends EntitySql{
       case $p.'max_dia': return "MAX({$t}.dia)";
       case $p.'count_dia': return "COUNT({$t}.dia)";
 
-      case $p.'_label': return "CONCAT_WS(' ',
-{$t}.id
-)";
+      case $p.'_label': return "CONCAT_WS(' ', {$t}.id)";
       default: return null;
     }
   }
@@ -75,8 +73,7 @@ class _HorarioSql extends EntitySql{
 ' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'hora_inicio') . ' AS ' . $p.'hora_inicio, ' . $this->_mappingField($p.'hora_fin') . ' AS ' . $p.'hora_fin, ' . $this->_mappingField($p.'curso') . ' AS ' . $p.'curso, ' . $this->_mappingField($p.'dia') . ' AS ' . $p.'dia';
   }
 
-  public function _fieldsDb(){
-    //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
+  public function _fieldsExclusive(){
     $p = $this->prf();
     return '
 ' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'hora_inicio') . ', ' . $this->_mappingField($p.'hora_fin') . ', ' . $this->_mappingField($p.'curso') . ', ' . $this->_mappingField($p.'dia') . '';
@@ -124,33 +121,72 @@ class _HorarioSql extends EntitySql{
   public function _conditionFieldStruct($field, $option, $value){
     $p = $this->prf();
 
-    $f = $this->_mappingField($field);
     switch ($field){
-      case "{$p}id": return $this->format->conditionText($f, $value, $option);
-      case "{$p}hora_inicio": return $this->format->conditionTime($f, $value, $option);
-      case "{$p}hora_fin": return $this->format->conditionTime($f, $value, $option);
-      case "{$p}curso": return $this->format->conditionText($f, $value, $option);
-      case "{$p}dia": return $this->format->conditionText($f, $value, $option);
+      case "{$p}id": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}id"), $value, $option);
 
-      case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}hora_inicio": return $this->format->conditionTime($this->_mappingField($field), $value, $option);
+    case "{$p}hora_inicio_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}hora_inicio"), $value, $option);
 
-      case "{$p}max_hora_inicio": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_hora_inicio": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_hora_inicio": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}hora_fin": return $this->format->conditionTime($this->_mappingField($field), $value, $option);
+    case "{$p}hora_fin_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}hora_fin"), $value, $option);
 
-      case "{$p}max_hora_fin": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_hora_fin": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_hora_fin": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}curso": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}curso_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}curso"), $value, $option);
 
-      case "{$p}max_curso": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_curso": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_curso": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}dia": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}dia_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}dia"), $value, $option);
 
-      case "{$p}max_dia": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_dia": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_dia": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_id"), $value, $option);
+
+      case "{$p}min_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_id"), $value, $option);
+
+      case "{$p}count_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_id"), $value, $option);
+
+
+      case "{$p}max_hora_inicio": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_hora_inicio_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_hora_inicio"), $value, $option);
+
+      case "{$p}min_hora_inicio": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_hora_inicio_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_hora_inicio"), $value, $option);
+
+      case "{$p}count_hora_inicio": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_hora_inicio_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_hora_inicio"), $value, $option);
+
+
+      case "{$p}max_hora_fin": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_hora_fin_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_hora_fin"), $value, $option);
+
+      case "{$p}min_hora_fin": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_hora_fin_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_hora_fin"), $value, $option);
+
+      case "{$p}count_hora_fin": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_hora_fin_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_hora_fin"), $value, $option);
+
+
+      case "{$p}max_curso": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_curso_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_curso"), $value, $option);
+
+      case "{$p}min_curso": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_curso_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_curso"), $value, $option);
+
+      case "{$p}count_curso": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_curso_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_curso"), $value, $option);
+
+
+      case "{$p}max_dia": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_dia_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_dia"), $value, $option);
+
+      case "{$p}min_dia": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_dia_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_dia"), $value, $option);
+
+      case "{$p}count_dia": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_dia_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_dia"), $value, $option);
+
 
       default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
@@ -194,50 +230,17 @@ class _HorarioSql extends EntitySql{
     if($c = EntitySql::getInstanceRequire('dia','dia')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
-  public function initializeInsert(array $data){
-    $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('horario');
-    if(!isset($data['hora_inicio']))  throw new Exception('fecha/hora obligatoria sin valor: hora_inicio');
-    if(!isset($data['hora_fin']))  throw new Exception('fecha/hora obligatoria sin valor: hora_fin');
-    if(empty($data['curso'])) throw new Exception('dato obligatorio sin valor: curso');
-    if(empty($data['dia'])) throw new Exception('dato obligatorio sin valor: dia');
-
-    return $data;
-  }
-
-
-  public function initializeUpdate(array $data){
-    if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
-    if(array_key_exists('hora_inicio', $data)) { if(empty($data['hora_inicio']))  throw new Exception('fecha/hora obligatoria sin valor: hora_inicio'); }
-    if(array_key_exists('hora_fin', $data)) { if(empty($data['hora_fin']))  throw new Exception('fecha/hora obligatoria sin valor: hora_fin'); }
-    if(array_key_exists('curso', $data)) { if(!isset($data['curso']) || ($data['curso'] == '')) throw new Exception('dato obligatorio sin valor: curso'); }
-    if(array_key_exists('dia', $data)) { if(!isset($data['dia']) || ($data['dia'] == '')) throw new Exception('dato obligatorio sin valor: dia'); }
-
-    return $data;
-  }
-
 
   public function format(array $row){
     $row_ = array();
-   if(isset($row['id']) )  $row_['id'] = $this->format->escapeString($row['id']);
-    if(isset($row['hora_inicio'])) $row_['hora_inicio'] = $this->format->time($row['hora_inicio']);
-    if(isset($row['hora_fin'])) $row_['hora_fin'] = $this->format->time($row['hora_fin']);
-    if(isset($row['curso'])) $row_['curso'] = $this->format->escapeString($row['curso']);
-    if(isset($row['dia'])) $row_['dia'] = $this->format->escapeString($row['dia']);
+    if(array_key_exists('id', $row))  $row_['id'] = $this->format->string($row['id']);
+    if(array_key_exists('hora_inicio', $row)) $row_['hora_inicio'] = $this->format->time($row['hora_inicio']);
+    if(array_key_exists('hora_fin', $row)) $row_['hora_fin'] = $this->format->time($row['hora_fin']);
+    if(array_key_exists('curso', $row)) $row_['curso'] = $this->format->string($row['curso']);
+    if(array_key_exists('dia', $row)) $row_['dia'] = $this->format->string($row['dia']);
 
     return $row_;
   }
-  public function _json(array $row = NULL){
-    if(empty($row)) return null;
-    $prefix = $this->prf();
-    $row_ = [];
-    $row_["id"] = (is_null($row[$prefix . "id"])) ? null : (string)$row[$prefix . "id"]; //la pk se trata como string debido a un comportamiento erratico en angular 2 que al tratarlo como integer resta 1 en el valor
-    $row_["hora_inicio"] = (is_null($row[$prefix . "hora_inicio"])) ? null : (string)$row[$prefix . "hora_inicio"];
-    $row_["hora_fin"] = (is_null($row[$prefix . "hora_fin"])) ? null : (string)$row[$prefix . "hora_fin"];
-    $row_["curso"] = (is_null($row[$prefix . "curso"])) ? null : (string)$row[$prefix . "curso"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
-    $row_["dia"] = (is_null($row[$prefix . "dia"])) ? null : (string)$row[$prefix . "dia"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
-    return $row_;
-  }
-
 
 
 }

@@ -9,23 +9,25 @@ class _Dia extends EntityValues {
   protected $dia = UNDEFINED;
 
   public function _setDefault(){
-    $this->setId(DEFAULT_VALUE);
-    $this->setNumero(DEFAULT_VALUE);
-    $this->setDia(DEFAULT_VALUE);
+    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->numero == UNDEFINED) $this->setNumero(null);
+    if($this->dia == UNDEFINED) $this->setDia(null);
+    return $this;
   }
 
-  public function _fromArray(array $row = NULL, $p = ""){
+  public function _fromArray(array $row = NULL, string $p = ""){
     if(empty($row)) return;
     if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
     if(isset($row[$p."numero"])) $this->setNumero($row[$p."numero"]);
     if(isset($row[$p."dia"])) $this->setDia($row[$p."dia"]);
+    return $this;
   }
 
-  public function _toArray(){
+  public function _toArray(string $p = ""){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->numero !== UNDEFINED) $row["numero"] = $this->numero();
-    if($this->dia !== UNDEFINED) $row["dia"] = $this->dia();
+    if($this->id !== UNDEFINED) $row[$p."id"] = $this->id();
+    if($this->numero !== UNDEFINED) $row[$p."numero"] = $this->numero();
+    if($this->dia !== UNDEFINED) $row[$p."dia"] = $this->dia();
     return $row;
   }
 
@@ -39,42 +41,44 @@ class _Dia extends EntityValues {
   public function id() { return $this->id; }
   public function numero() { return $this->numero; }
   public function dia($format = null) { return Format::convertCase($this->dia, $format); }
-  public function setId($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkId($p); 
-    if($check) $this->id = $p;
-    return $check;
-  }
 
-  public function setNumero($p) {
-    if ($p == DEFAULT_VALUE) $p = null;
-    $p = (is_null($p)) ? null : intval(trim($p));
-    $check = $this->checkNumero($p); 
-    if($check) $this->numero = $p;
-    return $check;
-  }
+  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
+  public function setNumero($p) { $this->numero = (is_null($p)) ? null : intval($p); }
+  public function setDia($p) { $this->dia = (is_null($p)) ? null : (string)$p; }
 
-  public function setDia($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkDia($p); 
-    if($check) $this->dia = $p;
-    return $check;
-  }
+  public function resetDia() { if(!Validation::is_empty($this->dia)) $this->dia = preg_replace('/\s\s+/', ' ', trim($this->dia)); }
 
   public function checkId($value) { 
+      if(Validation::is_undefined($value)) return null;
       return true; 
   }
 
   public function checkNumero($value) { 
-    $v = Validation::getInstanceValue($value)->integer()->required();
-    return $this->_setLogsValidation("numero", $v);
+    $this->_logs->resetLogs("numero");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("numero", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkDia($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("dia", $v);
+    $this->_logs->resetLogs("dia");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("dia", "error", $error); }
+    return $v->isSuccess();
+  }
+
+  public function _check(){
+    $this->checkId($this->id);
+    $this->checkNumero($this->numero);
+    $this->checkDia($this->dia);
+    return !$this->_getLogs()->isError();
+  }
+
+  public function _reset(){
+    $this->resetDia();
+    return $this;
   }
 
 

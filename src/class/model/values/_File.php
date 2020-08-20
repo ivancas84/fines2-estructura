@@ -12,15 +12,16 @@ class _File extends EntityValues {
   protected $created = UNDEFINED;
 
   public function _setDefault(){
-    $this->setId(DEFAULT_VALUE);
-    $this->setName(DEFAULT_VALUE);
-    $this->setType(DEFAULT_VALUE);
-    $this->setContent(DEFAULT_VALUE);
-    $this->setSize(DEFAULT_VALUE);
-    $this->setCreated(DEFAULT_VALUE);
+    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->name == UNDEFINED) $this->setName(null);
+    if($this->type == UNDEFINED) $this->setType(null);
+    if($this->content == UNDEFINED) $this->setContent(null);
+    if($this->size == UNDEFINED) $this->setSize(null);
+    if($this->created == UNDEFINED) $this->setCreated(date('c'));
+    return $this;
   }
 
-  public function _fromArray(array $row = NULL, $p = ""){
+  public function _fromArray(array $row = NULL, string $p = ""){
     if(empty($row)) return;
     if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
     if(isset($row[$p."name"])) $this->setName($row[$p."name"]);
@@ -28,16 +29,17 @@ class _File extends EntityValues {
     if(isset($row[$p."content"])) $this->setContent($row[$p."content"]);
     if(isset($row[$p."size"])) $this->setSize($row[$p."size"]);
     if(isset($row[$p."created"])) $this->setCreated($row[$p."created"]);
+    return $this;
   }
 
-  public function _toArray(){
+  public function _toArray(string $p = ""){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->name !== UNDEFINED) $row["name"] = $this->name();
-    if($this->type !== UNDEFINED) $row["type"] = $this->type();
-    if($this->content !== UNDEFINED) $row["content"] = $this->content();
-    if($this->size !== UNDEFINED) $row["size"] = $this->size();
-    if($this->created !== UNDEFINED) $row["created"] = $this->created("Y-m-d H:i:s");
+    if($this->id !== UNDEFINED) $row[$p."id"] = $this->id();
+    if($this->name !== UNDEFINED) $row[$p."name"] = $this->name();
+    if($this->type !== UNDEFINED) $row[$p."type"] = $this->type();
+    if($this->content !== UNDEFINED) $row[$p."content"] = $this->content();
+    if($this->size !== UNDEFINED) $row[$p."size"] = $this->size();
+    if($this->created !== UNDEFINED) $row[$p."created"] = $this->created("c");
     return $row;
   }
 
@@ -57,87 +59,87 @@ class _File extends EntityValues {
   public function content($format = null) { return Format::convertCase($this->content, $format); }
   public function size() { return $this->size; }
   public function created($format = null) { return Format::date($this->created, $format); }
-  public function setId($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkId($p); 
-    if($check) $this->id = $p;
-    return $check;
+
+  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
+  public function setName($p) { $this->name = (is_null($p)) ? null : (string)$p; }
+  public function setType($p) { $this->type = (is_null($p)) ? null : (string)$p; }
+  public function setContent($p) { $this->content = (is_null($p)) ? null : (string)$p; }
+  public function setSize($p) { $this->size = (is_null($p)) ? null : intval($p); }
+  public function _setCreated(DateTime $p = null) { $this->created = $p; }
+
+  public function setCreated($p) {
+    if(!is_null($p)) {
+      $p = new SpanishDateTime($p);    
+      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    }
+    $this->created = $p;  
   }
 
-  public function setName($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkName($p); 
-    if($check) $this->name = $p;
-    return $check;
-  }
 
-  public function setType($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkType($p); 
-    if($check) $this->type = $p;
-    return $check;
-  }
-
-  public function setContent($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkContent($p); 
-    if($check) $this->content = $p;
-    return $check;
-  }
-
-  public function setSize($p) {
-    if ($p == DEFAULT_VALUE) $p = null;
-    $p = (is_null($p)) ? null : intval(trim($p));
-    $check = $this->checkSize($p); 
-    if($check) $this->size = $p;
-    return $check;
-  }
-
-  public function _setCreated(DateTime $p = null) {
-      $check = $this->checkCreated($p); 
-      if($check) $this->created = $p;  
-      return $check;
-  }
-
-  public function setCreated($p, $format = "Y-m-d H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
-    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
-    $check = $this->checkCreated($p); 
-    if($check) $this->created = $p;  
-    return $check;
-  }
+  public function resetName() { if(!Validation::is_empty($this->name)) $this->name = preg_replace('/\s\s+/', ' ', trim($this->name)); }
+  public function resetType() { if(!Validation::is_empty($this->type)) $this->type = preg_replace('/\s\s+/', ' ', trim($this->type)); }
+  public function resetContent() { if(!Validation::is_empty($this->content)) $this->content = preg_replace('/\s\s+/', ' ', trim($this->content)); }
 
   public function checkId($value) { 
+      if(Validation::is_undefined($value)) return null;
       return true; 
   }
 
   public function checkName($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("name", $v);
+    $this->_logs->resetLogs("name");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("name", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkType($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("type", $v);
+    $this->_logs->resetLogs("type");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("type", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkContent($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("content", $v);
+    $this->_logs->resetLogs("content");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("content", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkSize($value) { 
-    $v = Validation::getInstanceValue($value)->integer()->required();
-    return $this->_setLogsValidation("size", $v);
+    $this->_logs->resetLogs("size");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("size", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkCreated($value) { 
-    $v = Validation::getInstanceValue($value)->date()->required();
-    return $this->_setLogsValidation("created", $v);
+    $this->_logs->resetLogs("created");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("created", "error", $error); }
+    return $v->isSuccess();
+  }
+
+  public function _check(){
+    $this->checkId($this->id);
+    $this->checkName($this->name);
+    $this->checkType($this->type);
+    $this->checkContent($this->content);
+    $this->checkSize($this->size);
+    $this->checkCreated($this->created);
+    return !$this->_getLogs()->isError();
+  }
+
+  public function _reset(){
+    $this->resetName();
+    $this->resetType();
+    $this->resetContent();
+    return $this;
   }
 
 

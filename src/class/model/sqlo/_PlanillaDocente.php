@@ -7,14 +7,7 @@ require_once("class/model/Values.php");
 
 class _PlanillaDocenteSqlo extends EntitySqlo {
 
-  public function __construct(){
-    /**
-     * Se definen todos los recursos de forma independiente, sin parametros en el constructor, para facilitar el polimorfismo de las subclases
-     */
-    $this->db = Dba::dbInstance();
-    $this->entity = Entity::getInstanceRequire('planilla_docente');
-    $this->sql = EntitySql::getInstanceRequire('planilla_docente');
-  }
+  public $entityName = "planilla_docente";
 
   protected function _insert(array $row){ //@override
       $sql = "

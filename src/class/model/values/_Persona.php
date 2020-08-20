@@ -16,19 +16,20 @@ class _Persona extends EntityValues {
   protected $domicilio = UNDEFINED;
 
   public function _setDefault(){
-    $this->setId(DEFAULT_VALUE);
-    $this->setNombres(DEFAULT_VALUE);
-    $this->setApellidos(DEFAULT_VALUE);
-    $this->setFechaNacimiento(DEFAULT_VALUE);
-    $this->setNumeroDocumento(DEFAULT_VALUE);
-    $this->setCuil(DEFAULT_VALUE);
-    $this->setGenero(DEFAULT_VALUE);
-    $this->setApodo(DEFAULT_VALUE);
-    $this->setAlta(DEFAULT_VALUE);
-    $this->setDomicilio(DEFAULT_VALUE);
+    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->nombres == UNDEFINED) $this->setNombres(null);
+    if($this->apellidos == UNDEFINED) $this->setApellidos(null);
+    if($this->fechaNacimiento == UNDEFINED) $this->setFechaNacimiento(null);
+    if($this->numeroDocumento == UNDEFINED) $this->setNumeroDocumento(null);
+    if($this->cuil == UNDEFINED) $this->setCuil(null);
+    if($this->genero == UNDEFINED) $this->setGenero(null);
+    if($this->apodo == UNDEFINED) $this->setApodo(null);
+    if($this->alta == UNDEFINED) $this->setAlta(date('c'));
+    if($this->domicilio == UNDEFINED) $this->setDomicilio(null);
+    return $this;
   }
 
-  public function _fromArray(array $row = NULL, $p = ""){
+  public function _fromArray(array $row = NULL, string $p = ""){
     if(empty($row)) return;
     if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
     if(isset($row[$p."nombres"])) $this->setNombres($row[$p."nombres"]);
@@ -40,20 +41,21 @@ class _Persona extends EntityValues {
     if(isset($row[$p."apodo"])) $this->setApodo($row[$p."apodo"]);
     if(isset($row[$p."alta"])) $this->setAlta($row[$p."alta"]);
     if(isset($row[$p."domicilio"])) $this->setDomicilio($row[$p."domicilio"]);
+    return $this;
   }
 
-  public function _toArray(){
+  public function _toArray(string $p = ""){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->nombres !== UNDEFINED) $row["nombres"] = $this->nombres();
-    if($this->apellidos !== UNDEFINED) $row["apellidos"] = $this->apellidos();
-    if($this->fechaNacimiento !== UNDEFINED) $row["fecha_nacimiento"] = $this->fechaNacimiento("Y-m-d");
-    if($this->numeroDocumento !== UNDEFINED) $row["numero_documento"] = $this->numeroDocumento();
-    if($this->cuil !== UNDEFINED) $row["cuil"] = $this->cuil();
-    if($this->genero !== UNDEFINED) $row["genero"] = $this->genero();
-    if($this->apodo !== UNDEFINED) $row["apodo"] = $this->apodo();
-    if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d H:i:s");
-    if($this->domicilio !== UNDEFINED) $row["domicilio"] = $this->domicilio();
+    if($this->id !== UNDEFINED) $row[$p."id"] = $this->id();
+    if($this->nombres !== UNDEFINED) $row[$p."nombres"] = $this->nombres();
+    if($this->apellidos !== UNDEFINED) $row[$p."apellidos"] = $this->apellidos();
+    if($this->fechaNacimiento !== UNDEFINED) $row[$p."fecha_nacimiento"] = $this->fechaNacimiento("c");
+    if($this->numeroDocumento !== UNDEFINED) $row[$p."numero_documento"] = $this->numeroDocumento();
+    if($this->cuil !== UNDEFINED) $row[$p."cuil"] = $this->cuil();
+    if($this->genero !== UNDEFINED) $row[$p."genero"] = $this->genero();
+    if($this->apodo !== UNDEFINED) $row[$p."apodo"] = $this->apodo();
+    if($this->alta !== UNDEFINED) $row[$p."alta"] = $this->alta("c");
+    if($this->domicilio !== UNDEFINED) $row[$p."domicilio"] = $this->domicilio();
     return $row;
   }
 
@@ -81,145 +83,125 @@ class _Persona extends EntityValues {
   public function apodo($format = null) { return Format::convertCase($this->apodo, $format); }
   public function alta($format = null) { return Format::date($this->alta, $format); }
   public function domicilio($format = null) { return Format::convertCase($this->domicilio, $format); }
-  public function setId($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkId($p); 
-    if($check) $this->id = $p;
-    return $check;
+
+  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
+  public function setNombres($p) { $this->nombres = (is_null($p)) ? null : (string)$p; }
+  public function setApellidos($p) { $this->apellidos = (is_null($p)) ? null : (string)$p; }
+  public function _setFechaNacimiento(DateTime $p = null) { $this->fechaNacimiento = $p; }
+
+  public function setFechaNacimiento($p) {
+    if(!is_null($p)) {
+      $p = new SpanishDateTime($p);
+      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+      $p->setTime(0,0,0);
+    }
+    $this->fechaNacimiento = $p;
   }
 
-  public function setNombres($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkNombres($p); 
-    if($check) $this->nombres = $p;
-    return $check;
+  public function setNumeroDocumento($p) { $this->numeroDocumento = (is_null($p)) ? null : (string)$p; }
+  public function setCuil($p) { $this->cuil = (is_null($p)) ? null : (string)$p; }
+  public function setGenero($p) { $this->genero = (is_null($p)) ? null : (string)$p; }
+  public function setApodo($p) { $this->apodo = (is_null($p)) ? null : (string)$p; }
+  public function _setAlta(DateTime $p = null) { $this->alta = $p; }
+
+  public function setAlta($p) {
+    if(!is_null($p)) {
+      $p = new SpanishDateTime($p);    
+      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    }
+    $this->alta = $p;  
   }
 
-  public function setApellidos($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkApellidos($p); 
-    if($check) $this->apellidos = $p;
-    return $check;
-  }
+  public function setDomicilio($p) { $this->domicilio = (is_null($p)) ? null : (string)$p; }
 
-  public function _setFechaNacimiento(DateTime $p = null) {
-      $check = $this->checkFechaNacimiento($p); 
-      if($check) $this->fechaNacimiento = $p;  
-      return $check;      
-  }
-
-  public function setFechaNacimiento($p, $format = UNDEFINED) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(!is_null($p)) $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);    
-    $check = $this->checkFechaNacimiento($p); 
-    if($check) $this->fechaNacimiento = $p;  
-    return $check;
-  }
-
-  public function setNumeroDocumento($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkNumeroDocumento($p); 
-    if($check) $this->numeroDocumento = $p;
-    return $check;
-  }
-
-  public function setCuil($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkCuil($p); 
-    if($check) $this->cuil = $p;
-    return $check;
-  }
-
-  public function setGenero($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkGenero($p); 
-    if($check) $this->genero = $p;
-    return $check;
-  }
-
-  public function setApodo($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkApodo($p); 
-    if($check) $this->apodo = $p;
-    return $check;
-  }
-
-  public function _setAlta(DateTime $p = null) {
-      $check = $this->checkAlta($p); 
-      if($check) $this->alta = $p;  
-      return $check;
-  }
-
-  public function setAlta($p, $format = "Y-m-d H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
-    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
-    $check = $this->checkAlta($p); 
-    if($check) $this->alta = $p;  
-    return $check;
-  }
-
-  public function setDomicilio($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkDomicilio($p); 
-    if($check) $this->domicilio = $p;
-    return $check;
-  }
+  public function resetNombres() { if(!Validation::is_empty($this->nombres)) $this->nombres = preg_replace('/\s\s+/', ' ', trim($this->nombres)); }
+  public function resetApellidos() { if(!Validation::is_empty($this->apellidos)) $this->apellidos = preg_replace('/\s\s+/', ' ', trim($this->apellidos)); }
+  public function resetNumeroDocumento() { if(!Validation::is_empty($this->numeroDocumento)) $this->numeroDocumento = preg_replace('/\s\s+/', ' ', trim($this->numeroDocumento)); }
+  public function resetCuil() { if(!Validation::is_empty($this->cuil)) $this->cuil = preg_replace('/\s\s+/', ' ', trim($this->cuil)); }
+  public function resetGenero() { if(!Validation::is_empty($this->genero)) $this->genero = preg_replace('/\s\s+/', ' ', trim($this->genero)); }
+  public function resetApodo() { if(!Validation::is_empty($this->apodo)) $this->apodo = preg_replace('/\s\s+/', ' ', trim($this->apodo)); }
 
   public function checkId($value) { 
+      if(Validation::is_undefined($value)) return null;
       return true; 
   }
 
   public function checkNombres($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("nombres", $v);
+    $this->_logs->resetLogs("nombres");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("nombres", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkApellidos($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("apellidos", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkFechaNacimiento($value) { 
-    $v = Validation::getInstanceValue($value)->date();
-    return $this->_setLogsValidation("fecha_nacimiento", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkNumeroDocumento($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("numero_documento", $v);
+    $this->_logs->resetLogs("numero_documento");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("numero_documento", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkCuil($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("cuil", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkGenero($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("genero", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkApodo($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("apodo", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkAlta($value) { 
-    $v = Validation::getInstanceValue($value)->date()->required();
-    return $this->_setLogsValidation("alta", $v);
+    $this->_logs->resetLogs("alta");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("alta", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkDomicilio($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("domicilio", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
+  }
+
+  public function _check(){
+    $this->checkId($this->id);
+    $this->checkNombres($this->nombres);
+    $this->checkApellidos($this->apellidos);
+    $this->checkFechaNacimiento($this->fechaNacimiento);
+    $this->checkNumeroDocumento($this->numeroDocumento);
+    $this->checkCuil($this->cuil);
+    $this->checkGenero($this->genero);
+    $this->checkApodo($this->apodo);
+    $this->checkAlta($this->alta);
+    $this->checkDomicilio($this->domicilio);
+    return !$this->_getLogs()->isError();
+  }
+
+  public function _reset(){
+    $this->resetNombres();
+    $this->resetApellidos();
+    $this->resetNumeroDocumento();
+    $this->resetCuil();
+    $this->resetGenero();
+    $this->resetApodo();
+    return $this;
   }
 
 

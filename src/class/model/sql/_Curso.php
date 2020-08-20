@@ -18,6 +18,7 @@ class _CursoSql extends EntitySql{
       case $p.'id': return $t.".id";
       case $p.'horas_catedra': return $t.".horas_catedra";
       case $p.'alta': return $t.".alta";
+      case $p.'alta_date': return "CAST({$t}.alta AS DATE)";
       case $p.'comision': return $t.".comision";
       case $p.'asignatura': return $t.".asignatura";
 
@@ -44,20 +45,7 @@ class _CursoSql extends EntitySql{
       case $p.'max_asignatura': return "MAX({$t}.asignatura)";
       case $p.'count_asignatura': return "COUNT({$t}.asignatura)";
 
-      case $p.'_label': return "CONCAT_WS(' ',
-{$p}com.division, 
-{$p}com_sed.numero, 
-{$p}com_sed.nombre, 
-{$p}com_pla.anio, 
-{$p}com_pla.semestre, 
-{$p}com_pla_plb.orientacion, 
-{$p}com_pla_plb.distribucion_horaria, 
-{$p}com_cal.inicio, 
-{$p}com_cal.fin, 
-{$p}com_cal.anio, 
-{$p}com_cal.semestre, 
-{$p}asi.nombre
-)";
+      case $p.'_label': return "CONCAT_WS(' ', {$p}com.division, {$p}com_sed.numero, {$p}com_sed.nombre, {$p}com_pla.anio, {$p}com_pla.semestre, {$p}com_pla_plb.orientacion, {$p}com_pla_plb.distribucion_horaria, {$p}com_cal.inicio, {$p}com_cal.fin, {$p}com_cal.anio, {$p}com_cal.semestre, {$p}asi.nombre)";
       default: return null;
     }
   }
@@ -87,8 +75,7 @@ class _CursoSql extends EntitySql{
 ' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'horas_catedra') . ' AS ' . $p.'horas_catedra, ' . $this->_mappingField($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingField($p.'comision') . ' AS ' . $p.'comision, ' . $this->_mappingField($p.'asignatura') . ' AS ' . $p.'asignatura';
   }
 
-  public function _fieldsDb(){
-    //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
+  public function _fieldsExclusive(){
     $p = $this->prf();
     return '
 ' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'horas_catedra') . ', ' . $this->_mappingField($p.'alta') . ', ' . $this->_mappingField($p.'comision') . ', ' . $this->_mappingField($p.'asignatura') . '';
@@ -132,36 +119,82 @@ class _CursoSql extends EntitySql{
   public function _conditionFieldStruct($field, $option, $value){
     $p = $this->prf();
 
-    $f = $this->_mappingField($field);
     switch ($field){
-      case "{$p}id": return $this->format->conditionText($f, $value, $option);
-      case "{$p}horas_catedra": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}alta": return $this->format->conditionTimestamp($f, $value, $option);
-      case "{$p}comision": return $this->format->conditionText($f, $value, $option);
-      case "{$p}asignatura": return $this->format->conditionText($f, $value, $option);
+      case "{$p}id": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}id"), $value, $option);
 
-      case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}horas_catedra": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}horas_catedra_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}horas_catedra"), $value, $option);
 
-      case "{$p}sum_horas_catedra": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}avg_horas_catedra": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}max_horas_catedra": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_horas_catedra": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_horas_catedra": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}alta": return $this->format->conditionTimestamp($this->_mappingField($field), $value, $option);
+      case "{$p}alta_date": return $this->format->conditionDate($this->_mappingField($field), $value, $option);
+      case "{$p}alta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}alta"), $value, $option);
 
-      case "{$p}avg_alta": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}max_alta": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_alta": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_alta": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}comision": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}comision_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}comision"), $value, $option);
 
-      case "{$p}max_comision": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_comision": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_comision": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}asignatura": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}asignatura_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}asignatura"), $value, $option);
 
-      case "{$p}max_asignatura": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_asignatura": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_asignatura": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_id"), $value, $option);
+
+      case "{$p}min_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_id"), $value, $option);
+
+      case "{$p}count_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_id"), $value, $option);
+
+
+      case "{$p}sum_horas_catedra": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}sum_horas_catedra_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}sum_horas_catedra"), $value, $option);
+
+      case "{$p}avg_horas_catedra": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}avg_horas_catedra_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}avg_horas_catedra"), $value, $option);
+
+      case "{$p}max_horas_catedra": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_horas_catedra_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_horas_catedra"), $value, $option);
+
+      case "{$p}min_horas_catedra": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_horas_catedra_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_horas_catedra"), $value, $option);
+
+      case "{$p}count_horas_catedra": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_horas_catedra_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_horas_catedra"), $value, $option);
+
+
+      case "{$p}avg_alta": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}avg_alta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}avg_alta"), $value, $option);
+
+      case "{$p}max_alta": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_alta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_alta"), $value, $option);
+
+      case "{$p}min_alta": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_alta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_alta"), $value, $option);
+
+      case "{$p}count_alta": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_alta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_alta"), $value, $option);
+
+
+      case "{$p}max_comision": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_comision_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_comision"), $value, $option);
+
+      case "{$p}min_comision": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_comision_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_comision"), $value, $option);
+
+      case "{$p}count_comision": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_comision_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_comision"), $value, $option);
+
+
+      case "{$p}max_asignatura": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_asignatura_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_asignatura"), $value, $option);
+
+      case "{$p}min_asignatura": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_asignatura_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_asignatura"), $value, $option);
+
+      case "{$p}count_asignatura": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_asignatura_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_asignatura"), $value, $option);
+
 
       default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
@@ -201,50 +234,17 @@ class _CursoSql extends EntitySql{
     if($c = EntitySql::getInstanceRequire('asignatura','asi')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
-  public function initializeInsert(array $data){
-    $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('curso');
-    if(!isset($data['horas_catedra']) || ($data['horas_catedra'] == '')) throw new Exception('dato obligatorio sin valor: horas_catedra');
-    if(!isset($data['alta']))  $data['alta'] = date("Y-m-d H:i:s");
-    if(empty($data['comision'])) throw new Exception('dato obligatorio sin valor: comision');
-    if(empty($data['asignatura'])) throw new Exception('dato obligatorio sin valor: asignatura');
-
-    return $data;
-  }
-
-
-  public function initializeUpdate(array $data){
-    if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
-    if(array_key_exists('horas_catedra', $data)) { if(!isset($data['horas_catedra']) || ($data['horas_catedra'] == '')) throw new Exception('dato obligatorio sin valor: horas_catedra'); }
-    if(array_key_exists('alta', $data)) { if(empty($data['alta']))  $data['alta'] = date("Y-m-d H:i:s"); }
-    if(array_key_exists('comision', $data)) { if(!isset($data['comision']) || ($data['comision'] == '')) throw new Exception('dato obligatorio sin valor: comision'); }
-    if(array_key_exists('asignatura', $data)) { if(!isset($data['asignatura']) || ($data['asignatura'] == '')) throw new Exception('dato obligatorio sin valor: asignatura'); }
-
-    return $data;
-  }
-
 
   public function format(array $row){
     $row_ = array();
-   if(isset($row['id']) )  $row_['id'] = $this->format->escapeString($row['id']);
-    if(isset($row['horas_catedra'])) $row_['horas_catedra'] = $this->format->numeric($row['horas_catedra']);
-    if(isset($row['alta'])) $row_['alta'] = $this->format->timestamp($row['alta']);
-    if(isset($row['comision'])) $row_['comision'] = $this->format->escapeString($row['comision']);
-    if(isset($row['asignatura'])) $row_['asignatura'] = $this->format->escapeString($row['asignatura']);
+    if(array_key_exists('id', $row))  $row_['id'] = $this->format->string($row['id']);
+    if(array_key_exists('horas_catedra', $row)) $row_['horas_catedra'] = $this->format->numeric($row['horas_catedra']);
+    if(array_key_exists('alta', $row)) $row_['alta'] = $this->format->timestamp($row['alta']);
+    if(array_key_exists('comision', $row)) $row_['comision'] = $this->format->string($row['comision']);
+    if(array_key_exists('asignatura', $row)) $row_['asignatura'] = $this->format->string($row['asignatura']);
 
     return $row_;
   }
-  public function _json(array $row = NULL){
-    if(empty($row)) return null;
-    $prefix = $this->prf();
-    $row_ = [];
-    $row_["id"] = (is_null($row[$prefix . "id"])) ? null : (string)$row[$prefix . "id"]; //la pk se trata como string debido a un comportamiento erratico en angular 2 que al tratarlo como integer resta 1 en el valor
-    $row_["horas_catedra"] = (is_null($row[$prefix . "horas_catedra"])) ? null : intval($row[$prefix . "horas_catedra"]);
-    $row_["alta"] = (is_null($row[$prefix . "alta"])) ? null : (string)$row[$prefix . "alta"];
-    $row_["comision"] = (is_null($row[$prefix . "comision"])) ? null : (string)$row[$prefix . "comision"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
-    $row_["asignatura"] = (is_null($row[$prefix . "asignatura"])) ? null : (string)$row[$prefix . "asignatura"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
-    return $row_;
-  }
-
 
 
 }

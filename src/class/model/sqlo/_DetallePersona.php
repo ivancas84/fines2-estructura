@@ -7,14 +7,7 @@ require_once("class/model/Values.php");
 
 class _DetallePersonaSqlo extends EntitySqlo {
 
-  public function __construct(){
-    /**
-     * Se definen todos los recursos de forma independiente, sin parametros en el constructor, para facilitar el polimorfismo de las subclases
-     */
-    $this->db = Dba::dbInstance();
-    $this->entity = Entity::getInstanceRequire('detalle_persona');
-    $this->sql = EntitySql::getInstanceRequire('detalle_persona');
-  }
+  public $entityName = "detalle_persona";
 
   protected function _insert(array $row){ //@override
       $sql = "
@@ -57,29 +50,19 @@ UPDATE " . $this->entity->sn_() . " SET
 
   public function json(array $row = null){
     if(empty($row)) return null;
-    $row_ = $this->sql->_json($row);
-    if(!is_null($row['arc_id'])){
-      $json = EntitySql::getInstanceRequire('file', 'arc')->_json($row);
-      $row_["archivo_"] = $json;
-    }
-    if(!is_null($row['per_id'])){
-      $json = EntitySql::getInstanceRequire('persona', 'per')->_json($row);
-      $row_["persona_"] = $json;
-    }
-    if(!is_null($row['per_dom_id'])){
-      $json = EntitySql::getInstanceRequire('domicilio', 'per_dom')->_json($row);
-      $row_["persona_"]["domicilio_"] = $json;
-    }
+    $row_ = EntityValues::getInstanceRequire($this->entity->getName())->_fromArray($row)->_toArray();
+    if(!is_null($row['arc_id'])) $row_["archivo_"] = EntityValues::getInstanceRequire('file')->_fromArray($row, 'arc_')->_toArray();
+    if(!is_null($row['per_id'])) $row_["persona_"] = EntityValues::getInstanceRequire('persona')->_fromArray($row, 'per_')->_toArray();
+    if(!is_null($row['per_dom_id'])) $row_["persona_"]["domicilio_"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'per_dom_')->_toArray();
     return $row_;
   }
 
   public function values(array $row){
     $row_ = [];
-
-    $row_["detalle_persona"] = EntityValues::getInstanceRequire("detalle_persona", $row);
-    $row_["archivo"] = EntityValues::getInstanceRequire('file', $row, 'arc_');
-    $row_["persona"] = EntityValues::getInstanceRequire('persona', $row, 'per_');
-    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $row, 'per_dom_');
+    $row_["detalle_persona"] = EntityValues::getInstanceRequire("detalle_persona")->_fromArray($row);
+    $row_["archivo"] = EntityValues::getInstanceRequire('file')->_fromArray($row, 'arc_');
+    $row_["persona"] = EntityValues::getInstanceRequire('persona')->_fromArray($row, 'per_');
+    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'per_dom_');
     return $row_;
   }
 

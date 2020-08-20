@@ -11,29 +11,31 @@ class _DetallePersona extends EntityValues {
   protected $persona = UNDEFINED;
 
   public function _setDefault(){
-    $this->setId(DEFAULT_VALUE);
-    $this->setDescripcion(DEFAULT_VALUE);
-    $this->setCreado(DEFAULT_VALUE);
-    $this->setArchivo(DEFAULT_VALUE);
-    $this->setPersona(DEFAULT_VALUE);
+    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->descripcion == UNDEFINED) $this->setDescripcion(null);
+    if($this->creado == UNDEFINED) $this->setCreado(date('c'));
+    if($this->archivo == UNDEFINED) $this->setArchivo(null);
+    if($this->persona == UNDEFINED) $this->setPersona(null);
+    return $this;
   }
 
-  public function _fromArray(array $row = NULL, $p = ""){
+  public function _fromArray(array $row = NULL, string $p = ""){
     if(empty($row)) return;
     if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
     if(isset($row[$p."descripcion"])) $this->setDescripcion($row[$p."descripcion"]);
     if(isset($row[$p."creado"])) $this->setCreado($row[$p."creado"]);
     if(isset($row[$p."archivo"])) $this->setArchivo($row[$p."archivo"]);
     if(isset($row[$p."persona"])) $this->setPersona($row[$p."persona"]);
+    return $this;
   }
 
-  public function _toArray(){
+  public function _toArray(string $p = ""){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->descripcion !== UNDEFINED) $row["descripcion"] = $this->descripcion();
-    if($this->creado !== UNDEFINED) $row["creado"] = $this->creado("Y-m-d H:i:s");
-    if($this->archivo !== UNDEFINED) $row["archivo"] = $this->archivo();
-    if($this->persona !== UNDEFINED) $row["persona"] = $this->persona();
+    if($this->id !== UNDEFINED) $row[$p."id"] = $this->id();
+    if($this->descripcion !== UNDEFINED) $row[$p."descripcion"] = $this->descripcion();
+    if($this->creado !== UNDEFINED) $row[$p."creado"] = $this->creado("c");
+    if($this->archivo !== UNDEFINED) $row[$p."archivo"] = $this->archivo();
+    if($this->persona !== UNDEFINED) $row[$p."persona"] = $this->persona();
     return $row;
   }
 
@@ -51,74 +53,70 @@ class _DetallePersona extends EntityValues {
   public function creado($format = null) { return Format::date($this->creado, $format); }
   public function archivo($format = null) { return Format::convertCase($this->archivo, $format); }
   public function persona($format = null) { return Format::convertCase($this->persona, $format); }
-  public function setId($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkId($p); 
-    if($check) $this->id = $p;
-    return $check;
+
+  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
+  public function setDescripcion($p) { $this->descripcion = (is_null($p)) ? null : (string)$p; }
+  public function _setCreado(DateTime $p = null) { $this->creado = $p; }
+
+  public function setCreado($p) {
+    if(!is_null($p)) {
+      $p = new SpanishDateTime($p);    
+      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    }
+    $this->creado = $p;  
   }
 
-  public function setDescripcion($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkDescripcion($p); 
-    if($check) $this->descripcion = $p;
-    return $check;
-  }
+  public function setArchivo($p) { $this->archivo = (is_null($p)) ? null : (string)$p; }
+  public function setPersona($p) { $this->persona = (is_null($p)) ? null : (string)$p; }
 
-  public function _setCreado(DateTime $p = null) {
-      $check = $this->checkCreado($p); 
-      if($check) $this->creado = $p;  
-      return $check;
-  }
-
-  public function setCreado($p, $format = "Y-m-d H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
-    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
-    $check = $this->checkCreado($p); 
-    if($check) $this->creado = $p;  
-    return $check;
-  }
-
-  public function setArchivo($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkArchivo($p); 
-    if($check) $this->archivo = $p;
-    return $check;
-  }
-
-  public function setPersona($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkPersona($p); 
-    if($check) $this->persona = $p;
-    return $check;
-  }
+  public function resetDescripcion() { if(!Validation::is_empty($this->descripcion)) $this->descripcion = preg_replace('/\s\s+/', ' ', trim($this->descripcion)); }
 
   public function checkId($value) { 
+      if(Validation::is_undefined($value)) return null;
       return true; 
   }
 
   public function checkDescripcion($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("descripcion", $v);
+    $this->_logs->resetLogs("descripcion");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("descripcion", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkCreado($value) { 
-    $v = Validation::getInstanceValue($value)->date()->required();
-    return $this->_setLogsValidation("creado", $v);
+    $this->_logs->resetLogs("creado");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("creado", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkArchivo($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("archivo", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkPersona($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("persona", $v);
+    $this->_logs->resetLogs("persona");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("persona", "error", $error); }
+    return $v->isSuccess();
+  }
+
+  public function _check(){
+    $this->checkId($this->id);
+    $this->checkDescripcion($this->descripcion);
+    $this->checkCreado($this->creado);
+    $this->checkArchivo($this->archivo);
+    $this->checkPersona($this->persona);
+    return !$this->_getLogs()->isError();
+  }
+
+  public function _reset(){
+    $this->resetDescripcion();
+    return $this;
   }
 
 

@@ -19,7 +19,9 @@ class _EmailSql extends EntitySql{
       case $p.'email': return $t.".email";
       case $p.'verificado': return $t.".verificado";
       case $p.'insertado': return $t.".insertado";
+      case $p.'insertado_date': return "CAST({$t}.insertado AS DATE)";
       case $p.'eliminado': return $t.".eliminado";
+      case $p.'eliminado_date': return "CAST({$t}.eliminado AS DATE)";
       case $p.'persona': return $t.".persona";
 
       case $p.'min_id': return "MIN({$t}.id)";
@@ -48,9 +50,7 @@ class _EmailSql extends EntitySql{
       case $p.'max_persona': return "MAX({$t}.persona)";
       case $p.'count_persona': return "COUNT({$t}.persona)";
 
-      case $p.'_label': return "CONCAT_WS(' ',
-{$t}.id
-)";
+      case $p.'_label': return "CONCAT_WS(' ', {$t}.id)";
       default: return null;
     }
   }
@@ -69,8 +69,7 @@ class _EmailSql extends EntitySql{
 ' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'email') . ' AS ' . $p.'email, ' . $this->_mappingField($p.'verificado') . ' AS ' . $p.'verificado, ' . $this->_mappingField($p.'insertado') . ' AS ' . $p.'insertado, ' . $this->_mappingField($p.'eliminado') . ' AS ' . $p.'eliminado, ' . $this->_mappingField($p.'persona') . ' AS ' . $p.'persona';
   }
 
-  public function _fieldsDb(){
-    //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
+  public function _fieldsExclusive(){
     $p = $this->prf();
     return '
 ' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'email') . ', ' . $this->_mappingField($p.'verificado') . ', ' . $this->_mappingField($p.'insertado') . ', ' . $this->_mappingField($p.'eliminado') . ', ' . $this->_mappingField($p.'persona') . '';
@@ -92,40 +91,93 @@ class _EmailSql extends EntitySql{
   public function _conditionFieldStruct($field, $option, $value){
     $p = $this->prf();
 
-    $f = $this->_mappingField($field);
     switch ($field){
-      case "{$p}id": return $this->format->conditionText($f, $value, $option);
-      case "{$p}email": return $this->format->conditionText($f, $value, $option);
-      case "{$p}verificado": return $this->format->conditionBoolean($f, $value);
-      case "{$p}insertado": return $this->format->conditionTimestamp($f, $value, $option);
-      case "{$p}eliminado": return $this->format->conditionTimestamp($f, $value, $option);
-      case "{$p}persona": return $this->format->conditionText($f, $value, $option);
+      case "{$p}id": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}id"), $value, $option);
 
-      case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}email": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}email_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}email"), $value, $option);
 
-      case "{$p}max_email": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_email": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_email": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}verificado": return $this->format->conditionBoolean($this->_mappingField($field), $value);
+    case "{$p}verificado_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}verificado"), $value, $option);
 
-      case "{$p}max_verificado": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_verificado": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_verificado": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}insertado": return $this->format->conditionTimestamp($this->_mappingField($field), $value, $option);
+      case "{$p}insertado_date": return $this->format->conditionDate($this->_mappingField($field), $value, $option);
+      case "{$p}insertado_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}insertado"), $value, $option);
 
-      case "{$p}avg_insertado": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}max_insertado": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_insertado": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_insertado": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}eliminado": return $this->format->conditionTimestamp($this->_mappingField($field), $value, $option);
+      case "{$p}eliminado_date": return $this->format->conditionDate($this->_mappingField($field), $value, $option);
+      case "{$p}eliminado_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}eliminado"), $value, $option);
 
-      case "{$p}avg_eliminado": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}max_eliminado": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_eliminado": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_eliminado": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}persona": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}persona_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}persona"), $value, $option);
 
-      case "{$p}max_persona": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_persona": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_persona": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_id"), $value, $option);
+
+      case "{$p}min_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_id"), $value, $option);
+
+      case "{$p}count_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_id"), $value, $option);
+
+
+      case "{$p}max_email": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_email_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_email"), $value, $option);
+
+      case "{$p}min_email": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_email_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_email"), $value, $option);
+
+      case "{$p}count_email": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_email_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_email"), $value, $option);
+
+
+      case "{$p}max_verificado": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_verificado_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_verificado"), $value, $option);
+
+      case "{$p}min_verificado": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_verificado_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_verificado"), $value, $option);
+
+      case "{$p}count_verificado": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_verificado_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_verificado"), $value, $option);
+
+
+      case "{$p}avg_insertado": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}avg_insertado_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}avg_insertado"), $value, $option);
+
+      case "{$p}max_insertado": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_insertado_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_insertado"), $value, $option);
+
+      case "{$p}min_insertado": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_insertado_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_insertado"), $value, $option);
+
+      case "{$p}count_insertado": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_insertado_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_insertado"), $value, $option);
+
+
+      case "{$p}avg_eliminado": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}avg_eliminado_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}avg_eliminado"), $value, $option);
+
+      case "{$p}max_eliminado": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_eliminado_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_eliminado"), $value, $option);
+
+      case "{$p}min_eliminado": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_eliminado_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_eliminado"), $value, $option);
+
+      case "{$p}count_eliminado": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_eliminado_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_eliminado"), $value, $option);
+
+
+      case "{$p}max_persona": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_persona_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_persona"), $value, $option);
+
+      case "{$p}min_persona": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_persona_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_persona"), $value, $option);
+
+      case "{$p}count_persona": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_persona_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_persona"), $value, $option);
+
 
       default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
@@ -143,54 +195,18 @@ class _EmailSql extends EntitySql{
     if($c = EntitySql::getInstanceRequire('domicilio','per_dom')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
-  public function initializeInsert(array $data){
-    $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('email');
-    if(!isset($data['email']) || is_null($data['email']) || $data['email'] == "") throw new Exception('dato obligatorio sin valor: email');
-    if(!isset($data['verificado']) || ($data['verificado'] == '')) $data['verificado'] = "false";
-    if(!isset($data['insertado']))  $data['insertado'] = date("Y-m-d H:i:s");
-    if(!isset($data['eliminado']))  $data['eliminado'] = "null";
-    if(empty($data['persona'])) throw new Exception('dato obligatorio sin valor: persona');
-
-    return $data;
-  }
-
-
-  public function initializeUpdate(array $data){
-    if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
-    if(array_key_exists('email', $data)) { if(is_null($data['email']) || $data['email'] == "") throw new Exception('dato obligatorio sin valor: email'); }
-    if(array_key_exists('verificado', $data)) { if(!isset($data['verificado']) || ($data['verificado'] == '')) $data['verificado'] = "false"; }
-    if(array_key_exists('insertado', $data)) { if(empty($data['insertado']))  $data['insertado'] = date("Y-m-d H:i:s"); }
-    if(array_key_exists('eliminado', $data)) { if(empty($data['eliminado']))  $data['eliminado'] = "null"; }
-    if(array_key_exists('persona', $data)) { if(!isset($data['persona']) || ($data['persona'] == '')) throw new Exception('dato obligatorio sin valor: persona'); }
-
-    return $data;
-  }
-
 
   public function format(array $row){
     $row_ = array();
-   if(isset($row['id']) )  $row_['id'] = $this->format->escapeString($row['id']);
-    if(isset($row['email'])) $row_['email'] = $this->format->escapeString($row['email']);
-    if(isset($row['verificado'])) $row_['verificado'] = $this->format->boolean($row['verificado']);
-    if(isset($row['insertado'])) $row_['insertado'] = $this->format->timestamp($row['insertado']);
-    if(isset($row['eliminado'])) $row_['eliminado'] = $this->format->timestamp($row['eliminado']);
-    if(isset($row['persona'])) $row_['persona'] = $this->format->escapeString($row['persona']);
+    if(array_key_exists('id', $row))  $row_['id'] = $this->format->string($row['id']);
+    if(array_key_exists('email', $row)) $row_['email'] = $this->format->string($row['email']);
+    if(array_key_exists('verificado', $row)) $row_['verificado'] = $this->format->boolean($row['verificado']);
+    if(array_key_exists('insertado', $row)) $row_['insertado'] = $this->format->timestamp($row['insertado']);
+    if(array_key_exists('eliminado', $row)) $row_['eliminado'] = $this->format->timestamp($row['eliminado']);
+    if(array_key_exists('persona', $row)) $row_['persona'] = $this->format->string($row['persona']);
 
     return $row_;
   }
-  public function _json(array $row = NULL){
-    if(empty($row)) return null;
-    $prefix = $this->prf();
-    $row_ = [];
-    $row_["id"] = (is_null($row[$prefix . "id"])) ? null : (string)$row[$prefix . "id"]; //la pk se trata como string debido a un comportamiento erratico en angular 2 que al tratarlo como integer resta 1 en el valor
-    $row_["email"] = (is_null($row[$prefix . "email"])) ? null : (string)$row[$prefix . "email"];
-    $row_["verificado"] = (is_null($row[$prefix . "verificado"])) ? null : settypebool($row[$prefix . "verificado"]);
-    $row_["insertado"] = (is_null($row[$prefix . "insertado"])) ? null : (string)$row[$prefix . "insertado"];
-    $row_["eliminado"] = (is_null($row[$prefix . "eliminado"])) ? null : (string)$row[$prefix . "eliminado"];
-    $row_["persona"] = (is_null($row[$prefix . "persona"])) ? null : (string)$row[$prefix . "persona"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
-    return $row_;
-  }
-
 
 
 }

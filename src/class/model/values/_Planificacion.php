@@ -10,26 +10,28 @@ class _Planificacion extends EntityValues {
   protected $plan = UNDEFINED;
 
   public function _setDefault(){
-    $this->setId(DEFAULT_VALUE);
-    $this->setAnio(DEFAULT_VALUE);
-    $this->setSemestre(DEFAULT_VALUE);
-    $this->setPlan(DEFAULT_VALUE);
+    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->anio == UNDEFINED) $this->setAnio(null);
+    if($this->semestre == UNDEFINED) $this->setSemestre(null);
+    if($this->plan == UNDEFINED) $this->setPlan(null);
+    return $this;
   }
 
-  public function _fromArray(array $row = NULL, $p = ""){
+  public function _fromArray(array $row = NULL, string $p = ""){
     if(empty($row)) return;
     if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
     if(isset($row[$p."anio"])) $this->setAnio($row[$p."anio"]);
     if(isset($row[$p."semestre"])) $this->setSemestre($row[$p."semestre"]);
     if(isset($row[$p."plan"])) $this->setPlan($row[$p."plan"]);
+    return $this;
   }
 
-  public function _toArray(){
+  public function _toArray(string $p = ""){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->anio !== UNDEFINED) $row["anio"] = $this->anio();
-    if($this->semestre !== UNDEFINED) $row["semestre"] = $this->semestre();
-    if($this->plan !== UNDEFINED) $row["plan"] = $this->plan();
+    if($this->id !== UNDEFINED) $row[$p."id"] = $this->id();
+    if($this->anio !== UNDEFINED) $row[$p."anio"] = $this->anio();
+    if($this->semestre !== UNDEFINED) $row[$p."semestre"] = $this->semestre();
+    if($this->plan !== UNDEFINED) $row[$p."plan"] = $this->plan();
     return $row;
   }
 
@@ -45,55 +47,56 @@ class _Planificacion extends EntityValues {
   public function anio($format = null) { return Format::convertCase($this->anio, $format); }
   public function semestre($format = null) { return Format::convertCase($this->semestre, $format); }
   public function plan($format = null) { return Format::convertCase($this->plan, $format); }
-  public function setId($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkId($p); 
-    if($check) $this->id = $p;
-    return $check;
-  }
 
-  public function setAnio($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkAnio($p); 
-    if($check) $this->anio = $p;
-    return $check;
-  }
+  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
+  public function setAnio($p) { $this->anio = (is_null($p)) ? null : (string)$p; }
+  public function setSemestre($p) { $this->semestre = (is_null($p)) ? null : (string)$p; }
+  public function setPlan($p) { $this->plan = (is_null($p)) ? null : (string)$p; }
 
-  public function setSemestre($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkSemestre($p); 
-    if($check) $this->semestre = $p;
-    return $check;
-  }
-
-  public function setPlan($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkPlan($p); 
-    if($check) $this->plan = $p;
-    return $check;
-  }
+  public function resetAnio() { if(!Validation::is_empty($this->anio)) $this->anio = preg_replace('/\s\s+/', ' ', trim($this->anio)); }
+  public function resetSemestre() { if(!Validation::is_empty($this->semestre)) $this->semestre = preg_replace('/\s\s+/', ' ', trim($this->semestre)); }
 
   public function checkId($value) { 
+      if(Validation::is_undefined($value)) return null;
       return true; 
   }
 
   public function checkAnio($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("anio", $v);
+    $this->_logs->resetLogs("anio");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("anio", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkSemestre($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("semestre", $v);
+    $this->_logs->resetLogs("semestre");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("semestre", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkPlan($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("plan", $v);
+    $this->_logs->resetLogs("plan");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("plan", "error", $error); }
+    return $v->isSuccess();
+  }
+
+  public function _check(){
+    $this->checkId($this->id);
+    $this->checkAnio($this->anio);
+    $this->checkSemestre($this->semestre);
+    $this->checkPlan($this->plan);
+    return !$this->_getLogs()->isError();
+  }
+
+  public function _reset(){
+    $this->resetAnio();
+    $this->resetSemestre();
+    return $this;
   }
 
 

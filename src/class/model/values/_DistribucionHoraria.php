@@ -11,29 +11,31 @@ class _DistribucionHoraria extends EntityValues {
   protected $planificacion = UNDEFINED;
 
   public function _setDefault(){
-    $this->setId(DEFAULT_VALUE);
-    $this->setHorasCatedra(DEFAULT_VALUE);
-    $this->setDia(DEFAULT_VALUE);
-    $this->setAsignatura(DEFAULT_VALUE);
-    $this->setPlanificacion(DEFAULT_VALUE);
+    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->horasCatedra == UNDEFINED) $this->setHorasCatedra(null);
+    if($this->dia == UNDEFINED) $this->setDia(null);
+    if($this->asignatura == UNDEFINED) $this->setAsignatura(null);
+    if($this->planificacion == UNDEFINED) $this->setPlanificacion(null);
+    return $this;
   }
 
-  public function _fromArray(array $row = NULL, $p = ""){
+  public function _fromArray(array $row = NULL, string $p = ""){
     if(empty($row)) return;
     if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
     if(isset($row[$p."horas_catedra"])) $this->setHorasCatedra($row[$p."horas_catedra"]);
     if(isset($row[$p."dia"])) $this->setDia($row[$p."dia"]);
     if(isset($row[$p."asignatura"])) $this->setAsignatura($row[$p."asignatura"]);
     if(isset($row[$p."planificacion"])) $this->setPlanificacion($row[$p."planificacion"]);
+    return $this;
   }
 
-  public function _toArray(){
+  public function _toArray(string $p = ""){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->horasCatedra !== UNDEFINED) $row["horas_catedra"] = $this->horasCatedra();
-    if($this->dia !== UNDEFINED) $row["dia"] = $this->dia();
-    if($this->asignatura !== UNDEFINED) $row["asignatura"] = $this->asignatura();
-    if($this->planificacion !== UNDEFINED) $row["planificacion"] = $this->planificacion();
+    if($this->id !== UNDEFINED) $row[$p."id"] = $this->id();
+    if($this->horasCatedra !== UNDEFINED) $row[$p."horas_catedra"] = $this->horasCatedra();
+    if($this->dia !== UNDEFINED) $row[$p."dia"] = $this->dia();
+    if($this->asignatura !== UNDEFINED) $row[$p."asignatura"] = $this->asignatura();
+    if($this->planificacion !== UNDEFINED) $row[$p."planificacion"] = $this->planificacion();
     return $row;
   }
 
@@ -51,68 +53,62 @@ class _DistribucionHoraria extends EntityValues {
   public function dia() { return $this->dia; }
   public function asignatura($format = null) { return Format::convertCase($this->asignatura, $format); }
   public function planificacion($format = null) { return Format::convertCase($this->planificacion, $format); }
-  public function setId($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkId($p); 
-    if($check) $this->id = $p;
-    return $check;
-  }
 
-  public function setHorasCatedra($p) {
-    if ($p == DEFAULT_VALUE) $p = null;
-    $p = (is_null($p)) ? null : intval(trim($p));
-    $check = $this->checkHorasCatedra($p); 
-    if($check) $this->horasCatedra = $p;
-    return $check;
-  }
+  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
+  public function setHorasCatedra($p) { $this->horasCatedra = (is_null($p)) ? null : intval($p); }
+  public function setDia($p) { $this->dia = (is_null($p)) ? null : intval($p); }
+  public function setAsignatura($p) { $this->asignatura = (is_null($p)) ? null : (string)$p; }
+  public function setPlanificacion($p) { $this->planificacion = (is_null($p)) ? null : (string)$p; }
 
-  public function setDia($p) {
-    if ($p == DEFAULT_VALUE) $p = null;
-    $p = (is_null($p)) ? null : intval(trim($p));
-    $check = $this->checkDia($p); 
-    if($check) $this->dia = $p;
-    return $check;
-  }
-
-  public function setAsignatura($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkAsignatura($p); 
-    if($check) $this->asignatura = $p;
-    return $check;
-  }
-
-  public function setPlanificacion($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkPlanificacion($p); 
-    if($check) $this->planificacion = $p;
-    return $check;
-  }
 
   public function checkId($value) { 
+      if(Validation::is_undefined($value)) return null;
       return true; 
   }
 
   public function checkHorasCatedra($value) { 
-    $v = Validation::getInstanceValue($value)->integer()->required();
-    return $this->_setLogsValidation("horas_catedra", $v);
+    $this->_logs->resetLogs("horas_catedra");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("horas_catedra", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkDia($value) { 
-    $v = Validation::getInstanceValue($value)->integer()->required();
-    return $this->_setLogsValidation("dia", $v);
+    $this->_logs->resetLogs("dia");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("dia", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkAsignatura($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("asignatura", $v);
+    $this->_logs->resetLogs("asignatura");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("asignatura", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkPlanificacion($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("planificacion", $v);
+    $this->_logs->resetLogs("planificacion");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("planificacion", "error", $error); }
+    return $v->isSuccess();
+  }
+
+  public function _check(){
+    $this->checkId($this->id);
+    $this->checkHorasCatedra($this->horasCatedra);
+    $this->checkDia($this->dia);
+    $this->checkAsignatura($this->asignatura);
+    $this->checkPlanificacion($this->planificacion);
+    return !$this->_getLogs()->isError();
+  }
+
+  public function _reset(){
+    return $this;
   }
 
 

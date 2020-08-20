@@ -13,16 +13,17 @@ class _Telefono extends EntityValues {
   protected $persona = UNDEFINED;
 
   public function _setDefault(){
-    $this->setId(DEFAULT_VALUE);
-    $this->setTipo(DEFAULT_VALUE);
-    $this->setPrefijo(DEFAULT_VALUE);
-    $this->setNumero(DEFAULT_VALUE);
-    $this->setInsertado(DEFAULT_VALUE);
-    $this->setEliminado(DEFAULT_VALUE);
-    $this->setPersona(DEFAULT_VALUE);
+    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->tipo == UNDEFINED) $this->setTipo(null);
+    if($this->prefijo == UNDEFINED) $this->setPrefijo(null);
+    if($this->numero == UNDEFINED) $this->setNumero(null);
+    if($this->insertado == UNDEFINED) $this->setInsertado(date('c'));
+    if($this->eliminado == UNDEFINED) $this->setEliminado(null);
+    if($this->persona == UNDEFINED) $this->setPersona(null);
+    return $this;
   }
 
-  public function _fromArray(array $row = NULL, $p = ""){
+  public function _fromArray(array $row = NULL, string $p = ""){
     if(empty($row)) return;
     if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
     if(isset($row[$p."tipo"])) $this->setTipo($row[$p."tipo"]);
@@ -31,17 +32,18 @@ class _Telefono extends EntityValues {
     if(isset($row[$p."insertado"])) $this->setInsertado($row[$p."insertado"]);
     if(isset($row[$p."eliminado"])) $this->setEliminado($row[$p."eliminado"]);
     if(isset($row[$p."persona"])) $this->setPersona($row[$p."persona"]);
+    return $this;
   }
 
-  public function _toArray(){
+  public function _toArray(string $p = ""){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->tipo !== UNDEFINED) $row["tipo"] = $this->tipo();
-    if($this->prefijo !== UNDEFINED) $row["prefijo"] = $this->prefijo();
-    if($this->numero !== UNDEFINED) $row["numero"] = $this->numero();
-    if($this->insertado !== UNDEFINED) $row["insertado"] = $this->insertado("Y-m-d H:i:s");
-    if($this->eliminado !== UNDEFINED) $row["eliminado"] = $this->eliminado("Y-m-d H:i:s");
-    if($this->persona !== UNDEFINED) $row["persona"] = $this->persona();
+    if($this->id !== UNDEFINED) $row[$p."id"] = $this->id();
+    if($this->tipo !== UNDEFINED) $row[$p."tipo"] = $this->tipo();
+    if($this->prefijo !== UNDEFINED) $row[$p."prefijo"] = $this->prefijo();
+    if($this->numero !== UNDEFINED) $row[$p."numero"] = $this->numero();
+    if($this->insertado !== UNDEFINED) $row[$p."insertado"] = $this->insertado("c");
+    if($this->eliminado !== UNDEFINED) $row[$p."eliminado"] = $this->eliminado("c");
+    if($this->persona !== UNDEFINED) $row[$p."persona"] = $this->persona();
     return $row;
   }
 
@@ -63,106 +65,97 @@ class _Telefono extends EntityValues {
   public function insertado($format = null) { return Format::date($this->insertado, $format); }
   public function eliminado($format = null) { return Format::date($this->eliminado, $format); }
   public function persona($format = null) { return Format::convertCase($this->persona, $format); }
-  public function setId($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkId($p); 
-    if($check) $this->id = $p;
-    return $check;
+
+  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
+  public function setTipo($p) { $this->tipo = (is_null($p)) ? null : (string)$p; }
+  public function setPrefijo($p) { $this->prefijo = (is_null($p)) ? null : (string)$p; }
+  public function setNumero($p) { $this->numero = (is_null($p)) ? null : (string)$p; }
+  public function _setInsertado(DateTime $p = null) { $this->insertado = $p; }
+
+  public function setInsertado($p) {
+    if(!is_null($p)) {
+      $p = new SpanishDateTime($p);    
+      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    }
+    $this->insertado = $p;  
   }
 
-  public function setTipo($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkTipo($p); 
-    if($check) $this->tipo = $p;
-    return $check;
+  public function _setEliminado(DateTime $p = null) { $this->eliminado = $p; }
+
+  public function setEliminado($p) {
+    if(!is_null($p)) {
+      $p = new SpanishDateTime($p);    
+      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    }
+    $this->eliminado = $p;  
   }
 
-  public function setPrefijo($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkPrefijo($p); 
-    if($check) $this->prefijo = $p;
-    return $check;
-  }
+  public function setPersona($p) { $this->persona = (is_null($p)) ? null : (string)$p; }
 
-  public function setNumero($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkNumero($p); 
-    if($check) $this->numero = $p;
-    return $check;
-  }
-
-  public function _setInsertado(DateTime $p = null) {
-      $check = $this->checkInsertado($p); 
-      if($check) $this->insertado = $p;  
-      return $check;
-  }
-
-  public function setInsertado($p, $format = "Y-m-d H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
-    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
-    $check = $this->checkInsertado($p); 
-    if($check) $this->insertado = $p;  
-    return $check;
-  }
-
-  public function _setEliminado(DateTime $p = null) {
-      $check = $this->checkEliminado($p); 
-      if($check) $this->eliminado = $p;  
-      return $check;
-  }
-
-  public function setEliminado($p, $format = "Y-m-d H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
-    $check = $this->checkEliminado($p); 
-    if($check) $this->eliminado = $p;  
-    return $check;
-  }
-
-  public function setPersona($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkPersona($p); 
-    if($check) $this->persona = $p;
-    return $check;
-  }
+  public function resetTipo() { if(!Validation::is_empty($this->tipo)) $this->tipo = preg_replace('/\s\s+/', ' ', trim($this->tipo)); }
+  public function resetPrefijo() { if(!Validation::is_empty($this->prefijo)) $this->prefijo = preg_replace('/\s\s+/', ' ', trim($this->prefijo)); }
+  public function resetNumero() { if(!Validation::is_empty($this->numero)) $this->numero = preg_replace('/\s\s+/', ' ', trim($this->numero)); }
 
   public function checkId($value) { 
+      if(Validation::is_undefined($value)) return null;
       return true; 
   }
 
   public function checkTipo($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("tipo", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkPrefijo($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("prefijo", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkNumero($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("numero", $v);
+    $this->_logs->resetLogs("numero");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("numero", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkInsertado($value) { 
-    $v = Validation::getInstanceValue($value)->date()->required();
-    return $this->_setLogsValidation("insertado", $v);
+    $this->_logs->resetLogs("insertado");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("insertado", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkEliminado($value) { 
-    $v = Validation::getInstanceValue($value)->date();
-    return $this->_setLogsValidation("eliminado", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkPersona($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("persona", $v);
+    $this->_logs->resetLogs("persona");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("persona", "error", $error); }
+    return $v->isSuccess();
+  }
+
+  public function _check(){
+    $this->checkId($this->id);
+    $this->checkTipo($this->tipo);
+    $this->checkPrefijo($this->prefijo);
+    $this->checkNumero($this->numero);
+    $this->checkInsertado($this->insertado);
+    $this->checkEliminado($this->eliminado);
+    $this->checkPersona($this->persona);
+    return !$this->_getLogs()->isError();
+  }
+
+  public function _reset(){
+    $this->resetTipo();
+    $this->resetPrefijo();
+    $this->resetNumero();
+    return $this;
   }
 
 

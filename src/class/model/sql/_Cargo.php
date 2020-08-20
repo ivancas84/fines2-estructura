@@ -26,9 +26,7 @@ class _CargoSql extends EntitySql{
       case $p.'max_descripcion': return "MAX({$t}.descripcion)";
       case $p.'count_descripcion': return "COUNT({$t}.descripcion)";
 
-      case $p.'_label': return "CONCAT_WS(' ',
-{$t}.descripcion
-)";
+      case $p.'_label': return "CONCAT_WS(' ', {$t}.descripcion)";
       default: return null;
     }
   }
@@ -40,8 +38,7 @@ class _CargoSql extends EntitySql{
 ' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'descripcion') . ' AS ' . $p.'descripcion';
   }
 
-  public function _fieldsDb(){
-    //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
+  public function _fieldsExclusive(){
     $p = $this->prf();
     return '
 ' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'descripcion') . '';
@@ -50,55 +47,46 @@ class _CargoSql extends EntitySql{
   public function _conditionFieldStruct($field, $option, $value){
     $p = $this->prf();
 
-    $f = $this->_mappingField($field);
     switch ($field){
-      case "{$p}id": return $this->format->conditionText($f, $value, $option);
-      case "{$p}descripcion": return $this->format->conditionText($f, $value, $option);
+      case "{$p}id": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}id"), $value, $option);
 
-      case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}descripcion": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}descripcion_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}descripcion"), $value, $option);
 
-      case "{$p}max_descripcion": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_descripcion": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_descripcion": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_id"), $value, $option);
+
+      case "{$p}min_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_id"), $value, $option);
+
+      case "{$p}count_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_id"), $value, $option);
+
+
+      case "{$p}max_descripcion": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_descripcion_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_descripcion"), $value, $option);
+
+      case "{$p}min_descripcion": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_descripcion_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_descripcion"), $value, $option);
+
+      case "{$p}count_descripcion": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_descripcion_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_descripcion"), $value, $option);
+
 
       default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
   }
 
-  public function initializeInsert(array $data){
-    $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('cargo');
-    if(!isset($data['descripcion']) || is_null($data['descripcion']) || $data['descripcion'] == "") throw new Exception('dato obligatorio sin valor: descripcion');
-
-    return $data;
-  }
-
-
-  public function initializeUpdate(array $data){
-    if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
-    if(array_key_exists('descripcion', $data)) { if(is_null($data['descripcion']) || $data['descripcion'] == "") throw new Exception('dato obligatorio sin valor: descripcion'); }
-
-    return $data;
-  }
-
 
   public function format(array $row){
     $row_ = array();
-   if(isset($row['id']) )  $row_['id'] = $this->format->escapeString($row['id']);
-    if(isset($row['descripcion'])) $row_['descripcion'] = $this->format->escapeString($row['descripcion']);
+    if(array_key_exists('id', $row))  $row_['id'] = $this->format->string($row['id']);
+    if(array_key_exists('descripcion', $row)) $row_['descripcion'] = $this->format->string($row['descripcion']);
 
     return $row_;
   }
-  public function _json(array $row = NULL){
-    if(empty($row)) return null;
-    $prefix = $this->prf();
-    $row_ = [];
-    $row_["id"] = (is_null($row[$prefix . "id"])) ? null : (string)$row[$prefix . "id"]; //la pk se trata como string debido a un comportamiento erratico en angular 2 que al tratarlo como integer resta 1 en el valor
-    $row_["descripcion"] = (is_null($row[$prefix . "descripcion"])) ? null : (string)$row[$prefix . "descripcion"];
-    return $row_;
-  }
-
 
 
 }

@@ -7,14 +7,7 @@ require_once("class/model/Values.php");
 
 class _CentroEducativoSqlo extends EntitySqlo {
 
-  public function __construct(){
-    /**
-     * Se definen todos los recursos de forma independiente, sin parametros en el constructor, para facilitar el polimorfismo de las subclases
-     */
-    $this->db = Dba::dbInstance();
-    $this->entity = Entity::getInstanceRequire('centro_educativo');
-    $this->sql = EntitySql::getInstanceRequire('centro_educativo');
-  }
+  public $entityName = "centro_educativo";
 
   protected function _insert(array $row){ //@override
       $sql = "
@@ -54,19 +47,15 @@ UPDATE " . $this->entity->sn_() . " SET
 
   public function json(array $row = null){
     if(empty($row)) return null;
-    $row_ = $this->sql->_json($row);
-    if(!is_null($row['dom_id'])){
-      $json = EntitySql::getInstanceRequire('domicilio', 'dom')->_json($row);
-      $row_["domicilio_"] = $json;
-    }
+    $row_ = EntityValues::getInstanceRequire($this->entity->getName())->_fromArray($row)->_toArray();
+    if(!is_null($row['dom_id'])) $row_["domicilio_"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'dom_')->_toArray();
     return $row_;
   }
 
   public function values(array $row){
     $row_ = [];
-
-    $row_["centro_educativo"] = EntityValues::getInstanceRequire("centro_educativo", $row);
-    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $row, 'dom_');
+    $row_["centro_educativo"] = EntityValues::getInstanceRequire("centro_educativo")->_fromArray($row);
+    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'dom_');
     return $row_;
   }
 

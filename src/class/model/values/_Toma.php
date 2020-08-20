@@ -18,21 +18,22 @@ class _Toma extends EntityValues {
   protected $planillaDocente = UNDEFINED;
 
   public function _setDefault(){
-    $this->setId(DEFAULT_VALUE);
-    $this->setFechaToma(DEFAULT_VALUE);
-    $this->setEstado(DEFAULT_VALUE);
-    $this->setObservaciones(DEFAULT_VALUE);
-    $this->setComentario(DEFAULT_VALUE);
-    $this->setTipoMovimiento(DEFAULT_VALUE);
-    $this->setEstadoContralor(DEFAULT_VALUE);
-    $this->setAlta(DEFAULT_VALUE);
-    $this->setCurso(DEFAULT_VALUE);
-    $this->setDocente(DEFAULT_VALUE);
-    $this->setReemplazo(DEFAULT_VALUE);
-    $this->setPlanillaDocente(DEFAULT_VALUE);
+    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->fechaToma == UNDEFINED) $this->setFechaToma(null);
+    if($this->estado == UNDEFINED) $this->setEstado(null);
+    if($this->observaciones == UNDEFINED) $this->setObservaciones(null);
+    if($this->comentario == UNDEFINED) $this->setComentario(null);
+    if($this->tipoMovimiento == UNDEFINED) $this->setTipoMovimiento(null);
+    if($this->estadoContralor == UNDEFINED) $this->setEstadoContralor(null);
+    if($this->alta == UNDEFINED) $this->setAlta(date('c'));
+    if($this->curso == UNDEFINED) $this->setCurso(null);
+    if($this->docente == UNDEFINED) $this->setDocente(null);
+    if($this->reemplazo == UNDEFINED) $this->setReemplazo(null);
+    if($this->planillaDocente == UNDEFINED) $this->setPlanillaDocente(null);
+    return $this;
   }
 
-  public function _fromArray(array $row = NULL, $p = ""){
+  public function _fromArray(array $row = NULL, string $p = ""){
     if(empty($row)) return;
     if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
     if(isset($row[$p."fecha_toma"])) $this->setFechaToma($row[$p."fecha_toma"]);
@@ -46,22 +47,23 @@ class _Toma extends EntityValues {
     if(isset($row[$p."docente"])) $this->setDocente($row[$p."docente"]);
     if(isset($row[$p."reemplazo"])) $this->setReemplazo($row[$p."reemplazo"]);
     if(isset($row[$p."planilla_docente"])) $this->setPlanillaDocente($row[$p."planilla_docente"]);
+    return $this;
   }
 
-  public function _toArray(){
+  public function _toArray(string $p = ""){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->fechaToma !== UNDEFINED) $row["fecha_toma"] = $this->fechaToma("Y-m-d");
-    if($this->estado !== UNDEFINED) $row["estado"] = $this->estado();
-    if($this->observaciones !== UNDEFINED) $row["observaciones"] = $this->observaciones();
-    if($this->comentario !== UNDEFINED) $row["comentario"] = $this->comentario();
-    if($this->tipoMovimiento !== UNDEFINED) $row["tipo_movimiento"] = $this->tipoMovimiento();
-    if($this->estadoContralor !== UNDEFINED) $row["estado_contralor"] = $this->estadoContralor();
-    if($this->alta !== UNDEFINED) $row["alta"] = $this->alta("Y-m-d H:i:s");
-    if($this->curso !== UNDEFINED) $row["curso"] = $this->curso();
-    if($this->docente !== UNDEFINED) $row["docente"] = $this->docente();
-    if($this->reemplazo !== UNDEFINED) $row["reemplazo"] = $this->reemplazo();
-    if($this->planillaDocente !== UNDEFINED) $row["planilla_docente"] = $this->planillaDocente();
+    if($this->id !== UNDEFINED) $row[$p."id"] = $this->id();
+    if($this->fechaToma !== UNDEFINED) $row[$p."fecha_toma"] = $this->fechaToma("c");
+    if($this->estado !== UNDEFINED) $row[$p."estado"] = $this->estado();
+    if($this->observaciones !== UNDEFINED) $row[$p."observaciones"] = $this->observaciones();
+    if($this->comentario !== UNDEFINED) $row[$p."comentario"] = $this->comentario();
+    if($this->tipoMovimiento !== UNDEFINED) $row[$p."tipo_movimiento"] = $this->tipoMovimiento();
+    if($this->estadoContralor !== UNDEFINED) $row[$p."estado_contralor"] = $this->estadoContralor();
+    if($this->alta !== UNDEFINED) $row[$p."alta"] = $this->alta("c");
+    if($this->curso !== UNDEFINED) $row[$p."curso"] = $this->curso();
+    if($this->docente !== UNDEFINED) $row[$p."docente"] = $this->docente();
+    if($this->reemplazo !== UNDEFINED) $row[$p."reemplazo"] = $this->reemplazo();
+    if($this->planillaDocente !== UNDEFINED) $row[$p."planilla_docente"] = $this->planillaDocente();
     return $row;
   }
 
@@ -93,171 +95,137 @@ class _Toma extends EntityValues {
   public function docente($format = null) { return Format::convertCase($this->docente, $format); }
   public function reemplazo($format = null) { return Format::convertCase($this->reemplazo, $format); }
   public function planillaDocente($format = null) { return Format::convertCase($this->planillaDocente, $format); }
-  public function setId($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkId($p); 
-    if($check) $this->id = $p;
-    return $check;
+
+  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
+  public function _setFechaToma(DateTime $p = null) { $this->fechaToma = $p; }
+
+  public function setFechaToma($p) {
+    if(!is_null($p)) {
+      $p = new SpanishDateTime($p);
+      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+      $p->setTime(0,0,0);
+    }
+    $this->fechaToma = $p;
   }
 
-  public function _setFechaToma(DateTime $p = null) {
-      $check = $this->checkFechaToma($p); 
-      if($check) $this->fechaToma = $p;  
-      return $check;      
+  public function setEstado($p) { $this->estado = (is_null($p)) ? null : (string)$p; }
+  public function setObservaciones($p) { $this->observaciones = (is_null($p)) ? null : (string)$p; }
+  public function setComentario($p) { $this->comentario = (is_null($p)) ? null : (string)$p; }
+  public function setTipoMovimiento($p) { $this->tipoMovimiento = (is_null($p)) ? null : (string)$p; }
+  public function setEstadoContralor($p) { $this->estadoContralor = (is_null($p)) ? null : (string)$p; }
+  public function _setAlta(DateTime $p = null) { $this->alta = $p; }
+
+  public function setAlta($p) {
+    if(!is_null($p)) {
+      $p = new SpanishDateTime($p);    
+      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    }
+    $this->alta = $p;  
   }
 
-  public function setFechaToma($p, $format = UNDEFINED) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(!is_null($p)) $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);    
-    $check = $this->checkFechaToma($p); 
-    if($check) $this->fechaToma = $p;  
-    return $check;
-  }
+  public function setCurso($p) { $this->curso = (is_null($p)) ? null : (string)$p; }
+  public function setDocente($p) { $this->docente = (is_null($p)) ? null : (string)$p; }
+  public function setReemplazo($p) { $this->reemplazo = (is_null($p)) ? null : (string)$p; }
+  public function setPlanillaDocente($p) { $this->planillaDocente = (is_null($p)) ? null : (string)$p; }
 
-  public function setEstado($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkEstado($p); 
-    if($check) $this->estado = $p;
-    return $check;
-  }
-
-  public function setObservaciones($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkObservaciones($p); 
-    if($check) $this->observaciones = $p;
-    return $check;
-  }
-
-  public function setComentario($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkComentario($p); 
-    if($check) $this->comentario = $p;
-    return $check;
-  }
-
-  public function setTipoMovimiento($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkTipoMovimiento($p); 
-    if($check) $this->tipoMovimiento = $p;
-    return $check;
-  }
-
-  public function setEstadoContralor($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkEstadoContralor($p); 
-    if($check) $this->estadoContralor = $p;
-    return $check;
-  }
-
-  public function _setAlta(DateTime $p = null) {
-      $check = $this->checkAlta($p); 
-      if($check) $this->alta = $p;  
-      return $check;
-  }
-
-  public function setAlta($p, $format = "Y-m-d H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
-    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
-    $check = $this->checkAlta($p); 
-    if($check) $this->alta = $p;  
-    return $check;
-  }
-
-  public function setCurso($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkCurso($p); 
-    if($check) $this->curso = $p;
-    return $check;
-  }
-
-  public function setDocente($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkDocente($p); 
-    if($check) $this->docente = $p;
-    return $check;
-  }
-
-  public function setReemplazo($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkReemplazo($p); 
-    if($check) $this->reemplazo = $p;
-    return $check;
-  }
-
-  public function setPlanillaDocente($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkPlanillaDocente($p); 
-    if($check) $this->planillaDocente = $p;
-    return $check;
-  }
+  public function resetEstado() { if(!Validation::is_empty($this->estado)) $this->estado = preg_replace('/\s\s+/', ' ', trim($this->estado)); }
+  public function resetObservaciones() { if(!Validation::is_empty($this->observaciones)) $this->observaciones = preg_replace('/\s\s+/', ' ', trim($this->observaciones)); }
+  public function resetComentario() { if(!Validation::is_empty($this->comentario)) $this->comentario = preg_replace('/\s\s+/', ' ', trim($this->comentario)); }
+  public function resetTipoMovimiento() { if(!Validation::is_empty($this->tipoMovimiento)) $this->tipoMovimiento = preg_replace('/\s\s+/', ' ', trim($this->tipoMovimiento)); }
+  public function resetEstadoContralor() { if(!Validation::is_empty($this->estadoContralor)) $this->estadoContralor = preg_replace('/\s\s+/', ' ', trim($this->estadoContralor)); }
 
   public function checkId($value) { 
+      if(Validation::is_undefined($value)) return null;
       return true; 
   }
 
   public function checkFechaToma($value) { 
-    $v = Validation::getInstanceValue($value)->date();
-    return $this->_setLogsValidation("fecha_toma", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkEstado($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("estado", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkObservaciones($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("observaciones", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkComentario($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("comentario", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkTipoMovimiento($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("tipo_movimiento", $v);
+    $this->_logs->resetLogs("tipo_movimiento");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("tipo_movimiento", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkEstadoContralor($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("estado_contralor", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkAlta($value) { 
-    $v = Validation::getInstanceValue($value)->date()->required();
-    return $this->_setLogsValidation("alta", $v);
+    $this->_logs->resetLogs("alta");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("alta", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkCurso($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("curso", $v);
+    $this->_logs->resetLogs("curso");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("curso", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkDocente($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("docente", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkReemplazo($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("reemplazo", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkPlanillaDocente($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("planilla_docente", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
+  }
+
+  public function _check(){
+    $this->checkId($this->id);
+    $this->checkFechaToma($this->fechaToma);
+    $this->checkEstado($this->estado);
+    $this->checkObservaciones($this->observaciones);
+    $this->checkComentario($this->comentario);
+    $this->checkTipoMovimiento($this->tipoMovimiento);
+    $this->checkEstadoContralor($this->estadoContralor);
+    $this->checkAlta($this->alta);
+    $this->checkCurso($this->curso);
+    $this->checkDocente($this->docente);
+    $this->checkReemplazo($this->reemplazo);
+    $this->checkPlanillaDocente($this->planillaDocente);
+    return !$this->_getLogs()->isError();
+  }
+
+  public function _reset(){
+    $this->resetEstado();
+    $this->resetObservaciones();
+    $this->resetComentario();
+    $this->resetTipoMovimiento();
+    $this->resetEstadoContralor();
+    return $this;
   }
 
 

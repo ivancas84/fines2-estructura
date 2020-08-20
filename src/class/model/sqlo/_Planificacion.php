@@ -7,14 +7,7 @@ require_once("class/model/Values.php");
 
 class _PlanificacionSqlo extends EntitySqlo {
 
-  public function __construct(){
-    /**
-     * Se definen todos los recursos de forma independiente, sin parametros en el constructor, para facilitar el polimorfismo de las subclases
-     */
-    $this->db = Dba::dbInstance();
-    $this->entity = Entity::getInstanceRequire('planificacion');
-    $this->sql = EntitySql::getInstanceRequire('planificacion');
-  }
+  public $entityName = "planificacion";
 
   protected function _insert(array $row){ //@override
       $sql = "
@@ -54,19 +47,15 @@ UPDATE " . $this->entity->sn_() . " SET
 
   public function json(array $row = null){
     if(empty($row)) return null;
-    $row_ = $this->sql->_json($row);
-    if(!is_null($row['plb_id'])){
-      $json = EntitySql::getInstanceRequire('plan', 'plb')->_json($row);
-      $row_["plan_"] = $json;
-    }
+    $row_ = EntityValues::getInstanceRequire($this->entity->getName())->_fromArray($row)->_toArray();
+    if(!is_null($row['plb_id'])) $row_["plan_"] = EntityValues::getInstanceRequire('plan')->_fromArray($row, 'plb_')->_toArray();
     return $row_;
   }
 
   public function values(array $row){
     $row_ = [];
-
-    $row_["planificacion"] = EntityValues::getInstanceRequire("planificacion", $row);
-    $row_["plan"] = EntityValues::getInstanceRequire('plan', $row, 'plb_');
+    $row_["planificacion"] = EntityValues::getInstanceRequire("planificacion")->_fromArray($row);
+    $row_["plan"] = EntityValues::getInstanceRequire('plan')->_fromArray($row, 'plb_');
     return $row_;
   }
 

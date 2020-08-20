@@ -19,6 +19,7 @@ class _DesignacionSql extends EntitySql{
       case $p.'desde': return $t.".desde";
       case $p.'hasta': return $t.".hasta";
       case $p.'alta': return $t.".alta";
+      case $p.'alta_date': return "CAST({$t}.alta AS DATE)";
       case $p.'cargo': return $t.".cargo";
       case $p.'sede': return $t.".sede";
       case $p.'persona': return $t.".persona";
@@ -54,9 +55,7 @@ class _DesignacionSql extends EntitySql{
       case $p.'max_persona': return "MAX({$t}.persona)";
       case $p.'count_persona': return "COUNT({$t}.persona)";
 
-      case $p.'_label': return "CONCAT_WS(' ',
-{$t}.id
-)";
+      case $p.'_label': return "CONCAT_WS(' ', {$t}.id)";
       default: return null;
     }
   }
@@ -83,8 +82,7 @@ class _DesignacionSql extends EntitySql{
 ' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'desde') . ' AS ' . $p.'desde, ' . $this->_mappingField($p.'hasta') . ' AS ' . $p.'hasta, ' . $this->_mappingField($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingField($p.'cargo') . ' AS ' . $p.'cargo, ' . $this->_mappingField($p.'sede') . ' AS ' . $p.'sede, ' . $this->_mappingField($p.'persona') . ' AS ' . $p.'persona';
   }
 
-  public function _fieldsDb(){
-    //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
+  public function _fieldsExclusive(){
     $p = $this->prf();
     return '
 ' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'desde') . ', ' . $this->_mappingField($p.'hasta') . ', ' . $this->_mappingField($p.'alta') . ', ' . $this->_mappingField($p.'cargo') . ', ' . $this->_mappingField($p.'sede') . ', ' . $this->_mappingField($p.'persona') . '';
@@ -122,46 +120,108 @@ class _DesignacionSql extends EntitySql{
   public function _conditionFieldStruct($field, $option, $value){
     $p = $this->prf();
 
-    $f = $this->_mappingField($field);
     switch ($field){
-      case "{$p}id": return $this->format->conditionText($f, $value, $option);
-      case "{$p}desde": return $this->format->conditionDate($f, $value, $option);
-      case "{$p}hasta": return $this->format->conditionDate($f, $value, $option);
-      case "{$p}alta": return $this->format->conditionTimestamp($f, $value, $option);
-      case "{$p}cargo": return $this->format->conditionText($f, $value, $option);
-      case "{$p}sede": return $this->format->conditionText($f, $value, $option);
-      case "{$p}persona": return $this->format->conditionText($f, $value, $option);
+      case "{$p}id": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}id"), $value, $option);
 
-      case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}desde": return $this->format->conditionDate($this->_mappingField($field), $value, $option);
+      case "{$p}desde_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}desde"), $value, $option);
 
-      case "{$p}avg_desde": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}max_desde": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_desde": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_desde": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}hasta": return $this->format->conditionDate($this->_mappingField($field), $value, $option);
+      case "{$p}hasta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}hasta"), $value, $option);
 
-      case "{$p}avg_hasta": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}max_hasta": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_hasta": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_hasta": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}alta": return $this->format->conditionTimestamp($this->_mappingField($field), $value, $option);
+      case "{$p}alta_date": return $this->format->conditionDate($this->_mappingField($field), $value, $option);
+      case "{$p}alta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}alta"), $value, $option);
 
-      case "{$p}avg_alta": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}max_alta": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_alta": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_alta": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}cargo": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}cargo_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}cargo"), $value, $option);
 
-      case "{$p}max_cargo": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_cargo": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_cargo": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}sede": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}sede_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}sede"), $value, $option);
 
-      case "{$p}max_sede": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_sede": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_sede": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}persona": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}persona_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}persona"), $value, $option);
 
-      case "{$p}max_persona": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_persona": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_persona": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_id"), $value, $option);
+
+      case "{$p}min_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_id"), $value, $option);
+
+      case "{$p}count_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_id"), $value, $option);
+
+
+      case "{$p}avg_desde": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}avg_desde_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}avg_desde"), $value, $option);
+
+      case "{$p}max_desde": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_desde_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_desde"), $value, $option);
+
+      case "{$p}min_desde": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_desde_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_desde"), $value, $option);
+
+      case "{$p}count_desde": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_desde_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_desde"), $value, $option);
+
+
+      case "{$p}avg_hasta": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}avg_hasta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}avg_hasta"), $value, $option);
+
+      case "{$p}max_hasta": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_hasta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_hasta"), $value, $option);
+
+      case "{$p}min_hasta": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_hasta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_hasta"), $value, $option);
+
+      case "{$p}count_hasta": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_hasta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_hasta"), $value, $option);
+
+
+      case "{$p}avg_alta": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}avg_alta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}avg_alta"), $value, $option);
+
+      case "{$p}max_alta": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_alta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_alta"), $value, $option);
+
+      case "{$p}min_alta": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_alta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_alta"), $value, $option);
+
+      case "{$p}count_alta": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_alta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_alta"), $value, $option);
+
+
+      case "{$p}max_cargo": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_cargo_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_cargo"), $value, $option);
+
+      case "{$p}min_cargo": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_cargo_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_cargo"), $value, $option);
+
+      case "{$p}count_cargo": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_cargo_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_cargo"), $value, $option);
+
+
+      case "{$p}max_sede": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_sede_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_sede"), $value, $option);
+
+      case "{$p}min_sede": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_sede_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_sede"), $value, $option);
+
+      case "{$p}count_sede": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_sede_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_sede"), $value, $option);
+
+
+      case "{$p}max_persona": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_persona_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_persona"), $value, $option);
+
+      case "{$p}min_persona": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_persona_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_persona"), $value, $option);
+
+      case "{$p}count_persona": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_persona_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_persona"), $value, $option);
+
 
       default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
@@ -195,58 +255,19 @@ class _DesignacionSql extends EntitySql{
     if($c = EntitySql::getInstanceRequire('domicilio','per_dom')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
-  public function initializeInsert(array $data){
-    $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('designacion');
-    if(!isset($data['desde']))  $data['desde'] = "null";
-    if(!isset($data['hasta']))  $data['hasta'] = "null";
-    if(!isset($data['alta']))  $data['alta'] = date("Y-m-d H:i:s");
-    if(empty($data['cargo'])) throw new Exception('dato obligatorio sin valor: cargo');
-    if(empty($data['sede'])) throw new Exception('dato obligatorio sin valor: sede');
-    if(empty($data['persona'])) throw new Exception('dato obligatorio sin valor: persona');
-
-    return $data;
-  }
-
-
-  public function initializeUpdate(array $data){
-    if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
-    if(array_key_exists('desde', $data)) { if(empty($data['desde']))  $data['desde'] = "null"; }
-    if(array_key_exists('hasta', $data)) { if(empty($data['hasta']))  $data['hasta'] = "null"; }
-    if(array_key_exists('alta', $data)) { if(empty($data['alta']))  $data['alta'] = date("Y-m-d H:i:s"); }
-    if(array_key_exists('cargo', $data)) { if(!isset($data['cargo']) || ($data['cargo'] == '')) throw new Exception('dato obligatorio sin valor: cargo'); }
-    if(array_key_exists('sede', $data)) { if(!isset($data['sede']) || ($data['sede'] == '')) throw new Exception('dato obligatorio sin valor: sede'); }
-    if(array_key_exists('persona', $data)) { if(!isset($data['persona']) || ($data['persona'] == '')) throw new Exception('dato obligatorio sin valor: persona'); }
-
-    return $data;
-  }
-
 
   public function format(array $row){
     $row_ = array();
-   if(isset($row['id']) )  $row_['id'] = $this->format->escapeString($row['id']);
-    if(isset($row['desde'])) $row_['desde'] = $this->format->date($row['desde']);
-    if(isset($row['hasta'])) $row_['hasta'] = $this->format->date($row['hasta']);
-    if(isset($row['alta'])) $row_['alta'] = $this->format->timestamp($row['alta']);
-    if(isset($row['cargo'])) $row_['cargo'] = $this->format->escapeString($row['cargo']);
-    if(isset($row['sede'])) $row_['sede'] = $this->format->escapeString($row['sede']);
-    if(isset($row['persona'])) $row_['persona'] = $this->format->escapeString($row['persona']);
+    if(array_key_exists('id', $row))  $row_['id'] = $this->format->string($row['id']);
+    if(array_key_exists('desde', $row)) $row_['desde'] = $this->format->date($row['desde']);
+    if(array_key_exists('hasta', $row)) $row_['hasta'] = $this->format->date($row['hasta']);
+    if(array_key_exists('alta', $row)) $row_['alta'] = $this->format->timestamp($row['alta']);
+    if(array_key_exists('cargo', $row)) $row_['cargo'] = $this->format->string($row['cargo']);
+    if(array_key_exists('sede', $row)) $row_['sede'] = $this->format->string($row['sede']);
+    if(array_key_exists('persona', $row)) $row_['persona'] = $this->format->string($row['persona']);
 
     return $row_;
   }
-  public function _json(array $row = NULL){
-    if(empty($row)) return null;
-    $prefix = $this->prf();
-    $row_ = [];
-    $row_["id"] = (is_null($row[$prefix . "id"])) ? null : (string)$row[$prefix . "id"]; //la pk se trata como string debido a un comportamiento erratico en angular 2 que al tratarlo como integer resta 1 en el valor
-    $row_["desde"] = (is_null($row[$prefix . "desde"])) ? null : (string)$row[$prefix . "desde"];
-    $row_["hasta"] = (is_null($row[$prefix . "hasta"])) ? null : (string)$row[$prefix . "hasta"];
-    $row_["alta"] = (is_null($row[$prefix . "alta"])) ? null : (string)$row[$prefix . "alta"];
-    $row_["cargo"] = (is_null($row[$prefix . "cargo"])) ? null : (string)$row[$prefix . "cargo"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
-    $row_["sede"] = (is_null($row[$prefix . "sede"])) ? null : (string)$row[$prefix . "sede"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
-    $row_["persona"] = (is_null($row[$prefix . "persona"])) ? null : (string)$row[$prefix . "persona"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
-    return $row_;
-  }
-
 
 
 }

@@ -9,23 +9,25 @@ class _PlanillaDocente extends EntityValues {
   protected $insertado = UNDEFINED;
 
   public function _setDefault(){
-    $this->setId(DEFAULT_VALUE);
-    $this->setNumero(DEFAULT_VALUE);
-    $this->setInsertado(DEFAULT_VALUE);
+    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->numero == UNDEFINED) $this->setNumero(null);
+    if($this->insertado == UNDEFINED) $this->setInsertado(date('c'));
+    return $this;
   }
 
-  public function _fromArray(array $row = NULL, $p = ""){
+  public function _fromArray(array $row = NULL, string $p = ""){
     if(empty($row)) return;
     if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
     if(isset($row[$p."numero"])) $this->setNumero($row[$p."numero"]);
     if(isset($row[$p."insertado"])) $this->setInsertado($row[$p."insertado"]);
+    return $this;
   }
 
-  public function _toArray(){
+  public function _toArray(string $p = ""){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->numero !== UNDEFINED) $row["numero"] = $this->numero();
-    if($this->insertado !== UNDEFINED) $row["insertado"] = $this->insertado("Y-m-d H:i:s");
+    if($this->id !== UNDEFINED) $row[$p."id"] = $this->id();
+    if($this->numero !== UNDEFINED) $row[$p."numero"] = $this->numero();
+    if($this->insertado !== UNDEFINED) $row[$p."insertado"] = $this->insertado("c");
     return $row;
   }
 
@@ -39,48 +41,53 @@ class _PlanillaDocente extends EntityValues {
   public function id() { return $this->id; }
   public function numero($format = null) { return Format::convertCase($this->numero, $format); }
   public function insertado($format = null) { return Format::date($this->insertado, $format); }
-  public function setId($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkId($p); 
-    if($check) $this->id = $p;
-    return $check;
+
+  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
+  public function setNumero($p) { $this->numero = (is_null($p)) ? null : (string)$p; }
+  public function _setInsertado(DateTime $p = null) { $this->insertado = $p; }
+
+  public function setInsertado($p) {
+    if(!is_null($p)) {
+      $p = new SpanishDateTime($p);    
+      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    }
+    $this->insertado = $p;  
   }
 
-  public function setNumero($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkNumero($p); 
-    if($check) $this->numero = $p;
-    return $check;
-  }
 
-  public function _setInsertado(DateTime $p = null) {
-      $check = $this->checkInsertado($p); 
-      if($check) $this->insertado = $p;  
-      return $check;
-  }
-
-  public function setInsertado($p, $format = "Y-m-d H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
-    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
-    $check = $this->checkInsertado($p); 
-    if($check) $this->insertado = $p;  
-    return $check;
-  }
+  public function resetNumero() { if(!Validation::is_empty($this->numero)) $this->numero = preg_replace('/\s\s+/', ' ', trim($this->numero)); }
 
   public function checkId($value) { 
+      if(Validation::is_undefined($value)) return null;
       return true; 
   }
 
   public function checkNumero($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("numero", $v);
+    $this->_logs->resetLogs("numero");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("numero", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkInsertado($value) { 
-    $v = Validation::getInstanceValue($value)->date()->required();
-    return $this->_setLogsValidation("insertado", $v);
+    $this->_logs->resetLogs("insertado");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("insertado", "error", $error); }
+    return $v->isSuccess();
+  }
+
+  public function _check(){
+    $this->checkId($this->id);
+    $this->checkNumero($this->numero);
+    $this->checkInsertado($this->insertado);
+    return !$this->_getLogs()->isError();
+  }
+
+  public function _reset(){
+    $this->resetNumero();
+    return $this;
   }
 
 

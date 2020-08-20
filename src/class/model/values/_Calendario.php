@@ -12,15 +12,16 @@ class _Calendario extends EntityValues {
   protected $insertado = UNDEFINED;
 
   public function _setDefault(){
-    $this->setId(DEFAULT_VALUE);
-    $this->setInicio(DEFAULT_VALUE);
-    $this->setFin(DEFAULT_VALUE);
-    $this->setAnio(DEFAULT_VALUE);
-    $this->setSemestre(DEFAULT_VALUE);
-    $this->setInsertado(DEFAULT_VALUE);
+    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->inicio == UNDEFINED) $this->setInicio(null);
+    if($this->fin == UNDEFINED) $this->setFin(null);
+    if($this->anio == UNDEFINED) $this->setAnio(null);
+    if($this->semestre == UNDEFINED) $this->setSemestre(null);
+    if($this->insertado == UNDEFINED) $this->setInsertado(date('c'));
+    return $this;
   }
 
-  public function _fromArray(array $row = NULL, $p = ""){
+  public function _fromArray(array $row = NULL, string $p = ""){
     if(empty($row)) return;
     if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
     if(isset($row[$p."inicio"])) $this->setInicio($row[$p."inicio"]);
@@ -28,16 +29,17 @@ class _Calendario extends EntityValues {
     if(isset($row[$p."anio"])) $this->setAnio($row[$p."anio"]);
     if(isset($row[$p."semestre"])) $this->setSemestre($row[$p."semestre"]);
     if(isset($row[$p."insertado"])) $this->setInsertado($row[$p."insertado"]);
+    return $this;
   }
 
-  public function _toArray(){
+  public function _toArray(string $p = ""){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->inicio !== UNDEFINED) $row["inicio"] = $this->inicio("Y-m-d");
-    if($this->fin !== UNDEFINED) $row["fin"] = $this->fin("Y-m-d");
-    if($this->anio !== UNDEFINED) $row["anio"] = $this->anio("Y");
-    if($this->semestre !== UNDEFINED) $row["semestre"] = $this->semestre();
-    if($this->insertado !== UNDEFINED) $row["insertado"] = $this->insertado("Y-m-d H:i:s");
+    if($this->id !== UNDEFINED) $row[$p."id"] = $this->id();
+    if($this->inicio !== UNDEFINED) $row[$p."inicio"] = $this->inicio("c");
+    if($this->fin !== UNDEFINED) $row[$p."fin"] = $this->fin("c");
+    if($this->anio !== UNDEFINED) $row[$p."anio"] = $this->anio("c");
+    if($this->semestre !== UNDEFINED) $row[$p."semestre"] = $this->semestre();
+    if($this->insertado !== UNDEFINED) $row[$p."insertado"] = $this->insertado("c");
     return $row;
   }
 
@@ -57,105 +59,104 @@ class _Calendario extends EntityValues {
   public function anio($format = null) { return Format::date($this->anio, $format); }
   public function semestre() { return $this->semestre; }
   public function insertado($format = null) { return Format::date($this->insertado, $format); }
-  public function setId($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkId($p); 
-    if($check) $this->id = $p;
-    return $check;
+
+  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
+  public function _setInicio(DateTime $p = null) { $this->inicio = $p; }
+
+  public function setInicio($p) {
+    if(!is_null($p)) {
+      $p = new SpanishDateTime($p);
+      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+      $p->setTime(0,0,0);
+    }
+    $this->inicio = $p;
   }
 
-  public function _setInicio(DateTime $p = null) {
-      $check = $this->checkInicio($p); 
-      if($check) $this->inicio = $p;  
-      return $check;      
+  public function _setFin(DateTime $p = null) { $this->fin = $p; }
+
+  public function setFin($p) {
+    if(!is_null($p)) {
+      $p = new SpanishDateTime($p);
+      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+      $p->setTime(0,0,0);
+    }
+    $this->fin = $p;
   }
 
-  public function setInicio($p, $format = UNDEFINED) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(!is_null($p)) $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);    
-    $check = $this->checkInicio($p); 
-    if($check) $this->inicio = $p;  
-    return $check;
+  public function _setAnio(DateTime $p = null) { $this->anio = $p; }
+
+  public function setAnio($p) {
+    if(!is_null($p)) {
+      $p = new SpanishDateTime($p);    
+      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    }
+    $this->anio = $p;  
   }
 
-  public function _setFin(DateTime $p = null) {
-      $check = $this->checkFin($p); 
-      if($check) $this->fin = $p;  
-      return $check;      
+  public function setSemestre($p) { $this->semestre = (is_null($p)) ? null : intval($p); }
+  public function _setInsertado(DateTime $p = null) { $this->insertado = $p; }
+
+  public function setInsertado($p) {
+    if(!is_null($p)) {
+      $p = new SpanishDateTime($p);    
+      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    }
+    $this->insertado = $p;  
   }
 
-  public function setFin($p, $format = UNDEFINED) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(!is_null($p)) $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);    
-    $check = $this->checkFin($p); 
-    if($check) $this->fin = $p;  
-    return $check;
-  }
 
-  public function _setAnio(DateTime $p = null) {
-      $check = $this->checkAnio($p); 
-      if($check) $this->anio = $p;  
-      return $check;
-  }
-
-  public function setAnio($p, $format = "Y") {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
-    $check = $this->checkAnio($p); 
-    if($check) $this->anio = $p;  
-    return $check;
-  }
-
-  public function setSemestre($p) {
-    if ($p == DEFAULT_VALUE) $p = null;
-    $p = (is_null($p)) ? null : intval(trim($p));
-    $check = $this->checkSemestre($p); 
-    if($check) $this->semestre = $p;
-    return $check;
-  }
-
-  public function _setInsertado(DateTime $p = null) {
-      $check = $this->checkInsertado($p); 
-      if($check) $this->insertado = $p;  
-      return $check;
-  }
-
-  public function setInsertado($p, $format = "Y-m-d H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
-    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
-    $check = $this->checkInsertado($p); 
-    if($check) $this->insertado = $p;  
-    return $check;
-  }
 
   public function checkId($value) { 
+      if(Validation::is_undefined($value)) return null;
       return true; 
   }
 
   public function checkInicio($value) { 
-    $v = Validation::getInstanceValue($value)->date();
-    return $this->_setLogsValidation("inicio", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkFin($value) { 
-    $v = Validation::getInstanceValue($value)->date();
-    return $this->_setLogsValidation("fin", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkAnio($value) { 
-    $v = Validation::getInstanceValue($value)->date()->required();
-    return $this->_setLogsValidation("anio", $v);
+    $this->_logs->resetLogs("anio");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("anio", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkSemestre($value) { 
-    $v = Validation::getInstanceValue($value)->integer()->required();
-    return $this->_setLogsValidation("semestre", $v);
+    $this->_logs->resetLogs("semestre");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("semestre", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkInsertado($value) { 
-    $v = Validation::getInstanceValue($value)->date()->required();
-    return $this->_setLogsValidation("insertado", $v);
+    $this->_logs->resetLogs("insertado");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("insertado", "error", $error); }
+    return $v->isSuccess();
+  }
+
+  public function _check(){
+    $this->checkId($this->id);
+    $this->checkInicio($this->inicio);
+    $this->checkFin($this->fin);
+    $this->checkAnio($this->anio);
+    $this->checkSemestre($this->semestre);
+    $this->checkInsertado($this->insertado);
+    return !$this->_getLogs()->isError();
+  }
+
+  public function _reset(){
+    return $this;
   }
 
 

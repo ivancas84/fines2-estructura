@@ -56,11 +56,7 @@ class _DomicilioSql extends EntitySql{
       case $p.'max_localidad': return "MAX({$t}.localidad)";
       case $p.'count_localidad': return "COUNT({$t}.localidad)";
 
-      case $p.'_label': return "CONCAT_WS(' ',
-{$t}.calle, 
-{$t}.numero, 
-{$t}.barrio
-)";
+      case $p.'_label': return "CONCAT_WS(' ', {$t}.calle, {$t}.numero, {$t}.barrio)";
       default: return null;
     }
   }
@@ -72,8 +68,7 @@ class _DomicilioSql extends EntitySql{
 ' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'calle') . ' AS ' . $p.'calle, ' . $this->_mappingField($p.'entre') . ' AS ' . $p.'entre, ' . $this->_mappingField($p.'numero') . ' AS ' . $p.'numero, ' . $this->_mappingField($p.'piso') . ' AS ' . $p.'piso, ' . $this->_mappingField($p.'departamento') . ' AS ' . $p.'departamento, ' . $this->_mappingField($p.'barrio') . ' AS ' . $p.'barrio, ' . $this->_mappingField($p.'localidad') . ' AS ' . $p.'localidad';
   }
 
-  public function _fieldsDb(){
-    //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
+  public function _fieldsExclusive(){
     $p = $this->prf();
     return '
 ' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'calle') . ', ' . $this->_mappingField($p.'entre') . ', ' . $this->_mappingField($p.'numero') . ', ' . $this->_mappingField($p.'piso') . ', ' . $this->_mappingField($p.'departamento') . ', ' . $this->_mappingField($p.'barrio') . ', ' . $this->_mappingField($p.'localidad') . '';
@@ -82,109 +77,130 @@ class _DomicilioSql extends EntitySql{
   public function _conditionFieldStruct($field, $option, $value){
     $p = $this->prf();
 
-    $f = $this->_mappingField($field);
     switch ($field){
-      case "{$p}id": return $this->format->conditionText($f, $value, $option);
-      case "{$p}calle": return $this->format->conditionText($f, $value, $option);
-      case "{$p}entre": return $this->format->conditionText($f, $value, $option);
-      case "{$p}numero": return $this->format->conditionText($f, $value, $option);
-      case "{$p}piso": return $this->format->conditionText($f, $value, $option);
-      case "{$p}departamento": return $this->format->conditionText($f, $value, $option);
-      case "{$p}barrio": return $this->format->conditionText($f, $value, $option);
-      case "{$p}localidad": return $this->format->conditionText($f, $value, $option);
+      case "{$p}id": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}id"), $value, $option);
 
-      case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}calle": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}calle_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}calle"), $value, $option);
 
-      case "{$p}max_calle": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_calle": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_calle": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}entre": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}entre_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}entre"), $value, $option);
 
-      case "{$p}max_entre": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_entre": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_entre": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}numero": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}numero_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}numero"), $value, $option);
 
-      case "{$p}max_numero": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_numero": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_numero": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}piso": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}piso_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}piso"), $value, $option);
 
-      case "{$p}max_piso": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_piso": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_piso": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}departamento": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}departamento_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}departamento"), $value, $option);
 
-      case "{$p}max_departamento": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_departamento": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_departamento": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}barrio": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}barrio_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}barrio"), $value, $option);
 
-      case "{$p}max_barrio": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_barrio": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_barrio": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}localidad": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}localidad_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}localidad"), $value, $option);
 
-      case "{$p}max_localidad": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_localidad": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_localidad": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_id"), $value, $option);
+
+      case "{$p}min_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_id"), $value, $option);
+
+      case "{$p}count_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_id"), $value, $option);
+
+
+      case "{$p}max_calle": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_calle_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_calle"), $value, $option);
+
+      case "{$p}min_calle": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_calle_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_calle"), $value, $option);
+
+      case "{$p}count_calle": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_calle_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_calle"), $value, $option);
+
+
+      case "{$p}max_entre": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_entre_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_entre"), $value, $option);
+
+      case "{$p}min_entre": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_entre_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_entre"), $value, $option);
+
+      case "{$p}count_entre": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_entre_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_entre"), $value, $option);
+
+
+      case "{$p}max_numero": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_numero_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_numero"), $value, $option);
+
+      case "{$p}min_numero": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_numero_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_numero"), $value, $option);
+
+      case "{$p}count_numero": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_numero_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_numero"), $value, $option);
+
+
+      case "{$p}max_piso": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_piso_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_piso"), $value, $option);
+
+      case "{$p}min_piso": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_piso_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_piso"), $value, $option);
+
+      case "{$p}count_piso": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_piso_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_piso"), $value, $option);
+
+
+      case "{$p}max_departamento": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_departamento_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_departamento"), $value, $option);
+
+      case "{$p}min_departamento": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_departamento_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_departamento"), $value, $option);
+
+      case "{$p}count_departamento": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_departamento_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_departamento"), $value, $option);
+
+
+      case "{$p}max_barrio": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_barrio_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_barrio"), $value, $option);
+
+      case "{$p}min_barrio": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_barrio_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_barrio"), $value, $option);
+
+      case "{$p}count_barrio": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_barrio_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_barrio"), $value, $option);
+
+
+      case "{$p}max_localidad": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_localidad_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_localidad"), $value, $option);
+
+      case "{$p}min_localidad": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_localidad_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_localidad"), $value, $option);
+
+      case "{$p}count_localidad": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_localidad_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_localidad"), $value, $option);
+
 
       default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
   }
 
-  public function initializeInsert(array $data){
-    $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('domicilio');
-    if(!isset($data['calle']) || is_null($data['calle']) || $data['calle'] == "") throw new Exception('dato obligatorio sin valor: calle');
-    if(!isset($data['entre']) || is_null($data['entre']) || $data['entre'] == "") $data['entre'] = "null";
-    if(!isset($data['numero']) || is_null($data['numero']) || $data['numero'] == "") throw new Exception('dato obligatorio sin valor: numero');
-    if(!isset($data['piso']) || is_null($data['piso']) || $data['piso'] == "") $data['piso'] = "null";
-    if(!isset($data['departamento']) || is_null($data['departamento']) || $data['departamento'] == "") $data['departamento'] = "null";
-    if(!isset($data['barrio']) || is_null($data['barrio']) || $data['barrio'] == "") $data['barrio'] = "null";
-    if(!isset($data['localidad']) || is_null($data['localidad']) || $data['localidad'] == "") throw new Exception('dato obligatorio sin valor: localidad');
-
-    return $data;
-  }
-
-
-  public function initializeUpdate(array $data){
-    if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
-    if(array_key_exists('calle', $data)) { if(is_null($data['calle']) || $data['calle'] == "") throw new Exception('dato obligatorio sin valor: calle'); }
-    if(array_key_exists('entre', $data)) { if(is_null($data['entre']) || $data['entre'] == "") $data['entre'] = "null"; }
-    if(array_key_exists('numero', $data)) { if(is_null($data['numero']) || $data['numero'] == "") throw new Exception('dato obligatorio sin valor: numero'); }
-    if(array_key_exists('piso', $data)) { if(is_null($data['piso']) || $data['piso'] == "") $data['piso'] = "null"; }
-    if(array_key_exists('departamento', $data)) { if(is_null($data['departamento']) || $data['departamento'] == "") $data['departamento'] = "null"; }
-    if(array_key_exists('barrio', $data)) { if(is_null($data['barrio']) || $data['barrio'] == "") $data['barrio'] = "null"; }
-    if(array_key_exists('localidad', $data)) { if(is_null($data['localidad']) || $data['localidad'] == "") throw new Exception('dato obligatorio sin valor: localidad'); }
-
-    return $data;
-  }
-
 
   public function format(array $row){
     $row_ = array();
-   if(isset($row['id']) )  $row_['id'] = $this->format->escapeString($row['id']);
-    if(isset($row['calle'])) $row_['calle'] = $this->format->escapeString($row['calle']);
-    if(isset($row['entre'])) $row_['entre'] = $this->format->escapeString($row['entre']);
-    if(isset($row['numero'])) $row_['numero'] = $this->format->escapeString($row['numero']);
-    if(isset($row['piso'])) $row_['piso'] = $this->format->escapeString($row['piso']);
-    if(isset($row['departamento'])) $row_['departamento'] = $this->format->escapeString($row['departamento']);
-    if(isset($row['barrio'])) $row_['barrio'] = $this->format->escapeString($row['barrio']);
-    if(isset($row['localidad'])) $row_['localidad'] = $this->format->escapeString($row['localidad']);
+    if(array_key_exists('id', $row))  $row_['id'] = $this->format->string($row['id']);
+    if(array_key_exists('calle', $row)) $row_['calle'] = $this->format->string($row['calle']);
+    if(array_key_exists('entre', $row)) $row_['entre'] = $this->format->string($row['entre']);
+    if(array_key_exists('numero', $row)) $row_['numero'] = $this->format->string($row['numero']);
+    if(array_key_exists('piso', $row)) $row_['piso'] = $this->format->string($row['piso']);
+    if(array_key_exists('departamento', $row)) $row_['departamento'] = $this->format->string($row['departamento']);
+    if(array_key_exists('barrio', $row)) $row_['barrio'] = $this->format->string($row['barrio']);
+    if(array_key_exists('localidad', $row)) $row_['localidad'] = $this->format->string($row['localidad']);
 
     return $row_;
   }
-  public function _json(array $row = NULL){
-    if(empty($row)) return null;
-    $prefix = $this->prf();
-    $row_ = [];
-    $row_["id"] = (is_null($row[$prefix . "id"])) ? null : (string)$row[$prefix . "id"]; //la pk se trata como string debido a un comportamiento erratico en angular 2 que al tratarlo como integer resta 1 en el valor
-    $row_["calle"] = (is_null($row[$prefix . "calle"])) ? null : (string)$row[$prefix . "calle"];
-    $row_["entre"] = (is_null($row[$prefix . "entre"])) ? null : (string)$row[$prefix . "entre"];
-    $row_["numero"] = (is_null($row[$prefix . "numero"])) ? null : (string)$row[$prefix . "numero"];
-    $row_["piso"] = (is_null($row[$prefix . "piso"])) ? null : (string)$row[$prefix . "piso"];
-    $row_["departamento"] = (is_null($row[$prefix . "departamento"])) ? null : (string)$row[$prefix . "departamento"];
-    $row_["barrio"] = (is_null($row[$prefix . "barrio"])) ? null : (string)$row[$prefix . "barrio"];
-    $row_["localidad"] = (is_null($row[$prefix . "localidad"])) ? null : (string)$row[$prefix . "localidad"];
-    return $row_;
-  }
-
 
 
 }

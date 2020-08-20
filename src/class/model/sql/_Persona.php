@@ -24,6 +24,7 @@ class _PersonaSql extends EntitySql{
       case $p.'genero': return $t.".genero";
       case $p.'apodo': return $t.".apodo";
       case $p.'alta': return $t.".alta";
+      case $p.'alta_date': return "CAST({$t}.alta AS DATE)";
       case $p.'domicilio': return $t.".domicilio";
 
       case $p.'min_id': return "MIN({$t}.id)";
@@ -68,11 +69,7 @@ class _PersonaSql extends EntitySql{
       case $p.'max_domicilio': return "MAX({$t}.domicilio)";
       case $p.'count_domicilio': return "COUNT({$t}.domicilio)";
 
-      case $p.'_label': return "CONCAT_WS(' ',
-{$t}.nombres, 
-{$t}.apellidos, 
-{$t}.numero_documento
-)";
+      case $p.'_label': return "CONCAT_WS(' ', {$t}.nombres, {$t}.apellidos, {$t}.numero_documento)";
       default: return null;
     }
   }
@@ -90,8 +87,7 @@ class _PersonaSql extends EntitySql{
 ' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'nombres') . ' AS ' . $p.'nombres, ' . $this->_mappingField($p.'apellidos') . ' AS ' . $p.'apellidos, ' . $this->_mappingField($p.'fecha_nacimiento') . ' AS ' . $p.'fecha_nacimiento, ' . $this->_mappingField($p.'numero_documento') . ' AS ' . $p.'numero_documento, ' . $this->_mappingField($p.'cuil') . ' AS ' . $p.'cuil, ' . $this->_mappingField($p.'genero') . ' AS ' . $p.'genero, ' . $this->_mappingField($p.'apodo') . ' AS ' . $p.'apodo, ' . $this->_mappingField($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingField($p.'domicilio') . ' AS ' . $p.'domicilio';
   }
 
-  public function _fieldsDb(){
-    //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
+  public function _fieldsExclusive(){
     $p = $this->prf();
     return '
 ' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'nombres') . ', ' . $this->_mappingField($p.'apellidos') . ', ' . $this->_mappingField($p.'fecha_nacimiento') . ', ' . $this->_mappingField($p.'numero_documento') . ', ' . $this->_mappingField($p.'cuil') . ', ' . $this->_mappingField($p.'genero') . ', ' . $this->_mappingField($p.'apodo') . ', ' . $this->_mappingField($p.'alta') . ', ' . $this->_mappingField($p.'domicilio') . '';
@@ -111,60 +107,144 @@ class _PersonaSql extends EntitySql{
   public function _conditionFieldStruct($field, $option, $value){
     $p = $this->prf();
 
-    $f = $this->_mappingField($field);
     switch ($field){
-      case "{$p}id": return $this->format->conditionText($f, $value, $option);
-      case "{$p}nombres": return $this->format->conditionText($f, $value, $option);
-      case "{$p}apellidos": return $this->format->conditionText($f, $value, $option);
-      case "{$p}fecha_nacimiento": return $this->format->conditionDate($f, $value, $option);
-      case "{$p}numero_documento": return $this->format->conditionText($f, $value, $option);
-      case "{$p}cuil": return $this->format->conditionText($f, $value, $option);
-      case "{$p}genero": return $this->format->conditionText($f, $value, $option);
-      case "{$p}apodo": return $this->format->conditionText($f, $value, $option);
-      case "{$p}alta": return $this->format->conditionTimestamp($f, $value, $option);
-      case "{$p}domicilio": return $this->format->conditionText($f, $value, $option);
+      case "{$p}id": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}id"), $value, $option);
 
-      case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}nombres": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}nombres_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}nombres"), $value, $option);
 
-      case "{$p}max_nombres": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_nombres": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_nombres": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}apellidos": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}apellidos_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}apellidos"), $value, $option);
 
-      case "{$p}max_apellidos": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_apellidos": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_apellidos": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}fecha_nacimiento": return $this->format->conditionDate($this->_mappingField($field), $value, $option);
+      case "{$p}fecha_nacimiento_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}fecha_nacimiento"), $value, $option);
 
-      case "{$p}avg_fecha_nacimiento": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}max_fecha_nacimiento": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_fecha_nacimiento": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_fecha_nacimiento": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}numero_documento": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}numero_documento_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}numero_documento"), $value, $option);
 
-      case "{$p}max_numero_documento": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_numero_documento": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_numero_documento": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}cuil": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}cuil_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}cuil"), $value, $option);
 
-      case "{$p}max_cuil": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_cuil": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_cuil": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}genero": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}genero_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}genero"), $value, $option);
 
-      case "{$p}max_genero": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_genero": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_genero": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}apodo": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}apodo_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}apodo"), $value, $option);
 
-      case "{$p}max_apodo": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_apodo": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_apodo": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}alta": return $this->format->conditionTimestamp($this->_mappingField($field), $value, $option);
+      case "{$p}alta_date": return $this->format->conditionDate($this->_mappingField($field), $value, $option);
+      case "{$p}alta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}alta"), $value, $option);
 
-      case "{$p}avg_alta": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}max_alta": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_alta": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_alta": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}domicilio": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}domicilio_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}domicilio"), $value, $option);
 
-      case "{$p}max_domicilio": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_domicilio": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_domicilio": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_id"), $value, $option);
+
+      case "{$p}min_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_id"), $value, $option);
+
+      case "{$p}count_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_id"), $value, $option);
+
+
+      case "{$p}max_nombres": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_nombres_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_nombres"), $value, $option);
+
+      case "{$p}min_nombres": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_nombres_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_nombres"), $value, $option);
+
+      case "{$p}count_nombres": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_nombres_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_nombres"), $value, $option);
+
+
+      case "{$p}max_apellidos": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_apellidos_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_apellidos"), $value, $option);
+
+      case "{$p}min_apellidos": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_apellidos_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_apellidos"), $value, $option);
+
+      case "{$p}count_apellidos": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_apellidos_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_apellidos"), $value, $option);
+
+
+      case "{$p}avg_fecha_nacimiento": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}avg_fecha_nacimiento_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}avg_fecha_nacimiento"), $value, $option);
+
+      case "{$p}max_fecha_nacimiento": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_fecha_nacimiento_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_fecha_nacimiento"), $value, $option);
+
+      case "{$p}min_fecha_nacimiento": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_fecha_nacimiento_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_fecha_nacimiento"), $value, $option);
+
+      case "{$p}count_fecha_nacimiento": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_fecha_nacimiento_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_fecha_nacimiento"), $value, $option);
+
+
+      case "{$p}max_numero_documento": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_numero_documento_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_numero_documento"), $value, $option);
+
+      case "{$p}min_numero_documento": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_numero_documento_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_numero_documento"), $value, $option);
+
+      case "{$p}count_numero_documento": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_numero_documento_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_numero_documento"), $value, $option);
+
+
+      case "{$p}max_cuil": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_cuil_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_cuil"), $value, $option);
+
+      case "{$p}min_cuil": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_cuil_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_cuil"), $value, $option);
+
+      case "{$p}count_cuil": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_cuil_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_cuil"), $value, $option);
+
+
+      case "{$p}max_genero": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_genero_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_genero"), $value, $option);
+
+      case "{$p}min_genero": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_genero_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_genero"), $value, $option);
+
+      case "{$p}count_genero": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_genero_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_genero"), $value, $option);
+
+
+      case "{$p}max_apodo": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_apodo_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_apodo"), $value, $option);
+
+      case "{$p}min_apodo": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_apodo_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_apodo"), $value, $option);
+
+      case "{$p}count_apodo": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_apodo_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_apodo"), $value, $option);
+
+
+      case "{$p}avg_alta": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}avg_alta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}avg_alta"), $value, $option);
+
+      case "{$p}max_alta": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_alta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_alta"), $value, $option);
+
+      case "{$p}min_alta": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_alta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_alta"), $value, $option);
+
+      case "{$p}count_alta": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_alta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_alta"), $value, $option);
+
+
+      case "{$p}max_domicilio": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_domicilio_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_domicilio"), $value, $option);
+
+      case "{$p}min_domicilio": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_domicilio_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_domicilio"), $value, $option);
+
+      case "{$p}count_domicilio": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_domicilio_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_domicilio"), $value, $option);
+
 
       default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
@@ -180,70 +260,22 @@ class _PersonaSql extends EntitySql{
     if($c = EntitySql::getInstanceRequire('domicilio','dom')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
-  public function initializeInsert(array $data){
-    $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('persona');
-    if(!isset($data['nombres']) || is_null($data['nombres']) || $data['nombres'] == "") throw new Exception('dato obligatorio sin valor: nombres');
-    if(!isset($data['apellidos']) || is_null($data['apellidos']) || $data['apellidos'] == "") $data['apellidos'] = "null";
-    if(!isset($data['fecha_nacimiento']))  $data['fecha_nacimiento'] = "null";
-    if(!isset($data['numero_documento']) || is_null($data['numero_documento']) || $data['numero_documento'] == "") throw new Exception('dato obligatorio sin valor: numero_documento');
-    if(!isset($data['cuil']) || is_null($data['cuil']) || $data['cuil'] == "") $data['cuil'] = "null";
-    if(!isset($data['genero']) || is_null($data['genero']) || $data['genero'] == "") $data['genero'] = "null";
-    if(!isset($data['apodo']) || is_null($data['apodo']) || $data['apodo'] == "") $data['apodo'] = "null";
-    if(!isset($data['alta']))  $data['alta'] = date("Y-m-d H:i:s");
-    if(empty($data['domicilio'])) $data['domicilio'] = "null";
-
-    return $data;
-  }
-
-
-  public function initializeUpdate(array $data){
-    if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
-    if(array_key_exists('nombres', $data)) { if(is_null($data['nombres']) || $data['nombres'] == "") throw new Exception('dato obligatorio sin valor: nombres'); }
-    if(array_key_exists('apellidos', $data)) { if(is_null($data['apellidos']) || $data['apellidos'] == "") $data['apellidos'] = "null"; }
-    if(array_key_exists('fecha_nacimiento', $data)) { if(empty($data['fecha_nacimiento']))  $data['fecha_nacimiento'] = "null"; }
-    if(array_key_exists('numero_documento', $data)) { if(is_null($data['numero_documento']) || $data['numero_documento'] == "") throw new Exception('dato obligatorio sin valor: numero_documento'); }
-    if(array_key_exists('cuil', $data)) { if(is_null($data['cuil']) || $data['cuil'] == "") $data['cuil'] = "null"; }
-    if(array_key_exists('genero', $data)) { if(is_null($data['genero']) || $data['genero'] == "") $data['genero'] = "null"; }
-    if(array_key_exists('apodo', $data)) { if(is_null($data['apodo']) || $data['apodo'] == "") $data['apodo'] = "null"; }
-    if(array_key_exists('alta', $data)) { if(empty($data['alta']))  $data['alta'] = date("Y-m-d H:i:s"); }
-    if(array_key_exists('domicilio', $data)) { if(!isset($data['domicilio']) || ($data['domicilio'] == '')) $data['domicilio'] = "null"; }
-
-    return $data;
-  }
-
 
   public function format(array $row){
     $row_ = array();
-   if(isset($row['id']) )  $row_['id'] = $this->format->escapeString($row['id']);
-    if(isset($row['nombres'])) $row_['nombres'] = $this->format->escapeString($row['nombres']);
-    if(isset($row['apellidos'])) $row_['apellidos'] = $this->format->escapeString($row['apellidos']);
-    if(isset($row['fecha_nacimiento'])) $row_['fecha_nacimiento'] = $this->format->date($row['fecha_nacimiento']);
-    if(isset($row['numero_documento'])) $row_['numero_documento'] = $this->format->escapeString($row['numero_documento']);
-    if(isset($row['cuil'])) $row_['cuil'] = $this->format->escapeString($row['cuil']);
-    if(isset($row['genero'])) $row_['genero'] = $this->format->escapeString($row['genero']);
-    if(isset($row['apodo'])) $row_['apodo'] = $this->format->escapeString($row['apodo']);
-    if(isset($row['alta'])) $row_['alta'] = $this->format->timestamp($row['alta']);
-    if(isset($row['domicilio'])) $row_['domicilio'] = $this->format->escapeString($row['domicilio']);
+    if(array_key_exists('id', $row))  $row_['id'] = $this->format->string($row['id']);
+    if(array_key_exists('nombres', $row)) $row_['nombres'] = $this->format->string($row['nombres']);
+    if(array_key_exists('apellidos', $row)) $row_['apellidos'] = $this->format->string($row['apellidos']);
+    if(array_key_exists('fecha_nacimiento', $row)) $row_['fecha_nacimiento'] = $this->format->date($row['fecha_nacimiento']);
+    if(array_key_exists('numero_documento', $row)) $row_['numero_documento'] = $this->format->string($row['numero_documento']);
+    if(array_key_exists('cuil', $row)) $row_['cuil'] = $this->format->string($row['cuil']);
+    if(array_key_exists('genero', $row)) $row_['genero'] = $this->format->string($row['genero']);
+    if(array_key_exists('apodo', $row)) $row_['apodo'] = $this->format->string($row['apodo']);
+    if(array_key_exists('alta', $row)) $row_['alta'] = $this->format->timestamp($row['alta']);
+    if(array_key_exists('domicilio', $row)) $row_['domicilio'] = $this->format->string($row['domicilio']);
 
     return $row_;
   }
-  public function _json(array $row = NULL){
-    if(empty($row)) return null;
-    $prefix = $this->prf();
-    $row_ = [];
-    $row_["id"] = (is_null($row[$prefix . "id"])) ? null : (string)$row[$prefix . "id"]; //la pk se trata como string debido a un comportamiento erratico en angular 2 que al tratarlo como integer resta 1 en el valor
-    $row_["nombres"] = (is_null($row[$prefix . "nombres"])) ? null : (string)$row[$prefix . "nombres"];
-    $row_["apellidos"] = (is_null($row[$prefix . "apellidos"])) ? null : (string)$row[$prefix . "apellidos"];
-    $row_["fecha_nacimiento"] = (is_null($row[$prefix . "fecha_nacimiento"])) ? null : (string)$row[$prefix . "fecha_nacimiento"];
-    $row_["numero_documento"] = (is_null($row[$prefix . "numero_documento"])) ? null : (string)$row[$prefix . "numero_documento"];
-    $row_["cuil"] = (is_null($row[$prefix . "cuil"])) ? null : (string)$row[$prefix . "cuil"];
-    $row_["genero"] = (is_null($row[$prefix . "genero"])) ? null : (string)$row[$prefix . "genero"];
-    $row_["apodo"] = (is_null($row[$prefix . "apodo"])) ? null : (string)$row[$prefix . "apodo"];
-    $row_["alta"] = (is_null($row[$prefix . "alta"])) ? null : (string)$row[$prefix . "alta"];
-    $row_["domicilio"] = (is_null($row[$prefix . "domicilio"])) ? null : (string)$row[$prefix . "domicilio"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
-    return $row_;
-  }
-
 
 
 }

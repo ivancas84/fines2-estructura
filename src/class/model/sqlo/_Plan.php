@@ -7,14 +7,7 @@ require_once("class/model/Values.php");
 
 class _PlanSqlo extends EntitySqlo {
 
-  public function __construct(){
-    /**
-     * Se definen todos los recursos de forma independiente, sin parametros en el constructor, para facilitar el polimorfismo de las subclases
-     */
-    $this->db = Dba::dbInstance();
-    $this->entity = Entity::getInstanceRequire('plan');
-    $this->sql = EntitySql::getInstanceRequire('plan');
-  }
+  public $entityName = "plan";
 
   protected function _insert(array $row){ //@override
       $sql = "

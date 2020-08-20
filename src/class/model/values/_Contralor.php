@@ -11,29 +11,31 @@ class _Contralor extends EntityValues {
   protected $planillaDocente = UNDEFINED;
 
   public function _setDefault(){
-    $this->setId(DEFAULT_VALUE);
-    $this->setFechaContralor(DEFAULT_VALUE);
-    $this->setFechaConsejo(DEFAULT_VALUE);
-    $this->setInsertado(DEFAULT_VALUE);
-    $this->setPlanillaDocente(DEFAULT_VALUE);
+    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->fechaContralor == UNDEFINED) $this->setFechaContralor(null);
+    if($this->fechaConsejo == UNDEFINED) $this->setFechaConsejo(null);
+    if($this->insertado == UNDEFINED) $this->setInsertado(date('c'));
+    if($this->planillaDocente == UNDEFINED) $this->setPlanillaDocente(null);
+    return $this;
   }
 
-  public function _fromArray(array $row = NULL, $p = ""){
+  public function _fromArray(array $row = NULL, string $p = ""){
     if(empty($row)) return;
     if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
     if(isset($row[$p."fecha_contralor"])) $this->setFechaContralor($row[$p."fecha_contralor"]);
     if(isset($row[$p."fecha_consejo"])) $this->setFechaConsejo($row[$p."fecha_consejo"]);
     if(isset($row[$p."insertado"])) $this->setInsertado($row[$p."insertado"]);
     if(isset($row[$p."planilla_docente"])) $this->setPlanillaDocente($row[$p."planilla_docente"]);
+    return $this;
   }
 
-  public function _toArray(){
+  public function _toArray(string $p = ""){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->fechaContralor !== UNDEFINED) $row["fecha_contralor"] = $this->fechaContralor("Y-m-d");
-    if($this->fechaConsejo !== UNDEFINED) $row["fecha_consejo"] = $this->fechaConsejo("Y-m-d");
-    if($this->insertado !== UNDEFINED) $row["insertado"] = $this->insertado("Y-m-d H:i:s");
-    if($this->planillaDocente !== UNDEFINED) $row["planilla_docente"] = $this->planillaDocente();
+    if($this->id !== UNDEFINED) $row[$p."id"] = $this->id();
+    if($this->fechaContralor !== UNDEFINED) $row[$p."fecha_contralor"] = $this->fechaContralor("c");
+    if($this->fechaConsejo !== UNDEFINED) $row[$p."fecha_consejo"] = $this->fechaConsejo("c");
+    if($this->insertado !== UNDEFINED) $row[$p."insertado"] = $this->insertado("c");
+    if($this->planillaDocente !== UNDEFINED) $row[$p."planilla_docente"] = $this->planillaDocente();
     return $row;
   }
 
@@ -51,86 +53,85 @@ class _Contralor extends EntityValues {
   public function fechaConsejo($format = null) { return Format::date($this->fechaConsejo, $format); }
   public function insertado($format = null) { return Format::date($this->insertado, $format); }
   public function planillaDocente($format = null) { return Format::convertCase($this->planillaDocente, $format); }
-  public function setId($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkId($p); 
-    if($check) $this->id = $p;
-    return $check;
+
+  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
+  public function _setFechaContralor(DateTime $p = null) { $this->fechaContralor = $p; }
+
+  public function setFechaContralor($p) {
+    if(!is_null($p)) {
+      $p = new SpanishDateTime($p);
+      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+      $p->setTime(0,0,0);
+    }
+    $this->fechaContralor = $p;
   }
 
-  public function _setFechaContralor(DateTime $p = null) {
-      $check = $this->checkFechaContralor($p); 
-      if($check) $this->fechaContralor = $p;  
-      return $check;      
+  public function _setFechaConsejo(DateTime $p = null) { $this->fechaConsejo = $p; }
+
+  public function setFechaConsejo($p) {
+    if(!is_null($p)) {
+      $p = new SpanishDateTime($p);
+      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+      $p->setTime(0,0,0);
+    }
+    $this->fechaConsejo = $p;
   }
 
-  public function setFechaContralor($p, $format = UNDEFINED) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(!is_null($p)) $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);    
-    $check = $this->checkFechaContralor($p); 
-    if($check) $this->fechaContralor = $p;  
-    return $check;
+  public function _setInsertado(DateTime $p = null) { $this->insertado = $p; }
+
+  public function setInsertado($p) {
+    if(!is_null($p)) {
+      $p = new SpanishDateTime($p);    
+      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    }
+    $this->insertado = $p;  
   }
 
-  public function _setFechaConsejo(DateTime $p = null) {
-      $check = $this->checkFechaConsejo($p); 
-      if($check) $this->fechaConsejo = $p;  
-      return $check;      
-  }
+  public function setPlanillaDocente($p) { $this->planillaDocente = (is_null($p)) ? null : (string)$p; }
 
-  public function setFechaConsejo($p, $format = UNDEFINED) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    if(!is_null($p)) $p = ($format == UNDEFINED) ? SpanishDateTime::createFromDate($p) : SpanishDateTime::createFromFormat($format, $p);    
-    $check = $this->checkFechaConsejo($p); 
-    if($check) $this->fechaConsejo = $p;  
-    return $check;
-  }
-
-  public function _setInsertado(DateTime $p = null) {
-      $check = $this->checkInsertado($p); 
-      if($check) $this->insertado = $p;  
-      return $check;
-  }
-
-  public function setInsertado($p, $format = "Y-m-d H:i:s") {
-    $p = ($p == DEFAULT_VALUE) ? date('Y-m-d H:i:s') : trim($p);
-    if(!is_null($p)) $p = SpanishDateTime::createFromFormat($format, $p);    
-    $check = $this->checkInsertado($p); 
-    if($check) $this->insertado = $p;  
-    return $check;
-  }
-
-  public function setPlanillaDocente($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkPlanillaDocente($p); 
-    if($check) $this->planillaDocente = $p;
-    return $check;
-  }
 
   public function checkId($value) { 
+      if(Validation::is_undefined($value)) return null;
       return true; 
   }
 
   public function checkFechaContralor($value) { 
-    $v = Validation::getInstanceValue($value)->date();
-    return $this->_setLogsValidation("fecha_contralor", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkFechaConsejo($value) { 
-    $v = Validation::getInstanceValue($value)->date();
-    return $this->_setLogsValidation("fecha_consejo", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkInsertado($value) { 
-    $v = Validation::getInstanceValue($value)->date()->required();
-    return $this->_setLogsValidation("insertado", $v);
+    $this->_logs->resetLogs("insertado");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("insertado", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkPlanillaDocente($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("planilla_docente", $v);
+    $this->_logs->resetLogs("planilla_docente");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("planilla_docente", "error", $error); }
+    return $v->isSuccess();
+  }
+
+  public function _check(){
+    $this->checkId($this->id);
+    $this->checkFechaContralor($this->fechaContralor);
+    $this->checkFechaConsejo($this->fechaConsejo);
+    $this->checkInsertado($this->insertado);
+    $this->checkPlanillaDocente($this->planillaDocente);
+    return !$this->_getLogs()->isError();
+  }
+
+  public function _reset(){
+    return $this;
   }
 
 

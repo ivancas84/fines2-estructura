@@ -24,6 +24,7 @@ class _ComisionSql extends EntitySql{
       case $p.'publicada': return $t.".publicada";
       case $p.'observaciones': return $t.".observaciones";
       case $p.'alta': return $t.".alta";
+      case $p.'alta_date': return "CAST({$t}.alta AS DATE)";
       case $p.'sede': return $t.".sede";
       case $p.'modalidad': return $t.".modalidad";
       case $p.'planificacion': return $t.".planificacion";
@@ -87,19 +88,7 @@ class _ComisionSql extends EntitySql{
       case $p.'max_calendario': return "MAX({$t}.calendario)";
       case $p.'count_calendario': return "COUNT({$t}.calendario)";
 
-      case $p.'_label': return "CONCAT_WS(' ',
-{$t}.division, 
-{$p}sed.numero, 
-{$p}sed.nombre, 
-{$p}pla.anio, 
-{$p}pla.semestre, 
-{$p}pla_plb.orientacion, 
-{$p}pla_plb.distribucion_horaria, 
-{$p}cal.inicio, 
-{$p}cal.fin, 
-{$p}cal.anio, 
-{$p}cal.semestre
-)";
+      case $p.'_label': return "CONCAT_WS(' ', {$t}.division, {$p}sed.numero, {$p}sed.nombre, {$p}pla.anio, {$p}pla.semestre, {$p}pla_plb.orientacion, {$p}pla_plb.distribucion_horaria, {$p}cal.inicio, {$p}cal.fin, {$p}cal.anio, {$p}cal.semestre)";
       default: return null;
     }
   }
@@ -127,8 +116,7 @@ class _ComisionSql extends EntitySql{
 ' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'turno') . ' AS ' . $p.'turno, ' . $this->_mappingField($p.'division') . ' AS ' . $p.'division, ' . $this->_mappingField($p.'comentario') . ' AS ' . $p.'comentario, ' . $this->_mappingField($p.'autorizada') . ' AS ' . $p.'autorizada, ' . $this->_mappingField($p.'apertura') . ' AS ' . $p.'apertura, ' . $this->_mappingField($p.'publicada') . ' AS ' . $p.'publicada, ' . $this->_mappingField($p.'observaciones') . ' AS ' . $p.'observaciones, ' . $this->_mappingField($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingField($p.'sede') . ' AS ' . $p.'sede, ' . $this->_mappingField($p.'modalidad') . ' AS ' . $p.'modalidad, ' . $this->_mappingField($p.'planificacion') . ' AS ' . $p.'planificacion, ' . $this->_mappingField($p.'comision_siguiente') . ' AS ' . $p.'comision_siguiente, ' . $this->_mappingField($p.'calendario') . ' AS ' . $p.'calendario';
   }
 
-  public function _fieldsDb(){
-    //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
+  public function _fieldsExclusive(){
     $p = $this->prf();
     return '
 ' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'turno') . ', ' . $this->_mappingField($p.'division') . ', ' . $this->_mappingField($p.'comentario') . ', ' . $this->_mappingField($p.'autorizada') . ', ' . $this->_mappingField($p.'apertura') . ', ' . $this->_mappingField($p.'publicada') . ', ' . $this->_mappingField($p.'observaciones') . ', ' . $this->_mappingField($p.'alta') . ', ' . $this->_mappingField($p.'sede') . ', ' . $this->_mappingField($p.'modalidad') . ', ' . $this->_mappingField($p.'planificacion') . ', ' . $this->_mappingField($p.'comision_siguiente') . ', ' . $this->_mappingField($p.'calendario') . '';
@@ -168,79 +156,193 @@ class _ComisionSql extends EntitySql{
   public function _conditionFieldStruct($field, $option, $value){
     $p = $this->prf();
 
-    $f = $this->_mappingField($field);
     switch ($field){
-      case "{$p}id": return $this->format->conditionText($f, $value, $option);
-      case "{$p}turno": return $this->format->conditionText($f, $value, $option);
-      case "{$p}division": return $this->format->conditionText($f, $value, $option);
-      case "{$p}comentario": return $this->format->conditionText($f, $value, $option);
-      case "{$p}autorizada": return $this->format->conditionBoolean($f, $value);
-      case "{$p}apertura": return $this->format->conditionBoolean($f, $value);
-      case "{$p}publicada": return $this->format->conditionBoolean($f, $value);
-      case "{$p}observaciones": return $this->format->conditionText($f, $value, $option);
-      case "{$p}alta": return $this->format->conditionTimestamp($f, $value, $option);
-      case "{$p}sede": return $this->format->conditionText($f, $value, $option);
-      case "{$p}modalidad": return $this->format->conditionText($f, $value, $option);
-      case "{$p}planificacion": return $this->format->conditionText($f, $value, $option);
-      case "{$p}comision_siguiente": return $this->format->conditionText($f, $value, $option);
-      case "{$p}calendario": return $this->format->conditionText($f, $value, $option);
+      case "{$p}id": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}id"), $value, $option);
 
-      case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}turno": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}turno_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}turno"), $value, $option);
 
-      case "{$p}max_turno": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_turno": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_turno": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}division": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}division_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}division"), $value, $option);
 
-      case "{$p}max_division": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_division": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_division": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}comentario": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}comentario_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}comentario"), $value, $option);
 
-      case "{$p}max_comentario": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_comentario": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_comentario": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}autorizada": return $this->format->conditionBoolean($this->_mappingField($field), $value);
+    case "{$p}autorizada_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}autorizada"), $value, $option);
 
-      case "{$p}max_autorizada": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_autorizada": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_autorizada": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}apertura": return $this->format->conditionBoolean($this->_mappingField($field), $value);
+    case "{$p}apertura_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}apertura"), $value, $option);
 
-      case "{$p}max_apertura": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_apertura": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_apertura": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}publicada": return $this->format->conditionBoolean($this->_mappingField($field), $value);
+    case "{$p}publicada_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}publicada"), $value, $option);
 
-      case "{$p}max_publicada": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_publicada": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_publicada": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}observaciones": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}observaciones_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}observaciones"), $value, $option);
 
-      case "{$p}max_observaciones": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_observaciones": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_observaciones": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}alta": return $this->format->conditionTimestamp($this->_mappingField($field), $value, $option);
+      case "{$p}alta_date": return $this->format->conditionDate($this->_mappingField($field), $value, $option);
+      case "{$p}alta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}alta"), $value, $option);
 
-      case "{$p}avg_alta": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}max_alta": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_alta": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_alta": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}sede": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}sede_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}sede"), $value, $option);
 
-      case "{$p}max_sede": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_sede": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_sede": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}modalidad": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}modalidad_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}modalidad"), $value, $option);
 
-      case "{$p}max_modalidad": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_modalidad": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_modalidad": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}planificacion": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}planificacion_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}planificacion"), $value, $option);
 
-      case "{$p}max_planificacion": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_planificacion": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_planificacion": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}comision_siguiente": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}comision_siguiente_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}comision_siguiente"), $value, $option);
 
-      case "{$p}max_comision_siguiente": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_comision_siguiente": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_comision_siguiente": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}calendario": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}calendario_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}calendario"), $value, $option);
 
-      case "{$p}max_calendario": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_calendario": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_calendario": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_id"), $value, $option);
+
+      case "{$p}min_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_id"), $value, $option);
+
+      case "{$p}count_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_id"), $value, $option);
+
+
+      case "{$p}max_turno": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_turno_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_turno"), $value, $option);
+
+      case "{$p}min_turno": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_turno_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_turno"), $value, $option);
+
+      case "{$p}count_turno": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_turno_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_turno"), $value, $option);
+
+
+      case "{$p}max_division": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_division_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_division"), $value, $option);
+
+      case "{$p}min_division": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_division_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_division"), $value, $option);
+
+      case "{$p}count_division": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_division_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_division"), $value, $option);
+
+
+      case "{$p}max_comentario": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_comentario_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_comentario"), $value, $option);
+
+      case "{$p}min_comentario": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_comentario_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_comentario"), $value, $option);
+
+      case "{$p}count_comentario": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_comentario_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_comentario"), $value, $option);
+
+
+      case "{$p}max_autorizada": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_autorizada_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_autorizada"), $value, $option);
+
+      case "{$p}min_autorizada": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_autorizada_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_autorizada"), $value, $option);
+
+      case "{$p}count_autorizada": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_autorizada_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_autorizada"), $value, $option);
+
+
+      case "{$p}max_apertura": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_apertura_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_apertura"), $value, $option);
+
+      case "{$p}min_apertura": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_apertura_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_apertura"), $value, $option);
+
+      case "{$p}count_apertura": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_apertura_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_apertura"), $value, $option);
+
+
+      case "{$p}max_publicada": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_publicada_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_publicada"), $value, $option);
+
+      case "{$p}min_publicada": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_publicada_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_publicada"), $value, $option);
+
+      case "{$p}count_publicada": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_publicada_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_publicada"), $value, $option);
+
+
+      case "{$p}max_observaciones": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_observaciones_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_observaciones"), $value, $option);
+
+      case "{$p}min_observaciones": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_observaciones_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_observaciones"), $value, $option);
+
+      case "{$p}count_observaciones": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_observaciones_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_observaciones"), $value, $option);
+
+
+      case "{$p}avg_alta": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}avg_alta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}avg_alta"), $value, $option);
+
+      case "{$p}max_alta": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_alta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_alta"), $value, $option);
+
+      case "{$p}min_alta": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_alta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_alta"), $value, $option);
+
+      case "{$p}count_alta": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_alta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_alta"), $value, $option);
+
+
+      case "{$p}max_sede": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_sede_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_sede"), $value, $option);
+
+      case "{$p}min_sede": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_sede_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_sede"), $value, $option);
+
+      case "{$p}count_sede": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_sede_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_sede"), $value, $option);
+
+
+      case "{$p}max_modalidad": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_modalidad_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_modalidad"), $value, $option);
+
+      case "{$p}min_modalidad": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_modalidad_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_modalidad"), $value, $option);
+
+      case "{$p}count_modalidad": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_modalidad_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_modalidad"), $value, $option);
+
+
+      case "{$p}max_planificacion": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_planificacion_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_planificacion"), $value, $option);
+
+      case "{$p}min_planificacion": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_planificacion_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_planificacion"), $value, $option);
+
+      case "{$p}count_planificacion": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_planificacion_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_planificacion"), $value, $option);
+
+
+      case "{$p}max_comision_siguiente": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_comision_siguiente_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_comision_siguiente"), $value, $option);
+
+      case "{$p}min_comision_siguiente": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_comision_siguiente_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_comision_siguiente"), $value, $option);
+
+      case "{$p}count_comision_siguiente": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_comision_siguiente_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_comision_siguiente"), $value, $option);
+
+
+      case "{$p}max_calendario": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_calendario_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_calendario"), $value, $option);
+
+      case "{$p}min_calendario": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_calendario_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_calendario"), $value, $option);
+
+      case "{$p}count_calendario": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_calendario_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_calendario"), $value, $option);
+
 
       default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
@@ -276,84 +378,26 @@ class _ComisionSql extends EntitySql{
     if($c = EntitySql::getInstanceRequire('calendario','cal')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
-  public function initializeInsert(array $data){
-    $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('comision');
-    if(!isset($data['turno']) || is_null($data['turno']) || $data['turno'] == "") $data['turno'] = "null";
-    if(!isset($data['division']) || is_null($data['division']) || $data['division'] == "") throw new Exception('dato obligatorio sin valor: division');
-    if(!isset($data['comentario']) || is_null($data['comentario']) || $data['comentario'] == "") $data['comentario'] = "null";
-    if(!isset($data['autorizada']) || ($data['autorizada'] == '')) $data['autorizada'] = "false";
-    if(!isset($data['apertura']) || ($data['apertura'] == '')) $data['apertura'] = "false";
-    if(!isset($data['publicada']) || ($data['publicada'] == '')) $data['publicada'] = "false";
-    if(!isset($data['observaciones']) || is_null($data['observaciones']) || $data['observaciones'] == "") $data['observaciones'] = "null";
-    if(empty($data['sede'])) throw new Exception('dato obligatorio sin valor: sede');
-    if(empty($data['modalidad'])) throw new Exception('dato obligatorio sin valor: modalidad');
-    if(empty($data['planificacion'])) $data['planificacion'] = "null";
-    if(empty($data['comision_siguiente'])) $data['comision_siguiente'] = "null";
-    if(empty($data['calendario'])) throw new Exception('dato obligatorio sin valor: calendario');
-
-    return $data;
-  }
-
-
-  public function initializeUpdate(array $data){
-    if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
-    if(array_key_exists('turno', $data)) { if(is_null($data['turno']) || $data['turno'] == "") $data['turno'] = "null"; }
-    if(array_key_exists('division', $data)) { if(is_null($data['division']) || $data['division'] == "") throw new Exception('dato obligatorio sin valor: division'); }
-    if(array_key_exists('comentario', $data)) { if(is_null($data['comentario']) || $data['comentario'] == "") $data['comentario'] = "null"; }
-    if(array_key_exists('autorizada', $data)) { if(!isset($data['autorizada']) || ($data['autorizada'] == '')) $data['autorizada'] = "false"; }
-    if(array_key_exists('apertura', $data)) { if(!isset($data['apertura']) || ($data['apertura'] == '')) $data['apertura'] = "false"; }
-    if(array_key_exists('publicada', $data)) { if(!isset($data['publicada']) || ($data['publicada'] == '')) $data['publicada'] = "false"; }
-    if(array_key_exists('observaciones', $data)) { if(is_null($data['observaciones']) || $data['observaciones'] == "") $data['observaciones'] = "null"; }
-    if(array_key_exists('sede', $data)) { if(!isset($data['sede']) || ($data['sede'] == '')) throw new Exception('dato obligatorio sin valor: sede'); }
-    if(array_key_exists('modalidad', $data)) { if(!isset($data['modalidad']) || ($data['modalidad'] == '')) throw new Exception('dato obligatorio sin valor: modalidad'); }
-    if(array_key_exists('planificacion', $data)) { if(!isset($data['planificacion']) || ($data['planificacion'] == '')) $data['planificacion'] = "null"; }
-    if(array_key_exists('comision_siguiente', $data)) { if(!isset($data['comision_siguiente']) || ($data['comision_siguiente'] == '')) $data['comision_siguiente'] = "null"; }
-    if(array_key_exists('calendario', $data)) { if(!isset($data['calendario']) || ($data['calendario'] == '')) throw new Exception('dato obligatorio sin valor: calendario'); }
-
-    return $data;
-  }
-
 
   public function format(array $row){
     $row_ = array();
-   if(isset($row['id']) )  $row_['id'] = $this->format->escapeString($row['id']);
-    if(isset($row['turno'])) $row_['turno'] = $this->format->escapeString($row['turno']);
-    if(isset($row['division'])) $row_['division'] = $this->format->escapeString($row['division']);
-    if(isset($row['comentario'])) $row_['comentario'] = $this->format->escapeString($row['comentario']);
-    if(isset($row['autorizada'])) $row_['autorizada'] = $this->format->boolean($row['autorizada']);
-    if(isset($row['apertura'])) $row_['apertura'] = $this->format->boolean($row['apertura']);
-    if(isset($row['publicada'])) $row_['publicada'] = $this->format->boolean($row['publicada']);
-    if(isset($row['observaciones'])) $row_['observaciones'] = $this->format->escapeString($row['observaciones']);
-    if(isset($row['alta'])) $row_['alta'] = $this->format->timestamp($row['alta']);
-    if(isset($row['sede'])) $row_['sede'] = $this->format->escapeString($row['sede']);
-    if(isset($row['modalidad'])) $row_['modalidad'] = $this->format->escapeString($row['modalidad']);
-    if(isset($row['planificacion'])) $row_['planificacion'] = $this->format->escapeString($row['planificacion']);
-    if(isset($row['comision_siguiente'])) $row_['comision_siguiente'] = $this->format->escapeString($row['comision_siguiente']);
-    if(isset($row['calendario'])) $row_['calendario'] = $this->format->escapeString($row['calendario']);
+    if(array_key_exists('id', $row))  $row_['id'] = $this->format->string($row['id']);
+    if(array_key_exists('turno', $row)) $row_['turno'] = $this->format->string($row['turno']);
+    if(array_key_exists('division', $row)) $row_['division'] = $this->format->string($row['division']);
+    if(array_key_exists('comentario', $row)) $row_['comentario'] = $this->format->string($row['comentario']);
+    if(array_key_exists('autorizada', $row)) $row_['autorizada'] = $this->format->boolean($row['autorizada']);
+    if(array_key_exists('apertura', $row)) $row_['apertura'] = $this->format->boolean($row['apertura']);
+    if(array_key_exists('publicada', $row)) $row_['publicada'] = $this->format->boolean($row['publicada']);
+    if(array_key_exists('observaciones', $row)) $row_['observaciones'] = $this->format->string($row['observaciones']);
+    if(array_key_exists('alta', $row)) $row_['alta'] = $this->format->timestamp($row['alta']);
+    if(array_key_exists('sede', $row)) $row_['sede'] = $this->format->string($row['sede']);
+    if(array_key_exists('modalidad', $row)) $row_['modalidad'] = $this->format->string($row['modalidad']);
+    if(array_key_exists('planificacion', $row)) $row_['planificacion'] = $this->format->string($row['planificacion']);
+    if(array_key_exists('comision_siguiente', $row)) $row_['comision_siguiente'] = $this->format->string($row['comision_siguiente']);
+    if(array_key_exists('calendario', $row)) $row_['calendario'] = $this->format->string($row['calendario']);
 
     return $row_;
   }
-  public function _json(array $row = NULL){
-    if(empty($row)) return null;
-    $prefix = $this->prf();
-    $row_ = [];
-    $row_["id"] = (is_null($row[$prefix . "id"])) ? null : (string)$row[$prefix . "id"]; //la pk se trata como string debido a un comportamiento erratico en angular 2 que al tratarlo como integer resta 1 en el valor
-    $row_["turno"] = (is_null($row[$prefix . "turno"])) ? null : (string)$row[$prefix . "turno"];
-    $row_["division"] = (is_null($row[$prefix . "division"])) ? null : (string)$row[$prefix . "division"];
-    $row_["comentario"] = (is_null($row[$prefix . "comentario"])) ? null : (string)$row[$prefix . "comentario"];
-    $row_["autorizada"] = (is_null($row[$prefix . "autorizada"])) ? null : settypebool($row[$prefix . "autorizada"]);
-    $row_["apertura"] = (is_null($row[$prefix . "apertura"])) ? null : settypebool($row[$prefix . "apertura"]);
-    $row_["publicada"] = (is_null($row[$prefix . "publicada"])) ? null : settypebool($row[$prefix . "publicada"]);
-    $row_["observaciones"] = (is_null($row[$prefix . "observaciones"])) ? null : (string)$row[$prefix . "observaciones"];
-    $row_["alta"] = (is_null($row[$prefix . "alta"])) ? null : (string)$row[$prefix . "alta"];
-    $row_["sede"] = (is_null($row[$prefix . "sede"])) ? null : (string)$row[$prefix . "sede"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
-    $row_["modalidad"] = (is_null($row[$prefix . "modalidad"])) ? null : (string)$row[$prefix . "modalidad"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
-    $row_["planificacion"] = (is_null($row[$prefix . "planificacion"])) ? null : (string)$row[$prefix . "planificacion"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
-    $row_["comision_siguiente"] = (is_null($row[$prefix . "comision_siguiente"])) ? null : (string)$row[$prefix . "comision_siguiente"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
-    $row_["calendario"] = (is_null($row[$prefix . "calendario"])) ? null : (string)$row[$prefix . "calendario"]; //las fk se transforman a string debido a un comportamiento errantico en angular 2 que al tratarlo como integer resta 1 en el valor
-    return $row_;
-  }
-
 
 
 }

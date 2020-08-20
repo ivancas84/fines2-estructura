@@ -14,17 +14,18 @@ class _Domicilio extends EntityValues {
   protected $localidad = UNDEFINED;
 
   public function _setDefault(){
-    $this->setId(DEFAULT_VALUE);
-    $this->setCalle(DEFAULT_VALUE);
-    $this->setEntre(DEFAULT_VALUE);
-    $this->setNumero(DEFAULT_VALUE);
-    $this->setPiso(DEFAULT_VALUE);
-    $this->setDepartamento(DEFAULT_VALUE);
-    $this->setBarrio(DEFAULT_VALUE);
-    $this->setLocalidad(DEFAULT_VALUE);
+    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->calle == UNDEFINED) $this->setCalle(null);
+    if($this->entre == UNDEFINED) $this->setEntre(null);
+    if($this->numero == UNDEFINED) $this->setNumero(null);
+    if($this->piso == UNDEFINED) $this->setPiso(null);
+    if($this->departamento == UNDEFINED) $this->setDepartamento(null);
+    if($this->barrio == UNDEFINED) $this->setBarrio(null);
+    if($this->localidad == UNDEFINED) $this->setLocalidad(null);
+    return $this;
   }
 
-  public function _fromArray(array $row = NULL, $p = ""){
+  public function _fromArray(array $row = NULL, string $p = ""){
     if(empty($row)) return;
     if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
     if(isset($row[$p."calle"])) $this->setCalle($row[$p."calle"]);
@@ -34,18 +35,19 @@ class _Domicilio extends EntityValues {
     if(isset($row[$p."departamento"])) $this->setDepartamento($row[$p."departamento"]);
     if(isset($row[$p."barrio"])) $this->setBarrio($row[$p."barrio"]);
     if(isset($row[$p."localidad"])) $this->setLocalidad($row[$p."localidad"]);
+    return $this;
   }
 
-  public function _toArray(){
+  public function _toArray(string $p = ""){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->calle !== UNDEFINED) $row["calle"] = $this->calle();
-    if($this->entre !== UNDEFINED) $row["entre"] = $this->entre();
-    if($this->numero !== UNDEFINED) $row["numero"] = $this->numero();
-    if($this->piso !== UNDEFINED) $row["piso"] = $this->piso();
-    if($this->departamento !== UNDEFINED) $row["departamento"] = $this->departamento();
-    if($this->barrio !== UNDEFINED) $row["barrio"] = $this->barrio();
-    if($this->localidad !== UNDEFINED) $row["localidad"] = $this->localidad();
+    if($this->id !== UNDEFINED) $row[$p."id"] = $this->id();
+    if($this->calle !== UNDEFINED) $row[$p."calle"] = $this->calle();
+    if($this->entre !== UNDEFINED) $row[$p."entre"] = $this->entre();
+    if($this->numero !== UNDEFINED) $row[$p."numero"] = $this->numero();
+    if($this->piso !== UNDEFINED) $row[$p."piso"] = $this->piso();
+    if($this->departamento !== UNDEFINED) $row[$p."departamento"] = $this->departamento();
+    if($this->barrio !== UNDEFINED) $row[$p."barrio"] = $this->barrio();
+    if($this->localidad !== UNDEFINED) $row[$p."localidad"] = $this->localidad();
     return $row;
   }
 
@@ -69,107 +71,94 @@ class _Domicilio extends EntityValues {
   public function departamento($format = null) { return Format::convertCase($this->departamento, $format); }
   public function barrio($format = null) { return Format::convertCase($this->barrio, $format); }
   public function localidad($format = null) { return Format::convertCase($this->localidad, $format); }
-  public function setId($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkId($p); 
-    if($check) $this->id = $p;
-    return $check;
-  }
 
-  public function setCalle($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkCalle($p); 
-    if($check) $this->calle = $p;
-    return $check;
-  }
+  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
+  public function setCalle($p) { $this->calle = (is_null($p)) ? null : (string)$p; }
+  public function setEntre($p) { $this->entre = (is_null($p)) ? null : (string)$p; }
+  public function setNumero($p) { $this->numero = (is_null($p)) ? null : (string)$p; }
+  public function setPiso($p) { $this->piso = (is_null($p)) ? null : (string)$p; }
+  public function setDepartamento($p) { $this->departamento = (is_null($p)) ? null : (string)$p; }
+  public function setBarrio($p) { $this->barrio = (is_null($p)) ? null : (string)$p; }
+  public function setLocalidad($p) { $this->localidad = (is_null($p)) ? null : (string)$p; }
 
-  public function setEntre($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkEntre($p); 
-    if($check) $this->entre = $p;
-    return $check;
-  }
-
-  public function setNumero($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkNumero($p); 
-    if($check) $this->numero = $p;
-    return $check;
-  }
-
-  public function setPiso($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkPiso($p); 
-    if($check) $this->piso = $p;
-    return $check;
-  }
-
-  public function setDepartamento($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkDepartamento($p); 
-    if($check) $this->departamento = $p;
-    return $check;
-  }
-
-  public function setBarrio($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkBarrio($p); 
-    if($check) $this->barrio = $p;
-    return $check;
-  }
-
-  public function setLocalidad($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkLocalidad($p); 
-    if($check) $this->localidad = $p;
-    return $check;
-  }
+  public function resetCalle() { if(!Validation::is_empty($this->calle)) $this->calle = preg_replace('/\s\s+/', ' ', trim($this->calle)); }
+  public function resetEntre() { if(!Validation::is_empty($this->entre)) $this->entre = preg_replace('/\s\s+/', ' ', trim($this->entre)); }
+  public function resetNumero() { if(!Validation::is_empty($this->numero)) $this->numero = preg_replace('/\s\s+/', ' ', trim($this->numero)); }
+  public function resetPiso() { if(!Validation::is_empty($this->piso)) $this->piso = preg_replace('/\s\s+/', ' ', trim($this->piso)); }
+  public function resetDepartamento() { if(!Validation::is_empty($this->departamento)) $this->departamento = preg_replace('/\s\s+/', ' ', trim($this->departamento)); }
+  public function resetBarrio() { if(!Validation::is_empty($this->barrio)) $this->barrio = preg_replace('/\s\s+/', ' ', trim($this->barrio)); }
+  public function resetLocalidad() { if(!Validation::is_empty($this->localidad)) $this->localidad = preg_replace('/\s\s+/', ' ', trim($this->localidad)); }
 
   public function checkId($value) { 
+      if(Validation::is_undefined($value)) return null;
       return true; 
   }
 
   public function checkCalle($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("calle", $v);
+    $this->_logs->resetLogs("calle");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("calle", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkEntre($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("entre", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkNumero($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("numero", $v);
+    $this->_logs->resetLogs("numero");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("numero", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkPiso($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("piso", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkDepartamento($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("departamento", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkBarrio($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("barrio", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkLocalidad($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("localidad", $v);
+    $this->_logs->resetLogs("localidad");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("localidad", "error", $error); }
+    return $v->isSuccess();
+  }
+
+  public function _check(){
+    $this->checkId($this->id);
+    $this->checkCalle($this->calle);
+    $this->checkEntre($this->entre);
+    $this->checkNumero($this->numero);
+    $this->checkPiso($this->piso);
+    $this->checkDepartamento($this->departamento);
+    $this->checkBarrio($this->barrio);
+    $this->checkLocalidad($this->localidad);
+    return !$this->_getLogs()->isError();
+  }
+
+  public function _reset(){
+    $this->resetCalle();
+    $this->resetEntre();
+    $this->resetNumero();
+    $this->resetPiso();
+    $this->resetDepartamento();
+    $this->resetBarrio();
+    $this->resetLocalidad();
+    return $this;
   }
 
 

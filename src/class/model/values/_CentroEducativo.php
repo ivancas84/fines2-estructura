@@ -10,26 +10,28 @@ class _CentroEducativo extends EntityValues {
   protected $domicilio = UNDEFINED;
 
   public function _setDefault(){
-    $this->setId(DEFAULT_VALUE);
-    $this->setNombre(DEFAULT_VALUE);
-    $this->setCue(DEFAULT_VALUE);
-    $this->setDomicilio(DEFAULT_VALUE);
+    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->nombre == UNDEFINED) $this->setNombre(null);
+    if($this->cue == UNDEFINED) $this->setCue(null);
+    if($this->domicilio == UNDEFINED) $this->setDomicilio(null);
+    return $this;
   }
 
-  public function _fromArray(array $row = NULL, $p = ""){
+  public function _fromArray(array $row = NULL, string $p = ""){
     if(empty($row)) return;
     if(isset($row[$p."id"])) $this->setId($row[$p."id"]);
     if(isset($row[$p."nombre"])) $this->setNombre($row[$p."nombre"]);
     if(isset($row[$p."cue"])) $this->setCue($row[$p."cue"]);
     if(isset($row[$p."domicilio"])) $this->setDomicilio($row[$p."domicilio"]);
+    return $this;
   }
 
-  public function _toArray(){
+  public function _toArray(string $p = ""){
     $row = [];
-    if($this->id !== UNDEFINED) $row["id"] = $this->id();
-    if($this->nombre !== UNDEFINED) $row["nombre"] = $this->nombre();
-    if($this->cue !== UNDEFINED) $row["cue"] = $this->cue();
-    if($this->domicilio !== UNDEFINED) $row["domicilio"] = $this->domicilio();
+    if($this->id !== UNDEFINED) $row[$p."id"] = $this->id();
+    if($this->nombre !== UNDEFINED) $row[$p."nombre"] = $this->nombre();
+    if($this->cue !== UNDEFINED) $row[$p."cue"] = $this->cue();
+    if($this->domicilio !== UNDEFINED) $row[$p."domicilio"] = $this->domicilio();
     return $row;
   }
 
@@ -45,55 +47,50 @@ class _CentroEducativo extends EntityValues {
   public function nombre($format = null) { return Format::convertCase($this->nombre, $format); }
   public function cue($format = null) { return Format::convertCase($this->cue, $format); }
   public function domicilio($format = null) { return Format::convertCase($this->domicilio, $format); }
-  public function setId($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkId($p); 
-    if($check) $this->id = $p;
-    return $check;
-  }
 
-  public function setNombre($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkNombre($p); 
-    if($check) $this->nombre = $p;
-    return $check;
-  }
+  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
+  public function setNombre($p) { $this->nombre = (is_null($p)) ? null : (string)$p; }
+  public function setCue($p) { $this->cue = (is_null($p)) ? null : (string)$p; }
+  public function setDomicilio($p) { $this->domicilio = (is_null($p)) ? null : (string)$p; }
 
-  public function setCue($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkCue($p); 
-    if($check) $this->cue = $p;
-    return $check;
-  }
-
-  public function setDomicilio($p) {
-    $p = ($p == DEFAULT_VALUE) ? null : trim($p);
-    $p = (is_null($p)) ? null : (string)$p;
-    $check = $this->checkDomicilio($p); 
-    if($check) $this->domicilio = $p;
-    return $check;
-  }
+  public function resetNombre() { if(!Validation::is_empty($this->nombre)) $this->nombre = preg_replace('/\s\s+/', ' ', trim($this->nombre)); }
+  public function resetCue() { if(!Validation::is_empty($this->cue)) $this->cue = preg_replace('/\s\s+/', ' ', trim($this->cue)); }
 
   public function checkId($value) { 
+      if(Validation::is_undefined($value)) return null;
       return true; 
   }
 
   public function checkNombre($value) { 
-    $v = Validation::getInstanceValue($value)->string()->required();
-    return $this->_setLogsValidation("nombre", $v);
+    $this->_logs->resetLogs("nombre");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->required();
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("nombre", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkCue($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("cue", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
   }
 
   public function checkDomicilio($value) { 
-    $v = Validation::getInstanceValue($value)->string();
-    return $this->_setLogsValidation("domicilio", $v);
+      if(Validation::is_undefined($value)) return null;
+      return true; 
+  }
+
+  public function _check(){
+    $this->checkId($this->id);
+    $this->checkNombre($this->nombre);
+    $this->checkCue($this->cue);
+    $this->checkDomicilio($this->domicilio);
+    return !$this->_getLogs()->isError();
+  }
+
+  public function _reset(){
+    $this->resetNombre();
+    $this->resetCue();
+    return $this;
   }
 
 

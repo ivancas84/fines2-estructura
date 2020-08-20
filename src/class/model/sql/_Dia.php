@@ -33,9 +33,7 @@ class _DiaSql extends EntitySql{
       case $p.'max_dia': return "MAX({$t}.dia)";
       case $p.'count_dia': return "COUNT({$t}.dia)";
 
-      case $p.'_label': return "CONCAT_WS(' ',
-{$t}.dia
-)";
+      case $p.'_label': return "CONCAT_WS(' ', {$t}.dia)";
       default: return null;
     }
   }
@@ -47,8 +45,7 @@ class _DiaSql extends EntitySql{
 ' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'numero') . ' AS ' . $p.'numero, ' . $this->_mappingField($p.'dia') . ' AS ' . $p.'dia';
   }
 
-  public function _fieldsDb(){
-    //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
+  public function _fieldsExclusive(){
     $p = $this->prf();
     return '
 ' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'numero') . ', ' . $this->_mappingField($p.'dia') . '';
@@ -57,66 +54,66 @@ class _DiaSql extends EntitySql{
   public function _conditionFieldStruct($field, $option, $value){
     $p = $this->prf();
 
-    $f = $this->_mappingField($field);
     switch ($field){
-      case "{$p}id": return $this->format->conditionText($f, $value, $option);
-      case "{$p}numero": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}dia": return $this->format->conditionText($f, $value, $option);
+      case "{$p}id": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}id"), $value, $option);
 
-      case "{$p}max_id": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_id": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_id": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}numero": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}numero_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}numero"), $value, $option);
 
-      case "{$p}sum_numero": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}avg_numero": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}max_numero": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_numero": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_numero": return $this->format->conditionNumber($f, $value, $option);
+      case "{$p}dia": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}dia_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}dia"), $value, $option);
 
-      case "{$p}max_dia": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}min_dia": return $this->format->conditionNumber($f, $value, $option);
-      case "{$p}count_dia": return $this->format->conditionNumber($f, $value, $option);
+
+      case "{$p}max_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_id"), $value, $option);
+
+      case "{$p}min_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_id"), $value, $option);
+
+      case "{$p}count_id": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_id_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_id"), $value, $option);
+
+
+      case "{$p}sum_numero": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}sum_numero_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}sum_numero"), $value, $option);
+
+      case "{$p}avg_numero": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}avg_numero_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}avg_numero"), $value, $option);
+
+      case "{$p}max_numero": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_numero_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_numero"), $value, $option);
+
+      case "{$p}min_numero": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_numero_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_numero"), $value, $option);
+
+      case "{$p}count_numero": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_numero_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_numero"), $value, $option);
+
+
+      case "{$p}max_dia": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_dia_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_dia"), $value, $option);
+
+      case "{$p}min_dia": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_dia_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_dia"), $value, $option);
+
+      case "{$p}count_dia": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_dia_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_dia"), $value, $option);
+
 
       default: return $this->_conditionFieldStructMain($field, $option, $value);
     }
   }
 
-  public function initializeInsert(array $data){
-    $data['id'] = (!empty($data['id'])) ? $data['id'] : Ma::nextId('dia');
-    if(!isset($data['numero']) || ($data['numero'] == '')) throw new Exception('dato obligatorio sin valor: numero');
-    if(!isset($data['dia']) || is_null($data['dia']) || $data['dia'] == "") throw new Exception('dato obligatorio sin valor: dia');
-
-    return $data;
-  }
-
-
-  public function initializeUpdate(array $data){
-    if(array_key_exists('id', $data)) { if(is_null($data['id']) || $data['id'] == "") throw new Exception('dato obligatorio sin valor: id'); }
-    if(array_key_exists('numero', $data)) { if(!isset($data['numero']) || ($data['numero'] == '')) throw new Exception('dato obligatorio sin valor: numero'); }
-    if(array_key_exists('dia', $data)) { if(is_null($data['dia']) || $data['dia'] == "") throw new Exception('dato obligatorio sin valor: dia'); }
-
-    return $data;
-  }
-
 
   public function format(array $row){
     $row_ = array();
-   if(isset($row['id']) )  $row_['id'] = $this->format->escapeString($row['id']);
-    if(isset($row['numero'])) $row_['numero'] = $this->format->numeric($row['numero']);
-    if(isset($row['dia'])) $row_['dia'] = $this->format->escapeString($row['dia']);
+    if(array_key_exists('id', $row))  $row_['id'] = $this->format->string($row['id']);
+    if(array_key_exists('numero', $row)) $row_['numero'] = $this->format->numeric($row['numero']);
+    if(array_key_exists('dia', $row)) $row_['dia'] = $this->format->string($row['dia']);
 
     return $row_;
   }
-  public function _json(array $row = NULL){
-    if(empty($row)) return null;
-    $prefix = $this->prf();
-    $row_ = [];
-    $row_["id"] = (is_null($row[$prefix . "id"])) ? null : (string)$row[$prefix . "id"]; //la pk se trata como string debido a un comportamiento erratico en angular 2 que al tratarlo como integer resta 1 en el valor
-    $row_["numero"] = (is_null($row[$prefix . "numero"])) ? null : intval($row[$prefix . "numero"]);
-    $row_["dia"] = (is_null($row[$prefix . "dia"])) ? null : (string)$row[$prefix . "dia"];
-    return $row_;
-  }
-
 
 
 }
