@@ -8,7 +8,7 @@ class _FieldHorarioHoraInicio extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = false;
   public $main = false;
   public $name = "hora_inicio";

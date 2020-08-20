@@ -8,7 +8,7 @@ class _FieldAsignaturaNombre extends Field {
   public $fieldType = "nf";
   public $unique = true;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "255";
   public $main = false;
   public $name = "nombre";

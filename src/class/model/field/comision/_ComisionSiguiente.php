@@ -8,7 +8,7 @@ class _FieldComisionComisionSiguiente extends Field {
   public $fieldType = "mu";
   public $unique = false;
   public $notNull = false;
-  public $default = false;
+  public $default = null;
   public $length = "45";
   public $main = false;
   public $name = "comision_siguiente";

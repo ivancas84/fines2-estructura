@@ -8,7 +8,7 @@ class _FieldEmailVerificado extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = "0";
   public $length = "1";
   public $main = false;
   public $name = "verificado";
