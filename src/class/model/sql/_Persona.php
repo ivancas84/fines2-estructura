@@ -23,6 +23,8 @@ class _PersonaSql extends EntitySql{
       case $p.'cuil': return $t.".cuil";
       case $p.'genero': return $t.".genero";
       case $p.'apodo': return $t.".apodo";
+      case $p.'telefono': return $t.".telefono";
+      case $p.'email': return $t.".email";
       case $p.'alta': return $t.".alta";
       case $p.'alta_date': return "CAST({$t}.alta AS DATE)";
       case $p.'domicilio': return $t.".domicilio";
@@ -60,6 +62,14 @@ class _PersonaSql extends EntitySql{
       case $p.'max_apodo': return "MAX({$t}.apodo)";
       case $p.'count_apodo': return "COUNT({$t}.apodo)";
 
+      case $p.'min_telefono': return "MIN({$t}.telefono)";
+      case $p.'max_telefono': return "MAX({$t}.telefono)";
+      case $p.'count_telefono': return "COUNT({$t}.telefono)";
+
+      case $p.'min_email': return "MIN({$t}.email)";
+      case $p.'max_email': return "MAX({$t}.email)";
+      case $p.'count_email': return "COUNT({$t}.email)";
+
       case $p.'avg_alta': return "AVG({$t}.alta)";
       case $p.'min_alta': return "MIN({$t}.alta)";
       case $p.'max_alta': return "MAX({$t}.alta)";
@@ -84,13 +94,13 @@ class _PersonaSql extends EntitySql{
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
     $p = $this->prf();
     return '
-' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'nombres') . ' AS ' . $p.'nombres, ' . $this->_mappingField($p.'apellidos') . ' AS ' . $p.'apellidos, ' . $this->_mappingField($p.'fecha_nacimiento') . ' AS ' . $p.'fecha_nacimiento, ' . $this->_mappingField($p.'numero_documento') . ' AS ' . $p.'numero_documento, ' . $this->_mappingField($p.'cuil') . ' AS ' . $p.'cuil, ' . $this->_mappingField($p.'genero') . ' AS ' . $p.'genero, ' . $this->_mappingField($p.'apodo') . ' AS ' . $p.'apodo, ' . $this->_mappingField($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingField($p.'domicilio') . ' AS ' . $p.'domicilio';
+' . $this->_mappingField($p.'id') . ' AS ' . $p.'id, ' . $this->_mappingField($p.'nombres') . ' AS ' . $p.'nombres, ' . $this->_mappingField($p.'apellidos') . ' AS ' . $p.'apellidos, ' . $this->_mappingField($p.'fecha_nacimiento') . ' AS ' . $p.'fecha_nacimiento, ' . $this->_mappingField($p.'numero_documento') . ' AS ' . $p.'numero_documento, ' . $this->_mappingField($p.'cuil') . ' AS ' . $p.'cuil, ' . $this->_mappingField($p.'genero') . ' AS ' . $p.'genero, ' . $this->_mappingField($p.'apodo') . ' AS ' . $p.'apodo, ' . $this->_mappingField($p.'telefono') . ' AS ' . $p.'telefono, ' . $this->_mappingField($p.'email') . ' AS ' . $p.'email, ' . $this->_mappingField($p.'alta') . ' AS ' . $p.'alta, ' . $this->_mappingField($p.'domicilio') . ' AS ' . $p.'domicilio';
   }
 
   public function _fieldsExclusive(){
     $p = $this->prf();
     return '
-' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'nombres') . ', ' . $this->_mappingField($p.'apellidos') . ', ' . $this->_mappingField($p.'fecha_nacimiento') . ', ' . $this->_mappingField($p.'numero_documento') . ', ' . $this->_mappingField($p.'cuil') . ', ' . $this->_mappingField($p.'genero') . ', ' . $this->_mappingField($p.'apodo') . ', ' . $this->_mappingField($p.'alta') . ', ' . $this->_mappingField($p.'domicilio') . '';
+' . $this->_mappingField($p.'id') . ', ' . $this->_mappingField($p.'nombres') . ', ' . $this->_mappingField($p.'apellidos') . ', ' . $this->_mappingField($p.'fecha_nacimiento') . ', ' . $this->_mappingField($p.'numero_documento') . ', ' . $this->_mappingField($p.'cuil') . ', ' . $this->_mappingField($p.'genero') . ', ' . $this->_mappingField($p.'apodo') . ', ' . $this->_mappingField($p.'telefono') . ', ' . $this->_mappingField($p.'email') . ', ' . $this->_mappingField($p.'alta') . ', ' . $this->_mappingField($p.'domicilio') . '';
   }
 
   public function fields(){
@@ -131,6 +141,12 @@ class _PersonaSql extends EntitySql{
 
       case "{$p}apodo": return $this->format->conditionText($this->_mappingField($field), $value, $option);
       case "{$p}apodo_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}apodo"), $value, $option);
+
+      case "{$p}telefono": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}telefono_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}telefono"), $value, $option);
+
+      case "{$p}email": return $this->format->conditionText($this->_mappingField($field), $value, $option);
+      case "{$p}email_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}email"), $value, $option);
 
       case "{$p}alta": return $this->format->conditionTimestamp($this->_mappingField($field), $value, $option);
       case "{$p}alta_date": return $this->format->conditionDate($this->_mappingField($field), $value, $option);
@@ -223,6 +239,26 @@ class _PersonaSql extends EntitySql{
       case "{$p}count_apodo_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_apodo"), $value, $option);
 
 
+      case "{$p}max_telefono": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_telefono_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_telefono"), $value, $option);
+
+      case "{$p}min_telefono": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_telefono_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_telefono"), $value, $option);
+
+      case "{$p}count_telefono": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_telefono_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_telefono"), $value, $option);
+
+
+      case "{$p}max_email": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}max_email_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}max_email"), $value, $option);
+
+      case "{$p}min_email": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}min_email_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}min_email"), $value, $option);
+
+      case "{$p}count_email": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
+      case "{$p}count_email_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}count_email"), $value, $option);
+
+
       case "{$p}avg_alta": return $this->format->conditionNumber($this->_mappingField($field), $value, $option);
       case "{$p}avg_alta_is_set": return $this->format->conditionIsSet($this->_mappingField("{$p}avg_alta"), $value, $option);
 
@@ -271,6 +307,8 @@ class _PersonaSql extends EntitySql{
     if(array_key_exists('cuil', $row)) $row_['cuil'] = $this->format->string($row['cuil']);
     if(array_key_exists('genero', $row)) $row_['genero'] = $this->format->string($row['genero']);
     if(array_key_exists('apodo', $row)) $row_['apodo'] = $this->format->string($row['apodo']);
+    if(array_key_exists('telefono', $row)) $row_['telefono'] = $this->format->string($row['telefono']);
+    if(array_key_exists('email', $row)) $row_['email'] = $this->format->string($row['email']);
     if(array_key_exists('alta', $row)) $row_['alta'] = $this->format->timestamp($row['alta']);
     if(array_key_exists('domicilio', $row)) $row_['domicilio'] = $this->format->string($row['domicilio']);
 

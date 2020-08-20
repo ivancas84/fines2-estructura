@@ -12,6 +12,8 @@ class _Persona extends EntityValues {
   protected $cuil = UNDEFINED;
   protected $genero = UNDEFINED;
   protected $apodo = UNDEFINED;
+  protected $telefono = UNDEFINED;
+  protected $email = UNDEFINED;
   protected $alta = UNDEFINED;
   protected $domicilio = UNDEFINED;
 
@@ -24,6 +26,8 @@ class _Persona extends EntityValues {
     if($this->cuil == UNDEFINED) $this->setCuil(null);
     if($this->genero == UNDEFINED) $this->setGenero(null);
     if($this->apodo == UNDEFINED) $this->setApodo(null);
+    if($this->telefono == UNDEFINED) $this->setTelefono(null);
+    if($this->email == UNDEFINED) $this->setEmail(null);
     if($this->alta == UNDEFINED) $this->setAlta(date('c'));
     if($this->domicilio == UNDEFINED) $this->setDomicilio(null);
     return $this;
@@ -39,6 +43,8 @@ class _Persona extends EntityValues {
     if(isset($row[$p."cuil"])) $this->setCuil($row[$p."cuil"]);
     if(isset($row[$p."genero"])) $this->setGenero($row[$p."genero"]);
     if(isset($row[$p."apodo"])) $this->setApodo($row[$p."apodo"]);
+    if(isset($row[$p."telefono"])) $this->setTelefono($row[$p."telefono"]);
+    if(isset($row[$p."email"])) $this->setEmail($row[$p."email"]);
     if(isset($row[$p."alta"])) $this->setAlta($row[$p."alta"]);
     if(isset($row[$p."domicilio"])) $this->setDomicilio($row[$p."domicilio"]);
     return $this;
@@ -54,6 +60,8 @@ class _Persona extends EntityValues {
     if($this->cuil !== UNDEFINED) $row[$p."cuil"] = $this->cuil();
     if($this->genero !== UNDEFINED) $row[$p."genero"] = $this->genero();
     if($this->apodo !== UNDEFINED) $row[$p."apodo"] = $this->apodo();
+    if($this->telefono !== UNDEFINED) $row[$p."telefono"] = $this->telefono();
+    if($this->email !== UNDEFINED) $row[$p."email"] = $this->email();
     if($this->alta !== UNDEFINED) $row[$p."alta"] = $this->alta("c");
     if($this->domicilio !== UNDEFINED) $row[$p."domicilio"] = $this->domicilio();
     return $row;
@@ -68,6 +76,8 @@ class _Persona extends EntityValues {
     if(!Validation::is_empty($this->cuil)) return false;
     if(!Validation::is_empty($this->genero)) return false;
     if(!Validation::is_empty($this->apodo)) return false;
+    if(!Validation::is_empty($this->telefono)) return false;
+    if(!Validation::is_empty($this->email)) return false;
     if(!Validation::is_empty($this->alta)) return false;
     if(!Validation::is_empty($this->domicilio)) return false;
     return true;
@@ -81,6 +91,8 @@ class _Persona extends EntityValues {
   public function cuil($format = null) { return Format::convertCase($this->cuil, $format); }
   public function genero($format = null) { return Format::convertCase($this->genero, $format); }
   public function apodo($format = null) { return Format::convertCase($this->apodo, $format); }
+  public function telefono($format = null) { return Format::convertCase($this->telefono, $format); }
+  public function email($format = null) { return Format::convertCase($this->email, $format); }
   public function alta($format = null) { return Format::date($this->alta, $format); }
   public function domicilio($format = null) { return Format::convertCase($this->domicilio, $format); }
 
@@ -102,6 +114,8 @@ class _Persona extends EntityValues {
   public function setCuil($p) { $this->cuil = (is_null($p)) ? null : (string)$p; }
   public function setGenero($p) { $this->genero = (is_null($p)) ? null : (string)$p; }
   public function setApodo($p) { $this->apodo = (is_null($p)) ? null : (string)$p; }
+  public function setTelefono($p) { $this->telefono = (is_null($p)) ? null : (string)$p; }
+  public function setEmail($p) { $this->email = (is_null($p)) ? null : (string)$p; }
   public function _setAlta(DateTime $p = null) { $this->alta = $p; }
 
   public function setAlta($p) {
@@ -120,6 +134,8 @@ class _Persona extends EntityValues {
   public function resetCuil() { if(!Validation::is_empty($this->cuil)) $this->cuil = preg_replace('/\s\s+/', ' ', trim($this->cuil)); }
   public function resetGenero() { if(!Validation::is_empty($this->genero)) $this->genero = preg_replace('/\s\s+/', ' ', trim($this->genero)); }
   public function resetApodo() { if(!Validation::is_empty($this->apodo)) $this->apodo = preg_replace('/\s\s+/', ' ', trim($this->apodo)); }
+  public function resetTelefono() { if(!Validation::is_empty($this->telefono)) $this->telefono = preg_replace('/\s\s+/', ' ', trim($this->telefono)); }
+  public function resetEmail() { if(!Validation::is_empty($this->email)) $this->email = preg_replace('/\s\s+/', ' ', trim($this->email)); }
 
   public function checkId($value) { 
       if(Validation::is_undefined($value)) return null;
@@ -167,6 +183,16 @@ class _Persona extends EntityValues {
       return true; 
   }
 
+  public function checkTelefono($value) { 
+      if(Validation::is_undefined($value)) return null;
+      return true; 
+  }
+
+  public function checkEmail($value) { 
+      if(Validation::is_undefined($value)) return null;
+      return true; 
+  }
+
   public function checkAlta($value) { 
     $this->_logs->resetLogs("alta");
     if(Validation::is_undefined($value)) return null;
@@ -189,6 +215,8 @@ class _Persona extends EntityValues {
     $this->checkCuil($this->cuil);
     $this->checkGenero($this->genero);
     $this->checkApodo($this->apodo);
+    $this->checkTelefono($this->telefono);
+    $this->checkEmail($this->email);
     $this->checkAlta($this->alta);
     $this->checkDomicilio($this->domicilio);
     return !$this->_getLogs()->isError();
@@ -201,6 +229,8 @@ class _Persona extends EntityValues {
     $this->resetCuil();
     $this->resetGenero();
     $this->resetApodo();
+    $this->resetTelefono();
+    $this->resetEmail();
     return $this;
   }
 
