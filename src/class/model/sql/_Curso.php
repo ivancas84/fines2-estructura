@@ -58,8 +58,6 @@ class _CursoSql extends EntitySql{
     if($f = EntitySql::getInstanceRequire('tipo_sede', 'com_sed_ts')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('centro_educativo', 'com_sed_ce')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('domicilio', 'com_sed_ce_dom')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('persona', 'com_sed_coo')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('domicilio', 'com_sed_coo_dom')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('modalidad', 'com_moa')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('planificacion', 'com_pla')->_mappingField($field)) return $f;
     if($f = EntitySql::getInstanceRequire('plan', 'com_pla_plb')->_mappingField($field)) return $f;
@@ -89,8 +87,6 @@ class _CursoSql extends EntitySql{
 ' . EntitySql::getInstanceRequire('tipo_sede', 'com_sed_ts')->_fields() . ',
 ' . EntitySql::getInstanceRequire('centro_educativo', 'com_sed_ce')->_fields() . ',
 ' . EntitySql::getInstanceRequire('domicilio', 'com_sed_ce_dom')->_fields() . ',
-' . EntitySql::getInstanceRequire('persona', 'com_sed_coo')->_fields() . ',
-' . EntitySql::getInstanceRequire('domicilio', 'com_sed_coo_dom')->_fields() . ',
 ' . EntitySql::getInstanceRequire('modalidad', 'com_moa')->_fields() . ',
 ' . EntitySql::getInstanceRequire('planificacion', 'com_pla')->_fields() . ',
 ' . EntitySql::getInstanceRequire('plan', 'com_pla_plb')->_fields() . ',
@@ -106,8 +102,6 @@ class _CursoSql extends EntitySql{
 ' . EntitySql::getInstanceRequire('tipo_sede', 'com_sed_ts')->_join('tipo_sede', 'com_sed', $render) . '
 ' . EntitySql::getInstanceRequire('centro_educativo', 'com_sed_ce')->_join('centro_educativo', 'com_sed', $render) . '
 ' . EntitySql::getInstanceRequire('domicilio', 'com_sed_ce_dom')->_join('domicilio', 'com_sed_ce', $render) . '
-' . EntitySql::getInstanceRequire('persona', 'com_sed_coo')->_join('coordinador', 'com_sed', $render) . '
-' . EntitySql::getInstanceRequire('domicilio', 'com_sed_coo_dom')->_join('domicilio', 'com_sed_coo', $render) . '
 ' . EntitySql::getInstanceRequire('modalidad', 'com_moa')->_join('modalidad', 'com', $render) . '
 ' . EntitySql::getInstanceRequire('planificacion', 'com_pla')->_join('planificacion', 'com', $render) . '
 ' . EntitySql::getInstanceRequire('plan', 'com_pla_plb')->_join('plan', 'com_pla', $render) . '
@@ -208,8 +202,6 @@ class _CursoSql extends EntitySql{
     if($c = EntitySql::getInstanceRequire('tipo_sede','com_sed_ts')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('centro_educativo','com_sed_ce')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','com_sed_ce_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('persona','com_sed_coo')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','com_sed_coo_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('modalidad','com_moa')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('planificacion','com_pla')->_conditionFieldStruct($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','com_pla_plb')->_conditionFieldStruct($field, $option, $value)) return $c;
@@ -225,8 +217,6 @@ class _CursoSql extends EntitySql{
     if($c = EntitySql::getInstanceRequire('tipo_sede','com_sed_ts')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('centro_educativo','com_sed_ce')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('domicilio','com_sed_ce_dom')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('persona','com_sed_coo')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','com_sed_coo_dom')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('modalidad','com_moa')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('planificacion','com_pla')->_conditionFieldAux($field, $option, $value)) return $c;
     if($c = EntitySql::getInstanceRequire('plan','com_pla_plb')->_conditionFieldAux($field, $option, $value)) return $c;

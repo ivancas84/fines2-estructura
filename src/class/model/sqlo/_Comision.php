@@ -80,8 +80,6 @@ UPDATE " . $this->entity->sn_() . " SET
     if(!is_null($row['sed_ts_id'])) $row_["sede_"]["tipo_sede_"] = EntityValues::getInstanceRequire('tipo_sede')->_fromArray($row, 'sed_ts_')->_toArray();
     if(!is_null($row['sed_ce_id'])) $row_["sede_"]["centro_educativo_"] = EntityValues::getInstanceRequire('centro_educativo')->_fromArray($row, 'sed_ce_')->_toArray();
     if(!is_null($row['sed_ce_dom_id'])) $row_["sede_"]["centro_educativo_"]["domicilio_"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'sed_ce_dom_')->_toArray();
-    if(!is_null($row['sed_coo_id'])) $row_["sede_"]["coordinador_"] = EntityValues::getInstanceRequire('persona')->_fromArray($row, 'sed_coo_')->_toArray();
-    if(!is_null($row['sed_coo_dom_id'])) $row_["sede_"]["coordinador_"]["domicilio_"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'sed_coo_dom_')->_toArray();
     if(!is_null($row['moa_id'])) $row_["modalidad_"] = EntityValues::getInstanceRequire('modalidad')->_fromArray($row, 'moa_')->_toArray();
     if(!is_null($row['pla_id'])) $row_["planificacion_"] = EntityValues::getInstanceRequire('planificacion')->_fromArray($row, 'pla_')->_toArray();
     if(!is_null($row['pla_plb_id'])) $row_["planificacion_"]["plan_"] = EntityValues::getInstanceRequire('plan')->_fromArray($row, 'pla_plb_')->_toArray();
@@ -97,8 +95,6 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede')->_fromArray($row, 'sed_ts_');
     $row_["centro_educativo"] = EntityValues::getInstanceRequire('centro_educativo')->_fromArray($row, 'sed_ce_');
     $row_["domicilio1"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'sed_ce_dom_');
-    $row_["coordinador"] = EntityValues::getInstanceRequire('persona')->_fromArray($row, 'sed_coo_');
-    $row_["domicilio2"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'sed_coo_dom_');
     $row_["modalidad"] = EntityValues::getInstanceRequire('modalidad')->_fromArray($row, 'moa_');
     $row_["planificacion"] = EntityValues::getInstanceRequire('planificacion')->_fromArray($row, 'pla_');
     $row_["plan"] = EntityValues::getInstanceRequire('plan')->_fromArray($row, 'pla_plb_');

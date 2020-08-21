@@ -13,7 +13,6 @@ class _Sede extends EntityValues {
   protected $domicilio = UNDEFINED;
   protected $tipoSede = UNDEFINED;
   protected $centroEducativo = UNDEFINED;
-  protected $coordinador = UNDEFINED;
 
   public function _setDefault(){
     if($this->id == UNDEFINED) $this->setId(null);
@@ -25,7 +24,6 @@ class _Sede extends EntityValues {
     if($this->domicilio == UNDEFINED) $this->setDomicilio(null);
     if($this->tipoSede == UNDEFINED) $this->setTipoSede(null);
     if($this->centroEducativo == UNDEFINED) $this->setCentroEducativo(null);
-    if($this->coordinador == UNDEFINED) $this->setCoordinador(null);
     return $this;
   }
 
@@ -40,7 +38,6 @@ class _Sede extends EntityValues {
     if(isset($row[$p."domicilio"])) $this->setDomicilio($row[$p."domicilio"]);
     if(isset($row[$p."tipo_sede"])) $this->setTipoSede($row[$p."tipo_sede"]);
     if(isset($row[$p."centro_educativo"])) $this->setCentroEducativo($row[$p."centro_educativo"]);
-    if(isset($row[$p."coordinador"])) $this->setCoordinador($row[$p."coordinador"]);
     return $this;
   }
 
@@ -55,7 +52,6 @@ class _Sede extends EntityValues {
     if($this->domicilio !== UNDEFINED) $row[$p."domicilio"] = $this->domicilio();
     if($this->tipoSede !== UNDEFINED) $row[$p."tipo_sede"] = $this->tipoSede();
     if($this->centroEducativo !== UNDEFINED) $row[$p."centro_educativo"] = $this->centroEducativo();
-    if($this->coordinador !== UNDEFINED) $row[$p."coordinador"] = $this->coordinador();
     return $row;
   }
 
@@ -69,7 +65,6 @@ class _Sede extends EntityValues {
     if(!Validation::is_empty($this->domicilio)) return false;
     if(!Validation::is_empty($this->tipoSede)) return false;
     if(!Validation::is_empty($this->centroEducativo)) return false;
-    if(!Validation::is_empty($this->coordinador)) return false;
     return true;
   }
 
@@ -82,7 +77,6 @@ class _Sede extends EntityValues {
   public function domicilio($format = null) { return Format::convertCase($this->domicilio, $format); }
   public function tipoSede($format = null) { return Format::convertCase($this->tipoSede, $format); }
   public function centroEducativo($format = null) { return Format::convertCase($this->centroEducativo, $format); }
-  public function coordinador() { return $this->coordinador; }
 
   public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
   public function setNumero($p) { $this->numero = (is_null($p)) ? null : (string)$p; }
@@ -111,7 +105,6 @@ class _Sede extends EntityValues {
   public function setDomicilio($p) { $this->domicilio = (is_null($p)) ? null : (string)$p; }
   public function setTipoSede($p) { $this->tipoSede = (is_null($p)) ? null : (string)$p; }
   public function setCentroEducativo($p) { $this->centroEducativo = (is_null($p)) ? null : (string)$p; }
-  public function setCoordinador($p) { $this->coordinador = (is_null($p)) ? null : (string)$p; }
 
   public function resetNumero() { if(!Validation::is_empty($this->numero)) $this->numero = preg_replace('/\s\s+/', ' ', trim($this->numero)); }
   public function resetNombre() { if(!Validation::is_empty($this->nombre)) $this->nombre = preg_replace('/\s\s+/', ' ', trim($this->nombre)); }
@@ -171,11 +164,6 @@ class _Sede extends EntityValues {
       return true; 
   }
 
-  public function checkCoordinador($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
-  }
-
   public function _check(){
     $this->checkId($this->id);
     $this->checkNumero($this->numero);
@@ -186,7 +174,6 @@ class _Sede extends EntityValues {
     $this->checkDomicilio($this->domicilio);
     $this->checkTipoSede($this->tipoSede);
     $this->checkCentroEducativo($this->centroEducativo);
-    $this->checkCoordinador($this->coordinador);
     return !$this->_getLogs()->isError();
   }
 

@@ -4,8 +4,6 @@ domicilio - com_sed_dom
 tipo_sede - com_sed_ts
 centro_educativo - com_sed_ce
 domicilio - com_sed_ce_dom
-persona - com_sed_coo
-domicilio - com_sed_coo_dom
 modalidad - com_moa
 planificacion - com_pla
 plan - com_pla_plb

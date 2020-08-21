@@ -3,8 +3,6 @@ domicilio - sed_dom
 tipo_sede - sed_ts
 centro_educativo - sed_ce
 domicilio - sed_ce_dom
-persona - sed_coo
-domicilio - sed_coo_dom
 modalidad - moa
 planificacion - pla
 plan - pla_plb

@@ -63,8 +63,6 @@ UPDATE " . $this->entity->sn_() . " SET
     if(!is_null($row['sed_ts_id'])) $row_["sede_"]["tipo_sede_"] = EntityValues::getInstanceRequire('tipo_sede')->_fromArray($row, 'sed_ts_')->_toArray();
     if(!is_null($row['sed_ce_id'])) $row_["sede_"]["centro_educativo_"] = EntityValues::getInstanceRequire('centro_educativo')->_fromArray($row, 'sed_ce_')->_toArray();
     if(!is_null($row['sed_ce_dom_id'])) $row_["sede_"]["centro_educativo_"]["domicilio_"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'sed_ce_dom_')->_toArray();
-    if(!is_null($row['sed_coo_id'])) $row_["sede_"]["coordinador_"] = EntityValues::getInstanceRequire('persona')->_fromArray($row, 'sed_coo_')->_toArray();
-    if(!is_null($row['sed_coo_dom_id'])) $row_["sede_"]["coordinador_"]["domicilio_"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'sed_coo_dom_')->_toArray();
     if(!is_null($row['per_id'])) $row_["persona_"] = EntityValues::getInstanceRequire('persona')->_fromArray($row, 'per_')->_toArray();
     if(!is_null($row['per_dom_id'])) $row_["persona_"]["domicilio_"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'per_dom_')->_toArray();
     return $row_;
@@ -79,10 +77,8 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede')->_fromArray($row, 'sed_ts_');
     $row_["centro_educativo"] = EntityValues::getInstanceRequire('centro_educativo')->_fromArray($row, 'sed_ce_');
     $row_["domicilio1"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'sed_ce_dom_');
-    $row_["coordinador"] = EntityValues::getInstanceRequire('persona')->_fromArray($row, 'sed_coo_');
-    $row_["domicilio2"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'sed_coo_dom_');
     $row_["persona"] = EntityValues::getInstanceRequire('persona')->_fromArray($row, 'per_');
-    $row_["domicilio3"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'per_dom_');
+    $row_["domicilio2"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'per_dom_');
     return $row_;
   }
 

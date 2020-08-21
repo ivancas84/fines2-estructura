@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/model/values/centroEducativo/_CentroEducativo.php");
+require_once("class/model/values/_CentroEducativo.php");
 
 class CentroEducativo extends _CentroEducativo{
 

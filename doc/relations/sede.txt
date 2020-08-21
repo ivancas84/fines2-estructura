@@ -2,8 +2,6 @@ domicilio - dom
 tipo_sede - ts
 centro_educativo - ce
 domicilio - ce_dom
-persona - coo
-domicilio - coo_dom
 
 id (id): string pk. NOT NULL. UNIQUE.
 numero (num): string nf. NOT NULL. MAIN.
@@ -14,6 +12,5 @@ baja (baj): timestamp nf.
 domicilio (dom): string mu.
 tipo_sede (ts): string mu.
 centro_educativo (ce): string mu.
-coordinador (coo): integer fk. NOT ADMIN.
 
 UNIQUE MULTIPLE: numero, centro_educativo

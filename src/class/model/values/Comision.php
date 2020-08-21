@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/model/values/comision/_Comision.php");
+require_once("class/model/values/_Comision.php");
 
 class Comision extends _Comision{
 

@@ -64,8 +64,6 @@ UPDATE " . $this->entity->sn_() . " SET
     if(!is_null($row['ts_id'])) $row_["tipo_sede_"] = EntityValues::getInstanceRequire('tipo_sede')->_fromArray($row, 'ts_')->_toArray();
     if(!is_null($row['ce_id'])) $row_["centro_educativo_"] = EntityValues::getInstanceRequire('centro_educativo')->_fromArray($row, 'ce_')->_toArray();
     if(!is_null($row['ce_dom_id'])) $row_["centro_educativo_"]["domicilio_"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'ce_dom_')->_toArray();
-    if(!is_null($row['coo_id'])) $row_["coordinador_"] = EntityValues::getInstanceRequire('persona')->_fromArray($row, 'coo_')->_toArray();
-    if(!is_null($row['coo_dom_id'])) $row_["coordinador_"]["domicilio_"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'coo_dom_')->_toArray();
     return $row_;
   }
 
@@ -76,8 +74,6 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede')->_fromArray($row, 'ts_');
     $row_["centro_educativo"] = EntityValues::getInstanceRequire('centro_educativo')->_fromArray($row, 'ce_');
     $row_["domicilio1"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'ce_dom_');
-    $row_["coordinador"] = EntityValues::getInstanceRequire('persona')->_fromArray($row, 'coo_');
-    $row_["domicilio2"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'coo_dom_');
     return $row_;
   }
 
