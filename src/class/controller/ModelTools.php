@@ -1,6 +1,5 @@
 <?php
 
-require_once("class/model/db/Dba.php");
 require_once("class/model/Render.php");
 require_once("class/model/Ma.php");
 
@@ -115,7 +114,10 @@ WHERE curso.id IN ('{$idCursos_}')
 GROUP BY curso.id 
   ";
 
-    return Dba::fetchAll($sql);
+    $result = Ma::open()->query($sql);
+    $rows = $result->fetch_all(MYSQLI_ASSOC);
+    $result->free();
+    return $rows;
   }
 
   public static function cursosConHorariosDeComision($idComision){
@@ -129,7 +131,10 @@ GROUP BY curso.id
   GROUP BY curso.id
   ";
 
-    return Dba::fetchAll($sql);
+    $result = Ma::open()->query($sql);
+    $rows = $result->fetch_all(MYSQLI_ASSOC);
+    $result->free();
+    return $rows;
   }
 
   
@@ -172,7 +177,10 @@ GROUP BY curso.id
     
 ";
 
-    return Dba::fetchAll($sql);    
+    $result = Ma::open()->query($sql);
+    $rows = $result->fetch_all(MYSQLI_ASSOC);
+    $result->free();
+    return $rows;
   }
 
 
