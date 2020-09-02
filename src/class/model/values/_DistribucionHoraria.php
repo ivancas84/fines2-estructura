@@ -11,7 +11,7 @@ class _DistribucionHoraria extends EntityValues {
   protected $planificacion = UNDEFINED;
 
   public function _setDefault(){
-    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->id == UNDEFINED) $this->setId(uniqid());
     if($this->horasCatedra == UNDEFINED) $this->setHorasCatedra(null);
     if($this->dia == UNDEFINED) $this->setDia(null);
     if($this->asignatura == UNDEFINED) $this->setAsignatura(null);
@@ -54,11 +54,21 @@ class _DistribucionHoraria extends EntityValues {
   public function asignatura($format = null) { return Format::convertCase($this->asignatura, $format); }
   public function planificacion($format = null) { return Format::convertCase($this->planificacion, $format); }
 
-  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
-  public function setHorasCatedra($p) { $this->horasCatedra = (is_null($p)) ? null : intval($p); }
-  public function setDia($p) { $this->dia = (is_null($p)) ? null : intval($p); }
-  public function setAsignatura($p) { $this->asignatura = (is_null($p)) ? null : (string)$p; }
-  public function setPlanificacion($p) { $this->planificacion = (is_null($p)) ? null : (string)$p; }
+  public function _setId(string $p = null) { return $this->id = $p; }  
+  public function setId($p) { return $this->id = (is_null($p)) ? null : (string)$p; }
+
+  public function _setHorasCatedra(integer $p = null) { return $this->horasCatedra = $p; }    
+  public function setHorasCatedra($p) { return $this->horasCatedra = (is_null($p)) ? null : intval($p); }
+
+  public function _setDia(integer $p = null) { return $this->dia = $p; }    
+  public function setDia($p) { return $this->dia = (is_null($p)) ? null : intval($p); }
+
+  public function _setAsignatura(string $p = null) { return $this->asignatura = $p; }  
+  public function setAsignatura($p) { return $this->asignatura = (is_null($p)) ? null : (string)$p; }
+
+  public function _setPlanificacion(string $p = null) { return $this->planificacion = $p; }  
+  public function setPlanificacion($p) { return $this->planificacion = (is_null($p)) ? null : (string)$p; }
+
 
 
   public function checkId($value) { 
@@ -69,7 +79,7 @@ class _DistribucionHoraria extends EntityValues {
   public function checkHorasCatedra($value) { 
     $this->_logs->resetLogs("horas_catedra");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(10);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("horas_catedra", "error", $error); }
     return $v->isSuccess();
   }
@@ -77,7 +87,7 @@ class _DistribucionHoraria extends EntityValues {
   public function checkDia($value) { 
     $this->_logs->resetLogs("dia");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(10);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("dia", "error", $error); }
     return $v->isSuccess();
   }
@@ -85,7 +95,7 @@ class _DistribucionHoraria extends EntityValues {
   public function checkAsignatura($value) { 
     $this->_logs->resetLogs("asignatura");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(45);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("asignatura", "error", $error); }
     return $v->isSuccess();
   }
@@ -93,7 +103,7 @@ class _DistribucionHoraria extends EntityValues {
   public function checkPlanificacion($value) { 
     $this->_logs->resetLogs("planificacion");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(45);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("planificacion", "error", $error); }
     return $v->isSuccess();
   }

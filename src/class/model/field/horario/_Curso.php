@@ -15,9 +15,9 @@ class _FieldHorarioCurso extends Field {
   public $alias = "cur";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('horario'); }
+  public function getEntity(){ return $this->container->getEntity('horario'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('curso'); }
+  public function getEntityRef(){ return $this->container->getEntity('curso'); }
 
 
 }

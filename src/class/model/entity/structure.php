@@ -1,32 +1,33 @@
 <?php
 
-require_once("class/model/Entity.php");
+require_once("class/Container.php");
 
+$container = new Container();
 $structure = array (
-  Entity::getInstanceRequire("asignatura"),
-  Entity::getInstanceRequire("calendario"),
-  Entity::getInstanceRequire("cargo"),
-  Entity::getInstanceRequire("centro_educativo"),
-  Entity::getInstanceRequire("comision"),
-  Entity::getInstanceRequire("contralor"),
-  Entity::getInstanceRequire("curso"),
-  Entity::getInstanceRequire("designacion"),
-  Entity::getInstanceRequire("detalle_persona"),
-  Entity::getInstanceRequire("dia"),
-  Entity::getInstanceRequire("distribucion_horaria"),
-  Entity::getInstanceRequire("domicilio"),
-  Entity::getInstanceRequire("email"),
-  Entity::getInstanceRequire("file"),
-  Entity::getInstanceRequire("horario"),
-  Entity::getInstanceRequire("modalidad"),
-  Entity::getInstanceRequire("persona"),
-  Entity::getInstanceRequire("plan"),
-  Entity::getInstanceRequire("planificacion"),
-  Entity::getInstanceRequire("planilla_docente"),
-  Entity::getInstanceRequire("sede"),
-  Entity::getInstanceRequire("telefono"),
-  Entity::getInstanceRequire("tipo_sede"),
-  Entity::getInstanceRequire("toma"),
+  $container->getEntity("asignatura"),
+  $container->getEntity("calendario"),
+  $container->getEntity("cargo"),
+  $container->getEntity("centro_educativo"),
+  $container->getEntity("comision"),
+  $container->getEntity("contralor"),
+  $container->getEntity("curso"),
+  $container->getEntity("designacion"),
+  $container->getEntity("detalle_persona"),
+  $container->getEntity("dia"),
+  $container->getEntity("distribucion_horaria"),
+  $container->getEntity("domicilio"),
+  $container->getEntity("email"),
+  $container->getEntity("file"),
+  $container->getEntity("horario"),
+  $container->getEntity("modalidad"),
+  $container->getEntity("persona"),
+  $container->getEntity("plan"),
+  $container->getEntity("planificacion"),
+  $container->getEntity("planilla_docente"),
+  $container->getEntity("sede"),
+  $container->getEntity("telefono"),
+  $container->getEntity("tipo_sede"),
+  $container->getEntity("toma"),
 );
 
   Entity::setStructure($structure);

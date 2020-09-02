@@ -15,7 +15,7 @@ class _FieldComisionId extends Field {
   public $alias = "id";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('comision'); }
+  public function getEntity(){ return $this->container->getEntity('comision'); }
 
 
 }

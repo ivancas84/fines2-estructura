@@ -15,7 +15,7 @@ class _FieldTomaFechaToma extends Field {
   public $alias = "ft";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('toma'); }
+  public function getEntity(){ return $this->container->getEntity('toma'); }
 
 
 }

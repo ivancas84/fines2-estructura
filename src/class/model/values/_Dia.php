@@ -9,7 +9,7 @@ class _Dia extends EntityValues {
   protected $dia = UNDEFINED;
 
   public function _setDefault(){
-    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->id == UNDEFINED) $this->setId(uniqid());
     if($this->numero == UNDEFINED) $this->setNumero(null);
     if($this->dia == UNDEFINED) $this->setDia(null);
     return $this;
@@ -42,9 +42,15 @@ class _Dia extends EntityValues {
   public function numero() { return $this->numero; }
   public function dia($format = null) { return Format::convertCase($this->dia, $format); }
 
-  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
-  public function setNumero($p) { $this->numero = (is_null($p)) ? null : intval($p); }
-  public function setDia($p) { $this->dia = (is_null($p)) ? null : (string)$p; }
+  public function _setId(string $p = null) { return $this->id = $p; }  
+  public function setId($p) { return $this->id = (is_null($p)) ? null : (string)$p; }
+
+  public function _setNumero(integer $p = null) { return $this->numero = $p; }    
+  public function setNumero($p) { return $this->numero = (is_null($p)) ? null : intval($p); }
+
+  public function _setDia(string $p = null) { return $this->dia = $p; }  
+  public function setDia($p) { return $this->dia = (is_null($p)) ? null : (string)$p; }
+
 
   public function resetDia() { if(!Validation::is_empty($this->dia)) $this->dia = preg_replace('/\s\s+/', ' ', trim($this->dia)); }
 
@@ -56,7 +62,7 @@ class _Dia extends EntityValues {
   public function checkNumero($value) { 
     $this->_logs->resetLogs("numero");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(1);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("numero", "error", $error); }
     return $v->isSuccess();
   }
@@ -64,7 +70,7 @@ class _Dia extends EntityValues {
   public function checkDia($value) { 
     $this->_logs->resetLogs("dia");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(9);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("dia", "error", $error); }
     return $v->isSuccess();
   }

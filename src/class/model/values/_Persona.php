@@ -18,7 +18,7 @@ class _Persona extends EntityValues {
   protected $domicilio = UNDEFINED;
 
   public function _setDefault(){
-    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->id == UNDEFINED) $this->setId(uniqid());
     if($this->nombres == UNDEFINED) $this->setNombres(null);
     if($this->apellidos == UNDEFINED) $this->setApellidos(null);
     if($this->fechaNacimiento == UNDEFINED) $this->setFechaNacimiento(null);
@@ -96,37 +96,53 @@ class _Persona extends EntityValues {
   public function alta($format = null) { return Format::date($this->alta, $format); }
   public function domicilio($format = null) { return Format::convertCase($this->domicilio, $format); }
 
-  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
-  public function setNombres($p) { $this->nombres = (is_null($p)) ? null : (string)$p; }
-  public function setApellidos($p) { $this->apellidos = (is_null($p)) ? null : (string)$p; }
-  public function _setFechaNacimiento(DateTime $p = null) { $this->fechaNacimiento = $p; }
+  public function _setId(string $p = null) { return $this->id = $p; }  
+  public function setId($p) { return $this->id = (is_null($p)) ? null : (string)$p; }
 
+  public function _setNombres(string $p = null) { return $this->nombres = $p; }  
+  public function setNombres($p) { return $this->nombres = (is_null($p)) ? null : (string)$p; }
+
+  public function _setApellidos(string $p = null) { return $this->apellidos = $p; }  
+  public function setApellidos($p) { return $this->apellidos = (is_null($p)) ? null : (string)$p; }
+
+  public function _setFechaNacimiento(DateTime $p = null) { return $this->fechaNacimiento = $p; }
   public function setFechaNacimiento($p) {
-    if(!is_null($p)) {
-      $p = new SpanishDateTime($p);
-      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    if(!is_null($p) && !($p instanceof DateTime)) $p = new SpanishDateTime($p);
+    if($p instanceof DateTime) {
+      $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
       $p->setTime(0,0,0);
     }
-    $this->fechaNacimiento = $p;
+    return $this->fechaNacimiento = $p;
   }
 
-  public function setNumeroDocumento($p) { $this->numeroDocumento = (is_null($p)) ? null : (string)$p; }
-  public function setCuil($p) { $this->cuil = (is_null($p)) ? null : (string)$p; }
-  public function setGenero($p) { $this->genero = (is_null($p)) ? null : (string)$p; }
-  public function setApodo($p) { $this->apodo = (is_null($p)) ? null : (string)$p; }
-  public function setTelefono($p) { $this->telefono = (is_null($p)) ? null : (string)$p; }
-  public function setEmail($p) { $this->email = (is_null($p)) ? null : (string)$p; }
-  public function _setAlta(DateTime $p = null) { $this->alta = $p; }
+  public function _setNumeroDocumento(string $p = null) { return $this->numeroDocumento = $p; }  
+  public function setNumeroDocumento($p) { return $this->numeroDocumento = (is_null($p)) ? null : (string)$p; }
 
+  public function _setCuil(string $p = null) { return $this->cuil = $p; }  
+  public function setCuil($p) { return $this->cuil = (is_null($p)) ? null : (string)$p; }
+
+  public function _setGenero(string $p = null) { return $this->genero = $p; }  
+  public function setGenero($p) { return $this->genero = (is_null($p)) ? null : (string)$p; }
+
+  public function _setApodo(string $p = null) { return $this->apodo = $p; }  
+  public function setApodo($p) { return $this->apodo = (is_null($p)) ? null : (string)$p; }
+
+  public function _setTelefono(string $p = null) { return $this->telefono = $p; }  
+  public function setTelefono($p) { return $this->telefono = (is_null($p)) ? null : (string)$p; }
+
+  public function _setEmail(string $p = null) { return $this->email = $p; }  
+  public function setEmail($p) { return $this->email = (is_null($p)) ? null : (string)$p; }
+
+  public function _setAlta(DateTime $p = null) { return $this->alta = $p; }  
   public function setAlta($p) {
-    if(!is_null($p)) {
-      $p = new SpanishDateTime($p);    
-      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
-    }
-    $this->alta = $p;  
+    if(!is_null($p) && !($p instanceof DateTime)) $p = new SpanishDateTime($p);
+    if($p instanceof DateTime) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    return $this->alta = $p;
   }
 
-  public function setDomicilio($p) { $this->domicilio = (is_null($p)) ? null : (string)$p; }
+  public function _setDomicilio(string $p = null) { return $this->domicilio = $p; }  
+  public function setDomicilio($p) { return $this->domicilio = (is_null($p)) ? null : (string)$p; }
+
 
   public function resetNombres() { if(!Validation::is_empty($this->nombres)) $this->nombres = preg_replace('/\s\s+/', ' ', trim($this->nombres)); }
   public function resetApellidos() { if(!Validation::is_empty($this->apellidos)) $this->apellidos = preg_replace('/\s\s+/', ' ', trim($this->apellidos)); }
@@ -145,65 +161,89 @@ class _Persona extends EntityValues {
   public function checkNombres($value) { 
     $this->_logs->resetLogs("nombres");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(255);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("nombres", "error", $error); }
     return $v->isSuccess();
   }
 
   public function checkApellidos($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("apellidos");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(255);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("apellidos", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkFechaNacimiento($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("fecha_nacimiento");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->isA('DateTime');
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("fecha_nacimiento", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkNumeroDocumento($value) { 
     $this->_logs->resetLogs("numero_documento");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(45);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("numero_documento", "error", $error); }
     return $v->isSuccess();
   }
 
   public function checkCuil($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("cuil");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("cuil", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkGenero($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("genero");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("genero", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkApodo($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("apodo");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(255);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("apodo", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkTelefono($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("telefono");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(255);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("telefono", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkEmail($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("email");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(255);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("email", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkAlta($value) { 
     $this->_logs->resetLogs("alta");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->isA('DateTime');
     foreach($v->getErrors() as $error){ $this->_logs->addLog("alta", "error", $error); }
     return $v->isSuccess();
   }
 
   public function checkDomicilio($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("domicilio");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("domicilio", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function _check(){

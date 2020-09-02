@@ -15,7 +15,7 @@ class _FieldDistribucionHorariaDia extends Field {
   public $alias = "dia";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('distribucion_horaria'); }
+  public function getEntity(){ return $this->container->getEntity('distribucion_horaria'); }
 
 
 }

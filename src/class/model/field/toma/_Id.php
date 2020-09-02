@@ -15,7 +15,7 @@ class _FieldTomaId extends Field {
   public $alias = "id";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('toma'); }
+  public function getEntity(){ return $this->container->getEntity('toma'); }
 
 
 }

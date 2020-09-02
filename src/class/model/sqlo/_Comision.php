@@ -74,31 +74,31 @@ UPDATE " . $this->entity->sn_() . " SET
 
   public function json(array $row = null){
     if(empty($row)) return null;
-    $row_ = EntityValues::getInstanceRequire($this->entity->getName())->_fromArray($row)->_toArray();
-    if(!is_null($row['sed_id'])) $row_["sede_"] = EntityValues::getInstanceRequire('sede')->_fromArray($row, 'sed_')->_toArray();
-    if(!is_null($row['sed_dom_id'])) $row_["sede_"]["domicilio_"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'sed_dom_')->_toArray();
-    if(!is_null($row['sed_ts_id'])) $row_["sede_"]["tipo_sede_"] = EntityValues::getInstanceRequire('tipo_sede')->_fromArray($row, 'sed_ts_')->_toArray();
-    if(!is_null($row['sed_ce_id'])) $row_["sede_"]["centro_educativo_"] = EntityValues::getInstanceRequire('centro_educativo')->_fromArray($row, 'sed_ce_')->_toArray();
-    if(!is_null($row['sed_ce_dom_id'])) $row_["sede_"]["centro_educativo_"]["domicilio_"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'sed_ce_dom_')->_toArray();
-    if(!is_null($row['moa_id'])) $row_["modalidad_"] = EntityValues::getInstanceRequire('modalidad')->_fromArray($row, 'moa_')->_toArray();
-    if(!is_null($row['pla_id'])) $row_["planificacion_"] = EntityValues::getInstanceRequire('planificacion')->_fromArray($row, 'pla_')->_toArray();
-    if(!is_null($row['pla_plb_id'])) $row_["planificacion_"]["plan_"] = EntityValues::getInstanceRequire('plan')->_fromArray($row, 'pla_plb_')->_toArray();
-    if(!is_null($row['cal_id'])) $row_["calendario_"] = EntityValues::getInstanceRequire('calendario')->_fromArray($row, 'cal_')->_toArray();
+    $row_ = $this->container->getValues($this->entity->getName())->_fromArray($row)->_toArray();
+    if(!is_null($row['sed_id'])) $row_["sede_"] = $this->container->getValues('sede')->_fromArray($row, 'sed_')->_toArray();
+    if(!is_null($row['sed_dom_id'])) $row_["sede_"]["domicilio_"] = $this->container->getValues('domicilio')->_fromArray($row, 'sed_dom_')->_toArray();
+    if(!is_null($row['sed_ts_id'])) $row_["sede_"]["tipo_sede_"] = $this->container->getValues('tipo_sede')->_fromArray($row, 'sed_ts_')->_toArray();
+    if(!is_null($row['sed_ce_id'])) $row_["sede_"]["centro_educativo_"] = $this->container->getValues('centro_educativo')->_fromArray($row, 'sed_ce_')->_toArray();
+    if(!is_null($row['sed_ce_dom_id'])) $row_["sede_"]["centro_educativo_"]["domicilio_"] = $this->container->getValues('domicilio')->_fromArray($row, 'sed_ce_dom_')->_toArray();
+    if(!is_null($row['moa_id'])) $row_["modalidad_"] = $this->container->getValues('modalidad')->_fromArray($row, 'moa_')->_toArray();
+    if(!is_null($row['pla_id'])) $row_["planificacion_"] = $this->container->getValues('planificacion')->_fromArray($row, 'pla_')->_toArray();
+    if(!is_null($row['pla_plb_id'])) $row_["planificacion_"]["plan_"] = $this->container->getValues('plan')->_fromArray($row, 'pla_plb_')->_toArray();
+    if(!is_null($row['cal_id'])) $row_["calendario_"] = $this->container->getValues('calendario')->_fromArray($row, 'cal_')->_toArray();
     return $row_;
   }
 
   public function values(array $row){
     $row_ = [];
-    $row_["comision"] = EntityValues::getInstanceRequire("comision")->_fromArray($row);
-    $row_["sede"] = EntityValues::getInstanceRequire('sede')->_fromArray($row, 'sed_');
-    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'sed_dom_');
-    $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede')->_fromArray($row, 'sed_ts_');
-    $row_["centro_educativo"] = EntityValues::getInstanceRequire('centro_educativo')->_fromArray($row, 'sed_ce_');
-    $row_["domicilio1"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'sed_ce_dom_');
-    $row_["modalidad"] = EntityValues::getInstanceRequire('modalidad')->_fromArray($row, 'moa_');
-    $row_["planificacion"] = EntityValues::getInstanceRequire('planificacion')->_fromArray($row, 'pla_');
-    $row_["plan"] = EntityValues::getInstanceRequire('plan')->_fromArray($row, 'pla_plb_');
-    $row_["calendario"] = EntityValues::getInstanceRequire('calendario')->_fromArray($row, 'cal_');
+    $row_["comision"] = $this->container->getValues("comision")->_fromArray($row);
+    $row_["sede"] = $this->container->getValues('sede')->_fromArray($row, 'sed_');
+    $row_["domicilio"] = $this->container->getValues('domicilio')->_fromArray($row, 'sed_dom_');
+    $row_["tipo_sede"] = $this->container->getValues('tipo_sede')->_fromArray($row, 'sed_ts_');
+    $row_["centro_educativo"] = $this->container->getValues('centro_educativo')->_fromArray($row, 'sed_ce_');
+    $row_["domicilio1"] = $this->container->getValues('domicilio')->_fromArray($row, 'sed_ce_dom_');
+    $row_["modalidad"] = $this->container->getValues('modalidad')->_fromArray($row, 'moa_');
+    $row_["planificacion"] = $this->container->getValues('planificacion')->_fromArray($row, 'pla_');
+    $row_["plan"] = $this->container->getValues('plan')->_fromArray($row, 'pla_plb_');
+    $row_["calendario"] = $this->container->getValues('calendario')->_fromArray($row, 'cal_');
     return $row_;
   }
 

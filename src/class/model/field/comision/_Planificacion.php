@@ -15,9 +15,9 @@ class _FieldComisionPlanificacion extends Field {
   public $alias = "pla";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('comision'); }
+  public function getEntity(){ return $this->container->getEntity('comision'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('planificacion'); }
+  public function getEntityRef(){ return $this->container->getEntity('planificacion'); }
 
 
 }

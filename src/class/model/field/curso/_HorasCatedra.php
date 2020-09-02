@@ -15,7 +15,7 @@ class _FieldCursoHorasCatedra extends Field {
   public $alias = "hc";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('curso'); }
+  public function getEntity(){ return $this->container->getEntity('curso'); }
 
 
 }

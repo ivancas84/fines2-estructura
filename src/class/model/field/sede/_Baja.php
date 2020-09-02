@@ -15,7 +15,7 @@ class _FieldSedeBaja extends Field {
   public $alias = "baj";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('sede'); }
+  public function getEntity(){ return $this->container->getEntity('sede'); }
 
 
 }

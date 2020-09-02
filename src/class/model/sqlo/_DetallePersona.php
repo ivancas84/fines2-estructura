@@ -50,19 +50,19 @@ UPDATE " . $this->entity->sn_() . " SET
 
   public function json(array $row = null){
     if(empty($row)) return null;
-    $row_ = EntityValues::getInstanceRequire($this->entity->getName())->_fromArray($row)->_toArray();
-    if(!is_null($row['arc_id'])) $row_["archivo_"] = EntityValues::getInstanceRequire('file')->_fromArray($row, 'arc_')->_toArray();
-    if(!is_null($row['per_id'])) $row_["persona_"] = EntityValues::getInstanceRequire('persona')->_fromArray($row, 'per_')->_toArray();
-    if(!is_null($row['per_dom_id'])) $row_["persona_"]["domicilio_"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'per_dom_')->_toArray();
+    $row_ = $this->container->getValues($this->entity->getName())->_fromArray($row)->_toArray();
+    if(!is_null($row['arc_id'])) $row_["archivo_"] = $this->container->getValues('file')->_fromArray($row, 'arc_')->_toArray();
+    if(!is_null($row['per_id'])) $row_["persona_"] = $this->container->getValues('persona')->_fromArray($row, 'per_')->_toArray();
+    if(!is_null($row['per_dom_id'])) $row_["persona_"]["domicilio_"] = $this->container->getValues('domicilio')->_fromArray($row, 'per_dom_')->_toArray();
     return $row_;
   }
 
   public function values(array $row){
     $row_ = [];
-    $row_["detalle_persona"] = EntityValues::getInstanceRequire("detalle_persona")->_fromArray($row);
-    $row_["archivo"] = EntityValues::getInstanceRequire('file')->_fromArray($row, 'arc_');
-    $row_["persona"] = EntityValues::getInstanceRequire('persona')->_fromArray($row, 'per_');
-    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'per_dom_');
+    $row_["detalle_persona"] = $this->container->getValues("detalle_persona")->_fromArray($row);
+    $row_["archivo"] = $this->container->getValues('file')->_fromArray($row, 'arc_');
+    $row_["persona"] = $this->container->getValues('persona')->_fromArray($row, 'per_');
+    $row_["domicilio"] = $this->container->getValues('domicilio')->_fromArray($row, 'per_dom_');
     return $row_;
   }
 

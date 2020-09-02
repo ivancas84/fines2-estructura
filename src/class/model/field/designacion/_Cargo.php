@@ -15,9 +15,9 @@ class _FieldDesignacionCargo extends Field {
   public $alias = "car";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('designacion'); }
+  public function getEntity(){ return $this->container->getEntity('designacion'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('cargo'); }
+  public function getEntityRef(){ return $this->container->getEntity('cargo'); }
 
 
 }

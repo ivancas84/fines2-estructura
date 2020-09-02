@@ -15,9 +15,9 @@ class _FieldDesignacionPersona extends Field {
   public $alias = "per";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('designacion'); }
+  public function getEntity(){ return $this->container->getEntity('designacion'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('persona'); }
+  public function getEntityRef(){ return $this->container->getEntity('persona'); }
 
 
 }

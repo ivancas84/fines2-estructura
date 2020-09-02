@@ -15,9 +15,9 @@ class _FieldDistribucionHorariaPlanificacion extends Field {
   public $alias = "pla";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('distribucion_horaria'); }
+  public function getEntity(){ return $this->container->getEntity('distribucion_horaria'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('planificacion'); }
+  public function getEntityRef(){ return $this->container->getEntity('planificacion'); }
 
 
 }

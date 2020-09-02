@@ -3,12 +3,6 @@ require_once("class/model/Sql.php");
 
 class _DetallePersonaSql extends EntitySql{
 
-  public function __construct(){
-    parent::__construct();
-    $this->entity = Entity::getInstanceRequire('detalle_persona');
-  }
-
-
   public function _mappingField($field){
     $p = $this->prf();
     $t = $this->prt();
@@ -50,9 +44,9 @@ class _DetallePersonaSql extends EntitySql{
 
   public function mappingField($field){
     if($f = $this->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('file', 'arc')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('persona', 'per')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('domicilio', 'per_dom')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('file', 'arc')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('persona', 'per')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('domicilio', 'per_dom')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
   }
 
@@ -71,16 +65,16 @@ class _DetallePersonaSql extends EntitySql{
 
   public function fields(){
     return $this->_fields() . ',
-' . EntitySql::getInstanceRequire('file', 'arc')->_fields() . ',
-' . EntitySql::getInstanceRequire('persona', 'per')->_fields() . ',
-' . EntitySql::getInstanceRequire('domicilio', 'per_dom')->_fields() . ' 
+' . $this->container->getSql('file', 'arc')->_fields() . ',
+' . $this->container->getSql('persona', 'per')->_fields() . ',
+' . $this->container->getSql('domicilio', 'per_dom')->_fields() . ' 
 ';
   }
 
   public function join(Render $render){
-    return EntitySql::getInstanceRequire('file', 'arc')->_join('archivo', 'dp', $render) . '
-' . EntitySql::getInstanceRequire('persona', 'per')->_join('persona', 'dp', $render) . '
-' . EntitySql::getInstanceRequire('domicilio', 'per_dom')->_join('domicilio', 'per', $render) . '
+    return $this->container->getSql('file', 'arc')->_join('archivo', 'dp', $render) . '
+' . $this->container->getSql('persona', 'per')->_join('persona', 'dp', $render) . '
+' . $this->container->getSql('domicilio', 'per_dom')->_join('domicilio', 'per', $render) . '
 ' ;
   }
 
@@ -164,16 +158,16 @@ class _DetallePersonaSql extends EntitySql{
 
   protected function conditionFieldStruct($field, $option, $value) {
     if($c = $this->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('file','arc')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('persona','per')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','per_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('file','arc')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('persona','per')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('domicilio','per_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldAux($field, $option, $value) {
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('file','arc')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('persona','per')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','per_dom')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('file','arc')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('persona','per')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('domicilio','per_dom')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
 

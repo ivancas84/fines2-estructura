@@ -15,7 +15,7 @@ class _FieldAsignaturaClasificacion extends Field {
   public $alias = "cla";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('asignatura'); }
+  public function getEntity(){ return $this->container->getEntity('asignatura'); }
 
 
 }

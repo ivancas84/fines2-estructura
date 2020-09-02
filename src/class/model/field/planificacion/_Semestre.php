@@ -15,7 +15,7 @@ class _FieldPlanificacionSemestre extends Field {
   public $alias = "sem";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('planificacion'); }
+  public function getEntity(){ return $this->container->getEntity('planificacion'); }
 
 
 }

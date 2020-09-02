@@ -15,7 +15,7 @@ class _FieldDesignacionHasta extends Field {
   public $alias = "has";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('designacion'); }
+  public function getEntity(){ return $this->container->getEntity('designacion'); }
 
 
 }

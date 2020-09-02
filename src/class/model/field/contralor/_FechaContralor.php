@@ -15,7 +15,7 @@ class _FieldContralorFechaContralor extends Field {
   public $alias = "fc";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('contralor'); }
+  public function getEntity(){ return $this->container->getEntity('contralor'); }
 
 
 }

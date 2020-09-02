@@ -13,7 +13,7 @@ class _Designacion extends EntityValues {
   protected $persona = UNDEFINED;
 
   public function _setDefault(){
-    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->id == UNDEFINED) $this->setId(uniqid());
     if($this->desde == UNDEFINED) $this->setDesde(null);
     if($this->hasta == UNDEFINED) $this->setHasta(null);
     if($this->alta == UNDEFINED) $this->setAlta(date('c'));
@@ -66,42 +66,45 @@ class _Designacion extends EntityValues {
   public function sede($format = null) { return Format::convertCase($this->sede, $format); }
   public function persona($format = null) { return Format::convertCase($this->persona, $format); }
 
-  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
-  public function _setDesde(DateTime $p = null) { $this->desde = $p; }
+  public function _setId(string $p = null) { return $this->id = $p; }  
+  public function setId($p) { return $this->id = (is_null($p)) ? null : (string)$p; }
 
+  public function _setDesde(DateTime $p = null) { return $this->desde = $p; }
   public function setDesde($p) {
-    if(!is_null($p)) {
-      $p = new SpanishDateTime($p);
-      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    if(!is_null($p) && !($p instanceof DateTime)) $p = new SpanishDateTime($p);
+    if($p instanceof DateTime) {
+      $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
       $p->setTime(0,0,0);
     }
-    $this->desde = $p;
+    return $this->desde = $p;
   }
 
-  public function _setHasta(DateTime $p = null) { $this->hasta = $p; }
-
+  public function _setHasta(DateTime $p = null) { return $this->hasta = $p; }
   public function setHasta($p) {
-    if(!is_null($p)) {
-      $p = new SpanishDateTime($p);
-      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    if(!is_null($p) && !($p instanceof DateTime)) $p = new SpanishDateTime($p);
+    if($p instanceof DateTime) {
+      $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
       $p->setTime(0,0,0);
     }
-    $this->hasta = $p;
+    return $this->hasta = $p;
   }
 
-  public function _setAlta(DateTime $p = null) { $this->alta = $p; }
-
+  public function _setAlta(DateTime $p = null) { return $this->alta = $p; }  
   public function setAlta($p) {
-    if(!is_null($p)) {
-      $p = new SpanishDateTime($p);    
-      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
-    }
-    $this->alta = $p;  
+    if(!is_null($p) && !($p instanceof DateTime)) $p = new SpanishDateTime($p);
+    if($p instanceof DateTime) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    return $this->alta = $p;
   }
 
-  public function setCargo($p) { $this->cargo = (is_null($p)) ? null : (string)$p; }
-  public function setSede($p) { $this->sede = (is_null($p)) ? null : (string)$p; }
-  public function setPersona($p) { $this->persona = (is_null($p)) ? null : (string)$p; }
+  public function _setCargo(string $p = null) { return $this->cargo = $p; }  
+  public function setCargo($p) { return $this->cargo = (is_null($p)) ? null : (string)$p; }
+
+  public function _setSede(string $p = null) { return $this->sede = $p; }  
+  public function setSede($p) { return $this->sede = (is_null($p)) ? null : (string)$p; }
+
+  public function _setPersona(string $p = null) { return $this->persona = $p; }  
+  public function setPersona($p) { return $this->persona = (is_null($p)) ? null : (string)$p; }
+
 
 
   public function checkId($value) { 
@@ -110,19 +113,25 @@ class _Designacion extends EntityValues {
   }
 
   public function checkDesde($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("desde");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->isA('DateTime');
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("desde", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkHasta($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("hasta");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->isA('DateTime');
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("hasta", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkAlta($value) { 
     $this->_logs->resetLogs("alta");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->isA('DateTime');
     foreach($v->getErrors() as $error){ $this->_logs->addLog("alta", "error", $error); }
     return $v->isSuccess();
   }
@@ -130,7 +139,7 @@ class _Designacion extends EntityValues {
   public function checkCargo($value) { 
     $this->_logs->resetLogs("cargo");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(45);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("cargo", "error", $error); }
     return $v->isSuccess();
   }
@@ -138,7 +147,7 @@ class _Designacion extends EntityValues {
   public function checkSede($value) { 
     $this->_logs->resetLogs("sede");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(45);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("sede", "error", $error); }
     return $v->isSuccess();
   }
@@ -146,7 +155,7 @@ class _Designacion extends EntityValues {
   public function checkPersona($value) { 
     $this->_logs->resetLogs("persona");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(45);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("persona", "error", $error); }
     return $v->isSuccess();
   }

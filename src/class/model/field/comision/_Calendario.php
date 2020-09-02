@@ -15,9 +15,9 @@ class _FieldComisionCalendario extends Field {
   public $alias = "cal";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('comision'); }
+  public function getEntity(){ return $this->container->getEntity('comision'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('calendario'); }
+  public function getEntityRef(){ return $this->container->getEntity('calendario'); }
 
 
 }

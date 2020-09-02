@@ -15,7 +15,7 @@ class _FieldAsignaturaCodigo extends Field {
   public $alias = "cod";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('asignatura'); }
+  public function getEntity(){ return $this->container->getEntity('asignatura'); }
 
 
 }

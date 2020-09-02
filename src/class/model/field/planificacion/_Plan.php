@@ -15,9 +15,9 @@ class _FieldPlanificacionPlan extends Field {
   public $alias = "plb";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('planificacion'); }
+  public function getEntity(){ return $this->container->getEntity('planificacion'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('plan'); }
+  public function getEntityRef(){ return $this->container->getEntity('plan'); }
 
 
 }

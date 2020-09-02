@@ -8,22 +8,22 @@ class _DesignacionEntity extends Entity {
   public $alias = "desi";
  
   public function getPk(){
-    return Field::getInstanceRequire("designacion", "id");
+    return $this->container->getField("designacion", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      Field::getInstanceRequire("designacion", "desde"),
-      Field::getInstanceRequire("designacion", "hasta"),
-      Field::getInstanceRequire("designacion", "alta"),
+      $this->container->getField("designacion", "desde"),
+      $this->container->getField("designacion", "hasta"),
+      $this->container->getField("designacion", "alta"),
     );
   }
 
   public function getFieldsMu(){
     return array(
-      Field::getInstanceRequire("designacion", "cargo"),
-      Field::getInstanceRequire("designacion", "sede"),
-      Field::getInstanceRequire("designacion", "persona"),
+      $this->container->getField("designacion", "cargo"),
+      $this->container->getField("designacion", "sede"),
+      $this->container->getField("designacion", "persona"),
     );
   }
 

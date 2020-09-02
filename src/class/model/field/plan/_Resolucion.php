@@ -15,7 +15,7 @@ class _FieldPlanResolucion extends Field {
   public $alias = "res";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('plan'); }
+  public function getEntity(){ return $this->container->getEntity('plan'); }
 
 
 }

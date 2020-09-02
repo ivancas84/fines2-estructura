@@ -15,7 +15,7 @@ class _FieldTomaEstadoContralor extends Field {
   public $alias = "ec";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('toma'); }
+  public function getEntity(){ return $this->container->getEntity('toma'); }
 
 
 }

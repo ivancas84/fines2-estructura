@@ -10,7 +10,7 @@ class _CentroEducativo extends EntityValues {
   protected $domicilio = UNDEFINED;
 
   public function _setDefault(){
-    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->id == UNDEFINED) $this->setId(uniqid());
     if($this->nombre == UNDEFINED) $this->setNombre(null);
     if($this->cue == UNDEFINED) $this->setCue(null);
     if($this->domicilio == UNDEFINED) $this->setDomicilio(null);
@@ -48,10 +48,18 @@ class _CentroEducativo extends EntityValues {
   public function cue($format = null) { return Format::convertCase($this->cue, $format); }
   public function domicilio($format = null) { return Format::convertCase($this->domicilio, $format); }
 
-  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
-  public function setNombre($p) { $this->nombre = (is_null($p)) ? null : (string)$p; }
-  public function setCue($p) { $this->cue = (is_null($p)) ? null : (string)$p; }
-  public function setDomicilio($p) { $this->domicilio = (is_null($p)) ? null : (string)$p; }
+  public function _setId(string $p = null) { return $this->id = $p; }  
+  public function setId($p) { return $this->id = (is_null($p)) ? null : (string)$p; }
+
+  public function _setNombre(string $p = null) { return $this->nombre = $p; }  
+  public function setNombre($p) { return $this->nombre = (is_null($p)) ? null : (string)$p; }
+
+  public function _setCue(string $p = null) { return $this->cue = $p; }  
+  public function setCue($p) { return $this->cue = (is_null($p)) ? null : (string)$p; }
+
+  public function _setDomicilio(string $p = null) { return $this->domicilio = $p; }  
+  public function setDomicilio($p) { return $this->domicilio = (is_null($p)) ? null : (string)$p; }
+
 
   public function resetNombre() { if(!Validation::is_empty($this->nombre)) $this->nombre = preg_replace('/\s\s+/', ' ', trim($this->nombre)); }
   public function resetCue() { if(!Validation::is_empty($this->cue)) $this->cue = preg_replace('/\s\s+/', ' ', trim($this->cue)); }
@@ -64,19 +72,25 @@ class _CentroEducativo extends EntityValues {
   public function checkNombre($value) { 
     $this->_logs->resetLogs("nombre");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(255);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("nombre", "error", $error); }
     return $v->isSuccess();
   }
 
   public function checkCue($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("cue");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("cue", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkDomicilio($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("domicilio");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("domicilio", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function _check(){

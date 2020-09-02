@@ -15,7 +15,7 @@ class _FieldPlanOrientacion extends Field {
   public $alias = "ori";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('plan'); }
+  public function getEntity(){ return $this->container->getEntity('plan'); }
 
 
 }

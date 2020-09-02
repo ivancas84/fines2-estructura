@@ -15,9 +15,9 @@ class _FieldDesignacionSede extends Field {
   public $alias = "sed";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('designacion'); }
+  public function getEntity(){ return $this->container->getEntity('designacion'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('sede'); }
+  public function getEntityRef(){ return $this->container->getEntity('sede'); }
 
 
 }

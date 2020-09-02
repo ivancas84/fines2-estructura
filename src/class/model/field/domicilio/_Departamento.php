@@ -15,7 +15,7 @@ class _FieldDomicilioDepartamento extends Field {
   public $alias = "dep";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('domicilio'); }
+  public function getEntity(){ return $this->container->getEntity('domicilio'); }
 
 
 }

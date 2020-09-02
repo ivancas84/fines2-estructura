@@ -8,27 +8,27 @@ class _TomaEntity extends Entity {
   public $alias = "toma";
  
   public function getPk(){
-    return Field::getInstanceRequire("toma", "id");
+    return $this->container->getField("toma", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      Field::getInstanceRequire("toma", "fecha_toma"),
-      Field::getInstanceRequire("toma", "estado"),
-      Field::getInstanceRequire("toma", "observaciones"),
-      Field::getInstanceRequire("toma", "comentario"),
-      Field::getInstanceRequire("toma", "tipo_movimiento"),
-      Field::getInstanceRequire("toma", "estado_contralor"),
-      Field::getInstanceRequire("toma", "alta"),
+      $this->container->getField("toma", "fecha_toma"),
+      $this->container->getField("toma", "estado"),
+      $this->container->getField("toma", "observaciones"),
+      $this->container->getField("toma", "comentario"),
+      $this->container->getField("toma", "tipo_movimiento"),
+      $this->container->getField("toma", "estado_contralor"),
+      $this->container->getField("toma", "alta"),
     );
   }
 
   public function getFieldsMu(){
     return array(
-      Field::getInstanceRequire("toma", "curso"),
-      Field::getInstanceRequire("toma", "docente"),
-      Field::getInstanceRequire("toma", "reemplazo"),
-      Field::getInstanceRequire("toma", "planilla_docente"),
+      $this->container->getField("toma", "curso"),
+      $this->container->getField("toma", "docente"),
+      $this->container->getField("toma", "reemplazo"),
+      $this->container->getField("toma", "planilla_docente"),
     );
   }
 

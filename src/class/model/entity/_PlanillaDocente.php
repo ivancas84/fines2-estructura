@@ -8,13 +8,13 @@ class _PlanillaDocenteEntity extends Entity {
   public $alias = "pd";
  
   public function getPk(){
-    return Field::getInstanceRequire("planilla_docente", "id");
+    return $this->container->getField("planilla_docente", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      Field::getInstanceRequire("planilla_docente", "numero"),
-      Field::getInstanceRequire("planilla_docente", "insertado"),
+      $this->container->getField("planilla_docente", "numero"),
+      $this->container->getField("planilla_docente", "insertado"),
     );
   }
 

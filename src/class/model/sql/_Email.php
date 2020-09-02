@@ -3,12 +3,6 @@ require_once("class/model/Sql.php");
 
 class _EmailSql extends EntitySql{
 
-  public function __construct(){
-    parent::__construct();
-    $this->entity = Entity::getInstanceRequire('email');
-  }
-
-
   public function _mappingField($field){
     $p = $this->prf();
     $t = $this->prt();
@@ -57,8 +51,8 @@ class _EmailSql extends EntitySql{
 
   public function mappingField($field){
     if($f = $this->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('persona', 'per')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('domicilio', 'per_dom')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('persona', 'per')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('domicilio', 'per_dom')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
   }
 
@@ -77,14 +71,14 @@ class _EmailSql extends EntitySql{
 
   public function fields(){
     return $this->_fields() . ',
-' . EntitySql::getInstanceRequire('persona', 'per')->_fields() . ',
-' . EntitySql::getInstanceRequire('domicilio', 'per_dom')->_fields() . ' 
+' . $this->container->getSql('persona', 'per')->_fields() . ',
+' . $this->container->getSql('domicilio', 'per_dom')->_fields() . ' 
 ';
   }
 
   public function join(Render $render){
-    return EntitySql::getInstanceRequire('persona', 'per')->_join('persona', 'emai', $render) . '
-' . EntitySql::getInstanceRequire('domicilio', 'per_dom')->_join('domicilio', 'per', $render) . '
+    return $this->container->getSql('persona', 'per')->_join('persona', 'emai', $render) . '
+' . $this->container->getSql('domicilio', 'per_dom')->_join('domicilio', 'per', $render) . '
 ' ;
   }
 
@@ -185,14 +179,14 @@ class _EmailSql extends EntitySql{
 
   protected function conditionFieldStruct($field, $option, $value) {
     if($c = $this->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('persona','per')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','per_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('persona','per')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('domicilio','per_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldAux($field, $option, $value) {
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('persona','per')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','per_dom')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('persona','per')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('domicilio','per_dom')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
 

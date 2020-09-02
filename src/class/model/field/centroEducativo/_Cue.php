@@ -15,7 +15,7 @@ class _FieldCentroEducativoCue extends Field {
   public $alias = "cue";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('centro_educativo'); }
+  public function getEntity(){ return $this->container->getEntity('centro_educativo'); }
 
 
 }

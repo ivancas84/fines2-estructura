@@ -15,7 +15,7 @@ class _FieldAsignaturaFormacion extends Field {
   public $alias = "for";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('asignatura'); }
+  public function getEntity(){ return $this->container->getEntity('asignatura'); }
 
 
 }

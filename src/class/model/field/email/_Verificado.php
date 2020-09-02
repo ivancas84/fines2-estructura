@@ -15,7 +15,7 @@ class _FieldEmailVerificado extends Field {
   public $alias = "ver";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('email'); }
+  public function getEntity(){ return $this->container->getEntity('email'); }
 
 
 }

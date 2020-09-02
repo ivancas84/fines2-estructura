@@ -15,9 +15,9 @@ class _FieldComisionComisionSiguiente extends Field {
   public $alias = "cs";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('comision'); }
+  public function getEntity(){ return $this->container->getEntity('comision'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('comision'); }
+  public function getEntityRef(){ return $this->container->getEntity('comision'); }
 
 
 }

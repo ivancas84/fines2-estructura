@@ -15,7 +15,7 @@ class _FieldDetallePersonaId extends Field {
   public $alias = "id";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('detalle_persona'); }
+  public function getEntity(){ return $this->container->getEntity('detalle_persona'); }
 
 
 }

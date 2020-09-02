@@ -15,7 +15,7 @@ class _FieldCalendarioSemestre extends Field {
   public $alias = "sem";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('calendario'); }
+  public function getEntity(){ return $this->container->getEntity('calendario'); }
 
 
 }

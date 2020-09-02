@@ -15,7 +15,7 @@ class _FieldCalendarioInicio extends Field {
   public $alias = "ini";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('calendario'); }
+  public function getEntity(){ return $this->container->getEntity('calendario'); }
 
 
 }

@@ -3,12 +3,6 @@ require_once("class/model/Sql.php");
 
 class _PlanSql extends EntitySql{
 
-  public function __construct(){
-    parent::__construct();
-    $this->entity = Entity::getInstanceRequire('plan');
-  }
-
-
   public function _mappingField($field){
     $p = $this->prf();
     $t = $this->prt();

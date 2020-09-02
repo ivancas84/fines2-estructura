@@ -15,7 +15,7 @@ class _FieldComisionComentario extends Field {
   public $alias = "com";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('comision'); }
+  public function getEntity(){ return $this->container->getEntity('comision'); }
 
 
 }

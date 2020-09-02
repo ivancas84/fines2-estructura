@@ -8,20 +8,20 @@ class _ContralorEntity extends Entity {
   public $alias = "cont";
  
   public function getPk(){
-    return Field::getInstanceRequire("contralor", "id");
+    return $this->container->getField("contralor", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      Field::getInstanceRequire("contralor", "fecha_contralor"),
-      Field::getInstanceRequire("contralor", "fecha_consejo"),
-      Field::getInstanceRequire("contralor", "insertado"),
+      $this->container->getField("contralor", "fecha_contralor"),
+      $this->container->getField("contralor", "fecha_consejo"),
+      $this->container->getField("contralor", "insertado"),
     );
   }
 
   public function getFieldsMu(){
     return array(
-      Field::getInstanceRequire("contralor", "planilla_docente"),
+      $this->container->getField("contralor", "planilla_docente"),
     );
   }
 

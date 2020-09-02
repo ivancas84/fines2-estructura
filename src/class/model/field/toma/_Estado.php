@@ -15,7 +15,7 @@ class _FieldTomaEstado extends Field {
   public $alias = "est";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('toma'); }
+  public function getEntity(){ return $this->container->getEntity('toma'); }
 
 
 }

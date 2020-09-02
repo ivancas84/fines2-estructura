@@ -15,9 +15,9 @@ class _FieldDetallePersonaArchivo extends Field {
   public $alias = "arc";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('detalle_persona'); }
+  public function getEntity(){ return $this->container->getEntity('detalle_persona'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('file'); }
+  public function getEntityRef(){ return $this->container->getEntity('file'); }
 
 
 }

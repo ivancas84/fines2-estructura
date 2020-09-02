@@ -8,7 +8,7 @@ class _Cargo extends EntityValues {
   protected $descripcion = UNDEFINED;
 
   public function _setDefault(){
-    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->id == UNDEFINED) $this->setId(uniqid());
     if($this->descripcion == UNDEFINED) $this->setDescripcion(null);
     return $this;
   }
@@ -36,8 +36,12 @@ class _Cargo extends EntityValues {
   public function id() { return $this->id; }
   public function descripcion($format = null) { return Format::convertCase($this->descripcion, $format); }
 
-  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
-  public function setDescripcion($p) { $this->descripcion = (is_null($p)) ? null : (string)$p; }
+  public function _setId(string $p = null) { return $this->id = $p; }  
+  public function setId($p) { return $this->id = (is_null($p)) ? null : (string)$p; }
+
+  public function _setDescripcion(string $p = null) { return $this->descripcion = $p; }  
+  public function setDescripcion($p) { return $this->descripcion = (is_null($p)) ? null : (string)$p; }
+
 
   public function resetDescripcion() { if(!Validation::is_empty($this->descripcion)) $this->descripcion = preg_replace('/\s\s+/', ' ', trim($this->descripcion)); }
 
@@ -49,7 +53,7 @@ class _Cargo extends EntityValues {
   public function checkDescripcion($value) { 
     $this->_logs->resetLogs("descripcion");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(255);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("descripcion", "error", $error); }
     return $v->isSuccess();
   }

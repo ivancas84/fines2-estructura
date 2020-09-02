@@ -15,7 +15,7 @@ class _FieldDomicilioLocalidad extends Field {
   public $alias = "loc";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('domicilio'); }
+  public function getEntity(){ return $this->container->getEntity('domicilio'); }
 
 
 }

@@ -8,20 +8,20 @@ class _HorarioEntity extends Entity {
   public $alias = "hora";
  
   public function getPk(){
-    return Field::getInstanceRequire("horario", "id");
+    return $this->container->getField("horario", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      Field::getInstanceRequire("horario", "hora_inicio"),
-      Field::getInstanceRequire("horario", "hora_fin"),
+      $this->container->getField("horario", "hora_inicio"),
+      $this->container->getField("horario", "hora_fin"),
     );
   }
 
   public function getFieldsMu(){
     return array(
-      Field::getInstanceRequire("horario", "curso"),
-      Field::getInstanceRequire("horario", "dia"),
+      $this->container->getField("horario", "curso"),
+      $this->container->getField("horario", "dia"),
     );
   }
 

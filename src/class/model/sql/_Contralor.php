@@ -3,12 +3,6 @@ require_once("class/model/Sql.php");
 
 class _ContralorSql extends EntitySql{
 
-  public function __construct(){
-    parent::__construct();
-    $this->entity = Entity::getInstanceRequire('contralor');
-  }
-
-
   public function _mappingField($field){
     $p = $this->prf();
     $t = $this->prt();
@@ -52,7 +46,7 @@ class _ContralorSql extends EntitySql{
 
   public function mappingField($field){
     if($f = $this->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('planilla_docente', 'pd')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('planilla_docente', 'pd')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
   }
 
@@ -71,12 +65,12 @@ class _ContralorSql extends EntitySql{
 
   public function fields(){
     return $this->_fields() . ',
-' . EntitySql::getInstanceRequire('planilla_docente', 'pd')->_fields() . ' 
+' . $this->container->getSql('planilla_docente', 'pd')->_fields() . ' 
 ';
   }
 
   public function join(Render $render){
-    return EntitySql::getInstanceRequire('planilla_docente', 'pd')->_join('planilla_docente', 'cont', $render) . '
+    return $this->container->getSql('planilla_docente', 'pd')->_join('planilla_docente', 'cont', $render) . '
 ' ;
   }
 
@@ -166,12 +160,12 @@ class _ContralorSql extends EntitySql{
 
   protected function conditionFieldStruct($field, $option, $value) {
     if($c = $this->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('planilla_docente','pd')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('planilla_docente','pd')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldAux($field, $option, $value) {
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('planilla_docente','pd')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('planilla_docente','pd')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
 

@@ -15,7 +15,7 @@ class _FieldComisionObservaciones extends Field {
   public $alias = "obs";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('comision'); }
+  public function getEntity(){ return $this->container->getEntity('comision'); }
 
 
 }

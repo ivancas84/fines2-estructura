@@ -11,7 +11,7 @@ class _DetallePersona extends EntityValues {
   protected $persona = UNDEFINED;
 
   public function _setDefault(){
-    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->id == UNDEFINED) $this->setId(uniqid());
     if($this->descripcion == UNDEFINED) $this->setDescripcion(null);
     if($this->creado == UNDEFINED) $this->setCreado(date('c'));
     if($this->archivo == UNDEFINED) $this->setArchivo(null);
@@ -54,20 +54,25 @@ class _DetallePersona extends EntityValues {
   public function archivo($format = null) { return Format::convertCase($this->archivo, $format); }
   public function persona($format = null) { return Format::convertCase($this->persona, $format); }
 
-  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
-  public function setDescripcion($p) { $this->descripcion = (is_null($p)) ? null : (string)$p; }
-  public function _setCreado(DateTime $p = null) { $this->creado = $p; }
+  public function _setId(string $p = null) { return $this->id = $p; }  
+  public function setId($p) { return $this->id = (is_null($p)) ? null : (string)$p; }
 
+  public function _setDescripcion(string $p = null) { return $this->descripcion = $p; }  
+  public function setDescripcion($p) { return $this->descripcion = (is_null($p)) ? null : (string)$p; }
+
+  public function _setCreado(DateTime $p = null) { return $this->creado = $p; }  
   public function setCreado($p) {
-    if(!is_null($p)) {
-      $p = new SpanishDateTime($p);    
-      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
-    }
-    $this->creado = $p;  
+    if(!is_null($p) && !($p instanceof DateTime)) $p = new SpanishDateTime($p);
+    if($p instanceof DateTime) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    return $this->creado = $p;
   }
 
-  public function setArchivo($p) { $this->archivo = (is_null($p)) ? null : (string)$p; }
-  public function setPersona($p) { $this->persona = (is_null($p)) ? null : (string)$p; }
+  public function _setArchivo(string $p = null) { return $this->archivo = $p; }  
+  public function setArchivo($p) { return $this->archivo = (is_null($p)) ? null : (string)$p; }
+
+  public function _setPersona(string $p = null) { return $this->persona = $p; }  
+  public function setPersona($p) { return $this->persona = (is_null($p)) ? null : (string)$p; }
+
 
   public function resetDescripcion() { if(!Validation::is_empty($this->descripcion)) $this->descripcion = preg_replace('/\s\s+/', ' ', trim($this->descripcion)); }
 
@@ -79,7 +84,7 @@ class _DetallePersona extends EntityValues {
   public function checkDescripcion($value) { 
     $this->_logs->resetLogs("descripcion");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(255);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("descripcion", "error", $error); }
     return $v->isSuccess();
   }
@@ -87,20 +92,23 @@ class _DetallePersona extends EntityValues {
   public function checkCreado($value) { 
     $this->_logs->resetLogs("creado");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->isA('DateTime');
     foreach($v->getErrors() as $error){ $this->_logs->addLog("creado", "error", $error); }
     return $v->isSuccess();
   }
 
   public function checkArchivo($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("archivo");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("archivo", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkPersona($value) { 
     $this->_logs->resetLogs("persona");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(45);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("persona", "error", $error); }
     return $v->isSuccess();
   }

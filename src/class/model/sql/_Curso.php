@@ -3,12 +3,6 @@ require_once("class/model/Sql.php");
 
 class _CursoSql extends EntitySql{
 
-  public function __construct(){
-    parent::__construct();
-    $this->entity = Entity::getInstanceRequire('curso');
-  }
-
-
   public function _mappingField($field){
     $p = $this->prf();
     $t = $this->prt();
@@ -52,17 +46,17 @@ class _CursoSql extends EntitySql{
 
   public function mappingField($field){
     if($f = $this->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('comision', 'com')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('sede', 'com_sed')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('domicilio', 'com_sed_dom')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('tipo_sede', 'com_sed_ts')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('centro_educativo', 'com_sed_ce')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('domicilio', 'com_sed_ce_dom')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('modalidad', 'com_moa')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('planificacion', 'com_pla')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('plan', 'com_pla_plb')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('calendario', 'com_cal')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('asignatura', 'asi')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('comision', 'com')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('sede', 'com_sed')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('domicilio', 'com_sed_dom')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('tipo_sede', 'com_sed_ts')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('centro_educativo', 'com_sed_ce')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('domicilio', 'com_sed_ce_dom')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('modalidad', 'com_moa')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('planificacion', 'com_pla')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('plan', 'com_pla_plb')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('calendario', 'com_cal')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('asignatura', 'asi')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
   }
 
@@ -81,32 +75,32 @@ class _CursoSql extends EntitySql{
 
   public function fields(){
     return $this->_fields() . ',
-' . EntitySql::getInstanceRequire('comision', 'com')->_fields() . ',
-' . EntitySql::getInstanceRequire('sede', 'com_sed')->_fields() . ',
-' . EntitySql::getInstanceRequire('domicilio', 'com_sed_dom')->_fields() . ',
-' . EntitySql::getInstanceRequire('tipo_sede', 'com_sed_ts')->_fields() . ',
-' . EntitySql::getInstanceRequire('centro_educativo', 'com_sed_ce')->_fields() . ',
-' . EntitySql::getInstanceRequire('domicilio', 'com_sed_ce_dom')->_fields() . ',
-' . EntitySql::getInstanceRequire('modalidad', 'com_moa')->_fields() . ',
-' . EntitySql::getInstanceRequire('planificacion', 'com_pla')->_fields() . ',
-' . EntitySql::getInstanceRequire('plan', 'com_pla_plb')->_fields() . ',
-' . EntitySql::getInstanceRequire('calendario', 'com_cal')->_fields() . ',
-' . EntitySql::getInstanceRequire('asignatura', 'asi')->_fields() . ' 
+' . $this->container->getSql('comision', 'com')->_fields() . ',
+' . $this->container->getSql('sede', 'com_sed')->_fields() . ',
+' . $this->container->getSql('domicilio', 'com_sed_dom')->_fields() . ',
+' . $this->container->getSql('tipo_sede', 'com_sed_ts')->_fields() . ',
+' . $this->container->getSql('centro_educativo', 'com_sed_ce')->_fields() . ',
+' . $this->container->getSql('domicilio', 'com_sed_ce_dom')->_fields() . ',
+' . $this->container->getSql('modalidad', 'com_moa')->_fields() . ',
+' . $this->container->getSql('planificacion', 'com_pla')->_fields() . ',
+' . $this->container->getSql('plan', 'com_pla_plb')->_fields() . ',
+' . $this->container->getSql('calendario', 'com_cal')->_fields() . ',
+' . $this->container->getSql('asignatura', 'asi')->_fields() . ' 
 ';
   }
 
   public function join(Render $render){
-    return EntitySql::getInstanceRequire('comision', 'com')->_join('comision', 'curs', $render) . '
-' . EntitySql::getInstanceRequire('sede', 'com_sed')->_join('sede', 'com', $render) . '
-' . EntitySql::getInstanceRequire('domicilio', 'com_sed_dom')->_join('domicilio', 'com_sed', $render) . '
-' . EntitySql::getInstanceRequire('tipo_sede', 'com_sed_ts')->_join('tipo_sede', 'com_sed', $render) . '
-' . EntitySql::getInstanceRequire('centro_educativo', 'com_sed_ce')->_join('centro_educativo', 'com_sed', $render) . '
-' . EntitySql::getInstanceRequire('domicilio', 'com_sed_ce_dom')->_join('domicilio', 'com_sed_ce', $render) . '
-' . EntitySql::getInstanceRequire('modalidad', 'com_moa')->_join('modalidad', 'com', $render) . '
-' . EntitySql::getInstanceRequire('planificacion', 'com_pla')->_join('planificacion', 'com', $render) . '
-' . EntitySql::getInstanceRequire('plan', 'com_pla_plb')->_join('plan', 'com_pla', $render) . '
-' . EntitySql::getInstanceRequire('calendario', 'com_cal')->_join('calendario', 'com', $render) . '
-' . EntitySql::getInstanceRequire('asignatura', 'asi')->_join('asignatura', 'curs', $render) . '
+    return $this->container->getSql('comision', 'com')->_join('comision', 'curs', $render) . '
+' . $this->container->getSql('sede', 'com_sed')->_join('sede', 'com', $render) . '
+' . $this->container->getSql('domicilio', 'com_sed_dom')->_join('domicilio', 'com_sed', $render) . '
+' . $this->container->getSql('tipo_sede', 'com_sed_ts')->_join('tipo_sede', 'com_sed', $render) . '
+' . $this->container->getSql('centro_educativo', 'com_sed_ce')->_join('centro_educativo', 'com_sed', $render) . '
+' . $this->container->getSql('domicilio', 'com_sed_ce_dom')->_join('domicilio', 'com_sed_ce', $render) . '
+' . $this->container->getSql('modalidad', 'com_moa')->_join('modalidad', 'com', $render) . '
+' . $this->container->getSql('planificacion', 'com_pla')->_join('planificacion', 'com', $render) . '
+' . $this->container->getSql('plan', 'com_pla_plb')->_join('plan', 'com_pla', $render) . '
+' . $this->container->getSql('calendario', 'com_cal')->_join('calendario', 'com', $render) . '
+' . $this->container->getSql('asignatura', 'asi')->_join('asignatura', 'curs', $render) . '
 ' ;
   }
 
@@ -196,32 +190,32 @@ class _CursoSql extends EntitySql{
 
   protected function conditionFieldStruct($field, $option, $value) {
     if($c = $this->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('comision','com')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('sede','com_sed')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','com_sed_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('tipo_sede','com_sed_ts')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('centro_educativo','com_sed_ce')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','com_sed_ce_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('modalidad','com_moa')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('planificacion','com_pla')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('plan','com_pla_plb')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('calendario','com_cal')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('asignatura','asi')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('comision','com')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('sede','com_sed')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('domicilio','com_sed_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('tipo_sede','com_sed_ts')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('centro_educativo','com_sed_ce')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('domicilio','com_sed_ce_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('modalidad','com_moa')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('planificacion','com_pla')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('plan','com_pla_plb')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('calendario','com_cal')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('asignatura','asi')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldAux($field, $option, $value) {
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('comision','com')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('sede','com_sed')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','com_sed_dom')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('tipo_sede','com_sed_ts')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('centro_educativo','com_sed_ce')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','com_sed_ce_dom')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('modalidad','com_moa')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('planificacion','com_pla')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('plan','com_pla_plb')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('calendario','com_cal')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('asignatura','asi')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('comision','com')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('sede','com_sed')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('domicilio','com_sed_dom')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('tipo_sede','com_sed_ts')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('centro_educativo','com_sed_ce')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('domicilio','com_sed_ce_dom')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('modalidad','com_moa')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('planificacion','com_pla')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('plan','com_pla_plb')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('calendario','com_cal')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('asignatura','asi')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
 

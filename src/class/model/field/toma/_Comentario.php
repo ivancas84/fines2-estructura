@@ -15,7 +15,7 @@ class _FieldTomaComentario extends Field {
   public $alias = "com";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('toma'); }
+  public function getEntity(){ return $this->container->getEntity('toma'); }
 
 
 }

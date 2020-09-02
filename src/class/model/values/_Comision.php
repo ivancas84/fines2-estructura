@@ -20,7 +20,7 @@ class _Comision extends EntityValues {
   protected $calendario = UNDEFINED;
 
   public function _setDefault(){
-    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->id == UNDEFINED) $this->setId(uniqid());
     if($this->turno == UNDEFINED) $this->setTurno(null);
     if($this->division == UNDEFINED) $this->setDivision(null);
     if($this->comentario == UNDEFINED) $this->setComentario(null);
@@ -108,29 +108,52 @@ class _Comision extends EntityValues {
   public function comisionSiguiente($format = null) { return Format::convertCase($this->comisionSiguiente, $format); }
   public function calendario($format = null) { return Format::convertCase($this->calendario, $format); }
 
-  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
-  public function setTurno($p) { $this->turno = (is_null($p)) ? null : (string)$p; }
-  public function setDivision($p) { $this->division = (is_null($p)) ? null : (string)$p; }
-  public function setComentario($p) { $this->comentario = (is_null($p)) ? null : (string)$p; }
-  public function setAutorizada($p) { $this->autorizada = settypebool($p); }
-  public function setApertura($p) { $this->apertura = settypebool($p); }
-  public function setPublicada($p) { $this->publicada = settypebool($p); }
-  public function setObservaciones($p) { $this->observaciones = (is_null($p)) ? null : (string)$p; }
-  public function _setAlta(DateTime $p = null) { $this->alta = $p; }
+  public function _setId(string $p = null) { return $this->id = $p; }  
+  public function setId($p) { return $this->id = (is_null($p)) ? null : (string)$p; }
 
+  public function _setTurno(string $p = null) { return $this->turno = $p; }  
+  public function setTurno($p) { return $this->turno = (is_null($p)) ? null : (string)$p; }
+
+  public function _setDivision(string $p = null) { return $this->division = $p; }  
+  public function setDivision($p) { return $this->division = (is_null($p)) ? null : (string)$p; }
+
+  public function _setComentario(string $p = null) { return $this->comentario = $p; }  
+  public function setComentario($p) { return $this->comentario = (is_null($p)) ? null : (string)$p; }
+
+  public function _setAutorizada(boolean $p = null) { return $this->autorizada = $p; }  
+  public function setAutorizada($p) { return $this->autorizada = settypebool($p); }
+
+  public function _setApertura(boolean $p = null) { return $this->apertura = $p; }  
+  public function setApertura($p) { return $this->apertura = settypebool($p); }
+
+  public function _setPublicada(boolean $p = null) { return $this->publicada = $p; }  
+  public function setPublicada($p) { return $this->publicada = settypebool($p); }
+
+  public function _setObservaciones(string $p = null) { return $this->observaciones = $p; }  
+  public function setObservaciones($p) { return $this->observaciones = (is_null($p)) ? null : (string)$p; }
+
+  public function _setAlta(DateTime $p = null) { return $this->alta = $p; }  
   public function setAlta($p) {
-    if(!is_null($p)) {
-      $p = new SpanishDateTime($p);    
-      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
-    }
-    $this->alta = $p;  
+    if(!is_null($p) && !($p instanceof DateTime)) $p = new SpanishDateTime($p);
+    if($p instanceof DateTime) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    return $this->alta = $p;
   }
 
-  public function setSede($p) { $this->sede = (is_null($p)) ? null : (string)$p; }
-  public function setModalidad($p) { $this->modalidad = (is_null($p)) ? null : (string)$p; }
-  public function setPlanificacion($p) { $this->planificacion = (is_null($p)) ? null : (string)$p; }
-  public function setComisionSiguiente($p) { $this->comisionSiguiente = (is_null($p)) ? null : (string)$p; }
-  public function setCalendario($p) { $this->calendario = (is_null($p)) ? null : (string)$p; }
+  public function _setSede(string $p = null) { return $this->sede = $p; }  
+  public function setSede($p) { return $this->sede = (is_null($p)) ? null : (string)$p; }
+
+  public function _setModalidad(string $p = null) { return $this->modalidad = $p; }  
+  public function setModalidad($p) { return $this->modalidad = (is_null($p)) ? null : (string)$p; }
+
+  public function _setPlanificacion(string $p = null) { return $this->planificacion = $p; }  
+  public function setPlanificacion($p) { return $this->planificacion = (is_null($p)) ? null : (string)$p; }
+
+  public function _setComisionSiguiente(string $p = null) { return $this->comisionSiguiente = $p; }  
+  public function setComisionSiguiente($p) { return $this->comisionSiguiente = (is_null($p)) ? null : (string)$p; }
+
+  public function _setCalendario(string $p = null) { return $this->calendario = $p; }  
+  public function setCalendario($p) { return $this->calendario = (is_null($p)) ? null : (string)$p; }
+
 
   public function resetTurno() { if(!Validation::is_empty($this->turno)) $this->turno = preg_replace('/\s\s+/', ' ', trim($this->turno)); }
   public function resetDivision() { if(!Validation::is_empty($this->division)) $this->division = preg_replace('/\s\s+/', ' ', trim($this->division)); }
@@ -143,27 +166,33 @@ class _Comision extends EntityValues {
   }
 
   public function checkTurno($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("turno");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("turno", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkDivision($value) { 
     $this->_logs->resetLogs("division");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(45);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("division", "error", $error); }
     return $v->isSuccess();
   }
 
   public function checkComentario($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("comentario");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(65535);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("comentario", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkAutorizada($value) { 
     $this->_logs->resetLogs("autorizada");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(1);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("autorizada", "error", $error); }
     return $v->isSuccess();
   }
@@ -171,7 +200,7 @@ class _Comision extends EntityValues {
   public function checkApertura($value) { 
     $this->_logs->resetLogs("apertura");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(1);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("apertura", "error", $error); }
     return $v->isSuccess();
   }
@@ -179,20 +208,23 @@ class _Comision extends EntityValues {
   public function checkPublicada($value) { 
     $this->_logs->resetLogs("publicada");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(1);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("publicada", "error", $error); }
     return $v->isSuccess();
   }
 
   public function checkObservaciones($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("observaciones");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(65535);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("observaciones", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkAlta($value) { 
     $this->_logs->resetLogs("alta");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->isA('DateTime');
     foreach($v->getErrors() as $error){ $this->_logs->addLog("alta", "error", $error); }
     return $v->isSuccess();
   }
@@ -200,7 +232,7 @@ class _Comision extends EntityValues {
   public function checkSede($value) { 
     $this->_logs->resetLogs("sede");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(45);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("sede", "error", $error); }
     return $v->isSuccess();
   }
@@ -208,25 +240,31 @@ class _Comision extends EntityValues {
   public function checkModalidad($value) { 
     $this->_logs->resetLogs("modalidad");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(45);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("modalidad", "error", $error); }
     return $v->isSuccess();
   }
 
   public function checkPlanificacion($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("planificacion");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("planificacion", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkComisionSiguiente($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("comision_siguiente");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("comision_siguiente", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkCalendario($value) { 
     $this->_logs->resetLogs("calendario");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(45);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("calendario", "error", $error); }
     return $v->isSuccess();
   }

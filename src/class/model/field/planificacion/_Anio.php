@@ -15,7 +15,7 @@ class _FieldPlanificacionAnio extends Field {
   public $alias = "ani";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('planificacion'); }
+  public function getEntity(){ return $this->container->getEntity('planificacion'); }
 
 
 }

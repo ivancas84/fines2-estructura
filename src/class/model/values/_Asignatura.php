@@ -12,7 +12,7 @@ class _Asignatura extends EntityValues {
   protected $perfil = UNDEFINED;
 
   public function _setDefault(){
-    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->id == UNDEFINED) $this->setId(uniqid());
     if($this->nombre == UNDEFINED) $this->setNombre(null);
     if($this->formacion == UNDEFINED) $this->setFormacion(null);
     if($this->clasificacion == UNDEFINED) $this->setClasificacion(null);
@@ -60,12 +60,24 @@ class _Asignatura extends EntityValues {
   public function codigo($format = null) { return Format::convertCase($this->codigo, $format); }
   public function perfil($format = null) { return Format::convertCase($this->perfil, $format); }
 
-  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
-  public function setNombre($p) { $this->nombre = (is_null($p)) ? null : (string)$p; }
-  public function setFormacion($p) { $this->formacion = (is_null($p)) ? null : (string)$p; }
-  public function setClasificacion($p) { $this->clasificacion = (is_null($p)) ? null : (string)$p; }
-  public function setCodigo($p) { $this->codigo = (is_null($p)) ? null : (string)$p; }
-  public function setPerfil($p) { $this->perfil = (is_null($p)) ? null : (string)$p; }
+  public function _setId(string $p = null) { return $this->id = $p; }  
+  public function setId($p) { return $this->id = (is_null($p)) ? null : (string)$p; }
+
+  public function _setNombre(string $p = null) { return $this->nombre = $p; }  
+  public function setNombre($p) { return $this->nombre = (is_null($p)) ? null : (string)$p; }
+
+  public function _setFormacion(string $p = null) { return $this->formacion = $p; }  
+  public function setFormacion($p) { return $this->formacion = (is_null($p)) ? null : (string)$p; }
+
+  public function _setClasificacion(string $p = null) { return $this->clasificacion = $p; }  
+  public function setClasificacion($p) { return $this->clasificacion = (is_null($p)) ? null : (string)$p; }
+
+  public function _setCodigo(string $p = null) { return $this->codigo = $p; }  
+  public function setCodigo($p) { return $this->codigo = (is_null($p)) ? null : (string)$p; }
+
+  public function _setPerfil(string $p = null) { return $this->perfil = $p; }  
+  public function setPerfil($p) { return $this->perfil = (is_null($p)) ? null : (string)$p; }
+
 
   public function resetNombre() { if(!Validation::is_empty($this->nombre)) $this->nombre = preg_replace('/\s\s+/', ' ', trim($this->nombre)); }
   public function resetFormacion() { if(!Validation::is_empty($this->formacion)) $this->formacion = preg_replace('/\s\s+/', ' ', trim($this->formacion)); }
@@ -81,29 +93,41 @@ class _Asignatura extends EntityValues {
   public function checkNombre($value) { 
     $this->_logs->resetLogs("nombre");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(255);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("nombre", "error", $error); }
     return $v->isSuccess();
   }
 
   public function checkFormacion($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("formacion");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("formacion", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkClasificacion($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("clasificacion");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("clasificacion", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkCodigo($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("codigo");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("codigo", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkPerfil($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("perfil");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("perfil", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function _check(){

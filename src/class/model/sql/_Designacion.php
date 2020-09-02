@@ -3,12 +3,6 @@ require_once("class/model/Sql.php");
 
 class _DesignacionSql extends EntitySql{
 
-  public function __construct(){
-    parent::__construct();
-    $this->entity = Entity::getInstanceRequire('designacion');
-  }
-
-
   public function _mappingField($field){
     $p = $this->prf();
     $t = $this->prt();
@@ -62,14 +56,14 @@ class _DesignacionSql extends EntitySql{
 
   public function mappingField($field){
     if($f = $this->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('cargo', 'car')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('sede', 'sed')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('domicilio', 'sed_dom')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('tipo_sede', 'sed_ts')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('centro_educativo', 'sed_ce')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('domicilio', 'sed_ce_dom')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('persona', 'per')->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('domicilio', 'per_dom')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('cargo', 'car')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('sede', 'sed')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('domicilio', 'sed_dom')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('tipo_sede', 'sed_ts')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('centro_educativo', 'sed_ce')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('domicilio', 'sed_ce_dom')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('persona', 'per')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('domicilio', 'per_dom')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
   }
 
@@ -88,26 +82,26 @@ class _DesignacionSql extends EntitySql{
 
   public function fields(){
     return $this->_fields() . ',
-' . EntitySql::getInstanceRequire('cargo', 'car')->_fields() . ',
-' . EntitySql::getInstanceRequire('sede', 'sed')->_fields() . ',
-' . EntitySql::getInstanceRequire('domicilio', 'sed_dom')->_fields() . ',
-' . EntitySql::getInstanceRequire('tipo_sede', 'sed_ts')->_fields() . ',
-' . EntitySql::getInstanceRequire('centro_educativo', 'sed_ce')->_fields() . ',
-' . EntitySql::getInstanceRequire('domicilio', 'sed_ce_dom')->_fields() . ',
-' . EntitySql::getInstanceRequire('persona', 'per')->_fields() . ',
-' . EntitySql::getInstanceRequire('domicilio', 'per_dom')->_fields() . ' 
+' . $this->container->getSql('cargo', 'car')->_fields() . ',
+' . $this->container->getSql('sede', 'sed')->_fields() . ',
+' . $this->container->getSql('domicilio', 'sed_dom')->_fields() . ',
+' . $this->container->getSql('tipo_sede', 'sed_ts')->_fields() . ',
+' . $this->container->getSql('centro_educativo', 'sed_ce')->_fields() . ',
+' . $this->container->getSql('domicilio', 'sed_ce_dom')->_fields() . ',
+' . $this->container->getSql('persona', 'per')->_fields() . ',
+' . $this->container->getSql('domicilio', 'per_dom')->_fields() . ' 
 ';
   }
 
   public function join(Render $render){
-    return EntitySql::getInstanceRequire('cargo', 'car')->_join('cargo', 'desi', $render) . '
-' . EntitySql::getInstanceRequire('sede', 'sed')->_join('sede', 'desi', $render) . '
-' . EntitySql::getInstanceRequire('domicilio', 'sed_dom')->_join('domicilio', 'sed', $render) . '
-' . EntitySql::getInstanceRequire('tipo_sede', 'sed_ts')->_join('tipo_sede', 'sed', $render) . '
-' . EntitySql::getInstanceRequire('centro_educativo', 'sed_ce')->_join('centro_educativo', 'sed', $render) . '
-' . EntitySql::getInstanceRequire('domicilio', 'sed_ce_dom')->_join('domicilio', 'sed_ce', $render) . '
-' . EntitySql::getInstanceRequire('persona', 'per')->_join('persona', 'desi', $render) . '
-' . EntitySql::getInstanceRequire('domicilio', 'per_dom')->_join('domicilio', 'per', $render) . '
+    return $this->container->getSql('cargo', 'car')->_join('cargo', 'desi', $render) . '
+' . $this->container->getSql('sede', 'sed')->_join('sede', 'desi', $render) . '
+' . $this->container->getSql('domicilio', 'sed_dom')->_join('domicilio', 'sed', $render) . '
+' . $this->container->getSql('tipo_sede', 'sed_ts')->_join('tipo_sede', 'sed', $render) . '
+' . $this->container->getSql('centro_educativo', 'sed_ce')->_join('centro_educativo', 'sed', $render) . '
+' . $this->container->getSql('domicilio', 'sed_ce_dom')->_join('domicilio', 'sed_ce', $render) . '
+' . $this->container->getSql('persona', 'per')->_join('persona', 'desi', $render) . '
+' . $this->container->getSql('domicilio', 'per_dom')->_join('domicilio', 'per', $render) . '
 ' ;
   }
 
@@ -223,26 +217,26 @@ class _DesignacionSql extends EntitySql{
 
   protected function conditionFieldStruct($field, $option, $value) {
     if($c = $this->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('cargo','car')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('sede','sed')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','sed_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('tipo_sede','sed_ts')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('centro_educativo','sed_ce')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','sed_ce_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('persona','per')->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','per_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('cargo','car')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('sede','sed')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('domicilio','sed_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('tipo_sede','sed_ts')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('centro_educativo','sed_ce')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('domicilio','sed_ce_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('persona','per')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('domicilio','per_dom')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldAux($field, $option, $value) {
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('cargo','car')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('sede','sed')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','sed_dom')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('tipo_sede','sed_ts')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('centro_educativo','sed_ce')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','sed_ce_dom')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('persona','per')->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','per_dom')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('cargo','car')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('sede','sed')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('domicilio','sed_dom')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('tipo_sede','sed_ts')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('centro_educativo','sed_ce')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('domicilio','sed_ce_dom')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('persona','per')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('domicilio','per_dom')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
 

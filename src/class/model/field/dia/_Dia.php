@@ -15,7 +15,7 @@ class _FieldDiaDia extends Field {
   public $alias = "dib";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('dia'); }
+  public function getEntity(){ return $this->container->getEntity('dia'); }
 
 
 }

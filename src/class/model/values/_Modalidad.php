@@ -8,7 +8,7 @@ class _Modalidad extends EntityValues {
   protected $nombre = UNDEFINED;
 
   public function _setDefault(){
-    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->id == UNDEFINED) $this->setId(uniqid());
     if($this->nombre == UNDEFINED) $this->setNombre(null);
     return $this;
   }
@@ -36,8 +36,12 @@ class _Modalidad extends EntityValues {
   public function id() { return $this->id; }
   public function nombre($format = null) { return Format::convertCase($this->nombre, $format); }
 
-  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
-  public function setNombre($p) { $this->nombre = (is_null($p)) ? null : (string)$p; }
+  public function _setId(string $p = null) { return $this->id = $p; }  
+  public function setId($p) { return $this->id = (is_null($p)) ? null : (string)$p; }
+
+  public function _setNombre(string $p = null) { return $this->nombre = $p; }  
+  public function setNombre($p) { return $this->nombre = (is_null($p)) ? null : (string)$p; }
+
 
   public function resetNombre() { if(!Validation::is_empty($this->nombre)) $this->nombre = preg_replace('/\s\s+/', ' ', trim($this->nombre)); }
 
@@ -49,7 +53,7 @@ class _Modalidad extends EntityValues {
   public function checkNombre($value) { 
     $this->_logs->resetLogs("nombre");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(45);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("nombre", "error", $error); }
     return $v->isSuccess();
   }

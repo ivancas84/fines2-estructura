@@ -15,7 +15,7 @@ class _FieldPlanillaDocenteId extends Field {
   public $alias = "id";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('planilla_docente'); }
+  public function getEntity(){ return $this->container->getEntity('planilla_docente'); }
 
 
 }

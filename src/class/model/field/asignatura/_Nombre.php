@@ -15,7 +15,7 @@ class _FieldAsignaturaNombre extends Field {
   public $alias = "nom";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('asignatura'); }
+  public function getEntity(){ return $this->container->getEntity('asignatura'); }
 
 
 }

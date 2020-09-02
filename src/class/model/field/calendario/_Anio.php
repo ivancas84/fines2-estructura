@@ -15,7 +15,7 @@ class _FieldCalendarioAnio extends Field {
   public $alias = "ani";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('calendario'); }
+  public function getEntity(){ return $this->container->getEntity('calendario'); }
 
 
 }

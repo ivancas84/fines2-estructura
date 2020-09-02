@@ -50,15 +50,15 @@ UPDATE " . $this->entity->sn_() . " SET
 
   public function json(array $row = null){
     if(empty($row)) return null;
-    $row_ = EntityValues::getInstanceRequire($this->entity->getName())->_fromArray($row)->_toArray();
-    if(!is_null($row['pd_id'])) $row_["planilla_docente_"] = EntityValues::getInstanceRequire('planilla_docente')->_fromArray($row, 'pd_')->_toArray();
+    $row_ = $this->container->getValues($this->entity->getName())->_fromArray($row)->_toArray();
+    if(!is_null($row['pd_id'])) $row_["planilla_docente_"] = $this->container->getValues('planilla_docente')->_fromArray($row, 'pd_')->_toArray();
     return $row_;
   }
 
   public function values(array $row){
     $row_ = [];
-    $row_["contralor"] = EntityValues::getInstanceRequire("contralor")->_fromArray($row);
-    $row_["planilla_docente"] = EntityValues::getInstanceRequire('planilla_docente')->_fromArray($row, 'pd_');
+    $row_["contralor"] = $this->container->getValues("contralor")->_fromArray($row);
+    $row_["planilla_docente"] = $this->container->getValues('planilla_docente')->_fromArray($row, 'pd_');
     return $row_;
   }
 

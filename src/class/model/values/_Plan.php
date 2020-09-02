@@ -10,7 +10,7 @@ class _Plan extends EntityValues {
   protected $distribucionHoraria = UNDEFINED;
 
   public function _setDefault(){
-    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->id == UNDEFINED) $this->setId(uniqid());
     if($this->orientacion == UNDEFINED) $this->setOrientacion(null);
     if($this->resolucion == UNDEFINED) $this->setResolucion(null);
     if($this->distribucionHoraria == UNDEFINED) $this->setDistribucionHoraria(null);
@@ -48,10 +48,18 @@ class _Plan extends EntityValues {
   public function resolucion($format = null) { return Format::convertCase($this->resolucion, $format); }
   public function distribucionHoraria($format = null) { return Format::convertCase($this->distribucionHoraria, $format); }
 
-  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
-  public function setOrientacion($p) { $this->orientacion = (is_null($p)) ? null : (string)$p; }
-  public function setResolucion($p) { $this->resolucion = (is_null($p)) ? null : (string)$p; }
-  public function setDistribucionHoraria($p) { $this->distribucionHoraria = (is_null($p)) ? null : (string)$p; }
+  public function _setId(string $p = null) { return $this->id = $p; }  
+  public function setId($p) { return $this->id = (is_null($p)) ? null : (string)$p; }
+
+  public function _setOrientacion(string $p = null) { return $this->orientacion = $p; }  
+  public function setOrientacion($p) { return $this->orientacion = (is_null($p)) ? null : (string)$p; }
+
+  public function _setResolucion(string $p = null) { return $this->resolucion = $p; }  
+  public function setResolucion($p) { return $this->resolucion = (is_null($p)) ? null : (string)$p; }
+
+  public function _setDistribucionHoraria(string $p = null) { return $this->distribucionHoraria = $p; }  
+  public function setDistribucionHoraria($p) { return $this->distribucionHoraria = (is_null($p)) ? null : (string)$p; }
+
 
   public function resetOrientacion() { if(!Validation::is_empty($this->orientacion)) $this->orientacion = preg_replace('/\s\s+/', ' ', trim($this->orientacion)); }
   public function resetResolucion() { if(!Validation::is_empty($this->resolucion)) $this->resolucion = preg_replace('/\s\s+/', ' ', trim($this->resolucion)); }
@@ -65,19 +73,25 @@ class _Plan extends EntityValues {
   public function checkOrientacion($value) { 
     $this->_logs->resetLogs("orientacion");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(45);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("orientacion", "error", $error); }
     return $v->isSuccess();
   }
 
   public function checkResolucion($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("resolucion");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("resolucion", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkDistribucionHoraria($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("distribucion_horaria");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("distribucion_horaria", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function _check(){

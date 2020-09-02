@@ -3,12 +3,6 @@ require_once("class/model/Sql.php");
 
 class _CentroEducativoSql extends EntitySql{
 
-  public function __construct(){
-    parent::__construct();
-    $this->entity = Entity::getInstanceRequire('centro_educativo');
-  }
-
-
   public function _mappingField($field){
     $p = $this->prf();
     $t = $this->prt();
@@ -43,7 +37,7 @@ class _CentroEducativoSql extends EntitySql{
 
   public function mappingField($field){
     if($f = $this->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('domicilio', 'dom')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('domicilio', 'dom')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
   }
 
@@ -62,12 +56,12 @@ class _CentroEducativoSql extends EntitySql{
 
   public function fields(){
     return $this->_fields() . ',
-' . EntitySql::getInstanceRequire('domicilio', 'dom')->_fields() . ' 
+' . $this->container->getSql('domicilio', 'dom')->_fields() . ' 
 ';
   }
 
   public function join(Render $render){
-    return EntitySql::getInstanceRequire('domicilio', 'dom')->_join('domicilio', 'ce', $render) . '
+    return $this->container->getSql('domicilio', 'dom')->_join('domicilio', 'ce', $render) . '
 ' ;
   }
 
@@ -134,12 +128,12 @@ class _CentroEducativoSql extends EntitySql{
 
   protected function conditionFieldStruct($field, $option, $value) {
     if($c = $this->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','dom')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('domicilio','dom')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldAux($field, $option, $value) {
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('domicilio','dom')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('domicilio','dom')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
 

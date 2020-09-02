@@ -11,7 +11,7 @@ class _Curso extends EntityValues {
   protected $asignatura = UNDEFINED;
 
   public function _setDefault(){
-    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->id == UNDEFINED) $this->setId(uniqid());
     if($this->horasCatedra == UNDEFINED) $this->setHorasCatedra(null);
     if($this->alta == UNDEFINED) $this->setAlta(date('c'));
     if($this->comision == UNDEFINED) $this->setComision(null);
@@ -54,20 +54,25 @@ class _Curso extends EntityValues {
   public function comision($format = null) { return Format::convertCase($this->comision, $format); }
   public function asignatura($format = null) { return Format::convertCase($this->asignatura, $format); }
 
-  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
-  public function setHorasCatedra($p) { $this->horasCatedra = (is_null($p)) ? null : intval($p); }
-  public function _setAlta(DateTime $p = null) { $this->alta = $p; }
+  public function _setId(string $p = null) { return $this->id = $p; }  
+  public function setId($p) { return $this->id = (is_null($p)) ? null : (string)$p; }
 
+  public function _setHorasCatedra(integer $p = null) { return $this->horasCatedra = $p; }    
+  public function setHorasCatedra($p) { return $this->horasCatedra = (is_null($p)) ? null : intval($p); }
+
+  public function _setAlta(DateTime $p = null) { return $this->alta = $p; }  
   public function setAlta($p) {
-    if(!is_null($p)) {
-      $p = new SpanishDateTime($p);    
-      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
-    }
-    $this->alta = $p;  
+    if(!is_null($p) && !($p instanceof DateTime)) $p = new SpanishDateTime($p);
+    if($p instanceof DateTime) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    return $this->alta = $p;
   }
 
-  public function setComision($p) { $this->comision = (is_null($p)) ? null : (string)$p; }
-  public function setAsignatura($p) { $this->asignatura = (is_null($p)) ? null : (string)$p; }
+  public function _setComision(string $p = null) { return $this->comision = $p; }  
+  public function setComision($p) { return $this->comision = (is_null($p)) ? null : (string)$p; }
+
+  public function _setAsignatura(string $p = null) { return $this->asignatura = $p; }  
+  public function setAsignatura($p) { return $this->asignatura = (is_null($p)) ? null : (string)$p; }
+
 
 
   public function checkId($value) { 
@@ -78,7 +83,7 @@ class _Curso extends EntityValues {
   public function checkHorasCatedra($value) { 
     $this->_logs->resetLogs("horas_catedra");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(10);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("horas_catedra", "error", $error); }
     return $v->isSuccess();
   }
@@ -86,7 +91,7 @@ class _Curso extends EntityValues {
   public function checkAlta($value) { 
     $this->_logs->resetLogs("alta");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->isA('DateTime');
     foreach($v->getErrors() as $error){ $this->_logs->addLog("alta", "error", $error); }
     return $v->isSuccess();
   }
@@ -94,7 +99,7 @@ class _Curso extends EntityValues {
   public function checkComision($value) { 
     $this->_logs->resetLogs("comision");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(45);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("comision", "error", $error); }
     return $v->isSuccess();
   }
@@ -102,7 +107,7 @@ class _Curso extends EntityValues {
   public function checkAsignatura($value) { 
     $this->_logs->resetLogs("asignatura");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(45);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("asignatura", "error", $error); }
     return $v->isSuccess();
   }
