@@ -15,7 +15,7 @@ class _Sede extends EntityValues {
   protected $centroEducativo = UNDEFINED;
 
   public function _setDefault(){
-    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->id == UNDEFINED) $this->setId(uniqid());
     if($this->numero == UNDEFINED) $this->setNumero(null);
     if($this->nombre == UNDEFINED) $this->setNombre(null);
     if($this->observaciones == UNDEFINED) $this->setObservaciones(null);
@@ -78,33 +78,41 @@ class _Sede extends EntityValues {
   public function tipoSede($format = null) { return Format::convertCase($this->tipoSede, $format); }
   public function centroEducativo($format = null) { return Format::convertCase($this->centroEducativo, $format); }
 
-  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
-  public function setNumero($p) { $this->numero = (is_null($p)) ? null : (string)$p; }
-  public function setNombre($p) { $this->nombre = (is_null($p)) ? null : (string)$p; }
-  public function setObservaciones($p) { $this->observaciones = (is_null($p)) ? null : (string)$p; }
-  public function _setAlta(DateTime $p = null) { $this->alta = $p; }
+  public function _setId(string $p = null) { return $this->id = $p; }  
+  public function setId($p) { return $this->id = (is_null($p)) ? null : (string)$p; }
 
+  public function _setNumero(string $p = null) { return $this->numero = $p; }  
+  public function setNumero($p) { return $this->numero = (is_null($p)) ? null : (string)$p; }
+
+  public function _setNombre(string $p = null) { return $this->nombre = $p; }  
+  public function setNombre($p) { return $this->nombre = (is_null($p)) ? null : (string)$p; }
+
+  public function _setObservaciones(string $p = null) { return $this->observaciones = $p; }  
+  public function setObservaciones($p) { return $this->observaciones = (is_null($p)) ? null : (string)$p; }
+
+  public function _setAlta(DateTime $p = null) { return $this->alta = $p; }  
   public function setAlta($p) {
-    if(!is_null($p)) {
-      $p = new SpanishDateTime($p);    
-      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
-    }
-    $this->alta = $p;  
+    if(!is_null($p) && !($p instanceof DateTime)) $p = new SpanishDateTime($p);
+    if($p instanceof DateTime) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    return $this->alta = $p;
   }
 
-  public function _setBaja(DateTime $p = null) { $this->baja = $p; }
-
+  public function _setBaja(DateTime $p = null) { return $this->baja = $p; }  
   public function setBaja($p) {
-    if(!is_null($p)) {
-      $p = new SpanishDateTime($p);    
-      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
-    }
-    $this->baja = $p;  
+    if(!is_null($p) && !($p instanceof DateTime)) $p = new SpanishDateTime($p);
+    if($p instanceof DateTime) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    return $this->baja = $p;
   }
 
-  public function setDomicilio($p) { $this->domicilio = (is_null($p)) ? null : (string)$p; }
-  public function setTipoSede($p) { $this->tipoSede = (is_null($p)) ? null : (string)$p; }
-  public function setCentroEducativo($p) { $this->centroEducativo = (is_null($p)) ? null : (string)$p; }
+  public function _setDomicilio(string $p = null) { return $this->domicilio = $p; }  
+  public function setDomicilio($p) { return $this->domicilio = (is_null($p)) ? null : (string)$p; }
+
+  public function _setTipoSede(string $p = null) { return $this->tipoSede = $p; }  
+  public function setTipoSede($p) { return $this->tipoSede = (is_null($p)) ? null : (string)$p; }
+
+  public function _setCentroEducativo(string $p = null) { return $this->centroEducativo = $p; }  
+  public function setCentroEducativo($p) { return $this->centroEducativo = (is_null($p)) ? null : (string)$p; }
+
 
   public function resetNumero() { if(!Validation::is_empty($this->numero)) $this->numero = preg_replace('/\s\s+/', ' ', trim($this->numero)); }
   public function resetNombre() { if(!Validation::is_empty($this->nombre)) $this->nombre = preg_replace('/\s\s+/', ' ', trim($this->nombre)); }
@@ -118,7 +126,7 @@ class _Sede extends EntityValues {
   public function checkNumero($value) { 
     $this->_logs->resetLogs("numero");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(45);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("numero", "error", $error); }
     return $v->isSuccess();
   }
@@ -126,42 +134,57 @@ class _Sede extends EntityValues {
   public function checkNombre($value) { 
     $this->_logs->resetLogs("nombre");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(255);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("nombre", "error", $error); }
     return $v->isSuccess();
   }
 
   public function checkObservaciones($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("observaciones");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(65535);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("observaciones", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkAlta($value) { 
     $this->_logs->resetLogs("alta");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->isA('DateTime');
     foreach($v->getErrors() as $error){ $this->_logs->addLog("alta", "error", $error); }
     return $v->isSuccess();
   }
 
   public function checkBaja($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("baja");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->isA('DateTime');
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("baja", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkDomicilio($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("domicilio");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("domicilio", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkTipoSede($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("tipo_sede");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("tipo_sede", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkCentroEducativo($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("centro_educativo");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("centro_educativo", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function _check(){

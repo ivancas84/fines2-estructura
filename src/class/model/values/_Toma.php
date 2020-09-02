@@ -18,7 +18,7 @@ class _Toma extends EntityValues {
   protected $planillaDocente = UNDEFINED;
 
   public function _setDefault(){
-    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->id == UNDEFINED) $this->setId(uniqid());
     if($this->fechaToma == UNDEFINED) $this->setFechaToma(null);
     if($this->estado == UNDEFINED) $this->setEstado(null);
     if($this->observaciones == UNDEFINED) $this->setObservaciones(null);
@@ -96,37 +96,53 @@ class _Toma extends EntityValues {
   public function reemplazo($format = null) { return Format::convertCase($this->reemplazo, $format); }
   public function planillaDocente($format = null) { return Format::convertCase($this->planillaDocente, $format); }
 
-  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
-  public function _setFechaToma(DateTime $p = null) { $this->fechaToma = $p; }
+  public function _setId(string $p = null) { return $this->id = $p; }  
+  public function setId($p) { return $this->id = (is_null($p)) ? null : (string)$p; }
 
+  public function _setFechaToma(DateTime $p = null) { return $this->fechaToma = $p; }
   public function setFechaToma($p) {
-    if(!is_null($p)) {
-      $p = new SpanishDateTime($p);
-      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    if(!is_null($p) && !($p instanceof DateTime)) $p = new SpanishDateTime($p);
+    if($p instanceof DateTime) {
+      $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
       $p->setTime(0,0,0);
     }
-    $this->fechaToma = $p;
+    return $this->fechaToma = $p;
   }
 
-  public function setEstado($p) { $this->estado = (is_null($p)) ? null : (string)$p; }
-  public function setObservaciones($p) { $this->observaciones = (is_null($p)) ? null : (string)$p; }
-  public function setComentario($p) { $this->comentario = (is_null($p)) ? null : (string)$p; }
-  public function setTipoMovimiento($p) { $this->tipoMovimiento = (is_null($p)) ? null : (string)$p; }
-  public function setEstadoContralor($p) { $this->estadoContralor = (is_null($p)) ? null : (string)$p; }
-  public function _setAlta(DateTime $p = null) { $this->alta = $p; }
+  public function _setEstado(string $p = null) { return $this->estado = $p; }  
+  public function setEstado($p) { return $this->estado = (is_null($p)) ? null : (string)$p; }
 
+  public function _setObservaciones(string $p = null) { return $this->observaciones = $p; }  
+  public function setObservaciones($p) { return $this->observaciones = (is_null($p)) ? null : (string)$p; }
+
+  public function _setComentario(string $p = null) { return $this->comentario = $p; }  
+  public function setComentario($p) { return $this->comentario = (is_null($p)) ? null : (string)$p; }
+
+  public function _setTipoMovimiento(string $p = null) { return $this->tipoMovimiento = $p; }  
+  public function setTipoMovimiento($p) { return $this->tipoMovimiento = (is_null($p)) ? null : (string)$p; }
+
+  public function _setEstadoContralor(string $p = null) { return $this->estadoContralor = $p; }  
+  public function setEstadoContralor($p) { return $this->estadoContralor = (is_null($p)) ? null : (string)$p; }
+
+  public function _setAlta(DateTime $p = null) { return $this->alta = $p; }  
   public function setAlta($p) {
-    if(!is_null($p)) {
-      $p = new SpanishDateTime($p);    
-      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
-    }
-    $this->alta = $p;  
+    if(!is_null($p) && !($p instanceof DateTime)) $p = new SpanishDateTime($p);
+    if($p instanceof DateTime) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    return $this->alta = $p;
   }
 
-  public function setCurso($p) { $this->curso = (is_null($p)) ? null : (string)$p; }
-  public function setDocente($p) { $this->docente = (is_null($p)) ? null : (string)$p; }
-  public function setReemplazo($p) { $this->reemplazo = (is_null($p)) ? null : (string)$p; }
-  public function setPlanillaDocente($p) { $this->planillaDocente = (is_null($p)) ? null : (string)$p; }
+  public function _setCurso(string $p = null) { return $this->curso = $p; }  
+  public function setCurso($p) { return $this->curso = (is_null($p)) ? null : (string)$p; }
+
+  public function _setDocente(string $p = null) { return $this->docente = $p; }  
+  public function setDocente($p) { return $this->docente = (is_null($p)) ? null : (string)$p; }
+
+  public function _setReemplazo(string $p = null) { return $this->reemplazo = $p; }  
+  public function setReemplazo($p) { return $this->reemplazo = (is_null($p)) ? null : (string)$p; }
+
+  public function _setPlanillaDocente(string $p = null) { return $this->planillaDocente = $p; }  
+  public function setPlanillaDocente($p) { return $this->planillaDocente = (is_null($p)) ? null : (string)$p; }
+
 
   public function resetEstado() { if(!Validation::is_empty($this->estado)) $this->estado = preg_replace('/\s\s+/', ' ', trim($this->estado)); }
   public function resetObservaciones() { if(!Validation::is_empty($this->observaciones)) $this->observaciones = preg_replace('/\s\s+/', ' ', trim($this->observaciones)); }
@@ -140,42 +156,57 @@ class _Toma extends EntityValues {
   }
 
   public function checkFechaToma($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("fecha_toma");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->isA('DateTime');
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("fecha_toma", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkEstado($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("estado");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("estado", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkObservaciones($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("observaciones");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(65535);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("observaciones", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkComentario($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("comentario");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("comentario", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkTipoMovimiento($value) { 
     $this->_logs->resetLogs("tipo_movimiento");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(45);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("tipo_movimiento", "error", $error); }
     return $v->isSuccess();
   }
 
   public function checkEstadoContralor($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("estado_contralor");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("estado_contralor", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkAlta($value) { 
     $this->_logs->resetLogs("alta");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->isA('DateTime');
     foreach($v->getErrors() as $error){ $this->_logs->addLog("alta", "error", $error); }
     return $v->isSuccess();
   }
@@ -183,24 +214,33 @@ class _Toma extends EntityValues {
   public function checkCurso($value) { 
     $this->_logs->resetLogs("curso");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(45);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("curso", "error", $error); }
     return $v->isSuccess();
   }
 
   public function checkDocente($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("docente");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("docente", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkReemplazo($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("reemplazo");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("reemplazo", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkPlanillaDocente($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("planilla_docente");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("planilla_docente", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function _check(){

@@ -9,7 +9,7 @@ class _PlanillaDocente extends EntityValues {
   protected $insertado = UNDEFINED;
 
   public function _setDefault(){
-    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->id == UNDEFINED) $this->setId(uniqid());
     if($this->numero == UNDEFINED) $this->setNumero(null);
     if($this->insertado == UNDEFINED) $this->setInsertado(date('c'));
     return $this;
@@ -42,16 +42,17 @@ class _PlanillaDocente extends EntityValues {
   public function numero($format = null) { return Format::convertCase($this->numero, $format); }
   public function insertado($format = null) { return Format::date($this->insertado, $format); }
 
-  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
-  public function setNumero($p) { $this->numero = (is_null($p)) ? null : (string)$p; }
-  public function _setInsertado(DateTime $p = null) { $this->insertado = $p; }
+  public function _setId(string $p = null) { return $this->id = $p; }  
+  public function setId($p) { return $this->id = (is_null($p)) ? null : (string)$p; }
 
+  public function _setNumero(string $p = null) { return $this->numero = $p; }  
+  public function setNumero($p) { return $this->numero = (is_null($p)) ? null : (string)$p; }
+
+  public function _setInsertado(DateTime $p = null) { return $this->insertado = $p; }  
   public function setInsertado($p) {
-    if(!is_null($p)) {
-      $p = new SpanishDateTime($p);    
-      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
-    }
-    $this->insertado = $p;  
+    if(!is_null($p) && !($p instanceof DateTime)) $p = new SpanishDateTime($p);
+    if($p instanceof DateTime) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    return $this->insertado = $p;
   }
 
 
@@ -65,7 +66,7 @@ class _PlanillaDocente extends EntityValues {
   public function checkNumero($value) { 
     $this->_logs->resetLogs("numero");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(255);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("numero", "error", $error); }
     return $v->isSuccess();
   }
@@ -73,7 +74,7 @@ class _PlanillaDocente extends EntityValues {
   public function checkInsertado($value) { 
     $this->_logs->resetLogs("insertado");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->isA('DateTime');
     foreach($v->getErrors() as $error){ $this->_logs->addLog("insertado", "error", $error); }
     return $v->isSuccess();
   }

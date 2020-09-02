@@ -3,12 +3,6 @@ require_once("class/model/Sql.php");
 
 class _PlanillaDocenteSql extends EntitySql{
 
-  public function __construct(){
-    parent::__construct();
-    $this->entity = Entity::getInstanceRequire('planilla_docente');
-  }
-
-
   public function _mappingField($field){
     $p = $this->prf();
     $t = $this->prt();

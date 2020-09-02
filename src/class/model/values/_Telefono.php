@@ -13,7 +13,7 @@ class _Telefono extends EntityValues {
   protected $persona = UNDEFINED;
 
   public function _setDefault(){
-    if($this->id == UNDEFINED) $this->setId(null);
+    if($this->id == UNDEFINED) $this->setId(uniqid());
     if($this->tipo == UNDEFINED) $this->setTipo(null);
     if($this->prefijo == UNDEFINED) $this->setPrefijo(null);
     if($this->numero == UNDEFINED) $this->setNumero(null);
@@ -66,31 +66,35 @@ class _Telefono extends EntityValues {
   public function eliminado($format = null) { return Format::date($this->eliminado, $format); }
   public function persona($format = null) { return Format::convertCase($this->persona, $format); }
 
-  public function setId($p) { $this->id = (is_null($p)) ? null : (string)$p; }
-  public function setTipo($p) { $this->tipo = (is_null($p)) ? null : (string)$p; }
-  public function setPrefijo($p) { $this->prefijo = (is_null($p)) ? null : (string)$p; }
-  public function setNumero($p) { $this->numero = (is_null($p)) ? null : (string)$p; }
-  public function _setInsertado(DateTime $p = null) { $this->insertado = $p; }
+  public function _setId(string $p = null) { return $this->id = $p; }  
+  public function setId($p) { return $this->id = (is_null($p)) ? null : (string)$p; }
 
+  public function _setTipo(string $p = null) { return $this->tipo = $p; }  
+  public function setTipo($p) { return $this->tipo = (is_null($p)) ? null : (string)$p; }
+
+  public function _setPrefijo(string $p = null) { return $this->prefijo = $p; }  
+  public function setPrefijo($p) { return $this->prefijo = (is_null($p)) ? null : (string)$p; }
+
+  public function _setNumero(string $p = null) { return $this->numero = $p; }  
+  public function setNumero($p) { return $this->numero = (is_null($p)) ? null : (string)$p; }
+
+  public function _setInsertado(DateTime $p = null) { return $this->insertado = $p; }  
   public function setInsertado($p) {
-    if(!is_null($p)) {
-      $p = new SpanishDateTime($p);    
-      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
-    }
-    $this->insertado = $p;  
+    if(!is_null($p) && !($p instanceof DateTime)) $p = new SpanishDateTime($p);
+    if($p instanceof DateTime) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    return $this->insertado = $p;
   }
 
-  public function _setEliminado(DateTime $p = null) { $this->eliminado = $p; }
-
+  public function _setEliminado(DateTime $p = null) { return $this->eliminado = $p; }  
   public function setEliminado($p) {
-    if(!is_null($p)) {
-      $p = new SpanishDateTime($p);    
-      if($p) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
-    }
-    $this->eliminado = $p;  
+    if(!is_null($p) && !($p instanceof DateTime)) $p = new SpanishDateTime($p);
+    if($p instanceof DateTime) $p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    return $this->eliminado = $p;
   }
 
-  public function setPersona($p) { $this->persona = (is_null($p)) ? null : (string)$p; }
+  public function _setPersona(string $p = null) { return $this->persona = $p; }  
+  public function setPersona($p) { return $this->persona = (is_null($p)) ? null : (string)$p; }
+
 
   public function resetTipo() { if(!Validation::is_empty($this->tipo)) $this->tipo = preg_replace('/\s\s+/', ' ', trim($this->tipo)); }
   public function resetPrefijo() { if(!Validation::is_empty($this->prefijo)) $this->prefijo = preg_replace('/\s\s+/', ' ', trim($this->prefijo)); }
@@ -102,19 +106,25 @@ class _Telefono extends EntityValues {
   }
 
   public function checkTipo($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("tipo");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("tipo", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkPrefijo($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("prefijo");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->max(45);
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("prefijo", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkNumero($value) { 
     $this->_logs->resetLogs("numero");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(255);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("numero", "error", $error); }
     return $v->isSuccess();
   }
@@ -122,20 +132,23 @@ class _Telefono extends EntityValues {
   public function checkInsertado($value) { 
     $this->_logs->resetLogs("insertado");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->isA('DateTime');
     foreach($v->getErrors() as $error){ $this->_logs->addLog("insertado", "error", $error); }
     return $v->isSuccess();
   }
 
   public function checkEliminado($value) { 
-      if(Validation::is_undefined($value)) return null;
-      return true; 
+    $this->_logs->resetLogs("eliminado");
+    if(Validation::is_undefined($value)) return null;
+    $v = Validation::getInstanceValue($value)->isA('DateTime');
+    foreach($v->getErrors() as $error){ $this->_logs->addLog("eliminado", "error", $error); }
+    return $v->isSuccess();
   }
 
   public function checkPersona($value) { 
     $this->_logs->resetLogs("persona");
     if(Validation::is_undefined($value)) return null;
-    $v = Validation::getInstanceValue($value)->required();
+    $v = Validation::getInstanceValue($value)->required()->max(45);
     foreach($v->getErrors() as $error){ $this->_logs->addLog("persona", "error", $error); }
     return $v->isSuccess();
   }

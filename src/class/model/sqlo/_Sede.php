@@ -59,21 +59,21 @@ UPDATE " . $this->entity->sn_() . " SET
 
   public function json(array $row = null){
     if(empty($row)) return null;
-    $row_ = EntityValues::getInstanceRequire($this->entity->getName())->_fromArray($row)->_toArray();
-    if(!is_null($row['dom_id'])) $row_["domicilio_"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'dom_')->_toArray();
-    if(!is_null($row['ts_id'])) $row_["tipo_sede_"] = EntityValues::getInstanceRequire('tipo_sede')->_fromArray($row, 'ts_')->_toArray();
-    if(!is_null($row['ce_id'])) $row_["centro_educativo_"] = EntityValues::getInstanceRequire('centro_educativo')->_fromArray($row, 'ce_')->_toArray();
-    if(!is_null($row['ce_dom_id'])) $row_["centro_educativo_"]["domicilio_"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'ce_dom_')->_toArray();
+    $row_ = $this->container->getValues($this->entity->getName())->_fromArray($row)->_toArray();
+    if(!is_null($row['dom_id'])) $row_["domicilio_"] = $this->container->getValues('domicilio')->_fromArray($row, 'dom_')->_toArray();
+    if(!is_null($row['ts_id'])) $row_["tipo_sede_"] = $this->container->getValues('tipo_sede')->_fromArray($row, 'ts_')->_toArray();
+    if(!is_null($row['ce_id'])) $row_["centro_educativo_"] = $this->container->getValues('centro_educativo')->_fromArray($row, 'ce_')->_toArray();
+    if(!is_null($row['ce_dom_id'])) $row_["centro_educativo_"]["domicilio_"] = $this->container->getValues('domicilio')->_fromArray($row, 'ce_dom_')->_toArray();
     return $row_;
   }
 
   public function values(array $row){
     $row_ = [];
-    $row_["sede"] = EntityValues::getInstanceRequire("sede")->_fromArray($row);
-    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'dom_');
-    $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede')->_fromArray($row, 'ts_');
-    $row_["centro_educativo"] = EntityValues::getInstanceRequire('centro_educativo')->_fromArray($row, 'ce_');
-    $row_["domicilio1"] = EntityValues::getInstanceRequire('domicilio')->_fromArray($row, 'ce_dom_');
+    $row_["sede"] = $this->container->getValues("sede")->_fromArray($row);
+    $row_["domicilio"] = $this->container->getValues('domicilio')->_fromArray($row, 'dom_');
+    $row_["tipo_sede"] = $this->container->getValues('tipo_sede')->_fromArray($row, 'ts_');
+    $row_["centro_educativo"] = $this->container->getValues('centro_educativo')->_fromArray($row, 'ce_');
+    $row_["domicilio1"] = $this->container->getValues('domicilio')->_fromArray($row, 'ce_dom_');
     return $row_;
   }
 

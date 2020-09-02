@@ -7,8 +7,8 @@ class SedeEntity extends _SedeEntity  {
 
   public function getFieldsUniqueMultiple(){ 
     return array(
-      Field::getInstanceRequire("sede", "numero"),
-      Field::getInstanceRequire("sede", "centro_educativo"),
+      $this->container->getField("sede", "numero"),
+      $this->container->getField("sede", "centro_educativo"),
     ); 
   }
 }

@@ -47,15 +47,15 @@ UPDATE " . $this->entity->sn_() . " SET
 
   public function json(array $row = null){
     if(empty($row)) return null;
-    $row_ = EntityValues::getInstanceRequire($this->entity->getName())->_fromArray($row)->_toArray();
-    if(!is_null($row['plb_id'])) $row_["plan_"] = EntityValues::getInstanceRequire('plan')->_fromArray($row, 'plb_')->_toArray();
+    $row_ = $this->container->getValues($this->entity->getName())->_fromArray($row)->_toArray();
+    if(!is_null($row['plb_id'])) $row_["plan_"] = $this->container->getValues('plan')->_fromArray($row, 'plb_')->_toArray();
     return $row_;
   }
 
   public function values(array $row){
     $row_ = [];
-    $row_["planificacion"] = EntityValues::getInstanceRequire("planificacion")->_fromArray($row);
-    $row_["plan"] = EntityValues::getInstanceRequire('plan')->_fromArray($row, 'plb_');
+    $row_["planificacion"] = $this->container->getValues("planificacion")->_fromArray($row);
+    $row_["plan"] = $this->container->getValues('plan')->_fromArray($row, 'plb_');
     return $row_;
   }
 

@@ -3,12 +3,6 @@ require_once("class/model/Sql.php");
 
 class _PlanificacionSql extends EntitySql{
 
-  public function __construct(){
-    parent::__construct();
-    $this->entity = Entity::getInstanceRequire('planificacion');
-  }
-
-
   public function _mappingField($field){
     $p = $this->prf();
     $t = $this->prt();
@@ -43,7 +37,7 @@ class _PlanificacionSql extends EntitySql{
 
   public function mappingField($field){
     if($f = $this->_mappingField($field)) return $f;
-    if($f = EntitySql::getInstanceRequire('plan', 'plb')->_mappingField($field)) return $f;
+    if($f = $this->container->getSql('plan', 'plb')->_mappingField($field)) return $f;
     throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
   }
 
@@ -62,12 +56,12 @@ class _PlanificacionSql extends EntitySql{
 
   public function fields(){
     return $this->_fields() . ',
-' . EntitySql::getInstanceRequire('plan', 'plb')->_fields() . ' 
+' . $this->container->getSql('plan', 'plb')->_fields() . ' 
 ';
   }
 
   public function join(Render $render){
-    return EntitySql::getInstanceRequire('plan', 'plb')->_join('plan', 'pla', $render) . '
+    return $this->container->getSql('plan', 'plb')->_join('plan', 'pla', $render) . '
 ' ;
   }
 
@@ -134,12 +128,12 @@ class _PlanificacionSql extends EntitySql{
 
   protected function conditionFieldStruct($field, $option, $value) {
     if($c = $this->_conditionFieldStruct($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('plan','plb')->_conditionFieldStruct($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('plan','plb')->_conditionFieldStruct($field, $option, $value)) return $c;
   }
 
   protected function conditionFieldAux($field, $option, $value) {
     if($c = $this->_conditionFieldAux($field, $option, $value)) return $c;
-    if($c = EntitySql::getInstanceRequire('plan','plb')->_conditionFieldAux($field, $option, $value)) return $c;
+    if($c = $this->container->getSql('plan','plb')->_conditionFieldAux($field, $option, $value)) return $c;
   }
 
 
