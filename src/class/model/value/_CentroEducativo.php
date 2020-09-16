@@ -44,30 +44,30 @@ class _CentroEducativoValue extends ValueEntityOptions{
   }
 
   public function checkNombre() { 
-    $this->_logs->resetLogs("nombre");
-    if(Validation::is_undefined($this->nombre)) return null;
-    $v = Validation::getInstanceValue($this->nombre)->required()->max(255);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("nombre", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkCue() { 
-    $this->_logs->resetLogs("cue");
-    if(Validation::is_undefined($this->cue)) return null;
-    $v = Validation::getInstanceValue($this->cue)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("cue", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkDomicilio() { 
-    $this->_logs->resetLogs("domicilio");
-    if(Validation::is_undefined($this->domicilio)) return null;
-    $v = Validation::getInstanceValue($this->domicilio)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("domicilio", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function sqlId() { return $this->_sqlString($this->id); }
+      $this->_logs->resetLogs("nombre");
+      if(Validation::is_undefined($this->nombre)) return null;
+      $v = Validation::getInstanceValue($this->nombre)->required()->max(255);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("nombre", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkCue() { 
+      $this->_logs->resetLogs("cue");
+      if(Validation::is_undefined($this->cue)) return null;
+      $v = Validation::getInstanceValue($this->cue)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("cue", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkDomicilio() { 
+      $this->_logs->resetLogs("domicilio");
+      if(Validation::is_undefined($this->domicilio)) return null;
+      $v = Validation::getInstanceValue($this->domicilio)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("domicilio", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function sqlId() { return $this->_sqlString($this->id); }
   public function sqlNombre() { return $this->_sqlString($this->nombre); }
   public function sqlCue() { return $this->_sqlString($this->cue); }
   public function sqlDomicilio() { return $this->_sqlString($this->domicilio); }

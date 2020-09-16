@@ -8,7 +8,7 @@ class _FileCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setId($value);
-    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id ");
+    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id");
     return "({$field} {$option} {$this->value->sqlId()})";  
   }
 
@@ -21,7 +21,7 @@ class _FileCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setName($value);
-    if(!$this->value->checkName()) throw new Exception("Valor incorrecto: Name ");
+    if(!$this->value->checkName()) throw new Exception("Valor incorrecto: Name");
     return "({$field} {$option} {$this->value->sqlName()})";  
   }
 
@@ -34,7 +34,7 @@ class _FileCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setType($value);
-    if(!$this->value->checkType()) throw new Exception("Valor incorrecto: Type ");
+    if(!$this->value->checkType()) throw new Exception("Valor incorrecto: Type");
     return "({$field} {$option} {$this->value->sqlType()})";  
   }
 
@@ -47,7 +47,7 @@ class _FileCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setContent($value);
-    if(!$this->value->checkContent()) throw new Exception("Valor incorrecto: Content ");
+    if(!$this->value->checkContent()) throw new Exception("Valor incorrecto: Content");
     return "({$field} {$option} {$this->value->sqlContent()})";  
   }
 

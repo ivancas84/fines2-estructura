@@ -45,30 +45,30 @@ class _PlanValue extends ValueEntityOptions{
   }
 
   public function checkOrientacion() { 
-    $this->_logs->resetLogs("orientacion");
-    if(Validation::is_undefined($this->orientacion)) return null;
-    $v = Validation::getInstanceValue($this->orientacion)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("orientacion", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkResolucion() { 
-    $this->_logs->resetLogs("resolucion");
-    if(Validation::is_undefined($this->resolucion)) return null;
-    $v = Validation::getInstanceValue($this->resolucion)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("resolucion", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkDistribucionHoraria() { 
-    $this->_logs->resetLogs("distribucion_horaria");
-    if(Validation::is_undefined($this->distribucionHoraria)) return null;
-    $v = Validation::getInstanceValue($this->distribucionHoraria)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("distribucion_horaria", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function sqlId() { return $this->_sqlString($this->id); }
+      $this->_logs->resetLogs("orientacion");
+      if(Validation::is_undefined($this->orientacion)) return null;
+      $v = Validation::getInstanceValue($this->orientacion)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("orientacion", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkResolucion() { 
+      $this->_logs->resetLogs("resolucion");
+      if(Validation::is_undefined($this->resolucion)) return null;
+      $v = Validation::getInstanceValue($this->resolucion)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("resolucion", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkDistribucionHoraria() { 
+      $this->_logs->resetLogs("distribucion_horaria");
+      if(Validation::is_undefined($this->distribucionHoraria)) return null;
+      $v = Validation::getInstanceValue($this->distribucionHoraria)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("distribucion_horaria", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function sqlId() { return $this->_sqlString($this->id); }
   public function sqlOrientacion() { return $this->_sqlString($this->orientacion); }
   public function sqlResolucion() { return $this->_sqlString($this->resolucion); }
   public function sqlDistribucionHoraria() { return $this->_sqlString($this->distribucionHoraria); }

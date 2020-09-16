@@ -88,38 +88,38 @@ class _ContralorValue extends ValueEntityOptions{
   }
 
   public function checkFechaContralor() { 
-    $this->_logs->resetLogs("fecha_contralor");
-    if(Validation::is_undefined($this->fechaContralor)) return null;
-    $v = Validation::getInstanceValue($this->fechaContralor)->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("fecha_contralor", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkFechaConsejo() { 
-    $this->_logs->resetLogs("fecha_consejo");
-    if(Validation::is_undefined($this->fechaConsejo)) return null;
-    $v = Validation::getInstanceValue($this->fechaConsejo)->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("fecha_consejo", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkInsertado() { 
-    $this->_logs->resetLogs("insertado");
-    if(Validation::is_undefined($this->insertado)) return null;
-    $v = Validation::getInstanceValue($this->insertado)->required()->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("insertado", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkPlanillaDocente() { 
-    $this->_logs->resetLogs("planilla_docente");
-    if(Validation::is_undefined($this->planillaDocente)) return null;
-    $v = Validation::getInstanceValue($this->planillaDocente)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("planilla_docente", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function sqlId() { return $this->_sqlString($this->id); }
+      $this->_logs->resetLogs("fecha_contralor");
+      if(Validation::is_undefined($this->fechaContralor)) return null;
+      $v = Validation::getInstanceValue($this->fechaContralor)->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("fecha_contralor", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkFechaConsejo() { 
+      $this->_logs->resetLogs("fecha_consejo");
+      if(Validation::is_undefined($this->fechaConsejo)) return null;
+      $v = Validation::getInstanceValue($this->fechaConsejo)->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("fecha_consejo", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkInsertado() { 
+      $this->_logs->resetLogs("insertado");
+      if(Validation::is_undefined($this->insertado)) return null;
+      $v = Validation::getInstanceValue($this->insertado)->required()->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("insertado", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkPlanillaDocente() { 
+      $this->_logs->resetLogs("planilla_docente");
+      if(Validation::is_undefined($this->planillaDocente)) return null;
+      $v = Validation::getInstanceValue($this->planillaDocente)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("planilla_docente", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function sqlId() { return $this->_sqlString($this->id); }
   public function sqlFechaContralor() { return $this->_sqlDateTime($this->fechaContralor, "Y-m-d"); }
   public function sqlFechaContralorYm() { return $this->_sqlDateTime($this->fechaContralor, "Y-m"); }
   public function sqlFechaContralorY() { return $this->_sqlDateTime($this->fechaContralor, "Y"); }

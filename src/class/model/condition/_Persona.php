@@ -8,7 +8,7 @@ class _PersonaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setId($value);
-    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id ");
+    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id");
     return "({$field} {$option} {$this->value->sqlId()})";  
   }
 
@@ -21,7 +21,7 @@ class _PersonaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setNombres($value);
-    if(!$this->value->checkNombres()) throw new Exception("Valor incorrecto: Nombres ");
+    if(!$this->value->checkNombres()) throw new Exception("Valor incorrecto: Nombres");
     return "({$field} {$option} {$this->value->sqlNombres()})";  
   }
 
@@ -34,7 +34,7 @@ class _PersonaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setApellidos($value);
-    if(!$this->value->checkApellidos()) throw new Exception("Valor incorrecto: Apellidos ");
+    if(!$this->value->checkApellidos()) throw new Exception("Valor incorrecto: Apellidos");
     return "({$field} {$option} {$this->value->sqlApellidos()})";  
   }
 
@@ -78,7 +78,7 @@ class _PersonaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setNumeroDocumento($value);
-    if(!$this->value->checkNumeroDocumento()) throw new Exception("Valor incorrecto: Numero Documento ");
+    if(!$this->value->checkNumeroDocumento()) throw new Exception("Valor incorrecto: Numero Documento");
     return "({$field} {$option} {$this->value->sqlNumeroDocumento()})";  
   }
 
@@ -91,7 +91,7 @@ class _PersonaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setCuil($value);
-    if(!$this->value->checkCuil()) throw new Exception("Valor incorrecto: Cuil ");
+    if(!$this->value->checkCuil()) throw new Exception("Valor incorrecto: Cuil");
     return "({$field} {$option} {$this->value->sqlCuil()})";  
   }
 
@@ -104,7 +104,7 @@ class _PersonaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setGenero($value);
-    if(!$this->value->checkGenero()) throw new Exception("Valor incorrecto: Genero ");
+    if(!$this->value->checkGenero()) throw new Exception("Valor incorrecto: Genero");
     return "({$field} {$option} {$this->value->sqlGenero()})";  
   }
 
@@ -117,7 +117,7 @@ class _PersonaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setApodo($value);
-    if(!$this->value->checkApodo()) throw new Exception("Valor incorrecto: Apodo ");
+    if(!$this->value->checkApodo()) throw new Exception("Valor incorrecto: Apodo");
     return "({$field} {$option} {$this->value->sqlApodo()})";  
   }
 
@@ -130,7 +130,7 @@ class _PersonaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setTelefono($value);
-    if(!$this->value->checkTelefono()) throw new Exception("Valor incorrecto: Telefono ");
+    if(!$this->value->checkTelefono()) throw new Exception("Valor incorrecto: Telefono");
     return "({$field} {$option} {$this->value->sqlTelefono()})";  
   }
 
@@ -143,7 +143,7 @@ class _PersonaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setEmail($value);
-    if(!$this->value->checkEmail()) throw new Exception("Valor incorrecto: Email ");
+    if(!$this->value->checkEmail()) throw new Exception("Valor incorrecto: Email");
     return "({$field} {$option} {$this->value->sqlEmail()})";  
   }
 
@@ -196,7 +196,7 @@ class _PersonaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setDomicilio($value);
-    if(!$this->value->checkDomicilio()) throw new Exception("Valor incorrecto: Domicilio ");
+    if(!$this->value->checkDomicilio()) throw new Exception("Valor incorrecto: Domicilio");
     return "({$field} {$option} {$this->value->sqlDomicilio()})";  
   }
 

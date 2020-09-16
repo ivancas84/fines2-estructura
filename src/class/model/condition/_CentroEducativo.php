@@ -8,7 +8,7 @@ class _CentroEducativoCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setId($value);
-    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id ");
+    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id");
     return "({$field} {$option} {$this->value->sqlId()})";  
   }
 
@@ -21,7 +21,7 @@ class _CentroEducativoCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setNombre($value);
-    if(!$this->value->checkNombre()) throw new Exception("Valor incorrecto: Nombre ");
+    if(!$this->value->checkNombre()) throw new Exception("Valor incorrecto: Nombre");
     return "({$field} {$option} {$this->value->sqlNombre()})";  
   }
 
@@ -34,7 +34,7 @@ class _CentroEducativoCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setCue($value);
-    if(!$this->value->checkCue()) throw new Exception("Valor incorrecto: Cue ");
+    if(!$this->value->checkCue()) throw new Exception("Valor incorrecto: Cue");
     return "({$field} {$option} {$this->value->sqlCue()})";  
   }
 
@@ -47,7 +47,7 @@ class _CentroEducativoCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setDomicilio($value);
-    if(!$this->value->checkDomicilio()) throw new Exception("Valor incorrecto: Domicilio ");
+    if(!$this->value->checkDomicilio()) throw new Exception("Valor incorrecto: Domicilio");
     return "({$field} {$option} {$this->value->sqlDomicilio()})";  
   }
 

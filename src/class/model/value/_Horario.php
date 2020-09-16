@@ -59,38 +59,38 @@ class _HorarioValue extends ValueEntityOptions{
   }
 
   public function checkHoraInicio() { 
-    $this->_logs->resetLogs("hora_inicio");
-    if(Validation::is_undefined($this->horaInicio)) return null;
-    $v = Validation::getInstanceValue($this->horaInicio)->required()->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("hora_inicio", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkHoraFin() { 
-    $this->_logs->resetLogs("hora_fin");
-    if(Validation::is_undefined($this->horaFin)) return null;
-    $v = Validation::getInstanceValue($this->horaFin)->required()->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("hora_fin", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkCurso() { 
-    $this->_logs->resetLogs("curso");
-    if(Validation::is_undefined($this->curso)) return null;
-    $v = Validation::getInstanceValue($this->curso)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("curso", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkDia() { 
-    $this->_logs->resetLogs("dia");
-    if(Validation::is_undefined($this->dia)) return null;
-    $v = Validation::getInstanceValue($this->dia)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("dia", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function sqlId() { return $this->_sqlString($this->id); }
+      $this->_logs->resetLogs("hora_inicio");
+      if(Validation::is_undefined($this->horaInicio)) return null;
+      $v = Validation::getInstanceValue($this->horaInicio)->required()->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("hora_inicio", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkHoraFin() { 
+      $this->_logs->resetLogs("hora_fin");
+      if(Validation::is_undefined($this->horaFin)) return null;
+      $v = Validation::getInstanceValue($this->horaFin)->required()->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("hora_fin", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkCurso() { 
+      $this->_logs->resetLogs("curso");
+      if(Validation::is_undefined($this->curso)) return null;
+      $v = Validation::getInstanceValue($this->curso)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("curso", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkDia() { 
+      $this->_logs->resetLogs("dia");
+      if(Validation::is_undefined($this->dia)) return null;
+      $v = Validation::getInstanceValue($this->dia)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("dia", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function sqlId() { return $this->_sqlString($this->id); }
   public function sqlHoraInicio() { return $this->_sqlDateTime($this->horaInicio, "H:i:s"); }
   public function sqlHoraInicioHm() { return $this->_sqlDateTime($this->horaInicio, "H:i"); }
   public function sqlHoraFin() { return $this->_sqlDateTime($this->horaFin, "H:i:s"); }

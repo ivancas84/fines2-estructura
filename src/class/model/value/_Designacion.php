@@ -102,54 +102,54 @@ class _DesignacionValue extends ValueEntityOptions{
   }
 
   public function checkDesde() { 
-    $this->_logs->resetLogs("desde");
-    if(Validation::is_undefined($this->desde)) return null;
-    $v = Validation::getInstanceValue($this->desde)->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("desde", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkHasta() { 
-    $this->_logs->resetLogs("hasta");
-    if(Validation::is_undefined($this->hasta)) return null;
-    $v = Validation::getInstanceValue($this->hasta)->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("hasta", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkAlta() { 
-    $this->_logs->resetLogs("alta");
-    if(Validation::is_undefined($this->alta)) return null;
-    $v = Validation::getInstanceValue($this->alta)->required()->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("alta", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkCargo() { 
-    $this->_logs->resetLogs("cargo");
-    if(Validation::is_undefined($this->cargo)) return null;
-    $v = Validation::getInstanceValue($this->cargo)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("cargo", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkSede() { 
-    $this->_logs->resetLogs("sede");
-    if(Validation::is_undefined($this->sede)) return null;
-    $v = Validation::getInstanceValue($this->sede)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("sede", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkPersona() { 
-    $this->_logs->resetLogs("persona");
-    if(Validation::is_undefined($this->persona)) return null;
-    $v = Validation::getInstanceValue($this->persona)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("persona", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function sqlId() { return $this->_sqlString($this->id); }
+      $this->_logs->resetLogs("desde");
+      if(Validation::is_undefined($this->desde)) return null;
+      $v = Validation::getInstanceValue($this->desde)->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("desde", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkHasta() { 
+      $this->_logs->resetLogs("hasta");
+      if(Validation::is_undefined($this->hasta)) return null;
+      $v = Validation::getInstanceValue($this->hasta)->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("hasta", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkAlta() { 
+      $this->_logs->resetLogs("alta");
+      if(Validation::is_undefined($this->alta)) return null;
+      $v = Validation::getInstanceValue($this->alta)->required()->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("alta", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkCargo() { 
+      $this->_logs->resetLogs("cargo");
+      if(Validation::is_undefined($this->cargo)) return null;
+      $v = Validation::getInstanceValue($this->cargo)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("cargo", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkSede() { 
+      $this->_logs->resetLogs("sede");
+      if(Validation::is_undefined($this->sede)) return null;
+      $v = Validation::getInstanceValue($this->sede)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("sede", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkPersona() { 
+      $this->_logs->resetLogs("persona");
+      if(Validation::is_undefined($this->persona)) return null;
+      $v = Validation::getInstanceValue($this->persona)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("persona", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function sqlId() { return $this->_sqlString($this->id); }
   public function sqlDesde() { return $this->_sqlDateTime($this->desde, "Y-m-d"); }
   public function sqlDesdeYm() { return $this->_sqlDateTime($this->desde, "Y-m"); }
   public function sqlDesdeY() { return $this->_sqlDateTime($this->desde, "Y"); }

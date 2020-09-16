@@ -8,7 +8,7 @@ class _ComisionCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setId($value);
-    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id ");
+    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id");
     return "({$field} {$option} {$this->value->sqlId()})";  
   }
 
@@ -21,7 +21,7 @@ class _ComisionCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setTurno($value);
-    if(!$this->value->checkTurno()) throw new Exception("Valor incorrecto: Turno ");
+    if(!$this->value->checkTurno()) throw new Exception("Valor incorrecto: Turno");
     return "({$field} {$option} {$this->value->sqlTurno()})";  
   }
 
@@ -34,7 +34,7 @@ class _ComisionCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setDivision($value);
-    if(!$this->value->checkDivision()) throw new Exception("Valor incorrecto: Division ");
+    if(!$this->value->checkDivision()) throw new Exception("Valor incorrecto: Division");
     return "({$field} {$option} {$this->value->sqlDivision()})";  
   }
 
@@ -47,7 +47,7 @@ class _ComisionCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setComentario($value);
-    if(!$this->value->checkComentario()) throw new Exception("Valor incorrecto: Comentario ");
+    if(!$this->value->checkComentario()) throw new Exception("Valor incorrecto: Comentario");
     return "({$field} {$option} {$this->value->sqlComentario()})";  
   }
 
@@ -84,7 +84,7 @@ class _ComisionCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setObservaciones($value);
-    if(!$this->value->checkObservaciones()) throw new Exception("Valor incorrecto: Observaciones ");
+    if(!$this->value->checkObservaciones()) throw new Exception("Valor incorrecto: Observaciones");
     return "({$field} {$option} {$this->value->sqlObservaciones()})";  
   }
 
@@ -137,7 +137,7 @@ class _ComisionCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setSede($value);
-    if(!$this->value->checkSede()) throw new Exception("Valor incorrecto: Sede ");
+    if(!$this->value->checkSede()) throw new Exception("Valor incorrecto: Sede");
     return "({$field} {$option} {$this->value->sqlSede()})";  
   }
 
@@ -150,7 +150,7 @@ class _ComisionCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setModalidad($value);
-    if(!$this->value->checkModalidad()) throw new Exception("Valor incorrecto: Modalidad ");
+    if(!$this->value->checkModalidad()) throw new Exception("Valor incorrecto: Modalidad");
     return "({$field} {$option} {$this->value->sqlModalidad()})";  
   }
 
@@ -163,7 +163,7 @@ class _ComisionCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setPlanificacion($value);
-    if(!$this->value->checkPlanificacion()) throw new Exception("Valor incorrecto: Planificacion ");
+    if(!$this->value->checkPlanificacion()) throw new Exception("Valor incorrecto: Planificacion");
     return "({$field} {$option} {$this->value->sqlPlanificacion()})";  
   }
 
@@ -176,7 +176,7 @@ class _ComisionCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setComisionSiguiente($value);
-    if(!$this->value->checkComisionSiguiente()) throw new Exception("Valor incorrecto: Comision Siguiente ");
+    if(!$this->value->checkComisionSiguiente()) throw new Exception("Valor incorrecto: Comision Siguiente");
     return "({$field} {$option} {$this->value->sqlComisionSiguiente()})";  
   }
 
@@ -189,7 +189,7 @@ class _ComisionCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setCalendario($value);
-    if(!$this->value->checkCalendario()) throw new Exception("Valor incorrecto: Calendario ");
+    if(!$this->value->checkCalendario()) throw new Exception("Valor incorrecto: Calendario");
     return "({$field} {$option} {$this->value->sqlCalendario()})";  
   }
 

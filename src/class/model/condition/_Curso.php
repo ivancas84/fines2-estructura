@@ -8,7 +8,7 @@ class _CursoCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setId($value);
-    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id ");
+    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id");
     return "({$field} {$option} {$this->value->sqlId()})";  
   }
 
@@ -74,7 +74,7 @@ class _CursoCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setComision($value);
-    if(!$this->value->checkComision()) throw new Exception("Valor incorrecto: Comision ");
+    if(!$this->value->checkComision()) throw new Exception("Valor incorrecto: Comision");
     return "({$field} {$option} {$this->value->sqlComision()})";  
   }
 
@@ -87,7 +87,7 @@ class _CursoCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setAsignatura($value);
-    if(!$this->value->checkAsignatura()) throw new Exception("Valor incorrecto: Asignatura ");
+    if(!$this->value->checkAsignatura()) throw new Exception("Valor incorrecto: Asignatura");
     return "({$field} {$option} {$this->value->sqlAsignatura()})";  
   }
 

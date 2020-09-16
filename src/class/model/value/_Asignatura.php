@@ -61,46 +61,46 @@ class _AsignaturaValue extends ValueEntityOptions{
   }
 
   public function checkNombre() { 
-    $this->_logs->resetLogs("nombre");
-    if(Validation::is_undefined($this->nombre)) return null;
-    $v = Validation::getInstanceValue($this->nombre)->required()->max(255);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("nombre", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkFormacion() { 
-    $this->_logs->resetLogs("formacion");
-    if(Validation::is_undefined($this->formacion)) return null;
-    $v = Validation::getInstanceValue($this->formacion)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("formacion", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkClasificacion() { 
-    $this->_logs->resetLogs("clasificacion");
-    if(Validation::is_undefined($this->clasificacion)) return null;
-    $v = Validation::getInstanceValue($this->clasificacion)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("clasificacion", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkCodigo() { 
-    $this->_logs->resetLogs("codigo");
-    if(Validation::is_undefined($this->codigo)) return null;
-    $v = Validation::getInstanceValue($this->codigo)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("codigo", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkPerfil() { 
-    $this->_logs->resetLogs("perfil");
-    if(Validation::is_undefined($this->perfil)) return null;
-    $v = Validation::getInstanceValue($this->perfil)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("perfil", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function sqlId() { return $this->_sqlString($this->id); }
+      $this->_logs->resetLogs("nombre");
+      if(Validation::is_undefined($this->nombre)) return null;
+      $v = Validation::getInstanceValue($this->nombre)->required()->max(255);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("nombre", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkFormacion() { 
+      $this->_logs->resetLogs("formacion");
+      if(Validation::is_undefined($this->formacion)) return null;
+      $v = Validation::getInstanceValue($this->formacion)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("formacion", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkClasificacion() { 
+      $this->_logs->resetLogs("clasificacion");
+      if(Validation::is_undefined($this->clasificacion)) return null;
+      $v = Validation::getInstanceValue($this->clasificacion)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("clasificacion", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkCodigo() { 
+      $this->_logs->resetLogs("codigo");
+      if(Validation::is_undefined($this->codigo)) return null;
+      $v = Validation::getInstanceValue($this->codigo)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("codigo", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkPerfil() { 
+      $this->_logs->resetLogs("perfil");
+      if(Validation::is_undefined($this->perfil)) return null;
+      $v = Validation::getInstanceValue($this->perfil)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("perfil", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function sqlId() { return $this->_sqlString($this->id); }
   public function sqlNombre() { return $this->_sqlString($this->nombre); }
   public function sqlFormacion() { return $this->_sqlString($this->formacion); }
   public function sqlClasificacion() { return $this->_sqlString($this->clasificacion); }

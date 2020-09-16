@@ -8,7 +8,7 @@ class _DiaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setId($value);
-    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id ");
+    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id");
     return "({$field} {$option} {$this->value->sqlId()})";  
   }
 
@@ -34,7 +34,7 @@ class _DiaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setDia($value);
-    if(!$this->value->checkDia()) throw new Exception("Valor incorrecto: Dia ");
+    if(!$this->value->checkDia()) throw new Exception("Valor incorrecto: Dia");
     return "({$field} {$option} {$this->value->sqlDia()})";  
   }
 

@@ -8,7 +8,7 @@ class _SedeCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setId($value);
-    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id ");
+    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id");
     return "({$field} {$option} {$this->value->sqlId()})";  
   }
 
@@ -21,7 +21,7 @@ class _SedeCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setNumero($value);
-    if(!$this->value->checkNumero()) throw new Exception("Valor incorrecto: Numero ");
+    if(!$this->value->checkNumero()) throw new Exception("Valor incorrecto: Numero");
     return "({$field} {$option} {$this->value->sqlNumero()})";  
   }
 
@@ -34,7 +34,7 @@ class _SedeCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setNombre($value);
-    if(!$this->value->checkNombre()) throw new Exception("Valor incorrecto: Nombre ");
+    if(!$this->value->checkNombre()) throw new Exception("Valor incorrecto: Nombre");
     return "({$field} {$option} {$this->value->sqlNombre()})";  
   }
 
@@ -47,7 +47,7 @@ class _SedeCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setObservaciones($value);
-    if(!$this->value->checkObservaciones()) throw new Exception("Valor incorrecto: Observaciones ");
+    if(!$this->value->checkObservaciones()) throw new Exception("Valor incorrecto: Observaciones");
     return "({$field} {$option} {$this->value->sqlObservaciones()})";  
   }
 
@@ -140,7 +140,7 @@ class _SedeCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setDomicilio($value);
-    if(!$this->value->checkDomicilio()) throw new Exception("Valor incorrecto: Domicilio ");
+    if(!$this->value->checkDomicilio()) throw new Exception("Valor incorrecto: Domicilio");
     return "({$field} {$option} {$this->value->sqlDomicilio()})";  
   }
 
@@ -153,7 +153,7 @@ class _SedeCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setTipoSede($value);
-    if(!$this->value->checkTipoSede()) throw new Exception("Valor incorrecto: Tipo Sede ");
+    if(!$this->value->checkTipoSede()) throw new Exception("Valor incorrecto: Tipo Sede");
     return "({$field} {$option} {$this->value->sqlTipoSede()})";  
   }
 
@@ -166,7 +166,7 @@ class _SedeCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setCentroEducativo($value);
-    if(!$this->value->checkCentroEducativo()) throw new Exception("Valor incorrecto: Centro Educativo ");
+    if(!$this->value->checkCentroEducativo()) throw new Exception("Valor incorrecto: Centro Educativo");
     return "({$field} {$option} {$this->value->sqlCentroEducativo()})";  
   }
 

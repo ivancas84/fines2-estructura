@@ -8,7 +8,7 @@ class _DistribucionHorariaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setId($value);
-    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id ");
+    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id");
     return "({$field} {$option} {$this->value->sqlId()})";  
   }
 
@@ -47,7 +47,7 @@ class _DistribucionHorariaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setAsignatura($value);
-    if(!$this->value->checkAsignatura()) throw new Exception("Valor incorrecto: Asignatura ");
+    if(!$this->value->checkAsignatura()) throw new Exception("Valor incorrecto: Asignatura");
     return "({$field} {$option} {$this->value->sqlAsignatura()})";  
   }
 
@@ -60,7 +60,7 @@ class _DistribucionHorariaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setPlanificacion($value);
-    if(!$this->value->checkPlanificacion()) throw new Exception("Valor incorrecto: Planificacion ");
+    if(!$this->value->checkPlanificacion()) throw new Exception("Valor incorrecto: Planificacion");
     return "({$field} {$option} {$this->value->sqlPlanificacion()})";  
   }
 

@@ -132,94 +132,94 @@ class _PersonaValue extends ValueEntityOptions{
   }
 
   public function checkNombres() { 
-    $this->_logs->resetLogs("nombres");
-    if(Validation::is_undefined($this->nombres)) return null;
-    $v = Validation::getInstanceValue($this->nombres)->required()->max(255);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("nombres", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkApellidos() { 
-    $this->_logs->resetLogs("apellidos");
-    if(Validation::is_undefined($this->apellidos)) return null;
-    $v = Validation::getInstanceValue($this->apellidos)->max(255);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("apellidos", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkFechaNacimiento() { 
-    $this->_logs->resetLogs("fecha_nacimiento");
-    if(Validation::is_undefined($this->fechaNacimiento)) return null;
-    $v = Validation::getInstanceValue($this->fechaNacimiento)->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("fecha_nacimiento", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkNumeroDocumento() { 
-    $this->_logs->resetLogs("numero_documento");
-    if(Validation::is_undefined($this->numeroDocumento)) return null;
-    $v = Validation::getInstanceValue($this->numeroDocumento)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("numero_documento", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkCuil() { 
-    $this->_logs->resetLogs("cuil");
-    if(Validation::is_undefined($this->cuil)) return null;
-    $v = Validation::getInstanceValue($this->cuil)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("cuil", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkGenero() { 
-    $this->_logs->resetLogs("genero");
-    if(Validation::is_undefined($this->genero)) return null;
-    $v = Validation::getInstanceValue($this->genero)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("genero", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkApodo() { 
-    $this->_logs->resetLogs("apodo");
-    if(Validation::is_undefined($this->apodo)) return null;
-    $v = Validation::getInstanceValue($this->apodo)->max(255);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("apodo", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkTelefono() { 
-    $this->_logs->resetLogs("telefono");
-    if(Validation::is_undefined($this->telefono)) return null;
-    $v = Validation::getInstanceValue($this->telefono)->max(255);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("telefono", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkEmail() { 
-    $this->_logs->resetLogs("email");
-    if(Validation::is_undefined($this->email)) return null;
-    $v = Validation::getInstanceValue($this->email)->max(255);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("email", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkAlta() { 
-    $this->_logs->resetLogs("alta");
-    if(Validation::is_undefined($this->alta)) return null;
-    $v = Validation::getInstanceValue($this->alta)->required()->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("alta", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkDomicilio() { 
-    $this->_logs->resetLogs("domicilio");
-    if(Validation::is_undefined($this->domicilio)) return null;
-    $v = Validation::getInstanceValue($this->domicilio)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("domicilio", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function sqlId() { return $this->_sqlString($this->id); }
+      $this->_logs->resetLogs("nombres");
+      if(Validation::is_undefined($this->nombres)) return null;
+      $v = Validation::getInstanceValue($this->nombres)->required()->max(255);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("nombres", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkApellidos() { 
+      $this->_logs->resetLogs("apellidos");
+      if(Validation::is_undefined($this->apellidos)) return null;
+      $v = Validation::getInstanceValue($this->apellidos)->max(255);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("apellidos", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkFechaNacimiento() { 
+      $this->_logs->resetLogs("fecha_nacimiento");
+      if(Validation::is_undefined($this->fechaNacimiento)) return null;
+      $v = Validation::getInstanceValue($this->fechaNacimiento)->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("fecha_nacimiento", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkNumeroDocumento() { 
+      $this->_logs->resetLogs("numero_documento");
+      if(Validation::is_undefined($this->numeroDocumento)) return null;
+      $v = Validation::getInstanceValue($this->numeroDocumento)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("numero_documento", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkCuil() { 
+      $this->_logs->resetLogs("cuil");
+      if(Validation::is_undefined($this->cuil)) return null;
+      $v = Validation::getInstanceValue($this->cuil)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("cuil", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkGenero() { 
+      $this->_logs->resetLogs("genero");
+      if(Validation::is_undefined($this->genero)) return null;
+      $v = Validation::getInstanceValue($this->genero)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("genero", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkApodo() { 
+      $this->_logs->resetLogs("apodo");
+      if(Validation::is_undefined($this->apodo)) return null;
+      $v = Validation::getInstanceValue($this->apodo)->max(255);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("apodo", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkTelefono() { 
+      $this->_logs->resetLogs("telefono");
+      if(Validation::is_undefined($this->telefono)) return null;
+      $v = Validation::getInstanceValue($this->telefono)->max(255);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("telefono", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkEmail() { 
+      $this->_logs->resetLogs("email");
+      if(Validation::is_undefined($this->email)) return null;
+      $v = Validation::getInstanceValue($this->email)->max(255);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("email", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkAlta() { 
+      $this->_logs->resetLogs("alta");
+      if(Validation::is_undefined($this->alta)) return null;
+      $v = Validation::getInstanceValue($this->alta)->required()->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("alta", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkDomicilio() { 
+      $this->_logs->resetLogs("domicilio");
+      if(Validation::is_undefined($this->domicilio)) return null;
+      $v = Validation::getInstanceValue($this->domicilio)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("domicilio", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function sqlId() { return $this->_sqlString($this->id); }
   public function sqlNombres() { return $this->_sqlString($this->nombres); }
   public function sqlApellidos() { return $this->_sqlString($this->apellidos); }
   public function sqlFechaNacimiento() { return $this->_sqlDateTime($this->fechaNacimiento, "Y-m-d"); }

@@ -77,62 +77,62 @@ class _DomicilioValue extends ValueEntityOptions{
   }
 
   public function checkCalle() { 
-    $this->_logs->resetLogs("calle");
-    if(Validation::is_undefined($this->calle)) return null;
-    $v = Validation::getInstanceValue($this->calle)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("calle", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkEntre() { 
-    $this->_logs->resetLogs("entre");
-    if(Validation::is_undefined($this->entre)) return null;
-    $v = Validation::getInstanceValue($this->entre)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("entre", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkNumero() { 
-    $this->_logs->resetLogs("numero");
-    if(Validation::is_undefined($this->numero)) return null;
-    $v = Validation::getInstanceValue($this->numero)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("numero", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkPiso() { 
-    $this->_logs->resetLogs("piso");
-    if(Validation::is_undefined($this->piso)) return null;
-    $v = Validation::getInstanceValue($this->piso)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("piso", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkDepartamento() { 
-    $this->_logs->resetLogs("departamento");
-    if(Validation::is_undefined($this->departamento)) return null;
-    $v = Validation::getInstanceValue($this->departamento)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("departamento", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkBarrio() { 
-    $this->_logs->resetLogs("barrio");
-    if(Validation::is_undefined($this->barrio)) return null;
-    $v = Validation::getInstanceValue($this->barrio)->max(255);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("barrio", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkLocalidad() { 
-    $this->_logs->resetLogs("localidad");
-    if(Validation::is_undefined($this->localidad)) return null;
-    $v = Validation::getInstanceValue($this->localidad)->required()->max(255);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("localidad", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function sqlId() { return $this->_sqlString($this->id); }
+      $this->_logs->resetLogs("calle");
+      if(Validation::is_undefined($this->calle)) return null;
+      $v = Validation::getInstanceValue($this->calle)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("calle", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkEntre() { 
+      $this->_logs->resetLogs("entre");
+      if(Validation::is_undefined($this->entre)) return null;
+      $v = Validation::getInstanceValue($this->entre)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("entre", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkNumero() { 
+      $this->_logs->resetLogs("numero");
+      if(Validation::is_undefined($this->numero)) return null;
+      $v = Validation::getInstanceValue($this->numero)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("numero", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkPiso() { 
+      $this->_logs->resetLogs("piso");
+      if(Validation::is_undefined($this->piso)) return null;
+      $v = Validation::getInstanceValue($this->piso)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("piso", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkDepartamento() { 
+      $this->_logs->resetLogs("departamento");
+      if(Validation::is_undefined($this->departamento)) return null;
+      $v = Validation::getInstanceValue($this->departamento)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("departamento", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkBarrio() { 
+      $this->_logs->resetLogs("barrio");
+      if(Validation::is_undefined($this->barrio)) return null;
+      $v = Validation::getInstanceValue($this->barrio)->max(255);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("barrio", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkLocalidad() { 
+      $this->_logs->resetLogs("localidad");
+      if(Validation::is_undefined($this->localidad)) return null;
+      $v = Validation::getInstanceValue($this->localidad)->required()->max(255);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("localidad", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function sqlId() { return $this->_sqlString($this->id); }
   public function sqlCalle() { return $this->_sqlString($this->calle); }
   public function sqlEntre() { return $this->_sqlString($this->entre); }
   public function sqlNumero() { return $this->_sqlString($this->numero); }

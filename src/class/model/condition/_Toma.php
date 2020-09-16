@@ -8,7 +8,7 @@ class _TomaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setId($value);
-    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id ");
+    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id");
     return "({$field} {$option} {$this->value->sqlId()})";  
   }
 
@@ -52,7 +52,7 @@ class _TomaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setEstado($value);
-    if(!$this->value->checkEstado()) throw new Exception("Valor incorrecto: Estado ");
+    if(!$this->value->checkEstado()) throw new Exception("Valor incorrecto: Estado");
     return "({$field} {$option} {$this->value->sqlEstado()})";  
   }
 
@@ -65,7 +65,7 @@ class _TomaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setObservaciones($value);
-    if(!$this->value->checkObservaciones()) throw new Exception("Valor incorrecto: Observaciones ");
+    if(!$this->value->checkObservaciones()) throw new Exception("Valor incorrecto: Observaciones");
     return "({$field} {$option} {$this->value->sqlObservaciones()})";  
   }
 
@@ -78,7 +78,7 @@ class _TomaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setComentario($value);
-    if(!$this->value->checkComentario()) throw new Exception("Valor incorrecto: Comentario ");
+    if(!$this->value->checkComentario()) throw new Exception("Valor incorrecto: Comentario");
     return "({$field} {$option} {$this->value->sqlComentario()})";  
   }
 
@@ -91,7 +91,7 @@ class _TomaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setTipoMovimiento($value);
-    if(!$this->value->checkTipoMovimiento()) throw new Exception("Valor incorrecto: Tipo Movimiento ");
+    if(!$this->value->checkTipoMovimiento()) throw new Exception("Valor incorrecto: Tipo Movimiento");
     return "({$field} {$option} {$this->value->sqlTipoMovimiento()})";  
   }
 
@@ -104,7 +104,7 @@ class _TomaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setEstadoContralor($value);
-    if(!$this->value->checkEstadoContralor()) throw new Exception("Valor incorrecto: Estado Contralor ");
+    if(!$this->value->checkEstadoContralor()) throw new Exception("Valor incorrecto: Estado Contralor");
     return "({$field} {$option} {$this->value->sqlEstadoContralor()})";  
   }
 
@@ -157,7 +157,7 @@ class _TomaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setCurso($value);
-    if(!$this->value->checkCurso()) throw new Exception("Valor incorrecto: Curso ");
+    if(!$this->value->checkCurso()) throw new Exception("Valor incorrecto: Curso");
     return "({$field} {$option} {$this->value->sqlCurso()})";  
   }
 
@@ -170,7 +170,7 @@ class _TomaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setDocente($value);
-    if(!$this->value->checkDocente()) throw new Exception("Valor incorrecto: Docente ");
+    if(!$this->value->checkDocente()) throw new Exception("Valor incorrecto: Docente");
     return "({$field} {$option} {$this->value->sqlDocente()})";  
   }
 
@@ -183,7 +183,7 @@ class _TomaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setReemplazo($value);
-    if(!$this->value->checkReemplazo()) throw new Exception("Valor incorrecto: Reemplazo ");
+    if(!$this->value->checkReemplazo()) throw new Exception("Valor incorrecto: Reemplazo");
     return "({$field} {$option} {$this->value->sqlReemplazo()})";  
   }
 
@@ -196,7 +196,7 @@ class _TomaCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setPlanillaDocente($value);
-    if(!$this->value->checkPlanillaDocente()) throw new Exception("Valor incorrecto: Planilla Docente ");
+    if(!$this->value->checkPlanillaDocente()) throw new Exception("Valor incorrecto: Planilla Docente");
     return "({$field} {$option} {$this->value->sqlPlanillaDocente()})";  
   }
 

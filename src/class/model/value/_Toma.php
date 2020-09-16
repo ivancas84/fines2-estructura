@@ -129,94 +129,94 @@ class _TomaValue extends ValueEntityOptions{
   }
 
   public function checkFechaToma() { 
-    $this->_logs->resetLogs("fecha_toma");
-    if(Validation::is_undefined($this->fechaToma)) return null;
-    $v = Validation::getInstanceValue($this->fechaToma)->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("fecha_toma", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkEstado() { 
-    $this->_logs->resetLogs("estado");
-    if(Validation::is_undefined($this->estado)) return null;
-    $v = Validation::getInstanceValue($this->estado)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("estado", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkObservaciones() { 
-    $this->_logs->resetLogs("observaciones");
-    if(Validation::is_undefined($this->observaciones)) return null;
-    $v = Validation::getInstanceValue($this->observaciones)->max(65535);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("observaciones", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkComentario() { 
-    $this->_logs->resetLogs("comentario");
-    if(Validation::is_undefined($this->comentario)) return null;
-    $v = Validation::getInstanceValue($this->comentario)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("comentario", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkTipoMovimiento() { 
-    $this->_logs->resetLogs("tipo_movimiento");
-    if(Validation::is_undefined($this->tipoMovimiento)) return null;
-    $v = Validation::getInstanceValue($this->tipoMovimiento)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("tipo_movimiento", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkEstadoContralor() { 
-    $this->_logs->resetLogs("estado_contralor");
-    if(Validation::is_undefined($this->estadoContralor)) return null;
-    $v = Validation::getInstanceValue($this->estadoContralor)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("estado_contralor", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkAlta() { 
-    $this->_logs->resetLogs("alta");
-    if(Validation::is_undefined($this->alta)) return null;
-    $v = Validation::getInstanceValue($this->alta)->required()->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("alta", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkCurso() { 
-    $this->_logs->resetLogs("curso");
-    if(Validation::is_undefined($this->curso)) return null;
-    $v = Validation::getInstanceValue($this->curso)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("curso", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkDocente() { 
-    $this->_logs->resetLogs("docente");
-    if(Validation::is_undefined($this->docente)) return null;
-    $v = Validation::getInstanceValue($this->docente)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("docente", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkReemplazo() { 
-    $this->_logs->resetLogs("reemplazo");
-    if(Validation::is_undefined($this->reemplazo)) return null;
-    $v = Validation::getInstanceValue($this->reemplazo)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("reemplazo", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkPlanillaDocente() { 
-    $this->_logs->resetLogs("planilla_docente");
-    if(Validation::is_undefined($this->planillaDocente)) return null;
-    $v = Validation::getInstanceValue($this->planillaDocente)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("planilla_docente", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function sqlId() { return $this->_sqlString($this->id); }
+      $this->_logs->resetLogs("fecha_toma");
+      if(Validation::is_undefined($this->fechaToma)) return null;
+      $v = Validation::getInstanceValue($this->fechaToma)->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("fecha_toma", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkEstado() { 
+      $this->_logs->resetLogs("estado");
+      if(Validation::is_undefined($this->estado)) return null;
+      $v = Validation::getInstanceValue($this->estado)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("estado", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkObservaciones() { 
+      $this->_logs->resetLogs("observaciones");
+      if(Validation::is_undefined($this->observaciones)) return null;
+      $v = Validation::getInstanceValue($this->observaciones)->max(65535);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("observaciones", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkComentario() { 
+      $this->_logs->resetLogs("comentario");
+      if(Validation::is_undefined($this->comentario)) return null;
+      $v = Validation::getInstanceValue($this->comentario)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("comentario", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkTipoMovimiento() { 
+      $this->_logs->resetLogs("tipo_movimiento");
+      if(Validation::is_undefined($this->tipoMovimiento)) return null;
+      $v = Validation::getInstanceValue($this->tipoMovimiento)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("tipo_movimiento", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkEstadoContralor() { 
+      $this->_logs->resetLogs("estado_contralor");
+      if(Validation::is_undefined($this->estadoContralor)) return null;
+      $v = Validation::getInstanceValue($this->estadoContralor)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("estado_contralor", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkAlta() { 
+      $this->_logs->resetLogs("alta");
+      if(Validation::is_undefined($this->alta)) return null;
+      $v = Validation::getInstanceValue($this->alta)->required()->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("alta", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkCurso() { 
+      $this->_logs->resetLogs("curso");
+      if(Validation::is_undefined($this->curso)) return null;
+      $v = Validation::getInstanceValue($this->curso)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("curso", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkDocente() { 
+      $this->_logs->resetLogs("docente");
+      if(Validation::is_undefined($this->docente)) return null;
+      $v = Validation::getInstanceValue($this->docente)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("docente", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkReemplazo() { 
+      $this->_logs->resetLogs("reemplazo");
+      if(Validation::is_undefined($this->reemplazo)) return null;
+      $v = Validation::getInstanceValue($this->reemplazo)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("reemplazo", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkPlanillaDocente() { 
+      $this->_logs->resetLogs("planilla_docente");
+      if(Validation::is_undefined($this->planillaDocente)) return null;
+      $v = Validation::getInstanceValue($this->planillaDocente)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("planilla_docente", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function sqlId() { return $this->_sqlString($this->id); }
   public function sqlFechaToma() { return $this->_sqlDateTime($this->fechaToma, "Y-m-d"); }
   public function sqlFechaTomaYm() { return $this->_sqlDateTime($this->fechaToma, "Y-m"); }
   public function sqlFechaTomaY() { return $this->_sqlDateTime($this->fechaToma, "Y"); }

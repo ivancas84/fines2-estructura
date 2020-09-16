@@ -92,54 +92,54 @@ class _TelefonoValue extends ValueEntityOptions{
   }
 
   public function checkTipo() { 
-    $this->_logs->resetLogs("tipo");
-    if(Validation::is_undefined($this->tipo)) return null;
-    $v = Validation::getInstanceValue($this->tipo)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("tipo", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkPrefijo() { 
-    $this->_logs->resetLogs("prefijo");
-    if(Validation::is_undefined($this->prefijo)) return null;
-    $v = Validation::getInstanceValue($this->prefijo)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("prefijo", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkNumero() { 
-    $this->_logs->resetLogs("numero");
-    if(Validation::is_undefined($this->numero)) return null;
-    $v = Validation::getInstanceValue($this->numero)->required()->max(255);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("numero", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkInsertado() { 
-    $this->_logs->resetLogs("insertado");
-    if(Validation::is_undefined($this->insertado)) return null;
-    $v = Validation::getInstanceValue($this->insertado)->required()->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("insertado", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkEliminado() { 
-    $this->_logs->resetLogs("eliminado");
-    if(Validation::is_undefined($this->eliminado)) return null;
-    $v = Validation::getInstanceValue($this->eliminado)->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("eliminado", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkPersona() { 
-    $this->_logs->resetLogs("persona");
-    if(Validation::is_undefined($this->persona)) return null;
-    $v = Validation::getInstanceValue($this->persona)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("persona", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function sqlId() { return $this->_sqlString($this->id); }
+      $this->_logs->resetLogs("tipo");
+      if(Validation::is_undefined($this->tipo)) return null;
+      $v = Validation::getInstanceValue($this->tipo)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("tipo", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkPrefijo() { 
+      $this->_logs->resetLogs("prefijo");
+      if(Validation::is_undefined($this->prefijo)) return null;
+      $v = Validation::getInstanceValue($this->prefijo)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("prefijo", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkNumero() { 
+      $this->_logs->resetLogs("numero");
+      if(Validation::is_undefined($this->numero)) return null;
+      $v = Validation::getInstanceValue($this->numero)->required()->max(255);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("numero", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkInsertado() { 
+      $this->_logs->resetLogs("insertado");
+      if(Validation::is_undefined($this->insertado)) return null;
+      $v = Validation::getInstanceValue($this->insertado)->required()->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("insertado", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkEliminado() { 
+      $this->_logs->resetLogs("eliminado");
+      if(Validation::is_undefined($this->eliminado)) return null;
+      $v = Validation::getInstanceValue($this->eliminado)->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("eliminado", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkPersona() { 
+      $this->_logs->resetLogs("persona");
+      if(Validation::is_undefined($this->persona)) return null;
+      $v = Validation::getInstanceValue($this->persona)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("persona", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function sqlId() { return $this->_sqlString($this->id); }
   public function sqlTipo() { return $this->_sqlString($this->tipo); }
   public function sqlPrefijo() { return $this->_sqlString($this->prefijo); }
   public function sqlNumero() { return $this->_sqlString($this->numero); }

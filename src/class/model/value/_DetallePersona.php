@@ -63,38 +63,38 @@ class _DetallePersonaValue extends ValueEntityOptions{
   }
 
   public function checkDescripcion() { 
-    $this->_logs->resetLogs("descripcion");
-    if(Validation::is_undefined($this->descripcion)) return null;
-    $v = Validation::getInstanceValue($this->descripcion)->required()->max(255);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("descripcion", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkCreado() { 
-    $this->_logs->resetLogs("creado");
-    if(Validation::is_undefined($this->creado)) return null;
-    $v = Validation::getInstanceValue($this->creado)->required()->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("creado", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkArchivo() { 
-    $this->_logs->resetLogs("archivo");
-    if(Validation::is_undefined($this->archivo)) return null;
-    $v = Validation::getInstanceValue($this->archivo)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("archivo", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkPersona() { 
-    $this->_logs->resetLogs("persona");
-    if(Validation::is_undefined($this->persona)) return null;
-    $v = Validation::getInstanceValue($this->persona)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("persona", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function sqlId() { return $this->_sqlString($this->id); }
+      $this->_logs->resetLogs("descripcion");
+      if(Validation::is_undefined($this->descripcion)) return null;
+      $v = Validation::getInstanceValue($this->descripcion)->required()->max(255);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("descripcion", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkCreado() { 
+      $this->_logs->resetLogs("creado");
+      if(Validation::is_undefined($this->creado)) return null;
+      $v = Validation::getInstanceValue($this->creado)->required()->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("creado", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkArchivo() { 
+      $this->_logs->resetLogs("archivo");
+      if(Validation::is_undefined($this->archivo)) return null;
+      $v = Validation::getInstanceValue($this->archivo)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("archivo", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkPersona() { 
+      $this->_logs->resetLogs("persona");
+      if(Validation::is_undefined($this->persona)) return null;
+      $v = Validation::getInstanceValue($this->persona)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("persona", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function sqlId() { return $this->_sqlString($this->id); }
   public function sqlDescripcion() { return $this->_sqlString($this->descripcion); }
   public function sqlCreado() { return $this->_sqlDateTime($this->creado, "Y-m-d H:i:s"); }
   public function sqlCreadoDate() { return $this->_sqlDateTime($this->creado, "Y-m-d"); }

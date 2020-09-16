@@ -129,110 +129,110 @@ class _ComisionValue extends ValueEntityOptions{
   }
 
   public function checkTurno() { 
-    $this->_logs->resetLogs("turno");
-    if(Validation::is_undefined($this->turno)) return null;
-    $v = Validation::getInstanceValue($this->turno)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("turno", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkDivision() { 
-    $this->_logs->resetLogs("division");
-    if(Validation::is_undefined($this->division)) return null;
-    $v = Validation::getInstanceValue($this->division)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("division", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkComentario() { 
-    $this->_logs->resetLogs("comentario");
-    if(Validation::is_undefined($this->comentario)) return null;
-    $v = Validation::getInstanceValue($this->comentario)->max(65535);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("comentario", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkAutorizada() { 
-    $this->_logs->resetLogs("autorizada");
-    if(Validation::is_undefined($this->autorizada)) return null;
-    $v = Validation::getInstanceValue($this->autorizada)->required()->max(1);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("autorizada", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkApertura() { 
-    $this->_logs->resetLogs("apertura");
-    if(Validation::is_undefined($this->apertura)) return null;
-    $v = Validation::getInstanceValue($this->apertura)->required()->max(1);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("apertura", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkPublicada() { 
-    $this->_logs->resetLogs("publicada");
-    if(Validation::is_undefined($this->publicada)) return null;
-    $v = Validation::getInstanceValue($this->publicada)->required()->max(1);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("publicada", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkObservaciones() { 
-    $this->_logs->resetLogs("observaciones");
-    if(Validation::is_undefined($this->observaciones)) return null;
-    $v = Validation::getInstanceValue($this->observaciones)->max(65535);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("observaciones", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkAlta() { 
-    $this->_logs->resetLogs("alta");
-    if(Validation::is_undefined($this->alta)) return null;
-    $v = Validation::getInstanceValue($this->alta)->required()->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("alta", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkSede() { 
-    $this->_logs->resetLogs("sede");
-    if(Validation::is_undefined($this->sede)) return null;
-    $v = Validation::getInstanceValue($this->sede)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("sede", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkModalidad() { 
-    $this->_logs->resetLogs("modalidad");
-    if(Validation::is_undefined($this->modalidad)) return null;
-    $v = Validation::getInstanceValue($this->modalidad)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("modalidad", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkPlanificacion() { 
-    $this->_logs->resetLogs("planificacion");
-    if(Validation::is_undefined($this->planificacion)) return null;
-    $v = Validation::getInstanceValue($this->planificacion)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("planificacion", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkComisionSiguiente() { 
-    $this->_logs->resetLogs("comision_siguiente");
-    if(Validation::is_undefined($this->comisionSiguiente)) return null;
-    $v = Validation::getInstanceValue($this->comisionSiguiente)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("comision_siguiente", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkCalendario() { 
-    $this->_logs->resetLogs("calendario");
-    if(Validation::is_undefined($this->calendario)) return null;
-    $v = Validation::getInstanceValue($this->calendario)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("calendario", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function sqlId() { return $this->_sqlString($this->id); }
+      $this->_logs->resetLogs("turno");
+      if(Validation::is_undefined($this->turno)) return null;
+      $v = Validation::getInstanceValue($this->turno)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("turno", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkDivision() { 
+      $this->_logs->resetLogs("division");
+      if(Validation::is_undefined($this->division)) return null;
+      $v = Validation::getInstanceValue($this->division)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("division", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkComentario() { 
+      $this->_logs->resetLogs("comentario");
+      if(Validation::is_undefined($this->comentario)) return null;
+      $v = Validation::getInstanceValue($this->comentario)->max(65535);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("comentario", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkAutorizada() { 
+      $this->_logs->resetLogs("autorizada");
+      if(Validation::is_undefined($this->autorizada)) return null;
+      $v = Validation::getInstanceValue($this->autorizada)->required()->max(1);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("autorizada", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkApertura() { 
+      $this->_logs->resetLogs("apertura");
+      if(Validation::is_undefined($this->apertura)) return null;
+      $v = Validation::getInstanceValue($this->apertura)->required()->max(1);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("apertura", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkPublicada() { 
+      $this->_logs->resetLogs("publicada");
+      if(Validation::is_undefined($this->publicada)) return null;
+      $v = Validation::getInstanceValue($this->publicada)->required()->max(1);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("publicada", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkObservaciones() { 
+      $this->_logs->resetLogs("observaciones");
+      if(Validation::is_undefined($this->observaciones)) return null;
+      $v = Validation::getInstanceValue($this->observaciones)->max(65535);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("observaciones", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkAlta() { 
+      $this->_logs->resetLogs("alta");
+      if(Validation::is_undefined($this->alta)) return null;
+      $v = Validation::getInstanceValue($this->alta)->required()->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("alta", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkSede() { 
+      $this->_logs->resetLogs("sede");
+      if(Validation::is_undefined($this->sede)) return null;
+      $v = Validation::getInstanceValue($this->sede)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("sede", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkModalidad() { 
+      $this->_logs->resetLogs("modalidad");
+      if(Validation::is_undefined($this->modalidad)) return null;
+      $v = Validation::getInstanceValue($this->modalidad)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("modalidad", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkPlanificacion() { 
+      $this->_logs->resetLogs("planificacion");
+      if(Validation::is_undefined($this->planificacion)) return null;
+      $v = Validation::getInstanceValue($this->planificacion)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("planificacion", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkComisionSiguiente() { 
+      $this->_logs->resetLogs("comision_siguiente");
+      if(Validation::is_undefined($this->comisionSiguiente)) return null;
+      $v = Validation::getInstanceValue($this->comisionSiguiente)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("comision_siguiente", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkCalendario() { 
+      $this->_logs->resetLogs("calendario");
+      if(Validation::is_undefined($this->calendario)) return null;
+      $v = Validation::getInstanceValue($this->calendario)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("calendario", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function sqlId() { return $this->_sqlString($this->id); }
   public function sqlTurno() { return $this->_sqlString($this->turno); }
   public function sqlDivision() { return $this->_sqlString($this->division); }
   public function sqlComentario() { return $this->_sqlString($this->comentario); }

@@ -8,7 +8,7 @@ class _CargoCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setId($value);
-    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id ");
+    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id");
     return "({$field} {$option} {$this->value->sqlId()})";  
   }
 
@@ -21,7 +21,7 @@ class _CargoCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setDescripcion($value);
-    if(!$this->value->checkDescripcion()) throw new Exception("Valor incorrecto: Descripcion ");
+    if(!$this->value->checkDescripcion()) throw new Exception("Valor incorrecto: Descripcion");
     return "({$field} {$option} {$this->value->sqlDescripcion()})";  
   }
 

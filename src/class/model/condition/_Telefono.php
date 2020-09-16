@@ -8,7 +8,7 @@ class _TelefonoCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setId($value);
-    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id ");
+    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id");
     return "({$field} {$option} {$this->value->sqlId()})";  
   }
 
@@ -21,7 +21,7 @@ class _TelefonoCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setTipo($value);
-    if(!$this->value->checkTipo()) throw new Exception("Valor incorrecto: Tipo ");
+    if(!$this->value->checkTipo()) throw new Exception("Valor incorrecto: Tipo");
     return "({$field} {$option} {$this->value->sqlTipo()})";  
   }
 
@@ -34,7 +34,7 @@ class _TelefonoCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setPrefijo($value);
-    if(!$this->value->checkPrefijo()) throw new Exception("Valor incorrecto: Prefijo ");
+    if(!$this->value->checkPrefijo()) throw new Exception("Valor incorrecto: Prefijo");
     return "({$field} {$option} {$this->value->sqlPrefijo()})";  
   }
 
@@ -47,7 +47,7 @@ class _TelefonoCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setNumero($value);
-    if(!$this->value->checkNumero()) throw new Exception("Valor incorrecto: Numero ");
+    if(!$this->value->checkNumero()) throw new Exception("Valor incorrecto: Numero");
     return "({$field} {$option} {$this->value->sqlNumero()})";  
   }
 
@@ -140,7 +140,7 @@ class _TelefonoCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setPersona($value);
-    if(!$this->value->checkPersona()) throw new Exception("Valor incorrecto: Persona ");
+    if(!$this->value->checkPersona()) throw new Exception("Valor incorrecto: Persona");
     return "({$field} {$option} {$this->value->sqlPersona()})";  
   }
 

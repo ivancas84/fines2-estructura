@@ -106,70 +106,70 @@ class _SedeValue extends ValueEntityOptions{
   }
 
   public function checkNumero() { 
-    $this->_logs->resetLogs("numero");
-    if(Validation::is_undefined($this->numero)) return null;
-    $v = Validation::getInstanceValue($this->numero)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("numero", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkNombre() { 
-    $this->_logs->resetLogs("nombre");
-    if(Validation::is_undefined($this->nombre)) return null;
-    $v = Validation::getInstanceValue($this->nombre)->required()->max(255);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("nombre", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkObservaciones() { 
-    $this->_logs->resetLogs("observaciones");
-    if(Validation::is_undefined($this->observaciones)) return null;
-    $v = Validation::getInstanceValue($this->observaciones)->max(65535);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("observaciones", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkAlta() { 
-    $this->_logs->resetLogs("alta");
-    if(Validation::is_undefined($this->alta)) return null;
-    $v = Validation::getInstanceValue($this->alta)->required()->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("alta", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkBaja() { 
-    $this->_logs->resetLogs("baja");
-    if(Validation::is_undefined($this->baja)) return null;
-    $v = Validation::getInstanceValue($this->baja)->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("baja", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkDomicilio() { 
-    $this->_logs->resetLogs("domicilio");
-    if(Validation::is_undefined($this->domicilio)) return null;
-    $v = Validation::getInstanceValue($this->domicilio)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("domicilio", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkTipoSede() { 
-    $this->_logs->resetLogs("tipo_sede");
-    if(Validation::is_undefined($this->tipoSede)) return null;
-    $v = Validation::getInstanceValue($this->tipoSede)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("tipo_sede", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkCentroEducativo() { 
-    $this->_logs->resetLogs("centro_educativo");
-    if(Validation::is_undefined($this->centroEducativo)) return null;
-    $v = Validation::getInstanceValue($this->centroEducativo)->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("centro_educativo", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function sqlId() { return $this->_sqlString($this->id); }
+      $this->_logs->resetLogs("numero");
+      if(Validation::is_undefined($this->numero)) return null;
+      $v = Validation::getInstanceValue($this->numero)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("numero", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkNombre() { 
+      $this->_logs->resetLogs("nombre");
+      if(Validation::is_undefined($this->nombre)) return null;
+      $v = Validation::getInstanceValue($this->nombre)->required()->max(255);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("nombre", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkObservaciones() { 
+      $this->_logs->resetLogs("observaciones");
+      if(Validation::is_undefined($this->observaciones)) return null;
+      $v = Validation::getInstanceValue($this->observaciones)->max(65535);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("observaciones", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkAlta() { 
+      $this->_logs->resetLogs("alta");
+      if(Validation::is_undefined($this->alta)) return null;
+      $v = Validation::getInstanceValue($this->alta)->required()->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("alta", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkBaja() { 
+      $this->_logs->resetLogs("baja");
+      if(Validation::is_undefined($this->baja)) return null;
+      $v = Validation::getInstanceValue($this->baja)->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("baja", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkDomicilio() { 
+      $this->_logs->resetLogs("domicilio");
+      if(Validation::is_undefined($this->domicilio)) return null;
+      $v = Validation::getInstanceValue($this->domicilio)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("domicilio", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkTipoSede() { 
+      $this->_logs->resetLogs("tipo_sede");
+      if(Validation::is_undefined($this->tipoSede)) return null;
+      $v = Validation::getInstanceValue($this->tipoSede)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("tipo_sede", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkCentroEducativo() { 
+      $this->_logs->resetLogs("centro_educativo");
+      if(Validation::is_undefined($this->centroEducativo)) return null;
+      $v = Validation::getInstanceValue($this->centroEducativo)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("centro_educativo", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function sqlId() { return $this->_sqlString($this->id); }
   public function sqlNumero() { return $this->_sqlString($this->numero); }
   public function sqlNombre() { return $this->_sqlString($this->nombre); }
   public function sqlObservaciones() { return $this->_sqlString($this->observaciones); }

@@ -49,38 +49,38 @@ class _DistribucionHorariaValue extends ValueEntityOptions{
   }
 
   public function checkHorasCatedra() { 
-    $this->_logs->resetLogs("horas_catedra");
-    if(Validation::is_undefined($this->horasCatedra)) return null;
-    $v = Validation::getInstanceValue($this->horasCatedra)->required()->max(10);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("horas_catedra", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkDia() { 
-    $this->_logs->resetLogs("dia");
-    if(Validation::is_undefined($this->dia)) return null;
-    $v = Validation::getInstanceValue($this->dia)->required()->max(10);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("dia", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkAsignatura() { 
-    $this->_logs->resetLogs("asignatura");
-    if(Validation::is_undefined($this->asignatura)) return null;
-    $v = Validation::getInstanceValue($this->asignatura)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("asignatura", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkPlanificacion() { 
-    $this->_logs->resetLogs("planificacion");
-    if(Validation::is_undefined($this->planificacion)) return null;
-    $v = Validation::getInstanceValue($this->planificacion)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("planificacion", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function sqlId() { return $this->_sqlString($this->id); }
+      $this->_logs->resetLogs("horas_catedra");
+      if(Validation::is_undefined($this->horasCatedra)) return null;
+      $v = Validation::getInstanceValue($this->horasCatedra)->required()->max(10);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("horas_catedra", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkDia() { 
+      $this->_logs->resetLogs("dia");
+      if(Validation::is_undefined($this->dia)) return null;
+      $v = Validation::getInstanceValue($this->dia)->required()->max(10);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("dia", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkAsignatura() { 
+      $this->_logs->resetLogs("asignatura");
+      if(Validation::is_undefined($this->asignatura)) return null;
+      $v = Validation::getInstanceValue($this->asignatura)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("asignatura", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkPlanificacion() { 
+      $this->_logs->resetLogs("planificacion");
+      if(Validation::is_undefined($this->planificacion)) return null;
+      $v = Validation::getInstanceValue($this->planificacion)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("planificacion", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function sqlId() { return $this->_sqlString($this->id); }
   public function sqlHorasCatedra() { return $this->_sqlNumber($this->horasCatedra); }
   public function sqlDia() { return $this->_sqlNumber($this->dia); }
   public function sqlAsignatura() { return $this->_sqlString($this->asignatura); }

@@ -102,46 +102,46 @@ class _CalendarioValue extends ValueEntityOptions{
   }
 
   public function checkInicio() { 
-    $this->_logs->resetLogs("inicio");
-    if(Validation::is_undefined($this->inicio)) return null;
-    $v = Validation::getInstanceValue($this->inicio)->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("inicio", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkFin() { 
-    $this->_logs->resetLogs("fin");
-    if(Validation::is_undefined($this->fin)) return null;
-    $v = Validation::getInstanceValue($this->fin)->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("fin", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkAnio() { 
-    $this->_logs->resetLogs("anio");
-    if(Validation::is_undefined($this->anio)) return null;
-    $v = Validation::getInstanceValue($this->anio)->required()->isA('DateTime')->min(2000);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("anio", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkSemestre() { 
-    $this->_logs->resetLogs("semestre");
-    if(Validation::is_undefined($this->semestre)) return null;
-    $v = Validation::getInstanceValue($this->semestre)->required()->max(5);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("semestre", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkInsertado() { 
-    $this->_logs->resetLogs("insertado");
-    if(Validation::is_undefined($this->insertado)) return null;
-    $v = Validation::getInstanceValue($this->insertado)->required()->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("insertado", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function sqlId() { return $this->_sqlString($this->id); }
+      $this->_logs->resetLogs("inicio");
+      if(Validation::is_undefined($this->inicio)) return null;
+      $v = Validation::getInstanceValue($this->inicio)->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("inicio", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkFin() { 
+      $this->_logs->resetLogs("fin");
+      if(Validation::is_undefined($this->fin)) return null;
+      $v = Validation::getInstanceValue($this->fin)->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("fin", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkAnio() { 
+      $this->_logs->resetLogs("anio");
+      if(Validation::is_undefined($this->anio)) return null;
+      $v = Validation::getInstanceValue($this->anio)->required()->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("anio", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkSemestre() { 
+      $this->_logs->resetLogs("semestre");
+      if(Validation::is_undefined($this->semestre)) return null;
+      $v = Validation::getInstanceValue($this->semestre)->required()->max(5);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("semestre", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkInsertado() { 
+      $this->_logs->resetLogs("insertado");
+      if(Validation::is_undefined($this->insertado)) return null;
+      $v = Validation::getInstanceValue($this->insertado)->required()->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("insertado", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function sqlId() { return $this->_sqlString($this->id); }
   public function sqlInicio() { return $this->_sqlDateTime($this->inicio, "Y-m-d"); }
   public function sqlInicioYm() { return $this->_sqlDateTime($this->inicio, "Y-m"); }
   public function sqlInicioY() { return $this->_sqlDateTime($this->inicio, "Y"); }

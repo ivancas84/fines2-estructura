@@ -29,14 +29,14 @@ class _TipoSedeValue extends ValueEntityOptions{
   }
 
   public function checkDescripcion() { 
-    $this->_logs->resetLogs("descripcion");
-    if(Validation::is_undefined($this->descripcion)) return null;
-    $v = Validation::getInstanceValue($this->descripcion)->required()->max(255);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("descripcion", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function sqlId() { return $this->_sqlString($this->id); }
+      $this->_logs->resetLogs("descripcion");
+      if(Validation::is_undefined($this->descripcion)) return null;
+      $v = Validation::getInstanceValue($this->descripcion)->required()->max(255);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("descripcion", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function sqlId() { return $this->_sqlString($this->id); }
   public function sqlDescripcion() { return $this->_sqlString($this->descripcion); }
 
   public function jsonId() { return $this->id; }

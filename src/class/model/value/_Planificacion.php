@@ -44,30 +44,30 @@ class _PlanificacionValue extends ValueEntityOptions{
   }
 
   public function checkAnio() { 
-    $this->_logs->resetLogs("anio");
-    if(Validation::is_undefined($this->anio)) return null;
-    $v = Validation::getInstanceValue($this->anio)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("anio", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkSemestre() { 
-    $this->_logs->resetLogs("semestre");
-    if(Validation::is_undefined($this->semestre)) return null;
-    $v = Validation::getInstanceValue($this->semestre)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("semestre", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkPlan() { 
-    $this->_logs->resetLogs("plan");
-    if(Validation::is_undefined($this->plan)) return null;
-    $v = Validation::getInstanceValue($this->plan)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("plan", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function sqlId() { return $this->_sqlString($this->id); }
+      $this->_logs->resetLogs("anio");
+      if(Validation::is_undefined($this->anio)) return null;
+      $v = Validation::getInstanceValue($this->anio)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("anio", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkSemestre() { 
+      $this->_logs->resetLogs("semestre");
+      if(Validation::is_undefined($this->semestre)) return null;
+      $v = Validation::getInstanceValue($this->semestre)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("semestre", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkPlan() { 
+      $this->_logs->resetLogs("plan");
+      if(Validation::is_undefined($this->plan)) return null;
+      $v = Validation::getInstanceValue($this->plan)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("plan", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function sqlId() { return $this->_sqlString($this->id); }
   public function sqlAnio() { return $this->_sqlString($this->anio); }
   public function sqlSemestre() { return $this->_sqlString($this->semestre); }
   public function sqlPlan() { return $this->_sqlString($this->plan); }

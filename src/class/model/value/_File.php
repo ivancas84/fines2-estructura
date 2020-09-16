@@ -72,46 +72,46 @@ class _FileValue extends ValueEntityOptions{
   }
 
   public function checkName() { 
-    $this->_logs->resetLogs("name");
-    if(Validation::is_undefined($this->name)) return null;
-    $v = Validation::getInstanceValue($this->name)->required()->max(255);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("name", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkType() { 
-    $this->_logs->resetLogs("type");
-    if(Validation::is_undefined($this->type)) return null;
-    $v = Validation::getInstanceValue($this->type)->required()->max(255);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("type", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkContent() { 
-    $this->_logs->resetLogs("content");
-    if(Validation::is_undefined($this->content)) return null;
-    $v = Validation::getInstanceValue($this->content)->required()->max(255);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("content", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkSize() { 
-    $this->_logs->resetLogs("size");
-    if(Validation::is_undefined($this->size)) return null;
-    $v = Validation::getInstanceValue($this->size)->required()->max(10);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("size", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkCreated() { 
-    $this->_logs->resetLogs("created");
-    if(Validation::is_undefined($this->created)) return null;
-    $v = Validation::getInstanceValue($this->created)->required()->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("created", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function sqlId() { return $this->_sqlString($this->id); }
+      $this->_logs->resetLogs("name");
+      if(Validation::is_undefined($this->name)) return null;
+      $v = Validation::getInstanceValue($this->name)->required()->max(255);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("name", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkType() { 
+      $this->_logs->resetLogs("type");
+      if(Validation::is_undefined($this->type)) return null;
+      $v = Validation::getInstanceValue($this->type)->required()->max(255);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("type", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkContent() { 
+      $this->_logs->resetLogs("content");
+      if(Validation::is_undefined($this->content)) return null;
+      $v = Validation::getInstanceValue($this->content)->required()->max(255);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("content", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkSize() { 
+      $this->_logs->resetLogs("size");
+      if(Validation::is_undefined($this->size)) return null;
+      $v = Validation::getInstanceValue($this->size)->required()->max(10);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("size", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkCreated() { 
+      $this->_logs->resetLogs("created");
+      if(Validation::is_undefined($this->created)) return null;
+      $v = Validation::getInstanceValue($this->created)->required()->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("created", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function sqlId() { return $this->_sqlString($this->id); }
   public function sqlName() { return $this->_sqlString($this->name); }
   public function sqlType() { return $this->_sqlString($this->type); }
   public function sqlContent() { return $this->_sqlString($this->content); }

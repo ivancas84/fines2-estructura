@@ -29,14 +29,14 @@ class _ModalidadValue extends ValueEntityOptions{
   }
 
   public function checkNombre() { 
-    $this->_logs->resetLogs("nombre");
-    if(Validation::is_undefined($this->nombre)) return null;
-    $v = Validation::getInstanceValue($this->nombre)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("nombre", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function sqlId() { return $this->_sqlString($this->id); }
+      $this->_logs->resetLogs("nombre");
+      if(Validation::is_undefined($this->nombre)) return null;
+      $v = Validation::getInstanceValue($this->nombre)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("nombre", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function sqlId() { return $this->_sqlString($this->id); }
   public function sqlNombre() { return $this->_sqlString($this->nombre); }
 
   public function jsonId() { return $this->id; }

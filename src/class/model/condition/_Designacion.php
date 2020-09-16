@@ -8,7 +8,7 @@ class _DesignacionCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setId($value);
-    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id ");
+    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id");
     return "({$field} {$option} {$this->value->sqlId()})";  
   }
 
@@ -123,7 +123,7 @@ class _DesignacionCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setCargo($value);
-    if(!$this->value->checkCargo()) throw new Exception("Valor incorrecto: Cargo ");
+    if(!$this->value->checkCargo()) throw new Exception("Valor incorrecto: Cargo");
     return "({$field} {$option} {$this->value->sqlCargo()})";  
   }
 
@@ -136,7 +136,7 @@ class _DesignacionCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setSede($value);
-    if(!$this->value->checkSede()) throw new Exception("Valor incorrecto: Sede ");
+    if(!$this->value->checkSede()) throw new Exception("Valor incorrecto: Sede");
     return "({$field} {$option} {$this->value->sqlSede()})";  
   }
 
@@ -149,7 +149,7 @@ class _DesignacionCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setPersona($value);
-    if(!$this->value->checkPersona()) throw new Exception("Valor incorrecto: Persona ");
+    if(!$this->value->checkPersona()) throw new Exception("Valor incorrecto: Persona");
     return "({$field} {$option} {$this->value->sqlPersona()})";  
   }
 

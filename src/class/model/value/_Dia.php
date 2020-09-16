@@ -36,22 +36,22 @@ class _DiaValue extends ValueEntityOptions{
   }
 
   public function checkNumero() { 
-    $this->_logs->resetLogs("numero");
-    if(Validation::is_undefined($this->numero)) return null;
-    $v = Validation::getInstanceValue($this->numero)->required()->max(1);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("numero", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkDia() { 
-    $this->_logs->resetLogs("dia");
-    if(Validation::is_undefined($this->dia)) return null;
-    $v = Validation::getInstanceValue($this->dia)->required()->max(9);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("dia", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function sqlId() { return $this->_sqlString($this->id); }
+      $this->_logs->resetLogs("numero");
+      if(Validation::is_undefined($this->numero)) return null;
+      $v = Validation::getInstanceValue($this->numero)->required()->max(1);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("numero", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkDia() { 
+      $this->_logs->resetLogs("dia");
+      if(Validation::is_undefined($this->dia)) return null;
+      $v = Validation::getInstanceValue($this->dia)->required()->max(9);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("dia", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function sqlId() { return $this->_sqlString($this->id); }
   public function sqlNumero() { return $this->_sqlNumber($this->numero); }
   public function sqlDia() { return $this->_sqlString($this->dia); }
 

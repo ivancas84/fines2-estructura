@@ -8,7 +8,7 @@ class _PlanCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setId($value);
-    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id ");
+    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id");
     return "({$field} {$option} {$this->value->sqlId()})";  
   }
 
@@ -21,7 +21,7 @@ class _PlanCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setOrientacion($value);
-    if(!$this->value->checkOrientacion()) throw new Exception("Valor incorrecto: Orientacion ");
+    if(!$this->value->checkOrientacion()) throw new Exception("Valor incorrecto: Orientacion");
     return "({$field} {$option} {$this->value->sqlOrientacion()})";  
   }
 
@@ -34,7 +34,7 @@ class _PlanCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setResolucion($value);
-    if(!$this->value->checkResolucion()) throw new Exception("Valor incorrecto: Resolucion ");
+    if(!$this->value->checkResolucion()) throw new Exception("Valor incorrecto: Resolucion");
     return "({$field} {$option} {$this->value->sqlResolucion()})";  
   }
 
@@ -47,7 +47,7 @@ class _PlanCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setDistribucionHoraria($value);
-    if(!$this->value->checkDistribucionHoraria()) throw new Exception("Valor incorrecto: Distribucion Horaria ");
+    if(!$this->value->checkDistribucionHoraria()) throw new Exception("Valor incorrecto: Distribucion Horaria");
     return "({$field} {$option} {$this->value->sqlDistribucionHoraria()})";  
   }
 

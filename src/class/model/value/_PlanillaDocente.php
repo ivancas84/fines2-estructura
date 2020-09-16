@@ -49,22 +49,22 @@ class _PlanillaDocenteValue extends ValueEntityOptions{
   }
 
   public function checkNumero() { 
-    $this->_logs->resetLogs("numero");
-    if(Validation::is_undefined($this->numero)) return null;
-    $v = Validation::getInstanceValue($this->numero)->required()->max(255);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("numero", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkInsertado() { 
-    $this->_logs->resetLogs("insertado");
-    if(Validation::is_undefined($this->insertado)) return null;
-    $v = Validation::getInstanceValue($this->insertado)->required()->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("insertado", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function sqlId() { return $this->_sqlString($this->id); }
+      $this->_logs->resetLogs("numero");
+      if(Validation::is_undefined($this->numero)) return null;
+      $v = Validation::getInstanceValue($this->numero)->required()->max(255);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("numero", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkInsertado() { 
+      $this->_logs->resetLogs("insertado");
+      if(Validation::is_undefined($this->insertado)) return null;
+      $v = Validation::getInstanceValue($this->insertado)->required()->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("insertado", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function sqlId() { return $this->_sqlString($this->id); }
   public function sqlNumero() { return $this->_sqlString($this->numero); }
   public function sqlInsertado() { return $this->_sqlDateTime($this->insertado, "Y-m-d H:i:s"); }
   public function sqlInsertadoDate() { return $this->_sqlDateTime($this->insertado, "Y-m-d"); }

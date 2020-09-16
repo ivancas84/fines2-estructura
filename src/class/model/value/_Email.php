@@ -83,46 +83,46 @@ class _EmailValue extends ValueEntityOptions{
   }
 
   public function checkEmail() { 
-    $this->_logs->resetLogs("email");
-    if(Validation::is_undefined($this->email)) return null;
-    $v = Validation::getInstanceValue($this->email)->required()->max(255);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("email", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkVerificado() { 
-    $this->_logs->resetLogs("verificado");
-    if(Validation::is_undefined($this->verificado)) return null;
-    $v = Validation::getInstanceValue($this->verificado)->required()->max(1);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("verificado", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkInsertado() { 
-    $this->_logs->resetLogs("insertado");
-    if(Validation::is_undefined($this->insertado)) return null;
-    $v = Validation::getInstanceValue($this->insertado)->required()->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("insertado", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkEliminado() { 
-    $this->_logs->resetLogs("eliminado");
-    if(Validation::is_undefined($this->eliminado)) return null;
-    $v = Validation::getInstanceValue($this->eliminado)->isA('DateTime');
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("eliminado", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function checkPersona() { 
-    $this->_logs->resetLogs("persona");
-    if(Validation::is_undefined($this->persona)) return null;
-    $v = Validation::getInstanceValue($this->persona)->required()->max(45);
-    foreach($v->getErrors() as $error){ $this->_logs->addLog("persona", "error", $error); }
-    return $v->isSuccess();
-  }
-
-  public function sqlId() { return $this->_sqlString($this->id); }
+      $this->_logs->resetLogs("email");
+      if(Validation::is_undefined($this->email)) return null;
+      $v = Validation::getInstanceValue($this->email)->required()->max(255);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("email", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkVerificado() { 
+      $this->_logs->resetLogs("verificado");
+      if(Validation::is_undefined($this->verificado)) return null;
+      $v = Validation::getInstanceValue($this->verificado)->required()->max(1);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("verificado", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkInsertado() { 
+      $this->_logs->resetLogs("insertado");
+      if(Validation::is_undefined($this->insertado)) return null;
+      $v = Validation::getInstanceValue($this->insertado)->required()->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("insertado", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkEliminado() { 
+      $this->_logs->resetLogs("eliminado");
+      if(Validation::is_undefined($this->eliminado)) return null;
+      $v = Validation::getInstanceValue($this->eliminado)->isA('DateTime');
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("eliminado", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function checkPersona() { 
+      $this->_logs->resetLogs("persona");
+      if(Validation::is_undefined($this->persona)) return null;
+      $v = Validation::getInstanceValue($this->persona)->required()->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("persona", "error", $error); }
+      return $v->isSuccess();
+    }
+  
+    public function sqlId() { return $this->_sqlString($this->id); }
   public function sqlEmail() { return $this->_sqlString($this->email); }
   public function sqlVerificado() { return $this->_sqlBoolean($this->verificado); }
   public function sqlInsertado() { return $this->_sqlDateTime($this->insertado, "Y-m-d H:i:s"); }

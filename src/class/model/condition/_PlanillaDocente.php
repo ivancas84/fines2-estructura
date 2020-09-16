@@ -8,7 +8,7 @@ class _PlanillaDocenteCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setId($value);
-    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id ");
+    if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id");
     return "({$field} {$option} {$this->value->sqlId()})";  
   }
 
@@ -21,7 +21,7 @@ class _PlanillaDocenteCondition extends ConditionEntityOptions{
     if($c = $this->_exists($field, $option, $value)) return $c;
     if($c = $this->_approx($field, $option, $value)) return $c;
     $this->value->setNumero($value);
-    if(!$this->value->checkNumero()) throw new Exception("Valor incorrecto: Numero ");
+    if(!$this->value->checkNumero()) throw new Exception("Valor incorrecto: Numero");
     return "({$field} {$option} {$this->value->sqlNumero()})";  
   }
 
