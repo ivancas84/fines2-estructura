@@ -1,8 +1,8 @@
 <?php
 
-require_once("class/model/sql/_Calendario.php");
+require_once("class/model/Sql.php");
 
-class CalendarioSql extends _CalendarioSql {
+class CalendarioSql extends EntitySql {
 
   public function _mappingField($field){
     $p = $this->prf();

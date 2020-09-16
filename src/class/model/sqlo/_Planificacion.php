@@ -9,7 +9,7 @@ class _PlanificacionSqlo extends EntitySqlo {
 
   public $entityName = "planificacion";
 
-  protected function _insert(array $row){ //@override
+  public function insert(array $row){ //@override
       $sql = "
   INSERT INTO " . $this->entity->sn_() . " (";
       $sql .= "id, " ;
@@ -32,7 +32,7 @@ VALUES ( ";
     return $sql;
   }
 
-  protected function _update(array $row){ //@override
+  public function _update(array $row){ //@override
     $sql = "
 UPDATE " . $this->entity->sn_() . " SET
 ";
@@ -47,15 +47,15 @@ UPDATE " . $this->entity->sn_() . " SET
 
   public function json(array $row = null){
     if(empty($row)) return null;
-    $row_ = $this->container->getValues($this->entity->getName())->_fromArray($row)->_toArray();
-    if(!is_null($row['plb_id'])) $row_["plan_"] = $this->container->getValues('plan')->_fromArray($row, 'plb_')->_toArray();
+    $row_ = $this->container->getValue($this->entity->getName())->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['plb_id'])) $row_["plan_"] = $this->container->getValue('plan', 'plb')->_fromArray($row, "set")->_toArray("json");
     return $row_;
   }
 
   public function values(array $row){
     $row_ = [];
-    $row_["planificacion"] = $this->container->getValues("planificacion")->_fromArray($row);
-    $row_["plan"] = $this->container->getValues('plan')->_fromArray($row, 'plb_');
+    $row_["planificacion"] = $this->container->getValue("planificacion")->_fromArray($row, "set");
+    $row_["plan"] = $this->container->getValue('plan', 'plb')->_fromArray($row, "set");
     return $row_;
   }
 

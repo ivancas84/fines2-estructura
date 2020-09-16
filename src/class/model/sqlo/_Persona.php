@@ -9,7 +9,7 @@ class _PersonaSqlo extends EntitySqlo {
 
   public $entityName = "persona";
 
-  protected function _insert(array $row){ //@override
+  public function insert(array $row){ //@override
       $sql = "
   INSERT INTO " . $this->entity->sn_() . " (";
       $sql .= "id, " ;
@@ -48,7 +48,7 @@ VALUES ( ";
     return $sql;
   }
 
-  protected function _update(array $row){ //@override
+  public function _update(array $row){ //@override
     $sql = "
 UPDATE " . $this->entity->sn_() . " SET
 ";
@@ -71,15 +71,15 @@ UPDATE " . $this->entity->sn_() . " SET
 
   public function json(array $row = null){
     if(empty($row)) return null;
-    $row_ = $this->container->getValues($this->entity->getName())->_fromArray($row)->_toArray();
-    if(!is_null($row['dom_id'])) $row_["domicilio_"] = $this->container->getValues('domicilio')->_fromArray($row, 'dom_')->_toArray();
+    $row_ = $this->container->getValue($this->entity->getName())->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['dom_id'])) $row_["domicilio_"] = $this->container->getValue('domicilio', 'dom')->_fromArray($row, "set")->_toArray("json");
     return $row_;
   }
 
   public function values(array $row){
     $row_ = [];
-    $row_["persona"] = $this->container->getValues("persona")->_fromArray($row);
-    $row_["domicilio"] = $this->container->getValues('domicilio')->_fromArray($row, 'dom_');
+    $row_["persona"] = $this->container->getValue("persona")->_fromArray($row, "set");
+    $row_["domicilio"] = $this->container->getValue('domicilio', 'dom')->_fromArray($row, "set");
     return $row_;
   }
 

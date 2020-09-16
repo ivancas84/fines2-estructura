@@ -9,7 +9,7 @@ class _HorarioSqlo extends EntitySqlo {
 
   public $entityName = "horario";
 
-  protected function _insert(array $row){ //@override
+  public function insert(array $row){ //@override
       $sql = "
   INSERT INTO " . $this->entity->sn_() . " (";
       $sql .= "id, " ;
@@ -34,7 +34,7 @@ VALUES ( ";
     return $sql;
   }
 
-  protected function _update(array $row){ //@override
+  public function _update(array $row){ //@override
     $sql = "
 UPDATE " . $this->entity->sn_() . " SET
 ";
@@ -50,39 +50,39 @@ UPDATE " . $this->entity->sn_() . " SET
 
   public function json(array $row = null){
     if(empty($row)) return null;
-    $row_ = $this->container->getValues($this->entity->getName())->_fromArray($row)->_toArray();
-    if(!is_null($row['cur_id'])) $row_["curso_"] = $this->container->getValues('curso')->_fromArray($row, 'cur_')->_toArray();
-    if(!is_null($row['cur_com_id'])) $row_["curso_"]["comision_"] = $this->container->getValues('comision')->_fromArray($row, 'cur_com_')->_toArray();
-    if(!is_null($row['cur_com_sed_id'])) $row_["curso_"]["comision_"]["sede_"] = $this->container->getValues('sede')->_fromArray($row, 'cur_com_sed_')->_toArray();
-    if(!is_null($row['cur_com_sed_dom_id'])) $row_["curso_"]["comision_"]["sede_"]["domicilio_"] = $this->container->getValues('domicilio')->_fromArray($row, 'cur_com_sed_dom_')->_toArray();
-    if(!is_null($row['cur_com_sed_ts_id'])) $row_["curso_"]["comision_"]["sede_"]["tipo_sede_"] = $this->container->getValues('tipo_sede')->_fromArray($row, 'cur_com_sed_ts_')->_toArray();
-    if(!is_null($row['cur_com_sed_ce_id'])) $row_["curso_"]["comision_"]["sede_"]["centro_educativo_"] = $this->container->getValues('centro_educativo')->_fromArray($row, 'cur_com_sed_ce_')->_toArray();
-    if(!is_null($row['cur_com_sed_ce_dom_id'])) $row_["curso_"]["comision_"]["sede_"]["centro_educativo_"]["domicilio_"] = $this->container->getValues('domicilio')->_fromArray($row, 'cur_com_sed_ce_dom_')->_toArray();
-    if(!is_null($row['cur_com_moa_id'])) $row_["curso_"]["comision_"]["modalidad_"] = $this->container->getValues('modalidad')->_fromArray($row, 'cur_com_moa_')->_toArray();
-    if(!is_null($row['cur_com_pla_id'])) $row_["curso_"]["comision_"]["planificacion_"] = $this->container->getValues('planificacion')->_fromArray($row, 'cur_com_pla_')->_toArray();
-    if(!is_null($row['cur_com_pla_plb_id'])) $row_["curso_"]["comision_"]["planificacion_"]["plan_"] = $this->container->getValues('plan')->_fromArray($row, 'cur_com_pla_plb_')->_toArray();
-    if(!is_null($row['cur_com_cal_id'])) $row_["curso_"]["comision_"]["calendario_"] = $this->container->getValues('calendario')->_fromArray($row, 'cur_com_cal_')->_toArray();
-    if(!is_null($row['cur_asi_id'])) $row_["curso_"]["asignatura_"] = $this->container->getValues('asignatura')->_fromArray($row, 'cur_asi_')->_toArray();
-    if(!is_null($row['dia_id'])) $row_["dia_"] = $this->container->getValues('dia')->_fromArray($row, 'dia_')->_toArray();
+    $row_ = $this->container->getValue($this->entity->getName())->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['cur_id'])) $row_["curso_"] = $this->container->getValue('curso', 'cur')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['cur_com_id'])) $row_["curso_"]["comision_"] = $this->container->getValue('comision', 'cur_com')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['cur_com_sed_id'])) $row_["curso_"]["comision_"]["sede_"] = $this->container->getValue('sede', 'cur_com_sed')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['cur_com_sed_dom_id'])) $row_["curso_"]["comision_"]["sede_"]["domicilio_"] = $this->container->getValue('domicilio', 'cur_com_sed_dom')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['cur_com_sed_ts_id'])) $row_["curso_"]["comision_"]["sede_"]["tipo_sede_"] = $this->container->getValue('tipo_sede', 'cur_com_sed_ts')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['cur_com_sed_ce_id'])) $row_["curso_"]["comision_"]["sede_"]["centro_educativo_"] = $this->container->getValue('centro_educativo', 'cur_com_sed_ce')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['cur_com_sed_ce_dom_id'])) $row_["curso_"]["comision_"]["sede_"]["centro_educativo_"]["domicilio_"] = $this->container->getValue('domicilio', 'cur_com_sed_ce_dom')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['cur_com_moa_id'])) $row_["curso_"]["comision_"]["modalidad_"] = $this->container->getValue('modalidad', 'cur_com_moa')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['cur_com_pla_id'])) $row_["curso_"]["comision_"]["planificacion_"] = $this->container->getValue('planificacion', 'cur_com_pla')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['cur_com_pla_plb_id'])) $row_["curso_"]["comision_"]["planificacion_"]["plan_"] = $this->container->getValue('plan', 'cur_com_pla_plb')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['cur_com_cal_id'])) $row_["curso_"]["comision_"]["calendario_"] = $this->container->getValue('calendario', 'cur_com_cal')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['cur_asi_id'])) $row_["curso_"]["asignatura_"] = $this->container->getValue('asignatura', 'cur_asi')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['dia_id'])) $row_["dia_"] = $this->container->getValue('dia', 'dia')->_fromArray($row, "set")->_toArray("json");
     return $row_;
   }
 
   public function values(array $row){
     $row_ = [];
-    $row_["horario"] = $this->container->getValues("horario")->_fromArray($row);
-    $row_["curso"] = $this->container->getValues('curso')->_fromArray($row, 'cur_');
-    $row_["comision"] = $this->container->getValues('comision')->_fromArray($row, 'cur_com_');
-    $row_["sede"] = $this->container->getValues('sede')->_fromArray($row, 'cur_com_sed_');
-    $row_["domicilio"] = $this->container->getValues('domicilio')->_fromArray($row, 'cur_com_sed_dom_');
-    $row_["tipo_sede"] = $this->container->getValues('tipo_sede')->_fromArray($row, 'cur_com_sed_ts_');
-    $row_["centro_educativo"] = $this->container->getValues('centro_educativo')->_fromArray($row, 'cur_com_sed_ce_');
-    $row_["domicilio1"] = $this->container->getValues('domicilio')->_fromArray($row, 'cur_com_sed_ce_dom_');
-    $row_["modalidad"] = $this->container->getValues('modalidad')->_fromArray($row, 'cur_com_moa_');
-    $row_["planificacion"] = $this->container->getValues('planificacion')->_fromArray($row, 'cur_com_pla_');
-    $row_["plan"] = $this->container->getValues('plan')->_fromArray($row, 'cur_com_pla_plb_');
-    $row_["calendario"] = $this->container->getValues('calendario')->_fromArray($row, 'cur_com_cal_');
-    $row_["asignatura"] = $this->container->getValues('asignatura')->_fromArray($row, 'cur_asi_');
-    $row_["dia"] = $this->container->getValues('dia')->_fromArray($row, 'dia_');
+    $row_["horario"] = $this->container->getValue("horario")->_fromArray($row, "set");
+    $row_["curso"] = $this->container->getValue('curso', 'cur')->_fromArray($row, "set");
+    $row_["comision"] = $this->container->getValue('comision', 'cur_com')->_fromArray($row, "set");
+    $row_["sede"] = $this->container->getValue('sede', 'cur_com_sed')->_fromArray($row, "set");
+    $row_["domicilio"] = $this->container->getValue('domicilio', 'cur_com_sed_dom')->_fromArray($row, "set");
+    $row_["tipo_sede"] = $this->container->getValue('tipo_sede', 'cur_com_sed_ts')->_fromArray($row, "set");
+    $row_["centro_educativo"] = $this->container->getValue('centro_educativo', 'cur_com_sed_ce')->_fromArray($row, "set");
+    $row_["domicilio1"] = $this->container->getValue('domicilio', 'cur_com_sed_ce_dom')->_fromArray($row, "set");
+    $row_["modalidad"] = $this->container->getValue('modalidad', 'cur_com_moa')->_fromArray($row, "set");
+    $row_["planificacion"] = $this->container->getValue('planificacion', 'cur_com_pla')->_fromArray($row, "set");
+    $row_["plan"] = $this->container->getValue('plan', 'cur_com_pla_plb')->_fromArray($row, "set");
+    $row_["calendario"] = $this->container->getValue('calendario', 'cur_com_cal')->_fromArray($row, "set");
+    $row_["asignatura"] = $this->container->getValue('asignatura', 'cur_asi')->_fromArray($row, "set");
+    $row_["dia"] = $this->container->getValue('dia', 'dia')->_fromArray($row, "set");
     return $row_;
   }
 

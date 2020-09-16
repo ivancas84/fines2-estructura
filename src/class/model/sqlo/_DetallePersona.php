@@ -9,7 +9,7 @@ class _DetallePersonaSqlo extends EntitySqlo {
 
   public $entityName = "detalle_persona";
 
-  protected function _insert(array $row){ //@override
+  public function insert(array $row){ //@override
       $sql = "
   INSERT INTO " . $this->entity->sn_() . " (";
       $sql .= "id, " ;
@@ -34,7 +34,7 @@ VALUES ( ";
     return $sql;
   }
 
-  protected function _update(array $row){ //@override
+  public function _update(array $row){ //@override
     $sql = "
 UPDATE " . $this->entity->sn_() . " SET
 ";
@@ -50,19 +50,19 @@ UPDATE " . $this->entity->sn_() . " SET
 
   public function json(array $row = null){
     if(empty($row)) return null;
-    $row_ = $this->container->getValues($this->entity->getName())->_fromArray($row)->_toArray();
-    if(!is_null($row['arc_id'])) $row_["archivo_"] = $this->container->getValues('file')->_fromArray($row, 'arc_')->_toArray();
-    if(!is_null($row['per_id'])) $row_["persona_"] = $this->container->getValues('persona')->_fromArray($row, 'per_')->_toArray();
-    if(!is_null($row['per_dom_id'])) $row_["persona_"]["domicilio_"] = $this->container->getValues('domicilio')->_fromArray($row, 'per_dom_')->_toArray();
+    $row_ = $this->container->getValue($this->entity->getName())->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['arc_id'])) $row_["archivo_"] = $this->container->getValue('file', 'arc')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['per_id'])) $row_["persona_"] = $this->container->getValue('persona', 'per')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['per_dom_id'])) $row_["persona_"]["domicilio_"] = $this->container->getValue('domicilio', 'per_dom')->_fromArray($row, "set")->_toArray("json");
     return $row_;
   }
 
   public function values(array $row){
     $row_ = [];
-    $row_["detalle_persona"] = $this->container->getValues("detalle_persona")->_fromArray($row);
-    $row_["archivo"] = $this->container->getValues('file')->_fromArray($row, 'arc_');
-    $row_["persona"] = $this->container->getValues('persona')->_fromArray($row, 'per_');
-    $row_["domicilio"] = $this->container->getValues('domicilio')->_fromArray($row, 'per_dom_');
+    $row_["detalle_persona"] = $this->container->getValue("detalle_persona")->_fromArray($row, "set");
+    $row_["archivo"] = $this->container->getValue('file', 'arc')->_fromArray($row, "set");
+    $row_["persona"] = $this->container->getValue('persona', 'per')->_fromArray($row, "set");
+    $row_["domicilio"] = $this->container->getValue('domicilio', 'per_dom')->_fromArray($row, "set");
     return $row_;
   }
 

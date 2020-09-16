@@ -9,7 +9,7 @@ class _SedeSqlo extends EntitySqlo {
 
   public $entityName = "sede";
 
-  protected function _insert(array $row){ //@override
+  public function insert(array $row){ //@override
       $sql = "
   INSERT INTO " . $this->entity->sn_() . " (";
       $sql .= "id, " ;
@@ -40,7 +40,7 @@ VALUES ( ";
     return $sql;
   }
 
-  protected function _update(array $row){ //@override
+  public function _update(array $row){ //@override
     $sql = "
 UPDATE " . $this->entity->sn_() . " SET
 ";
@@ -59,21 +59,21 @@ UPDATE " . $this->entity->sn_() . " SET
 
   public function json(array $row = null){
     if(empty($row)) return null;
-    $row_ = $this->container->getValues($this->entity->getName())->_fromArray($row)->_toArray();
-    if(!is_null($row['dom_id'])) $row_["domicilio_"] = $this->container->getValues('domicilio')->_fromArray($row, 'dom_')->_toArray();
-    if(!is_null($row['ts_id'])) $row_["tipo_sede_"] = $this->container->getValues('tipo_sede')->_fromArray($row, 'ts_')->_toArray();
-    if(!is_null($row['ce_id'])) $row_["centro_educativo_"] = $this->container->getValues('centro_educativo')->_fromArray($row, 'ce_')->_toArray();
-    if(!is_null($row['ce_dom_id'])) $row_["centro_educativo_"]["domicilio_"] = $this->container->getValues('domicilio')->_fromArray($row, 'ce_dom_')->_toArray();
+    $row_ = $this->container->getValue($this->entity->getName())->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['dom_id'])) $row_["domicilio_"] = $this->container->getValue('domicilio', 'dom')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['ts_id'])) $row_["tipo_sede_"] = $this->container->getValue('tipo_sede', 'ts')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['ce_id'])) $row_["centro_educativo_"] = $this->container->getValue('centro_educativo', 'ce')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['ce_dom_id'])) $row_["centro_educativo_"]["domicilio_"] = $this->container->getValue('domicilio', 'ce_dom')->_fromArray($row, "set")->_toArray("json");
     return $row_;
   }
 
   public function values(array $row){
     $row_ = [];
-    $row_["sede"] = $this->container->getValues("sede")->_fromArray($row);
-    $row_["domicilio"] = $this->container->getValues('domicilio')->_fromArray($row, 'dom_');
-    $row_["tipo_sede"] = $this->container->getValues('tipo_sede')->_fromArray($row, 'ts_');
-    $row_["centro_educativo"] = $this->container->getValues('centro_educativo')->_fromArray($row, 'ce_');
-    $row_["domicilio1"] = $this->container->getValues('domicilio')->_fromArray($row, 'ce_dom_');
+    $row_["sede"] = $this->container->getValue("sede")->_fromArray($row, "set");
+    $row_["domicilio"] = $this->container->getValue('domicilio', 'dom')->_fromArray($row, "set");
+    $row_["tipo_sede"] = $this->container->getValue('tipo_sede', 'ts')->_fromArray($row, "set");
+    $row_["centro_educativo"] = $this->container->getValue('centro_educativo', 'ce')->_fromArray($row, "set");
+    $row_["domicilio1"] = $this->container->getValue('domicilio', 'ce_dom')->_fromArray($row, "set");
     return $row_;
   }
 

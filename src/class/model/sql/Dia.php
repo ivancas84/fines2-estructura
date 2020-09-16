@@ -1,8 +1,8 @@
 <?php
 
-require_once("class/model/sql/_Dia.php");
+require_once("class/model/Sql.php");
 
-class DiaSql extends _DiaSql {
+class DiaSql extends EntitySql {
     protected function orderDefault(){
         return ["numero" => "asc"];      
     }
