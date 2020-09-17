@@ -5,8 +5,8 @@ class _DiaCondition extends ConditionEntityOptions{
 
   public function id($option, $value) { 
     $field = $this->mapping->id();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approx($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approx($field, $option, $value)) return $c;
     $this->value->setId($value);
     if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id");
     return "({$field} {$option} {$this->value->sqlId()})";  
@@ -18,8 +18,8 @@ class _DiaCondition extends ConditionEntityOptions{
 
   public function numero($option, $value) { 
     $field = $this->mapping->numero();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setNumero($value);
     if(!$this->value->checkNumero()) throw new Exception("Valor incorrecto: Numero ");
     return "({$field} {$option} {$this->value->sqlNumero()})";  
@@ -31,8 +31,8 @@ class _DiaCondition extends ConditionEntityOptions{
 
   public function dia($option, $value) { 
     $field = $this->mapping->dia();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approx($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approx($field, $option, $value)) return $c;
     $this->value->setDia($value);
     if(!$this->value->checkDia()) throw new Exception("Valor incorrecto: Dia");
     return "({$field} {$option} {$this->value->sqlDia()})";  

@@ -94,14 +94,14 @@ class _DetallePersonaValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
-    public function sqlId() { return $this->_sqlString($this->id); }
-  public function sqlDescripcion() { return $this->_sqlString($this->descripcion); }
-  public function sqlCreado() { return $this->_sqlDateTime($this->creado, "Y-m-d H:i:s"); }
-  public function sqlCreadoDate() { return $this->_sqlDateTime($this->creado, "Y-m-d"); }
-  public function sqlCreadoYm() { return $this->_sqlDateTime($this->creado, "Y-m"); }
-  public function sqlCreadoY() { return $this->_sqlDateTime($this->creado, "Y"); }
-  public function sqlArchivo() { return $this->_sqlString($this->archivo); }
-  public function sqlPersona() { return $this->_sqlString($this->persona); }
+    public function sqlId() { return $this->sql->string($this->id); }
+  public function sqlDescripcion() { return $this->sql->string($this->descripcion); }
+  public function sqlCreado() { return $this->sql->dateTime($this->creado, "Y-m-d H:i:s"); }
+  public function sqlCreadoDate() { return $this->sql->dateTime($this->creado, "Y-m-d"); }
+  public function sqlCreadoYm() { return $this->sql->dateTime($this->creado, "Y-m"); }
+  public function sqlCreadoY() { return $this->sql->dateTime($this->creado, "Y"); }
+  public function sqlArchivo() { return $this->sql->string($this->archivo); }
+  public function sqlPersona() { return $this->sql->string($this->persona); }
 
   public function jsonId() { return $this->id; }
   public function jsonDescripcion() { return $this->descripcion; }

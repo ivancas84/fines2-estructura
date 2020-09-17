@@ -100,12 +100,12 @@ class _AsignaturaValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
-    public function sqlId() { return $this->_sqlString($this->id); }
-  public function sqlNombre() { return $this->_sqlString($this->nombre); }
-  public function sqlFormacion() { return $this->_sqlString($this->formacion); }
-  public function sqlClasificacion() { return $this->_sqlString($this->clasificacion); }
-  public function sqlCodigo() { return $this->_sqlString($this->codigo); }
-  public function sqlPerfil() { return $this->_sqlString($this->perfil); }
+    public function sqlId() { return $this->sql->string($this->id); }
+  public function sqlNombre() { return $this->sql->string($this->nombre); }
+  public function sqlFormacion() { return $this->sql->string($this->formacion); }
+  public function sqlClasificacion() { return $this->sql->string($this->clasificacion); }
+  public function sqlCodigo() { return $this->sql->string($this->codigo); }
+  public function sqlPerfil() { return $this->sql->string($this->perfil); }
 
   public function jsonId() { return $this->id; }
   public function jsonNombre() { return $this->nombre; }

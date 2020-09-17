@@ -139,19 +139,19 @@ class _TelefonoValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
-    public function sqlId() { return $this->_sqlString($this->id); }
-  public function sqlTipo() { return $this->_sqlString($this->tipo); }
-  public function sqlPrefijo() { return $this->_sqlString($this->prefijo); }
-  public function sqlNumero() { return $this->_sqlString($this->numero); }
-  public function sqlInsertado() { return $this->_sqlDateTime($this->insertado, "Y-m-d H:i:s"); }
-  public function sqlInsertadoDate() { return $this->_sqlDateTime($this->insertado, "Y-m-d"); }
-  public function sqlInsertadoYm() { return $this->_sqlDateTime($this->insertado, "Y-m"); }
-  public function sqlInsertadoY() { return $this->_sqlDateTime($this->insertado, "Y"); }
-  public function sqlEliminado() { return $this->_sqlDateTime($this->eliminado, "Y-m-d H:i:s"); }
-  public function sqlEliminadoDate() { return $this->_sqlDateTime($this->eliminado, "Y-m-d"); }
-  public function sqlEliminadoYm() { return $this->_sqlDateTime($this->eliminado, "Y-m"); }
-  public function sqlEliminadoY() { return $this->_sqlDateTime($this->eliminado, "Y"); }
-  public function sqlPersona() { return $this->_sqlString($this->persona); }
+    public function sqlId() { return $this->sql->string($this->id); }
+  public function sqlTipo() { return $this->sql->string($this->tipo); }
+  public function sqlPrefijo() { return $this->sql->string($this->prefijo); }
+  public function sqlNumero() { return $this->sql->string($this->numero); }
+  public function sqlInsertado() { return $this->sql->dateTime($this->insertado, "Y-m-d H:i:s"); }
+  public function sqlInsertadoDate() { return $this->sql->dateTime($this->insertado, "Y-m-d"); }
+  public function sqlInsertadoYm() { return $this->sql->dateTime($this->insertado, "Y-m"); }
+  public function sqlInsertadoY() { return $this->sql->dateTime($this->insertado, "Y"); }
+  public function sqlEliminado() { return $this->sql->dateTime($this->eliminado, "Y-m-d H:i:s"); }
+  public function sqlEliminadoDate() { return $this->sql->dateTime($this->eliminado, "Y-m-d"); }
+  public function sqlEliminadoYm() { return $this->sql->dateTime($this->eliminado, "Y-m"); }
+  public function sqlEliminadoY() { return $this->sql->dateTime($this->eliminado, "Y"); }
+  public function sqlPersona() { return $this->sql->string($this->persona); }
 
   public function jsonId() { return $this->id; }
   public function jsonTipo() { return $this->tipo; }

@@ -5,8 +5,8 @@ class _ContralorCondition extends ConditionEntityOptions{
 
   public function id($option, $value) { 
     $field = $this->mapping->id();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approx($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approx($field, $option, $value)) return $c;
     $this->value->setId($value);
     if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id");
     return "({$field} {$option} {$this->value->sqlId()})";  
@@ -18,8 +18,8 @@ class _ContralorCondition extends ConditionEntityOptions{
 
   public function fechaContralor($option, $value) { 
     $field = $this->mapping->fechaContralor();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setFechaContralor($value);
     if(!$this->value->checkFechaContralor()) throw new Exception("Valor incorrecto: Fecha Contralor ");
     return "({$field} {$option} {$this->value->sqlFechaContralor()})";  
@@ -27,8 +27,8 @@ class _ContralorCondition extends ConditionEntityOptions{
 
   public function fechaContralorYm($option, $value) { 
     $field = $this->mapping->fechaContralorYm();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setFechaContralor($value);
     if(!$this->value->checkFechaContralor()) throw new Exception("Valor incorrecto: Fecha Contralor Ym");
     return "({$field} {$option} {$this->value->sqlFechaContralorYm()})";  
@@ -36,8 +36,8 @@ class _ContralorCondition extends ConditionEntityOptions{
 
   public function fechaContralorY($option, $value) { 
     $field = $this->mapping->fechaContralorY();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setFechaContralorY($value);
     if(!$this->value->checkFechaContralor()) throw new Exception("Valor incorrecto: Fecha Contralor Y");
     return "({$field} {$option} {$this->value->sqlFechaContralorY()})";  
@@ -49,8 +49,8 @@ class _ContralorCondition extends ConditionEntityOptions{
 
   public function fechaConsejo($option, $value) { 
     $field = $this->mapping->fechaConsejo();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setFechaConsejo($value);
     if(!$this->value->checkFechaConsejo()) throw new Exception("Valor incorrecto: Fecha Consejo ");
     return "({$field} {$option} {$this->value->sqlFechaConsejo()})";  
@@ -58,8 +58,8 @@ class _ContralorCondition extends ConditionEntityOptions{
 
   public function fechaConsejoYm($option, $value) { 
     $field = $this->mapping->fechaConsejoYm();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setFechaConsejo($value);
     if(!$this->value->checkFechaConsejo()) throw new Exception("Valor incorrecto: Fecha Consejo Ym");
     return "({$field} {$option} {$this->value->sqlFechaConsejoYm()})";  
@@ -67,8 +67,8 @@ class _ContralorCondition extends ConditionEntityOptions{
 
   public function fechaConsejoY($option, $value) { 
     $field = $this->mapping->fechaConsejoY();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setFechaConsejoY($value);
     if(!$this->value->checkFechaConsejo()) throw new Exception("Valor incorrecto: Fecha Consejo Y");
     return "({$field} {$option} {$this->value->sqlFechaConsejoY()})";  
@@ -80,8 +80,8 @@ class _ContralorCondition extends ConditionEntityOptions{
 
   public function insertado($option, $value) { 
     $field = $this->mapping->insertado();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setInsertado($value);
     if(!$this->value->checkInsertado()) throw new Exception("Valor incorrecto: Insertado ");
     return "({$field} {$option} {$this->value->sqlInsertado()})";  
@@ -89,8 +89,8 @@ class _ContralorCondition extends ConditionEntityOptions{
 
   public function insertadoDate($option, $value) { 
     $field = $this->mapping->insertadoDate();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setInsertado($value);
     if(!$this->value->checkInsertado()) throw new Exception("Valor incorrecto: Insertado Date");
     return "({$field} {$option} {$this->value->sqlInsertadoDate()})";  
@@ -98,8 +98,8 @@ class _ContralorCondition extends ConditionEntityOptions{
 
   public function insertadoYm($option, $value) { 
     $field = $this->mapping->insertadoYm();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setInsertado($value);
     if(!$this->value->checkInsertado()) throw new Exception("Valor incorrecto: Insertado Ym");
     return "({$field} {$option} {$this->value->sqlInsertadoYm()})";  
@@ -107,8 +107,8 @@ class _ContralorCondition extends ConditionEntityOptions{
 
   public function insertadoY($option, $value) { 
     $field = $this->mapping->insertadoY();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setInsertadoY($value);
     if(!$this->value->checkInsertado()) throw new Exception("Valor incorrecto: Insertado Y");
     return "({$field} {$option} {$this->value->sqlInsertadoY()})";  
@@ -120,8 +120,8 @@ class _ContralorCondition extends ConditionEntityOptions{
 
   public function planillaDocente($option, $value) { 
     $field = $this->mapping->planillaDocente();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approx($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approx($field, $option, $value)) return $c;
     $this->value->setPlanillaDocente($value);
     if(!$this->value->checkPlanillaDocente()) throw new Exception("Valor incorrecto: Planilla Docente");
     return "({$field} {$option} {$this->value->sqlPlanillaDocente()})";  

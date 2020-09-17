@@ -169,21 +169,21 @@ class _SedeValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
-    public function sqlId() { return $this->_sqlString($this->id); }
-  public function sqlNumero() { return $this->_sqlString($this->numero); }
-  public function sqlNombre() { return $this->_sqlString($this->nombre); }
-  public function sqlObservaciones() { return $this->_sqlString($this->observaciones); }
-  public function sqlAlta() { return $this->_sqlDateTime($this->alta, "Y-m-d H:i:s"); }
-  public function sqlAltaDate() { return $this->_sqlDateTime($this->alta, "Y-m-d"); }
-  public function sqlAltaYm() { return $this->_sqlDateTime($this->alta, "Y-m"); }
-  public function sqlAltaY() { return $this->_sqlDateTime($this->alta, "Y"); }
-  public function sqlBaja() { return $this->_sqlDateTime($this->baja, "Y-m-d H:i:s"); }
-  public function sqlBajaDate() { return $this->_sqlDateTime($this->baja, "Y-m-d"); }
-  public function sqlBajaYm() { return $this->_sqlDateTime($this->baja, "Y-m"); }
-  public function sqlBajaY() { return $this->_sqlDateTime($this->baja, "Y"); }
-  public function sqlDomicilio() { return $this->_sqlString($this->domicilio); }
-  public function sqlTipoSede() { return $this->_sqlString($this->tipoSede); }
-  public function sqlCentroEducativo() { return $this->_sqlString($this->centroEducativo); }
+    public function sqlId() { return $this->sql->string($this->id); }
+  public function sqlNumero() { return $this->sql->string($this->numero); }
+  public function sqlNombre() { return $this->sql->string($this->nombre); }
+  public function sqlObservaciones() { return $this->sql->string($this->observaciones); }
+  public function sqlAlta() { return $this->sql->dateTime($this->alta, "Y-m-d H:i:s"); }
+  public function sqlAltaDate() { return $this->sql->dateTime($this->alta, "Y-m-d"); }
+  public function sqlAltaYm() { return $this->sql->dateTime($this->alta, "Y-m"); }
+  public function sqlAltaY() { return $this->sql->dateTime($this->alta, "Y"); }
+  public function sqlBaja() { return $this->sql->dateTime($this->baja, "Y-m-d H:i:s"); }
+  public function sqlBajaDate() { return $this->sql->dateTime($this->baja, "Y-m-d"); }
+  public function sqlBajaYm() { return $this->sql->dateTime($this->baja, "Y-m"); }
+  public function sqlBajaY() { return $this->sql->dateTime($this->baja, "Y"); }
+  public function sqlDomicilio() { return $this->sql->string($this->domicilio); }
+  public function sqlTipoSede() { return $this->sql->string($this->tipoSede); }
+  public function sqlCentroEducativo() { return $this->sql->string($this->centroEducativo); }
 
   public function jsonId() { return $this->id; }
   public function jsonNumero() { return $this->numero; }

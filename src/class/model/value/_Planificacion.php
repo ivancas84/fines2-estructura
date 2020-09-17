@@ -67,10 +67,10 @@ class _PlanificacionValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
-    public function sqlId() { return $this->_sqlString($this->id); }
-  public function sqlAnio() { return $this->_sqlString($this->anio); }
-  public function sqlSemestre() { return $this->_sqlString($this->semestre); }
-  public function sqlPlan() { return $this->_sqlString($this->plan); }
+    public function sqlId() { return $this->sql->string($this->id); }
+  public function sqlAnio() { return $this->sql->string($this->anio); }
+  public function sqlSemestre() { return $this->sql->string($this->semestre); }
+  public function sqlPlan() { return $this->sql->string($this->plan); }
 
   public function jsonId() { return $this->id; }
   public function jsonAnio() { return $this->anio; }

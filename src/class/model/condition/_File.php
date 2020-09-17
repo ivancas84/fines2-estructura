@@ -5,8 +5,8 @@ class _FileCondition extends ConditionEntityOptions{
 
   public function id($option, $value) { 
     $field = $this->mapping->id();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approx($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approx($field, $option, $value)) return $c;
     $this->value->setId($value);
     if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id");
     return "({$field} {$option} {$this->value->sqlId()})";  
@@ -18,8 +18,8 @@ class _FileCondition extends ConditionEntityOptions{
 
   public function name($option, $value) { 
     $field = $this->mapping->name();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approx($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approx($field, $option, $value)) return $c;
     $this->value->setName($value);
     if(!$this->value->checkName()) throw new Exception("Valor incorrecto: Name");
     return "({$field} {$option} {$this->value->sqlName()})";  
@@ -31,8 +31,8 @@ class _FileCondition extends ConditionEntityOptions{
 
   public function type($option, $value) { 
     $field = $this->mapping->type();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approx($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approx($field, $option, $value)) return $c;
     $this->value->setType($value);
     if(!$this->value->checkType()) throw new Exception("Valor incorrecto: Type");
     return "({$field} {$option} {$this->value->sqlType()})";  
@@ -44,8 +44,8 @@ class _FileCondition extends ConditionEntityOptions{
 
   public function content($option, $value) { 
     $field = $this->mapping->content();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approx($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approx($field, $option, $value)) return $c;
     $this->value->setContent($value);
     if(!$this->value->checkContent()) throw new Exception("Valor incorrecto: Content");
     return "({$field} {$option} {$this->value->sqlContent()})";  
@@ -57,8 +57,8 @@ class _FileCondition extends ConditionEntityOptions{
 
   public function size($option, $value) { 
     $field = $this->mapping->size();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setSize($value);
     if(!$this->value->checkSize()) throw new Exception("Valor incorrecto: Size ");
     return "({$field} {$option} {$this->value->sqlSize()})";  
@@ -70,8 +70,8 @@ class _FileCondition extends ConditionEntityOptions{
 
   public function created($option, $value) { 
     $field = $this->mapping->created();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setCreated($value);
     if(!$this->value->checkCreated()) throw new Exception("Valor incorrecto: Created ");
     return "({$field} {$option} {$this->value->sqlCreated()})";  
@@ -79,8 +79,8 @@ class _FileCondition extends ConditionEntityOptions{
 
   public function createdDate($option, $value) { 
     $field = $this->mapping->createdDate();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setCreated($value);
     if(!$this->value->checkCreated()) throw new Exception("Valor incorrecto: Created Date");
     return "({$field} {$option} {$this->value->sqlCreatedDate()})";  
@@ -88,8 +88,8 @@ class _FileCondition extends ConditionEntityOptions{
 
   public function createdYm($option, $value) { 
     $field = $this->mapping->createdYm();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setCreated($value);
     if(!$this->value->checkCreated()) throw new Exception("Valor incorrecto: Created Ym");
     return "({$field} {$option} {$this->value->sqlCreatedYm()})";  
@@ -97,8 +97,8 @@ class _FileCondition extends ConditionEntityOptions{
 
   public function createdY($option, $value) { 
     $field = $this->mapping->createdY();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setCreatedY($value);
     if(!$this->value->checkCreated()) throw new Exception("Valor incorrecto: Created Y");
     return "({$field} {$option} {$this->value->sqlCreatedY()})";  

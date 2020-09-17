@@ -36,8 +36,8 @@ class _TipoSedeValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
-    public function sqlId() { return $this->_sqlString($this->id); }
-  public function sqlDescripcion() { return $this->_sqlString($this->descripcion); }
+    public function sqlId() { return $this->sql->string($this->id); }
+  public function sqlDescripcion() { return $this->sql->string($this->descripcion); }
 
   public function jsonId() { return $this->id; }
   public function jsonDescripcion() { return $this->descripcion; }

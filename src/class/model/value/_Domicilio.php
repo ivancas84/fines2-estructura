@@ -132,14 +132,14 @@ class _DomicilioValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
-    public function sqlId() { return $this->_sqlString($this->id); }
-  public function sqlCalle() { return $this->_sqlString($this->calle); }
-  public function sqlEntre() { return $this->_sqlString($this->entre); }
-  public function sqlNumero() { return $this->_sqlString($this->numero); }
-  public function sqlPiso() { return $this->_sqlString($this->piso); }
-  public function sqlDepartamento() { return $this->_sqlString($this->departamento); }
-  public function sqlBarrio() { return $this->_sqlString($this->barrio); }
-  public function sqlLocalidad() { return $this->_sqlString($this->localidad); }
+    public function sqlId() { return $this->sql->string($this->id); }
+  public function sqlCalle() { return $this->sql->string($this->calle); }
+  public function sqlEntre() { return $this->sql->string($this->entre); }
+  public function sqlNumero() { return $this->sql->string($this->numero); }
+  public function sqlPiso() { return $this->sql->string($this->piso); }
+  public function sqlDepartamento() { return $this->sql->string($this->departamento); }
+  public function sqlBarrio() { return $this->sql->string($this->barrio); }
+  public function sqlLocalidad() { return $this->sql->string($this->localidad); }
 
   public function jsonId() { return $this->id; }
   public function jsonCalle() { return $this->calle; }

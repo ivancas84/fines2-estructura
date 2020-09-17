@@ -5,8 +5,8 @@ class _CursoCondition extends ConditionEntityOptions{
 
   public function id($option, $value) { 
     $field = $this->mapping->id();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approx($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approx($field, $option, $value)) return $c;
     $this->value->setId($value);
     if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id");
     return "({$field} {$option} {$this->value->sqlId()})";  
@@ -18,8 +18,8 @@ class _CursoCondition extends ConditionEntityOptions{
 
   public function horasCatedra($option, $value) { 
     $field = $this->mapping->horasCatedra();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setHorasCatedra($value);
     if(!$this->value->checkHorasCatedra()) throw new Exception("Valor incorrecto: Horas Catedra ");
     return "({$field} {$option} {$this->value->sqlHorasCatedra()})";  
@@ -31,8 +31,8 @@ class _CursoCondition extends ConditionEntityOptions{
 
   public function alta($option, $value) { 
     $field = $this->mapping->alta();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setAlta($value);
     if(!$this->value->checkAlta()) throw new Exception("Valor incorrecto: Alta ");
     return "({$field} {$option} {$this->value->sqlAlta()})";  
@@ -40,8 +40,8 @@ class _CursoCondition extends ConditionEntityOptions{
 
   public function altaDate($option, $value) { 
     $field = $this->mapping->altaDate();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setAlta($value);
     if(!$this->value->checkAlta()) throw new Exception("Valor incorrecto: Alta Date");
     return "({$field} {$option} {$this->value->sqlAltaDate()})";  
@@ -49,8 +49,8 @@ class _CursoCondition extends ConditionEntityOptions{
 
   public function altaYm($option, $value) { 
     $field = $this->mapping->altaYm();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setAlta($value);
     if(!$this->value->checkAlta()) throw new Exception("Valor incorrecto: Alta Ym");
     return "({$field} {$option} {$this->value->sqlAltaYm()})";  
@@ -58,8 +58,8 @@ class _CursoCondition extends ConditionEntityOptions{
 
   public function altaY($option, $value) { 
     $field = $this->mapping->altaY();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setAltaY($value);
     if(!$this->value->checkAlta()) throw new Exception("Valor incorrecto: Alta Y");
     return "({$field} {$option} {$this->value->sqlAltaY()})";  
@@ -71,8 +71,8 @@ class _CursoCondition extends ConditionEntityOptions{
 
   public function comision($option, $value) { 
     $field = $this->mapping->comision();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approx($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approx($field, $option, $value)) return $c;
     $this->value->setComision($value);
     if(!$this->value->checkComision()) throw new Exception("Valor incorrecto: Comision");
     return "({$field} {$option} {$this->value->sqlComision()})";  
@@ -84,8 +84,8 @@ class _CursoCondition extends ConditionEntityOptions{
 
   public function asignatura($option, $value) { 
     $field = $this->mapping->asignatura();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approx($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approx($field, $option, $value)) return $c;
     $this->value->setAsignatura($value);
     if(!$this->value->checkAsignatura()) throw new Exception("Valor incorrecto: Asignatura");
     return "({$field} {$option} {$this->value->sqlAsignatura()})";  

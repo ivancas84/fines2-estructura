@@ -149,20 +149,20 @@ class _DesignacionValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
-    public function sqlId() { return $this->_sqlString($this->id); }
-  public function sqlDesde() { return $this->_sqlDateTime($this->desde, "Y-m-d"); }
-  public function sqlDesdeYm() { return $this->_sqlDateTime($this->desde, "Y-m"); }
-  public function sqlDesdeY() { return $this->_sqlDateTime($this->desde, "Y"); }
-  public function sqlHasta() { return $this->_sqlDateTime($this->hasta, "Y-m-d"); }
-  public function sqlHastaYm() { return $this->_sqlDateTime($this->hasta, "Y-m"); }
-  public function sqlHastaY() { return $this->_sqlDateTime($this->hasta, "Y"); }
-  public function sqlAlta() { return $this->_sqlDateTime($this->alta, "Y-m-d H:i:s"); }
-  public function sqlAltaDate() { return $this->_sqlDateTime($this->alta, "Y-m-d"); }
-  public function sqlAltaYm() { return $this->_sqlDateTime($this->alta, "Y-m"); }
-  public function sqlAltaY() { return $this->_sqlDateTime($this->alta, "Y"); }
-  public function sqlCargo() { return $this->_sqlString($this->cargo); }
-  public function sqlSede() { return $this->_sqlString($this->sede); }
-  public function sqlPersona() { return $this->_sqlString($this->persona); }
+    public function sqlId() { return $this->sql->string($this->id); }
+  public function sqlDesde() { return $this->sql->dateTime($this->desde, "Y-m-d"); }
+  public function sqlDesdeYm() { return $this->sql->dateTime($this->desde, "Y-m"); }
+  public function sqlDesdeY() { return $this->sql->dateTime($this->desde, "Y"); }
+  public function sqlHasta() { return $this->sql->dateTime($this->hasta, "Y-m-d"); }
+  public function sqlHastaYm() { return $this->sql->dateTime($this->hasta, "Y-m"); }
+  public function sqlHastaY() { return $this->sql->dateTime($this->hasta, "Y"); }
+  public function sqlAlta() { return $this->sql->dateTime($this->alta, "Y-m-d H:i:s"); }
+  public function sqlAltaDate() { return $this->sql->dateTime($this->alta, "Y-m-d"); }
+  public function sqlAltaYm() { return $this->sql->dateTime($this->alta, "Y-m"); }
+  public function sqlAltaY() { return $this->sql->dateTime($this->alta, "Y"); }
+  public function sqlCargo() { return $this->sql->string($this->cargo); }
+  public function sqlSede() { return $this->sql->string($this->sede); }
+  public function sqlPersona() { return $this->sql->string($this->persona); }
 
   public function jsonId() { return $this->id; }
   public function jsonDesde() { return $this->desde('c'); }

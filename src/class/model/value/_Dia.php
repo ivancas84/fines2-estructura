@@ -51,9 +51,9 @@ class _DiaValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
-    public function sqlId() { return $this->_sqlString($this->id); }
-  public function sqlNumero() { return $this->_sqlNumber($this->numero); }
-  public function sqlDia() { return $this->_sqlString($this->dia); }
+    public function sqlId() { return $this->sql->string($this->id); }
+  public function sqlNumero() { return $this->sql->Number($this->numero); }
+  public function sqlDia() { return $this->sql->string($this->dia); }
 
   public function jsonId() { return $this->id; }
   public function jsonNumero() { return $this->numero; }

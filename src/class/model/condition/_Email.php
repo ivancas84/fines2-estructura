@@ -5,8 +5,8 @@ class _EmailCondition extends ConditionEntityOptions{
 
   public function id($option, $value) { 
     $field = $this->mapping->id();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approx($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approx($field, $option, $value)) return $c;
     $this->value->setId($value);
     if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id");
     return "({$field} {$option} {$this->value->sqlId()})";  
@@ -18,8 +18,8 @@ class _EmailCondition extends ConditionEntityOptions{
 
   public function email($option, $value) { 
     $field = $this->mapping->email();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approx($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approx($field, $option, $value)) return $c;
     $this->value->setEmail($value);
     if(!$this->value->checkEmail()) throw new Exception("Valor incorrecto: Email");
     return "({$field} {$option} {$this->value->sqlEmail()})";  
@@ -31,7 +31,7 @@ class _EmailCondition extends ConditionEntityOptions{
 
   public function verificado($option, $value) { 
     $field = $this->mapping->verificado();
-    if($c = $this->_exists($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
     $this->value->setVerificado($value);
     if(!$this->value->checkVerificado()) throw new Exception("Valor incorrecto: Verificado ");
     return "({$field} {$option} {$this->value->sqlVerificado()})";  
@@ -39,8 +39,8 @@ class _EmailCondition extends ConditionEntityOptions{
   
   public function insertado($option, $value) { 
     $field = $this->mapping->insertado();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setInsertado($value);
     if(!$this->value->checkInsertado()) throw new Exception("Valor incorrecto: Insertado ");
     return "({$field} {$option} {$this->value->sqlInsertado()})";  
@@ -48,8 +48,8 @@ class _EmailCondition extends ConditionEntityOptions{
 
   public function insertadoDate($option, $value) { 
     $field = $this->mapping->insertadoDate();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setInsertado($value);
     if(!$this->value->checkInsertado()) throw new Exception("Valor incorrecto: Insertado Date");
     return "({$field} {$option} {$this->value->sqlInsertadoDate()})";  
@@ -57,8 +57,8 @@ class _EmailCondition extends ConditionEntityOptions{
 
   public function insertadoYm($option, $value) { 
     $field = $this->mapping->insertadoYm();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setInsertado($value);
     if(!$this->value->checkInsertado()) throw new Exception("Valor incorrecto: Insertado Ym");
     return "({$field} {$option} {$this->value->sqlInsertadoYm()})";  
@@ -66,8 +66,8 @@ class _EmailCondition extends ConditionEntityOptions{
 
   public function insertadoY($option, $value) { 
     $field = $this->mapping->insertadoY();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setInsertadoY($value);
     if(!$this->value->checkInsertado()) throw new Exception("Valor incorrecto: Insertado Y");
     return "({$field} {$option} {$this->value->sqlInsertadoY()})";  
@@ -79,8 +79,8 @@ class _EmailCondition extends ConditionEntityOptions{
 
   public function eliminado($option, $value) { 
     $field = $this->mapping->eliminado();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setEliminado($value);
     if(!$this->value->checkEliminado()) throw new Exception("Valor incorrecto: Eliminado ");
     return "({$field} {$option} {$this->value->sqlEliminado()})";  
@@ -88,8 +88,8 @@ class _EmailCondition extends ConditionEntityOptions{
 
   public function eliminadoDate($option, $value) { 
     $field = $this->mapping->eliminadoDate();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setEliminado($value);
     if(!$this->value->checkEliminado()) throw new Exception("Valor incorrecto: Eliminado Date");
     return "({$field} {$option} {$this->value->sqlEliminadoDate()})";  
@@ -97,8 +97,8 @@ class _EmailCondition extends ConditionEntityOptions{
 
   public function eliminadoYm($option, $value) { 
     $field = $this->mapping->eliminadoYm();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setEliminado($value);
     if(!$this->value->checkEliminado()) throw new Exception("Valor incorrecto: Eliminado Ym");
     return "({$field} {$option} {$this->value->sqlEliminadoYm()})";  
@@ -106,8 +106,8 @@ class _EmailCondition extends ConditionEntityOptions{
 
   public function eliminadoY($option, $value) { 
     $field = $this->mapping->eliminadoY();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approxCast($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approxCast($field, $option, $value)) return $c;
     $this->value->setEliminadoY($value);
     if(!$this->value->checkEliminado()) throw new Exception("Valor incorrecto: Eliminado Y");
     return "({$field} {$option} {$this->value->sqlEliminadoY()})";  
@@ -119,8 +119,8 @@ class _EmailCondition extends ConditionEntityOptions{
 
   public function persona($option, $value) { 
     $field = $this->mapping->persona();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approx($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approx($field, $option, $value)) return $c;
     $this->value->setPersona($value);
     if(!$this->value->checkPersona()) throw new Exception("Valor incorrecto: Persona");
     return "({$field} {$option} {$this->value->sqlPersona()})";  

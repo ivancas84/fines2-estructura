@@ -67,10 +67,10 @@ class _CentroEducativoValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
-    public function sqlId() { return $this->_sqlString($this->id); }
-  public function sqlNombre() { return $this->_sqlString($this->nombre); }
-  public function sqlCue() { return $this->_sqlString($this->cue); }
-  public function sqlDomicilio() { return $this->_sqlString($this->domicilio); }
+    public function sqlId() { return $this->sql->string($this->id); }
+  public function sqlNombre() { return $this->sql->string($this->nombre); }
+  public function sqlCue() { return $this->sql->string($this->cue); }
+  public function sqlDomicilio() { return $this->sql->string($this->domicilio); }
 
   public function jsonId() { return $this->id; }
   public function jsonNombre() { return $this->nombre; }

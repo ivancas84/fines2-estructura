@@ -3,8 +3,6 @@
 require_once("class/model/Render.php");
 require_once("class/model/Ma.php");
 
-
-
 class ModelTools {
 
   public static function distribucionesHorarias($planificacion){
@@ -114,7 +112,8 @@ WHERE curso.id IN ('{$idCursos_}')
 GROUP BY curso.id 
   ";
 
-    $result = Ma::open()->query($sql);
+    $container = new Container();
+    $result = $container->getDb()->query($sql);
     $rows = $result->fetch_all(MYSQLI_ASSOC);
     $result->free();
     return $rows;

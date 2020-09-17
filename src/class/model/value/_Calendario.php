@@ -141,19 +141,19 @@ class _CalendarioValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
-    public function sqlId() { return $this->_sqlString($this->id); }
-  public function sqlInicio() { return $this->_sqlDateTime($this->inicio, "Y-m-d"); }
-  public function sqlInicioYm() { return $this->_sqlDateTime($this->inicio, "Y-m"); }
-  public function sqlInicioY() { return $this->_sqlDateTime($this->inicio, "Y"); }
-  public function sqlFin() { return $this->_sqlDateTime($this->fin, "Y-m-d"); }
-  public function sqlFinYm() { return $this->_sqlDateTime($this->fin, "Y-m"); }
-  public function sqlFinY() { return $this->_sqlDateTime($this->fin, "Y"); }
-  public function sqlAnio() { return $this->_sqlDateTime($this->anio, "Y"); }
-  public function sqlSemestre() { return $this->_sqlNumber($this->semestre); }
-  public function sqlInsertado() { return $this->_sqlDateTime($this->insertado, "Y-m-d H:i:s"); }
-  public function sqlInsertadoDate() { return $this->_sqlDateTime($this->insertado, "Y-m-d"); }
-  public function sqlInsertadoYm() { return $this->_sqlDateTime($this->insertado, "Y-m"); }
-  public function sqlInsertadoY() { return $this->_sqlDateTime($this->insertado, "Y"); }
+    public function sqlId() { return $this->sql->string($this->id); }
+  public function sqlInicio() { return $this->sql->dateTime($this->inicio, "Y-m-d"); }
+  public function sqlInicioYm() { return $this->sql->dateTime($this->inicio, "Y-m"); }
+  public function sqlInicioY() { return $this->sql->dateTime($this->inicio, "Y"); }
+  public function sqlFin() { return $this->sql->dateTime($this->fin, "Y-m-d"); }
+  public function sqlFinYm() { return $this->sql->dateTime($this->fin, "Y-m"); }
+  public function sqlFinY() { return $this->sql->dateTime($this->fin, "Y"); }
+  public function sqlAnio() { return $this->sql->dateTime($this->anio, "Y"); }
+  public function sqlSemestre() { return $this->sql->Number($this->semestre); }
+  public function sqlInsertado() { return $this->sql->dateTime($this->insertado, "Y-m-d H:i:s"); }
+  public function sqlInsertadoDate() { return $this->sql->dateTime($this->insertado, "Y-m-d"); }
+  public function sqlInsertadoYm() { return $this->sql->dateTime($this->insertado, "Y-m"); }
+  public function sqlInsertadoY() { return $this->sql->dateTime($this->insertado, "Y"); }
 
   public function jsonId() { return $this->id; }
   public function jsonInicio() { return $this->inicio('c'); }

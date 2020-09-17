@@ -64,12 +64,12 @@ class _PlanillaDocenteValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
-    public function sqlId() { return $this->_sqlString($this->id); }
-  public function sqlNumero() { return $this->_sqlString($this->numero); }
-  public function sqlInsertado() { return $this->_sqlDateTime($this->insertado, "Y-m-d H:i:s"); }
-  public function sqlInsertadoDate() { return $this->_sqlDateTime($this->insertado, "Y-m-d"); }
-  public function sqlInsertadoYm() { return $this->_sqlDateTime($this->insertado, "Y-m"); }
-  public function sqlInsertadoY() { return $this->_sqlDateTime($this->insertado, "Y"); }
+    public function sqlId() { return $this->sql->string($this->id); }
+  public function sqlNumero() { return $this->sql->string($this->numero); }
+  public function sqlInsertado() { return $this->sql->dateTime($this->insertado, "Y-m-d H:i:s"); }
+  public function sqlInsertadoDate() { return $this->sql->dateTime($this->insertado, "Y-m-d"); }
+  public function sqlInsertadoYm() { return $this->sql->dateTime($this->insertado, "Y-m"); }
+  public function sqlInsertadoY() { return $this->sql->dateTime($this->insertado, "Y"); }
 
   public function jsonId() { return $this->id; }
   public function jsonNumero() { return $this->numero; }

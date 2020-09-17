@@ -90,13 +90,13 @@ class _HorarioValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
-    public function sqlId() { return $this->_sqlString($this->id); }
-  public function sqlHoraInicio() { return $this->_sqlDateTime($this->horaInicio, "H:i:s"); }
-  public function sqlHoraInicioHm() { return $this->_sqlDateTime($this->horaInicio, "H:i"); }
-  public function sqlHoraFin() { return $this->_sqlDateTime($this->horaFin, "H:i:s"); }
-  public function sqlHoraFinHm() { return $this->_sqlDateTime($this->horaFin, "H:i"); }
-  public function sqlCurso() { return $this->_sqlString($this->curso); }
-  public function sqlDia() { return $this->_sqlString($this->dia); }
+    public function sqlId() { return $this->sql->string($this->id); }
+  public function sqlHoraInicio() { return $this->sql->dateTime($this->horaInicio, "H:i:s"); }
+  public function sqlHoraInicioHm() { return $this->sql->dateTime($this->horaInicio, "H:i"); }
+  public function sqlHoraFin() { return $this->sql->dateTime($this->horaFin, "H:i:s"); }
+  public function sqlHoraFinHm() { return $this->sql->dateTime($this->horaFin, "H:i"); }
+  public function sqlCurso() { return $this->sql->string($this->curso); }
+  public function sqlDia() { return $this->sql->string($this->dia); }
 
   public function jsonId() { return $this->id; }
   public function jsonHoraInicio() { return $this->horaInicio('c'); }

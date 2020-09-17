@@ -68,10 +68,10 @@ class _PlanValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
-    public function sqlId() { return $this->_sqlString($this->id); }
-  public function sqlOrientacion() { return $this->_sqlString($this->orientacion); }
-  public function sqlResolucion() { return $this->_sqlString($this->resolucion); }
-  public function sqlDistribucionHoraria() { return $this->_sqlString($this->distribucionHoraria); }
+    public function sqlId() { return $this->sql->string($this->id); }
+  public function sqlOrientacion() { return $this->sql->string($this->orientacion); }
+  public function sqlResolucion() { return $this->sql->string($this->resolucion); }
+  public function sqlDistribucionHoraria() { return $this->sql->string($this->distribucionHoraria); }
 
   public function jsonId() { return $this->id; }
   public function jsonOrientacion() { return $this->orientacion; }

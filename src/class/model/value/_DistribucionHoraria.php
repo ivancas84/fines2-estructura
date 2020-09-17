@@ -80,11 +80,11 @@ class _DistribucionHorariaValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
-    public function sqlId() { return $this->_sqlString($this->id); }
-  public function sqlHorasCatedra() { return $this->_sqlNumber($this->horasCatedra); }
-  public function sqlDia() { return $this->_sqlNumber($this->dia); }
-  public function sqlAsignatura() { return $this->_sqlString($this->asignatura); }
-  public function sqlPlanificacion() { return $this->_sqlString($this->planificacion); }
+    public function sqlId() { return $this->sql->string($this->id); }
+  public function sqlHorasCatedra() { return $this->sql->Number($this->horasCatedra); }
+  public function sqlDia() { return $this->sql->Number($this->dia); }
+  public function sqlAsignatura() { return $this->sql->string($this->asignatura); }
+  public function sqlPlanificacion() { return $this->sql->string($this->planificacion); }
 
   public function jsonId() { return $this->id; }
   public function jsonHorasCatedra() { return $this->horasCatedra; }

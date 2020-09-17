@@ -122,18 +122,18 @@ class _EmailValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
-    public function sqlId() { return $this->_sqlString($this->id); }
-  public function sqlEmail() { return $this->_sqlString($this->email); }
-  public function sqlVerificado() { return $this->_sqlBoolean($this->verificado); }
-  public function sqlInsertado() { return $this->_sqlDateTime($this->insertado, "Y-m-d H:i:s"); }
-  public function sqlInsertadoDate() { return $this->_sqlDateTime($this->insertado, "Y-m-d"); }
-  public function sqlInsertadoYm() { return $this->_sqlDateTime($this->insertado, "Y-m"); }
-  public function sqlInsertadoY() { return $this->_sqlDateTime($this->insertado, "Y"); }
-  public function sqlEliminado() { return $this->_sqlDateTime($this->eliminado, "Y-m-d H:i:s"); }
-  public function sqlEliminadoDate() { return $this->_sqlDateTime($this->eliminado, "Y-m-d"); }
-  public function sqlEliminadoYm() { return $this->_sqlDateTime($this->eliminado, "Y-m"); }
-  public function sqlEliminadoY() { return $this->_sqlDateTime($this->eliminado, "Y"); }
-  public function sqlPersona() { return $this->_sqlString($this->persona); }
+    public function sqlId() { return $this->sql->string($this->id); }
+  public function sqlEmail() { return $this->sql->string($this->email); }
+  public function sqlVerificado() { return $this->sql->boolean($this->verificado); }
+  public function sqlInsertado() { return $this->sql->dateTime($this->insertado, "Y-m-d H:i:s"); }
+  public function sqlInsertadoDate() { return $this->sql->dateTime($this->insertado, "Y-m-d"); }
+  public function sqlInsertadoYm() { return $this->sql->dateTime($this->insertado, "Y-m"); }
+  public function sqlInsertadoY() { return $this->sql->dateTime($this->insertado, "Y"); }
+  public function sqlEliminado() { return $this->sql->dateTime($this->eliminado, "Y-m-d H:i:s"); }
+  public function sqlEliminadoDate() { return $this->sql->dateTime($this->eliminado, "Y-m-d"); }
+  public function sqlEliminadoYm() { return $this->sql->dateTime($this->eliminado, "Y-m"); }
+  public function sqlEliminadoY() { return $this->sql->dateTime($this->eliminado, "Y"); }
+  public function sqlPersona() { return $this->sql->string($this->persona); }
 
   public function jsonId() { return $this->id; }
   public function jsonEmail() { return $this->email; }

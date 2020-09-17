@@ -111,15 +111,15 @@ class _FileValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
-    public function sqlId() { return $this->_sqlString($this->id); }
-  public function sqlName() { return $this->_sqlString($this->name); }
-  public function sqlType() { return $this->_sqlString($this->type); }
-  public function sqlContent() { return $this->_sqlString($this->content); }
-  public function sqlSize() { return $this->_sqlNumber($this->size); }
-  public function sqlCreated() { return $this->_sqlDateTime($this->created, "Y-m-d H:i:s"); }
-  public function sqlCreatedDate() { return $this->_sqlDateTime($this->created, "Y-m-d"); }
-  public function sqlCreatedYm() { return $this->_sqlDateTime($this->created, "Y-m"); }
-  public function sqlCreatedY() { return $this->_sqlDateTime($this->created, "Y"); }
+    public function sqlId() { return $this->sql->string($this->id); }
+  public function sqlName() { return $this->sql->string($this->name); }
+  public function sqlType() { return $this->sql->string($this->type); }
+  public function sqlContent() { return $this->sql->string($this->content); }
+  public function sqlSize() { return $this->sql->Number($this->size); }
+  public function sqlCreated() { return $this->sql->dateTime($this->created, "Y-m-d H:i:s"); }
+  public function sqlCreatedDate() { return $this->sql->dateTime($this->created, "Y-m-d"); }
+  public function sqlCreatedYm() { return $this->sql->dateTime($this->created, "Y-m"); }
+  public function sqlCreatedY() { return $this->sql->dateTime($this->created, "Y"); }
 
   public function jsonId() { return $this->id; }
   public function jsonName() { return $this->name; }

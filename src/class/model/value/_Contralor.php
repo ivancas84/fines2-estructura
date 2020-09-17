@@ -119,18 +119,18 @@ class _ContralorValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
-    public function sqlId() { return $this->_sqlString($this->id); }
-  public function sqlFechaContralor() { return $this->_sqlDateTime($this->fechaContralor, "Y-m-d"); }
-  public function sqlFechaContralorYm() { return $this->_sqlDateTime($this->fechaContralor, "Y-m"); }
-  public function sqlFechaContralorY() { return $this->_sqlDateTime($this->fechaContralor, "Y"); }
-  public function sqlFechaConsejo() { return $this->_sqlDateTime($this->fechaConsejo, "Y-m-d"); }
-  public function sqlFechaConsejoYm() { return $this->_sqlDateTime($this->fechaConsejo, "Y-m"); }
-  public function sqlFechaConsejoY() { return $this->_sqlDateTime($this->fechaConsejo, "Y"); }
-  public function sqlInsertado() { return $this->_sqlDateTime($this->insertado, "Y-m-d H:i:s"); }
-  public function sqlInsertadoDate() { return $this->_sqlDateTime($this->insertado, "Y-m-d"); }
-  public function sqlInsertadoYm() { return $this->_sqlDateTime($this->insertado, "Y-m"); }
-  public function sqlInsertadoY() { return $this->_sqlDateTime($this->insertado, "Y"); }
-  public function sqlPlanillaDocente() { return $this->_sqlString($this->planillaDocente); }
+    public function sqlId() { return $this->sql->string($this->id); }
+  public function sqlFechaContralor() { return $this->sql->dateTime($this->fechaContralor, "Y-m-d"); }
+  public function sqlFechaContralorYm() { return $this->sql->dateTime($this->fechaContralor, "Y-m"); }
+  public function sqlFechaContralorY() { return $this->sql->dateTime($this->fechaContralor, "Y"); }
+  public function sqlFechaConsejo() { return $this->sql->dateTime($this->fechaConsejo, "Y-m-d"); }
+  public function sqlFechaConsejoYm() { return $this->sql->dateTime($this->fechaConsejo, "Y-m"); }
+  public function sqlFechaConsejoY() { return $this->sql->dateTime($this->fechaConsejo, "Y"); }
+  public function sqlInsertado() { return $this->sql->dateTime($this->insertado, "Y-m-d H:i:s"); }
+  public function sqlInsertadoDate() { return $this->sql->dateTime($this->insertado, "Y-m-d"); }
+  public function sqlInsertadoYm() { return $this->sql->dateTime($this->insertado, "Y-m"); }
+  public function sqlInsertadoY() { return $this->sql->dateTime($this->insertado, "Y"); }
+  public function sqlPlanillaDocente() { return $this->sql->string($this->planillaDocente); }
 
   public function jsonId() { return $this->id; }
   public function jsonFechaContralor() { return $this->fechaContralor('c'); }

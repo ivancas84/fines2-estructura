@@ -232,23 +232,23 @@ class _ComisionValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
-    public function sqlId() { return $this->_sqlString($this->id); }
-  public function sqlTurno() { return $this->_sqlString($this->turno); }
-  public function sqlDivision() { return $this->_sqlString($this->division); }
-  public function sqlComentario() { return $this->_sqlString($this->comentario); }
-  public function sqlAutorizada() { return $this->_sqlBoolean($this->autorizada); }
-  public function sqlApertura() { return $this->_sqlBoolean($this->apertura); }
-  public function sqlPublicada() { return $this->_sqlBoolean($this->publicada); }
-  public function sqlObservaciones() { return $this->_sqlString($this->observaciones); }
-  public function sqlAlta() { return $this->_sqlDateTime($this->alta, "Y-m-d H:i:s"); }
-  public function sqlAltaDate() { return $this->_sqlDateTime($this->alta, "Y-m-d"); }
-  public function sqlAltaYm() { return $this->_sqlDateTime($this->alta, "Y-m"); }
-  public function sqlAltaY() { return $this->_sqlDateTime($this->alta, "Y"); }
-  public function sqlSede() { return $this->_sqlString($this->sede); }
-  public function sqlModalidad() { return $this->_sqlString($this->modalidad); }
-  public function sqlPlanificacion() { return $this->_sqlString($this->planificacion); }
-  public function sqlComisionSiguiente() { return $this->_sqlString($this->comisionSiguiente); }
-  public function sqlCalendario() { return $this->_sqlString($this->calendario); }
+    public function sqlId() { return $this->sql->string($this->id); }
+  public function sqlTurno() { return $this->sql->string($this->turno); }
+  public function sqlDivision() { return $this->sql->string($this->division); }
+  public function sqlComentario() { return $this->sql->string($this->comentario); }
+  public function sqlAutorizada() { return $this->sql->boolean($this->autorizada); }
+  public function sqlApertura() { return $this->sql->boolean($this->apertura); }
+  public function sqlPublicada() { return $this->sql->boolean($this->publicada); }
+  public function sqlObservaciones() { return $this->sql->string($this->observaciones); }
+  public function sqlAlta() { return $this->sql->dateTime($this->alta, "Y-m-d H:i:s"); }
+  public function sqlAltaDate() { return $this->sql->dateTime($this->alta, "Y-m-d"); }
+  public function sqlAltaYm() { return $this->sql->dateTime($this->alta, "Y-m"); }
+  public function sqlAltaY() { return $this->sql->dateTime($this->alta, "Y"); }
+  public function sqlSede() { return $this->sql->string($this->sede); }
+  public function sqlModalidad() { return $this->sql->string($this->modalidad); }
+  public function sqlPlanificacion() { return $this->sql->string($this->planificacion); }
+  public function sqlComisionSiguiente() { return $this->sql->string($this->comisionSiguiente); }
+  public function sqlCalendario() { return $this->sql->string($this->calendario); }
 
   public function jsonId() { return $this->id; }
   public function jsonTurno() { return $this->turno; }

@@ -5,8 +5,8 @@ class _PlanificacionCondition extends ConditionEntityOptions{
 
   public function id($option, $value) { 
     $field = $this->mapping->id();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approx($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approx($field, $option, $value)) return $c;
     $this->value->setId($value);
     if(!$this->value->checkId()) throw new Exception("Valor incorrecto: Id");
     return "({$field} {$option} {$this->value->sqlId()})";  
@@ -18,8 +18,8 @@ class _PlanificacionCondition extends ConditionEntityOptions{
 
   public function anio($option, $value) { 
     $field = $this->mapping->anio();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approx($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approx($field, $option, $value)) return $c;
     $this->value->setAnio($value);
     if(!$this->value->checkAnio()) throw new Exception("Valor incorrecto: Anio");
     return "({$field} {$option} {$this->value->sqlAnio()})";  
@@ -31,8 +31,8 @@ class _PlanificacionCondition extends ConditionEntityOptions{
 
   public function semestre($option, $value) { 
     $field = $this->mapping->semestre();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approx($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approx($field, $option, $value)) return $c;
     $this->value->setSemestre($value);
     if(!$this->value->checkSemestre()) throw new Exception("Valor incorrecto: Semestre");
     return "({$field} {$option} {$this->value->sqlSemestre()})";  
@@ -44,8 +44,8 @@ class _PlanificacionCondition extends ConditionEntityOptions{
 
   public function plan($option, $value) { 
     $field = $this->mapping->plan();
-    if($c = $this->_exists($field, $option, $value)) return $c;
-    if($c = $this->_approx($field, $option, $value)) return $c;
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approx($field, $option, $value)) return $c;
     $this->value->setPlan($value);
     if(!$this->value->checkPlan()) throw new Exception("Valor incorrecto: Plan");
     return "({$field} {$option} {$this->value->sqlPlan()})";  

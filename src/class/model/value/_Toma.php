@@ -216,23 +216,23 @@ class _TomaValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
-    public function sqlId() { return $this->_sqlString($this->id); }
-  public function sqlFechaToma() { return $this->_sqlDateTime($this->fechaToma, "Y-m-d"); }
-  public function sqlFechaTomaYm() { return $this->_sqlDateTime($this->fechaToma, "Y-m"); }
-  public function sqlFechaTomaY() { return $this->_sqlDateTime($this->fechaToma, "Y"); }
-  public function sqlEstado() { return $this->_sqlString($this->estado); }
-  public function sqlObservaciones() { return $this->_sqlString($this->observaciones); }
-  public function sqlComentario() { return $this->_sqlString($this->comentario); }
-  public function sqlTipoMovimiento() { return $this->_sqlString($this->tipoMovimiento); }
-  public function sqlEstadoContralor() { return $this->_sqlString($this->estadoContralor); }
-  public function sqlAlta() { return $this->_sqlDateTime($this->alta, "Y-m-d H:i:s"); }
-  public function sqlAltaDate() { return $this->_sqlDateTime($this->alta, "Y-m-d"); }
-  public function sqlAltaYm() { return $this->_sqlDateTime($this->alta, "Y-m"); }
-  public function sqlAltaY() { return $this->_sqlDateTime($this->alta, "Y"); }
-  public function sqlCurso() { return $this->_sqlString($this->curso); }
-  public function sqlDocente() { return $this->_sqlString($this->docente); }
-  public function sqlReemplazo() { return $this->_sqlString($this->reemplazo); }
-  public function sqlPlanillaDocente() { return $this->_sqlString($this->planillaDocente); }
+    public function sqlId() { return $this->sql->string($this->id); }
+  public function sqlFechaToma() { return $this->sql->dateTime($this->fechaToma, "Y-m-d"); }
+  public function sqlFechaTomaYm() { return $this->sql->dateTime($this->fechaToma, "Y-m"); }
+  public function sqlFechaTomaY() { return $this->sql->dateTime($this->fechaToma, "Y"); }
+  public function sqlEstado() { return $this->sql->string($this->estado); }
+  public function sqlObservaciones() { return $this->sql->string($this->observaciones); }
+  public function sqlComentario() { return $this->sql->string($this->comentario); }
+  public function sqlTipoMovimiento() { return $this->sql->string($this->tipoMovimiento); }
+  public function sqlEstadoContralor() { return $this->sql->string($this->estadoContralor); }
+  public function sqlAlta() { return $this->sql->dateTime($this->alta, "Y-m-d H:i:s"); }
+  public function sqlAltaDate() { return $this->sql->dateTime($this->alta, "Y-m-d"); }
+  public function sqlAltaYm() { return $this->sql->dateTime($this->alta, "Y-m"); }
+  public function sqlAltaY() { return $this->sql->dateTime($this->alta, "Y"); }
+  public function sqlCurso() { return $this->sql->string($this->curso); }
+  public function sqlDocente() { return $this->sql->string($this->docente); }
+  public function sqlReemplazo() { return $this->sql->string($this->reemplazo); }
+  public function sqlPlanillaDocente() { return $this->sql->string($this->planillaDocente); }
 
   public function jsonId() { return $this->id; }
   public function jsonFechaToma() { return $this->fechaToma('c'); }

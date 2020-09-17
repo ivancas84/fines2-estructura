@@ -219,23 +219,23 @@ class _PersonaValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
-    public function sqlId() { return $this->_sqlString($this->id); }
-  public function sqlNombres() { return $this->_sqlString($this->nombres); }
-  public function sqlApellidos() { return $this->_sqlString($this->apellidos); }
-  public function sqlFechaNacimiento() { return $this->_sqlDateTime($this->fechaNacimiento, "Y-m-d"); }
-  public function sqlFechaNacimientoYm() { return $this->_sqlDateTime($this->fechaNacimiento, "Y-m"); }
-  public function sqlFechaNacimientoY() { return $this->_sqlDateTime($this->fechaNacimiento, "Y"); }
-  public function sqlNumeroDocumento() { return $this->_sqlString($this->numeroDocumento); }
-  public function sqlCuil() { return $this->_sqlString($this->cuil); }
-  public function sqlGenero() { return $this->_sqlString($this->genero); }
-  public function sqlApodo() { return $this->_sqlString($this->apodo); }
-  public function sqlTelefono() { return $this->_sqlString($this->telefono); }
-  public function sqlEmail() { return $this->_sqlString($this->email); }
-  public function sqlAlta() { return $this->_sqlDateTime($this->alta, "Y-m-d H:i:s"); }
-  public function sqlAltaDate() { return $this->_sqlDateTime($this->alta, "Y-m-d"); }
-  public function sqlAltaYm() { return $this->_sqlDateTime($this->alta, "Y-m"); }
-  public function sqlAltaY() { return $this->_sqlDateTime($this->alta, "Y"); }
-  public function sqlDomicilio() { return $this->_sqlString($this->domicilio); }
+    public function sqlId() { return $this->sql->string($this->id); }
+  public function sqlNombres() { return $this->sql->string($this->nombres); }
+  public function sqlApellidos() { return $this->sql->string($this->apellidos); }
+  public function sqlFechaNacimiento() { return $this->sql->dateTime($this->fechaNacimiento, "Y-m-d"); }
+  public function sqlFechaNacimientoYm() { return $this->sql->dateTime($this->fechaNacimiento, "Y-m"); }
+  public function sqlFechaNacimientoY() { return $this->sql->dateTime($this->fechaNacimiento, "Y"); }
+  public function sqlNumeroDocumento() { return $this->sql->string($this->numeroDocumento); }
+  public function sqlCuil() { return $this->sql->string($this->cuil); }
+  public function sqlGenero() { return $this->sql->string($this->genero); }
+  public function sqlApodo() { return $this->sql->string($this->apodo); }
+  public function sqlTelefono() { return $this->sql->string($this->telefono); }
+  public function sqlEmail() { return $this->sql->string($this->email); }
+  public function sqlAlta() { return $this->sql->dateTime($this->alta, "Y-m-d H:i:s"); }
+  public function sqlAltaDate() { return $this->sql->dateTime($this->alta, "Y-m-d"); }
+  public function sqlAltaYm() { return $this->sql->dateTime($this->alta, "Y-m"); }
+  public function sqlAltaY() { return $this->sql->dateTime($this->alta, "Y"); }
+  public function sqlDomicilio() { return $this->sql->string($this->domicilio); }
 
   public function jsonId() { return $this->id; }
   public function jsonNombres() { return $this->nombres; }

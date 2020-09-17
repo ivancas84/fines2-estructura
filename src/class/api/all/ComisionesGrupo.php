@@ -5,18 +5,14 @@ require_once("class/api/All.php");
 require_once("class/model/Ma.php");
 require_once("class/model/Values.php");
 
-
 //@todo
 require_once("class/controller/persist/ComisionCursos.php");
-
-
 
 class ComisionesGrupoAllApi extends AllApi {
   /**
    * Persistencia de cursos y comisiones
    */
   protected $entityName = "comisiones_grupo";
-
 
   public function main($data){
     /**

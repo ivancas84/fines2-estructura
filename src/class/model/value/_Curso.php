@@ -93,14 +93,14 @@ class _CursoValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
-    public function sqlId() { return $this->_sqlString($this->id); }
-  public function sqlHorasCatedra() { return $this->_sqlNumber($this->horasCatedra); }
-  public function sqlAlta() { return $this->_sqlDateTime($this->alta, "Y-m-d H:i:s"); }
-  public function sqlAltaDate() { return $this->_sqlDateTime($this->alta, "Y-m-d"); }
-  public function sqlAltaYm() { return $this->_sqlDateTime($this->alta, "Y-m"); }
-  public function sqlAltaY() { return $this->_sqlDateTime($this->alta, "Y"); }
-  public function sqlComision() { return $this->_sqlString($this->comision); }
-  public function sqlAsignatura() { return $this->_sqlString($this->asignatura); }
+    public function sqlId() { return $this->sql->string($this->id); }
+  public function sqlHorasCatedra() { return $this->sql->Number($this->horasCatedra); }
+  public function sqlAlta() { return $this->sql->dateTime($this->alta, "Y-m-d H:i:s"); }
+  public function sqlAltaDate() { return $this->sql->dateTime($this->alta, "Y-m-d"); }
+  public function sqlAltaYm() { return $this->sql->dateTime($this->alta, "Y-m"); }
+  public function sqlAltaY() { return $this->sql->dateTime($this->alta, "Y"); }
+  public function sqlComision() { return $this->sql->string($this->comision); }
+  public function sqlAsignatura() { return $this->sql->string($this->asignatura); }
 
   public function jsonId() { return $this->id; }
   public function jsonHorasCatedra() { return $this->horasCatedra; }
