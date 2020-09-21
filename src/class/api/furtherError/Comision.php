@@ -5,6 +5,9 @@ require_once("class/api/FurtherError.php");
 class ComisionFurtherErrorApi extends FurtherErrorApi {
 
   public function main(){
+    /**
+     * @todo Falta verificar que, por ejemplo, si voy a cargar una comision de 1/2 que la de 1/1 sea la misma modalidad y plan
+     */
     $data = Filter::jsonPostRequired();
     if(empty($data)) return ["empty" => true];
 
