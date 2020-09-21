@@ -26,24 +26,24 @@ class _TomaSql extends EntitySql{
   }
 
   public function fields(){
-    return $this->container->getFieldAlias($this->entity->getName())->_callConcat() . ',
-' . $this->container->getFieldAlias('curso', 'cur')->_callConcat() . ',
-' . $this->container->getFieldAlias('comision', 'cur_com')->_callConcat() . ',
-' . $this->container->getFieldAlias('sede', 'cur_com_sed')->_callConcat() . ',
-' . $this->container->getFieldAlias('domicilio', 'cur_com_sed_dom')->_callConcat() . ',
-' . $this->container->getFieldAlias('tipo_sede', 'cur_com_sed_ts')->_callConcat() . ',
-' . $this->container->getFieldAlias('centro_educativo', 'cur_com_sed_ce')->_callConcat() . ',
-' . $this->container->getFieldAlias('domicilio', 'cur_com_sed_ce_dom')->_callConcat() . ',
-' . $this->container->getFieldAlias('modalidad', 'cur_com_moa')->_callConcat() . ',
-' . $this->container->getFieldAlias('planificacion', 'cur_com_pla')->_callConcat() . ',
-' . $this->container->getFieldAlias('plan', 'cur_com_pla_plb')->_callConcat() . ',
-' . $this->container->getFieldAlias('calendario', 'cur_com_cal')->_callConcat() . ',
-' . $this->container->getFieldAlias('asignatura', 'cur_asi')->_callConcat() . ',
-' . $this->container->getFieldAlias('persona', 'doc')->_callConcat() . ',
-' . $this->container->getFieldAlias('domicilio', 'doc_dom')->_callConcat() . ',
-' . $this->container->getFieldAlias('persona', 'ree')->_callConcat() . ',
-' . $this->container->getFieldAlias('domicilio', 'ree_dom')->_callConcat() . ',
-' . $this->container->getFieldAlias('planilla_docente', 'pd')->_callConcat() . ' 
+    return implode(",", $this->container->getFieldAlias($this->entity->getName())->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('curso', 'cur')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('comision', 'cur_com')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('sede', 'cur_com_sed')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('domicilio', 'cur_com_sed_dom')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('tipo_sede', 'cur_com_sed_ts')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('centro_educativo', 'cur_com_sed_ce')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('domicilio', 'cur_com_sed_ce_dom')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('modalidad', 'cur_com_moa')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('planificacion', 'cur_com_pla')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('plan', 'cur_com_pla_plb')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('calendario', 'cur_com_cal')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('asignatura', 'cur_asi')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('persona', 'doc')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('domicilio', 'doc_dom')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('persona', 'ree')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('domicilio', 'ree_dom')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('planilla_docente', 'pd')->_toArray()) . ' 
 ';
   }
 

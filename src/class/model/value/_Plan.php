@@ -35,6 +35,7 @@ class _PlanValue extends ValueEntityOptions{
   public function _setDistribucionHoraria(string $p = null) { return $this->distribucionHoraria = $p; }  
   public function setDistribucionHoraria($p) { return $this->distribucionHoraria = (is_null($p)) ? null : (string)$p; }
 
+  public function resetId() { if(!Validation::is_empty($this->id)) $this->id = preg_replace('/\s\s+/', ' ', trim($this->id)); }
   public function resetOrientacion() { if(!Validation::is_empty($this->orientacion)) $this->orientacion = preg_replace('/\s\s+/', ' ', trim($this->orientacion)); }
   public function resetResolucion() { if(!Validation::is_empty($this->resolucion)) $this->resolucion = preg_replace('/\s\s+/', ' ', trim($this->resolucion)); }
   public function resetDistribucionHoraria() { if(!Validation::is_empty($this->distribucionHoraria)) $this->distribucionHoraria = preg_replace('/\s\s+/', ' ', trim($this->distribucionHoraria)); }

@@ -117,11 +117,16 @@ class _TomaValue extends ValueEntityOptions{
   public function _setPlanillaDocente(string $p = null) { return $this->planillaDocente = $p; }  
   public function setPlanillaDocente($p) { return $this->planillaDocente = (is_null($p)) ? null : (string)$p; }
 
+  public function resetId() { if(!Validation::is_empty($this->id)) $this->id = preg_replace('/\s\s+/', ' ', trim($this->id)); }
   public function resetEstado() { if(!Validation::is_empty($this->estado)) $this->estado = preg_replace('/\s\s+/', ' ', trim($this->estado)); }
   public function resetObservaciones() { if(!Validation::is_empty($this->observaciones)) $this->observaciones = preg_replace('/\s\s+/', ' ', trim($this->observaciones)); }
   public function resetComentario() { if(!Validation::is_empty($this->comentario)) $this->comentario = preg_replace('/\s\s+/', ' ', trim($this->comentario)); }
   public function resetTipoMovimiento() { if(!Validation::is_empty($this->tipoMovimiento)) $this->tipoMovimiento = preg_replace('/\s\s+/', ' ', trim($this->tipoMovimiento)); }
   public function resetEstadoContralor() { if(!Validation::is_empty($this->estadoContralor)) $this->estadoContralor = preg_replace('/\s\s+/', ' ', trim($this->estadoContralor)); }
+  public function resetCurso() { if(!Validation::is_empty($this->curso)) $this->curso = preg_replace('/\s\s+/', ' ', trim($this->curso)); }
+  public function resetDocente() { if(!Validation::is_empty($this->docente)) $this->docente = preg_replace('/\s\s+/', ' ', trim($this->docente)); }
+  public function resetReemplazo() { if(!Validation::is_empty($this->reemplazo)) $this->reemplazo = preg_replace('/\s\s+/', ' ', trim($this->reemplazo)); }
+  public function resetPlanillaDocente() { if(!Validation::is_empty($this->planillaDocente)) $this->planillaDocente = preg_replace('/\s\s+/', ' ', trim($this->planillaDocente)); }
 
   public function checkId() { 
       if(Validation::is_undefined($this->id)) return null;

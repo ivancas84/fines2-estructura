@@ -21,6 +21,7 @@ class _ModalidadValue extends ValueEntityOptions{
   public function _setNombre(string $p = null) { return $this->nombre = $p; }  
   public function setNombre($p) { return $this->nombre = (is_null($p)) ? null : (string)$p; }
 
+  public function resetId() { if(!Validation::is_empty($this->id)) $this->id = preg_replace('/\s\s+/', ' ', trim($this->id)); }
   public function resetNombre() { if(!Validation::is_empty($this->nombre)) $this->nombre = preg_replace('/\s\s+/', ' ', trim($this->nombre)); }
 
   public function checkId() { 

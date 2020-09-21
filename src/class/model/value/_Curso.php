@@ -55,6 +55,9 @@ class _CursoValue extends ValueEntityOptions{
   public function _setAsignatura(string $p = null) { return $this->asignatura = $p; }  
   public function setAsignatura($p) { return $this->asignatura = (is_null($p)) ? null : (string)$p; }
 
+  public function resetId() { if(!Validation::is_empty($this->id)) $this->id = preg_replace('/\s\s+/', ' ', trim($this->id)); }
+  public function resetComision() { if(!Validation::is_empty($this->comision)) $this->comision = preg_replace('/\s\s+/', ' ', trim($this->comision)); }
+  public function resetAsignatura() { if(!Validation::is_empty($this->asignatura)) $this->asignatura = preg_replace('/\s\s+/', ' ', trim($this->asignatura)); }
 
   public function checkId() { 
       if(Validation::is_undefined($this->id)) return null;

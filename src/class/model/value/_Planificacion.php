@@ -35,8 +35,10 @@ class _PlanificacionValue extends ValueEntityOptions{
   public function _setPlan(string $p = null) { return $this->plan = $p; }  
   public function setPlan($p) { return $this->plan = (is_null($p)) ? null : (string)$p; }
 
+  public function resetId() { if(!Validation::is_empty($this->id)) $this->id = preg_replace('/\s\s+/', ' ', trim($this->id)); }
   public function resetAnio() { if(!Validation::is_empty($this->anio)) $this->anio = preg_replace('/\s\s+/', ' ', trim($this->anio)); }
   public function resetSemestre() { if(!Validation::is_empty($this->semestre)) $this->semestre = preg_replace('/\s\s+/', ' ', trim($this->semestre)); }
+  public function resetPlan() { if(!Validation::is_empty($this->plan)) $this->plan = preg_replace('/\s\s+/', ' ', trim($this->plan)); }
 
   public function checkId() { 
       if(Validation::is_undefined($this->id)) return null;

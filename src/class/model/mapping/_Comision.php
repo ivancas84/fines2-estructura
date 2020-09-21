@@ -15,6 +15,7 @@ class _ComisionMapping extends MappingEntityOptions{
   public function altaDate() { return "CAST({$this->_pt()}.alta AS DATE)"; }
   public function altaYm() { return "DATE_FORMAT({$this->_pt()}.alta, '%Y-%m')"; }
   public function altaY() { return "DATE_FORMAT({$this->_pt()}.alta, '%Y')"; }
+  public function identificacion() { return $this->_pt() . ".identificacion"; }
   public function sede() { return $this->_pt() . ".sede"; }
   public function modalidad() { return $this->_pt() . ".modalidad"; }
   public function planificacion() { return $this->_pt() . ".planificacion"; }
@@ -57,6 +58,10 @@ class _ComisionMapping extends MappingEntityOptions{
   public function minAlta() { return "MIN({$this->_pt()}.alta)"; }
   public function maxAlta() { return "MAX({$this->_pt()}.alta)"; }
   public function countAlta() { return "COUNT({$this->_pt()}.alta)"; }
+
+  public function minIdentificacion() { return "MIN({$this->_pt()}.identificacion)"; }
+  public function maxIdentificacion() { return "MAX({$this->_pt()}.identificacion)"; }
+  public function countIdentificacion() { return "COUNT({$this->_pt()}.identificacion)"; }
 
   public function minSede() { return "MIN({$this->_pt()}.sede)"; }
   public function maxSede() { return "MAX({$this->_pt()}.sede)"; }

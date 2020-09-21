@@ -35,8 +35,10 @@ class _CentroEducativoValue extends ValueEntityOptions{
   public function _setDomicilio(string $p = null) { return $this->domicilio = $p; }  
   public function setDomicilio($p) { return $this->domicilio = (is_null($p)) ? null : (string)$p; }
 
+  public function resetId() { if(!Validation::is_empty($this->id)) $this->id = preg_replace('/\s\s+/', ' ', trim($this->id)); }
   public function resetNombre() { if(!Validation::is_empty($this->nombre)) $this->nombre = preg_replace('/\s\s+/', ' ', trim($this->nombre)); }
   public function resetCue() { if(!Validation::is_empty($this->cue)) $this->cue = preg_replace('/\s\s+/', ' ', trim($this->cue)); }
+  public function resetDomicilio() { if(!Validation::is_empty($this->domicilio)) $this->domicilio = preg_replace('/\s\s+/', ' ', trim($this->domicilio)); }
 
   public function checkId() { 
       if(Validation::is_undefined($this->id)) return null;

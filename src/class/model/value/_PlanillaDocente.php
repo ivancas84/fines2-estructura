@@ -41,6 +41,7 @@ class _PlanillaDocenteValue extends ValueEntityOptions{
     return $this->insertado = $p;
   }
 
+  public function resetId() { if(!Validation::is_empty($this->id)) $this->id = preg_replace('/\s\s+/', ' ', trim($this->id)); }
   public function resetNumero() { if(!Validation::is_empty($this->numero)) $this->numero = preg_replace('/\s\s+/', ' ', trim($this->numero)); }
 
   public function checkId() { 

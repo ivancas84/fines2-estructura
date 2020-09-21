@@ -10,8 +10,8 @@ class _CentroEducativoSql extends EntitySql{
   }
 
   public function fields(){
-    return $this->container->getFieldAlias($this->entity->getName())->_callConcat() . ',
-' . $this->container->getFieldAlias('domicilio', 'dom')->_callConcat() . ' 
+    return implode(",", $this->container->getFieldAlias($this->entity->getName())->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('domicilio', 'dom')->_toArray()) . ' 
 ';
   }
 

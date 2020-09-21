@@ -132,6 +132,19 @@ class _ComisionCondition extends ConditionEntityOptions{
     return $this->_exists($this->mapping->alta(), $option, settypebool($value));
   }
 
+  public function identificacion($option, $value) { 
+    $field = $this->mapping->identificacion();
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approx($field, $option, $value)) return $c;
+    $this->value->setIdentificacion($value);
+    if(!$this->value->checkIdentificacion()) throw new Exception("Valor incorrecto: Identificacion");
+    return "({$field} {$option} {$this->value->sqlIdentificacion()})";  
+  }
+
+  public function identificacionIsSet($option, $value) { 
+    return $this->_exists($this->mapping->identificacion(), $option, settypebool($value));
+  }
+
   public function sede($option, $value) { 
     $field = $this->mapping->sede();
     if($c = $this->sql->exists($field, $option, $value)) return $c;

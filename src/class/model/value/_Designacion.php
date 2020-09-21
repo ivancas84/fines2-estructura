@@ -95,6 +95,10 @@ class _DesignacionValue extends ValueEntityOptions{
   public function _setPersona(string $p = null) { return $this->persona = $p; }  
   public function setPersona($p) { return $this->persona = (is_null($p)) ? null : (string)$p; }
 
+  public function resetId() { if(!Validation::is_empty($this->id)) $this->id = preg_replace('/\s\s+/', ' ', trim($this->id)); }
+  public function resetCargo() { if(!Validation::is_empty($this->cargo)) $this->cargo = preg_replace('/\s\s+/', ' ', trim($this->cargo)); }
+  public function resetSede() { if(!Validation::is_empty($this->sede)) $this->sede = preg_replace('/\s\s+/', ' ', trim($this->sede)); }
+  public function resetPersona() { if(!Validation::is_empty($this->persona)) $this->persona = preg_replace('/\s\s+/', ' ', trim($this->persona)); }
 
   public function checkId() { 
       if(Validation::is_undefined($this->id)) return null;

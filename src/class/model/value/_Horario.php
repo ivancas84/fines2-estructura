@@ -52,6 +52,9 @@ class _HorarioValue extends ValueEntityOptions{
   public function _setDia(string $p = null) { return $this->dia = $p; }  
   public function setDia($p) { return $this->dia = (is_null($p)) ? null : (string)$p; }
 
+  public function resetId() { if(!Validation::is_empty($this->id)) $this->id = preg_replace('/\s\s+/', ' ', trim($this->id)); }
+  public function resetCurso() { if(!Validation::is_empty($this->curso)) $this->curso = preg_replace('/\s\s+/', ' ', trim($this->curso)); }
+  public function resetDia() { if(!Validation::is_empty($this->dia)) $this->dia = preg_replace('/\s\s+/', ' ', trim($this->dia)); }
 
   public function checkId() { 
       if(Validation::is_undefined($this->id)) return null;

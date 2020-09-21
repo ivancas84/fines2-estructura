@@ -12,6 +12,7 @@ class _ComisionValue extends ValueEntityOptions{
   protected $publicada = UNDEFINED;
   protected $observaciones = UNDEFINED;
   protected $alta = UNDEFINED;
+  protected $identificacion = UNDEFINED;
   protected $sede = UNDEFINED;
   protected $modalidad = UNDEFINED;
   protected $planificacion = UNDEFINED;
@@ -27,6 +28,7 @@ class _ComisionValue extends ValueEntityOptions{
   public function setDefaultPublicada() { if($this->publicada === UNDEFINED) $this->setPublicada(null); }
   public function setDefaultObservaciones() { if($this->observaciones === UNDEFINED) $this->setObservaciones(null); }
   public function setDefaultAlta() { if($this->alta === UNDEFINED) $this->setAlta(date('c')); }
+  public function setDefaultIdentificacion() { if($this->identificacion === UNDEFINED) $this->setIdentificacion(null); }
   public function setDefaultSede() { if($this->sede === UNDEFINED) $this->setSede(null); }
   public function setDefaultModalidad() { if($this->modalidad === UNDEFINED) $this->setModalidad(null); }
   public function setDefaultPlanificacion() { if($this->planificacion === UNDEFINED) $this->setPlanificacion(null); }
@@ -42,6 +44,7 @@ class _ComisionValue extends ValueEntityOptions{
   public function isEmptyPublicada() { if(!Validation::is_empty($this->publicada)) return false; }
   public function isEmptyObservaciones() { if(!Validation::is_empty($this->observaciones)) return false; }
   public function isEmptyAlta() { if(!Validation::is_empty($this->alta)) return false; }
+  public function isEmptyIdentificacion() { if(!Validation::is_empty($this->identificacion)) return false; }
   public function isEmptySede() { if(!Validation::is_empty($this->sede)) return false; }
   public function isEmptyModalidad() { if(!Validation::is_empty($this->modalidad)) return false; }
   public function isEmptyPlanificacion() { if(!Validation::is_empty($this->planificacion)) return false; }
@@ -57,6 +60,7 @@ class _ComisionValue extends ValueEntityOptions{
   public function publicada($format = null) { return Format::boolean($this->publicada, $format); }
   public function observaciones($format = null) { return Format::convertCase($this->observaciones, $format); }
   public function alta($format = null) { return Format::date($this->alta, $format); }
+  public function identificacion($format = null) { return Format::convertCase($this->identificacion, $format); }
   public function sede($format = null) { return Format::convertCase($this->sede, $format); }
   public function modalidad($format = null) { return Format::convertCase($this->modalidad, $format); }
   public function planificacion($format = null) { return Format::convertCase($this->planificacion, $format); }
@@ -103,6 +107,9 @@ class _ComisionValue extends ValueEntityOptions{
     return $this->alta = $p;
   }
 
+  public function _setIdentificacion(string $p = null) { return $this->identificacion = $p; }  
+  public function setIdentificacion($p) { return $this->identificacion = (is_null($p)) ? null : (string)$p; }
+
   public function _setSede(string $p = null) { return $this->sede = $p; }  
   public function setSede($p) { return $this->sede = (is_null($p)) ? null : (string)$p; }
 
@@ -118,10 +125,17 @@ class _ComisionValue extends ValueEntityOptions{
   public function _setCalendario(string $p = null) { return $this->calendario = $p; }  
   public function setCalendario($p) { return $this->calendario = (is_null($p)) ? null : (string)$p; }
 
+  public function resetId() { if(!Validation::is_empty($this->id)) $this->id = preg_replace('/\s\s+/', ' ', trim($this->id)); }
   public function resetTurno() { if(!Validation::is_empty($this->turno)) $this->turno = preg_replace('/\s\s+/', ' ', trim($this->turno)); }
   public function resetDivision() { if(!Validation::is_empty($this->division)) $this->division = preg_replace('/\s\s+/', ' ', trim($this->division)); }
   public function resetComentario() { if(!Validation::is_empty($this->comentario)) $this->comentario = preg_replace('/\s\s+/', ' ', trim($this->comentario)); }
   public function resetObservaciones() { if(!Validation::is_empty($this->observaciones)) $this->observaciones = preg_replace('/\s\s+/', ' ', trim($this->observaciones)); }
+  public function resetIdentificacion() { if(!Validation::is_empty($this->identificacion)) $this->identificacion = preg_replace('/\s\s+/', ' ', trim($this->identificacion)); }
+  public function resetSede() { if(!Validation::is_empty($this->sede)) $this->sede = preg_replace('/\s\s+/', ' ', trim($this->sede)); }
+  public function resetModalidad() { if(!Validation::is_empty($this->modalidad)) $this->modalidad = preg_replace('/\s\s+/', ' ', trim($this->modalidad)); }
+  public function resetPlanificacion() { if(!Validation::is_empty($this->planificacion)) $this->planificacion = preg_replace('/\s\s+/', ' ', trim($this->planificacion)); }
+  public function resetComisionSiguiente() { if(!Validation::is_empty($this->comisionSiguiente)) $this->comisionSiguiente = preg_replace('/\s\s+/', ' ', trim($this->comisionSiguiente)); }
+  public function resetCalendario() { if(!Validation::is_empty($this->calendario)) $this->calendario = preg_replace('/\s\s+/', ' ', trim($this->calendario)); }
 
   public function checkId() { 
       if(Validation::is_undefined($this->id)) return null;
@@ -192,6 +206,14 @@ class _ComisionValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
+    public function checkIdentificacion() { 
+      $this->_logs->resetLogs("identificacion");
+      if(Validation::is_undefined($this->identificacion)) return null;
+      $v = Validation::getInstanceValue($this->identificacion)->max(45);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("identificacion", "error", $error); }
+      return $v->isSuccess();
+    }
+  
     public function checkSede() { 
       $this->_logs->resetLogs("sede");
       if(Validation::is_undefined($this->sede)) return null;
@@ -244,6 +266,7 @@ class _ComisionValue extends ValueEntityOptions{
   public function sqlAltaDate() { return $this->sql->dateTime($this->alta, "Y-m-d"); }
   public function sqlAltaYm() { return $this->sql->dateTime($this->alta, "Y-m"); }
   public function sqlAltaY() { return $this->sql->dateTime($this->alta, "Y"); }
+  public function sqlIdentificacion() { return $this->sql->string($this->identificacion); }
   public function sqlSede() { return $this->sql->string($this->sede); }
   public function sqlModalidad() { return $this->sql->string($this->modalidad); }
   public function sqlPlanificacion() { return $this->sql->string($this->planificacion); }
@@ -259,6 +282,7 @@ class _ComisionValue extends ValueEntityOptions{
   public function jsonPublicada() { return $this->publicada; }
   public function jsonObservaciones() { return $this->observaciones; }
   public function jsonAlta() { return $this->alta('c'); }
+  public function jsonIdentificacion() { return $this->identificacion; }
   public function jsonSede() { return $this->sede; }
   public function jsonModalidad() { return $this->modalidad; }
   public function jsonPlanificacion() { return $this->planificacion; }

@@ -12,10 +12,10 @@ class _DistribucionHorariaSql extends EntitySql{
   }
 
   public function fields(){
-    return $this->container->getFieldAlias($this->entity->getName())->_callConcat() . ',
-' . $this->container->getFieldAlias('asignatura', 'asi')->_callConcat() . ',
-' . $this->container->getFieldAlias('planificacion', 'pla')->_callConcat() . ',
-' . $this->container->getFieldAlias('plan', 'pla_plb')->_callConcat() . ' 
+    return implode(",", $this->container->getFieldAlias($this->entity->getName())->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('asignatura', 'asi')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('planificacion', 'pla')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('plan', 'pla_plb')->_toArray()) . ' 
 ';
   }
 

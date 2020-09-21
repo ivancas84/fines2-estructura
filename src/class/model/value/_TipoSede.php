@@ -21,6 +21,7 @@ class _TipoSedeValue extends ValueEntityOptions{
   public function _setDescripcion(string $p = null) { return $this->descripcion = $p; }  
   public function setDescripcion($p) { return $this->descripcion = (is_null($p)) ? null : (string)$p; }
 
+  public function resetId() { if(!Validation::is_empty($this->id)) $this->id = preg_replace('/\s\s+/', ' ', trim($this->id)); }
   public function resetDescripcion() { if(!Validation::is_empty($this->descripcion)) $this->descripcion = preg_replace('/\s\s+/', ' ', trim($this->descripcion)); }
 
   public function checkId() { 

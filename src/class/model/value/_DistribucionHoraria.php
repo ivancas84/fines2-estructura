@@ -42,6 +42,9 @@ class _DistribucionHorariaValue extends ValueEntityOptions{
   public function _setPlanificacion(string $p = null) { return $this->planificacion = $p; }  
   public function setPlanificacion($p) { return $this->planificacion = (is_null($p)) ? null : (string)$p; }
 
+  public function resetId() { if(!Validation::is_empty($this->id)) $this->id = preg_replace('/\s\s+/', ' ', trim($this->id)); }
+  public function resetAsignatura() { if(!Validation::is_empty($this->asignatura)) $this->asignatura = preg_replace('/\s\s+/', ' ', trim($this->asignatura)); }
+  public function resetPlanificacion() { if(!Validation::is_empty($this->planificacion)) $this->planificacion = preg_replace('/\s\s+/', ' ', trim($this->planificacion)); }
 
   public function checkId() { 
       if(Validation::is_undefined($this->id)) return null;

@@ -117,6 +117,7 @@ class _PersonaValue extends ValueEntityOptions{
   public function _setDomicilio(string $p = null) { return $this->domicilio = $p; }  
   public function setDomicilio($p) { return $this->domicilio = (is_null($p)) ? null : (string)$p; }
 
+  public function resetId() { if(!Validation::is_empty($this->id)) $this->id = preg_replace('/\s\s+/', ' ', trim($this->id)); }
   public function resetNombres() { if(!Validation::is_empty($this->nombres)) $this->nombres = preg_replace('/\s\s+/', ' ', trim($this->nombres)); }
   public function resetApellidos() { if(!Validation::is_empty($this->apellidos)) $this->apellidos = preg_replace('/\s\s+/', ' ', trim($this->apellidos)); }
   public function resetNumeroDocumento() { if(!Validation::is_empty($this->numeroDocumento)) $this->numeroDocumento = preg_replace('/\s\s+/', ' ', trim($this->numeroDocumento)); }
@@ -125,6 +126,7 @@ class _PersonaValue extends ValueEntityOptions{
   public function resetApodo() { if(!Validation::is_empty($this->apodo)) $this->apodo = preg_replace('/\s\s+/', ' ', trim($this->apodo)); }
   public function resetTelefono() { if(!Validation::is_empty($this->telefono)) $this->telefono = preg_replace('/\s\s+/', ' ', trim($this->telefono)); }
   public function resetEmail() { if(!Validation::is_empty($this->email)) $this->email = preg_replace('/\s\s+/', ' ', trim($this->email)); }
+  public function resetDomicilio() { if(!Validation::is_empty($this->domicilio)) $this->domicilio = preg_replace('/\s\s+/', ' ', trim($this->domicilio)); }
 
   public function checkId() { 
       if(Validation::is_undefined($this->id)) return null;

@@ -62,6 +62,7 @@ class _FileValue extends ValueEntityOptions{
     return $this->created = $p;
   }
 
+  public function resetId() { if(!Validation::is_empty($this->id)) $this->id = preg_replace('/\s\s+/', ' ', trim($this->id)); }
   public function resetName() { if(!Validation::is_empty($this->name)) $this->name = preg_replace('/\s\s+/', ' ', trim($this->name)); }
   public function resetType() { if(!Validation::is_empty($this->type)) $this->type = preg_replace('/\s\s+/', ' ', trim($this->type)); }
   public function resetContent() { if(!Validation::is_empty($this->content)) $this->content = preg_replace('/\s\s+/', ' ', trim($this->content)); }

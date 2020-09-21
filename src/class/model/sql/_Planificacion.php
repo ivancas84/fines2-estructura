@@ -10,8 +10,8 @@ class _PlanificacionSql extends EntitySql{
   }
 
   public function fields(){
-    return $this->container->getFieldAlias($this->entity->getName())->_callConcat() . ',
-' . $this->container->getFieldAlias('plan', 'plb')->_callConcat() . ' 
+    return implode(",", $this->container->getFieldAlias($this->entity->getName())->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('plan', 'plb')->_toArray()) . ' 
 ';
   }
 

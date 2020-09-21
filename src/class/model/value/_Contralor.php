@@ -81,6 +81,8 @@ class _ContralorValue extends ValueEntityOptions{
   public function _setPlanillaDocente(string $p = null) { return $this->planillaDocente = $p; }  
   public function setPlanillaDocente($p) { return $this->planillaDocente = (is_null($p)) ? null : (string)$p; }
 
+  public function resetId() { if(!Validation::is_empty($this->id)) $this->id = preg_replace('/\s\s+/', ' ', trim($this->id)); }
+  public function resetPlanillaDocente() { if(!Validation::is_empty($this->planillaDocente)) $this->planillaDocente = preg_replace('/\s\s+/', ' ', trim($this->planillaDocente)); }
 
   public function checkId() { 
       if(Validation::is_undefined($this->id)) return null;

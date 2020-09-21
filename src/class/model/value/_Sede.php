@@ -96,9 +96,13 @@ class _SedeValue extends ValueEntityOptions{
   public function _setCentroEducativo(string $p = null) { return $this->centroEducativo = $p; }  
   public function setCentroEducativo($p) { return $this->centroEducativo = (is_null($p)) ? null : (string)$p; }
 
+  public function resetId() { if(!Validation::is_empty($this->id)) $this->id = preg_replace('/\s\s+/', ' ', trim($this->id)); }
   public function resetNumero() { if(!Validation::is_empty($this->numero)) $this->numero = preg_replace('/\s\s+/', ' ', trim($this->numero)); }
   public function resetNombre() { if(!Validation::is_empty($this->nombre)) $this->nombre = preg_replace('/\s\s+/', ' ', trim($this->nombre)); }
   public function resetObservaciones() { if(!Validation::is_empty($this->observaciones)) $this->observaciones = preg_replace('/\s\s+/', ' ', trim($this->observaciones)); }
+  public function resetDomicilio() { if(!Validation::is_empty($this->domicilio)) $this->domicilio = preg_replace('/\s\s+/', ' ', trim($this->domicilio)); }
+  public function resetTipoSede() { if(!Validation::is_empty($this->tipoSede)) $this->tipoSede = preg_replace('/\s\s+/', ' ', trim($this->tipoSede)); }
+  public function resetCentroEducativo() { if(!Validation::is_empty($this->centroEducativo)) $this->centroEducativo = preg_replace('/\s\s+/', ' ', trim($this->centroEducativo)); }
 
   public function checkId() { 
       if(Validation::is_undefined($this->id)) return null;

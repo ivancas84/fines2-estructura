@@ -49,6 +49,7 @@ class _AsignaturaValue extends ValueEntityOptions{
   public function _setPerfil(string $p = null) { return $this->perfil = $p; }  
   public function setPerfil($p) { return $this->perfil = (is_null($p)) ? null : (string)$p; }
 
+  public function resetId() { if(!Validation::is_empty($this->id)) $this->id = preg_replace('/\s\s+/', ' ', trim($this->id)); }
   public function resetNombre() { if(!Validation::is_empty($this->nombre)) $this->nombre = preg_replace('/\s\s+/', ' ', trim($this->nombre)); }
   public function resetFormacion() { if(!Validation::is_empty($this->formacion)) $this->formacion = preg_replace('/\s\s+/', ' ', trim($this->formacion)); }
   public function resetClasificacion() { if(!Validation::is_empty($this->clasificacion)) $this->clasificacion = preg_replace('/\s\s+/', ' ', trim($this->clasificacion)); }

@@ -20,18 +20,18 @@ class _CursoSql extends EntitySql{
   }
 
   public function fields(){
-    return $this->container->getFieldAlias($this->entity->getName())->_callConcat() . ',
-' . $this->container->getFieldAlias('comision', 'com')->_callConcat() . ',
-' . $this->container->getFieldAlias('sede', 'com_sed')->_callConcat() . ',
-' . $this->container->getFieldAlias('domicilio', 'com_sed_dom')->_callConcat() . ',
-' . $this->container->getFieldAlias('tipo_sede', 'com_sed_ts')->_callConcat() . ',
-' . $this->container->getFieldAlias('centro_educativo', 'com_sed_ce')->_callConcat() . ',
-' . $this->container->getFieldAlias('domicilio', 'com_sed_ce_dom')->_callConcat() . ',
-' . $this->container->getFieldAlias('modalidad', 'com_moa')->_callConcat() . ',
-' . $this->container->getFieldAlias('planificacion', 'com_pla')->_callConcat() . ',
-' . $this->container->getFieldAlias('plan', 'com_pla_plb')->_callConcat() . ',
-' . $this->container->getFieldAlias('calendario', 'com_cal')->_callConcat() . ',
-' . $this->container->getFieldAlias('asignatura', 'asi')->_callConcat() . ' 
+    return implode(",", $this->container->getFieldAlias($this->entity->getName())->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('comision', 'com')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('sede', 'com_sed')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('domicilio', 'com_sed_dom')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('tipo_sede', 'com_sed_ts')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('centro_educativo', 'com_sed_ce')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('domicilio', 'com_sed_ce_dom')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('modalidad', 'com_moa')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('planificacion', 'com_pla')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('plan', 'com_pla_plb')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('calendario', 'com_cal')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('asignatura', 'asi')->_toArray()) . ' 
 ';
   }
 

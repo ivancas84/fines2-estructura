@@ -63,6 +63,7 @@ class _DomicilioValue extends ValueEntityOptions{
   public function _setLocalidad(string $p = null) { return $this->localidad = $p; }  
   public function setLocalidad($p) { return $this->localidad = (is_null($p)) ? null : (string)$p; }
 
+  public function resetId() { if(!Validation::is_empty($this->id)) $this->id = preg_replace('/\s\s+/', ' ', trim($this->id)); }
   public function resetCalle() { if(!Validation::is_empty($this->calle)) $this->calle = preg_replace('/\s\s+/', ' ', trim($this->calle)); }
   public function resetEntre() { if(!Validation::is_empty($this->entre)) $this->entre = preg_replace('/\s\s+/', ' ', trim($this->entre)); }
   public function resetNumero() { if(!Validation::is_empty($this->numero)) $this->numero = preg_replace('/\s\s+/', ' ', trim($this->numero)); }

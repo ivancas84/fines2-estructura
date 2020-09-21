@@ -55,7 +55,10 @@ class _DetallePersonaValue extends ValueEntityOptions{
   public function _setPersona(string $p = null) { return $this->persona = $p; }  
   public function setPersona($p) { return $this->persona = (is_null($p)) ? null : (string)$p; }
 
+  public function resetId() { if(!Validation::is_empty($this->id)) $this->id = preg_replace('/\s\s+/', ' ', trim($this->id)); }
   public function resetDescripcion() { if(!Validation::is_empty($this->descripcion)) $this->descripcion = preg_replace('/\s\s+/', ' ', trim($this->descripcion)); }
+  public function resetArchivo() { if(!Validation::is_empty($this->archivo)) $this->archivo = preg_replace('/\s\s+/', ' ', trim($this->archivo)); }
+  public function resetPersona() { if(!Validation::is_empty($this->persona)) $this->persona = preg_replace('/\s\s+/', ' ', trim($this->persona)); }
 
   public function checkId() { 
       if(Validation::is_undefined($this->id)) return null;

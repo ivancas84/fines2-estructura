@@ -95,6 +95,7 @@ class _CalendarioValue extends ValueEntityOptions{
     return $this->insertado = $p;
   }
 
+  public function resetId() { if(!Validation::is_empty($this->id)) $this->id = preg_replace('/\s\s+/', ' ', trim($this->id)); }
 
   public function checkId() { 
       if(Validation::is_undefined($this->id)) return null;

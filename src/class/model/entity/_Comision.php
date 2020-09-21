@@ -21,6 +21,7 @@ class _ComisionEntity extends Entity {
       $this->container->getField("comision", "publicada"),
       $this->container->getField("comision", "observaciones"),
       $this->container->getField("comision", "alta"),
+      $this->container->getField("comision", "identificacion"),
     );
   }
 

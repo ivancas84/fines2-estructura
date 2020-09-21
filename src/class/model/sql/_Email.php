@@ -11,9 +11,9 @@ class _EmailSql extends EntitySql{
   }
 
   public function fields(){
-    return $this->container->getFieldAlias($this->entity->getName())->_callConcat() . ',
-' . $this->container->getFieldAlias('persona', 'per')->_callConcat() . ',
-' . $this->container->getFieldAlias('domicilio', 'per_dom')->_callConcat() . ' 
+    return implode(",", $this->container->getFieldAlias($this->entity->getName())->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('persona', 'per')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('domicilio', 'per_dom')->_toArray()) . ' 
 ';
   }
 

@@ -82,9 +82,11 @@ class _TelefonoValue extends ValueEntityOptions{
   public function _setPersona(string $p = null) { return $this->persona = $p; }  
   public function setPersona($p) { return $this->persona = (is_null($p)) ? null : (string)$p; }
 
+  public function resetId() { if(!Validation::is_empty($this->id)) $this->id = preg_replace('/\s\s+/', ' ', trim($this->id)); }
   public function resetTipo() { if(!Validation::is_empty($this->tipo)) $this->tipo = preg_replace('/\s\s+/', ' ', trim($this->tipo)); }
   public function resetPrefijo() { if(!Validation::is_empty($this->prefijo)) $this->prefijo = preg_replace('/\s\s+/', ' ', trim($this->prefijo)); }
   public function resetNumero() { if(!Validation::is_empty($this->numero)) $this->numero = preg_replace('/\s\s+/', ' ', trim($this->numero)); }
+  public function resetPersona() { if(!Validation::is_empty($this->persona)) $this->persona = preg_replace('/\s\s+/', ' ', trim($this->persona)); }
 
   public function checkId() { 
       if(Validation::is_undefined($this->id)) return null;

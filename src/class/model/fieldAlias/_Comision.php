@@ -15,6 +15,7 @@ class _ComisionFieldAlias extends FieldAliasEntityOptions{
   public function altaDate() { return $this->mapping->altaDate() . " AS " . $this->_pf() . "alta_date"; }
   public function altaYm() { return $this->mapping->altaYm() . " AS " . $this->_pf() . "alta_ym"; }
   public function altaY() { return $this->mapping->altaY() . " AS " . $this->_pf() . "alta_y"; }
+  public function identificacion() { return $this->mapping->identificacion() . " AS " . $this->_pf() . "identificacion"; }
   public function sede() { return $this->mapping->sede() . " AS " . $this->_pf() . "sede"; }
   public function modalidad() { return $this->mapping->modalidad() . " AS " . $this->_pf() . "modalidad"; }
   public function planificacion() { return $this->mapping->planificacion() . " AS " . $this->_pf() . "planificacion"; }
@@ -57,6 +58,10 @@ class _ComisionFieldAlias extends FieldAliasEntityOptions{
   public function minAlta() { return $this->mapping->minAlta() . " AS " . $this->_pf() . "min_alta"; }
   public function maxAlta() { return $this->mapping->maxAlta() . " AS " . $this->_pf() . "max_alta"; }
   public function countAlta() { return $this->mapping->countAlta() . " AS " . $this->_pf() . "count_alta"; }
+
+  public function minIdentificacion() { return $this->mapping->minIdentificacion() . " AS " . $this->_pf() . "min_identificacion"; }
+  public function maxIdentificacion() { return $this->mapping->maxIdentificacion() . " AS " . $this->_pf() . "max_identificacion"; }
+  public function countIdentificacion() { return $this->mapping->countIdentificacion() . " AS " . $this->_pf() . "count_identificacion"; }
 
   public function minSede() { return $this->mapping->minSede() . " AS " . $this->_pf() . "min_sede"; }
   public function maxSede() { return $this->mapping->maxSede() . " AS " . $this->_pf() . "max_sede"; }

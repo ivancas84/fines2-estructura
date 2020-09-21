@@ -17,15 +17,15 @@ class _DesignacionSql extends EntitySql{
   }
 
   public function fields(){
-    return $this->container->getFieldAlias($this->entity->getName())->_callConcat() . ',
-' . $this->container->getFieldAlias('cargo', 'car')->_callConcat() . ',
-' . $this->container->getFieldAlias('sede', 'sed')->_callConcat() . ',
-' . $this->container->getFieldAlias('domicilio', 'sed_dom')->_callConcat() . ',
-' . $this->container->getFieldAlias('tipo_sede', 'sed_ts')->_callConcat() . ',
-' . $this->container->getFieldAlias('centro_educativo', 'sed_ce')->_callConcat() . ',
-' . $this->container->getFieldAlias('domicilio', 'sed_ce_dom')->_callConcat() . ',
-' . $this->container->getFieldAlias('persona', 'per')->_callConcat() . ',
-' . $this->container->getFieldAlias('domicilio', 'per_dom')->_callConcat() . ' 
+    return implode(",", $this->container->getFieldAlias($this->entity->getName())->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('cargo', 'car')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('sede', 'sed')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('domicilio', 'sed_dom')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('tipo_sede', 'sed_ts')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('centro_educativo', 'sed_ce')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('domicilio', 'sed_ce_dom')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('persona', 'per')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('domicilio', 'per_dom')->_toArray()) . ' 
 ';
   }
 

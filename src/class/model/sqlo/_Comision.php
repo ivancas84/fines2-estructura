@@ -20,6 +20,7 @@ class _ComisionSqlo extends EntitySqlo {
     $sql .= "apertura, " ;
     $sql .= "publicada, " ;
     $sql .= "observaciones, " ;
+    $sql .= "identificacion, " ;
     $sql .= "sede, " ;
     $sql .= "modalidad, " ;
     $sql .= "planificacion, " ;
@@ -37,6 +38,7 @@ VALUES ( ";
     $sql .= $row['apertura'] . ", " ;
     $sql .= $row['publicada'] . ", " ;
     $sql .= $row['observaciones'] . ", " ;
+    $sql .= $row['identificacion'] . ", " ;
     $sql .= $row['sede'] . ", " ;
     $sql .= $row['modalidad'] . ", " ;
     $sql .= $row['planificacion'] . ", " ;
@@ -61,6 +63,7 @@ UPDATE " . $this->entity->sn_() . " SET
     if (isset($row['apertura'] )) $sql .= "apertura = " . $row['apertura'] . " ," ;
     if (isset($row['publicada'] )) $sql .= "publicada = " . $row['publicada'] . " ," ;
     if (isset($row['observaciones'] )) $sql .= "observaciones = " . $row['observaciones'] . " ," ;
+    if (isset($row['identificacion'] )) $sql .= "identificacion = " . $row['identificacion'] . " ," ;
     if (isset($row['sede'] )) $sql .= "sede = " . $row['sede'] . " ," ;
     if (isset($row['modalidad'] )) $sql .= "modalidad = " . $row['modalidad'] . " ," ;
     if (isset($row['planificacion'] )) $sql .= "planificacion = " . $row['planificacion'] . " ," ;

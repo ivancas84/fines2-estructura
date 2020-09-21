@@ -13,11 +13,11 @@ class _SedeSql extends EntitySql{
   }
 
   public function fields(){
-    return $this->container->getFieldAlias($this->entity->getName())->_callConcat() . ',
-' . $this->container->getFieldAlias('domicilio', 'dom')->_callConcat() . ',
-' . $this->container->getFieldAlias('tipo_sede', 'ts')->_callConcat() . ',
-' . $this->container->getFieldAlias('centro_educativo', 'ce')->_callConcat() . ',
-' . $this->container->getFieldAlias('domicilio', 'ce_dom')->_callConcat() . ' 
+    return implode(",", $this->container->getFieldAlias($this->entity->getName())->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('domicilio', 'dom')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('tipo_sede', 'ts')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('centro_educativo', 'ce')->_toArray()) . ',
+' . implode(",", $this->container->getFieldAlias('domicilio', 'ce_dom')->_toArray()) . ' 
 ';
   }
 
