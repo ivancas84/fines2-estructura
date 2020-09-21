@@ -8,14 +8,14 @@ class _FieldPlanOrientacion extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "45";
   public $main = false;
   public $name = "orientacion";
   public $alias = "ori";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('plan'); }
+  public function getEntity(){ return $this->container->getEntity('plan'); }
 
 
 }

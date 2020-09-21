@@ -8,14 +8,14 @@ class _FieldFileName extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "255";
   public $main = false;
   public $name = "name";
   public $alias = "nam";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('file'); }
+  public function getEntity(){ return $this->container->getEntity('file'); }
 
 
 }

@@ -7,16 +7,9 @@ require_once("class/model/Values.php");
 
 class _CargoSqlo extends EntitySqlo {
 
-  public function __construct(){
-    /**
-     * Se definen todos los recursos de forma independiente, sin parametros en el constructor, para facilitar el polimorfismo de las subclases
-     */
-    $this->db = Dba::dbInstance();
-    $this->entity = Entity::getInstanceRequire('cargo');
-    $this->sql = EntitySql::getInstanceRequire('cargo');
-  }
+  public $entityName = "cargo";
 
-  protected function _insert(array $row){ //@override
+  public function insert(array $row){ //@override
       $sql = "
   INSERT INTO " . $this->entity->sn_() . " (";
       $sql .= "id, " ;
@@ -35,7 +28,7 @@ VALUES ( ";
     return $sql;
   }
 
-  protected function _update(array $row){ //@override
+  public function _update(array $row){ //@override
     $sql = "
 UPDATE " . $this->entity->sn_() . " SET
 ";

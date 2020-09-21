@@ -8,14 +8,14 @@ class _FieldTomaTipoMovimiento extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "45";
   public $main = false;
   public $name = "tipo_movimiento";
   public $alias = "tm";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('toma'); }
+  public function getEntity(){ return $this->container->getEntity('toma'); }
 
 
 }

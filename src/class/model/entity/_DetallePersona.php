@@ -8,20 +8,20 @@ class _DetallePersonaEntity extends Entity {
   public $alias = "dp";
  
   public function getPk(){
-    return Field::getInstanceRequire("detalle_persona", "id");
+    return $this->container->getField("detalle_persona", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      Field::getInstanceRequire("detalle_persona", "descripcion"),
-      Field::getInstanceRequire("detalle_persona", "creado"),
+      $this->container->getField("detalle_persona", "descripcion"),
+      $this->container->getField("detalle_persona", "creado"),
     );
   }
 
   public function getFieldsMu(){
     return array(
-      Field::getInstanceRequire("detalle_persona", "archivo"),
-      Field::getInstanceRequire("detalle_persona", "persona"),
+      $this->container->getField("detalle_persona", "archivo"),
+      $this->container->getField("detalle_persona", "persona"),
     );
   }
 

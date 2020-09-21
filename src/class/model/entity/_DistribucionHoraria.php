@@ -8,20 +8,20 @@ class _DistribucionHorariaEntity extends Entity {
   public $alias = "dh";
  
   public function getPk(){
-    return Field::getInstanceRequire("distribucion_horaria", "id");
+    return $this->container->getField("distribucion_horaria", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      Field::getInstanceRequire("distribucion_horaria", "horas_catedra"),
-      Field::getInstanceRequire("distribucion_horaria", "dia"),
+      $this->container->getField("distribucion_horaria", "horas_catedra"),
+      $this->container->getField("distribucion_horaria", "dia"),
     );
   }
 
   public function getFieldsMu(){
     return array(
-      Field::getInstanceRequire("distribucion_horaria", "asignatura"),
-      Field::getInstanceRequire("distribucion_horaria", "planificacion"),
+      $this->container->getField("distribucion_horaria", "asignatura"),
+      $this->container->getField("distribucion_horaria", "planificacion"),
     );
   }
 

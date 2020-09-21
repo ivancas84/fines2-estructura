@@ -15,7 +15,7 @@ class _FieldTomaAlta extends Field {
   public $alias = "alt";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('toma'); }
+  public function getEntity(){ return $this->container->getEntity('toma'); }
 
 
 }

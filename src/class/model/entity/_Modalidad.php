@@ -8,12 +8,12 @@ class _ModalidadEntity extends Entity {
   public $alias = "moda";
  
   public function getPk(){
-    return Field::getInstanceRequire("modalidad", "id");
+    return $this->container->getField("modalidad", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      Field::getInstanceRequire("modalidad", "nombre"),
+      $this->container->getField("modalidad", "nombre"),
     );
   }
 

@@ -8,16 +8,16 @@ class _FieldTelefonoPersona extends Field {
   public $fieldType = "mu";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "45";
   public $main = false;
   public $name = "persona";
   public $alias = "per";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('telefono'); }
+  public function getEntity(){ return $this->container->getEntity('telefono'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('persona'); }
+  public function getEntityRef(){ return $this->container->getEntity('persona'); }
 
 
 }

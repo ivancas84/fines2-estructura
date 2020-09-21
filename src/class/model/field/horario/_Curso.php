@@ -8,16 +8,16 @@ class _FieldHorarioCurso extends Field {
   public $fieldType = "mu";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "45";
   public $main = false;
   public $name = "curso";
   public $alias = "cur";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('horario'); }
+  public function getEntity(){ return $this->container->getEntity('horario'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('curso'); }
+  public function getEntityRef(){ return $this->container->getEntity('curso'); }
 
 
 }

@@ -8,14 +8,14 @@ class _FieldTelefonoPrefijo extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = false;
-  public $default = false;
+  public $default = null;
   public $length = "45";
   public $main = false;
   public $name = "prefijo";
   public $alias = "pre";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('telefono'); }
+  public function getEntity(){ return $this->container->getEntity('telefono'); }
 
 
 }

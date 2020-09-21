@@ -8,25 +8,27 @@ class _PersonaEntity extends Entity {
   public $alias = "pers";
  
   public function getPk(){
-    return Field::getInstanceRequire("persona", "id");
+    return $this->container->getField("persona", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      Field::getInstanceRequire("persona", "nombres"),
-      Field::getInstanceRequire("persona", "apellidos"),
-      Field::getInstanceRequire("persona", "fecha_nacimiento"),
-      Field::getInstanceRequire("persona", "numero_documento"),
-      Field::getInstanceRequire("persona", "cuil"),
-      Field::getInstanceRequire("persona", "genero"),
-      Field::getInstanceRequire("persona", "apodo"),
-      Field::getInstanceRequire("persona", "alta"),
+      $this->container->getField("persona", "nombres"),
+      $this->container->getField("persona", "apellidos"),
+      $this->container->getField("persona", "fecha_nacimiento"),
+      $this->container->getField("persona", "numero_documento"),
+      $this->container->getField("persona", "cuil"),
+      $this->container->getField("persona", "genero"),
+      $this->container->getField("persona", "apodo"),
+      $this->container->getField("persona", "telefono"),
+      $this->container->getField("persona", "email"),
+      $this->container->getField("persona", "alta"),
     );
   }
 
   public function getFieldsMu(){
     return array(
-      Field::getInstanceRequire("persona", "domicilio"),
+      $this->container->getField("persona", "domicilio"),
     );
   }
 

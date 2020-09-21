@@ -8,14 +8,14 @@ class _FieldDetallePersonaDescripcion extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "255";
   public $main = false;
   public $name = "descripcion";
   public $alias = "des";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('detalle_persona'); }
+  public function getEntity(){ return $this->container->getEntity('detalle_persona'); }
 
 
 }

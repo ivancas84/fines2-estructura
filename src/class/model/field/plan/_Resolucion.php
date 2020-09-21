@@ -8,14 +8,14 @@ class _FieldPlanResolucion extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = false;
-  public $default = false;
+  public $default = null;
   public $length = "45";
   public $main = false;
   public $name = "resolucion";
   public $alias = "res";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('plan'); }
+  public function getEntity(){ return $this->container->getEntity('plan'); }
 
 
 }

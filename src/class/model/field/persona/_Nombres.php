@@ -8,14 +8,14 @@ class _FieldPersonaNombres extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "255";
   public $main = false;
   public $name = "nombres";
   public $alias = "nom";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('persona'); }
+  public function getEntity(){ return $this->container->getEntity('persona'); }
 
 
 }

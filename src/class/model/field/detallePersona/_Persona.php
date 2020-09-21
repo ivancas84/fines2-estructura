@@ -8,16 +8,16 @@ class _FieldDetallePersonaPersona extends Field {
   public $fieldType = "mu";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "45";
   public $main = false;
   public $name = "persona";
   public $alias = "per";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('detalle_persona'); }
+  public function getEntity(){ return $this->container->getEntity('detalle_persona'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('persona'); }
+  public function getEntityRef(){ return $this->container->getEntity('persona'); }
 
 
 }

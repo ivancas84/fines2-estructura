@@ -7,16 +7,9 @@ require_once("class/model/Values.php");
 
 class _EmailSqlo extends EntitySqlo {
 
-  public function __construct(){
-    /**
-     * Se definen todos los recursos de forma independiente, sin parametros en el constructor, para facilitar el polimorfismo de las subclases
-     */
-    $this->db = Dba::dbInstance();
-    $this->entity = Entity::getInstanceRequire('email');
-    $this->sql = EntitySql::getInstanceRequire('email');
-  }
+  public $entityName = "email";
 
-  protected function _insert(array $row){ //@override
+  public function insert(array $row){ //@override
       $sql = "
   INSERT INTO " . $this->entity->sn_() . " (";
       $sql .= "id, " ;
@@ -43,7 +36,7 @@ VALUES ( ";
     return $sql;
   }
 
-  protected function _update(array $row){ //@override
+  public function _update(array $row){ //@override
     $sql = "
 UPDATE " . $this->entity->sn_() . " SET
 ";
@@ -60,24 +53,17 @@ UPDATE " . $this->entity->sn_() . " SET
 
   public function json(array $row = null){
     if(empty($row)) return null;
-    $row_ = $this->sql->_json($row);
-    if(!is_null($row['per_id'])){
-      $json = EntitySql::getInstanceRequire('persona', 'per')->_json($row);
-      $row_["persona_"] = $json;
-    }
-    if(!is_null($row['per_dom_id'])){
-      $json = EntitySql::getInstanceRequire('domicilio', 'per_dom')->_json($row);
-      $row_["persona_"]["domicilio_"] = $json;
-    }
+    $row_ = $this->container->getValue($this->entity->getName())->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['per_id'])) $row_["persona_"] = $this->container->getValue('persona', 'per')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['per_dom_id'])) $row_["persona_"]["domicilio_"] = $this->container->getValue('domicilio', 'per_dom')->_fromArray($row, "set")->_toArray("json");
     return $row_;
   }
 
   public function values(array $row){
     $row_ = [];
-
-    $row_["email"] = EntityValues::getInstanceRequire("email", $row);
-    $row_["persona"] = EntityValues::getInstanceRequire('persona', $row, 'per_');
-    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $row, 'per_dom_');
+    $row_["email"] = $this->container->getValue("email")->_fromArray($row, "set");
+    $row_["persona"] = $this->container->getValue('persona', 'per')->_fromArray($row, "set");
+    $row_["domicilio"] = $this->container->getValue('domicilio', 'per_dom')->_fromArray($row, "set");
     return $row_;
   }
 

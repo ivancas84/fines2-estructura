@@ -8,16 +8,16 @@ class _FieldDesignacionCargo extends Field {
   public $fieldType = "mu";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "45";
   public $main = false;
   public $name = "cargo";
   public $alias = "car";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('designacion'); }
+  public function getEntity(){ return $this->container->getEntity('designacion'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('cargo'); }
+  public function getEntityRef(){ return $this->container->getEntity('cargo'); }
 
 
 }

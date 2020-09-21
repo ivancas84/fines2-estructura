@@ -8,19 +8,19 @@ class _PlanificacionEntity extends Entity {
   public $alias = "pla";
  
   public function getPk(){
-    return Field::getInstanceRequire("planificacion", "id");
+    return $this->container->getField("planificacion", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      Field::getInstanceRequire("planificacion", "anio"),
-      Field::getInstanceRequire("planificacion", "semestre"),
+      $this->container->getField("planificacion", "anio"),
+      $this->container->getField("planificacion", "semestre"),
     );
   }
 
   public function getFieldsMu(){
     return array(
-      Field::getInstanceRequire("planificacion", "plan"),
+      $this->container->getField("planificacion", "plan"),
     );
   }
 

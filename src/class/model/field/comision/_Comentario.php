@@ -8,14 +8,14 @@ class _FieldComisionComentario extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = false;
-  public $default = false;
+  public $default = null;
   public $length = "65535";
   public $main = false;
   public $name = "comentario";
   public $alias = "com";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('comision'); }
+  public function getEntity(){ return $this->container->getEntity('comision'); }
 
 
 }

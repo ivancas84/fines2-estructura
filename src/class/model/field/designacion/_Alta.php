@@ -15,7 +15,7 @@ class _FieldDesignacionAlta extends Field {
   public $alias = "alt";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('designacion'); }
+  public function getEntity(){ return $this->container->getEntity('designacion'); }
 
 
 }

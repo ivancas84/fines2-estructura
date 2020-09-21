@@ -8,16 +8,16 @@ class _AsignaturaEntity extends Entity {
   public $alias = "asig";
  
   public function getPk(){
-    return Field::getInstanceRequire("asignatura", "id");
+    return $this->container->getField("asignatura", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      Field::getInstanceRequire("asignatura", "nombre"),
-      Field::getInstanceRequire("asignatura", "formacion"),
-      Field::getInstanceRequire("asignatura", "clasificacion"),
-      Field::getInstanceRequire("asignatura", "codigo"),
-      Field::getInstanceRequire("asignatura", "perfil"),
+      $this->container->getField("asignatura", "nombre"),
+      $this->container->getField("asignatura", "formacion"),
+      $this->container->getField("asignatura", "clasificacion"),
+      $this->container->getField("asignatura", "codigo"),
+      $this->container->getField("asignatura", "perfil"),
     );
   }
 

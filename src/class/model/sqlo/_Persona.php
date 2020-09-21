@@ -7,16 +7,9 @@ require_once("class/model/Values.php");
 
 class _PersonaSqlo extends EntitySqlo {
 
-  public function __construct(){
-    /**
-     * Se definen todos los recursos de forma independiente, sin parametros en el constructor, para facilitar el polimorfismo de las subclases
-     */
-    $this->db = Dba::dbInstance();
-    $this->entity = Entity::getInstanceRequire('persona');
-    $this->sql = EntitySql::getInstanceRequire('persona');
-  }
+  public $entityName = "persona";
 
-  protected function _insert(array $row){ //@override
+  public function insert(array $row){ //@override
       $sql = "
   INSERT INTO " . $this->entity->sn_() . " (";
       $sql .= "id, " ;
@@ -27,6 +20,8 @@ class _PersonaSqlo extends EntitySqlo {
     $sql .= "cuil, " ;
     $sql .= "genero, " ;
     $sql .= "apodo, " ;
+    $sql .= "telefono, " ;
+    $sql .= "email, " ;
     $sql .= "alta, " ;
     $sql .= "domicilio, " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
@@ -41,6 +36,8 @@ VALUES ( ";
     $sql .= $row['cuil'] . ", " ;
     $sql .= $row['genero'] . ", " ;
     $sql .= $row['apodo'] . ", " ;
+    $sql .= $row['telefono'] . ", " ;
+    $sql .= $row['email'] . ", " ;
     $sql .= $row['alta'] . ", " ;
     $sql .= $row['domicilio'] . ", " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
@@ -51,7 +48,7 @@ VALUES ( ";
     return $sql;
   }
 
-  protected function _update(array $row){ //@override
+  public function _update(array $row){ //@override
     $sql = "
 UPDATE " . $this->entity->sn_() . " SET
 ";
@@ -62,6 +59,8 @@ UPDATE " . $this->entity->sn_() . " SET
     if (isset($row['cuil'] )) $sql .= "cuil = " . $row['cuil'] . " ," ;
     if (isset($row['genero'] )) $sql .= "genero = " . $row['genero'] . " ," ;
     if (isset($row['apodo'] )) $sql .= "apodo = " . $row['apodo'] . " ," ;
+    if (isset($row['telefono'] )) $sql .= "telefono = " . $row['telefono'] . " ," ;
+    if (isset($row['email'] )) $sql .= "email = " . $row['email'] . " ," ;
     if (isset($row['alta'] )) $sql .= "alta = " . $row['alta'] . " ," ;
     if (isset($row['domicilio'] )) $sql .= "domicilio = " . $row['domicilio'] . " ," ;
     //eliminar ultima coma
@@ -72,19 +71,15 @@ UPDATE " . $this->entity->sn_() . " SET
 
   public function json(array $row = null){
     if(empty($row)) return null;
-    $row_ = $this->sql->_json($row);
-    if(!is_null($row['dom_id'])){
-      $json = EntitySql::getInstanceRequire('domicilio', 'dom')->_json($row);
-      $row_["domicilio_"] = $json;
-    }
+    $row_ = $this->container->getValue($this->entity->getName())->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['dom_id'])) $row_["domicilio_"] = $this->container->getValue('domicilio', 'dom')->_fromArray($row, "set")->_toArray("json");
     return $row_;
   }
 
   public function values(array $row){
     $row_ = [];
-
-    $row_["persona"] = EntityValues::getInstanceRequire("persona", $row);
-    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $row, 'dom_');
+    $row_["persona"] = $this->container->getValue("persona")->_fromArray($row, "set");
+    $row_["domicilio"] = $this->container->getValue('domicilio', 'dom')->_fromArray($row, "set");
     return $row_;
   }
 

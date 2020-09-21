@@ -15,7 +15,7 @@ class _FieldContralorInsertado extends Field {
   public $alias = "ins";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('contralor'); }
+  public function getEntity(){ return $this->container->getEntity('contralor'); }
 
 
 }

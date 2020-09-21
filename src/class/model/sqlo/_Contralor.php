@@ -7,16 +7,9 @@ require_once("class/model/Values.php");
 
 class _ContralorSqlo extends EntitySqlo {
 
-  public function __construct(){
-    /**
-     * Se definen todos los recursos de forma independiente, sin parametros en el constructor, para facilitar el polimorfismo de las subclases
-     */
-    $this->db = Dba::dbInstance();
-    $this->entity = Entity::getInstanceRequire('contralor');
-    $this->sql = EntitySql::getInstanceRequire('contralor');
-  }
+  public $entityName = "contralor";
 
-  protected function _insert(array $row){ //@override
+  public function insert(array $row){ //@override
       $sql = "
   INSERT INTO " . $this->entity->sn_() . " (";
       $sql .= "id, " ;
@@ -41,7 +34,7 @@ VALUES ( ";
     return $sql;
   }
 
-  protected function _update(array $row){ //@override
+  public function _update(array $row){ //@override
     $sql = "
 UPDATE " . $this->entity->sn_() . " SET
 ";
@@ -57,19 +50,15 @@ UPDATE " . $this->entity->sn_() . " SET
 
   public function json(array $row = null){
     if(empty($row)) return null;
-    $row_ = $this->sql->_json($row);
-    if(!is_null($row['pd_id'])){
-      $json = EntitySql::getInstanceRequire('planilla_docente', 'pd')->_json($row);
-      $row_["planilla_docente_"] = $json;
-    }
+    $row_ = $this->container->getValue($this->entity->getName())->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['pd_id'])) $row_["planilla_docente_"] = $this->container->getValue('planilla_docente', 'pd')->_fromArray($row, "set")->_toArray("json");
     return $row_;
   }
 
   public function values(array $row){
     $row_ = [];
-
-    $row_["contralor"] = EntityValues::getInstanceRequire("contralor", $row);
-    $row_["planilla_docente"] = EntityValues::getInstanceRequire('planilla_docente', $row, 'pd_');
+    $row_["contralor"] = $this->container->getValue("contralor")->_fromArray($row, "set");
+    $row_["planilla_docente"] = $this->container->getValue('planilla_docente', 'pd')->_fromArray($row, "set");
     return $row_;
   }
 

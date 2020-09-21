@@ -7,16 +7,9 @@ require_once("class/model/Values.php");
 
 class _DesignacionSqlo extends EntitySqlo {
 
-  public function __construct(){
-    /**
-     * Se definen todos los recursos de forma independiente, sin parametros en el constructor, para facilitar el polimorfismo de las subclases
-     */
-    $this->db = Dba::dbInstance();
-    $this->entity = Entity::getInstanceRequire('designacion');
-    $this->sql = EntitySql::getInstanceRequire('designacion');
-  }
+  public $entityName = "designacion";
 
-  protected function _insert(array $row){ //@override
+  public function insert(array $row){ //@override
       $sql = "
   INSERT INTO " . $this->entity->sn_() . " (";
       $sql .= "id, " ;
@@ -45,7 +38,7 @@ VALUES ( ";
     return $sql;
   }
 
-  protected function _update(array $row){ //@override
+  public function _update(array $row){ //@override
     $sql = "
 UPDATE " . $this->entity->sn_() . " SET
 ";
@@ -63,64 +56,29 @@ UPDATE " . $this->entity->sn_() . " SET
 
   public function json(array $row = null){
     if(empty($row)) return null;
-    $row_ = $this->sql->_json($row);
-    if(!is_null($row['car_id'])){
-      $json = EntitySql::getInstanceRequire('cargo', 'car')->_json($row);
-      $row_["cargo_"] = $json;
-    }
-    if(!is_null($row['sed_id'])){
-      $json = EntitySql::getInstanceRequire('sede', 'sed')->_json($row);
-      $row_["sede_"] = $json;
-    }
-    if(!is_null($row['sed_dom_id'])){
-      $json = EntitySql::getInstanceRequire('domicilio', 'sed_dom')->_json($row);
-      $row_["sede_"]["domicilio_"] = $json;
-    }
-    if(!is_null($row['sed_ts_id'])){
-      $json = EntitySql::getInstanceRequire('tipo_sede', 'sed_ts')->_json($row);
-      $row_["sede_"]["tipo_sede_"] = $json;
-    }
-    if(!is_null($row['sed_ce_id'])){
-      $json = EntitySql::getInstanceRequire('centro_educativo', 'sed_ce')->_json($row);
-      $row_["sede_"]["centro_educativo_"] = $json;
-    }
-    if(!is_null($row['sed_ce_dom_id'])){
-      $json = EntitySql::getInstanceRequire('domicilio', 'sed_ce_dom')->_json($row);
-      $row_["sede_"]["centro_educativo_"]["domicilio_"] = $json;
-    }
-    if(!is_null($row['sed_coo_id'])){
-      $json = EntitySql::getInstanceRequire('persona', 'sed_coo')->_json($row);
-      $row_["sede_"]["coordinador_"] = $json;
-    }
-    if(!is_null($row['sed_coo_dom_id'])){
-      $json = EntitySql::getInstanceRequire('domicilio', 'sed_coo_dom')->_json($row);
-      $row_["sede_"]["coordinador_"]["domicilio_"] = $json;
-    }
-    if(!is_null($row['per_id'])){
-      $json = EntitySql::getInstanceRequire('persona', 'per')->_json($row);
-      $row_["persona_"] = $json;
-    }
-    if(!is_null($row['per_dom_id'])){
-      $json = EntitySql::getInstanceRequire('domicilio', 'per_dom')->_json($row);
-      $row_["persona_"]["domicilio_"] = $json;
-    }
+    $row_ = $this->container->getValue($this->entity->getName())->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['car_id'])) $row_["cargo_"] = $this->container->getValue('cargo', 'car')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['sed_id'])) $row_["sede_"] = $this->container->getValue('sede', 'sed')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['sed_dom_id'])) $row_["sede_"]["domicilio_"] = $this->container->getValue('domicilio', 'sed_dom')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['sed_ts_id'])) $row_["sede_"]["tipo_sede_"] = $this->container->getValue('tipo_sede', 'sed_ts')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['sed_ce_id'])) $row_["sede_"]["centro_educativo_"] = $this->container->getValue('centro_educativo', 'sed_ce')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['sed_ce_dom_id'])) $row_["sede_"]["centro_educativo_"]["domicilio_"] = $this->container->getValue('domicilio', 'sed_ce_dom')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['per_id'])) $row_["persona_"] = $this->container->getValue('persona', 'per')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['per_dom_id'])) $row_["persona_"]["domicilio_"] = $this->container->getValue('domicilio', 'per_dom')->_fromArray($row, "set")->_toArray("json");
     return $row_;
   }
 
   public function values(array $row){
     $row_ = [];
-
-    $row_["designacion"] = EntityValues::getInstanceRequire("designacion", $row);
-    $row_["cargo"] = EntityValues::getInstanceRequire('cargo', $row, 'car_');
-    $row_["sede"] = EntityValues::getInstanceRequire('sede', $row, 'sed_');
-    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $row, 'sed_dom_');
-    $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede', $row, 'sed_ts_');
-    $row_["centro_educativo"] = EntityValues::getInstanceRequire('centro_educativo', $row, 'sed_ce_');
-    $row_["domicilio1"] = EntityValues::getInstanceRequire('domicilio', $row, 'sed_ce_dom_');
-    $row_["coordinador"] = EntityValues::getInstanceRequire('persona', $row, 'sed_coo_');
-    $row_["domicilio2"] = EntityValues::getInstanceRequire('domicilio', $row, 'sed_coo_dom_');
-    $row_["persona"] = EntityValues::getInstanceRequire('persona', $row, 'per_');
-    $row_["domicilio3"] = EntityValues::getInstanceRequire('domicilio', $row, 'per_dom_');
+    $row_["designacion"] = $this->container->getValue("designacion")->_fromArray($row, "set");
+    $row_["cargo"] = $this->container->getValue('cargo', 'car')->_fromArray($row, "set");
+    $row_["sede"] = $this->container->getValue('sede', 'sed')->_fromArray($row, "set");
+    $row_["domicilio"] = $this->container->getValue('domicilio', 'sed_dom')->_fromArray($row, "set");
+    $row_["tipo_sede"] = $this->container->getValue('tipo_sede', 'sed_ts')->_fromArray($row, "set");
+    $row_["centro_educativo"] = $this->container->getValue('centro_educativo', 'sed_ce')->_fromArray($row, "set");
+    $row_["domicilio1"] = $this->container->getValue('domicilio', 'sed_ce_dom')->_fromArray($row, "set");
+    $row_["persona"] = $this->container->getValue('persona', 'per')->_fromArray($row, "set");
+    $row_["domicilio2"] = $this->container->getValue('domicilio', 'per_dom')->_fromArray($row, "set");
     return $row_;
   }
 

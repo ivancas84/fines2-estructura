@@ -8,14 +8,14 @@ class _FieldDiaDia extends Field {
   public $fieldType = "nf";
   public $unique = true;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "9";
   public $main = false;
   public $name = "dia";
   public $alias = "dib";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('dia'); }
+  public function getEntity(){ return $this->container->getEntity('dia'); }
 
 
 }

@@ -8,14 +8,14 @@ class _FieldDomicilioLocalidad extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "255";
   public $main = false;
   public $name = "localidad";
   public $alias = "loc";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('domicilio'); }
+  public function getEntity(){ return $this->container->getEntity('domicilio'); }
 
 
 }

@@ -8,14 +8,14 @@ class _FieldCentroEducativoId extends Field {
   public $fieldType = "pk";
   public $unique = true;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "45";
   public $main = true;
   public $name = "id";
   public $alias = "id";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('centro_educativo'); }
+  public function getEntity(){ return $this->container->getEntity('centro_educativo'); }
 
 
 }

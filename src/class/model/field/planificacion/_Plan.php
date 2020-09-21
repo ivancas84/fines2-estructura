@@ -8,16 +8,16 @@ class _FieldPlanificacionPlan extends Field {
   public $fieldType = "mu";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "45";
   public $main = false;
   public $name = "plan";
   public $alias = "plb";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('planificacion'); }
+  public function getEntity(){ return $this->container->getEntity('planificacion'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('plan'); }
+  public function getEntityRef(){ return $this->container->getEntity('plan'); }
 
 
 }

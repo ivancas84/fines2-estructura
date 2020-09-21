@@ -8,22 +8,22 @@ class _TelefonoEntity extends Entity {
   public $alias = "tele";
  
   public function getPk(){
-    return Field::getInstanceRequire("telefono", "id");
+    return $this->container->getField("telefono", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      Field::getInstanceRequire("telefono", "tipo"),
-      Field::getInstanceRequire("telefono", "prefijo"),
-      Field::getInstanceRequire("telefono", "numero"),
-      Field::getInstanceRequire("telefono", "insertado"),
-      Field::getInstanceRequire("telefono", "eliminado"),
+      $this->container->getField("telefono", "tipo"),
+      $this->container->getField("telefono", "prefijo"),
+      $this->container->getField("telefono", "numero"),
+      $this->container->getField("telefono", "insertado"),
+      $this->container->getField("telefono", "eliminado"),
     );
   }
 
   public function getFieldsMu(){
     return array(
-      Field::getInstanceRequire("telefono", "persona"),
+      $this->container->getField("telefono", "persona"),
     );
   }
 

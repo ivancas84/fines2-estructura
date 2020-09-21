@@ -8,14 +8,14 @@ class _FieldCursoHorasCatedra extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "10";
   public $main = false;
   public $name = "horas_catedra";
   public $alias = "hc";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('curso'); }
+  public function getEntity(){ return $this->container->getEntity('curso'); }
 
 
 }

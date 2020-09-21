@@ -8,16 +8,16 @@ class _CalendarioEntity extends Entity {
   public $alias = "cale";
  
   public function getPk(){
-    return Field::getInstanceRequire("calendario", "id");
+    return $this->container->getField("calendario", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      Field::getInstanceRequire("calendario", "inicio"),
-      Field::getInstanceRequire("calendario", "fin"),
-      Field::getInstanceRequire("calendario", "anio"),
-      Field::getInstanceRequire("calendario", "semestre"),
-      Field::getInstanceRequire("calendario", "insertado"),
+      $this->container->getField("calendario", "inicio"),
+      $this->container->getField("calendario", "fin"),
+      $this->container->getField("calendario", "anio"),
+      $this->container->getField("calendario", "semestre"),
+      $this->container->getField("calendario", "insertado"),
     );
   }
 

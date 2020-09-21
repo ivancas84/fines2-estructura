@@ -8,16 +8,16 @@ class _FieldEmailPersona extends Field {
   public $fieldType = "mu";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "45";
   public $main = false;
   public $name = "persona";
   public $alias = "per";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('email'); }
+  public function getEntity(){ return $this->container->getEntity('email'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('persona'); }
+  public function getEntityRef(){ return $this->container->getEntity('persona'); }
 
 
 }

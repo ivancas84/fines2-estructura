@@ -15,7 +15,7 @@ class _FieldPlanillaDocenteInsertado extends Field {
   public $alias = "ins";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('planilla_docente'); }
+  public function getEntity(){ return $this->container->getEntity('planilla_docente'); }
 
 
 }

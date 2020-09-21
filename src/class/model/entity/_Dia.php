@@ -8,13 +8,13 @@ class _DiaEntity extends Entity {
   public $alias = "dia";
  
   public function getPk(){
-    return Field::getInstanceRequire("dia", "id");
+    return $this->container->getField("dia", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      Field::getInstanceRequire("dia", "numero"),
-      Field::getInstanceRequire("dia", "dia"),
+      $this->container->getField("dia", "numero"),
+      $this->container->getField("dia", "dia"),
     );
   }
 

@@ -8,14 +8,14 @@ class _FieldDomicilioDepartamento extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = false;
-  public $default = false;
+  public $default = null;
   public $length = "45";
   public $main = false;
   public $name = "departamento";
   public $alias = "dep";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('domicilio'); }
+  public function getEntity(){ return $this->container->getEntity('domicilio'); }
 
 
 }

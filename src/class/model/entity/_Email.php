@@ -8,21 +8,21 @@ class _EmailEntity extends Entity {
   public $alias = "emai";
  
   public function getPk(){
-    return Field::getInstanceRequire("email", "id");
+    return $this->container->getField("email", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      Field::getInstanceRequire("email", "email"),
-      Field::getInstanceRequire("email", "verificado"),
-      Field::getInstanceRequire("email", "insertado"),
-      Field::getInstanceRequire("email", "eliminado"),
+      $this->container->getField("email", "email"),
+      $this->container->getField("email", "verificado"),
+      $this->container->getField("email", "insertado"),
+      $this->container->getField("email", "eliminado"),
     );
   }
 
   public function getFieldsMu(){
     return array(
-      Field::getInstanceRequire("email", "persona"),
+      $this->container->getField("email", "persona"),
     );
   }
 

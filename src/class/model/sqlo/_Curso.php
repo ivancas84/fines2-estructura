@@ -7,16 +7,9 @@ require_once("class/model/Values.php");
 
 class _CursoSqlo extends EntitySqlo {
 
-  public function __construct(){
-    /**
-     * Se definen todos los recursos de forma independiente, sin parametros en el constructor, para facilitar el polimorfismo de las subclases
-     */
-    $this->db = Dba::dbInstance();
-    $this->entity = Entity::getInstanceRequire('curso');
-    $this->sql = EntitySql::getInstanceRequire('curso');
-  }
+  public $entityName = "curso";
 
-  protected function _insert(array $row){ //@override
+  public function insert(array $row){ //@override
       $sql = "
   INSERT INTO " . $this->entity->sn_() . " (";
       $sql .= "id, " ;
@@ -41,7 +34,7 @@ VALUES ( ";
     return $sql;
   }
 
-  protected function _update(array $row){ //@override
+  public function _update(array $row){ //@override
     $sql = "
 UPDATE " . $this->entity->sn_() . " SET
 ";
@@ -57,79 +50,35 @@ UPDATE " . $this->entity->sn_() . " SET
 
   public function json(array $row = null){
     if(empty($row)) return null;
-    $row_ = $this->sql->_json($row);
-    if(!is_null($row['com_id'])){
-      $json = EntitySql::getInstanceRequire('comision', 'com')->_json($row);
-      $row_["comision_"] = $json;
-    }
-    if(!is_null($row['com_sed_id'])){
-      $json = EntitySql::getInstanceRequire('sede', 'com_sed')->_json($row);
-      $row_["comision_"]["sede_"] = $json;
-    }
-    if(!is_null($row['com_sed_dom_id'])){
-      $json = EntitySql::getInstanceRequire('domicilio', 'com_sed_dom')->_json($row);
-      $row_["comision_"]["sede_"]["domicilio_"] = $json;
-    }
-    if(!is_null($row['com_sed_ts_id'])){
-      $json = EntitySql::getInstanceRequire('tipo_sede', 'com_sed_ts')->_json($row);
-      $row_["comision_"]["sede_"]["tipo_sede_"] = $json;
-    }
-    if(!is_null($row['com_sed_ce_id'])){
-      $json = EntitySql::getInstanceRequire('centro_educativo', 'com_sed_ce')->_json($row);
-      $row_["comision_"]["sede_"]["centro_educativo_"] = $json;
-    }
-    if(!is_null($row['com_sed_ce_dom_id'])){
-      $json = EntitySql::getInstanceRequire('domicilio', 'com_sed_ce_dom')->_json($row);
-      $row_["comision_"]["sede_"]["centro_educativo_"]["domicilio_"] = $json;
-    }
-    if(!is_null($row['com_sed_coo_id'])){
-      $json = EntitySql::getInstanceRequire('persona', 'com_sed_coo')->_json($row);
-      $row_["comision_"]["sede_"]["coordinador_"] = $json;
-    }
-    if(!is_null($row['com_sed_coo_dom_id'])){
-      $json = EntitySql::getInstanceRequire('domicilio', 'com_sed_coo_dom')->_json($row);
-      $row_["comision_"]["sede_"]["coordinador_"]["domicilio_"] = $json;
-    }
-    if(!is_null($row['com_moa_id'])){
-      $json = EntitySql::getInstanceRequire('modalidad', 'com_moa')->_json($row);
-      $row_["comision_"]["modalidad_"] = $json;
-    }
-    if(!is_null($row['com_pla_id'])){
-      $json = EntitySql::getInstanceRequire('planificacion', 'com_pla')->_json($row);
-      $row_["comision_"]["planificacion_"] = $json;
-    }
-    if(!is_null($row['com_pla_plb_id'])){
-      $json = EntitySql::getInstanceRequire('plan', 'com_pla_plb')->_json($row);
-      $row_["comision_"]["planificacion_"]["plan_"] = $json;
-    }
-    if(!is_null($row['com_cal_id'])){
-      $json = EntitySql::getInstanceRequire('calendario', 'com_cal')->_json($row);
-      $row_["comision_"]["calendario_"] = $json;
-    }
-    if(!is_null($row['asi_id'])){
-      $json = EntitySql::getInstanceRequire('asignatura', 'asi')->_json($row);
-      $row_["asignatura_"] = $json;
-    }
+    $row_ = $this->container->getValue($this->entity->getName())->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['com_id'])) $row_["comision_"] = $this->container->getValue('comision', 'com')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['com_sed_id'])) $row_["comision_"]["sede_"] = $this->container->getValue('sede', 'com_sed')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['com_sed_dom_id'])) $row_["comision_"]["sede_"]["domicilio_"] = $this->container->getValue('domicilio', 'com_sed_dom')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['com_sed_ts_id'])) $row_["comision_"]["sede_"]["tipo_sede_"] = $this->container->getValue('tipo_sede', 'com_sed_ts')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['com_sed_ce_id'])) $row_["comision_"]["sede_"]["centro_educativo_"] = $this->container->getValue('centro_educativo', 'com_sed_ce')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['com_sed_ce_dom_id'])) $row_["comision_"]["sede_"]["centro_educativo_"]["domicilio_"] = $this->container->getValue('domicilio', 'com_sed_ce_dom')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['com_moa_id'])) $row_["comision_"]["modalidad_"] = $this->container->getValue('modalidad', 'com_moa')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['com_pla_id'])) $row_["comision_"]["planificacion_"] = $this->container->getValue('planificacion', 'com_pla')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['com_pla_plb_id'])) $row_["comision_"]["planificacion_"]["plan_"] = $this->container->getValue('plan', 'com_pla_plb')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['com_cal_id'])) $row_["comision_"]["calendario_"] = $this->container->getValue('calendario', 'com_cal')->_fromArray($row, "set")->_toArray("json");
+    if(!is_null($row['asi_id'])) $row_["asignatura_"] = $this->container->getValue('asignatura', 'asi')->_fromArray($row, "set")->_toArray("json");
     return $row_;
   }
 
   public function values(array $row){
     $row_ = [];
-
-    $row_["curso"] = EntityValues::getInstanceRequire("curso", $row);
-    $row_["comision"] = EntityValues::getInstanceRequire('comision', $row, 'com_');
-    $row_["sede"] = EntityValues::getInstanceRequire('sede', $row, 'com_sed_');
-    $row_["domicilio"] = EntityValues::getInstanceRequire('domicilio', $row, 'com_sed_dom_');
-    $row_["tipo_sede"] = EntityValues::getInstanceRequire('tipo_sede', $row, 'com_sed_ts_');
-    $row_["centro_educativo"] = EntityValues::getInstanceRequire('centro_educativo', $row, 'com_sed_ce_');
-    $row_["domicilio1"] = EntityValues::getInstanceRequire('domicilio', $row, 'com_sed_ce_dom_');
-    $row_["coordinador"] = EntityValues::getInstanceRequire('persona', $row, 'com_sed_coo_');
-    $row_["domicilio2"] = EntityValues::getInstanceRequire('domicilio', $row, 'com_sed_coo_dom_');
-    $row_["modalidad"] = EntityValues::getInstanceRequire('modalidad', $row, 'com_moa_');
-    $row_["planificacion"] = EntityValues::getInstanceRequire('planificacion', $row, 'com_pla_');
-    $row_["plan"] = EntityValues::getInstanceRequire('plan', $row, 'com_pla_plb_');
-    $row_["calendario"] = EntityValues::getInstanceRequire('calendario', $row, 'com_cal_');
-    $row_["asignatura"] = EntityValues::getInstanceRequire('asignatura', $row, 'asi_');
+    $row_["curso"] = $this->container->getValue("curso")->_fromArray($row, "set");
+    $row_["comision"] = $this->container->getValue('comision', 'com')->_fromArray($row, "set");
+    $row_["sede"] = $this->container->getValue('sede', 'com_sed')->_fromArray($row, "set");
+    $row_["domicilio"] = $this->container->getValue('domicilio', 'com_sed_dom')->_fromArray($row, "set");
+    $row_["tipo_sede"] = $this->container->getValue('tipo_sede', 'com_sed_ts')->_fromArray($row, "set");
+    $row_["centro_educativo"] = $this->container->getValue('centro_educativo', 'com_sed_ce')->_fromArray($row, "set");
+    $row_["domicilio1"] = $this->container->getValue('domicilio', 'com_sed_ce_dom')->_fromArray($row, "set");
+    $row_["modalidad"] = $this->container->getValue('modalidad', 'com_moa')->_fromArray($row, "set");
+    $row_["planificacion"] = $this->container->getValue('planificacion', 'com_pla')->_fromArray($row, "set");
+    $row_["plan"] = $this->container->getValue('plan', 'com_pla_plb')->_fromArray($row, "set");
+    $row_["calendario"] = $this->container->getValue('calendario', 'com_cal')->_fromArray($row, "set");
+    $row_["asignatura"] = $this->container->getValue('asignatura', 'asi')->_fromArray($row, "set");
     return $row_;
   }
 

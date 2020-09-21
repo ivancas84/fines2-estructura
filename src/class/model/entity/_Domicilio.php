@@ -8,18 +8,18 @@ class _DomicilioEntity extends Entity {
   public $alias = "domi";
  
   public function getPk(){
-    return Field::getInstanceRequire("domicilio", "id");
+    return $this->container->getField("domicilio", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      Field::getInstanceRequire("domicilio", "calle"),
-      Field::getInstanceRequire("domicilio", "entre"),
-      Field::getInstanceRequire("domicilio", "numero"),
-      Field::getInstanceRequire("domicilio", "piso"),
-      Field::getInstanceRequire("domicilio", "departamento"),
-      Field::getInstanceRequire("domicilio", "barrio"),
-      Field::getInstanceRequire("domicilio", "localidad"),
+      $this->container->getField("domicilio", "calle"),
+      $this->container->getField("domicilio", "entre"),
+      $this->container->getField("domicilio", "numero"),
+      $this->container->getField("domicilio", "piso"),
+      $this->container->getField("domicilio", "departamento"),
+      $this->container->getField("domicilio", "barrio"),
+      $this->container->getField("domicilio", "localidad"),
     );
   }
 

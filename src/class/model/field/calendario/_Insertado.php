@@ -15,7 +15,7 @@ class _FieldCalendarioInsertado extends Field {
   public $alias = "ins";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('calendario'); }
+  public function getEntity(){ return $this->container->getEntity('calendario'); }
 
 
 }

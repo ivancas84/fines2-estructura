@@ -8,14 +8,14 @@ class _FieldTipoSedeDescripcion extends Field {
   public $fieldType = "nf";
   public $unique = true;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "255";
   public $main = false;
   public $name = "descripcion";
   public $alias = "des";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('tipo_sede'); }
+  public function getEntity(){ return $this->container->getEntity('tipo_sede'); }
 
 
 }

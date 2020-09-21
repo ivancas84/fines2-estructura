@@ -8,14 +8,14 @@ class _FieldFileSize extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "10";
   public $main = false;
   public $name = "size";
   public $alias = "siz";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('file'); }
+  public function getEntity(){ return $this->container->getEntity('file'); }
 
 
 }

@@ -8,19 +8,19 @@ class _CentroEducativoEntity extends Entity {
   public $alias = "ce";
  
   public function getPk(){
-    return Field::getInstanceRequire("centro_educativo", "id");
+    return $this->container->getField("centro_educativo", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      Field::getInstanceRequire("centro_educativo", "nombre"),
-      Field::getInstanceRequire("centro_educativo", "cue"),
+      $this->container->getField("centro_educativo", "nombre"),
+      $this->container->getField("centro_educativo", "cue"),
     );
   }
 
   public function getFieldsMu(){
     return array(
-      Field::getInstanceRequire("centro_educativo", "domicilio"),
+      $this->container->getField("centro_educativo", "domicilio"),
     );
   }
 

@@ -8,14 +8,14 @@ class _FieldCentroEducativoNombre extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "255";
   public $main = false;
   public $name = "nombre";
   public $alias = "nom";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('centro_educativo'); }
+  public function getEntity(){ return $this->container->getEntity('centro_educativo'); }
 
 
 }

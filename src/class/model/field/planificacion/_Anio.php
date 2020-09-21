@@ -8,14 +8,14 @@ class _FieldPlanificacionAnio extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "45";
   public $main = false;
   public $name = "anio";
   public $alias = "ani";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('planificacion'); }
+  public function getEntity(){ return $this->container->getEntity('planificacion'); }
 
 
 }

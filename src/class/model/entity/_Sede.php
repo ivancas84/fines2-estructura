@@ -8,24 +8,24 @@ class _SedeEntity extends Entity {
   public $alias = "sede";
  
   public function getPk(){
-    return Field::getInstanceRequire("sede", "id");
+    return $this->container->getField("sede", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      Field::getInstanceRequire("sede", "numero"),
-      Field::getInstanceRequire("sede", "nombre"),
-      Field::getInstanceRequire("sede", "observaciones"),
-      Field::getInstanceRequire("sede", "alta"),
-      Field::getInstanceRequire("sede", "baja"),
+      $this->container->getField("sede", "numero"),
+      $this->container->getField("sede", "nombre"),
+      $this->container->getField("sede", "observaciones"),
+      $this->container->getField("sede", "alta"),
+      $this->container->getField("sede", "baja"),
     );
   }
 
   public function getFieldsMu(){
     return array(
-      Field::getInstanceRequire("sede", "domicilio"),
-      Field::getInstanceRequire("sede", "tipo_sede"),
-      Field::getInstanceRequire("sede", "centro_educativo"),
+      $this->container->getField("sede", "domicilio"),
+      $this->container->getField("sede", "tipo_sede"),
+      $this->container->getField("sede", "centro_educativo"),
     );
   }
 

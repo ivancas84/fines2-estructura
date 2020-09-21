@@ -8,12 +8,12 @@ class _TipoSedeEntity extends Entity {
   public $alias = "ts";
  
   public function getPk(){
-    return Field::getInstanceRequire("tipo_sede", "id");
+    return $this->container->getField("tipo_sede", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      Field::getInstanceRequire("tipo_sede", "descripcion"),
+      $this->container->getField("tipo_sede", "descripcion"),
     );
   }
 

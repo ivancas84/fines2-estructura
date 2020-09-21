@@ -8,16 +8,16 @@ class _FieldCursoAsignatura extends Field {
   public $fieldType = "mu";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "45";
   public $main = false;
   public $name = "asignatura";
   public $alias = "asi";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('curso'); }
+  public function getEntity(){ return $this->container->getEntity('curso'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('asignatura'); }
+  public function getEntityRef(){ return $this->container->getEntity('asignatura'); }
 
 
 }

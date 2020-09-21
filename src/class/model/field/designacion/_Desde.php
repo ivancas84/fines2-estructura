@@ -8,14 +8,14 @@ class _FieldDesignacionDesde extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = false;
-  public $default = false;
+  public $default = null;
   public $length = false;
   public $main = false;
   public $name = "desde";
   public $alias = "des";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('designacion'); }
+  public function getEntity(){ return $this->container->getEntity('designacion'); }
 
 
 }

@@ -8,16 +8,16 @@ class _FieldContralorPlanillaDocente extends Field {
   public $fieldType = "mu";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "45";
   public $main = false;
   public $name = "planilla_docente";
   public $alias = "pd";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('contralor'); }
+  public function getEntity(){ return $this->container->getEntity('contralor'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('planilla_docente'); }
+  public function getEntityRef(){ return $this->container->getEntity('planilla_docente'); }
 
 
 }

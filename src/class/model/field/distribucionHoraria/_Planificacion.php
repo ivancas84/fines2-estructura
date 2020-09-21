@@ -8,16 +8,16 @@ class _FieldDistribucionHorariaPlanificacion extends Field {
   public $fieldType = "mu";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "45";
   public $main = false;
   public $name = "planificacion";
   public $alias = "pla";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('distribucion_horaria'); }
+  public function getEntity(){ return $this->container->getEntity('distribucion_horaria'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('planificacion'); }
+  public function getEntityRef(){ return $this->container->getEntity('planificacion'); }
 
 
 }

@@ -1,15 +1,21 @@
 <?php
 
-require_once($_SERVER["DOCUMENT_ROOT"]."/config/config.php");
-require_once("class/controller/ModelTools.php");
-
-require_once("class/model/Sqlo.php");
+require_once("../config/config.php");
+require_once("class/Container.php");
 
 
+$container = new Container();
 $render = new Render();
-$render->addGeneralCondition(["label","=~","25A11"]);
-$sqlo = EntitySqlo::getInstanceRequire("comision");
+$render->setCondition(["sed_ce_nombre", "=~", "456"]);
+//$render->addGeneralCondition(["label","=~","25A11"]);
+$sqlo = $container->getSqlo("comision");
+
 echo "<pre>";
-
-echo $sqlo->all( $render);
-
+echo $sqlo->all($render);
+/*
+$comision = [
+  "id" => "anId",
+  "division" => "Z"
+];
+print_r($sqlo->update($comision));
+*/

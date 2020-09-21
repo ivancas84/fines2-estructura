@@ -4,7 +4,11 @@ require_once("class/controller/DisplayRender.php");
 require_once("function/array_unique_key.php");
 
 class SedeDisplayRender extends DisplayRender {
-  public $entityName = "sede";
+
+  public $display;
+  /**
+   * El parametro display se asigna a un atributo para facilitar su manipulacion entre los distintos metodos
+   */
 
   protected function renderComisionCondition($key){
     if(array_key_exists ($key , $this->display["params"])

@@ -8,16 +8,16 @@ class _FieldHorarioDia extends Field {
   public $fieldType = "mu";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "45";
   public $main = false;
   public $name = "dia";
   public $alias = "dia";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('horario'); }
+  public function getEntity(){ return $this->container->getEntity('horario'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('dia'); }
+  public function getEntityRef(){ return $this->container->getEntity('dia'); }
 
 
 }

@@ -8,29 +8,30 @@ class _ComisionEntity extends Entity {
   public $alias = "comi";
  
   public function getPk(){
-    return Field::getInstanceRequire("comision", "id");
+    return $this->container->getField("comision", "id");
   }
 
   public function getFieldsNf(){
     return array(
-      Field::getInstanceRequire("comision", "turno"),
-      Field::getInstanceRequire("comision", "division"),
-      Field::getInstanceRequire("comision", "comentario"),
-      Field::getInstanceRequire("comision", "autorizada"),
-      Field::getInstanceRequire("comision", "apertura"),
-      Field::getInstanceRequire("comision", "publicada"),
-      Field::getInstanceRequire("comision", "observaciones"),
-      Field::getInstanceRequire("comision", "alta"),
+      $this->container->getField("comision", "turno"),
+      $this->container->getField("comision", "division"),
+      $this->container->getField("comision", "comentario"),
+      $this->container->getField("comision", "autorizada"),
+      $this->container->getField("comision", "apertura"),
+      $this->container->getField("comision", "publicada"),
+      $this->container->getField("comision", "observaciones"),
+      $this->container->getField("comision", "alta"),
+      $this->container->getField("comision", "identificacion"),
     );
   }
 
   public function getFieldsMu(){
     return array(
-      Field::getInstanceRequire("comision", "sede"),
-      Field::getInstanceRequire("comision", "modalidad"),
-      Field::getInstanceRequire("comision", "planificacion"),
-      Field::getInstanceRequire("comision", "comision_siguiente"),
-      Field::getInstanceRequire("comision", "calendario"),
+      $this->container->getField("comision", "sede"),
+      $this->container->getField("comision", "modalidad"),
+      $this->container->getField("comision", "planificacion"),
+      $this->container->getField("comision", "comision_siguiente"),
+      $this->container->getField("comision", "calendario"),
     );
   }
 

@@ -8,14 +8,14 @@ class _FieldHorarioId extends Field {
   public $fieldType = "pk";
   public $unique = true;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "45";
   public $main = true;
   public $name = "id";
   public $alias = "id";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('horario'); }
+  public function getEntity(){ return $this->container->getEntity('horario'); }
 
 
 }

@@ -8,16 +8,16 @@ class _FieldTomaDocente extends Field {
   public $fieldType = "mu";
   public $unique = false;
   public $notNull = false;
-  public $default = false;
+  public $default = null;
   public $length = "45";
   public $main = false;
   public $name = "docente";
   public $alias = "doc";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('toma'); }
+  public function getEntity(){ return $this->container->getEntity('toma'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('persona'); }
+  public function getEntityRef(){ return $this->container->getEntity('persona'); }
 
 
 }

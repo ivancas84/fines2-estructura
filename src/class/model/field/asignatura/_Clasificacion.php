@@ -8,14 +8,14 @@ class _FieldAsignaturaClasificacion extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = false;
-  public $default = false;
+  public $default = null;
   public $length = "45";
   public $main = false;
   public $name = "clasificacion";
   public $alias = "cla";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('asignatura'); }
+  public function getEntity(){ return $this->container->getEntity('asignatura'); }
 
 
 }

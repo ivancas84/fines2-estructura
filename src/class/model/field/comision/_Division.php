@@ -8,14 +8,14 @@ class _FieldComisionDivision extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "45";
   public $main = false;
   public $name = "division";
   public $alias = "dia";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('comision'); }
+  public function getEntity(){ return $this->container->getEntity('comision'); }
 
 
 }

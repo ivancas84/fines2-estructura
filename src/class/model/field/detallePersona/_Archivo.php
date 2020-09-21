@@ -8,16 +8,16 @@ class _FieldDetallePersonaArchivo extends Field {
   public $fieldType = "mu";
   public $unique = false;
   public $notNull = false;
-  public $default = false;
+  public $default = null;
   public $length = "45";
   public $main = false;
   public $name = "archivo";
   public $alias = "arc";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('detalle_persona'); }
+  public function getEntity(){ return $this->container->getEntity('detalle_persona'); }
 
-  public function getEntityRef(){ return Entity::getInstanceRequire('file'); }
+  public function getEntityRef(){ return $this->container->getEntity('file'); }
 
 
 }

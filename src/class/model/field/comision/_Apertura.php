@@ -8,14 +8,14 @@ class _FieldComisionApertura extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = true;
-  public $default = false;
+  public $default = null;
   public $length = "1";
   public $main = false;
   public $name = "apertura";
   public $alias = "ape";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('comision'); }
+  public function getEntity(){ return $this->container->getEntity('comision'); }
 
 
 }

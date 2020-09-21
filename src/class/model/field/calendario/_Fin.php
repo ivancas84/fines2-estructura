@@ -8,14 +8,14 @@ class _FieldCalendarioFin extends Field {
   public $fieldType = "nf";
   public $unique = false;
   public $notNull = false;
-  public $default = false;
+  public $default = null;
   public $length = false;
   public $main = false;
   public $name = "fin";
   public $alias = "fin";
 
 
-  public function getEntity(){ return Entity::getInstanceRequire('calendario'); }
+  public function getEntity(){ return $this->container->getEntity('calendario'); }
 
 
 }
