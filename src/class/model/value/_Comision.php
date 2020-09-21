@@ -169,7 +169,7 @@ class _ComisionValue extends ValueEntityOptions{
     public function checkAutorizada() { 
       $this->_logs->resetLogs("autorizada");
       if(Validation::is_undefined($this->autorizada)) return null;
-      $v = Validation::getInstanceValue($this->autorizada)->required()->max(1);
+      $v = Validation::getInstanceValue($this->autorizada)->boolean();
       foreach($v->getErrors() as $error){ $this->_logs->addLog("autorizada", "error", $error); }
       return $v->isSuccess();
     }
@@ -177,7 +177,7 @@ class _ComisionValue extends ValueEntityOptions{
     public function checkApertura() { 
       $this->_logs->resetLogs("apertura");
       if(Validation::is_undefined($this->apertura)) return null;
-      $v = Validation::getInstanceValue($this->apertura)->required()->max(1);
+      $v = Validation::getInstanceValue($this->apertura)->boolean();
       foreach($v->getErrors() as $error){ $this->_logs->addLog("apertura", "error", $error); }
       return $v->isSuccess();
     }
@@ -185,7 +185,7 @@ class _ComisionValue extends ValueEntityOptions{
     public function checkPublicada() { 
       $this->_logs->resetLogs("publicada");
       if(Validation::is_undefined($this->publicada)) return null;
-      $v = Validation::getInstanceValue($this->publicada)->required()->max(1);
+      $v = Validation::getInstanceValue($this->publicada)->boolean();
       foreach($v->getErrors() as $error){ $this->_logs->addLog("publicada", "error", $error); }
       return $v->isSuccess();
     }

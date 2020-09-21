@@ -95,7 +95,7 @@ class _EmailValue extends ValueEntityOptions{
     public function checkVerificado() { 
       $this->_logs->resetLogs("verificado");
       if(Validation::is_undefined($this->verificado)) return null;
-      $v = Validation::getInstanceValue($this->verificado)->required()->max(1);
+      $v = Validation::getInstanceValue($this->verificado)->boolean();
       foreach($v->getErrors() as $error){ $this->_logs->addLog("verificado", "error", $error); }
       return $v->isSuccess();
     }
