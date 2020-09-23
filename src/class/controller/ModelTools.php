@@ -4,13 +4,14 @@ require_once("class/model/Render.php");
 require_once("class/model/Ma.php");
 
 class ModelTools {
+  public $container;
 
-  public static function distribucionesHorarias($planificacion){
+  public function distribucionesHorarias($planificacion){
     if(empty($planificacion)) throw new Exception("Planificacion vacia");
-    return Ma::all("distribucion_horaria", ["planificacion"=>$planificacion]);
+    return $this->getDb()->all("distribucion_horaria", ["planificacion"=>$planificacion]);
   }
 
-  public static function sumaHorasCatedraAsignaturasGrupo($fechaAnio, $fechaSemestre, $modalidad, $centroEducativo){
+  public function sumaHorasCatedraAsignaturasGrupo($fechaAnio, $fechaSemestre, $modalidad, $centroEducativo){
     /**
      * @param fechaAnio
      * @param fechaSemestre
@@ -29,20 +30,20 @@ class ModelTools {
     $render->setGroup(["ch_asignatura"]);
     $render->setOrder(["ch_sum_horas_catedra" =>"desc"]);
 
-    return Ma::advanced("curso",$render);
+    return $this->container->getDb()->advanced("curso",$render);
   }
 
-  public static function cargasHorariasDePlanificacion($planificacion){
+  public function cargasHorariasDePlanificacion($planificacion){
     if(empty($planificacion)) throw new Exception("Planificacion no definida");
     $render = Render::getInstanceParams(["planificacion" => $planificacion]);
     $render->setAggregate(["sum_horas_catedra"]);
     $render->setGroup(["planificacion", "asignatura"]);
     $render->setOrder(["sum_horas_catedra" => "desc"]);
 
-    return Ma::advanced("distribucion_horaria",$render);
+    return $this->container->getDb()->advanced("distribucion_horaria",$render);
   }
 
-  public static function cargasHorariasXAsignaturaDeDistribucionesHorarias($distribucionesHorarias){
+  public function cargasHorariasXAsignaturaDeDistribucionesHorarias($distribucionesHorarias){
     /**
      * Sumar horas catedra de asignaturas para un conjunto de distribuciones horarias
      * Recorre todas las distribuciones sin verificar si corresponden al mismo plan, anio o semestre
@@ -60,7 +61,7 @@ class ModelTools {
     return $cargasHorariasXAsignatura;
   }
 
-  public static function intervaloAnterior(array $grupo){
+  public function intervaloAnterior(array $grupo){
     /**
      * un intervalo es la combinación de fecha_anio, fecha_semestre
      * @param $grupo["fecha_anio"]
@@ -89,7 +90,7 @@ class ModelTools {
     return $param;
   }
 
-  public static function cursosConTomaActiva($idCursos){
+  public function cursosConTomaActiva($idCursos){
     $idCursos_ = implode("','",$idCursos);
     
     $sql = "
@@ -100,7 +101,7 @@ AND curso.id IN ('{$idCursos_}')
 ";
   }
 
-  public static function cursoHorario($idCursos){
+  public function cursoHorario($idCursos){
     $idCursos_ = implode("','",$idCursos);
     
     $sql = "
@@ -119,7 +120,7 @@ GROUP BY curso.id
     return $rows;
   }
 
-  public static function cursosConHorariosDeComision($idComision){
+  public function cursosConHorariosDeComision($idComision){
     
     $sql = "
   SELECT curso.id AS curso, GROUP_CONCAT(dia.dia, \" \", TIME_FORMAT(horario.hora_inicio, '%H:%i'), \" a \", TIME_FORMAT(horario.hora_fin, '%H:%i') ORDER BY dia.numero ASC SEPARATOR ', ') AS horario
@@ -130,14 +131,14 @@ GROUP BY curso.id
   GROUP BY curso.id
   ";
 
-    $result = Ma::open()->query($sql);
+    $result = $this->container->getDb()->query($sql);
     $rows = $result->fetch_all(MYSQLI_ASSOC);
     $result->free();
     return $rows;
   }
 
   
-  public static function diasHorariosComision(array $ids) {
+  public function diasHorariosComision(array $ids) {
     $ids_ = implode("','", $ids);
 
     $sql =  "
@@ -176,7 +177,7 @@ GROUP BY curso.id
     
 ";
 
-    $result = Ma::open()->query($sql);
+    $result = $this->container->getDb()->query($sql);
     $rows = $result->fetch_all(MYSQLI_ASSOC);
     $result->free();
     return $rows;
