@@ -12,7 +12,8 @@ class ComisionHorariosPersistApi extends PersistApi {
    * Registro de cursos de una comision
    */
 
-  public $persistLog;
+  public $sql = "";
+  public $ids = []
 
   public function main(){
     $data = Filter::jsonPostRequired();
@@ -63,8 +64,10 @@ class ComisionHorariosPersistApi extends PersistApi {
 
     $this->definirHorarios($data["hora_inicio"]);
 
-    $this->container->getDb()->multi_query_transaction_log($this->persistLog->getSql());
-    return ["id" => $this->id, "detail" => $this->persistLog->getDetail()];
+    $this->container->getDb()->multi_query_transaction_log($this->sql);
+    
+
+    return ["id" => $this->id, "detail" => array_map(function($val) { return "horario".$val; } , $ids)];
   }
 
   public function verificarHorarios(){
@@ -107,7 +110,6 @@ class ComisionHorariosPersistApi extends PersistApi {
   public function definirHorarios($horaInicio){
     $horasCatedrasDia = [];
     
-    $this->persistLog = $this->container->getController("persist_log");
     foreach($this->distribucionesHorarias as $dh){
       $horario = $this->container->getValue("horario");
 
@@ -132,7 +134,10 @@ class ComisionHorariosPersistApi extends PersistApi {
 
       if($horario->_getLogs()->isError()) throw new Exception("El horario posee errores en la asignacion de valores");
 
-      $this->persistLog->insert("horario", $horario->_toArray("sql"));
+      $horario->_call("setDefault");
+      $horario->setId(uniqid());
+      $this->sql = $this->container->getSqlo("horario")->insert($horario->_toArray("sql"));
+      array_push($this->ids, $horario->id());
     }
   }
 }
