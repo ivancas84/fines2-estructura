@@ -12,8 +12,9 @@ class ComisionHorariosPersistApi extends PersistApi {
    * Registro de cursos de una comision
    */
 
-  public $sql = "";
-  public $ids = []
+  public $sql = ""; //sql de horarios insertados
+  public $ids = []; //ids de horarios insertados
+  public $id; //id comision
 
   public function main(){
     $data = Filter::jsonPostRequired();
@@ -67,7 +68,7 @@ class ComisionHorariosPersistApi extends PersistApi {
     $this->container->getDb()->multi_query_transaction_log($this->sql);
     
 
-    return ["id" => $this->id, "detail" => array_map(function($val) { return "horario".$val; } , $ids)];
+    return ["id" => $this->id, "detail" => array_map(function($id) { return "horario".$id; } , $this->ids)];
   }
 
   public function verificarHorarios(){
