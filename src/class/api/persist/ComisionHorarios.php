@@ -137,7 +137,8 @@ class ComisionHorariosPersistApi extends PersistApi {
 
       $horario->_call("setDefault");
       $horario->setId(uniqid());
-      $this->sql = $this->container->getSqlo("horario")->insert($horario->_toArray("sql"));
+      $this->sql .= $this->container->getSqlo("horario")->insert($horario->_toArray("sql"));
+
       array_push($this->ids, $horario->id());
     }
   }

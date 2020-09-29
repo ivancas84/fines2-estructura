@@ -99,7 +99,7 @@ class _FileValue extends ValueEntityOptions{
     public function checkSize() { 
       $this->_logs->resetLogs("size");
       if(Validation::is_undefined($this->size)) return null;
-      $v = Validation::getInstanceValue($this->size)->required()->max(10);
+      $v = Validation::getInstanceValue($this->size)->required();
       foreach($v->getErrors() as $error){ $this->_logs->addLog("size", "error", $error); }
       return $v->isSuccess();
     }

@@ -14,6 +14,8 @@ class _CursoSqlo extends EntitySqlo {
   INSERT INTO " . $this->entity->sn_() . " (";
       $sql .= "id, " ;
     $sql .= "horas_catedra, " ;
+    $sql .= "ige, " ;
+    $sql .= "numero_documento_designado, " ;
     $sql .= "alta, " ;
     $sql .= "comision, " ;
     $sql .= "asignatura, " ;
@@ -23,6 +25,8 @@ class _CursoSqlo extends EntitySqlo {
 VALUES ( ";
     $sql .= $row['id'] . ", " ;
     $sql .= $row['horas_catedra'] . ", " ;
+    $sql .= $row['ige'] . ", " ;
+    $sql .= $row['numero_documento_designado'] . ", " ;
     $sql .= $row['alta'] . ", " ;
     $sql .= $row['comision'] . ", " ;
     $sql .= $row['asignatura'] . ", " ;
@@ -39,6 +43,8 @@ VALUES ( ";
 UPDATE " . $this->entity->sn_() . " SET
 ";
     if (isset($row['horas_catedra'] )) $sql .= "horas_catedra = " . $row['horas_catedra'] . " ," ;
+    if (isset($row['ige'] )) $sql .= "ige = " . $row['ige'] . " ," ;
+    if (isset($row['numero_documento_designado'] )) $sql .= "numero_documento_designado = " . $row['numero_documento_designado'] . " ," ;
     if (isset($row['alta'] )) $sql .= "alta = " . $row['alta'] . " ," ;
     if (isset($row['comision'] )) $sql .= "comision = " . $row['comision'] . " ," ;
     if (isset($row['asignatura'] )) $sql .= "asignatura = " . $row['asignatura'] . " ," ;

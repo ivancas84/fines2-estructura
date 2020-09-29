@@ -14,6 +14,8 @@ class _CursoEntity extends Entity {
   public function getFieldsNf(){
     return array(
       $this->container->getField("curso", "horas_catedra"),
+      $this->container->getField("curso", "ige"),
+      $this->container->getField("curso", "numero_documento_designado"),
       $this->container->getField("curso", "alta"),
     );
   }

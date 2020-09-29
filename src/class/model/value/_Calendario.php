@@ -129,7 +129,7 @@ class _CalendarioValue extends ValueEntityOptions{
     public function checkSemestre() { 
       $this->_logs->resetLogs("semestre");
       if(Validation::is_undefined($this->semestre)) return null;
-      $v = Validation::getInstanceValue($this->semestre)->required()->max(5);
+      $v = Validation::getInstanceValue($this->semestre)->required();
       foreach($v->getErrors() as $error){ $this->_logs->addLog("semestre", "error", $error); }
       return $v->isSuccess();
     }

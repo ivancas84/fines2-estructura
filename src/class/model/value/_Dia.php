@@ -39,7 +39,7 @@ class _DiaValue extends ValueEntityOptions{
   public function checkNumero() { 
       $this->_logs->resetLogs("numero");
       if(Validation::is_undefined($this->numero)) return null;
-      $v = Validation::getInstanceValue($this->numero)->required()->max(1);
+      $v = Validation::getInstanceValue($this->numero)->required();
       foreach($v->getErrors() as $error){ $this->_logs->addLog("numero", "error", $error); }
       return $v->isSuccess();
     }
