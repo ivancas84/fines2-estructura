@@ -22,6 +22,7 @@ class _PersonaSqlo extends EntitySqlo {
     $sql .= "apodo, " ;
     $sql .= "telefono, " ;
     $sql .= "email, " ;
+    $sql .= "email_abc, " ;
     $sql .= "alta, " ;
     $sql .= "domicilio, " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
@@ -38,6 +39,7 @@ VALUES ( ";
     $sql .= $row['apodo'] . ", " ;
     $sql .= $row['telefono'] . ", " ;
     $sql .= $row['email'] . ", " ;
+    $sql .= $row['email_abc'] . ", " ;
     $sql .= $row['alta'] . ", " ;
     $sql .= $row['domicilio'] . ", " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
@@ -61,6 +63,7 @@ UPDATE " . $this->entity->sn_() . " SET
     if (isset($row['apodo'] )) $sql .= "apodo = " . $row['apodo'] . " ," ;
     if (isset($row['telefono'] )) $sql .= "telefono = " . $row['telefono'] . " ," ;
     if (isset($row['email'] )) $sql .= "email = " . $row['email'] . " ," ;
+    if (isset($row['email_abc'] )) $sql .= "email_abc = " . $row['email_abc'] . " ," ;
     if (isset($row['alta'] )) $sql .= "alta = " . $row['alta'] . " ," ;
     if (isset($row['domicilio'] )) $sql .= "domicilio = " . $row['domicilio'] . " ," ;
     //eliminar ultima coma

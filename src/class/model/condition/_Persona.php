@@ -151,6 +151,19 @@ class _PersonaCondition extends ConditionEntityOptions{
     return $this->_exists($this->mapping->email(), $option, settypebool($value));
   }
 
+  public function emailAbc($option, $value) { 
+    $field = $this->mapping->emailAbc();
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approx($field, $option, $value)) return $c;
+    $this->value->setEmailAbc($value);
+    if(!$this->value->checkEmailAbc()) throw new Exception("Valor incorrecto: Email Abc");
+    return "({$field} {$option} {$this->value->sqlEmailAbc()})";  
+  }
+
+  public function emailAbcIsSet($option, $value) { 
+    return $this->_exists($this->mapping->emailAbc(), $option, settypebool($value));
+  }
+
   public function alta($option, $value) { 
     $field = $this->mapping->alta();
     if($c = $this->sql->exists($field, $option, $value)) return $c;

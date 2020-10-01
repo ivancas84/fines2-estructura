@@ -13,6 +13,7 @@ class _PersonaFieldAlias extends FieldAliasEntityOptions{
   public function apodo() { return $this->mapping->apodo() . " AS " . $this->_pf() . "apodo"; }
   public function telefono() { return $this->mapping->telefono() . " AS " . $this->_pf() . "telefono"; }
   public function email() { return $this->mapping->email() . " AS " . $this->_pf() . "email"; }
+  public function emailAbc() { return $this->mapping->emailAbc() . " AS " . $this->_pf() . "email_abc"; }
   public function alta() { return $this->mapping->alta() . " AS " . $this->_pf() . "alta"; }
   public function altaDate() { return $this->mapping->altaDate() . " AS " . $this->_pf() . "alta_date"; }
   public function altaYm() { return $this->mapping->altaYm() . " AS " . $this->_pf() . "alta_ym"; }
@@ -59,6 +60,10 @@ class _PersonaFieldAlias extends FieldAliasEntityOptions{
   public function minEmail() { return $this->mapping->minEmail() . " AS " . $this->_pf() . "min_email"; }
   public function maxEmail() { return $this->mapping->maxEmail() . " AS " . $this->_pf() . "max_email"; }
   public function countEmail() { return $this->mapping->countEmail() . " AS " . $this->_pf() . "count_email"; }
+
+  public function minEmailAbc() { return $this->mapping->minEmailAbc() . " AS " . $this->_pf() . "min_email_abc"; }
+  public function maxEmailAbc() { return $this->mapping->maxEmailAbc() . " AS " . $this->_pf() . "max_email_abc"; }
+  public function countEmailAbc() { return $this->mapping->countEmailAbc() . " AS " . $this->_pf() . "count_email_abc"; }
 
   public function avgAlta() { return $this->mapping->avgAlta() . " AS " . $this->_pf() . "avg_alta"; }
   public function minAlta() { return $this->mapping->minAlta() . " AS " . $this->_pf() . "min_alta"; }

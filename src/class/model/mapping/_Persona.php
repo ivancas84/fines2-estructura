@@ -13,6 +13,7 @@ class _PersonaMapping extends MappingEntityOptions{
   public function apodo() { return $this->_pt() . ".apodo"; }
   public function telefono() { return $this->_pt() . ".telefono"; }
   public function email() { return $this->_pt() . ".email"; }
+  public function emailAbc() { return $this->_pt() . ".email_abc"; }
   public function alta() { return $this->_pt() . ".alta"; }
   public function altaDate() { return "CAST({$this->_pt()}.alta AS DATE)"; }
   public function altaYm() { return "DATE_FORMAT({$this->_pt()}.alta, '%Y-%m')"; }
@@ -59,6 +60,10 @@ class _PersonaMapping extends MappingEntityOptions{
   public function minEmail() { return "MIN({$this->_pt()}.email)"; }
   public function maxEmail() { return "MAX({$this->_pt()}.email)"; }
   public function countEmail() { return "COUNT({$this->_pt()}.email)"; }
+
+  public function minEmailAbc() { return "MIN({$this->_pt()}.email_abc)"; }
+  public function maxEmailAbc() { return "MAX({$this->_pt()}.email_abc)"; }
+  public function countEmailAbc() { return "COUNT({$this->_pt()}.email_abc)"; }
 
   public function avgAlta() { return "AVG({$this->_pt()}.alta)"; }
   public function minAlta() { return "MIN({$this->_pt()}.alta)"; }

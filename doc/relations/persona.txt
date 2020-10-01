@@ -10,5 +10,6 @@ genero (gen): string nf.
 apodo (apo): string nf.
 telefono (tel): string nf.
 email (ema): string nf.
+email_abc (ea): string nf. UNIQUE.
 alta (alt): timestamp nf. NOT NULL. DEFAULT: current_timestamp().
 domicilio (dom): string mu.

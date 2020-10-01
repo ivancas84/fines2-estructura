@@ -22,6 +22,7 @@ class _PersonaEntity extends Entity {
       $this->container->getField("persona", "apodo"),
       $this->container->getField("persona", "telefono"),
       $this->container->getField("persona", "email"),
+      $this->container->getField("persona", "email_abc"),
       $this->container->getField("persona", "alta"),
     );
   }
