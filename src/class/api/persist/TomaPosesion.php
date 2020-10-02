@@ -25,6 +25,7 @@ class TomaPosesionPersistApi extends PersistApi {
     ]);
 
     $this->container->getDb()->multi_query_transaction_log($persistToma["sql"]);
+    $this->container->getControllerEntity("email", "registro")->main($persistToma["id"]);
 
     return true;
   }
