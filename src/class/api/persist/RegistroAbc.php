@@ -41,7 +41,8 @@ class RegistroAbcPersistApi extends PersistApi {
     $detail = ["persona".$value->id(), "toma".$persistToma["id"]];
 
     $this->container->getDb()->multi_query_transaction_log($sql);
-    
+    $this->container->getControllerEntity("email", "registro")->main($persistToma["id"]);
+
     return ["id" => $value->id(), "detail" => $detail];
   }
 }
