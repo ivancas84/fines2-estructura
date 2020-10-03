@@ -1,11 +1,18 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+// Load Composer's autoloader
+
+require $_SERVER["DOCUMENT_ROOT"] . "/" . PATH_ROOT . '/vendor/autoload.php';
+
 require_once("../config/config.php");
 require_once("class/Container.php");
 require_once("class/controller/Base.php");
 
 class RegistroEmail extends Base {
-
 
   public function main($id){
 
@@ -50,7 +57,7 @@ class RegistroEmail extends Base {
           $mail->Subject = 'Toma de posesión: ' . $asignatura . ' IGE ' . $ige;
           $mail->Body    = '<p>Hola ' . $nombre  . '</p>
 <p>Usted ha recibido este email porque fue designado/a en la asignatura ' . $asignatura . ' IGE ' . $ige . "</p>
-<p>Para completar su toma de posesión, necesitamos que nos envíe una foto de su DNI y Declaración Jurada de Cargos</p>
+<p>Para completar su toma de posesión, necesitamos que responda este email y nos envíe por este medio una foto de su DNI y Declaración Jurada de Cargos</p>
 <br>
 <p>Para la declaración Jurada puede utilizar el siguiente formato: <a href=\"http://cens456.planfines2.com.ar/wp-content/uploads/2019/02/declaracion-jurada-cargos-1.pdf\">Descargar</a></p>
 <br>

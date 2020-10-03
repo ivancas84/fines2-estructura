@@ -19,20 +19,17 @@ class ConfirmacionEmail extends Base {
 
     $toma = $this->container->getDb()->get("toma",$id);
     
-    $horario_ = $this->cursoHorario($toma["curso"]);
-    $horario = count($horario_) ? $horario_[0] : null;
+    $horario_ = $this->container->getController("model_tools")->cursoHorario([$toma["curso"]]);
+    $horario = count($horario_) ? $horario_[0]["horario"] : null;
 
-    //print_r($toma);
     $t = $this->container->getSqlo("toma")->values($toma);
 
     $body = '
-    <!DOCTYPE html>
-    <html>
-    <body>
-    <p>Hola ' . $t["docente"]->nombre() . ', a continuación se indica el comprobante de toma de posesión.</p>
-    <p>Podrá descargar la lista de alumnos del siguiente enlace: <a href="http://planfines2.com.ar/registro-docente/lista-alumnos?id=' . $t["toma"]->id() . '">Descargar lista de alumnos</a></p>    
+<p>Hola ' . $t["docente"]->nombre() . ', a continuación se indica el comprobante de toma de posesión.</p>
+<p>Podrá descargar la lista de alumnos del siguiente enlace: <a href="http://planfines2.com.ar/registro-docente/lista-alumnos?id=' . $t["toma"]->id() . '">Lista de alumnos</a></p>    
+<p>Podrá descargar las planillas de finalización de semestre e instrucciones del siguiente enlace: <a href="http://cens456.planfines2.com.ar/docentes/">Finalización de semestre</a></p>    
 
-    <div style="margin-left:15px;width:600px;padding:20px;border:1px solid #d0d2d2;border-radius:5px;color:#444444">
+<div style="margin-left:15px;width:600px;padding:20px;border:1px solid #d0d2d2;border-radius:5px;color:#444444">
     
       <h4 style="padding:0 0 12px 0;margin:0;font-weight:bold">Toma de posesión: <span>' . $t["docente"]->apellidos("X") . ', ' . $t["docente"]->nombre("Xx Yy") . ' DNI ' . $t["docente"]->numeroDocumento() . '</span></h4>
       
@@ -64,7 +61,7 @@ class ConfirmacionEmail extends Base {
           </tr>
           <tr>
             <td><strong>Horario:</strong></td>
-            <td>' . $horario["horario"] . '</td>
+            <td>' . $horario . '</td>
           </tr>
           <tr>
             <td><strong>Horas Cátedra:</strong></td>
@@ -76,20 +73,24 @@ class ConfirmacionEmail extends Base {
       </div>
       <div style="clear:both;display:block;margin:0 0 10px 0;padding:10px 0 10px 0;border-top:1px solid #d7d7d7">
         <p>El/la docente asume el compromiso de: participar en las mesas examinadoras a las que fuera convocado, colaborar con el referente de la sede y entregar una copia impresa de las planillas solicitadas al finalizar el cuatrimestre al CENS al cual corresponde la comisión y sede. Declara no estar en uso de licencia, cambio de funciones o superposición horaria).</p>
-        
       </div>    
     
-      </div>
-      </body>
-    </html>  
+</div>
+-- 
+<br>
+Saluda a Usted muy atentamente:
+<br>
+Equipo de Coordinadores del Plan Fines 2 CENS 456 UMuPla
+<br>http://cens456.planfines2.com.ar
 ';
 
 
-    $subject = "Comprobante toma de posesión " . $t["asignatura"]->nombre() . " IGE " . $t["curso"]->ige();
+    $subject = "Comprobante toma de posesión: " . $t["asignatura"]->nombre() . " IGE " . $t["curso"]->ige();
 
     $addresses = [
-      "icastaneda@abc.gob.ar" => "Iván Castañeda"
+      $t["docente"]->emailAbc() => $t["docente"]->nombres() . " " . $t["docente"]->apellidos(),
     ];
+
     email($addresses, $subject, $body);
 
     return true;
