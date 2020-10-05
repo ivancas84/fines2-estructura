@@ -11,4 +11,13 @@ class PersonaValue extends _PersonaValue{
     return implode(" ", $ret);
   }
 
+  public function preCuil(){
+    if(Validation::is_empty($this->cuil)) return $this->cuil;
+    return substr($this->cuil, 0, 2);  
+  }
+
+  public function suCuil(){
+    if(Validation::is_empty($this->cuil)) return $this->cuil;
+    return substr($this->cuil, 10, 1);  
+  }
 }
