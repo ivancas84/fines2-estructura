@@ -11,4 +11,13 @@ class SedeCondition extends _SedeCondition{
     if(!$this->value->checkNumero()) throw new Exception("Valor incorrecto: Numero");
     return "({$field} {$option} {$this->value->sqlNumero()})";  
   }
+
+  public function numeroPad($option, $value) { 
+    $field = $this->mapping->numeroPad();
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approx($field, $option, $value)) return $c;
+    $this->value->setNumero($value);
+    if(!$this->value->checkNumero()) throw new Exception("Valor incorrecto: Numero");
+    return "({$field} {$option} {$this->value->sqlNumero()})";  
+  }
 }
