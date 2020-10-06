@@ -28,7 +28,6 @@ class _TomaEntity extends Entity {
       $this->container->getField("toma", "curso"),
       $this->container->getField("toma", "docente"),
       $this->container->getField("toma", "reemplazo"),
-      $this->container->getField("toma", "planilla_docente"),
     );
   }
 

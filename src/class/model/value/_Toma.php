@@ -14,7 +14,6 @@ class _TomaValue extends ValueEntityOptions{
   protected $curso = UNDEFINED;
   protected $docente = UNDEFINED;
   protected $reemplazo = UNDEFINED;
-  protected $planillaDocente = UNDEFINED;
 
   public function setDefaultId() { if($this->id === UNDEFINED) $this->setId(uniqid()); }
   public function setDefaultFechaToma() { if($this->fechaToma === UNDEFINED) $this->setFechaToma(null); }
@@ -27,7 +26,6 @@ class _TomaValue extends ValueEntityOptions{
   public function setDefaultCurso() { if($this->curso === UNDEFINED) $this->setCurso(null); }
   public function setDefaultDocente() { if($this->docente === UNDEFINED) $this->setDocente(null); }
   public function setDefaultReemplazo() { if($this->reemplazo === UNDEFINED) $this->setReemplazo(null); }
-  public function setDefaultPlanillaDocente() { if($this->planillaDocente === UNDEFINED) $this->setPlanillaDocente(null); }
 
   public function isEmptyId() { if(!Validation::is_empty($this->id)) return false; }
   public function isEmptyFechaToma() { if(!Validation::is_empty($this->fechaToma)) return false; }
@@ -40,7 +38,6 @@ class _TomaValue extends ValueEntityOptions{
   public function isEmptyCurso() { if(!Validation::is_empty($this->curso)) return false; }
   public function isEmptyDocente() { if(!Validation::is_empty($this->docente)) return false; }
   public function isEmptyReemplazo() { if(!Validation::is_empty($this->reemplazo)) return false; }
-  public function isEmptyPlanillaDocente() { if(!Validation::is_empty($this->planillaDocente)) return false; }
 
   public function id() { return $this->id; }
   public function fechaToma($format = null) { return Format::date($this->fechaToma, $format); }
@@ -53,7 +50,6 @@ class _TomaValue extends ValueEntityOptions{
   public function curso($format = null) { return Format::convertCase($this->curso, $format); }
   public function docente($format = null) { return Format::convertCase($this->docente, $format); }
   public function reemplazo($format = null) { return Format::convertCase($this->reemplazo, $format); }
-  public function planillaDocente($format = null) { return Format::convertCase($this->planillaDocente, $format); }
 
   public function _setId(string $p = null) { return $this->id = $p; }  
   public function setId($p) { return $this->id = (is_null($p)) ? null : (string)$p; }
@@ -114,9 +110,6 @@ class _TomaValue extends ValueEntityOptions{
   public function _setReemplazo(string $p = null) { return $this->reemplazo = $p; }  
   public function setReemplazo($p) { return $this->reemplazo = (is_null($p)) ? null : (string)$p; }
 
-  public function _setPlanillaDocente(string $p = null) { return $this->planillaDocente = $p; }  
-  public function setPlanillaDocente($p) { return $this->planillaDocente = (is_null($p)) ? null : (string)$p; }
-
   public function resetId() { if(!Validation::is_empty($this->id)) $this->id = preg_replace('/\s\s+/', ' ', trim($this->id)); }
   public function resetEstado() { if(!Validation::is_empty($this->estado)) $this->estado = preg_replace('/\s\s+/', ' ', trim($this->estado)); }
   public function resetObservaciones() { if(!Validation::is_empty($this->observaciones)) $this->observaciones = preg_replace('/\s\s+/', ' ', trim($this->observaciones)); }
@@ -126,7 +119,6 @@ class _TomaValue extends ValueEntityOptions{
   public function resetCurso() { if(!Validation::is_empty($this->curso)) $this->curso = preg_replace('/\s\s+/', ' ', trim($this->curso)); }
   public function resetDocente() { if(!Validation::is_empty($this->docente)) $this->docente = preg_replace('/\s\s+/', ' ', trim($this->docente)); }
   public function resetReemplazo() { if(!Validation::is_empty($this->reemplazo)) $this->reemplazo = preg_replace('/\s\s+/', ' ', trim($this->reemplazo)); }
-  public function resetPlanillaDocente() { if(!Validation::is_empty($this->planillaDocente)) $this->planillaDocente = preg_replace('/\s\s+/', ' ', trim($this->planillaDocente)); }
 
   public function checkId() { 
       if(Validation::is_undefined($this->id)) return null;
@@ -213,14 +205,6 @@ class _TomaValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
-    public function checkPlanillaDocente() { 
-      $this->_logs->resetLogs("planilla_docente");
-      if(Validation::is_undefined($this->planillaDocente)) return null;
-      $v = Validation::getInstanceValue($this->planillaDocente)->max(45);
-      foreach($v->getErrors() as $error){ $this->_logs->addLog("planilla_docente", "error", $error); }
-      return $v->isSuccess();
-    }
-  
     public function sqlId() { return $this->sql->string($this->id); }
   public function sqlFechaToma() { return $this->sql->dateTime($this->fechaToma, "Y-m-d"); }
   public function sqlFechaTomaYm() { return $this->sql->dateTime($this->fechaToma, "Y-m"); }
@@ -237,7 +221,6 @@ class _TomaValue extends ValueEntityOptions{
   public function sqlCurso() { return $this->sql->string($this->curso); }
   public function sqlDocente() { return $this->sql->string($this->docente); }
   public function sqlReemplazo() { return $this->sql->string($this->reemplazo); }
-  public function sqlPlanillaDocente() { return $this->sql->string($this->planillaDocente); }
 
   public function jsonId() { return $this->id; }
   public function jsonFechaToma() { return $this->fechaToma('c'); }
@@ -250,7 +233,6 @@ class _TomaValue extends ValueEntityOptions{
   public function jsonCurso() { return $this->curso; }
   public function jsonDocente() { return $this->docente; }
   public function jsonReemplazo() { return $this->reemplazo; }
-  public function jsonPlanillaDocente() { return $this->planillaDocente; }
 
 
 

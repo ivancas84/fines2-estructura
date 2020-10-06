@@ -191,19 +191,6 @@ class _TomaCondition extends ConditionEntityOptions{
     return $this->_exists($this->mapping->reemplazo(), $option, settypebool($value));
   }
 
-  public function planillaDocente($option, $value) { 
-    $field = $this->mapping->planillaDocente();
-    if($c = $this->sql->exists($field, $option, $value)) return $c;
-    if($c = $this->sql->approx($field, $option, $value)) return $c;
-    $this->value->setPlanillaDocente($value);
-    if(!$this->value->checkPlanillaDocente()) throw new Exception("Valor incorrecto: Planilla Docente");
-    return "({$field} {$option} {$this->value->sqlPlanillaDocente()})";  
-  }
-
-  public function planillaDocenteIsSet($option, $value) { 
-    return $this->_exists($this->mapping->planillaDocente(), $option, settypebool($value));
-  }
-
 
 
 

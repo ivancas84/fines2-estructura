@@ -21,7 +21,6 @@ class _TomaSql extends EntitySql{
     if($f = $this->container->getMapping('domicilio', 'doc_dom')->_eval($field)) return $f;
     if($f = $this->container->getMapping('persona', 'ree')->_eval($field)) return $f;
     if($f = $this->container->getMapping('domicilio', 'ree_dom')->_eval($field)) return $f;
-    if($f = $this->container->getMapping('planilla_docente', 'pd')->_eval($field)) return $f;
     throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
   }
 
@@ -42,8 +41,7 @@ class _TomaSql extends EntitySql{
 ' . implode(",", $this->container->getFieldAlias('persona', 'doc')->_toArray()) . ',
 ' . implode(",", $this->container->getFieldAlias('domicilio', 'doc_dom')->_toArray()) . ',
 ' . implode(",", $this->container->getFieldAlias('persona', 'ree')->_toArray()) . ',
-' . implode(",", $this->container->getFieldAlias('domicilio', 'ree_dom')->_toArray()) . ',
-' . implode(",", $this->container->getFieldAlias('planilla_docente', 'pd')->_toArray()) . ' 
+' . implode(",", $this->container->getFieldAlias('domicilio', 'ree_dom')->_toArray()) . ' 
 ';
   }
 
@@ -64,7 +62,6 @@ class _TomaSql extends EntitySql{
 ' . $this->container->getSql('domicilio', 'doc_dom')->_join('domicilio', 'doc', $render) . '
 ' . $this->container->getSql('persona', 'ree')->_join('reemplazo', 'toma', $render) . '
 ' . $this->container->getSql('domicilio', 'ree_dom')->_join('domicilio', 'ree', $render) . '
-' . $this->container->getSql('planilla_docente', 'pd')->_join('planilla_docente', 'toma', $render) . '
 ' ;
   }
 
@@ -86,7 +83,6 @@ class _TomaSql extends EntitySql{
     if($c = $this->container->getCondition('domicilio','doc_dom')->_eval($field, [$option, $value])) return $c;
     if($c = $this->container->getCondition('persona','ree')->_eval($field, [$option, $value])) return $c;
     if($c = $this->container->getCondition('domicilio','ree_dom')->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getCondition('planilla_docente','pd')->_eval($field, [$option, $value])) return $c;
   }
 
   protected function conditionFieldAux($field, $option, $value) {
@@ -107,7 +103,6 @@ class _TomaSql extends EntitySql{
     if($c = $this->container->getConditionAux('domicilio','doc_dom')->_eval($field, [$option, $value])) return $c;
     if($c = $this->container->getConditionAux('persona','ree')->_eval($field, [$option, $value])) return $c;
     if($c = $this->container->getConditionAux('domicilio','ree_dom')->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getConditionAux('planilla_docente','pd')->_eval($field, [$option, $value])) return $c;
   }
 
 

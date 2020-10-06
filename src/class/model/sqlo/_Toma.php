@@ -23,7 +23,6 @@ class _TomaSqlo extends EntitySqlo {
     $sql .= "curso, " ;
     $sql .= "docente, " ;
     $sql .= "reemplazo, " ;
-    $sql .= "planilla_docente, " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
 
     $sql .= ")
@@ -39,7 +38,6 @@ VALUES ( ";
     $sql .= $row['curso'] . ", " ;
     $sql .= $row['docente'] . ", " ;
     $sql .= $row['reemplazo'] . ", " ;
-    $sql .= $row['planilla_docente'] . ", " ;
     $sql = substr($sql, 0, -2); //eliminar ultima coma
 
     $sql .= ");
@@ -62,7 +60,6 @@ UPDATE " . $this->entity->sn_() . " SET
     if (isset($row['curso'] )) $sql .= "curso = " . $row['curso'] . " ," ;
     if (isset($row['docente'] )) $sql .= "docente = " . $row['docente'] . " ," ;
     if (isset($row['reemplazo'] )) $sql .= "reemplazo = " . $row['reemplazo'] . " ," ;
-    if (isset($row['planilla_docente'] )) $sql .= "planilla_docente = " . $row['planilla_docente'] . " ," ;
     //eliminar ultima coma
     $sql = substr($sql, 0, -2);
 
@@ -88,7 +85,6 @@ UPDATE " . $this->entity->sn_() . " SET
     if(!is_null($row['doc_dom_id'])) $row_["docente_"]["domicilio_"] = $this->container->getValue('domicilio', 'doc_dom')->_fromArray($row, "set")->_toArray("json");
     if(!is_null($row['ree_id'])) $row_["reemplazo_"] = $this->container->getValue('persona', 'ree')->_fromArray($row, "set")->_toArray("json");
     if(!is_null($row['ree_dom_id'])) $row_["reemplazo_"]["domicilio_"] = $this->container->getValue('domicilio', 'ree_dom')->_fromArray($row, "set")->_toArray("json");
-    if(!is_null($row['pd_id'])) $row_["planilla_docente_"] = $this->container->getValue('planilla_docente', 'pd')->_fromArray($row, "set")->_toArray("json");
     return $row_;
   }
 
@@ -111,7 +107,6 @@ UPDATE " . $this->entity->sn_() . " SET
     $row_["domicilio2"] = $this->container->getValue('domicilio', 'doc_dom')->_fromArray($row, "set");
     $row_["reemplazo"] = $this->container->getValue('persona', 'ree')->_fromArray($row, "set");
     $row_["domicilio3"] = $this->container->getValue('domicilio', 'ree_dom')->_fromArray($row, "set");
-    $row_["planilla_docente"] = $this->container->getValue('planilla_docente', 'pd')->_fromArray($row, "set");
     return $row_;
   }
 

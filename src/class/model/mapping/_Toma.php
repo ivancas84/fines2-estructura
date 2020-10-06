@@ -17,7 +17,6 @@ class _TomaMapping extends MappingEntityOptions{
   public function curso() { return $this->_pt() . ".curso"; }
   public function docente() { return $this->_pt() . ".docente"; }
   public function reemplazo() { return $this->_pt() . ".reemplazo"; }
-  public function planillaDocente() { return $this->_pt() . ".planilla_docente"; }
 
   public function minId() { return "MIN({$this->_pt()}.id)"; }
   public function maxId() { return "MAX({$this->_pt()}.id)"; }
@@ -64,10 +63,6 @@ class _TomaMapping extends MappingEntityOptions{
   public function minReemplazo() { return "MIN({$this->_pt()}.reemplazo)"; }
   public function maxReemplazo() { return "MAX({$this->_pt()}.reemplazo)"; }
   public function countReemplazo() { return "COUNT({$this->_pt()}.reemplazo)"; }
-
-  public function minPlanillaDocente() { return "MIN({$this->_pt()}.planilla_docente)"; }
-  public function maxPlanillaDocente() { return "MAX({$this->_pt()}.planilla_docente)"; }
-  public function countPlanillaDocente() { return "COUNT({$this->_pt()}.planilla_docente)"; }
 
   public function label() {
     return "CONCAT_WS(' ', {$this->_pt()}.id)"; 

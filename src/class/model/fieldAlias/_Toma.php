@@ -17,7 +17,6 @@ class _TomaFieldAlias extends FieldAliasEntityOptions{
   public function curso() { return $this->mapping->curso() . " AS " . $this->_pf() . "curso"; }
   public function docente() { return $this->mapping->docente() . " AS " . $this->_pf() . "docente"; }
   public function reemplazo() { return $this->mapping->reemplazo() . " AS " . $this->_pf() . "reemplazo"; }
-  public function planillaDocente() { return $this->mapping->planillaDocente() . " AS " . $this->_pf() . "planilla_docente"; }
 
   public function minId() { return $this->mapping->minId() . " AS " . $this->_pf() . "min_id"; }
   public function maxId() { return $this->mapping->maxId() . " AS " . $this->_pf() . "max_id"; }
@@ -64,10 +63,6 @@ class _TomaFieldAlias extends FieldAliasEntityOptions{
   public function minReemplazo() { return $this->mapping->minReemplazo() . " AS " . $this->_pf() . "min_reemplazo"; }
   public function maxReemplazo() { return $this->mapping->maxReemplazo() . " AS " . $this->_pf() . "max_reemplazo"; }
   public function countReemplazo() { return $this->mapping->countReemplazo() . " AS " . $this->_pf() . "count_reemplazo"; }
-
-  public function minPlanillaDocente() { return $this->mapping->minPlanillaDocente() . " AS " . $this->_pf() . "min_planilla_docente"; }
-  public function maxPlanillaDocente() { return $this->mapping->maxPlanillaDocente() . " AS " . $this->_pf() . "max_planilla_docente"; }
-  public function countPlanillaDocente() { return $this->mapping->countPlanillaDocente() . " AS " . $this->_pf() . "count_planilla_docente"; }
 
   public function label() { return $this->mapping->label() . " AS " . $this->_pf() . "label"; }
 

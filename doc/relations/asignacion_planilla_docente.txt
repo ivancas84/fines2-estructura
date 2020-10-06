@@ -1,0 +1,23 @@
+planilla_docente - pd
+toma - tom
+curso - tom_cur
+comision - tom_cur_com
+sede - tom_cur_com_sed
+domicilio - tom_cur_com_sed_dom
+tipo_sede - tom_cur_com_sed_ts
+centro_educativo - tom_cur_com_sed_ce
+domicilio - tom_cur_com_sed_ce_dom
+modalidad - tom_cur_com_moa
+planificacion - tom_cur_com_pla
+plan - tom_cur_com_pla_plb
+calendario - tom_cur_com_cal
+asignatura - tom_cur_asi
+persona - tom_doc
+domicilio - tom_doc_dom
+persona - tom_ree
+domicilio - tom_ree_dom
+
+id (id): string pk. NOT NULL. MAIN. UNIQUE.
+insertado (ins): timestamp nf. NOT NULL. DEFAULT: current_timestamp().
+planilla_docente (pd): string mu. NOT NULL.
+toma (tom): string mu. NOT NULL.
