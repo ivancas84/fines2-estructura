@@ -3,8 +3,8 @@ require_once("class/model/Rel.php");
 
 class _DesignacionRel extends EntityRel{
 
-  public function mappingField($field){
-    if($f = $this->container->getMapping($this->entity->getName())->_eval($field)) return $f;
+  public function mapping($field){
+    if($f = $this->container->getMapping($this->entityName)->_eval($field)) return $f;
     if($f = $this->container->getMapping('cargo', 'car')->_eval($field)) return $f;
     if($f = $this->container->getMapping('sede', 'sed')->_eval($field)) return $f;
     if($f = $this->container->getMapping('domicilio', 'sed_dom')->_eval($field)) return $f;
@@ -13,11 +13,11 @@ class _DesignacionRel extends EntityRel{
     if($f = $this->container->getMapping('domicilio', 'sed_ce_dom')->_eval($field)) return $f;
     if($f = $this->container->getMapping('persona', 'per')->_eval($field)) return $f;
     if($f = $this->container->getMapping('domicilio', 'per_dom')->_eval($field)) return $f;
-    throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
+    throw new Exception("Campo no reconocido para {$this->entityName}: {$field}");
   }
 
   public function fields(){
-    return implode(",", $this->container->getFieldAlias($this->entity->getName())->_toArray()) . ',
+    return implode(",", $this->container->getFieldAlias($this->entityName)->_toArray()) . ',
 ' . implode(",", $this->container->getFieldAlias('cargo', 'car')->_toArray()) . ',
 ' . implode(",", $this->container->getFieldAlias('sede', 'sed')->_toArray()) . ',
 ' . implode(",", $this->container->getFieldAlias('domicilio', 'sed_dom')->_toArray()) . ',
@@ -41,8 +41,8 @@ class _DesignacionRel extends EntityRel{
 ' ;
   }
 
-  protected function conditionFieldStruct($field, $option, $value) {
-    if($c = $this->container->getCondition($this->entity->getName())->_eval($field, [$option, $value])) return $c;
+  public function condition($field, $option, $value) {
+    if($c = $this->container->getCondition($this->entityName)->_eval($field, [$option, $value])) return $c;
     if($c = $this->container->getCondition('cargo','car')->_eval($field, [$option, $value])) return $c;
     if($c = $this->container->getCondition('sede','sed')->_eval($field, [$option, $value])) return $c;
     if($c = $this->container->getCondition('domicilio','sed_dom')->_eval($field, [$option, $value])) return $c;
@@ -53,8 +53,8 @@ class _DesignacionRel extends EntityRel{
     if($c = $this->container->getCondition('domicilio','per_dom')->_eval($field, [$option, $value])) return $c;
   }
 
-  protected function conditionFieldAux($field, $option, $value) {
-    if($c = $this->container->getConditionAux($this->entity->getName())->_eval($field, [$option, $value])) return $c;
+  public function conditionAux($field, $option, $value) {
+    if($c = $this->container->getConditionAux($this->entityName)->_eval($field, [$option, $value])) return $c;
     if($c = $this->container->getConditionAux('cargo','car')->_eval($field, [$option, $value])) return $c;
     if($c = $this->container->getConditionAux('sede','sed')->_eval($field, [$option, $value])) return $c;
     if($c = $this->container->getConditionAux('domicilio','sed_dom')->_eval($field, [$option, $value])) return $c;
@@ -67,7 +67,7 @@ class _DesignacionRel extends EntityRel{
 
   public function json(array $row = null){
     if(empty($row)) return null;
-    $row_ = $this->container->getValue($this->entity->getName())->_fromArray($row, "set")->_toArray("json");
+    $row_ = $this->container->getValue($this->entityName)->_fromArray($row, "set")->_toArray("json");
     if(!is_null($row['car_id'])) $row_["cargo_"] = $this->container->getValue('cargo', 'car')->_fromArray($row, "set")->_toArray("json");
     if(!is_null($row['sed_id'])) $row_["sede_"] = $this->container->getValue('sede', 'sed')->_fromArray($row, "set")->_toArray("json");
     if(!is_null($row['sed_dom_id'])) $row_["sede_"]["domicilio_"] = $this->container->getValue('domicilio', 'sed_dom')->_fromArray($row, "set")->_toArray("json");
@@ -79,7 +79,7 @@ class _DesignacionRel extends EntityRel{
     return $row_;
   }
 
-  public function values(array $row){
+  public function value(array $row){
     $row_ = [];
     $row_["designacion"] = $this->container->getValue("designacion")->_fromArray($row, "set");
     $row_["cargo"] = $this->container->getValue('cargo', 'car')->_fromArray($row, "set");

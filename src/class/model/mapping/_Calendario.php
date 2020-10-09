@@ -43,7 +43,10 @@ class _CalendarioMapping extends MappingEntityOptions{
   public function countInsertado() { return "COUNT({$this->_pt()}.insertado)"; }
 
   public function label() {
-    return "CONCAT_WS(' ', {$this->_pt()}.id)"; 
+    return "CONCAT_WS(' ', {$this->_pt()}.inicio, 
+{$this->_pt()}.fin, 
+{$this->_pt()}.anio, 
+{$this->_pt()}.semestre)"; 
   }
 
 

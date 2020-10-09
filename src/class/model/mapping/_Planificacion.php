@@ -25,7 +25,9 @@ class _PlanificacionMapping extends MappingEntityOptions{
   public function countPlan() { return "COUNT({$this->_pt()}.plan)"; }
 
   public function label() {
-    return "CONCAT_WS(' ', {$this->_pt()}.id)"; 
+    return "CONCAT_WS(' ', {$this->_pt()}.anio, 
+{$this->_pt()}.semestre, 
+{$this->_pf()}plb.id)"; 
   }
 
 

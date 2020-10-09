@@ -3,8 +3,8 @@ require_once("class/model/Rel.php");
 
 class _HorarioRel extends EntityRel{
 
-  public function mappingField($field){
-    if($f = $this->container->getMapping($this->entity->getName())->_eval($field)) return $f;
+  public function mapping($field){
+    if($f = $this->container->getMapping($this->entityName)->_eval($field)) return $f;
     if($f = $this->container->getMapping('curso', 'cur')->_eval($field)) return $f;
     if($f = $this->container->getMapping('comision', 'cur_com')->_eval($field)) return $f;
     if($f = $this->container->getMapping('sede', 'cur_com_sed')->_eval($field)) return $f;
@@ -18,11 +18,11 @@ class _HorarioRel extends EntityRel{
     if($f = $this->container->getMapping('calendario', 'cur_com_cal')->_eval($field)) return $f;
     if($f = $this->container->getMapping('asignatura', 'cur_asi')->_eval($field)) return $f;
     if($f = $this->container->getMapping('dia', 'dia')->_eval($field)) return $f;
-    throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
+    throw new Exception("Campo no reconocido para {$this->entityName}: {$field}");
   }
 
   public function fields(){
-    return implode(",", $this->container->getFieldAlias($this->entity->getName())->_toArray()) . ',
+    return implode(",", $this->container->getFieldAlias($this->entityName)->_toArray()) . ',
 ' . implode(",", $this->container->getFieldAlias('curso', 'cur')->_toArray()) . ',
 ' . implode(",", $this->container->getFieldAlias('comision', 'cur_com')->_toArray()) . ',
 ' . implode(",", $this->container->getFieldAlias('sede', 'cur_com_sed')->_toArray()) . ',
@@ -56,8 +56,8 @@ class _HorarioRel extends EntityRel{
 ' ;
   }
 
-  protected function conditionFieldStruct($field, $option, $value) {
-    if($c = $this->container->getCondition($this->entity->getName())->_eval($field, [$option, $value])) return $c;
+  public function condition($field, $option, $value) {
+    if($c = $this->container->getCondition($this->entityName)->_eval($field, [$option, $value])) return $c;
     if($c = $this->container->getCondition('curso','cur')->_eval($field, [$option, $value])) return $c;
     if($c = $this->container->getCondition('comision','cur_com')->_eval($field, [$option, $value])) return $c;
     if($c = $this->container->getCondition('sede','cur_com_sed')->_eval($field, [$option, $value])) return $c;
@@ -73,8 +73,8 @@ class _HorarioRel extends EntityRel{
     if($c = $this->container->getCondition('dia','dia')->_eval($field, [$option, $value])) return $c;
   }
 
-  protected function conditionFieldAux($field, $option, $value) {
-    if($c = $this->container->getConditionAux($this->entity->getName())->_eval($field, [$option, $value])) return $c;
+  public function conditionAux($field, $option, $value) {
+    if($c = $this->container->getConditionAux($this->entityName)->_eval($field, [$option, $value])) return $c;
     if($c = $this->container->getConditionAux('curso','cur')->_eval($field, [$option, $value])) return $c;
     if($c = $this->container->getConditionAux('comision','cur_com')->_eval($field, [$option, $value])) return $c;
     if($c = $this->container->getConditionAux('sede','cur_com_sed')->_eval($field, [$option, $value])) return $c;
@@ -92,7 +92,7 @@ class _HorarioRel extends EntityRel{
 
   public function json(array $row = null){
     if(empty($row)) return null;
-    $row_ = $this->container->getValue($this->entity->getName())->_fromArray($row, "set")->_toArray("json");
+    $row_ = $this->container->getValue($this->entityName)->_fromArray($row, "set")->_toArray("json");
     if(!is_null($row['cur_id'])) $row_["curso_"] = $this->container->getValue('curso', 'cur')->_fromArray($row, "set")->_toArray("json");
     if(!is_null($row['cur_com_id'])) $row_["curso_"]["comision_"] = $this->container->getValue('comision', 'cur_com')->_fromArray($row, "set")->_toArray("json");
     if(!is_null($row['cur_com_sed_id'])) $row_["curso_"]["comision_"]["sede_"] = $this->container->getValue('sede', 'cur_com_sed')->_fromArray($row, "set")->_toArray("json");
@@ -109,7 +109,7 @@ class _HorarioRel extends EntityRel{
     return $row_;
   }
 
-  public function values(array $row){
+  public function value(array $row){
     $row_ = [];
     $row_["horario"] = $this->container->getValue("horario")->_fromArray($row, "set");
     $row_["curso"] = $this->container->getValue('curso', 'cur')->_fromArray($row, "set");

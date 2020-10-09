@@ -25,7 +25,7 @@ class _CentroEducativoMapping extends MappingEntityOptions{
   public function countDomicilio() { return "COUNT({$this->_pt()}.domicilio)"; }
 
   public function label() {
-    return "CONCAT_WS(' ', {$this->_pt()}.id)"; 
+    return "CONCAT_WS(' ', {$this->_pt()}.nombre)"; 
   }
 
 

@@ -2,3 +2,5 @@ id (id): string pk. NOT NULL. MAIN. UNIQUE.
 orientacion (ori): string nf. NOT NULL.
 resolucion (res): string nf.
 distribucion_horaria (dh): string nf.
+
+UNIQUE MULTIPLE: orientacion, distribucion_horaria

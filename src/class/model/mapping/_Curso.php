@@ -46,7 +46,17 @@ class _CursoMapping extends MappingEntityOptions{
   public function countAsignatura() { return "COUNT({$this->_pt()}.asignatura)"; }
 
   public function label() {
-    return "CONCAT_WS(' ', {$this->_pt()}.id)"; 
+    return "CONCAT_WS(' ', {$this->_pf()}com.division, 
+{$this->_pf()}com_sed.numero, 
+{$this->_pf()}com_sed.nombre, 
+{$this->_pf()}com_pla.anio, 
+{$this->_pf()}com_pla.semestre, 
+{$this->_pf()}com_pla_plb.id, 
+{$this->_pf()}com_cal.inicio, 
+{$this->_pf()}com_cal.fin, 
+{$this->_pf()}com_cal.anio, 
+{$this->_pf()}com_cal.semestre, 
+{$this->_pf()}asi.nombre)"; 
   }
 
 

@@ -3,17 +3,17 @@ require_once("class/model/Rel.php");
 
 class _SedeRel extends EntityRel{
 
-  public function mappingField($field){
-    if($f = $this->container->getMapping($this->entity->getName())->_eval($field)) return $f;
+  public function mapping($field){
+    if($f = $this->container->getMapping($this->entityName)->_eval($field)) return $f;
     if($f = $this->container->getMapping('domicilio', 'dom')->_eval($field)) return $f;
     if($f = $this->container->getMapping('tipo_sede', 'ts')->_eval($field)) return $f;
     if($f = $this->container->getMapping('centro_educativo', 'ce')->_eval($field)) return $f;
     if($f = $this->container->getMapping('domicilio', 'ce_dom')->_eval($field)) return $f;
-    throw new Exception("Campo no reconocido para {$this->entity->getName()}: {$field}");
+    throw new Exception("Campo no reconocido para {$this->entityName}: {$field}");
   }
 
   public function fields(){
-    return implode(",", $this->container->getFieldAlias($this->entity->getName())->_toArray()) . ',
+    return implode(",", $this->container->getFieldAlias($this->entityName)->_toArray()) . ',
 ' . implode(",", $this->container->getFieldAlias('domicilio', 'dom')->_toArray()) . ',
 ' . implode(",", $this->container->getFieldAlias('tipo_sede', 'ts')->_toArray()) . ',
 ' . implode(",", $this->container->getFieldAlias('centro_educativo', 'ce')->_toArray()) . ',
@@ -29,16 +29,16 @@ class _SedeRel extends EntityRel{
 ' ;
   }
 
-  protected function conditionFieldStruct($field, $option, $value) {
-    if($c = $this->container->getCondition($this->entity->getName())->_eval($field, [$option, $value])) return $c;
+  public function condition($field, $option, $value) {
+    if($c = $this->container->getCondition($this->entityName)->_eval($field, [$option, $value])) return $c;
     if($c = $this->container->getCondition('domicilio','dom')->_eval($field, [$option, $value])) return $c;
     if($c = $this->container->getCondition('tipo_sede','ts')->_eval($field, [$option, $value])) return $c;
     if($c = $this->container->getCondition('centro_educativo','ce')->_eval($field, [$option, $value])) return $c;
     if($c = $this->container->getCondition('domicilio','ce_dom')->_eval($field, [$option, $value])) return $c;
   }
 
-  protected function conditionFieldAux($field, $option, $value) {
-    if($c = $this->container->getConditionAux($this->entity->getName())->_eval($field, [$option, $value])) return $c;
+  public function conditionAux($field, $option, $value) {
+    if($c = $this->container->getConditionAux($this->entityName)->_eval($field, [$option, $value])) return $c;
     if($c = $this->container->getConditionAux('domicilio','dom')->_eval($field, [$option, $value])) return $c;
     if($c = $this->container->getConditionAux('tipo_sede','ts')->_eval($field, [$option, $value])) return $c;
     if($c = $this->container->getConditionAux('centro_educativo','ce')->_eval($field, [$option, $value])) return $c;
@@ -47,7 +47,7 @@ class _SedeRel extends EntityRel{
 
   public function json(array $row = null){
     if(empty($row)) return null;
-    $row_ = $this->container->getValue($this->entity->getName())->_fromArray($row, "set")->_toArray("json");
+    $row_ = $this->container->getValue($this->entityName)->_fromArray($row, "set")->_toArray("json");
     if(!is_null($row['dom_id'])) $row_["domicilio_"] = $this->container->getValue('domicilio', 'dom')->_fromArray($row, "set")->_toArray("json");
     if(!is_null($row['ts_id'])) $row_["tipo_sede_"] = $this->container->getValue('tipo_sede', 'ts')->_fromArray($row, "set")->_toArray("json");
     if(!is_null($row['ce_id'])) $row_["centro_educativo_"] = $this->container->getValue('centro_educativo', 'ce')->_fromArray($row, "set")->_toArray("json");
@@ -55,7 +55,7 @@ class _SedeRel extends EntityRel{
     return $row_;
   }
 
-  public function values(array $row){
+  public function value(array $row){
     $row_ = [];
     $row_["sede"] = $this->container->getValue("sede")->_fromArray($row, "set");
     $row_["domicilio"] = $this->container->getValue('domicilio', 'dom')->_fromArray($row, "set");

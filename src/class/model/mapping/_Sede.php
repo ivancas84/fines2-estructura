@@ -58,7 +58,8 @@ class _SedeMapping extends MappingEntityOptions{
   public function countCentroEducativo() { return "COUNT({$this->_pt()}.centro_educativo)"; }
 
   public function label() {
-    return "CONCAT_WS(' ', {$this->_pt()}.id)"; 
+    return "CONCAT_WS(' ', {$this->_pt()}.numero, 
+{$this->_pt()}.nombre)"; 
   }
 
 

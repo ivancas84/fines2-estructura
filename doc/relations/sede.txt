@@ -3,11 +3,11 @@ tipo_sede - ts
 centro_educativo - ce
 domicilio - ce_dom
 
-id (id): string pk. NOT NULL. MAIN. UNIQUE.
-numero (num): string nf. NOT NULL.
-nombre (nom): string nf. NOT NULL.
+id (id): string pk. NOT NULL. UNIQUE.
+numero (num): string nf. NOT NULL. MAIN.
+nombre (nom): string nf. NOT NULL. MAIN.
 observaciones (obs): text nf.
-alta (alt): timestamp nf. NOT NULL. DEFAULT: current_timestamp().
+alta (alt): timestamp nf. NOT NULL. NOT ADMIN. DEFAULT: current_timestamp().
 baja (baj): timestamp nf.
 domicilio (dom): string mu.
 tipo_sede (ts): string mu.

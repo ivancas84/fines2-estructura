@@ -6,12 +6,13 @@ require_once("class/Container.php");
 
 $container = new Container();
 $render = new Render();
-$render->setOrder(["numero_pad" => "ASC"]);
+$render->setAggregate(["count"]);
+$render->addCondition(["cal_anio","=","2019"]);
 //$render->addGeneralCondition(["label","=~","25A11"]);
-$sqlo = $container->getSqlo("sede");
+$sqlo = $container->getSqlo("comision");
 
 echo "<pre>";
-echo $sqlo->all($render);
+echo $sqlo->advanced($render);
 /*
 $comision = [
   "id" => "anId",
