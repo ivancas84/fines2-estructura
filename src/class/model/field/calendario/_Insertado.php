@@ -6,16 +6,11 @@ class _FieldCalendarioInsertado extends Field {
 
   public $type = "timestamp";
   public $fieldType = "nf";
-  public $unique = false;
-  public $notNull = true;
   public $default = "current_timestamp()";
-  public $length = false;
-  public $main = false;
+  public $length = false;  
   public $name = "insertado";
   public $alias = "ins";
-
-
-  public function getEntity(){ return $this->container->getEntity('calendario'); }
+  public $entityName = "calendario";
 
 
 }

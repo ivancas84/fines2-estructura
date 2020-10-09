@@ -15,7 +15,7 @@ class _TipoSedeMapping extends MappingEntityOptions{
   public function countDescripcion() { return "COUNT({$this->_pt()}.descripcion)"; }
 
   public function label() {
-    return "CONCAT_WS(' ', {$this->_pt()}.descripcion)"; 
+    return "CONCAT_WS(' ', {$this->_pt()}.id)"; 
   }
 
 

@@ -84,17 +84,7 @@ class _ComisionMapping extends MappingEntityOptions{
   public function countCalendario() { return "COUNT({$this->_pt()}.calendario)"; }
 
   public function label() {
-    return "CONCAT_WS(' ', {$this->_pt()}.division, 
-{$this->_pf()}sed.numero, 
-{$this->_pf()}sed.nombre, 
-{$this->_pf()}pla.anio, 
-{$this->_pf()}pla.semestre, 
-{$this->_pf()}pla_plb.orientacion, 
-{$this->_pf()}pla_plb.distribucion_horaria, 
-{$this->_pf()}cal.inicio, 
-{$this->_pf()}cal.fin, 
-{$this->_pf()}cal.anio, 
-{$this->_pf()}cal.semestre)"; 
+    return "CONCAT_WS(' ', {$this->_pt()}.id)"; 
   }
 
 

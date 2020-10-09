@@ -6,22 +6,15 @@ require_once("class/model/Field.php");
 class _DomicilioEntity extends Entity {
   public $name = "domicilio";
   public $alias = "domi";
- 
-  public function getPk(){
-    return $this->container->getField("domicilio", "id");
-  }
+  public $main = ['id'];
+  public $pk = ['id'];
+  public $nf = ['calle', 'entre', 'numero', 'piso', 'departamento', 'barrio', 'localidad'];
+  public $mu = [];
+  public $_u = [];
+  public $notNull = ['id', 'calle', 'numero', 'localidad'];
+  public $unique = ['id'];
+  public $admin = ['id', 'calle', 'entre', 'numero', 'piso', 'departamento', 'barrio', 'localidad'];
 
-  public function getFieldsNf(){
-    return array(
-      $this->container->getField("domicilio", "calle"),
-      $this->container->getField("domicilio", "entre"),
-      $this->container->getField("domicilio", "numero"),
-      $this->container->getField("domicilio", "piso"),
-      $this->container->getField("domicilio", "departamento"),
-      $this->container->getField("domicilio", "barrio"),
-      $this->container->getField("domicilio", "localidad"),
-    );
-  }
 
 
 }

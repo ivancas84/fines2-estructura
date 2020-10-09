@@ -13,7 +13,7 @@ class _HorarioCondition extends ConditionEntityOptions{
   }
 
   public function idIsSet($option, $value) { 
-    return $this->_exists($this->mapping->id(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->id(), $option, settypebool($value));
   }
 
   public function horaInicio($option, $value) { 
@@ -35,7 +35,7 @@ class _HorarioCondition extends ConditionEntityOptions{
   }
 
   public function horaInicioIsSet($option, $value) { 
-    return $this->_exists($this->mapping->horaInicio(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->horaInicio(), $option, settypebool($value));
   }
 
   public function horaFin($option, $value) { 
@@ -57,7 +57,7 @@ class _HorarioCondition extends ConditionEntityOptions{
   }
 
   public function horaFinIsSet($option, $value) { 
-    return $this->_exists($this->mapping->horaFin(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->horaFin(), $option, settypebool($value));
   }
 
   public function curso($option, $value) { 
@@ -70,7 +70,7 @@ class _HorarioCondition extends ConditionEntityOptions{
   }
 
   public function cursoIsSet($option, $value) { 
-    return $this->_exists($this->mapping->curso(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->curso(), $option, settypebool($value));
   }
 
   public function dia($option, $value) { 
@@ -83,7 +83,7 @@ class _HorarioCondition extends ConditionEntityOptions{
   }
 
   public function diaIsSet($option, $value) { 
-    return $this->_exists($this->mapping->dia(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->dia(), $option, settypebool($value));
   }
 
 

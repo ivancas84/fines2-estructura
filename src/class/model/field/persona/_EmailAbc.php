@@ -6,16 +6,11 @@ class _FieldPersonaEmailAbc extends Field {
 
   public $type = "varchar";
   public $fieldType = "nf";
-  public $unique = true;
-  public $notNull = false;
   public $default = null;
-  public $length = "255";
-  public $main = false;
+  public $length = "255";  
   public $name = "email_abc";
   public $alias = "ea";
-
-
-  public function getEntity(){ return $this->container->getEntity('persona'); }
+  public $entityName = "persona";
 
 
 }

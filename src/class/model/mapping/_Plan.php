@@ -25,8 +25,7 @@ class _PlanMapping extends MappingEntityOptions{
   public function countDistribucionHoraria() { return "COUNT({$this->_pt()}.distribucion_horaria)"; }
 
   public function label() {
-    return "CONCAT_WS(' ', {$this->_pt()}.orientacion, 
-{$this->_pt()}.distribucion_horaria)"; 
+    return "CONCAT_WS(' ', {$this->_pt()}.id)"; 
   }
 
 

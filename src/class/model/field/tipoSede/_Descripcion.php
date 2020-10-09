@@ -6,16 +6,11 @@ class _FieldTipoSedeDescripcion extends Field {
 
   public $type = "varchar";
   public $fieldType = "nf";
-  public $unique = true;
-  public $notNull = true;
   public $default = null;
-  public $length = "255";
-  public $main = false;
+  public $length = "255";  
   public $name = "descripcion";
   public $alias = "des";
-
-
-  public function getEntity(){ return $this->container->getEntity('tipo_sede'); }
+  public $entityName = "tipo_sede";
 
 
 }

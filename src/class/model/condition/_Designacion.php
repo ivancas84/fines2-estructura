@@ -13,7 +13,7 @@ class _DesignacionCondition extends ConditionEntityOptions{
   }
 
   public function idIsSet($option, $value) { 
-    return $this->_exists($this->mapping->id(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->id(), $option, settypebool($value));
   }
 
   public function desde($option, $value) { 
@@ -44,7 +44,7 @@ class _DesignacionCondition extends ConditionEntityOptions{
   }
 
   public function desdeIsSet($option, $value) { 
-    return $this->_exists($this->mapping->desde(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->desde(), $option, settypebool($value));
   }
 
   public function hasta($option, $value) { 
@@ -75,7 +75,7 @@ class _DesignacionCondition extends ConditionEntityOptions{
   }
 
   public function hastaIsSet($option, $value) { 
-    return $this->_exists($this->mapping->hasta(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->hasta(), $option, settypebool($value));
   }
 
   public function alta($option, $value) { 
@@ -115,7 +115,7 @@ class _DesignacionCondition extends ConditionEntityOptions{
   }
 
   public function altaIsSet($option, $value) { 
-    return $this->_exists($this->mapping->alta(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->alta(), $option, settypebool($value));
   }
 
   public function cargo($option, $value) { 
@@ -128,7 +128,7 @@ class _DesignacionCondition extends ConditionEntityOptions{
   }
 
   public function cargoIsSet($option, $value) { 
-    return $this->_exists($this->mapping->cargo(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->cargo(), $option, settypebool($value));
   }
 
   public function sede($option, $value) { 
@@ -141,7 +141,7 @@ class _DesignacionCondition extends ConditionEntityOptions{
   }
 
   public function sedeIsSet($option, $value) { 
-    return $this->_exists($this->mapping->sede(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->sede(), $option, settypebool($value));
   }
 
   public function persona($option, $value) { 
@@ -154,7 +154,7 @@ class _DesignacionCondition extends ConditionEntityOptions{
   }
 
   public function personaIsSet($option, $value) { 
-    return $this->_exists($this->mapping->persona(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->persona(), $option, settypebool($value));
   }
 
 

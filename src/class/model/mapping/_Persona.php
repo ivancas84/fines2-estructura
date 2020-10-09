@@ -75,9 +75,7 @@ class _PersonaMapping extends MappingEntityOptions{
   public function countDomicilio() { return "COUNT({$this->_pt()}.domicilio)"; }
 
   public function label() {
-    return "CONCAT_WS(' ', {$this->_pt()}.nombres, 
-{$this->_pt()}.apellidos, 
-{$this->_pt()}.numero_documento)"; 
+    return "CONCAT_WS(' ', {$this->_pt()}.id)"; 
   }
 
 

@@ -35,7 +35,7 @@ class _AsignaturaMapping extends MappingEntityOptions{
   public function countPerfil() { return "COUNT({$this->_pt()}.perfil)"; }
 
   public function label() {
-    return "CONCAT_WS(' ', {$this->_pt()}.nombre)"; 
+    return "CONCAT_WS(' ', {$this->_pt()}.id)"; 
   }
 
 

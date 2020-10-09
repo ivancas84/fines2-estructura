@@ -6,16 +6,11 @@ class _FieldAsignacionPlanillaDocenteInsertado extends Field {
 
   public $type = "timestamp";
   public $fieldType = "nf";
-  public $unique = false;
-  public $notNull = true;
   public $default = "current_timestamp()";
-  public $length = false;
-  public $main = false;
+  public $length = false;  
   public $name = "insertado";
   public $alias = "ins";
-
-
-  public function getEntity(){ return $this->container->getEntity('asignacion_planilla_docente'); }
+  public $entityName = "asignacion_planilla_docente";
 
 
 }

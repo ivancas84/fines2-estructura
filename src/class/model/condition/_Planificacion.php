@@ -13,7 +13,7 @@ class _PlanificacionCondition extends ConditionEntityOptions{
   }
 
   public function idIsSet($option, $value) { 
-    return $this->_exists($this->mapping->id(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->id(), $option, settypebool($value));
   }
 
   public function anio($option, $value) { 
@@ -26,7 +26,7 @@ class _PlanificacionCondition extends ConditionEntityOptions{
   }
 
   public function anioIsSet($option, $value) { 
-    return $this->_exists($this->mapping->anio(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->anio(), $option, settypebool($value));
   }
 
   public function semestre($option, $value) { 
@@ -39,7 +39,7 @@ class _PlanificacionCondition extends ConditionEntityOptions{
   }
 
   public function semestreIsSet($option, $value) { 
-    return $this->_exists($this->mapping->semestre(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->semestre(), $option, settypebool($value));
   }
 
   public function plan($option, $value) { 
@@ -52,7 +52,7 @@ class _PlanificacionCondition extends ConditionEntityOptions{
   }
 
   public function planIsSet($option, $value) { 
-    return $this->_exists($this->mapping->plan(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->plan(), $option, settypebool($value));
   }
 
 

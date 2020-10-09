@@ -6,16 +6,11 @@ class _FieldCursoIge extends Field {
 
   public $type = "varchar";
   public $fieldType = "nf";
-  public $unique = false;
-  public $notNull = false;
   public $default = null;
-  public $length = "45";
-  public $main = false;
+  public $length = "45";  
   public $name = "ige";
   public $alias = "ige";
-
-
-  public function getEntity(){ return $this->container->getEntity('curso'); }
+  public $entityName = "curso";
 
 
 }

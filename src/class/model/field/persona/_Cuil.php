@@ -6,16 +6,11 @@ class _FieldPersonaCuil extends Field {
 
   public $type = "varchar";
   public $fieldType = "nf";
-  public $unique = true;
-  public $notNull = false;
   public $default = null;
-  public $length = "45";
-  public $main = false;
+  public $length = "45";  
   public $name = "cuil";
   public $alias = "cui";
-
-
-  public function getEntity(){ return $this->container->getEntity('persona'); }
+  public $entityName = "persona";
 
 
 }

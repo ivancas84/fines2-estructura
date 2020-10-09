@@ -6,18 +6,12 @@ class _FieldDesignacionCargo extends Field {
 
   public $type = "varchar";
   public $fieldType = "mu";
-  public $unique = false;
-  public $notNull = true;
   public $default = null;
-  public $length = "45";
-  public $main = false;
+  public $length = "45";  
   public $name = "cargo";
   public $alias = "car";
-
-
-  public function getEntity(){ return $this->container->getEntity('designacion'); }
-
-  public function getEntityRef(){ return $this->container->getEntity('cargo'); }
+  public $entityName = "designacion";
+  public $entityRefName = "cargo";  
 
 
 }

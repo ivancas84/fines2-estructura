@@ -13,7 +13,7 @@ class _TelefonoCondition extends ConditionEntityOptions{
   }
 
   public function idIsSet($option, $value) { 
-    return $this->_exists($this->mapping->id(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->id(), $option, settypebool($value));
   }
 
   public function tipo($option, $value) { 
@@ -26,7 +26,7 @@ class _TelefonoCondition extends ConditionEntityOptions{
   }
 
   public function tipoIsSet($option, $value) { 
-    return $this->_exists($this->mapping->tipo(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->tipo(), $option, settypebool($value));
   }
 
   public function prefijo($option, $value) { 
@@ -39,7 +39,7 @@ class _TelefonoCondition extends ConditionEntityOptions{
   }
 
   public function prefijoIsSet($option, $value) { 
-    return $this->_exists($this->mapping->prefijo(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->prefijo(), $option, settypebool($value));
   }
 
   public function numero($option, $value) { 
@@ -52,7 +52,7 @@ class _TelefonoCondition extends ConditionEntityOptions{
   }
 
   public function numeroIsSet($option, $value) { 
-    return $this->_exists($this->mapping->numero(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->numero(), $option, settypebool($value));
   }
 
   public function insertado($option, $value) { 
@@ -92,7 +92,7 @@ class _TelefonoCondition extends ConditionEntityOptions{
   }
 
   public function insertadoIsSet($option, $value) { 
-    return $this->_exists($this->mapping->insertado(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->insertado(), $option, settypebool($value));
   }
 
   public function eliminado($option, $value) { 
@@ -132,7 +132,7 @@ class _TelefonoCondition extends ConditionEntityOptions{
   }
 
   public function eliminadoIsSet($option, $value) { 
-    return $this->_exists($this->mapping->eliminado(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->eliminado(), $option, settypebool($value));
   }
 
   public function persona($option, $value) { 
@@ -145,7 +145,7 @@ class _TelefonoCondition extends ConditionEntityOptions{
   }
 
   public function personaIsSet($option, $value) { 
-    return $this->_exists($this->mapping->persona(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->persona(), $option, settypebool($value));
   }
 
 

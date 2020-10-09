@@ -45,9 +45,7 @@ class _DomicilioMapping extends MappingEntityOptions{
   public function countLocalidad() { return "COUNT({$this->_pt()}.localidad)"; }
 
   public function label() {
-    return "CONCAT_WS(' ', {$this->_pt()}.calle, 
-{$this->_pt()}.numero, 
-{$this->_pt()}.barrio)"; 
+    return "CONCAT_WS(' ', {$this->_pt()}.id)"; 
   }
 
 

@@ -15,7 +15,7 @@ class _ModalidadMapping extends MappingEntityOptions{
   public function countNombre() { return "COUNT({$this->_pt()}.nombre)"; }
 
   public function label() {
-    return "CONCAT_WS(' ', {$this->_pt()}.nombre)"; 
+    return "CONCAT_WS(' ', {$this->_pt()}.id)"; 
   }
 
 

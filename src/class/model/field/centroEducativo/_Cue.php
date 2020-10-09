@@ -6,16 +6,11 @@ class _FieldCentroEducativoCue extends Field {
 
   public $type = "varchar";
   public $fieldType = "nf";
-  public $unique = true;
-  public $notNull = false;
   public $default = null;
-  public $length = "45";
-  public $main = false;
+  public $length = "45";  
   public $name = "cue";
   public $alias = "cue";
-
-
-  public function getEntity(){ return $this->container->getEntity('centro_educativo'); }
+  public $entityName = "centro_educativo";
 
 
 }

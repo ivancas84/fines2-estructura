@@ -13,7 +13,7 @@ class _CursoCondition extends ConditionEntityOptions{
   }
 
   public function idIsSet($option, $value) { 
-    return $this->_exists($this->mapping->id(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->id(), $option, settypebool($value));
   }
 
   public function horasCatedra($option, $value) { 
@@ -26,7 +26,7 @@ class _CursoCondition extends ConditionEntityOptions{
   }
 
     public function horasCatedraIsSet($option, $value) { 
-    return $this->_exists($this->mapping->horasCatedra(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->horasCatedra(), $option, settypebool($value));
   }
 
   public function ige($option, $value) { 
@@ -39,7 +39,7 @@ class _CursoCondition extends ConditionEntityOptions{
   }
 
   public function igeIsSet($option, $value) { 
-    return $this->_exists($this->mapping->ige(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->ige(), $option, settypebool($value));
   }
 
   public function numeroDocumentoDesignado($option, $value) { 
@@ -52,7 +52,7 @@ class _CursoCondition extends ConditionEntityOptions{
   }
 
   public function numeroDocumentoDesignadoIsSet($option, $value) { 
-    return $this->_exists($this->mapping->numeroDocumentoDesignado(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->numeroDocumentoDesignado(), $option, settypebool($value));
   }
 
   public function alta($option, $value) { 
@@ -92,7 +92,7 @@ class _CursoCondition extends ConditionEntityOptions{
   }
 
   public function altaIsSet($option, $value) { 
-    return $this->_exists($this->mapping->alta(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->alta(), $option, settypebool($value));
   }
 
   public function comision($option, $value) { 
@@ -105,7 +105,7 @@ class _CursoCondition extends ConditionEntityOptions{
   }
 
   public function comisionIsSet($option, $value) { 
-    return $this->_exists($this->mapping->comision(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->comision(), $option, settypebool($value));
   }
 
   public function asignatura($option, $value) { 
@@ -118,7 +118,7 @@ class _CursoCondition extends ConditionEntityOptions{
   }
 
   public function asignaturaIsSet($option, $value) { 
-    return $this->_exists($this->mapping->asignatura(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->asignatura(), $option, settypebool($value));
   }
 
 

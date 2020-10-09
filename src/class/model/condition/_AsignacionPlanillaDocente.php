@@ -13,7 +13,7 @@ class _AsignacionPlanillaDocenteCondition extends ConditionEntityOptions{
   }
 
   public function idIsSet($option, $value) { 
-    return $this->_exists($this->mapping->id(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->id(), $option, settypebool($value));
   }
 
   public function insertado($option, $value) { 
@@ -53,7 +53,7 @@ class _AsignacionPlanillaDocenteCondition extends ConditionEntityOptions{
   }
 
   public function insertadoIsSet($option, $value) { 
-    return $this->_exists($this->mapping->insertado(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->insertado(), $option, settypebool($value));
   }
 
   public function planillaDocente($option, $value) { 
@@ -66,7 +66,7 @@ class _AsignacionPlanillaDocenteCondition extends ConditionEntityOptions{
   }
 
   public function planillaDocenteIsSet($option, $value) { 
-    return $this->_exists($this->mapping->planillaDocente(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->planillaDocente(), $option, settypebool($value));
   }
 
   public function toma($option, $value) { 
@@ -79,7 +79,7 @@ class _AsignacionPlanillaDocenteCondition extends ConditionEntityOptions{
   }
 
   public function tomaIsSet($option, $value) { 
-    return $this->_exists($this->mapping->toma(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->toma(), $option, settypebool($value));
   }
 
 

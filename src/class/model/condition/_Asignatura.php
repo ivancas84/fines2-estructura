@@ -13,7 +13,7 @@ class _AsignaturaCondition extends ConditionEntityOptions{
   }
 
   public function idIsSet($option, $value) { 
-    return $this->_exists($this->mapping->id(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->id(), $option, settypebool($value));
   }
 
   public function nombre($option, $value) { 
@@ -26,7 +26,7 @@ class _AsignaturaCondition extends ConditionEntityOptions{
   }
 
   public function nombreIsSet($option, $value) { 
-    return $this->_exists($this->mapping->nombre(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->nombre(), $option, settypebool($value));
   }
 
   public function formacion($option, $value) { 
@@ -39,7 +39,7 @@ class _AsignaturaCondition extends ConditionEntityOptions{
   }
 
   public function formacionIsSet($option, $value) { 
-    return $this->_exists($this->mapping->formacion(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->formacion(), $option, settypebool($value));
   }
 
   public function clasificacion($option, $value) { 
@@ -52,7 +52,7 @@ class _AsignaturaCondition extends ConditionEntityOptions{
   }
 
   public function clasificacionIsSet($option, $value) { 
-    return $this->_exists($this->mapping->clasificacion(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->clasificacion(), $option, settypebool($value));
   }
 
   public function codigo($option, $value) { 
@@ -65,7 +65,7 @@ class _AsignaturaCondition extends ConditionEntityOptions{
   }
 
   public function codigoIsSet($option, $value) { 
-    return $this->_exists($this->mapping->codigo(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->codigo(), $option, settypebool($value));
   }
 
   public function perfil($option, $value) { 
@@ -78,7 +78,7 @@ class _AsignaturaCondition extends ConditionEntityOptions{
   }
 
   public function perfilIsSet($option, $value) { 
-    return $this->_exists($this->mapping->perfil(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->perfil(), $option, settypebool($value));
   }
 
 

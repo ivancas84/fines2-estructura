@@ -22,7 +22,7 @@ class _DiaMapping extends MappingEntityOptions{
   public function countDia() { return "COUNT({$this->_pt()}.dia)"; }
 
   public function label() {
-    return "CONCAT_WS(' ', {$this->_pt()}.dia)"; 
+    return "CONCAT_WS(' ', {$this->_pt()}.id)"; 
   }
 
 

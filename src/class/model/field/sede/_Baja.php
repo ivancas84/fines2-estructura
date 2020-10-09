@@ -6,16 +6,11 @@ class _FieldSedeBaja extends Field {
 
   public $type = "timestamp";
   public $fieldType = "nf";
-  public $unique = false;
-  public $notNull = false;
   public $default = null;
-  public $length = false;
-  public $main = false;
+  public $length = false;  
   public $name = "baja";
   public $alias = "baj";
-
-
-  public function getEntity(){ return $this->container->getEntity('sede'); }
+  public $entityName = "sede";
 
 
 }

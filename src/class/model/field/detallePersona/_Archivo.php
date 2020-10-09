@@ -6,18 +6,12 @@ class _FieldDetallePersonaArchivo extends Field {
 
   public $type = "varchar";
   public $fieldType = "mu";
-  public $unique = false;
-  public $notNull = false;
   public $default = null;
-  public $length = "45";
-  public $main = false;
+  public $length = "45";  
   public $name = "archivo";
   public $alias = "arc";
-
-
-  public function getEntity(){ return $this->container->getEntity('detalle_persona'); }
-
-  public function getEntityRef(){ return $this->container->getEntity('file'); }
+  public $entityName = "detalle_persona";
+  public $entityRefName = "file";  
 
 
 }

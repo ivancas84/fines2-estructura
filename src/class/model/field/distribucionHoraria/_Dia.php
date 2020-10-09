@@ -6,16 +6,11 @@ class _FieldDistribucionHorariaDia extends Field {
 
   public $type = "int";
   public $fieldType = "nf";
-  public $unique = false;
-  public $notNull = true;
   public $default = null;
-  public $length = "10";
-  public $main = false;
+  public $length = "10";  
   public $name = "dia";
   public $alias = "dia";
-
-
-  public function getEntity(){ return $this->container->getEntity('distribucion_horaria'); }
+  public $entityName = "distribucion_horaria";
 
 
 }

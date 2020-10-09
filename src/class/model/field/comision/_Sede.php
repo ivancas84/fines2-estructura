@@ -6,18 +6,12 @@ class _FieldComisionSede extends Field {
 
   public $type = "varchar";
   public $fieldType = "mu";
-  public $unique = false;
-  public $notNull = true;
   public $default = null;
-  public $length = "45";
-  public $main = false;
+  public $length = "45";  
   public $name = "sede";
   public $alias = "sed";
-
-
-  public function getEntity(){ return $this->container->getEntity('comision'); }
-
-  public function getEntityRef(){ return $this->container->getEntity('sede'); }
+  public $entityName = "comision";
+  public $entityRefName = "sede";  
 
 
 }

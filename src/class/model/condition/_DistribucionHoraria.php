@@ -13,7 +13,7 @@ class _DistribucionHorariaCondition extends ConditionEntityOptions{
   }
 
   public function idIsSet($option, $value) { 
-    return $this->_exists($this->mapping->id(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->id(), $option, settypebool($value));
   }
 
   public function horasCatedra($option, $value) { 
@@ -26,7 +26,7 @@ class _DistribucionHorariaCondition extends ConditionEntityOptions{
   }
 
     public function horasCatedraIsSet($option, $value) { 
-    return $this->_exists($this->mapping->horasCatedra(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->horasCatedra(), $option, settypebool($value));
   }
 
   public function dia($option, $value) { 
@@ -39,7 +39,7 @@ class _DistribucionHorariaCondition extends ConditionEntityOptions{
   }
 
     public function diaIsSet($option, $value) { 
-    return $this->_exists($this->mapping->dia(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->dia(), $option, settypebool($value));
   }
 
   public function asignatura($option, $value) { 
@@ -52,7 +52,7 @@ class _DistribucionHorariaCondition extends ConditionEntityOptions{
   }
 
   public function asignaturaIsSet($option, $value) { 
-    return $this->_exists($this->mapping->asignatura(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->asignatura(), $option, settypebool($value));
   }
 
   public function planificacion($option, $value) { 
@@ -65,7 +65,7 @@ class _DistribucionHorariaCondition extends ConditionEntityOptions{
   }
 
   public function planificacionIsSet($option, $value) { 
-    return $this->_exists($this->mapping->planificacion(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->planificacion(), $option, settypebool($value));
   }
 
 

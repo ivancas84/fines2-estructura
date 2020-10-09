@@ -13,7 +13,7 @@ class _EmailCondition extends ConditionEntityOptions{
   }
 
   public function idIsSet($option, $value) { 
-    return $this->_exists($this->mapping->id(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->id(), $option, settypebool($value));
   }
 
   public function email($option, $value) { 
@@ -26,7 +26,7 @@ class _EmailCondition extends ConditionEntityOptions{
   }
 
   public function emailIsSet($option, $value) { 
-    return $this->_exists($this->mapping->email(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->email(), $option, settypebool($value));
   }
 
   public function verificado($option, $value) { 
@@ -74,7 +74,7 @@ class _EmailCondition extends ConditionEntityOptions{
   }
 
   public function insertadoIsSet($option, $value) { 
-    return $this->_exists($this->mapping->insertado(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->insertado(), $option, settypebool($value));
   }
 
   public function eliminado($option, $value) { 
@@ -114,7 +114,7 @@ class _EmailCondition extends ConditionEntityOptions{
   }
 
   public function eliminadoIsSet($option, $value) { 
-    return $this->_exists($this->mapping->eliminado(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->eliminado(), $option, settypebool($value));
   }
 
   public function persona($option, $value) { 
@@ -127,7 +127,7 @@ class _EmailCondition extends ConditionEntityOptions{
   }
 
   public function personaIsSet($option, $value) { 
-    return $this->_exists($this->mapping->persona(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->persona(), $option, settypebool($value));
   }
 
 

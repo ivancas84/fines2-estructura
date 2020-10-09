@@ -13,7 +13,7 @@ class _SedeCondition extends ConditionEntityOptions{
   }
 
   public function idIsSet($option, $value) { 
-    return $this->_exists($this->mapping->id(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->id(), $option, settypebool($value));
   }
 
   public function numero($option, $value) { 
@@ -26,7 +26,7 @@ class _SedeCondition extends ConditionEntityOptions{
   }
 
   public function numeroIsSet($option, $value) { 
-    return $this->_exists($this->mapping->numero(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->numero(), $option, settypebool($value));
   }
 
   public function nombre($option, $value) { 
@@ -39,7 +39,7 @@ class _SedeCondition extends ConditionEntityOptions{
   }
 
   public function nombreIsSet($option, $value) { 
-    return $this->_exists($this->mapping->nombre(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->nombre(), $option, settypebool($value));
   }
 
   public function observaciones($option, $value) { 
@@ -52,7 +52,7 @@ class _SedeCondition extends ConditionEntityOptions{
   }
 
   public function observacionesIsSet($option, $value) { 
-    return $this->_exists($this->mapping->observaciones(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->observaciones(), $option, settypebool($value));
   }
 
   public function alta($option, $value) { 
@@ -92,7 +92,7 @@ class _SedeCondition extends ConditionEntityOptions{
   }
 
   public function altaIsSet($option, $value) { 
-    return $this->_exists($this->mapping->alta(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->alta(), $option, settypebool($value));
   }
 
   public function baja($option, $value) { 
@@ -132,7 +132,7 @@ class _SedeCondition extends ConditionEntityOptions{
   }
 
   public function bajaIsSet($option, $value) { 
-    return $this->_exists($this->mapping->baja(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->baja(), $option, settypebool($value));
   }
 
   public function domicilio($option, $value) { 
@@ -145,7 +145,7 @@ class _SedeCondition extends ConditionEntityOptions{
   }
 
   public function domicilioIsSet($option, $value) { 
-    return $this->_exists($this->mapping->domicilio(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->domicilio(), $option, settypebool($value));
   }
 
   public function tipoSede($option, $value) { 
@@ -158,7 +158,7 @@ class _SedeCondition extends ConditionEntityOptions{
   }
 
   public function tipoSedeIsSet($option, $value) { 
-    return $this->_exists($this->mapping->tipoSede(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->tipoSede(), $option, settypebool($value));
   }
 
   public function centroEducativo($option, $value) { 
@@ -171,7 +171,7 @@ class _SedeCondition extends ConditionEntityOptions{
   }
 
   public function centroEducativoIsSet($option, $value) { 
-    return $this->_exists($this->mapping->centroEducativo(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->centroEducativo(), $option, settypebool($value));
   }
 
 

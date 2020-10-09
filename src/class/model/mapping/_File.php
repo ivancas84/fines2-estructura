@@ -41,7 +41,7 @@ class _FileMapping extends MappingEntityOptions{
   public function countCreated() { return "COUNT({$this->_pt()}.created)"; }
 
   public function label() {
-    return "CONCAT_WS(' ', {$this->_pt()}.name)"; 
+    return "CONCAT_WS(' ', {$this->_pt()}.id)"; 
   }
 
 
