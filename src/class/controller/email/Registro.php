@@ -19,7 +19,7 @@ class RegistroEmail extends Base {
     $toma = $this->container->getDb()->get("toma",$id);
 
     $nombre = $toma["doc_nombres"] . " " . $toma["doc_apellidos"];
-    $email =  $toma["doc_email_abc"];
+    $email =  (!empty($toma["doc_email_abc"])) ? $toma["doc_email_abc"] : $toma["doc_email"];
     $ige = $toma["cur_ige"];
     $asignatura = $toma["cur_asi_nombre"];
     $horasCatedra = $toma["cur_horas_catedra"];

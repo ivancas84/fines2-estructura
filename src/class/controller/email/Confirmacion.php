@@ -26,8 +26,9 @@ class ConfirmacionEmail extends Base {
 
     $body = '
 <p>Hola ' . $t["docente"]->nombre() . ', a continuación se indica el comprobante de toma de posesión.</p>
-<p>Podrá descargar la lista de alumnos del siguiente enlace: <a href="http://planfines2.com.ar/registro-docente/lista-alumnos?id=' . $t["toma"]->id() . '">Lista de alumnos</a></p>    
-<p>Podrá descargar las planillas de finalización de semestre e instrucciones del siguiente enlace: <a href="http://cens456.planfines2.com.ar/docentes/">Finalización de semestre</a></p>    
+<p>Descargue la lista de alumnos del siguiente enlace: <a href="http://planfines2.com.ar/registro-docente/lista-alumnos?id=' . $t["toma"]->id() . '">Lista de alumnos</a></p>    
+<p>Descargue las planillas de finalización de semestre e instrucciones del siguiente enlace: <a href="http://cens456.planfines2.com.ar/docentes/">Finalización de semestre</a></p> 
+<p>Únase al grupo de Whatsapp de docentes: <a href="https://chat.whatsapp.com/KRDvOU737LEK73SHnuS0Dr">Grupo docentes</a> o envíe un Whatsapp a 1172870518 para que podamos agregarlo</p>
 
 <div style="margin-left:15px;width:600px;padding:20px;border:1px solid #d0d2d2;border-radius:5px;color:#444444">
     
@@ -87,8 +88,10 @@ Equipo de Coordinadores del Plan Fines 2 CENS 456 UMuPla
 
     $subject = "Comprobante toma de posesión: " . $t["asignatura"]->nombre() . " IGE " . $t["curso"]->ige();
 
+    $email =  (!Validation::is_empty($t["docente"]->emailAbc())) ? $t["docente"]->emailAbc() : $t["docente"]->email();
+
     $addresses = [
-      $t["docente"]->emailAbc() => $t["docente"]->nombres() . " " . $t["docente"]->apellidos(),
+      $email => $t["docente"]->nombres() . " " . $t["docente"]->apellidos(),
     ];
 
     email($addresses, $subject, $body);
