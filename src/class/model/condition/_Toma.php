@@ -13,7 +13,7 @@ class _TomaCondition extends ConditionEntityOptions{
   }
 
   public function idIsSet($option, $value) { 
-    return $this->_exists($this->mapping->id(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->id(), $option, settypebool($value));
   }
 
   public function fechaToma($option, $value) { 
@@ -44,7 +44,7 @@ class _TomaCondition extends ConditionEntityOptions{
   }
 
   public function fechaTomaIsSet($option, $value) { 
-    return $this->_exists($this->mapping->fechaToma(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->fechaToma(), $option, settypebool($value));
   }
 
   public function estado($option, $value) { 
@@ -57,7 +57,7 @@ class _TomaCondition extends ConditionEntityOptions{
   }
 
   public function estadoIsSet($option, $value) { 
-    return $this->_exists($this->mapping->estado(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->estado(), $option, settypebool($value));
   }
 
   public function observaciones($option, $value) { 
@@ -70,7 +70,7 @@ class _TomaCondition extends ConditionEntityOptions{
   }
 
   public function observacionesIsSet($option, $value) { 
-    return $this->_exists($this->mapping->observaciones(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->observaciones(), $option, settypebool($value));
   }
 
   public function comentario($option, $value) { 
@@ -83,7 +83,7 @@ class _TomaCondition extends ConditionEntityOptions{
   }
 
   public function comentarioIsSet($option, $value) { 
-    return $this->_exists($this->mapping->comentario(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->comentario(), $option, settypebool($value));
   }
 
   public function tipoMovimiento($option, $value) { 
@@ -96,7 +96,7 @@ class _TomaCondition extends ConditionEntityOptions{
   }
 
   public function tipoMovimientoIsSet($option, $value) { 
-    return $this->_exists($this->mapping->tipoMovimiento(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->tipoMovimiento(), $option, settypebool($value));
   }
 
   public function estadoContralor($option, $value) { 
@@ -109,7 +109,7 @@ class _TomaCondition extends ConditionEntityOptions{
   }
 
   public function estadoContralorIsSet($option, $value) { 
-    return $this->_exists($this->mapping->estadoContralor(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->estadoContralor(), $option, settypebool($value));
   }
 
   public function alta($option, $value) { 
@@ -149,7 +149,7 @@ class _TomaCondition extends ConditionEntityOptions{
   }
 
   public function altaIsSet($option, $value) { 
-    return $this->_exists($this->mapping->alta(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->alta(), $option, settypebool($value));
   }
 
   public function curso($option, $value) { 
@@ -162,7 +162,7 @@ class _TomaCondition extends ConditionEntityOptions{
   }
 
   public function cursoIsSet($option, $value) { 
-    return $this->_exists($this->mapping->curso(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->curso(), $option, settypebool($value));
   }
 
   public function docente($option, $value) { 
@@ -175,7 +175,7 @@ class _TomaCondition extends ConditionEntityOptions{
   }
 
   public function docenteIsSet($option, $value) { 
-    return $this->_exists($this->mapping->docente(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->docente(), $option, settypebool($value));
   }
 
   public function reemplazo($option, $value) { 
@@ -188,20 +188,7 @@ class _TomaCondition extends ConditionEntityOptions{
   }
 
   public function reemplazoIsSet($option, $value) { 
-    return $this->_exists($this->mapping->reemplazo(), $option, settypebool($value));
-  }
-
-  public function planillaDocente($option, $value) { 
-    $field = $this->mapping->planillaDocente();
-    if($c = $this->sql->exists($field, $option, $value)) return $c;
-    if($c = $this->sql->approx($field, $option, $value)) return $c;
-    $this->value->setPlanillaDocente($value);
-    if(!$this->value->checkPlanillaDocente()) throw new Exception("Valor incorrecto: Planilla Docente");
-    return "({$field} {$option} {$this->value->sqlPlanillaDocente()})";  
-  }
-
-  public function planillaDocenteIsSet($option, $value) { 
-    return $this->_exists($this->mapping->planillaDocente(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->reemplazo(), $option, settypebool($value));
   }
 
 

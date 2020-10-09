@@ -6,16 +6,11 @@ class _FieldPersonaFechaNacimiento extends Field {
 
   public $type = "date";
   public $fieldType = "nf";
-  public $unique = false;
-  public $notNull = false;
   public $default = null;
-  public $length = false;
-  public $main = false;
+  public $length = false;  
   public $name = "fecha_nacimiento";
   public $alias = "fn";
-
-
-  public function getEntity(){ return $this->container->getEntity('persona'); }
+  public $entityName = "persona";
 
 
 }

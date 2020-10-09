@@ -5,6 +5,8 @@ class _CursoMapping extends MappingEntityOptions{
 
   public function id() { return $this->_pt() . ".id"; }
   public function horasCatedra() { return $this->_pt() . ".horas_catedra"; }
+  public function ige() { return $this->_pt() . ".ige"; }
+  public function numeroDocumentoDesignado() { return $this->_pt() . ".numero_documento_designado"; }
   public function alta() { return $this->_pt() . ".alta"; }
   public function altaDate() { return "CAST({$this->_pt()}.alta AS DATE)"; }
   public function altaYm() { return "DATE_FORMAT({$this->_pt()}.alta, '%Y-%m')"; }
@@ -21,6 +23,14 @@ class _CursoMapping extends MappingEntityOptions{
   public function minHorasCatedra() { return "MIN({$this->_pt()}.horas_catedra)"; }
   public function maxHorasCatedra() { return "MAX({$this->_pt()}.horas_catedra)"; }
   public function countHorasCatedra() { return "COUNT({$this->_pt()}.horas_catedra)"; }
+
+  public function minIge() { return "MIN({$this->_pt()}.ige)"; }
+  public function maxIge() { return "MAX({$this->_pt()}.ige)"; }
+  public function countIge() { return "COUNT({$this->_pt()}.ige)"; }
+
+  public function minNumeroDocumentoDesignado() { return "MIN({$this->_pt()}.numero_documento_designado)"; }
+  public function maxNumeroDocumentoDesignado() { return "MAX({$this->_pt()}.numero_documento_designado)"; }
+  public function countNumeroDocumentoDesignado() { return "COUNT({$this->_pt()}.numero_documento_designado)"; }
 
   public function avgAlta() { return "AVG({$this->_pt()}.alta)"; }
   public function minAlta() { return "MIN({$this->_pt()}.alta)"; }
@@ -41,8 +51,7 @@ class _CursoMapping extends MappingEntityOptions{
 {$this->_pf()}com_sed.nombre, 
 {$this->_pf()}com_pla.anio, 
 {$this->_pf()}com_pla.semestre, 
-{$this->_pf()}com_pla_plb.orientacion, 
-{$this->_pf()}com_pla_plb.distribucion_horaria, 
+{$this->_pf()}com_pla_plb.id, 
 {$this->_pf()}com_cal.inicio, 
 {$this->_pf()}com_cal.fin, 
 {$this->_pf()}com_cal.anio, 

@@ -13,7 +13,7 @@ class _PlanillaDocenteCondition extends ConditionEntityOptions{
   }
 
   public function idIsSet($option, $value) { 
-    return $this->_exists($this->mapping->id(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->id(), $option, settypebool($value));
   }
 
   public function numero($option, $value) { 
@@ -26,7 +26,7 @@ class _PlanillaDocenteCondition extends ConditionEntityOptions{
   }
 
   public function numeroIsSet($option, $value) { 
-    return $this->_exists($this->mapping->numero(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->numero(), $option, settypebool($value));
   }
 
   public function insertado($option, $value) { 
@@ -66,7 +66,7 @@ class _PlanillaDocenteCondition extends ConditionEntityOptions{
   }
 
   public function insertadoIsSet($option, $value) { 
-    return $this->_exists($this->mapping->insertado(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->insertado(), $option, settypebool($value));
   }
 
 

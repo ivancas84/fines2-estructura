@@ -6,16 +6,11 @@ class _FieldFileCreated extends Field {
 
   public $type = "timestamp";
   public $fieldType = "nf";
-  public $unique = false;
-  public $notNull = true;
   public $default = "current_timestamp()";
-  public $length = false;
-  public $main = false;
+  public $length = false;  
   public $name = "created";
   public $alias = "cre";
-
-
-  public function getEntity(){ return $this->container->getEntity('file'); }
+  public $entityName = "file";
 
 
 }

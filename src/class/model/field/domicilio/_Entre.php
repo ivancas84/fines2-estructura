@@ -6,16 +6,11 @@ class _FieldDomicilioEntre extends Field {
 
   public $type = "varchar";
   public $fieldType = "nf";
-  public $unique = false;
-  public $notNull = false;
   public $default = null;
-  public $length = "45";
-  public $main = false;
+  public $length = "45";  
   public $name = "entre";
   public $alias = "ent";
-
-
-  public function getEntity(){ return $this->container->getEntity('domicilio'); }
+  public $entityName = "domicilio";
 
 
 }

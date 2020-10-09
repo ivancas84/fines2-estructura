@@ -6,16 +6,11 @@ class _FieldCursoHorasCatedra extends Field {
 
   public $type = "int";
   public $fieldType = "nf";
-  public $unique = false;
-  public $notNull = true;
   public $default = null;
-  public $length = "10";
-  public $main = false;
+  public $length = "10";  
   public $name = "horas_catedra";
   public $alias = "hc";
-
-
-  public function getEntity(){ return $this->container->getEntity('curso'); }
+  public $entityName = "curso";
 
 
 }

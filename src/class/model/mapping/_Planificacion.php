@@ -27,8 +27,7 @@ class _PlanificacionMapping extends MappingEntityOptions{
   public function label() {
     return "CONCAT_WS(' ', {$this->_pt()}.anio, 
 {$this->_pt()}.semestre, 
-{$this->_pf()}plb.orientacion, 
-{$this->_pf()}plb.distribucion_horaria)"; 
+{$this->_pf()}plb.id)"; 
   }
 
 

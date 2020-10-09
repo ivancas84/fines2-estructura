@@ -6,16 +6,11 @@ class _FieldPlanDistribucionHoraria extends Field {
 
   public $type = "varchar";
   public $fieldType = "nf";
-  public $unique = false;
-  public $notNull = false;
   public $default = null;
-  public $length = "45";
-  public $main = false;
+  public $length = "45";  
   public $name = "distribucion_horaria";
   public $alias = "dh";
-
-
-  public function getEntity(){ return $this->container->getEntity('plan'); }
+  public $entityName = "plan";
 
 
 }

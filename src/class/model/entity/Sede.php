@@ -4,11 +4,7 @@ require_once("class/model/entity/_Sede.php");
 
 class SedeEntity extends _SedeEntity  {
  
-
-  public function getFieldsUniqueMultiple(){ 
-    return array(
-      $this->container->getField("sede", "numero"),
-      $this->container->getField("sede", "centro_educativo"),
-    ); 
-  }
+  public $uniqueMultiple = ["numero", "centro_educativo"];
+  public $admin = ['id', 'numero', 'nombre', 'observaciones', 'baja', 'domicilio', 'tipo_sede', 'centro_educativo'];
+  public $main = ["numero", "nombre"];
 }

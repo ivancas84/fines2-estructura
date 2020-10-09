@@ -2,6 +2,8 @@
 
 require_once("class/api/Base.php");
 require_once("class/controller/ModelTools.php");
+require_once("class/tools/Filter.php");
+
 
 class CursoHorarioBaseApi extends BaseApi {
   public $entityName = "curso_horario";

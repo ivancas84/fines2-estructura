@@ -54,7 +54,7 @@ class _DistribucionHorariaValue extends ValueEntityOptions{
   public function checkHorasCatedra() { 
       $this->_logs->resetLogs("horas_catedra");
       if(Validation::is_undefined($this->horasCatedra)) return null;
-      $v = Validation::getInstanceValue($this->horasCatedra)->required()->max(10);
+      $v = Validation::getInstanceValue($this->horasCatedra)->required();
       foreach($v->getErrors() as $error){ $this->_logs->addLog("horas_catedra", "error", $error); }
       return $v->isSuccess();
     }
@@ -62,7 +62,7 @@ class _DistribucionHorariaValue extends ValueEntityOptions{
     public function checkDia() { 
       $this->_logs->resetLogs("dia");
       if(Validation::is_undefined($this->dia)) return null;
-      $v = Validation::getInstanceValue($this->dia)->required()->max(10);
+      $v = Validation::getInstanceValue($this->dia)->required();
       foreach($v->getErrors() as $error){ $this->_logs->addLog("dia", "error", $error); }
       return $v->isSuccess();
     }

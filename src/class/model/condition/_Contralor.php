@@ -13,7 +13,7 @@ class _ContralorCondition extends ConditionEntityOptions{
   }
 
   public function idIsSet($option, $value) { 
-    return $this->_exists($this->mapping->id(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->id(), $option, settypebool($value));
   }
 
   public function fechaContralor($option, $value) { 
@@ -44,7 +44,7 @@ class _ContralorCondition extends ConditionEntityOptions{
   }
 
   public function fechaContralorIsSet($option, $value) { 
-    return $this->_exists($this->mapping->fechaContralor(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->fechaContralor(), $option, settypebool($value));
   }
 
   public function fechaConsejo($option, $value) { 
@@ -75,7 +75,7 @@ class _ContralorCondition extends ConditionEntityOptions{
   }
 
   public function fechaConsejoIsSet($option, $value) { 
-    return $this->_exists($this->mapping->fechaConsejo(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->fechaConsejo(), $option, settypebool($value));
   }
 
   public function insertado($option, $value) { 
@@ -115,7 +115,7 @@ class _ContralorCondition extends ConditionEntityOptions{
   }
 
   public function insertadoIsSet($option, $value) { 
-    return $this->_exists($this->mapping->insertado(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->insertado(), $option, settypebool($value));
   }
 
   public function planillaDocente($option, $value) { 
@@ -128,7 +128,7 @@ class _ContralorCondition extends ConditionEntityOptions{
   }
 
   public function planillaDocenteIsSet($option, $value) { 
-    return $this->_exists($this->mapping->planillaDocente(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->planillaDocente(), $option, settypebool($value));
   }
 
 

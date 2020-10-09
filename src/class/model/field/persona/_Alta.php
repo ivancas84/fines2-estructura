@@ -6,16 +6,11 @@ class _FieldPersonaAlta extends Field {
 
   public $type = "timestamp";
   public $fieldType = "nf";
-  public $unique = false;
-  public $notNull = true;
   public $default = "current_timestamp()";
-  public $length = false;
-  public $main = false;
+  public $length = false;  
   public $name = "alta";
   public $alias = "alt";
-
-
-  public function getEntity(){ return $this->container->getEntity('persona'); }
+  public $entityName = "persona";
 
 
 }

@@ -6,16 +6,11 @@ class _FieldDiaNumero extends Field {
 
   public $type = "smallint";
   public $fieldType = "nf";
-  public $unique = true;
-  public $notNull = true;
   public $default = null;
-  public $length = "1";
-  public $main = false;
+  public $length = "1";  
   public $name = "numero";
   public $alias = "num";
-
-
-  public function getEntity(){ return $this->container->getEntity('dia'); }
+  public $entityName = "dia";
 
 
 }

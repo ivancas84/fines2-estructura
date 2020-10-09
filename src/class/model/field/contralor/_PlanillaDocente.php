@@ -6,18 +6,12 @@ class _FieldContralorPlanillaDocente extends Field {
 
   public $type = "varchar";
   public $fieldType = "mu";
-  public $unique = false;
-  public $notNull = true;
   public $default = null;
-  public $length = "45";
-  public $main = false;
+  public $length = "45";  
   public $name = "planilla_docente";
   public $alias = "pd";
-
-
-  public function getEntity(){ return $this->container->getEntity('contralor'); }
-
-  public function getEntityRef(){ return $this->container->getEntity('planilla_docente'); }
+  public $entityName = "contralor";
+  public $entityRefName = "planilla_docente";  
 
 
 }

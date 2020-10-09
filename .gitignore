@@ -3,6 +3,7 @@
 /cache
 /config
 /upload
+/vendor
 
 
 # IDE - VSCode

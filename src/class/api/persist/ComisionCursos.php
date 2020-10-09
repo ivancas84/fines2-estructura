@@ -31,6 +31,8 @@ class ComisionCursosPersistApi extends PersistApi {
       array_push($detail, "curso".$curso->id());
     }
 
+    $this->container->getDb()->multi_query_transaction_log($sql);
+
     return ["id" => $idComision, "detail" => $detail];
 
   }

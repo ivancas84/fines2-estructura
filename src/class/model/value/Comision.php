@@ -4,6 +4,13 @@ require_once("class/model/value/_Comision.php");
 
 class ComisionValue extends _ComisionValue{
 
+  public function acronimoTurno($format = null) { 
+    if(Validation::is_empty($this->turno)) return $this->turno;
+  
+    $turno = Format::convertCase(acronym($this->turno), $format); 
+    if($turno == "N") return "V";
+  }
+
   public function resetTramoSiguiente(){
     /**
      * Definir anio, semestre de la comision siguiente

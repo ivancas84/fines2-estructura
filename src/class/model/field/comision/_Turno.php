@@ -6,16 +6,11 @@ class _FieldComisionTurno extends Field {
 
   public $type = "varchar";
   public $fieldType = "nf";
-  public $unique = false;
-  public $notNull = false;
   public $default = null;
-  public $length = "45";
-  public $main = false;
+  public $length = "45";  
   public $name = "turno";
   public $alias = "tur";
-
-
-  public function getEntity(){ return $this->container->getEntity('comision'); }
+  public $entityName = "comision";
 
 
 }

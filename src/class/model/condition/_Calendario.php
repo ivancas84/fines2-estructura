@@ -13,7 +13,7 @@ class _CalendarioCondition extends ConditionEntityOptions{
   }
 
   public function idIsSet($option, $value) { 
-    return $this->_exists($this->mapping->id(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->id(), $option, settypebool($value));
   }
 
   public function inicio($option, $value) { 
@@ -44,7 +44,7 @@ class _CalendarioCondition extends ConditionEntityOptions{
   }
 
   public function inicioIsSet($option, $value) { 
-    return $this->_exists($this->mapping->inicio(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->inicio(), $option, settypebool($value));
   }
 
   public function fin($option, $value) { 
@@ -75,7 +75,7 @@ class _CalendarioCondition extends ConditionEntityOptions{
   }
 
   public function finIsSet($option, $value) { 
-    return $this->_exists($this->mapping->fin(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->fin(), $option, settypebool($value));
   }
 
   public function anio($option, $value) { 
@@ -88,7 +88,7 @@ class _CalendarioCondition extends ConditionEntityOptions{
   }
 
     public function anioIsSet($option, $value) { 
-    return $this->_exists($this->mapping->anio(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->anio(), $option, settypebool($value));
   }
 
   public function semestre($option, $value) { 
@@ -101,7 +101,7 @@ class _CalendarioCondition extends ConditionEntityOptions{
   }
 
     public function semestreIsSet($option, $value) { 
-    return $this->_exists($this->mapping->semestre(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->semestre(), $option, settypebool($value));
   }
 
   public function insertado($option, $value) { 
@@ -141,7 +141,7 @@ class _CalendarioCondition extends ConditionEntityOptions{
   }
 
   public function insertadoIsSet($option, $value) { 
-    return $this->_exists($this->mapping->insertado(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->insertado(), $option, settypebool($value));
   }
 
 

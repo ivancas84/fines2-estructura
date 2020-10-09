@@ -13,7 +13,7 @@ class _DiaCondition extends ConditionEntityOptions{
   }
 
   public function idIsSet($option, $value) { 
-    return $this->_exists($this->mapping->id(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->id(), $option, settypebool($value));
   }
 
   public function numero($option, $value) { 
@@ -26,7 +26,7 @@ class _DiaCondition extends ConditionEntityOptions{
   }
 
     public function numeroIsSet($option, $value) { 
-    return $this->_exists($this->mapping->numero(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->numero(), $option, settypebool($value));
   }
 
   public function dia($option, $value) { 
@@ -39,7 +39,7 @@ class _DiaCondition extends ConditionEntityOptions{
   }
 
   public function diaIsSet($option, $value) { 
-    return $this->_exists($this->mapping->dia(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->dia(), $option, settypebool($value));
   }
 
 

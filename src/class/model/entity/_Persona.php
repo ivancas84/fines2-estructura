@@ -6,31 +6,15 @@ require_once("class/model/Field.php");
 class _PersonaEntity extends Entity {
   public $name = "persona";
   public $alias = "pers";
- 
-  public function getPk(){
-    return $this->container->getField("persona", "id");
-  }
+  public $main = ['id'];
+  public $pk = ['id'];
+  public $nf = ['nombres', 'apellidos', 'fecha_nacimiento', 'numero_documento', 'cuil', 'genero', 'apodo', 'telefono', 'email', 'email_abc', 'alta'];
+  public $mu = ['domicilio'];
+  public $_u = [];
+  public $notNull = ['id', 'nombres', 'numero_documento', 'alta'];
+  public $unique = ['id', 'numero_documento', 'cuil', 'email_abc'];
+  public $admin = ['id', 'nombres', 'apellidos', 'fecha_nacimiento', 'numero_documento', 'cuil', 'genero', 'apodo', 'telefono', 'email', 'email_abc', 'alta', 'domicilio'];
 
-  public function getFieldsNf(){
-    return array(
-      $this->container->getField("persona", "nombres"),
-      $this->container->getField("persona", "apellidos"),
-      $this->container->getField("persona", "fecha_nacimiento"),
-      $this->container->getField("persona", "numero_documento"),
-      $this->container->getField("persona", "cuil"),
-      $this->container->getField("persona", "genero"),
-      $this->container->getField("persona", "apodo"),
-      $this->container->getField("persona", "telefono"),
-      $this->container->getField("persona", "email"),
-      $this->container->getField("persona", "alta"),
-    );
-  }
-
-  public function getFieldsMu(){
-    return array(
-      $this->container->getField("persona", "domicilio"),
-    );
-  }
 
 
 }

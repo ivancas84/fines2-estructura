@@ -6,16 +6,11 @@ class _FieldDomicilioBarrio extends Field {
 
   public $type = "varchar";
   public $fieldType = "nf";
-  public $unique = false;
-  public $notNull = false;
   public $default = null;
-  public $length = "255";
-  public $main = false;
+  public $length = "255";  
   public $name = "barrio";
   public $alias = "bar";
-
-
-  public function getEntity(){ return $this->container->getEntity('domicilio'); }
+  public $entityName = "domicilio";
 
 
 }

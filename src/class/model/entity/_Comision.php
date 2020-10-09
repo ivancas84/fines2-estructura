@@ -6,34 +6,15 @@ require_once("class/model/Field.php");
 class _ComisionEntity extends Entity {
   public $name = "comision";
   public $alias = "comi";
- 
-  public function getPk(){
-    return $this->container->getField("comision", "id");
-  }
+  public $main = ['id'];
+  public $pk = ['id'];
+  public $nf = ['turno', 'division', 'comentario', 'autorizada', 'apertura', 'publicada', 'observaciones', 'alta', 'identificacion'];
+  public $mu = ['sede', 'modalidad', 'planificacion', 'comision_siguiente', 'calendario'];
+  public $_u = [];
+  public $notNull = ['id', 'division', 'autorizada', 'apertura', 'publicada', 'alta', 'sede', 'modalidad', 'calendario'];
+  public $unique = ['id'];
+  public $admin = ['id', 'turno', 'division', 'comentario', 'autorizada', 'apertura', 'publicada', 'observaciones', 'alta', 'sede', 'modalidad', 'planificacion', 'comision_siguiente', 'calendario', 'identificacion'];
 
-  public function getFieldsNf(){
-    return array(
-      $this->container->getField("comision", "turno"),
-      $this->container->getField("comision", "division"),
-      $this->container->getField("comision", "comentario"),
-      $this->container->getField("comision", "autorizada"),
-      $this->container->getField("comision", "apertura"),
-      $this->container->getField("comision", "publicada"),
-      $this->container->getField("comision", "observaciones"),
-      $this->container->getField("comision", "alta"),
-      $this->container->getField("comision", "identificacion"),
-    );
-  }
-
-  public function getFieldsMu(){
-    return array(
-      $this->container->getField("comision", "sede"),
-      $this->container->getField("comision", "modalidad"),
-      $this->container->getField("comision", "planificacion"),
-      $this->container->getField("comision", "comision_siguiente"),
-      $this->container->getField("comision", "calendario"),
-    );
-  }
 
 
 }

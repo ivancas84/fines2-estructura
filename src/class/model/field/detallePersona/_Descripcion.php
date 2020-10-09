@@ -6,16 +6,11 @@ class _FieldDetallePersonaDescripcion extends Field {
 
   public $type = "varchar";
   public $fieldType = "nf";
-  public $unique = false;
-  public $notNull = true;
   public $default = null;
-  public $length = "255";
-  public $main = false;
+  public $length = "255";  
   public $name = "descripcion";
   public $alias = "des";
-
-
-  public function getEntity(){ return $this->container->getEntity('detalle_persona'); }
+  public $entityName = "detalle_persona";
 
 
 }

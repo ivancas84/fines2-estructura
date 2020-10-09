@@ -13,6 +13,7 @@ class _PersonaValue extends ValueEntityOptions{
   protected $apodo = UNDEFINED;
   protected $telefono = UNDEFINED;
   protected $email = UNDEFINED;
+  protected $emailAbc = UNDEFINED;
   protected $alta = UNDEFINED;
   protected $domicilio = UNDEFINED;
 
@@ -26,6 +27,7 @@ class _PersonaValue extends ValueEntityOptions{
   public function setDefaultApodo() { if($this->apodo === UNDEFINED) $this->setApodo(null); }
   public function setDefaultTelefono() { if($this->telefono === UNDEFINED) $this->setTelefono(null); }
   public function setDefaultEmail() { if($this->email === UNDEFINED) $this->setEmail(null); }
+  public function setDefaultEmailAbc() { if($this->emailAbc === UNDEFINED) $this->setEmailAbc(null); }
   public function setDefaultAlta() { if($this->alta === UNDEFINED) $this->setAlta(date('c')); }
   public function setDefaultDomicilio() { if($this->domicilio === UNDEFINED) $this->setDomicilio(null); }
 
@@ -39,6 +41,7 @@ class _PersonaValue extends ValueEntityOptions{
   public function isEmptyApodo() { if(!Validation::is_empty($this->apodo)) return false; }
   public function isEmptyTelefono() { if(!Validation::is_empty($this->telefono)) return false; }
   public function isEmptyEmail() { if(!Validation::is_empty($this->email)) return false; }
+  public function isEmptyEmailAbc() { if(!Validation::is_empty($this->emailAbc)) return false; }
   public function isEmptyAlta() { if(!Validation::is_empty($this->alta)) return false; }
   public function isEmptyDomicilio() { if(!Validation::is_empty($this->domicilio)) return false; }
 
@@ -52,6 +55,7 @@ class _PersonaValue extends ValueEntityOptions{
   public function apodo($format = null) { return Format::convertCase($this->apodo, $format); }
   public function telefono($format = null) { return Format::convertCase($this->telefono, $format); }
   public function email($format = null) { return Format::convertCase($this->email, $format); }
+  public function emailAbc($format = null) { return Format::convertCase($this->emailAbc, $format); }
   public function alta($format = null) { return Format::date($this->alta, $format); }
   public function domicilio($format = null) { return Format::convertCase($this->domicilio, $format); }
 
@@ -98,6 +102,9 @@ class _PersonaValue extends ValueEntityOptions{
   public function _setEmail(string $p = null) { return $this->email = $p; }  
   public function setEmail($p) { return $this->email = (is_null($p)) ? null : (string)$p; }
 
+  public function _setEmailAbc(string $p = null) { return $this->emailAbc = $p; }  
+  public function setEmailAbc($p) { return $this->emailAbc = (is_null($p)) ? null : (string)$p; }
+
   public function _setAlta(DateTime $p = null) { return $this->alta = $p; }  
 
   public function setAlta($p) {
@@ -126,6 +133,7 @@ class _PersonaValue extends ValueEntityOptions{
   public function resetApodo() { if(!Validation::is_empty($this->apodo)) $this->apodo = preg_replace('/\s\s+/', ' ', trim($this->apodo)); }
   public function resetTelefono() { if(!Validation::is_empty($this->telefono)) $this->telefono = preg_replace('/\s\s+/', ' ', trim($this->telefono)); }
   public function resetEmail() { if(!Validation::is_empty($this->email)) $this->email = preg_replace('/\s\s+/', ' ', trim($this->email)); }
+  public function resetEmailAbc() { if(!Validation::is_empty($this->emailAbc)) $this->emailAbc = preg_replace('/\s\s+/', ' ', trim($this->emailAbc)); }
   public function resetDomicilio() { if(!Validation::is_empty($this->domicilio)) $this->domicilio = preg_replace('/\s\s+/', ' ', trim($this->domicilio)); }
 
   public function checkId() { 
@@ -205,6 +213,14 @@ class _PersonaValue extends ValueEntityOptions{
       return $v->isSuccess();
     }
   
+    public function checkEmailAbc() { 
+      $this->_logs->resetLogs("email_abc");
+      if(Validation::is_undefined($this->emailAbc)) return null;
+      $v = Validation::getInstanceValue($this->emailAbc)->max(255);
+      foreach($v->getErrors() as $error){ $this->_logs->addLog("email_abc", "error", $error); }
+      return $v->isSuccess();
+    }
+  
     public function checkAlta() { 
       $this->_logs->resetLogs("alta");
       if(Validation::is_undefined($this->alta)) return null;
@@ -233,6 +249,7 @@ class _PersonaValue extends ValueEntityOptions{
   public function sqlApodo() { return $this->sql->string($this->apodo); }
   public function sqlTelefono() { return $this->sql->string($this->telefono); }
   public function sqlEmail() { return $this->sql->string($this->email); }
+  public function sqlEmailAbc() { return $this->sql->string($this->emailAbc); }
   public function sqlAlta() { return $this->sql->dateTime($this->alta, "Y-m-d H:i:s"); }
   public function sqlAltaDate() { return $this->sql->dateTime($this->alta, "Y-m-d"); }
   public function sqlAltaYm() { return $this->sql->dateTime($this->alta, "Y-m"); }
@@ -249,6 +266,7 @@ class _PersonaValue extends ValueEntityOptions{
   public function jsonApodo() { return $this->apodo; }
   public function jsonTelefono() { return $this->telefono; }
   public function jsonEmail() { return $this->email; }
+  public function jsonEmailAbc() { return $this->emailAbc; }
   public function jsonAlta() { return $this->alta('c'); }
   public function jsonDomicilio() { return $this->domicilio; }
 

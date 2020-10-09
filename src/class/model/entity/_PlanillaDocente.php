@@ -6,17 +6,15 @@ require_once("class/model/Field.php");
 class _PlanillaDocenteEntity extends Entity {
   public $name = "planilla_docente";
   public $alias = "pd";
- 
-  public function getPk(){
-    return $this->container->getField("planilla_docente", "id");
-  }
+  public $main = ['id'];
+  public $pk = ['id'];
+  public $nf = ['numero', 'insertado'];
+  public $mu = [];
+  public $_u = [];
+  public $notNull = ['id', 'numero', 'insertado'];
+  public $unique = ['id'];
+  public $admin = ['id', 'numero', 'insertado'];
 
-  public function getFieldsNf(){
-    return array(
-      $this->container->getField("planilla_docente", "numero"),
-      $this->container->getField("planilla_docente", "insertado"),
-    );
-  }
 
 
 }

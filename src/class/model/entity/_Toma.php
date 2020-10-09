@@ -6,31 +6,15 @@ require_once("class/model/Field.php");
 class _TomaEntity extends Entity {
   public $name = "toma";
   public $alias = "toma";
- 
-  public function getPk(){
-    return $this->container->getField("toma", "id");
-  }
+  public $main = ['id'];
+  public $pk = ['id'];
+  public $nf = ['fecha_toma', 'estado', 'observaciones', 'comentario', 'tipo_movimiento', 'estado_contralor', 'alta'];
+  public $mu = ['curso', 'docente', 'reemplazo'];
+  public $_u = [];
+  public $notNull = ['id', 'tipo_movimiento', 'alta', 'curso'];
+  public $unique = ['id'];
+  public $admin = ['id', 'fecha_toma', 'estado', 'observaciones', 'comentario', 'tipo_movimiento', 'estado_contralor', 'alta', 'curso', 'docente', 'reemplazo'];
 
-  public function getFieldsNf(){
-    return array(
-      $this->container->getField("toma", "fecha_toma"),
-      $this->container->getField("toma", "estado"),
-      $this->container->getField("toma", "observaciones"),
-      $this->container->getField("toma", "comentario"),
-      $this->container->getField("toma", "tipo_movimiento"),
-      $this->container->getField("toma", "estado_contralor"),
-      $this->container->getField("toma", "alta"),
-    );
-  }
-
-  public function getFieldsMu(){
-    return array(
-      $this->container->getField("toma", "curso"),
-      $this->container->getField("toma", "docente"),
-      $this->container->getField("toma", "reemplazo"),
-      $this->container->getField("toma", "planilla_docente"),
-    );
-  }
 
 
 }

@@ -6,24 +6,15 @@ require_once("class/model/Field.php");
 class _DistribucionHorariaEntity extends Entity {
   public $name = "distribucion_horaria";
   public $alias = "dh";
- 
-  public function getPk(){
-    return $this->container->getField("distribucion_horaria", "id");
-  }
+  public $main = ['id'];
+  public $pk = ['id'];
+  public $nf = ['horas_catedra', 'dia'];
+  public $mu = ['asignatura', 'planificacion'];
+  public $_u = [];
+  public $notNull = ['id', 'horas_catedra', 'dia', 'asignatura', 'planificacion'];
+  public $unique = ['id'];
+  public $admin = ['id', 'horas_catedra', 'dia', 'asignatura', 'planificacion'];
 
-  public function getFieldsNf(){
-    return array(
-      $this->container->getField("distribucion_horaria", "horas_catedra"),
-      $this->container->getField("distribucion_horaria", "dia"),
-    );
-  }
-
-  public function getFieldsMu(){
-    return array(
-      $this->container->getField("distribucion_horaria", "asignatura"),
-      $this->container->getField("distribucion_horaria", "planificacion"),
-    );
-  }
 
 
 }

@@ -6,23 +6,15 @@ require_once("class/model/Field.php");
 class _CentroEducativoEntity extends Entity {
   public $name = "centro_educativo";
   public $alias = "ce";
- 
-  public function getPk(){
-    return $this->container->getField("centro_educativo", "id");
-  }
+  public $main = ['id'];
+  public $pk = ['id'];
+  public $nf = ['nombre', 'cue'];
+  public $mu = ['domicilio'];
+  public $_u = [];
+  public $notNull = ['id', 'nombre'];
+  public $unique = ['id', 'cue'];
+  public $admin = ['id', 'nombre', 'cue', 'domicilio'];
 
-  public function getFieldsNf(){
-    return array(
-      $this->container->getField("centro_educativo", "nombre"),
-      $this->container->getField("centro_educativo", "cue"),
-    );
-  }
-
-  public function getFieldsMu(){
-    return array(
-      $this->container->getField("centro_educativo", "domicilio"),
-    );
-  }
 
 
 }

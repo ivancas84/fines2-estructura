@@ -6,23 +6,15 @@ require_once("class/model/Field.php");
 class _PlanificacionEntity extends Entity {
   public $name = "planificacion";
   public $alias = "pla";
- 
-  public function getPk(){
-    return $this->container->getField("planificacion", "id");
-  }
+  public $main = ['id'];
+  public $pk = ['id'];
+  public $nf = ['anio', 'semestre'];
+  public $mu = ['plan'];
+  public $_u = [];
+  public $notNull = ['id', 'anio', 'semestre', 'plan'];
+  public $unique = ['id'];
+  public $admin = ['id', 'anio', 'semestre', 'plan'];
 
-  public function getFieldsNf(){
-    return array(
-      $this->container->getField("planificacion", "anio"),
-      $this->container->getField("planificacion", "semestre"),
-    );
-  }
-
-  public function getFieldsMu(){
-    return array(
-      $this->container->getField("planificacion", "plan"),
-    );
-  }
 
 
 }

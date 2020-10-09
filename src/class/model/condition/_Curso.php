@@ -13,7 +13,7 @@ class _CursoCondition extends ConditionEntityOptions{
   }
 
   public function idIsSet($option, $value) { 
-    return $this->_exists($this->mapping->id(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->id(), $option, settypebool($value));
   }
 
   public function horasCatedra($option, $value) { 
@@ -26,7 +26,33 @@ class _CursoCondition extends ConditionEntityOptions{
   }
 
     public function horasCatedraIsSet($option, $value) { 
-    return $this->_exists($this->mapping->horasCatedra(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->horasCatedra(), $option, settypebool($value));
+  }
+
+  public function ige($option, $value) { 
+    $field = $this->mapping->ige();
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approx($field, $option, $value)) return $c;
+    $this->value->setIge($value);
+    if(!$this->value->checkIge()) throw new Exception("Valor incorrecto: Ige");
+    return "({$field} {$option} {$this->value->sqlIge()})";  
+  }
+
+  public function igeIsSet($option, $value) { 
+    return $this->sql->exists($this->mapping->ige(), $option, settypebool($value));
+  }
+
+  public function numeroDocumentoDesignado($option, $value) { 
+    $field = $this->mapping->numeroDocumentoDesignado();
+    if($c = $this->sql->exists($field, $option, $value)) return $c;
+    if($c = $this->sql->approx($field, $option, $value)) return $c;
+    $this->value->setNumeroDocumentoDesignado($value);
+    if(!$this->value->checkNumeroDocumentoDesignado()) throw new Exception("Valor incorrecto: Numero Documento Designado");
+    return "({$field} {$option} {$this->value->sqlNumeroDocumentoDesignado()})";  
+  }
+
+  public function numeroDocumentoDesignadoIsSet($option, $value) { 
+    return $this->sql->exists($this->mapping->numeroDocumentoDesignado(), $option, settypebool($value));
   }
 
   public function alta($option, $value) { 
@@ -66,7 +92,7 @@ class _CursoCondition extends ConditionEntityOptions{
   }
 
   public function altaIsSet($option, $value) { 
-    return $this->_exists($this->mapping->alta(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->alta(), $option, settypebool($value));
   }
 
   public function comision($option, $value) { 
@@ -79,7 +105,7 @@ class _CursoCondition extends ConditionEntityOptions{
   }
 
   public function comisionIsSet($option, $value) { 
-    return $this->_exists($this->mapping->comision(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->comision(), $option, settypebool($value));
   }
 
   public function asignatura($option, $value) { 
@@ -92,7 +118,7 @@ class _CursoCondition extends ConditionEntityOptions{
   }
 
   public function asignaturaIsSet($option, $value) { 
-    return $this->_exists($this->mapping->asignatura(), $option, settypebool($value));
+    return $this->sql->exists($this->mapping->asignatura(), $option, settypebool($value));
   }
 
 

@@ -6,26 +6,15 @@ require_once("class/model/Field.php");
 class _DesignacionEntity extends Entity {
   public $name = "designacion";
   public $alias = "desi";
- 
-  public function getPk(){
-    return $this->container->getField("designacion", "id");
-  }
+  public $main = ['id'];
+  public $pk = ['id'];
+  public $nf = ['desde', 'hasta', 'alta'];
+  public $mu = ['cargo', 'sede', 'persona'];
+  public $_u = [];
+  public $notNull = ['id', 'cargo', 'sede', 'persona', 'alta'];
+  public $unique = ['id'];
+  public $admin = ['id', 'desde', 'hasta', 'cargo', 'sede', 'persona', 'alta'];
 
-  public function getFieldsNf(){
-    return array(
-      $this->container->getField("designacion", "desde"),
-      $this->container->getField("designacion", "hasta"),
-      $this->container->getField("designacion", "alta"),
-    );
-  }
-
-  public function getFieldsMu(){
-    return array(
-      $this->container->getField("designacion", "cargo"),
-      $this->container->getField("designacion", "sede"),
-      $this->container->getField("designacion", "persona"),
-    );
-  }
 
 
 }

@@ -6,18 +6,12 @@ class _FieldTomaCurso extends Field {
 
   public $type = "varchar";
   public $fieldType = "mu";
-  public $unique = false;
-  public $notNull = true;
   public $default = null;
-  public $length = "45";
-  public $main = false;
+  public $length = "45";  
   public $name = "curso";
   public $alias = "cur";
-
-
-  public function getEntity(){ return $this->container->getEntity('toma'); }
-
-  public function getEntityRef(){ return $this->container->getEntity('curso'); }
+  public $entityName = "toma";
+  public $entityRefName = "curso";  
 
 
 }

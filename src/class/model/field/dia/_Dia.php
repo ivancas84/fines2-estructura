@@ -6,16 +6,11 @@ class _FieldDiaDia extends Field {
 
   public $type = "varchar";
   public $fieldType = "nf";
-  public $unique = true;
-  public $notNull = true;
   public $default = null;
-  public $length = "9";
-  public $main = false;
+  public $length = "9";  
   public $name = "dia";
   public $alias = "dib";
-
-
-  public function getEntity(){ return $this->container->getEntity('dia'); }
+  public $entityName = "dia";
 
 
 }
