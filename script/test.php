@@ -5,14 +5,17 @@ require_once("class/Container.php");
 
 
 $container = new Container();
-$render = new Render();
-$render->setAggregate(["count"]);
-$render->addCondition(["cal_anio","=","2019"]);
-//$render->addGeneralCondition(["label","=~","25A11"]);
-$sqlo = $container->getSqlo("comision");
-
 echo "<pre>";
-echo $sqlo->advanced($render);
+print_r($container->getEntity("curso")->getFieldsNf());
+
+//$render = new Render();
+//$render->setAggregate(["count"]);
+//$render->addCondition(["cal_anio","=","2019"]);
+//$render->setOrder(["sed_numero"=>"ASC"]);
+//$render->addGeneralCondition(["label","=~","25A11"]);
+//$sqlo = $container->getSqlo("comision");
+//echo "<pre>";
+//echo $sqlo->all($render);
 /*
 $comision = [
   "id" => "anId",

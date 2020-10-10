@@ -22,7 +22,7 @@ class ConfirmacionEmail extends Base {
     $horario_ = $this->container->getController("model_tools")->cursoHorario([$toma["curso"]]);
     $horario = count($horario_) ? $horario_[0]["horario"] : null;
 
-    $t = $this->container->getSqlo("toma")->values($toma);
+    $t = $this->container->getRel("toma")->value($toma);
 
     $body = '
 <p>Hola ' . $t["docente"]->nombre() . ', a continuación se indica el comprobante de toma de posesión.</p>

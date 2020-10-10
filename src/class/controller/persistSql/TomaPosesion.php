@@ -20,6 +20,7 @@ class TomaPosesionPersistSql extends Base {
     $toma->setDocente($data["persona"]);
     $toma->setTipoMovimiento("AI");
     $toma->setEstadoContralor("Pasar");
+    $sqlo = $this->container->getSqlo("toma");
     $sql = $this->container->getSqlo("toma")->insert($toma->_toArray("sql"));
     return["id" => $toma->id(),"sql"=>$sql];
   }
