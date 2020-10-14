@@ -1,12 +1,14 @@
 <?php
 
-require_once("class/controller/Base.php");
 
-class TomaPosesionPersistSql extends Base {
+class TomaPosesionPersistSql  {
   /**
    * Toma posesion realizada por los docentes
    */
 
+  public $entityName;
+  public $controller;
+  
   public function main($data) {
     /**
      * $data["persona"] Id de la persona

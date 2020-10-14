@@ -10,10 +10,12 @@ require $_SERVER["DOCUMENT_ROOT"] . "/" . PATH_ROOT . '/vendor/autoload.php';
 
 require_once("../config/config.php");
 require_once("class/Container.php");
-require_once("class/controller/Base.php");
 require_once("function/email.php");
 
-class ConfirmacionEmail extends Base {
+class ConfirmacionEmail {
+
+  public $entityName;
+  public $container;
 
   public function main($id){
 
