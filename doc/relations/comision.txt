@@ -16,7 +16,7 @@ autorizada (aut): boolean nf. NOT NULL.
 apertura (ape): boolean nf. NOT NULL.
 publicada (pub): boolean nf. NOT NULL.
 observaciones (obs): text nf.
-alta (alt): timestamp nf. NOT NULL. NOT ADMIN. DEFAULT: current_timestamp().
+alta (alt): timestamp nf. NOT NULL. DEFAULT: current_timestamp().
 identificacion (ide): string nf.
 sede (sed): string mu. NOT NULL. MAIN.
 modalidad (moa): string mu. NOT NULL.

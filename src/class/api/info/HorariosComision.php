@@ -9,7 +9,7 @@ require_once("class/controller/ModelTools.php");
 
 
 
-class HorariosComisionData extends Data {
+class HorariosComisionInfoApi extends BaseApi {
   public $entityName = "horarios_comision";
 
   public function main($idComisiones) {

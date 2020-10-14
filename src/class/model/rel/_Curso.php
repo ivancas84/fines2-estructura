@@ -3,38 +3,6 @@ require_once("class/model/Rel.php");
 
 class _CursoRel extends EntityRel{
 
-  public function mapping($field){
-    if($f = $this->container->getMapping($this->entityName)->_eval($field)) return $f;
-    if($f = $this->container->getMapping('comision', 'com')->_eval($field)) return $f;
-    if($f = $this->container->getMapping('sede', 'com_sed')->_eval($field)) return $f;
-    if($f = $this->container->getMapping('domicilio', 'com_sed_dom')->_eval($field)) return $f;
-    if($f = $this->container->getMapping('tipo_sede', 'com_sed_ts')->_eval($field)) return $f;
-    if($f = $this->container->getMapping('centro_educativo', 'com_sed_ce')->_eval($field)) return $f;
-    if($f = $this->container->getMapping('domicilio', 'com_sed_ce_dom')->_eval($field)) return $f;
-    if($f = $this->container->getMapping('modalidad', 'com_moa')->_eval($field)) return $f;
-    if($f = $this->container->getMapping('planificacion', 'com_pla')->_eval($field)) return $f;
-    if($f = $this->container->getMapping('plan', 'com_pla_plb')->_eval($field)) return $f;
-    if($f = $this->container->getMapping('calendario', 'com_cal')->_eval($field)) return $f;
-    if($f = $this->container->getMapping('asignatura', 'asi')->_eval($field)) return $f;
-    throw new Exception("Campo no reconocido para {$this->entityName}: {$field}");
-  }
-
-  public function fields(){
-    return implode(",", $this->container->getFieldAlias($this->entityName)->_toArray()) . ',
-' . implode(",", $this->container->getFieldAlias('comision', 'com')->_toArray()) . ',
-' . implode(",", $this->container->getFieldAlias('sede', 'com_sed')->_toArray()) . ',
-' . implode(",", $this->container->getFieldAlias('domicilio', 'com_sed_dom')->_toArray()) . ',
-' . implode(",", $this->container->getFieldAlias('tipo_sede', 'com_sed_ts')->_toArray()) . ',
-' . implode(",", $this->container->getFieldAlias('centro_educativo', 'com_sed_ce')->_toArray()) . ',
-' . implode(",", $this->container->getFieldAlias('domicilio', 'com_sed_ce_dom')->_toArray()) . ',
-' . implode(",", $this->container->getFieldAlias('modalidad', 'com_moa')->_toArray()) . ',
-' . implode(",", $this->container->getFieldAlias('planificacion', 'com_pla')->_toArray()) . ',
-' . implode(",", $this->container->getFieldAlias('plan', 'com_pla_plb')->_toArray()) . ',
-' . implode(",", $this->container->getFieldAlias('calendario', 'com_cal')->_toArray()) . ',
-' . implode(",", $this->container->getFieldAlias('asignatura', 'asi')->_toArray()) . ' 
-';
-  }
-
   public function join(Render $render){
     return $this->container->getSql('comision', 'com')->_join('comision', 'curs', $render) . '
 ' . $this->container->getSql('sede', 'com_sed')->_join('sede', 'com', $render) . '
@@ -48,36 +16,6 @@ class _CursoRel extends EntityRel{
 ' . $this->container->getSql('calendario', 'com_cal')->_join('calendario', 'com', $render) . '
 ' . $this->container->getSql('asignatura', 'asi')->_join('asignatura', 'curs', $render) . '
 ' ;
-  }
-
-  public function condition($field, $option, $value) {
-    if($c = $this->container->getCondition($this->entityName)->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getCondition('comision','com')->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getCondition('sede','com_sed')->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getCondition('domicilio','com_sed_dom')->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getCondition('tipo_sede','com_sed_ts')->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getCondition('centro_educativo','com_sed_ce')->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getCondition('domicilio','com_sed_ce_dom')->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getCondition('modalidad','com_moa')->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getCondition('planificacion','com_pla')->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getCondition('plan','com_pla_plb')->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getCondition('calendario','com_cal')->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getCondition('asignatura','asi')->_eval($field, [$option, $value])) return $c;
-  }
-
-  public function conditionAux($field, $option, $value) {
-    if($c = $this->container->getConditionAux($this->entityName)->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getConditionAux('comision','com')->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getConditionAux('sede','com_sed')->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getConditionAux('domicilio','com_sed_dom')->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getConditionAux('tipo_sede','com_sed_ts')->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getConditionAux('centro_educativo','com_sed_ce')->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getConditionAux('domicilio','com_sed_ce_dom')->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getConditionAux('modalidad','com_moa')->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getConditionAux('planificacion','com_pla')->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getConditionAux('plan','com_pla_plb')->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getConditionAux('calendario','com_cal')->_eval($field, [$option, $value])) return $c;
-    if($c = $this->container->getConditionAux('asignatura','asi')->_eval($field, [$option, $value])) return $c;
   }
 
   public function json(array $row = null){

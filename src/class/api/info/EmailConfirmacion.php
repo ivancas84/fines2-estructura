@@ -1,9 +1,8 @@
 <?php
 
-require_once("class/api/Base.php");
 require_once("class/tools/Filter.php");
 
-class EmailConfirmacionBaseApi {
+class EmailConfirmacionInfoApi {
 
   public function main() {
     $idToma = Filter::jsonPostRequired(); //siempre deben recibirse ids
