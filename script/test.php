@@ -5,15 +5,18 @@ require_once("class/Container.php");
 require_once("class/model/Render.php");
 require_once("function/get_entity_relations.php");
 
+
 $container = new Container();
-$render = new Render();
-$render->setCondition([
-  ["cur_com_cal_anio","=","2020"],
-  ["cur_com_cal_semestre","=","2"],
-  ["cur_com_moa_nombre","=","Fines 2"],
-  ["estado","=","Aprobada"]
-]);
+echo $container->getCondition("asignatura")->_("label_search","=~",4);
+/*$rows = $container->getDb()->getAll("comision", ["5f73a0dd951c8","5e501982a1ce3"]);
 
-$sql = $container->getSqlo("toma")->all($render);
 
-echo "<pre>".$sql;
+$rel = $container->getRel("comision");
+foreach($rows as &$row) {
+  echo "voy a generar json";
+  $row = $rel->json($row);
+}
+
+echo "<pre>";
+print_r($rows);
+*/

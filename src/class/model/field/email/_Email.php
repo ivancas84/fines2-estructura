@@ -7,10 +7,13 @@ class _FieldEmailEmail extends Field {
   public $type = "varchar";
   public $fieldType = "nf";
   public $default = null;
-  public $length = "255";  
   public $name = "email";
   public $alias = "ema";
   public $entityName = "email";
+  public $dataType = "string";  
+  public $subtype = "text";  
+  public $length = "255";  
+  public $value = "string";  
 
 
 }

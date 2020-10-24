@@ -7,10 +7,12 @@ class _FieldSedeBaja extends Field {
   public $type = "timestamp";
   public $fieldType = "nf";
   public $default = null;
-  public $length = false;  
   public $name = "baja";
   public $alias = "baj";
   public $entityName = "sede";
+  public $dataType = "timestamp";  
+  public $subtype = "timestamp";  
+  public $value = "datetime";  
 
 
 }

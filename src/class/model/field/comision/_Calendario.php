@@ -7,11 +7,14 @@ class _FieldComisionCalendario extends Field {
   public $type = "varchar";
   public $fieldType = "mu";
   public $default = null;
-  public $length = "45";  
   public $name = "calendario";
   public $alias = "cal";
   public $entityName = "comision";
   public $entityRefName = "calendario";  
+  public $dataType = "string";  
+  public $subtype = "typeahead";  
+  public $length = "45";  
+  public $value = "string";  
 
 
 }

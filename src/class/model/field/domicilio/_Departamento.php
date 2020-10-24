@@ -7,10 +7,13 @@ class _FieldDomicilioDepartamento extends Field {
   public $type = "varchar";
   public $fieldType = "nf";
   public $default = null;
-  public $length = "45";  
   public $name = "departamento";
   public $alias = "dep";
   public $entityName = "domicilio";
+  public $dataType = "string";  
+  public $subtype = "text";  
+  public $length = "45";  
+  public $value = "string";  
 
 
 }

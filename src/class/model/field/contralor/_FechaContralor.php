@@ -7,10 +7,12 @@ class _FieldContralorFechaContralor extends Field {
   public $type = "date";
   public $fieldType = "nf";
   public $default = null;
-  public $length = false;  
   public $name = "fecha_contralor";
   public $alias = "fc";
   public $entityName = "contralor";
+  public $dataType = "date";  
+  public $subtype = "date";  
+  public $value = "datetime";  
 
 
 }

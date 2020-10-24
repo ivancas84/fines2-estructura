@@ -7,10 +7,12 @@ class _FieldDetallePersonaCreado extends Field {
   public $type = "timestamp";
   public $fieldType = "nf";
   public $default = "current_timestamp()";
-  public $length = false;  
   public $name = "creado";
   public $alias = "cre";
   public $entityName = "detalle_persona";
+  public $dataType = "timestamp";  
+  public $subtype = "timestamp";  
+  public $value = "datetime";  
 
 
 }

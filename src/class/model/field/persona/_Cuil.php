@@ -7,10 +7,13 @@ class _FieldPersonaCuil extends Field {
   public $type = "varchar";
   public $fieldType = "nf";
   public $default = null;
-  public $length = "45";  
   public $name = "cuil";
   public $alias = "cui";
   public $entityName = "persona";
+  public $dataType = "string";  
+  public $subtype = "text";  
+  public $length = "45";  
+  public $value = "string";  
 
 
 }

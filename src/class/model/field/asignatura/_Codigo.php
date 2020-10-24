@@ -7,10 +7,13 @@ class _FieldAsignaturaCodigo extends Field {
   public $type = "varchar";
   public $fieldType = "nf";
   public $default = null;
-  public $length = "45";  
   public $name = "codigo";
   public $alias = "cod";
   public $entityName = "asignatura";
+  public $dataType = "string";  
+  public $subtype = "text";  
+  public $length = "45";  
+  public $value = "string";  
 
 
 }

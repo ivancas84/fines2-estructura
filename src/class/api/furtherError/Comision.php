@@ -27,8 +27,8 @@ class ComisionFurtherErrorApi extends FurtherErrorApi {
         $render->addCondition(["sede","=",$data["sede"]]);
         $render->addCondition(["division","=",$data["division"]]);
         $render->addCondition(["modalidad","=",$data["modalidad"]]);
-        $render->addCondition(["pla_anio","=",$row["anio"]]);
-        $render->addCondition(["pla_semestre","=",$row["semestre"]]);
+        $render->addCondition(["pla-anio","=",$row["anio"]]);
+        $render->addCondition(["pla-semestre","=",$row["semestre"]]);
         $rows = $this->container->getDb()->all("comision", $render);
         if(count($rows) > 1) return [ "multiple" => true ];
         return ((count($rows) == 1) && ($rows[0]["id"] != $data["id"])) ? ["notUnique" => $rows[0]["id"]] : null;
@@ -41,11 +41,17 @@ class ComisionFurtherErrorApi extends FurtherErrorApi {
         ) return null;
 
         $render= new Render();
-        $render->addCondition("sede","=",$data["sede"]);
-        $render->addCondition("division","=",$data["division"]);
-        $render->addCondition("modalidad","=",$data["modalidad"]);
-        $render->addCondition("cal_anio","=",$row["anio"]);
-        $render->addCondition("cal_semestre","=",$row["semestre"]);
+        $render->addCondition(["sede","=",$data["sede"]]);
+        $render->addCondition(["division","=",$data["division"]]);
+        $render->addCondition(["modalidad","=",$data["modalidad"]]);
+
+        if($data["calendario"]) {
+          $render->addCondition(["calendario","=",$data["calendario"]]);
+        } else {
+          $render->addCondition(["cal-anio","=",$row["anio"]]);
+          $render->addCondition(["cal-semestre","=",$row["semestre"]]);
+        }
+
         $id = $this->container->getDb()->idOrNull("comision", $render);
         return ($id && ($id != $data["id"])) ? [ "notUnique" => $id ] : null;
       default:

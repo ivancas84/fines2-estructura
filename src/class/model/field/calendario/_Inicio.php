@@ -7,10 +7,12 @@ class _FieldCalendarioInicio extends Field {
   public $type = "date";
   public $fieldType = "nf";
   public $default = null;
-  public $length = false;  
   public $name = "inicio";
   public $alias = "ini";
   public $entityName = "calendario";
+  public $dataType = "date";  
+  public $subtype = "date";  
+  public $value = "datetime";  
 
 
 }

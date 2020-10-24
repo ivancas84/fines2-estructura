@@ -72,7 +72,7 @@ class ComisionHorariosPersistApi extends PersistApi {
   }
 
   public function verificarHorarios(){
-    if($this->container->getDb()->count("horario", ["cur_comision","=", $this->id])) throw new Exception("Ya existen horarios para la comision");
+    if($this->container->getDb()->count("horario", ["cur-comision","=", $this->id])) throw new Exception("Ya existen horarios para la comision");
   }
 
   public function cursos(){
@@ -121,25 +121,24 @@ class ComisionHorariosPersistApi extends PersistApi {
       $minutos = $horasCatedrasDia[$dh["dia"]];
 
       $hora->modify("+{$minutos} minute");
-      $horario->_setHoraInicio(clone $hora);
+      $horario->_fastSet("hora_inicio",clone $hora);
 
       $minutos = intval($dh["horas_catedra"]) * 40;
       $hora->modify("+{$minutos} minute");
-      $horario->_setHoraFin(clone $hora);
+      $horario->_fastSet("hora_fin",clone $hora);
 
       $horasCatedrasDia[$dh["dia"]] += $minutos;
       
-      $horario->setDefaultId();
-      $horario->setDia($this->dias[intval($dh["dia"])-1]);
-      $horario->setCurso($this->cursosXAsignaturas[$dh["asignatura"]]["id"]);
+      $horario->_set("dia", $this->dias[intval($dh["dia"])-1]);
+      $horario->_set("curso", $this->cursosXAsignaturas[$dh["asignatura"]]["id"]);
 
       if($horario->_getLogs()->isError()) throw new Exception("El horario posee errores en la asignacion de valores");
 
       $horario->_call("setDefault");
-      $horario->setId(uniqid());
+      $horario->_set("id",uniqid());
       $this->sql .= $this->container->getSqlo("horario")->insert($horario->_toArray("sql"));
 
-      array_push($this->ids, $horario->id());
+      array_push($this->ids, $horario->_get("id"));
     }
   }
 }

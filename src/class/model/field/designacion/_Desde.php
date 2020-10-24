@@ -7,10 +7,12 @@ class _FieldDesignacionDesde extends Field {
   public $type = "date";
   public $fieldType = "nf";
   public $default = null;
-  public $length = false;  
   public $name = "desde";
   public $alias = "des";
   public $entityName = "designacion";
+  public $dataType = "date";  
+  public $subtype = "date";  
+  public $value = "datetime";  
 
 
 }

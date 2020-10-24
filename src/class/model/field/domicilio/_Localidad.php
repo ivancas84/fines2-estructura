@@ -7,10 +7,13 @@ class _FieldDomicilioLocalidad extends Field {
   public $type = "varchar";
   public $fieldType = "nf";
   public $default = null;
-  public $length = "255";  
   public $name = "localidad";
   public $alias = "loc";
   public $entityName = "domicilio";
+  public $dataType = "string";  
+  public $subtype = "text";  
+  public $length = "255";  
+  public $value = "string";  
 
 
 }

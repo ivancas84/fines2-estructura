@@ -7,10 +7,13 @@ class _FieldDomicilioBarrio extends Field {
   public $type = "varchar";
   public $fieldType = "nf";
   public $default = null;
-  public $length = "255";  
   public $name = "barrio";
   public $alias = "bar";
   public $entityName = "domicilio";
+  public $dataType = "string";  
+  public $subtype = "text";  
+  public $length = "255";  
+  public $value = "string";  
 
 
 }

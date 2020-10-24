@@ -36,9 +36,9 @@ class ModelTools {
   public function cargasHorariasDePlanificacion($planificacion){
     if(empty($planificacion)) throw new Exception("Planificacion no definida");
     $render = Render::getInstanceParams(["planificacion" => $planificacion]);
-    $render->setAggregate(["sum_horas_catedra"]);
+    $render->setAggregate(["horas_catedra.sum"]);
     $render->setGroup(["planificacion", "asignatura"]);
-    $render->setOrder(["sum_horas_catedra" => "desc"]);
+    $render->setOrder(["horas_catedra.sum" => "desc"]);
 
     return $this->container->getDb()->advanced("distribucion_horaria",$render);
   }
