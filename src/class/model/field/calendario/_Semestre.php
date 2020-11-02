@@ -13,7 +13,6 @@ class _FieldCalendarioSemestre extends Field {
   public $dataType = "integer";  
   public $subtype = "integer";  
   public $length = "5";  
-  public $value = "integer";  
 
 
 }

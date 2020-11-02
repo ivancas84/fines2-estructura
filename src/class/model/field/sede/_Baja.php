@@ -12,7 +12,6 @@ class _FieldSedeBaja extends Field {
   public $entityName = "sede";
   public $dataType = "timestamp";  
   public $subtype = "timestamp";  
-  public $value = "datetime";  
 
 
 }

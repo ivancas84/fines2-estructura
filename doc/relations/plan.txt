@@ -1,6 +1,6 @@
-id (id): string pk. NOT NULL. MAIN. UNIQUE.
-orientacion (ori): string nf. NOT NULL.
+id (id): string pk. NOT NULL. UNIQUE.
+orientacion (ori): string nf. NOT NULL. MAIN.
 resolucion (res): string nf.
-distribucion_horaria (dh): string nf.
+distribucion_horaria (dh): string nf. MAIN.
 
 UNIQUE MULTIPLE: orientacion, distribucion_horaria

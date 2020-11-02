@@ -12,7 +12,6 @@ class _FieldTelefonoInsertado extends Field {
   public $entityName = "telefono";
   public $dataType = "timestamp";  
   public $subtype = "timestamp";  
-  public $value = "datetime";  
 
 
 }

@@ -12,7 +12,6 @@ class _FieldContralorInsertado extends Field {
   public $entityName = "contralor";
   public $dataType = "timestamp";  
   public $subtype = "timestamp";  
-  public $value = "datetime";  
 
 
 }

@@ -12,7 +12,6 @@ class _FieldCursoAlta extends Field {
   public $entityName = "curso";
   public $dataType = "timestamp";  
   public $subtype = "timestamp";  
-  public $value = "datetime";  
 
 
 }

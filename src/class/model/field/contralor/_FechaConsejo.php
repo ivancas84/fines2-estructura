@@ -12,7 +12,6 @@ class _FieldContralorFechaConsejo extends Field {
   public $entityName = "contralor";
   public $dataType = "date";  
   public $subtype = "date";  
-  public $value = "datetime";  
 
 
 }

@@ -12,7 +12,6 @@ class _FieldHorarioHoraInicio extends Field {
   public $entityName = "horario";
   public $dataType = "time";  
   public $subtype = "time";  
-  public $value = "datetime";  
 
 
 }

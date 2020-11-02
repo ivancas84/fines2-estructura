@@ -12,7 +12,6 @@ class _FieldAlumnoCreado extends Field {
   public $entityName = "alumno";
   public $dataType = "timestamp";  
   public $subtype = "timestamp";  
-  public $value = "datetime";  
 
 
 }

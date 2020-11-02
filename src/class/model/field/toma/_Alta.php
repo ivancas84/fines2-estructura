@@ -12,7 +12,6 @@ class _FieldTomaAlta extends Field {
   public $entityName = "toma";
   public $dataType = "timestamp";  
   public $subtype = "timestamp";  
-  public $value = "datetime";  
 
 
 }

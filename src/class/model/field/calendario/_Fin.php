@@ -12,7 +12,6 @@ class _FieldCalendarioFin extends Field {
   public $entityName = "calendario";
   public $dataType = "date";  
   public $subtype = "date";  
-  public $value = "datetime";  
 
 
 }

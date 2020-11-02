@@ -13,7 +13,6 @@ class _FieldAlumnoSede extends Field {
   public $dataType = "string";  
   public $subtype = "text";  
   public $length = "45";  
-  public $value = "string";  
 
 
 }

@@ -12,7 +12,6 @@ class _FieldTomaFechaToma extends Field {
   public $entityName = "toma";
   public $dataType = "date";  
   public $subtype = "date";  
-  public $value = "datetime";  
 
 
 }

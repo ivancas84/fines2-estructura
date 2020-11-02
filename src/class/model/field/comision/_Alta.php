@@ -12,7 +12,6 @@ class _FieldComisionAlta extends Field {
   public $entityName = "comision";
   public $dataType = "timestamp";  
   public $subtype = "timestamp";  
-  public $value = "datetime";  
 
 
 }

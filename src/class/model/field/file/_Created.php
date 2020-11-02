@@ -12,7 +12,6 @@ class _FieldFileCreated extends Field {
   public $entityName = "file";
   public $dataType = "timestamp";  
   public $subtype = "timestamp";  
-  public $value = "datetime";  
 
 
 }

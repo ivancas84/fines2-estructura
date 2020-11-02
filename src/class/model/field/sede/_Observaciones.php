@@ -13,7 +13,6 @@ class _FieldSedeObservaciones extends Field {
   public $dataType = "text";  
   public $subtype = "textarea";  
   public $length = "65535";  
-  public $value = "string";  
 
 
 }

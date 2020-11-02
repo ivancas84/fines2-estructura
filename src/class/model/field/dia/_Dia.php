@@ -13,7 +13,6 @@ class _FieldDiaDia extends Field {
   public $dataType = "string";  
   public $subtype = "text";  
   public $length = "9";  
-  public $value = "string";  
 
 
 }

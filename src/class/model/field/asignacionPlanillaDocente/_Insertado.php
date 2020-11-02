@@ -12,7 +12,6 @@ class _FieldAsignacionPlanillaDocenteInsertado extends Field {
   public $entityName = "asignacion_planilla_docente";
   public $dataType = "timestamp";  
   public $subtype = "timestamp";  
-  public $value = "datetime";  
 
 
 }

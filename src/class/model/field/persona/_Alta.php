@@ -12,7 +12,6 @@ class _FieldPersonaAlta extends Field {
   public $entityName = "persona";
   public $dataType = "timestamp";  
   public $subtype = "timestamp";  
-  public $value = "datetime";  
 
 
 }

@@ -12,7 +12,6 @@ class _FieldCalendarioInsertado extends Field {
   public $entityName = "calendario";
   public $dataType = "timestamp";  
   public $subtype = "timestamp";  
-  public $value = "datetime";  
 
 
 }

@@ -12,7 +12,6 @@ class _FieldPersonaFechaNacimiento extends Field {
   public $entityName = "persona";
   public $dataType = "date";  
   public $subtype = "date";  
-  public $value = "datetime";  
 
 
 }

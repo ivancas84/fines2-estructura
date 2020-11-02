@@ -2,6 +2,21 @@
 
 function get_entity_relations($entityName) {
   switch($entityName){
+    case 'alumno': return [
+      'per' => 'persona',
+      'per_dom' => 'domicilio',
+      'com' => 'comision',
+      'com_sed' => 'sede',
+      'com_sed_dom' => 'domicilio',
+      'com_sed_ts' => 'tipo_sede',
+      'com_sed_ce' => 'centro_educativo',
+      'com_sed_ce_dom' => 'domicilio',
+      'com_moa' => 'modalidad',
+      'com_pla' => 'planificacion',
+      'com_pla_plb' => 'plan',
+      'com_cal' => 'calendario',
+    ];
+
     case 'asignacion_planilla_docente': return [
       'pd' => 'planilla_docente',
       'tom' => 'toma',
@@ -21,6 +36,7 @@ function get_entity_relations($entityName) {
       'tom_doc_dom' => 'domicilio',
       'tom_ree' => 'persona',
       'tom_ree_dom' => 'domicilio',
+      'tom_pd' => 'planilla_docente',
     ];
 
     case 'centro_educativo': return [
@@ -138,6 +154,7 @@ function get_entity_relations($entityName) {
       'doc_dom' => 'domicilio',
       'ree' => 'persona',
       'ree_dom' => 'domicilio',
+      'pd' => 'planilla_docente',
     ];
 
     default: return [];

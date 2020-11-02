@@ -13,7 +13,6 @@ class _FieldDistribucionHorariaDia extends Field {
   public $dataType = "integer";  
   public $subtype = "integer";  
   public $length = "10";  
-  public $value = "integer";  
 
 
 }

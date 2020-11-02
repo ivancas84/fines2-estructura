@@ -13,7 +13,6 @@ class _FieldAlumnoFotocopiaDocumento extends Field {
   public $dataType = "boolean";  
   public $subtype = "checkbox";  
   public $length = "1";  
-  public $value = "boolean";  
 
 
 }

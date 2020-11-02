@@ -12,7 +12,6 @@ class _FieldEmailEliminado extends Field {
   public $entityName = "email";
   public $dataType = "timestamp";  
   public $subtype = "timestamp";  
-  public $value = "datetime";  
 
 
 }

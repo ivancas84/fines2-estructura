@@ -12,7 +12,6 @@ class _FieldCalendarioAnio extends Field {
   public $entityName = "calendario";
   public $dataType = "year";  
   public $subtype = "year";  
-  public $value = "datetime";  
 
 
 }

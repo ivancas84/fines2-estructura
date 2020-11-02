@@ -13,7 +13,6 @@ class _FieldDiaNumero extends Field {
   public $dataType = "integer";  
   public $subtype = "integer";  
   public $length = "1";  
-  public $value = "integer";  
 
 
 }

@@ -12,7 +12,6 @@ class _FieldDetallePersonaCreado extends Field {
   public $entityName = "detalle_persona";
   public $dataType = "timestamp";  
   public $subtype = "timestamp";  
-  public $value = "datetime";  
 
 
 }

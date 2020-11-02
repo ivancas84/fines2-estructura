@@ -12,7 +12,6 @@ class _FieldDesignacionAlta extends Field {
   public $entityName = "designacion";
   public $dataType = "timestamp";  
   public $subtype = "timestamp";  
-  public $value = "datetime";  
 
 
 }

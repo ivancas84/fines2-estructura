@@ -12,7 +12,6 @@ class _FieldDesignacionDesde extends Field {
   public $entityName = "designacion";
   public $dataType = "date";  
   public $subtype = "date";  
-  public $value = "datetime";  
 
 
 }

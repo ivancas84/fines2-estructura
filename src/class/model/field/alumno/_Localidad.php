@@ -13,7 +13,6 @@ class _FieldAlumnoLocalidad extends Field {
   public $dataType = "string";  
   public $subtype = "text";  
   public $length = "255";  
-  public $value = "string";  
 
 
 }

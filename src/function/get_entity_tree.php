@@ -2,6 +2,21 @@
 
 function get_entity_tree($entityName) {
   switch($entityName){
+    case 'alumno': return [
+
+      'per' => ['field_id'=>'persona', 'field_name'=>'persona', 'entity_name'=>'persona', 'children'=>[
+        'per_dom' => ['field_id'=>'domicilio', 'field_name'=>'domicilio', 'entity_name'=>'domicilio', 'children'=>[]],]],
+      'com' => ['field_id'=>'comision', 'field_name'=>'comision', 'entity_name'=>'comision', 'children'=>[
+        'com_sed' => ['field_id'=>'sede', 'field_name'=>'sede', 'entity_name'=>'sede', 'children'=>[
+          'com_sed_dom' => ['field_id'=>'domicilio1', 'field_name'=>'domicilio', 'entity_name'=>'domicilio', 'children'=>[]],
+          'com_sed_ts' => ['field_id'=>'tipo_sede', 'field_name'=>'tipo_sede', 'entity_name'=>'tipo_sede', 'children'=>[]],
+          'com_sed_ce' => ['field_id'=>'centro_educativo', 'field_name'=>'centro_educativo', 'entity_name'=>'centro_educativo', 'children'=>[
+            'com_sed_ce_dom' => ['field_id'=>'domicilio2', 'field_name'=>'domicilio', 'entity_name'=>'domicilio', 'children'=>[]],]],]],
+        'com_moa' => ['field_id'=>'modalidad', 'field_name'=>'modalidad', 'entity_name'=>'modalidad', 'children'=>[]],
+        'com_pla' => ['field_id'=>'planificacion', 'field_name'=>'planificacion', 'entity_name'=>'planificacion', 'children'=>[
+          'com_pla_plb' => ['field_id'=>'plan', 'field_name'=>'plan', 'entity_name'=>'plan', 'children'=>[]],]],
+        'com_cal' => ['field_id'=>'calendario', 'field_name'=>'calendario', 'entity_name'=>'calendario', 'children'=>[]],]],    ];
+
     case 'asignacion_planilla_docente': return [
 
       'pd' => ['field_id'=>'planilla_docente', 'field_name'=>'planilla_docente', 'entity_name'=>'planilla_docente', 'children'=>[]],
@@ -21,7 +36,8 @@ function get_entity_tree($entityName) {
         'tom_doc' => ['field_id'=>'docente', 'field_name'=>'docente', 'entity_name'=>'persona', 'children'=>[
           'tom_doc_dom' => ['field_id'=>'domicilio2', 'field_name'=>'domicilio', 'entity_name'=>'domicilio', 'children'=>[]],]],
         'tom_ree' => ['field_id'=>'reemplazo', 'field_name'=>'reemplazo', 'entity_name'=>'persona', 'children'=>[
-          'tom_ree_dom' => ['field_id'=>'domicilio3', 'field_name'=>'domicilio', 'entity_name'=>'domicilio', 'children'=>[]],]],]],    ];
+          'tom_ree_dom' => ['field_id'=>'domicilio3', 'field_name'=>'domicilio', 'entity_name'=>'domicilio', 'children'=>[]],]],
+        'tom_pd' => ['field_id'=>'planilla_docente1', 'field_name'=>'planilla_docente', 'entity_name'=>'planilla_docente', 'children'=>[]],]],    ];
 
     case 'centro_educativo': return [
 
@@ -138,7 +154,8 @@ function get_entity_tree($entityName) {
       'doc' => ['field_id'=>'docente', 'field_name'=>'docente', 'entity_name'=>'persona', 'children'=>[
         'doc_dom' => ['field_id'=>'domicilio2', 'field_name'=>'domicilio', 'entity_name'=>'domicilio', 'children'=>[]],]],
       'ree' => ['field_id'=>'reemplazo', 'field_name'=>'reemplazo', 'entity_name'=>'persona', 'children'=>[
-        'ree_dom' => ['field_id'=>'domicilio3', 'field_name'=>'domicilio', 'entity_name'=>'domicilio', 'children'=>[]],]],    ];
+        'ree_dom' => ['field_id'=>'domicilio3', 'field_name'=>'domicilio', 'entity_name'=>'domicilio', 'children'=>[]],]],
+      'pd' => ['field_id'=>'planilla_docente', 'field_name'=>'planilla_docente', 'entity_name'=>'planilla_docente', 'children'=>[]],    ];
 
     default: return [];
   }
