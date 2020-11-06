@@ -9,10 +9,10 @@ $container = new Container();
 $render = new Render();
 
 $render->setCondition([
-  ["cur_com_cal_anio","=","2020"],
-  ["cur_com_cal_semestre","=","2"],
-  ["cur_com_moa_nombre","=","Fines 2"],
-  ["cur_com_autorizada","=",true],
+  ["cur_com_cal-anio","=","2020"],
+  ["cur_com_cal-semestre","=","2"],
+  ["cur_com_moa-nombre","=","Fines 2"],
+  ["cur_com-autorizada","=",true],
   ["estado","=","Aprobada"],
 ]);
 $render->setAggregate(["doc_email_abc", "doc_email"]);

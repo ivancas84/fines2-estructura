@@ -4,7 +4,6 @@
  * @todo Implementar render en el getall
  */
 require_once("../src/config/config.php");
-require_once("class/tools/Filter.php");
 require_once("class/controller/Dba.php");
 require_once("class/model/Data.php");
 require_once("class/model/Render.php");
@@ -13,7 +12,6 @@ require_once("config/structure.php");
 require_once("config/modelClasses.php");
 require_once("config/entityClasses.php");
 require_once("config/valuesClasses.php");
-
 
 $render = new Render();
 $render->setCondition([

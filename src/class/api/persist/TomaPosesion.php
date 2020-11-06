@@ -2,6 +2,7 @@
 
 require_once("class/api/Persist.php");
 require_once("class/controller/ModelTools.php");
+require_once("function/php_input.php");
 
 class TomaPosesionPersistApi extends PersistApi {
   /**
@@ -9,7 +10,7 @@ class TomaPosesionPersistApi extends PersistApi {
    */
 
   public function main(){
-    $data = Filter::jsonPostRequired();
+    $data = php_input();
     
     /**
      * $data["id"]: Id curso

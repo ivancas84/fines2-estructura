@@ -1,16 +1,16 @@
 <?php
 
 require_once("class/api/Delete.php");
+require_once("function/php_input.php");
 
 class CursoDeleteApi extends DeleteApi {
-
 
   public function concatHorario($id) {
     return("horario" . $id);
   }  
 
   public function main(){
-    $idsCursos = Filter::jsonPostRequired();
+    $idsCursos = php_input();
     $idsHorarios = $this->container->getDb()->ids("horario",["curso","=",$idsCursos]);
     
     $sql = "";

@@ -5,7 +5,7 @@ require_once("class/controller/ModelTools.php");
 
 require_once("function/array_combine_keys.php");
 require_once("function/array_combine_key.php");
-
+require_once("function/php_input.php");
 
 class ComisionHorariosPersistApi extends PersistApi {
   /**
@@ -17,7 +17,8 @@ class ComisionHorariosPersistApi extends PersistApi {
   public $id; //id comision
 
   public function main(){
-    $data = Filter::jsonPostRequired();
+    $data = php_input();
+    
 
     if(empty($data["id"])) throw new Exception("Dato no definido: id comision");
     if(empty($data["dias"])) throw new Exception("Dato no definido: dias");

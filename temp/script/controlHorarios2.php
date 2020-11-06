@@ -1,6 +1,5 @@
 <?php
 require_once("./config.php");
-require_once("class/tools/Filter.php");
 require_once("config/structure.php");
 require_once("config/modelClasses.php");
 require_once("config/valuesClasses.php");
@@ -17,8 +16,8 @@ function getValues($horario){
     "asignatura" => new AsignaturaValues($horario["curso_"]["carga_horaria_"]["asignatura_"]),
   );
 }
-$fechaAnio = Filter::getRequired("fecha_anio");
-$fechaSemestre = Filter::getRequired("fecha_semestre");
+$fechaAnio = filter_input(INPUT_GET, 'fecha_anio', FILTER_SANITIZE_SPECIAL_CHARS);
+$fechaSemestre = filter_input(INPUT_GET, 'fecha_semestre', FILTER_SANITIZE_SPECIAL_CHARS);
 $sqlo = ComisionSqlo::getInstance();
 $sql = $sqlo->ids([["fecha_anio","=",$fechaAnio],["fecha_semestre","=",$fechaSemestre],["autorizada","=",true]]);
 //echo $sql;

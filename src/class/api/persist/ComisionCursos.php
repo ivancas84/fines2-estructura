@@ -2,6 +2,7 @@
 
 require_once("class/api/Persist.php");
 require_once("class/controller/ModelTools.php");
+require_once("function/php_input.php");
 
 class ComisionCursosPersistApi extends PersistApi {
   /**
@@ -9,7 +10,7 @@ class ComisionCursosPersistApi extends PersistApi {
    */
 
   public function main(){
-    $idComision = Filter::jsonPostRequired()["id"];
+    $idComision = php_input()["id"];
 
     $comision = $this->container->getDb()->get("comision", $idComision);
 
