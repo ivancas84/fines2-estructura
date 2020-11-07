@@ -5,7 +5,8 @@ require_once("class/controller/ModelTools.php");
 require_once("function/php_input.php");
 
 class CursoHorarioInfoApi extends BaseApi {
-  public $entityName = "curso_horario";
+  public $entityName = "curso";
+  public $permission = "r";
 
   public function main() {
     $idCursos = php_input();

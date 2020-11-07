@@ -12,7 +12,8 @@ class ComisionesGrupoAllApi extends AllApi {
   /**
    * Persistencia de cursos y comisiones
    */
-  protected $entityName = "comisiones_grupo";
+  public $entityName = "comision_actual";
+  public $permission = "r";
 
   public function main($data){
     /**
