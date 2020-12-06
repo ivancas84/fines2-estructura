@@ -12,4 +12,6 @@ telefono (tel): string nf.
 email (ema): string nf.
 email_abc (ea): string nf. UNIQUE.
 alta (alt): timestamp nf. NOT NULL. DEFAULT: current_timestamp().
+primer_nombre_apellido (pna): string nf. NOT ADMIN.
+primer_apellido_nombre (pan): string nf. NOT ADMIN.
 domicilio (dom): string mu.

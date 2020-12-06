@@ -8,7 +8,7 @@ class FieldPersonaPrimerApellidoNombre extends Field {
   public $fieldType = "nf";
   public $default = null;
   public $name = "primer_apellido_nombre";
-  public $alias = "nom";
+  public $alias = "pan";
   public $entityName = "persona";
   public $dataType = "string";  
   public $subtype = "text";  
