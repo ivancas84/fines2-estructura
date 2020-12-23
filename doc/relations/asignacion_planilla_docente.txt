@@ -20,5 +20,7 @@ planilla_docente - tom_pd
 
 id (id): string pk. NOT NULL. MAIN. UNIQUE.
 insertado (ins): timestamp nf. NOT NULL. DEFAULT: current_timestamp().
+comentario (com): string nf.
+reclamo (rec): boolean nf. NOT NULL.
 planilla_docente (pd): string mu. NOT NULL.
 toma (tom): string mu. NOT NULL.
