@@ -8,14 +8,19 @@ class DocenteRenderBuild extends RenderBuild {
     $render = Render::getInstanceDisplay($display);
     $render->entityName = "persona";    
 
-    $r = clone $render;
-    $r->addPrefix("doc-");
-    $tomas = $this->container->getDb()->all("toma",$r);
+    $render->addPrefix("doc-");
+    $render->setFields(["docente"]);
+    $render->addCondition(["docente","=",true]);
+
+    $tomas = $this->container->getDb()->advanced("toma",$render);
     $idPersonas = array_column($tomas, "docente");
+
     $condition = (empty($idPersonas)) ? false : $idPersonas;
+    $render = new Render();
+    $render->entityName = "persona";    
+    $render->setSize(0);
     $render->addCondition(["id","=",$condition]);
     return $render;
   }
 
 }
-
