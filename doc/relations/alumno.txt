@@ -19,32 +19,6 @@ constancia_cuil (cc): boolean nf. NOT NULL.
 certificado_estudios (ce): boolean nf. NOT NULL.
 anio_ingreso (ai): string nf.
 activo (act): boolean nf.
-programa (pro): string nf.
 observaciones (obs): text nf.
-comision_aux (ca): string nf.
-region (reg): string nf.
-distrito (dis): string nf.
-localidad (loc): string nf.
-programa_aux (pa): string nf.
-inscripcion_men (im): string nf.
-cens (cen): string nf.
-sede (sed): string nf.
-tramo (tra): string nf.
-identificador (ide): string nf.
-numero_inscripcion (ni): string nf.
-trayectoria_educativa (te): string nf.
-turno (tur): string nf.
-pc_escritorio (pe): string nf.
-net_notebook (nn): string nf.
-tablet (tab): string nf.
-pc_tablet (pt): string nf.
-impresora (imp): string nf.
-conexion_internet_paga (cip): string nf.
-telefono_celular (tc): string nf.
-comision_2020 (c2): string nf.
-archivo_2019 (a2): string nf.
-archivo_2020 (a2a): string nf.
-drive (dri): string nf.
-cuil (cui): string nf.
 persona (per): string mu. NOT NULL.
 comision (com): string mu.
