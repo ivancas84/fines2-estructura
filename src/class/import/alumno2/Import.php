@@ -3,38 +3,17 @@
 require_once("class/import/Import.php");
 require_once("class/model/Db.php");
 
-class AlumnoImport extends Import{
+class Alumno2Import extends Import{
 
   public $mode = "db";
   public $id = "alumno";
 
   public function defineSource(){
-    $db = new Db(ALU_HOST, ALU_USER, ALU_PASS, ALU_DBNAME);
-    $result = $db->query("
-      SELECT *,
-      correo,
-      nombres,
-      apellidos,
-      numero_documento,
-      genero,
-      telefono,
-      cuil,
-      fecha_nacimiento,
-      programa as alu_programa, 
-      analitico_dni as alu_fotocopia_documento, 
-      analitico_cuil as alu_constancia_cuil, 
-      analitico_partida as alu_partida_nacimiento,
-      analitico_certificado as alu_certificado_estudios,
-      ingreso as alu_anio_ingreso,
-      observaciones alu_observaciones,
-      activo as alu_activo,
-      id_comision as com_identificacion
-      
-      FROM persona 
-      WHERE cens = '456'
-      AND id_comision IS NOT NULL");
-    $this->source = $result->fetch_all(MYSQLI_ASSOC);
-    $result->free();
+    $display = [
+      "fields"=>[ "per-nombres", "per-apellidos", "per-numero_documento","per-cuil","per-fecha_nacimiento"],
+      "size"=>0
+    ];
+    $this->source = rest("http://localhost/fines2-temp/api/", "nomina2", "advanced",$display);
   }
 
   public function identify(){
