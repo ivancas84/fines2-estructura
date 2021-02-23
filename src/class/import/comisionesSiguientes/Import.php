@@ -43,12 +43,13 @@ class ComisionesSiguientesImport extends Import{
       ["cal-anio","=",$this->anio],
       ["cal-semestre","=",$this->semestre],
       ["modalidad","=",$this->modalidad],
-      [["pla-anio", "!=","3"],["pla-semestre", "!=","2"]]
+      ["tramo", "!=","32"]
     ]);
 
     $fields = $this->container->getRel("comision")->fieldNames();
     array_push($fields, "identifier");
     $render->setFields($fields);
+
     $this->source = $this->container->getDb()->select("comision", $render);
   }
 
