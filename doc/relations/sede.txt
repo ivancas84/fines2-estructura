@@ -9,6 +9,7 @@ nombre (nom): string nf. NOT NULL. MAIN.
 observaciones (obs): text nf.
 alta (alt): timestamp nf. NOT NULL. DEFAULT: current_timestamp().
 baja (baj): timestamp nf.
+fecha_traspaso (ft): date nf.
 domicilio (dom): string mu.
 tipo_sede (ts): string mu.
 centro_educativo (ce): string mu.
