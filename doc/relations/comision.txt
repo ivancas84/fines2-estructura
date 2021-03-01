@@ -18,6 +18,8 @@ publicada (pub): boolean nf. NOT NULL.
 observaciones (obs): text nf.
 alta (alt): timestamp nf. NOT NULL. DEFAULT: current_timestamp().
 identificacion (ide): string nf.
+estado (est): string nf. DEFAULT: Confirma.
+configuracion (con): string nf. DEFAULT: Histórica.
 sede (sed): string mu. NOT NULL. MAIN.
 modalidad (moa): string mu. NOT NULL.
 planificacion (pla): string mu. MAIN.
