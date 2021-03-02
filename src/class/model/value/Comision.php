@@ -32,7 +32,7 @@ class ComisionValue extends ValueEntityOptions{
     } else {
       $render->addCondition([
         ["anio","=",++$anio],
-        ["semestre","=",$semestre],
+        ["semestre","=",--$semestre],
       ]);
     }
 

@@ -1,15 +1,12 @@
 <?php
 
-require_once("class/controller/Persist.php");
-require_once("class/model/Ma.php");
-require_once("class/model/Values.php");
 require_once("class/controller/ModelTools.php");
 
 require_once("function/array_combine_keys.php");
 require_once("function/array_combine_key.php");
 
 
-class HorariosComisionPersist extends Persist {
+class HorariosComisionPersist  {
   /**
    * Definir horarios de todos los cursos de una comision
    * Los días y horarios se acomodan aleatoriamente
@@ -36,6 +33,7 @@ class HorariosComisionPersist extends Persist {
      */
 
     $this->getCursos();
+
     /**
      * obtener los cursos de la comision para poder asignar los horarios
      * las asignaturas de los cursos deben coincidir con los de las distribuciones horarias
@@ -69,27 +67,28 @@ class HorariosComisionPersist extends Persist {
      * Las horas catedra definidas en los cursos deben coincidir con la carga horaria de las asignaturas de las distribuciones horarias.
      */
 
-    $this->definirHorarios($data["hora_inicio"]);
+    return $this->definirHorarios($data["hora_inicio"]);
   }
 
   public function checkHorarios(){
-    if(Ma::count("horario", ["cur_comision","=", $this->id])) throw new Exception("Ya existen horarios para la comision " . $this->id);
+    $render = new Render("horario");
+    $render->setCondition(["cur-comision","=", $this->id]);
+    if($this->container->getDb()->count("horario", $render)) throw new Exception("Ya existen horarios para la comision " . $this->id);
   }
 
   public function getCursos(){
-    $this->cursos = Ma::all("curso", ["comision","=", $this->id]);  
+    $render = new Render("curso");
+    $render->setCondition(["comision","=", $this->id]);
+    $this->cursos = $this->container->getDb()->all("curso", $render);  
     if(empty($this->cursos)) throw new Exception("No existen cursos para la comision " . $this->id);
   }
 
 
   public function getDistribucionesHorarias() {
-    $params = [
-      "planificacion" => $this->cursos[0]["com_planificacion"],
-    ];
-
-    $render = Render::getInstanceParams($params);
-
-    $this->distribucionesHorarias = Ma::all("distribucion_horaria", $render);
+    $render = $this->container->getRender("distribucion_horaria");
+    $render->addCondition(["planificacion","=",$this->cursos[0]["com_planificacion"]]);
+    $this->distribucionesHorarias = $this->container->getDb()->all("distribucion_horaria", $render);
+    
     if(empty($this->distribucionesHorarias)) throw new Exception("No existen distribuciones horarias para la comision indicada: " . $this->id);
     if(!shuffle($this->distribucionesHorarias)) throw new Exception("No se pudo asignar orden aleatorio a la distribucion horaria");
     if(
@@ -107,9 +106,10 @@ class HorariosComisionPersist extends Persist {
 
   public function definirHorarios($horaInicio){
     $horasCatedrasDia = [];
-    
+
+    $detail = [];
     foreach($this->distribucionesHorarias as $dh){
-      $horario = EntityValues::getInstanceRequire("horario");
+      $horario = $this->container->getValue("horario"); 
       
       $hora = DateTime::createFromFormat("H:i:s", $horaInicio);  
       
@@ -117,22 +117,23 @@ class HorariosComisionPersist extends Persist {
       $minutos = $horasCatedrasDia[$dh["dia"]];
 
       $hora->modify("+{$minutos} minute");
-      $horario->_setHoraInicio(clone $hora);
+      $horario->_fastSet("hora_inicio", clone $hora);
 
       $minutos = intval($dh["horas_catedra"]) * 40;
       $hora->modify("+{$minutos} minute");
-      $horario->_setHoraFin(clone $hora);
+      $horario->_fastSet("hora_fin", clone $hora);
 
       $horasCatedrasDia[$dh["dia"]] += $minutos;
       
-      $horario->setDia($this->dias[intval($dh["dia"])-1]);
-      $horario->setCurso($this->cursosXAsignaturas[$dh["asignatura"]]["id"]);
+      $horario->_fastSet("dia", $this->dias[intval($dh["dia"])-1]);
+      $horario->_fastSet("curso", $this->cursosXAsignaturas[$dh["asignatura"]]["id"]);
 
-      if($horario->_logs()->isError()) throw new Exception("El horario posee errores en la asignacion de valores");
-
-      $this->insert("horario", $horario->_toArray());
+      $persist = $this->container->getController("persist_sql_value")->id("horario",$horario);
+      array_push($detail,"horario".$persist["id"]);
+      $this->container->getDb()->multi_query_transaction($persist["sql"]);
     }
 
+    return ["id" => $this->id, "detail" => $detail];
   }
 
   

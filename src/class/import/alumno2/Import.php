@@ -6,7 +6,9 @@ require_once("function/rest.php");
 
 
 class Alumno2Import extends Import{
-
+  /**
+   * Importar alumnos de la base anterior 2017/3
+   */
   public $mode = "db";
   public $id = "alumno";
 

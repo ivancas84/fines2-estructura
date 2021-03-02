@@ -1,18 +1,14 @@
 <?php
 
 
-require_once("class/controller/Persist.php");
-require_once("class/controller/persist/HorariosComision.php");
-require_once("class/model/Ma.php");
-require_once("class/model/Values.php");
+require_once("class/controller/HorariosComisionPersist.php");
 require_once("class/controller/ModelTools.php");
-require_once("class/model/Render.php");
 require_once("function/array_combine_key.php");
 
 
 
 
-class HorariosComisionesGrupoPersist extends Persist {
+class HorariosComisionesGrupoPersist {
   /**
    * Definir horarios de todos los cursos de un grupo basandose en la comision anterior
    * 
@@ -22,19 +18,21 @@ class HorariosComisionesGrupoPersist extends Persist {
    */
   protected $comisionesAnteriores;
   protected $diasHorarios;
-
+  protected $mt;
 
   public function main($grupo){
-    if(empty($grupo["fecha_anio"])) throw new Exception("Dato no definido: fecha anio");
-    if(empty($grupo["fecha_semestre"])) throw new Exception("Dato no definido: fecha semestre");
+    $this->mt = new ModelTools();
+    $this->mt->container = $this->container;
+
+    if(empty($grupo["cal-anio"])) throw new Exception("Dato no definido: fecha anio");
+    if(empty($grupo["cal-semestre"])) throw new Exception("Dato no definido: fecha semestre");
     if(empty($grupo["modalidad"])) throw new Exception("Dato no definido: modalidad");
-    if(empty($grupo["sed_centro_educativo"])) throw new Exception("Dato no definido: centro educativo (sed_centro_educativo)");
+    //if(empty($grupo["sed-centro_educativo"])) throw new Exception("Dato no definido: centro educativo (sed_centro_educativo)");
        
     $this->consultarComisionesAnterioresConSiguiente($grupo);
     /**
      * Consultar comisiones anteriores dle grupo, que tengan el campo siguiente definido
      */
-    
     $this->quitarComisionesAnterioresMismoSiguiente();
     /**
      * Quitar comisiones que tengan el campo siguiente repetido
@@ -46,6 +44,7 @@ class HorariosComisionesGrupoPersist extends Persist {
      */
 
     $this->quitarComisionesAnterioresConHorarioGrupoActual();
+
     /**
      *  "quitar comisiones anteriores cuyo horario de la comision siguiente este definido";
      */
@@ -55,17 +54,19 @@ class HorariosComisionesGrupoPersist extends Persist {
      * obtener dias y horarios de las comisiones anteriores
      */
 
-    $this->definirHorariosComisiones();
+    return $this->definirHorariosComisiones();
     /**
      * definir dias y horarios para las comisiones actuales
      */
   }
   
   protected function consultarComisionesAnterioresConSiguiente($grupo){
-    $grupoAnterior = ModelTools::intervaloAnterior($grupo);
-    $render = Render::getInstanceParams($grupoAnterior);
+    $grupoAnterior = $this->mt->intervaloAnterior($grupo, "cal-");
+    $render = $this->container->getRender("comision");
+    $render->setParams($grupoAnterior);
     $render->addCondition(["comision_siguiente","=",true]);
-    $this->comisionesAnteriores = Ma::all("comision",$render);
+    $render->setSize(0);
+    $this->comisionesAnteriores = $this->container->getDb()->all("comision",$render);
   }
 
   protected function quitarComisionesAnterioresMismoSiguiente() {
@@ -93,10 +94,14 @@ class HorariosComisionesGrupoPersist extends Persist {
 
   protected  function quitarComisionesAnterioresSinHorario(){
     $idsComisionesAnteriores = array_column($this->comisionesAnteriores, "id");
-    $horariosGrupoAnterior = Ma::all("horario",["cur_comision","=",$idsComisionesAnteriores]);
-
+    $render = $this->container->getRender("horario");
+    $render->addCondition(["cur-comision","=",$idsComisionesAnteriores]);
+    $render->setSize(0);
+    $horariosGrupoAnterior = $this->container->getDb()->all("horario",$render);
     $idsComisionesAnteriores = array_column($this->comisionesAnteriores, "id");
+
     $idComisionesAnterioresConHorarios = array_values(array_unique(array_column($horariosGrupoAnterior, "cur_comision")));
+    
     for($i = 0; $i < count($idsComisionesAnteriores); $i++) {
       if(!in_array($idsComisionesAnteriores[$i], $idComisionesAnterioresConHorarios)){
         unset($this->comisionesAnteriores[$i]);
@@ -106,7 +111,10 @@ class HorariosComisionesGrupoPersist extends Persist {
 
   protected  function quitarComisionesAnterioresConHorarioGrupoActual(){
     $idsComisionesGrupoActual = array_column($this->comisionesAnteriores, "comision_siguiente");
-    $horariosGrupoActual = Ma::all("horario",["cur_comision","=",$idsComisionesGrupoActual]);
+    $render = $this->container->getRender("horario");
+    $render->setCondition(["cur-comision","=",$idsComisionesGrupoActual]);
+    $render->setSize(0);
+    $horariosGrupoActual = $this->container->getDb()->all("horario",$render);
 
     $idComisionesGrupoActualConHorarios = array_values(array_unique(array_column($horariosGrupoActual, "cur_comision")));
     for($i = 0; $i < count($idsComisionesGrupoActual); $i++) {
@@ -118,14 +126,16 @@ class HorariosComisionesGrupoPersist extends Persist {
 
   protected function definirDiasHorariosComisionesAnteriores (){
     $ids = array_column($this->comisionesAnteriores, "id");
-    $diasHorarios = ModelTools::diasHorariosComision($ids);
+    $diasHorarios = $this->mt->diasHorariosComision($ids);
     $this->diasHorarios = array_combine_key($diasHorarios, "comision");
   }
 
   protected function definirHorariosComisiones(){
     
-    $controller = new HorariosComisionPersist();
+    $controller = $this->container->getController("horarios_comision_persist");
 
+    $ids = [];
+    $detail = [];
     foreach($this->comisionesAnteriores as $comision){
       $dias = $this->diasHorarios[$comision["id"]]["dias_ids"];
       $hora_inicio = $this->diasHorarios[$comision["id"]]["hora_inicio"];
@@ -135,10 +145,14 @@ class HorariosComisionesGrupoPersist extends Persist {
         "hora_inicio" => $hora_inicio
       ];
 
-      $controller->main($data);
+      $persist = $controller->main($data);
+      array_push($ids, $persist["id"]);
+      $detail = array_merge($detail,$persist["detail"]);
     }
 
-    array_push($this->logs, ["sql"=>$controller->getSql(), "detail"=>$controller->getDetail()]);
+    return ["ids"=>$ids, "detail"=>$detail];
+
+    //array_push($this->logs, ["sql"=>$controller->getSql(), "detail"=>$controller->getDetail()]);
   }
 
 

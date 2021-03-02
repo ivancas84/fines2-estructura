@@ -35,12 +35,13 @@ class ModelTools {
 
   public function cargasHorariasDePlanificacion($planificacion){
     if(empty($planificacion)) throw new Exception("Planificacion no definida");
-    $render = Render::getInstanceParams(["planificacion" => $planificacion]);
-    $render->setAggregate(["horas_catedra.sum"]);
+    $render = $this->container->getRender("distribucion_horaria");
+    $render->setParams(["planificacion" => $planificacion]);
+    $render->setFields(["horas_catedra.sum"]);
     $render->setGroup(["planificacion", "asignatura"]);
     $render->setOrder(["horas_catedra.sum" => "desc"]);
-
-    return $this->container->getDb()->advanced("distribucion_horaria",$render);
+    $render->setSize(0);
+    return $this->container->getDb()->select("distribucion_horaria",$render);
   }
 
   public function cargasHorariasXAsignaturaDeDistribucionesHorarias($distribucionesHorarias){
@@ -61,7 +62,7 @@ class ModelTools {
     return $cargasHorariasXAsignatura;
   }
 
-  public function intervaloAnterior(array $grupo){
+  public function intervaloAnterior(array $grupo, $prefix = ""){
     /**
      * un intervalo es la combinación de fecha_anio, fecha_semestre
      * @param $grupo["fecha_anio"]
@@ -69,22 +70,22 @@ class ModelTools {
      */
     $param = $grupo;
 
-    $param["fecha_anio"] = intval($grupo["fecha_anio"]);
-    $param["fecha_semestre"] = intval($grupo["fecha_semestre"]);
+    $param[$prefix."anio"] = intval($grupo[$prefix."anio"]);
+    $param[$prefix."semestre"] = intval($grupo[$prefix."semestre"]);
 
-    switch($param["fecha_semestre"]){
+    switch($param[$prefix."semestre"]){
       case 2:  
-        $param["fecha_semestre"] = 1; 
+        $param[$prefix."semestre"] = 1; 
       break;
       
       case 1: 
-        $param["fecha_anio"]--;
-        $param["fecha_semestre"] = 2; 
+        $param[$prefix."anio"]--;
+        $param[$prefix."semestre"] = 2; 
       break;
       
       default: 
-        $param["fecha_semestre"] = false;
-        $param["fecha_anio"]--;
+        $param[$prefix."semestre"] = false;
+        $param[$prefix."anio"]--;
     }
 
     return $param;

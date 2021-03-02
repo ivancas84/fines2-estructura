@@ -4,7 +4,9 @@ require_once("class/import/Import.php");
 require_once("class/model/Db.php");
 
 class AlumnoImport extends Import{
-
+  /**
+   * Importar alumnos de la base de organizacion
+   */
   public $mode = "db";
   public $id = "alumno";
 
