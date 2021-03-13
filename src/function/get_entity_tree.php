@@ -39,6 +39,23 @@ function get_entity_tree($entityName) {
           'tom_ree_dom' => ['field_id'=>'domicilio3', 'field_name'=>'domicilio', 'entity_name'=>'domicilio', 'children'=>[]],]],
         'tom_pd' => ['field_id'=>'planilla_docente1', 'field_name'=>'planilla_docente', 'entity_name'=>'planilla_docente', 'children'=>[]],]],    ];
 
+    case 'calificacion': return [
+
+      'cur' => ['field_id'=>'curso', 'field_name'=>'curso', 'entity_name'=>'curso', 'children'=>[
+        'cur_com' => ['field_id'=>'comision', 'field_name'=>'comision', 'entity_name'=>'comision', 'children'=>[
+          'cur_com_sed' => ['field_id'=>'sede', 'field_name'=>'sede', 'entity_name'=>'sede', 'children'=>[
+            'cur_com_sed_dom' => ['field_id'=>'domicilio', 'field_name'=>'domicilio', 'entity_name'=>'domicilio', 'children'=>[]],
+            'cur_com_sed_ts' => ['field_id'=>'tipo_sede', 'field_name'=>'tipo_sede', 'entity_name'=>'tipo_sede', 'children'=>[]],
+            'cur_com_sed_ce' => ['field_id'=>'centro_educativo', 'field_name'=>'centro_educativo', 'entity_name'=>'centro_educativo', 'children'=>[
+              'cur_com_sed_ce_dom' => ['field_id'=>'domicilio1', 'field_name'=>'domicilio', 'entity_name'=>'domicilio', 'children'=>[]],]],]],
+          'cur_com_moa' => ['field_id'=>'modalidad', 'field_name'=>'modalidad', 'entity_name'=>'modalidad', 'children'=>[]],
+          'cur_com_pla' => ['field_id'=>'planificacion', 'field_name'=>'planificacion', 'entity_name'=>'planificacion', 'children'=>[
+            'cur_com_pla_plb' => ['field_id'=>'plan', 'field_name'=>'plan', 'entity_name'=>'plan', 'children'=>[]],]],
+          'cur_com_cal' => ['field_id'=>'calendario', 'field_name'=>'calendario', 'entity_name'=>'calendario', 'children'=>[]],]],
+        'cur_asi' => ['field_id'=>'asignatura', 'field_name'=>'asignatura', 'entity_name'=>'asignatura', 'children'=>[]],]],
+      'per' => ['field_id'=>'persona', 'field_name'=>'persona', 'entity_name'=>'persona', 'children'=>[
+        'per_dom' => ['field_id'=>'domicilio2', 'field_name'=>'domicilio', 'entity_name'=>'domicilio', 'children'=>[]],]],    ];
+
     case 'centro_educativo': return [
 
       'dom' => ['field_id'=>'domicilio', 'field_name'=>'domicilio', 'entity_name'=>'domicilio', 'children'=>[]],    ];

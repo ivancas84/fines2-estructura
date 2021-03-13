@@ -39,6 +39,23 @@ function get_entity_relations($entityName) {
       'tom_pd' => 'planilla_docente',
     ];
 
+    case 'calificacion': return [
+      'cur' => 'curso',
+      'cur_com' => 'comision',
+      'cur_com_sed' => 'sede',
+      'cur_com_sed_dom' => 'domicilio',
+      'cur_com_sed_ts' => 'tipo_sede',
+      'cur_com_sed_ce' => 'centro_educativo',
+      'cur_com_sed_ce_dom' => 'domicilio',
+      'cur_com_moa' => 'modalidad',
+      'cur_com_pla' => 'planificacion',
+      'cur_com_pla_plb' => 'plan',
+      'cur_com_cal' => 'calendario',
+      'cur_asi' => 'asignatura',
+      'per' => 'persona',
+      'per_dom' => 'domicilio',
+    ];
+
     case 'centro_educativo': return [
       'dom' => 'domicilio',
     ];
