@@ -17,7 +17,7 @@ id (id): string pk. NOT NULL. MAIN. UNIQUE.
 nota1 (noa): float nf.
 nota2 (nob): float nf.
 nota3 (noc): float nf.
-nota_final (nf): float nf. NOT NULL.
+nota_final (nf): float nf.
 crec (cre): float nf.
-curso (cur): string mu.
+curso (cur): string mu. NOT NULL.
 persona (per): string mu. NOT NULL.

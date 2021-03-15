@@ -12,7 +12,7 @@ class CalificacionCursoPersistApi extends PersistApi {
    */
 
   public function main(){
-    $idCurso = php_input();
+    $idCurso = file_get_contents("php://input");
     $curso = $this->container->getDb()->get("curso", $idCurso);
 
     $render = $this->container->getRender("alumno");
@@ -38,18 +38,20 @@ class CalificacionCursoPersistApi extends PersistApi {
     $sql = "";
     $ids = [];
     $detail = [];
-    foreach($idPersonas as $id){
-      $row = [
-        "id"=>uniqid(),
-        "curso"=>$row["curso"],
-        "persona"=>$id,
-      ];
-      array_push($ids, $row["id"]);
-      array_push($detail, "calificacion".$row["id"]);
-      $sql .= $this->container->getSqlo("calificacion")->insert($row);
+    foreach($idPersonas as $idPersona){
+      $calificacion = $this->container->getValue("calificacion");
+      $calificacion->_set("id", uniqid());
+      $calificacion->_set("curso", $idCurso);
+      $calificacion->_set("persona", $idPersona);
+      $calificacion->_call("reset")->_call("check");
+      if($calificacion->_getLogs()->isError()) throw new Exception($calificacion->_getLogs()->toString());
+      $calificacion->_call("setDefault");
+      $sql .= $this->container->getSqlo("calificacion")->insert($calificacion->_toArray("sql"));
+      array_push($ids, $calificacion->_get("id"));
+      array_push($detail, "calificacion".$calificacion->_get("id"));
     }
 
-    $this->container->getDb()->multi_query_transaction($sql);
+    if(!empty($sql)) $this->container->getDb()->multi_query_transaction($sql);
     return ["ids"=>$ids,"detail"=>$detail];
   }
 }
