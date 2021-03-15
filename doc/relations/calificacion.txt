@@ -19,5 +19,6 @@ nota2 (nob): float nf.
 nota3 (noc): float nf.
 nota_final (nf): float nf.
 crec (cre): float nf.
+porcentaje_asistencia (pa): integer nf.
 curso (cur): string mu. NOT NULL.
 persona (per): string mu. NOT NULL.
