@@ -24,6 +24,10 @@ comentario (com): string nf.
 tipo_movimiento (tm): string nf. NOT NULL.
 estado_contralor (ec): string nf.
 alta (alt): timestamp nf. NOT NULL. DEFAULT: current_timestamp().
+calificacion (cal): boolean nf. NOT NULL.
+temas_tratados (tt): boolean nf. NOT NULL.
+asistencia (asi): boolean nf. NOT NULL.
+sin_planillas (sp): boolean nf. NOT NULL.
 curso (cur): string mu. NOT NULL.
 docente (doc): string mu.
 reemplazo (ree): string mu.
