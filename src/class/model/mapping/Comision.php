@@ -4,7 +4,7 @@ require_once("class/model/entityOptions/Mapping.php");
 class ComisionMapping extends MappingEntityOptions{
 
   public function numero() {
-    return "CONCAT({$this->_pf()}sed.numero, {$this->_pt()}.division)
+    return "CONCAT({$this->_pf()}sed.numero, {$this->_pt()}.division, '/', COALESCE({$this->_pf()}pla.anio,''), COALESCE({$this->_pf()}pla.semestre,''))
 ";
   }
 
