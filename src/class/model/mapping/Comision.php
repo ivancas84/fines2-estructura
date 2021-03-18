@@ -14,6 +14,8 @@ class ComisionMapping extends MappingEntityOptions{
   }
 
   public function label() {
+    return $this->numero();
+
     return "CONCAT(
       {$this->_pf()}sed.numero, {$this->_pt()}.division,
       IF({$this->_pf()}pla.id, CONCAT({$this->_pf()}pla.anio,{$this->_pf()}pla.semestre), ''),
