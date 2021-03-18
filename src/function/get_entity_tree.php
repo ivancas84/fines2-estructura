@@ -72,6 +72,29 @@ function get_entity_tree($entityName) {
         'pla_plb' => ['field_id'=>'plan', 'field_name'=>'plan', 'entity_name'=>'plan', 'children'=>[]],]],
       'cal' => ['field_id'=>'calendario', 'field_name'=>'calendario', 'entity_name'=>'calendario', 'children'=>[]],    ];
 
+    case 'comision_relacionada': return [
+
+      'com' => ['field_id'=>'comision', 'field_name'=>'comision', 'entity_name'=>'comision', 'children'=>[
+        'com_sed' => ['field_id'=>'sede', 'field_name'=>'sede', 'entity_name'=>'sede', 'children'=>[
+          'com_sed_dom' => ['field_id'=>'domicilio', 'field_name'=>'domicilio', 'entity_name'=>'domicilio', 'children'=>[]],
+          'com_sed_ts' => ['field_id'=>'tipo_sede', 'field_name'=>'tipo_sede', 'entity_name'=>'tipo_sede', 'children'=>[]],
+          'com_sed_ce' => ['field_id'=>'centro_educativo', 'field_name'=>'centro_educativo', 'entity_name'=>'centro_educativo', 'children'=>[
+            'com_sed_ce_dom' => ['field_id'=>'domicilio1', 'field_name'=>'domicilio', 'entity_name'=>'domicilio', 'children'=>[]],]],]],
+        'com_moa' => ['field_id'=>'modalidad', 'field_name'=>'modalidad', 'entity_name'=>'modalidad', 'children'=>[]],
+        'com_pla' => ['field_id'=>'planificacion', 'field_name'=>'planificacion', 'entity_name'=>'planificacion', 'children'=>[
+          'com_pla_plb' => ['field_id'=>'plan', 'field_name'=>'plan', 'entity_name'=>'plan', 'children'=>[]],]],
+        'com_cal' => ['field_id'=>'calendario', 'field_name'=>'calendario', 'entity_name'=>'calendario', 'children'=>[]],]],
+      'rel' => ['field_id'=>'relacion', 'field_name'=>'relacion', 'entity_name'=>'comision', 'children'=>[
+        'rel_sed' => ['field_id'=>'sede1', 'field_name'=>'sede', 'entity_name'=>'sede', 'children'=>[
+          'rel_sed_dom' => ['field_id'=>'domicilio2', 'field_name'=>'domicilio', 'entity_name'=>'domicilio', 'children'=>[]],
+          'rel_sed_ts' => ['field_id'=>'tipo_sede1', 'field_name'=>'tipo_sede', 'entity_name'=>'tipo_sede', 'children'=>[]],
+          'rel_sed_ce' => ['field_id'=>'centro_educativo1', 'field_name'=>'centro_educativo', 'entity_name'=>'centro_educativo', 'children'=>[
+            'rel_sed_ce_dom' => ['field_id'=>'domicilio3', 'field_name'=>'domicilio', 'entity_name'=>'domicilio', 'children'=>[]],]],]],
+        'rel_moa' => ['field_id'=>'modalidad1', 'field_name'=>'modalidad', 'entity_name'=>'modalidad', 'children'=>[]],
+        'rel_pla' => ['field_id'=>'planificacion1', 'field_name'=>'planificacion', 'entity_name'=>'planificacion', 'children'=>[
+          'rel_pla_plb' => ['field_id'=>'plan1', 'field_name'=>'plan', 'entity_name'=>'plan', 'children'=>[]],]],
+        'rel_cal' => ['field_id'=>'calendario1', 'field_name'=>'calendario', 'entity_name'=>'calendario', 'children'=>[]],]],    ];
+
     case 'contralor': return [
 
       'pd' => ['field_id'=>'planilla_docente', 'field_name'=>'planilla_docente', 'entity_name'=>'planilla_docente', 'children'=>[]],    ];
