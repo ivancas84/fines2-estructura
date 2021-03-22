@@ -28,6 +28,7 @@ calificacion (cal): boolean nf. NOT NULL.
 temas_tratados (tt): boolean nf. NOT NULL.
 asistencia (asi): boolean nf. NOT NULL.
 sin_planillas (sp): boolean nf. NOT NULL.
+enlace_planillas (ep): string nf.
 curso (cur): string mu. NOT NULL.
 docente (doc): string mu.
 reemplazo (ree): string mu.
