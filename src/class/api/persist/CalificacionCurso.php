@@ -18,7 +18,7 @@ class CalificacionCursoPersistApi extends PersistApi {
     $render = $this->container->getRender("alumno");
     $render->setCondition([
       ["comision","=",$curso["comision"]],
-      ["activo","=","true"]
+      //["activo","=","true"]
     ]);
     $render->setSize(0);
     $alumnos = $this->container->getDb()->all("alumno",$render);
