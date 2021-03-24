@@ -53,13 +53,12 @@ class CursosComisionPersist  {
   public function definirCursos(){
     $detail = [];
     foreach($this->cargasHorarias as $ch){
-      $p = $this->container->getController("persist_sql");
       $curso = [
           "comision" => $this->id,
           "asignatura" => $ch["asignatura"],
           "horas_catedra" => $ch["horas_catedra_sum"],
       ];
-      $persist = $p->id("curso",$curso);
+      $persist = $this->container->getControllerEntity("persist_sql","curso")->id("curso",$curso);
       array_push($detail,"curso".$persist["id"]);
       $this->container->getDb()->multi_query_transaction($persist["sql"]);
     }

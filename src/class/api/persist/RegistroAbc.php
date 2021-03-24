@@ -34,7 +34,7 @@ class RegistroAbcPersistApi extends PersistApi {
       $sql = $this->container->getSqlo("persona")->insert($value->_toArray("sql"));
     }
     
-    $persistToma = $this->container->getControllerEntity("persist_sql", "toma_posesion")->main([
+    $persistToma = $this->container->getControllerEntity("persist_sql", "toma_posesion")->id([
       "curso" => $data["curso"], "persona" => $value->id()
     ]);
 

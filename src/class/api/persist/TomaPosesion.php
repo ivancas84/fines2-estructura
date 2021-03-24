@@ -21,7 +21,7 @@ class TomaPosesionPersistApi extends PersistApi {
 
     if(!$persona) return false;
 
-    $persistToma = $this->container->getControllerEntity("persist_sql", "toma_posesion")->main([
+    $persistToma = $this->container->getControllerEntity("persist_sql", "toma_posesion")->id([
       "curso" => $data["id"], "persona" => $persona["id"]
     ]);
 
