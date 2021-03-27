@@ -7,10 +7,11 @@ class _FieldCalendarioAnio extends Field {
   public $type = "year";
   public $fieldType = "nf";
   public $default = null;
-  public $length = false;  
   public $name = "anio";
   public $alias = "ani";
   public $entityName = "calendario";
+  public $dataType = "year";  
+  public $subtype = "year";  
 
 
 }

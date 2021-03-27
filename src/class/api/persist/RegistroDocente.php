@@ -1,11 +1,12 @@
 <?php
 
 require_once("class/api/Persist.php");
+require_once("function/php_input.php");
 
 class RegistroDocentePersistApi extends PersistApi {
 
   public function main(){
-    $data = Filter::jsonPostRequired();
+    $data = php_input();
 
     if(empty($data)) throw new Exception("Se está intentando persistir un conjunto de datos vacío");
 

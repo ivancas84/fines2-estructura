@@ -7,11 +7,13 @@ class _FieldSedeTipoSede extends Field {
   public $type = "varchar";
   public $fieldType = "mu";
   public $default = null;
-  public $length = "45";  
   public $name = "tipo_sede";
   public $alias = "ts";
   public $entityName = "sede";
   public $entityRefName = "tipo_sede";  
+  public $dataType = "string";  
+  public $subtype = "typeahead";  
+  public $length = "45";  
 
 
 }

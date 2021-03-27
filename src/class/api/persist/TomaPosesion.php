@@ -2,6 +2,7 @@
 
 require_once("class/api/Persist.php");
 require_once("class/controller/ModelTools.php");
+require_once("function/php_input.php");
 
 class TomaPosesionPersistApi extends PersistApi {
   /**
@@ -9,7 +10,7 @@ class TomaPosesionPersistApi extends PersistApi {
    */
 
   public function main(){
-    $data = Filter::jsonPostRequired();
+    $data = php_input();
     
     /**
      * $data["id"]: Id curso
@@ -20,11 +21,11 @@ class TomaPosesionPersistApi extends PersistApi {
 
     if(!$persona) return false;
 
-    $persistToma = $this->container->getControllerEntity("persist_sql", "toma_posesion")->main([
+    $persistToma = $this->container->getControllerEntity("persist_sql", "toma_posesion")->id([
       "curso" => $data["id"], "persona" => $persona["id"]
     ]);
 
-    $this->container->getDb()->multi_query_transaction_log($persistToma["sql"]);
+    $this->container->getDb()->multi_query_transaction($persistToma["sql"]);
     $this->container->getControllerEntity("email", "registro")->main($persistToma["id"]);
 
     return true;

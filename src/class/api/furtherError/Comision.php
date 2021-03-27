@@ -1,6 +1,7 @@
 <?php
 
 require_once("class/api/FurtherError.php");
+require_once("function/php_input.php");
 
 class ComisionFurtherErrorApi extends FurtherErrorApi {
 
@@ -8,7 +9,7 @@ class ComisionFurtherErrorApi extends FurtherErrorApi {
     /**
      * @todo Falta verificar que, por ejemplo, si voy a cargar una comision de 1/2 que la de 1/1 sea la misma modalidad y plan
      */
-    $data = Filter::jsonPostRequired();
+    $data = php_input();
     if(empty($data)) return ["empty" => true];
 
     if(
@@ -27,8 +28,8 @@ class ComisionFurtherErrorApi extends FurtherErrorApi {
         $render->addCondition(["sede","=",$data["sede"]]);
         $render->addCondition(["division","=",$data["division"]]);
         $render->addCondition(["modalidad","=",$data["modalidad"]]);
-        $render->addCondition(["pla_anio","=",$row["anio"]]);
-        $render->addCondition(["pla_semestre","=",$row["semestre"]]);
+        $render->addCondition(["pla-anio","=",$row["anio"]]);
+        $render->addCondition(["pla-semestre","=",$row["semestre"]]);
         $rows = $this->container->getDb()->all("comision", $render);
         if(count($rows) > 1) return [ "multiple" => true ];
         return ((count($rows) == 1) && ($rows[0]["id"] != $data["id"])) ? ["notUnique" => $rows[0]["id"]] : null;
@@ -41,11 +42,17 @@ class ComisionFurtherErrorApi extends FurtherErrorApi {
         ) return null;
 
         $render= new Render();
-        $render->addCondition("sede","=",$data["sede"]);
-        $render->addCondition("division","=",$data["division"]);
-        $render->addCondition("modalidad","=",$data["modalidad"]);
-        $render->addCondition("cal_anio","=",$row["anio"]);
-        $render->addCondition("cal_semestre","=",$row["semestre"]);
+        $render->addCondition(["sede","=",$data["sede"]]);
+        $render->addCondition(["division","=",$data["division"]]);
+        $render->addCondition(["modalidad","=",$data["modalidad"]]);
+
+        if($data["calendario"]) {
+          $render->addCondition(["calendario","=",$data["calendario"]]);
+        } else {
+          $render->addCondition(["cal-anio","=",$row["anio"]]);
+          $render->addCondition(["cal-semestre","=",$row["semestre"]]);
+        }
+
         $id = $this->container->getDb()->idOrNull("comision", $render);
         return ($id && ($id != $data["id"])) ? [ "notUnique" => $id ] : null;
       default:

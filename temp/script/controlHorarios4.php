@@ -1,6 +1,5 @@
 <?php
 require_once("./config.php");
-require_once("class/tools/Filter.php");
 require_once("config/structure.php");
 require_once("config/modelClasses.php");
 require_once("config/valuesClasses.php");
@@ -16,8 +15,8 @@ function getValues($curso){
   );
 }
 
-$fechaAnio = Filter::get("fecha_anio");
-$fechaSemestre = Filter::get("fecha_semestre");
+$fechaAnio = filter_input(INPUT_GET, 'fecha_anio', FILTER_SANITIZE_SPECIAL_CHARS);
+$fechaSemestre = filter_input(INPUT_GET, 'fecha_semestre', FILTER_SANITIZE_SPECIAL_CHARS);
 
 $render = new Render();
 

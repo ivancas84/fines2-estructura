@@ -1,23 +1,30 @@
 <?php
-require_once("class/model/value/_Persona.php");
+require_once("class/model/entityOptions/Value.php");
+require_once("function/nombres_parecidos.php");
 
-class PersonaValue extends _PersonaValue{
+class PersonaValue extends ValueEntityOptions{
 
-  public function nombre(){
-    $ret = [];
-    if(!Validation::is_empty($this->nombres)) array_push($ret, $this->nombres);
-    if(!Validation::is_empty($this->apellidos)) array_push($ret, $this->apellidos);
-    if(empty($ret)) return UNDEFINED;
-    return implode(" ", $ret);
+  public function checkNombresParecidos($existente){
+    $this->logs->resetLogs("nombres_parecidos");
+
+    if(!nombres_parecidos($this->_get("nombre"), $existente->_get("nombre"))){
+      $this->logs->addLog("nombres_parecidos","error", "Los nombres no son parecidos");
+      return false;
+    }
+    
+    return true;
   }
 
-  public function preCuil(){
-    if(Validation::is_empty($this->cuil)) return $this->cuil;
-    return substr($this->cuil, 0, 2);  
+  public function getNombre(){
+    $array = [];
+    if(!Validation::is_undefined($this->_get("nombres"))) array_push($array, $this->_get("nombres"));
+    if(!Validation::is_undefined($this->_get("apellidos"))) array_push($array, $this->_get("apellidos"));
+    return empty($array) ? UNDEFINED : implode(" ", $array);
   }
 
-  public function suCuil(){
-    if(Validation::is_empty($this->cuil)) return $this->cuil;
-    return substr($this->cuil, 10, 1);  
+  public function setNumeroDocumento($p){
+    $this->value["numero_documento"] = ltrim((string)$p, "0"); 
+    return $this->value["numero_documento"];
   }
+
 }

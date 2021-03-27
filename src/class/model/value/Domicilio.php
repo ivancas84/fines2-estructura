@@ -1,37 +1,11 @@
 <?php
+require_once("class/model/entityOptions/Value.php");
 
-require_once("class/model/value/_Domicilio.php");
+class DomicilioValue extends ValueEntityOptions{
 
-class DomicilioValue extends _DomicilioValue{
-
-  public function label(){
-    return $this->calle . " N° " . $this->numero . " entre " . $this->entre . " " . $this->barrio . " " . $this->localidad;
+  public function getLabel() {
+    return $this->_get("calle") . " e/ " . $this->_get("entre") . " n° ". $this->_get("numero") . " " . $this->_get("barrio") . " " . $this->_get("localidad");
   }
 
-  public function labelSinLocalidad(){
-    return $this->calle . " N° " . $this->numero . " entre " . $this->entre . " " . $this->barrio;
-  }
 
-  public function localidad($modo = null) {
-    switch($modo) {
-        case "XX YY":
-            return mb_strtoupper($this->localidad);
-
-        default: return $this->localidad;
-    }
-  }
-  
-  public function barrio($modo = null) {
-    switch($modo) {
-        case "XX YY":
-            return mb_strtoupper($this->barrio);
-
-        default: return $this->barrio;
-    }
-  }
-  
-  public function barrioOLocalidad($modo = null){
-    return (!empty($this->barrio($modo))) ? $this->barrio($modo) : $this->localidad($modo);
-  }
-  
 }

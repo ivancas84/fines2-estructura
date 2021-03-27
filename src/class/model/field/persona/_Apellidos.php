@@ -7,10 +7,12 @@ class _FieldPersonaApellidos extends Field {
   public $type = "varchar";
   public $fieldType = "nf";
   public $default = null;
-  public $length = "255";  
   public $name = "apellidos";
   public $alias = "ape";
   public $entityName = "persona";
+  public $dataType = "string";  
+  public $subtype = "text";  
+  public $length = "255";  
 
 
 }

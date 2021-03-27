@@ -7,10 +7,12 @@ class _FieldDiaNumero extends Field {
   public $type = "smallint";
   public $fieldType = "nf";
   public $default = null;
-  public $length = "1";  
   public $name = "numero";
   public $alias = "num";
   public $entityName = "dia";
+  public $dataType = "integer";  
+  public $subtype = "integer";  
+  public $length = "1";  
 
 
 }

@@ -16,8 +16,11 @@ persona - tom_doc
 domicilio - tom_doc_dom
 persona - tom_ree
 domicilio - tom_ree_dom
+planilla_docente - tom_pd
 
 id (id): string pk. NOT NULL. MAIN. UNIQUE.
 insertado (ins): timestamp nf. NOT NULL. DEFAULT: current_timestamp().
+comentario (com): string nf.
+reclamo (rec): boolean nf. NOT NULL.
 planilla_docente (pd): string mu. NOT NULL.
 toma (tom): string mu. NOT NULL.

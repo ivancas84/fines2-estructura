@@ -6,15 +6,11 @@ require_once("class/model/Field.php");
 class _DetallePersonaEntity extends Entity {
   public $name = "detalle_persona";
   public $alias = "dp";
-  public $main = ['id'];
-  public $pk = ['id'];
   public $nf = ['descripcion', 'creado'];
   public $mu = ['archivo', 'persona'];
   public $_u = [];
   public $notNull = ['id', 'descripcion', 'creado', 'persona'];
   public $unique = ['id'];
-  public $admin = ['id', 'descripcion', 'archivo', 'creado', 'persona'];
-
 
 
 }

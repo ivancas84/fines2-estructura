@@ -7,10 +7,11 @@ class _FieldFileCreated extends Field {
   public $type = "timestamp";
   public $fieldType = "nf";
   public $default = "current_timestamp()";
-  public $length = false;  
   public $name = "created";
   public $alias = "cre";
   public $entityName = "file";
+  public $dataType = "timestamp";  
+  public $subtype = "timestamp";  
 
 
 }

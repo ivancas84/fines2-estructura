@@ -7,10 +7,12 @@ class _FieldPlanOrientacion extends Field {
   public $type = "varchar";
   public $fieldType = "nf";
   public $default = null;
-  public $length = "45";  
   public $name = "orientacion";
   public $alias = "ori";
   public $entityName = "plan";
+  public $dataType = "string";  
+  public $subtype = "text";  
+  public $length = "45";  
 
 
 }

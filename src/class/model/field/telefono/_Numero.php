@@ -7,10 +7,12 @@ class _FieldTelefonoNumero extends Field {
   public $type = "varchar";
   public $fieldType = "nf";
   public $default = null;
-  public $length = "255";  
   public $name = "numero";
   public $alias = "num";
   public $entityName = "telefono";
+  public $dataType = "string";  
+  public $subtype = "text";  
+  public $length = "255";  
 
 
 }

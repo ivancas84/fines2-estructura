@@ -7,11 +7,13 @@ class _FieldAsignacionPlanillaDocenteToma extends Field {
   public $type = "varchar";
   public $fieldType = "mu";
   public $default = null;
-  public $length = "45";  
   public $name = "toma";
   public $alias = "tom";
   public $entityName = "asignacion_planilla_docente";
   public $entityRefName = "toma";  
+  public $dataType = "string";  
+  public $subtype = "typeahead";  
+  public $length = "45";  
 
 
 }

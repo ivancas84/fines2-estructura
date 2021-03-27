@@ -1,0 +1,24 @@
+comision - com
+sede - com_sed
+domicilio - com_sed_dom
+tipo_sede - com_sed_ts
+centro_educativo - com_sed_ce
+domicilio - com_sed_ce_dom
+modalidad - com_moa
+planificacion - com_pla
+plan - com_pla_plb
+calendario - com_cal
+comision - rel
+sede - rel_sed
+domicilio - rel_sed_dom
+tipo_sede - rel_sed_ts
+centro_educativo - rel_sed_ce
+domicilio - rel_sed_ce_dom
+modalidad - rel_moa
+planificacion - rel_pla
+plan - rel_pla_plb
+calendario - rel_cal
+
+id (id): string pk. NOT NULL. MAIN. UNIQUE.
+comision (com): string mu. NOT NULL.
+relacion (rel): string mu. NOT NULL.
