@@ -17,7 +17,7 @@ class DocenteRenderBuild extends RenderBuild {
 
     $condition = (empty($idPersonas)) ? false : $idPersonas;
     $render = new Render();
-    $render->entityName = "persona";    
+    $render->entityName = "persona";
     $render->setSize(0);
     $render->addCondition(["id","=",$condition]);
     return $render;
