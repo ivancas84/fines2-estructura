@@ -16,7 +16,8 @@ class AlumnosAprobadosComisionApi extends BaseApi {
         ["crec",">=","4","OR"]
       ]
     ]);
-    $render->setFields(["comision"=>"cur-comision", "persona"=>"persona"]);
+    $render->setFields(["comision"=>"cur-comision", "persona"=>"persona", "cantidad"=>"id.count"]);
+    $render->setGroup(["comision"=>"cur-comision","persona"=>"persona"]);
     
     return $this->container->getDb()->select("calificacion",$render);
   }
