@@ -11,6 +11,21 @@ class ModelTools {
     return $this->getDb()->all("distribucion_horaria", ["planificacion"=>$planificacion]);
   }
 
+  public function cantidadAlumnosAprobadosComision($idsComisiones){
+    $render = $this->container->getRender("calificacion");
+    $render->setCondition([
+      ["cur-comision","=",$idsComisiones],
+      [
+        ["nota_final",">","7"],
+        ["crec",">","4"]
+      ]
+    ]);
+    $render->setFields(["aprobados"=>"persona.count"]);
+    $render->setGroup(["comision"=>"cur-comision"]);
+    
+    return $this->container->getDb()->select("calificacion",$render);
+  }
+
   public function sumaHorasCatedraAsignaturasGrupo($fechaAnio, $fechaSemestre, $modalidad, $centroEducativo){
     /**
      * @param fechaAnio
