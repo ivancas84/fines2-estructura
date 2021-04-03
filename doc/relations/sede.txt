@@ -1,7 +1,7 @@
-domicilio - dom
-tipo_sede - ts
-centro_educativo - ce
-domicilio - ce_dom
+domicilio - dom_dom
+tipo_sede - ts_ts
+centro_educativo - ce_ce
+domicilio - ce_dom_dom
 
 id (id): string pk. NOT NULL. UNIQUE.
 numero (num): string nf. NOT NULL. MAIN.

@@ -5,6 +5,11 @@ function get_entity_rel($entityName) {
     case 'alumno': return [
   'per' => ['field_id'=>'persona', 'field_name'=>'persona', 'entity_name'=>'persona'],
   'per_dom' => ['field_id'=>'domicilio', 'field_name'=>'domicilio', 'entity_name'=>'domicilio'],
+    ];
+
+    case 'alumno_comision': return [
+  'per' => ['field_id'=>'persona', 'field_name'=>'persona', 'entity_name'=>'persona'],
+  'per_dom' => ['field_id'=>'domicilio', 'field_name'=>'domicilio', 'entity_name'=>'domicilio'],
   'com' => ['field_id'=>'comision', 'field_name'=>'comision', 'entity_name'=>'comision'],
   'com_sed' => ['field_id'=>'sede', 'field_name'=>'sede', 'entity_name'=>'sede'],
   'com_sed_dom' => ['field_id'=>'domicilio1', 'field_name'=>'domicilio', 'entity_name'=>'domicilio'],

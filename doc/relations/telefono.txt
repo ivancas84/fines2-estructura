@@ -1,5 +1,5 @@
-persona - per
-domicilio - per_dom
+persona - per_per
+domicilio - per_dom_dom
 
 id (id): string pk. NOT NULL. MAIN. UNIQUE.
 tipo (tip): string nf.

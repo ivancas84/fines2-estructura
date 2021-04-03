@@ -1,25 +1,11 @@
-persona - per
-domicilio - per_dom
-comision - com
-sede - com_sed
-domicilio - com_sed_dom
-tipo_sede - com_sed_ts
-centro_educativo - com_sed_ce
-domicilio - com_sed_ce_dom
-modalidad - com_moa
-planificacion - com_pla
-plan - com_pla_plb
-calendario - com_cal
+persona - per_per
+domicilio - per_dom_dom
 
 id (id): string pk. NOT NULL. MAIN. UNIQUE.
-fotocopia_documento (fd): boolean nf. NOT NULL.
+documento (doc): boolean nf. NOT NULL.
 partida_nacimiento (pn): boolean nf. NOT NULL.
-creado (cre): timestamp nf. NOT NULL. DEFAULT: current_timestamp().
-constancia_cuil (cc): boolean nf. NOT NULL.
+cuil (cui): boolean nf. NOT NULL.
 certificado_estudios (ce): boolean nf. NOT NULL.
 anio_ingreso (ai): string nf.
-activo (act): boolean nf.
-programa (pro): string nf.
 observaciones (obs): text nf.
 persona (per): string mu. NOT NULL.
-comision (com): string mu.

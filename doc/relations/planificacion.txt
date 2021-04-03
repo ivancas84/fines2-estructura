@@ -1,4 +1,4 @@
-plan - plb
+plan - plb_plb
 
 id (id): string pk. NOT NULL. UNIQUE.
 anio (ani): string nf. NOT NULL. MAIN.
