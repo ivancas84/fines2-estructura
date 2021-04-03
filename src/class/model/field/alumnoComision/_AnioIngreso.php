@@ -2,14 +2,14 @@
 
 require_once("class/model/Field.php");
 
-class _FieldAlumnoArchivo2020 extends Field {
+class _FieldAlumnoComisionAnioIngreso extends Field {
 
   public $type = "varchar";
   public $fieldType = "nf";
   public $default = null;
-  public $name = "archivo_2020";
-  public $alias = "a2a";
-  public $entityName = "alumno";
+  public $name = "anio_ingreso";
+  public $alias = "ai";
+  public $entityName = "alumno_comision";
   public $dataType = "string";  
   public $subtype = "text";  
   public $length = "45";  
