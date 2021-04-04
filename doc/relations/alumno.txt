@@ -8,4 +8,4 @@ cuil (cui): boolean nf. NOT NULL.
 certificado_estudios (ce): boolean nf. NOT NULL.
 anio_ingreso (ai): string nf.
 observaciones (obs): text nf.
-persona (per): string mu. NOT NULL.
+persona (per): string _u. NOT NULL. UNIQUE.
