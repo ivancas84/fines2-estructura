@@ -7,10 +7,10 @@ class _AlumnoEntity extends Entity {
   public $name = "alumno";
   public $alias = "alum";
   public $nf = ['documento', 'partida_nacimiento', 'cuil', 'certificado_estudios', 'anio_ingreso', 'observaciones'];
-  public $mu = ['persona'];
-  public $_u = [];
+  public $mu = [];
+  public $_u = ['persona'];
   public $notNull = ['id', 'documento', 'partida_nacimiento', 'cuil', 'certificado_estudios', 'persona'];
-  public $unique = ['id'];
+  public $unique = ['id', 'persona'];
 
 
 }
