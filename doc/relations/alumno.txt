@@ -1,4 +1,7 @@
 file - doc_doc
+file - pn_pn
+file - ce_ce
+file - cui_cui
 persona - per_per
 domicilio - per_dom_dom
 
@@ -10,4 +13,7 @@ tiene_certificado_estudios (tce): boolean nf. NOT NULL.
 anio_ingreso (ai): string nf.
 observaciones (obs): text nf.
 documento (doc): string mu.
+partida_nacimiento (pn): string mu.
+certificado_estudios (ce): string mu.
+cuil (cui): string mu.
 persona (per): string _u. NOT NULL. UNIQUE.

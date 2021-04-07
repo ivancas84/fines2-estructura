@@ -5,6 +5,9 @@ function get_entity_tree($entityName) {
     case 'alumno': return [
 
       'doc' => ['field_id'=>'documento', 'field_name'=>'documento', 'entity_name'=>'file', 'children'=>[]],
+      'pn' => ['field_id'=>'partida_nacimiento', 'field_name'=>'partida_nacimiento', 'entity_name'=>'file', 'children'=>[]],
+      'ce' => ['field_id'=>'certificado_estudios', 'field_name'=>'certificado_estudios', 'entity_name'=>'file', 'children'=>[]],
+      'cui' => ['field_id'=>'cuil', 'field_name'=>'cuil', 'entity_name'=>'file', 'children'=>[]],
       'per' => ['field_id'=>'persona', 'field_name'=>'persona', 'entity_name'=>'persona', 'children'=>[
         'per_dom' => ['field_id'=>'domicilio', 'field_name'=>'domicilio', 'entity_name'=>'domicilio', 'children'=>[]],]],    ];
 
