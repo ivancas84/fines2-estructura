@@ -28,6 +28,9 @@ $mpdf->Cell(62,6,implode("   ", str_split ("DNI ".$v->_get("numero_documento")))
 $mpdf->SetXY(58,54);
 $mpdf->Cell(0,6,$v->_get("apellidos","XX YY") . " " . $v->_get("nombres","Xx Yy"));
 
+$mpdf->Image('firma_director.png', 33, 190, 42, 42, 'png', '', true, false);
+$mpdf->Image('sello_cens.png', 148, 190, 32, 43, 'png', '', true, false);
+
 $mpdf->AddPage(); 
 
 $tplId = $mpdf->importPage(2);
