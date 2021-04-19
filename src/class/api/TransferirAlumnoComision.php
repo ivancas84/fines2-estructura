@@ -10,6 +10,7 @@ class TransferirAlumnoComisionApi extends BaseApi {
   public $sql = "";
   public $detail = [];
   public $permission = "w";
+  public $entityName = "alumno_comision";
 
   public function main() {
     /**
@@ -17,14 +18,16 @@ class TransferirAlumnoComisionApi extends BaseApi {
      * son transferidos a los alumnos, se actualizan valores si no existen
      */
     $this->container->getAuth()->authorize($this->entityName, $this->permission);
-    $this->data = php_input();
+    if(!$this->data) $this->data = php_input();
     /**
      * id: comision a transferir
      */
     
     $this->consultarComisionAlumnos();
+    if(!count($this->alumnoComisionArray)) return(["id"=>$this->data["id"],"detail"=>[]]);
     $this->consultarAlumnos();
     $this->persistirAlumnos();
+
     $this->container->getDb()->multi_query_transaction($this->sql);
     return(["id"=>$this->data["id"],"detail"=>$this->detail]);
   }
@@ -67,7 +70,7 @@ class TransferirAlumnoComisionApi extends BaseApi {
         if($ac->_get("certificado_estudios")) $a->_fastSet("tiene_certificado_estudios", true);
         
         $anioIngresoA = (int) filter_var($a->_get("anio_ingreso"), FILTER_SANITIZE_NUMBER_INT);  
-        if((empty($anioIngresoA) && !empty($anioIngresoAc)) || ($anioIngresoAc < $anioIngresoA)) $this->_fastSet("anio_ingreso",$anioIngresoAc);
+        if((empty($anioIngresoA) && !empty($anioIngresoAc)) || ($anioIngresoAc < $anioIngresoA)) $a->_fastSet("anio_ingreso",$anioIngresoAc);
         if($ac->_get("observaciones")) {
           if($a->_get("observaciones")) $a->_fastSet("observaciones", $a->_get("observaciones") . " / " . $ac->_get("observaciones"));
           else $a->_fastSet("observaciones", $ac->_get("observaciones"));

@@ -18,38 +18,42 @@ class TransferirAlumnoApi extends BaseApi {
      * persona: dni de la persona a las cuales se transferiran los datos
      */
     $this->transferirEntidadAlumno();
+    $this->transferirEntidadAlumnoComision();
     $this->transferirEntidadCalificacion();
+    $this->transferirEntidadDetallePersona();
 
     $this->sql .= $this->container->getSqlo("persona")->delete([$this->data["id"]]);
+    
+    //echo "<pre>".$this->sql;
     $this->container->getDb()->multi_query_transaction($this->sql);
     array_push($this->detail, "persona".$this->data["id"]);
     return(["id"=>null,"detail"=>$this->detail]);
   }
 
-  public function transferirEntidadAlumno(){
-    $render = $this->container->getRender("alumno");
+  public function transferirEntidadAlumnoComision(){
+    $render = $this->container->getRender("alumno_comision");
     $render->setCondition([
       ["persona","=",$this->data["id"]]
     ]);
     $transferir = array_combine_key(
-      $this->container->getDb()->all("alumno",$render),
+      $this->container->getDb()->all("alumno_comision",$render),
       "comision"
     );
 
-    $render = $this->container->getRender("alumno");
+    $render = $this->container->getRender("alumno_comision");
     $render->setCondition([
       ["persona","=",$this->data["persona"]]
     ]);
     $existentes = array_combine_key( 
-      $this->container->getDb()->all("alumno",$render),
+      $this->container->getDb()->all("alumno_comision",$render),
       "comision"
     );
 
     foreach($transferir as $comisionAt => $alumno){
-      $at = $this->container->getRel("alumno")->value($alumno)["alumno"];
+      $at = $this->container->getRel("alumno_comision")->value($alumno)["alumno_comision"];
 
       if(in_array($comisionAt, $existentes)){
-        $ae = $this->container->getRel("alumno")->value($existentes[$comisionAt])["alumno"];
+        $ae = $this->container->getRel("alumno_comision")->value($existentes[$comisionAt])["alumno_comision"];
         
         if($at->_get("fotocopia_documento")) $ae->_fastSet("fotocopia_documento", true);
         if($at->_get("partida_nacimiento")) $ae->_fastSet("partida_nacimiento", true);
@@ -64,17 +68,66 @@ class TransferirAlumnoApi extends BaseApi {
           
         $ae->_call("reset")->_call("check");
         if($ae->logs->isError()) throw new Exception($ae->logs->toString());
-        $this->sql .= $this->container->getSqlo("alumno")->update($ae->_toArray("sql"));
-        $this->sql .= $this->container->getSqlo("alumno")->delete([$at->_get("id")]);
-        array_push($this->detail, "alumno".$at->_get("id"));      
-        array_push($this->detail, "alumno".$ae->_get("id"));
+        $this->sql .= $this->container->getSqlo("alumno_comision")->update($ae->_toArray("sql"));
+        $this->sql .= $this->container->getSqlo("alumno_comision")->delete([$at->_get("id")]);
+        array_push($this->detail, "alumno_comision".$at->_get("id"));      
+        array_push($this->detail, "alumno_comision".$ae->_get("id"));
       } else {
         $at->_fastSet("persona",$this->data["persona"]);
         $at->_call("reset")->_call("check");
         if($at->logs->isError()) throw new Exception($at->logs->toString());
-        $this->sql .= $this->container->getSqlo("alumno")->update($at->_toArray("sql"));      
-        array_push($this->detail, "alumno".$at->_get("id"));
+        $this->sql .= $this->container->getSqlo("alumno_comision")->update($at->_toArray("sql"));      
+        array_push($this->detail, "alumno_comision".$at->_get("id"));
       }
+    }
+  }
+
+  public function transferirEntidadAlumno(){
+    $render = $this->container->getRender("alumno");
+    $render->setCondition([
+      ["persona","=",$this->data["id"]]
+    ]);
+    $transferir = $this->container->getDb()->oneOrNull("alumno",$render);
+
+    if(empty($transferir)) return; //si no tiene alumno el que se transfiere
+
+    $render = $this->container->getRender("alumno");
+    $render->setCondition([
+      ["persona","=",$this->data["persona"]]
+    ]);
+    $existente = $this->container->getDb()->oneOrNull("alumno",$render);
+
+    $at = $this->container->getValue("alumno")->_fromArray($transferir,"_set");
+
+    if(!empty($existente)){
+      $ae = $this->container->getValue("alumno")->_fromArray($existente,"_set");
+      if($at->_get("tiene_documento")) $ae->_fastSet("tiene_documento", true);
+      if($at->_get("tiene_partida_nacimiento")) $ae->_fastSet("tiene_partida_nacimiento", true);
+      if($at->_get("tiene_cuil")) $ae->_fastSet("tiene_cuil", true);
+      if($at->_get("tiene_certificado_estudios")) $ae->_fastSet("tiene_certificado_estudios", true);
+      if($at->_get("anio_ingreso")) $ae->_fastSet("anio_ingreso", $at->_get("anio_ingreso"));
+      if($at->_get("observaciones")) {
+        if($ae->_get("observaciones")) $ae->_fastSet("observaciones", $ae->_get("observaciones") . " / " . $at->_get("observaciones"));
+        else $ae->_fastSet("observaciones", $at->_get("observaciones"));
+      }
+
+      if($at->_get("documento")) $ae->_fastSet("documento", $at->_get("documento"));
+      if($at->_get("partida_nacimiento")) $ae->_fastSet("partida_nacimiento", $at->_get("partida_nacimiento"));
+      if($at->_get("certificado_estudios")) $ae->_fastSet("certificado_estudios", $at->_get("certificado_estudios"));
+      if($at->_get("cuil")) $ae->_fastSet("cuil", $at->_get("cuil"));
+
+      $ae->_call("reset")->_call("check");
+      if($ae->logs->isError()) throw new Exception($ae->logs->toString());
+      $this->sql .= $this->container->getSqlo("alumno")->update($ae->_toArray("sql"));
+      $this->sql .= $this->container->getSqlo("alumno")->delete([$at->_get("id")]);
+      array_push($this->detail, "alumno".$at->_get("id"));      
+      array_push($this->detail, "alumno".$ae->_get("id"));
+    } else {
+      $at->_fastSet("persona",$this->data["persona"]);
+      $at->_call("reset")->_call("check");
+      if($at->logs->isError()) throw new Exception($at->logs->toString());
+      $this->sql .= $this->container->getSqlo("alumno")->update($at->_toArray("sql"));      
+      array_push($this->detail, "alumno".$at->_get("id"));
     }
   }
 
@@ -132,7 +185,15 @@ class TransferirAlumnoApi extends BaseApi {
         array_push($this->detail, "calificacion".$tr->_get("id"));
       }
     }
+
   }
+
+  public function transferirEntidadDetallePersona(){
+    $persist = $this->container->getController("model_resources")->transferirEntidad("detalle_persona","persona", $this->data["id"],$this->data["persona"]);
+    $this->sql .= $persist["sql"];
+    $this->detail = array_merge($this->detail,$persist["detail"]);
+  }
+
 
   public function compare($tr, $ex){
     $a = $tr->_toArray("sql");
