@@ -1,15 +1,8 @@
 <?php
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-// Load Composer's autoloader
-
-require $_SERVER["DOCUMENT_ROOT"] . "/" . PATH_ROOT . '/vendor/autoload.php';
-
 require_once("../config/config.php");
 require_once("class/Container.php");
+require_once("function/email.php");
 
 class RegistroEmail {
 
@@ -18,67 +11,40 @@ class RegistroEmail {
 
   public function main($id){
 
+    $mt = $this->container->getController("model_tools");
     $toma = $this->container->getDb()->get("toma",$id);
+    $curso = $mt->labelCurso($toma,"cur_");
+    $t = $this->container->getRel("toma")->value($toma);
 
-    $nombre = $toma["doc_nombres"] . " " . $toma["doc_apellidos"];
-    $email =  (!empty($toma["doc_email_abc"])) ? $toma["doc_email_abc"] : $toma["doc_email"];
-    $ige = $toma["cur_ige"];
-    $asignatura = $toma["cur_asi_nombre"];
-    $horasCatedra = $toma["cur_horas_catedra"];
-    $this->email($nombre, $email, $ige, $asignatura, $horasCatedra);
-  }
+    $subject = "Toma de posesión: " . $curso;
 
-
-  public function email($nombre, $email, $ige, $asignatura, $horasCatedra){
-      // Instantiation and passing `true` enables exceptions
-      $mail = new PHPMailer(true);
-
-      try {
-        
-          //Server settings
-          //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
-          $mail->isSMTP();                                            // Send using SMTP
-          $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-          $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-          $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
-          $mail->CharSet = 'UTF-8';
-
-          $mail->Host       = EMAIL_HOST;                    // Set the SMTP server to send through
-          $mail->Username   = EMAIL_USER;                     // SMTP username
-          $mail->Password   = EMAIL_PASSWORD;                               // SMTP password
-          
-
-          //Recipients
-          $mail->setFrom(EMAIL_FROM_ADRESS, EMAIL_FROM_NAME);
-          
-          
-          $mail->addAddress($email, $nombre);     // Add a recipient
-
-          // Content
-          $mail->isHTML(true);                                  // Set email format to HTML
-          $mail->Subject = 'Toma de posesión: ' . $asignatura . ' IGE ' . $ige;
-          $mail->Body    = '<p>Hola ' . $nombre  . '</p>
-<p>Usted ha recibido este email porque fue designado/a en la asignatura ' . $asignatura . ' IGE ' . $ige . "</p>
-<p>Para completar su toma de posesión, necesitamos que responda este email y nos envíe por este medio una foto de su DNI y Declaración Jurada de Cargos</p>
+    $body = '
+<p>Hola ' . $t["docente"]->_get("nombres", "Xx Yy") . ' ' . $t["docente"]->_get("apellidos", "Xx Yy") . ', usted ha recibido este email porque fue designado/a en la asignatura <strong>' . $curso . '.</strong></p>
+<p>Para completar su toma de posesión, necesitamos que a la brevedad se comunique con el director del CENS 462 Luis García al número 221 5407540</p>
+<p>Y posteriormente necesitamos que responda este email y nos envíe por este medio una foto de su DNI y Declaración Jurada de Cargos.</p>
 <br>
-<p>Para la declaración Jurada puede utilizar el siguiente formato: <a href=\"http://planfines2.com.ar/wp/wp-content/uploads/2021/04/Declaracion-Jurada-de-Cargos.xls\">Descargar</a></p>
+<p>Para la declaración Jurada puede utilizar el siguiente formato: <a href="https://planfines2.com.ar/wp/wp-content/uploads/2021/04/Declaracion-Jurada-de-Cargos.xls">Descargar</a></p>
 <br>
 -- 
 <br>
 Saluda a Usted muy atentamente:
 <br>
-Equipo de Coordinadores del Plan Fines 2 CENS 456 UMuPla
-<br>http://cens456.planfines2.com.ar
-";
+Equipo de Coordinadores del Plan Fines 2 CENS 462
+<br><a href="https://planfines2.com.ar">https://planfines2.com.ar</a>
+';
 
-          $mail->send();
-          
-      } catch (Exception $e) {
-          echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-      }
+
+
+    $email =  (!Validation::is_empty($t["docente"]->_get("email_abc"))) ? $t["docente"]->_get("email_abc") : $t["docente"]->_get("email");
+
+    $addresses = [
+      $email => $t["docente"]->_get("nombres") . " " . $t["docente"]->_get("apellidos"),
+    ];
+
+    email($addresses, $subject, $body);
+
+    return true;
+
   }
+
 }
-
-
-
-

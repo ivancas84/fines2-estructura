@@ -17,7 +17,7 @@ class ModelTools {
     if($data[$prefix."com_pla_id"]) 
       $label .= $data[$prefix."com_pla_anio"].$data[$prefix."com_pla_semestre"];
 
-    $label .= $data[$prefix."asi_nombre"];
+    $label .= " " . $data[$prefix."asi_nombre"];
 
     return $label;
   }

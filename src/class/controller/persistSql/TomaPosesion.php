@@ -9,7 +9,7 @@ class TomaPosesionPersistSql  {
   public $entityName;
   public $controller;
   
-  public function main($data) {
+  public function id($data) {
     /**
      * $data["persona"] Id de la persona
      * $data["curso"] Id del curso
