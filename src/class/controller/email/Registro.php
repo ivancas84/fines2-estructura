@@ -61,7 +61,7 @@ class RegistroEmail {
 <p>Usted ha recibido este email porque fue designado/a en la asignatura ' . $asignatura . ' IGE ' . $ige . "</p>
 <p>Para completar su toma de posesión, necesitamos que responda este email y nos envíe por este medio una foto de su DNI y Declaración Jurada de Cargos</p>
 <br>
-<p>Para la declaración Jurada puede utilizar el siguiente formato: <a href=\"http://cens456.planfines2.com.ar/wp-content/uploads/2019/02/declaracion-jurada-cargos-1.pdf\">Descargar</a></p>
+<p>Para la declaración Jurada puede utilizar el siguiente formato: <a href=\"http://planfines2.com.ar/wp/wp-content/uploads/2021/04/Declaracion-Jurada-de-Cargos.xls\">Descargar</a></p>
 <br>
 -- 
 <br>
