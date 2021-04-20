@@ -6,6 +6,23 @@ require_once("class/model/Ma.php");
 class ModelTools {
   public $container;
 
+  public function labelCurso($data, $prefix){
+    /**
+     * Definir la etiqueta de curso a partir de $data
+     * $data es el resultado de una consulta a la base de datos sin aplicar ningun filtro por ejemplo
+     * ["id" => "v", "field" => "v", "fk_id" => "v", "fk_field" => "v", "fk2_fk_id" => "v" , "fk2_fk_field" => "v", ...]
+     */
+    $label = $data[$prefix."com_sed_numero"] . $data[$prefix."com_division"] . "/";
+
+    if($data[$prefix."com_pla_id"]) 
+      $label .= $data[$prefix."com_pla_anio"].$data[$prefix."com_pla_semestre"];
+
+    $label .= $data[$prefix."asi_nombre"];
+
+    return $label;
+  }
+
+
   public function distribucionesHorarias($planificacion){
     if(empty($planificacion)) throw new Exception("Planificacion vacia");
     return $this->getDb()->all("distribucion_horaria", ["planificacion"=>$planificacion]);
