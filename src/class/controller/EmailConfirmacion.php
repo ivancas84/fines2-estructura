@@ -12,9 +12,8 @@ require_once("../config/config.php");
 require_once("class/Container.php");
 require_once("function/email.php");
 
-class ConfirmacionEmail {
+class EmailConfirmacion {
 
-  public $entityName;
   public $container;
 
   public function main($id){
@@ -27,10 +26,10 @@ class ConfirmacionEmail {
     $t = $this->container->getRel("toma")->value($toma);
 
     $body = '
-<p>Hola ' . $t["docente"]->_get("nombres", "Xx Yy") . ', a continuación se indica el comprobante de toma de posesión.</p>
-<p>Descargue la lista de alumnos del siguiente enlace: <a href="http://planfines2.com.ar/registro-docente/lista-alumnos?id=' . $t["toma"]->_get("id") . '">Lista de alumnos</a></p>    
-<p>Descargue las planillas de finalización de semestre e instrucciones del siguiente enlace: <a href="http://cens456.planfines2.com.ar/docentes/">Finalización de semestre</a></p> 
-<p>Únase al grupo de Whatsapp de docentes: <a href="https://chat.whatsapp.com/KRDvOU737LEK73SHnuS0Dr">Grupo docentes</a> o envíe un Whatsapp a 1172870518 para que podamos agregarlo</p>
+<p>Hola ' . $t["docente"]->_get("nombres", "Xx Yy") . ' ' . $t["docente"]->_get("apellidos", "Xx Yy") . ', a continuación se indica el comprobante de toma de posesión.</p>
+<p>En la parte inferior encontrara las listas de alumnos y el contacto con los referentes</p>
+<p>Al finalizar el período podrá descargar las <strong>planillas de finalización y sus instrucciones</strong> del siguiente enlace: <a href="https://planfines2.com.ar/wp/planillas-de-finalizacion/">Finalización de semestre</a></p> 
+<p>Posteriormente le enviaremos a su número de móvil una invitación para unirse al grupo de Whatsapp de docentes</p>
 
 <div style="margin-left:15px;width:600px;padding:20px;border:1px solid #d0d2d2;border-radius:5px;color:#444444">
     
