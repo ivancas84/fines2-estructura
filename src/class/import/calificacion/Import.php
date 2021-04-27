@@ -7,11 +7,9 @@ class CalificacionImport extends Import{
   /**
    * Importar Calificaciones
    */
-  public $entityName = "calificacion";
   public $mode = "tab";
   public $id = "calificacion";
   public $idCurso;
-  
 
   public function main(){
     $this->container->getEntity("calificacion")->identifier = ["per-numero_documento", "curso"];
@@ -49,9 +47,6 @@ class CalificacionImport extends Import{
       if(in_array($dni, $this->ids["persona"])) $element->logs->addLog("persona","warning","El número de documento está duplicado");
       else array_push($this->ids["persona"], $dni);
     }
-
-    
-
   }
 
   public function query(){
@@ -72,8 +67,10 @@ class CalificacionImport extends Import{
           $element->logs->addLog("persona", "error", "En la base existe una persona cuyos datos no coinciden");
           continue;
         }
+      } else {
+        //las personas no se actualizan, solo se insertan
+        $element->insert("persona");
       }
-      $this->processElement($element, "persona", $dni);
 
       $element->entities["calificacion"]->_set("curso",$this->idCurso);
       $element->entities["calificacion"]->_set("persona",$element->entities["persona"]->_get("id"));
