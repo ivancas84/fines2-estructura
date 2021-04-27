@@ -97,10 +97,10 @@ class TransferirAlumnoApi extends BaseApi {
     ]);
     $existente = $this->container->getDb()->oneOrNull("alumno",$render);
 
-    $at = $this->container->getValue("alumno")->_fromArray($transferir,"_set");
+    $at = $this->container->getValue("alumno")->_fromArray($transferir,"set");
 
     if(!empty($existente)){
-      $ae = $this->container->getValue("alumno")->_fromArray($existente,"_set");
+      $ae = $this->container->getValue("alumno")->_fromArray($existente,"set");
       if($at->_get("tiene_documento")) $ae->_fastSet("tiene_documento", true);
       if($at->_get("tiene_partida_nacimiento")) $ae->_fastSet("tiene_partida_nacimiento", true);
       if($at->_get("tiene_cuil")) $ae->_fastSet("tiene_cuil", true);
