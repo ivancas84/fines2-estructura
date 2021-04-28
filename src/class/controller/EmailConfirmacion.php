@@ -27,12 +27,12 @@ class EmailConfirmacion {
 
     $body = '
 <p>Hola ' . $t["docente"]->_get("nombres", "Xx Yy") . ' ' . $t["docente"]->_get("apellidos", "Xx Yy") . ', a continuación se indica el comprobante de toma de posesión.</p>
-<p>En la parte inferior encontrara las listas de alumnos y el contacto con los referentes</p>
+<p>Comuníquese en primer término con los referentes, ellos conocen la realidad de cada alumno y ofrecen medios de contacto adicionales para la comunicación.</p>
+<p>En el siguiente enlace se encuentran los contactos de los referentes: <a>Contacto Referentes</a></p>
+<p>En el siguiente enlace podrá descargar las listas de alumnos: <a>Lista alumnos</a></p>
+<p>Haga clic aquí para unirse al grupo de Whatsapp de docentes: <a href="https://chat.whatsapp.com/I2IAsdRaRLS8FG87i3tqfg">Grupo Whatsapp</a> o escríbanos al número 22167113326 para que lo incorporemos</p>
 <p>Al finalizar el período podrá descargar las <strong>planillas de finalización y sus instrucciones</strong> del siguiente enlace: <a href="https://planfines2.com.ar/wp/planillas-de-finalizacion/">Finalización de semestre</a></p> 
-<p>Posteriormente le enviaremos a su número de móvil una invitación para unirse al grupo de Whatsapp de docentes</p>
-
 <div style="margin-left:15px;width:600px;padding:20px;border:1px solid #d0d2d2;border-radius:5px;color:#444444">
-    
       <h4 style="padding:0 0 12px 0;margin:0;font-weight:bold">Toma de posesión: <span>' . $t["docente"]->_get("apellidos","X") . ', ' . $t["docente"]->_get("nombres","Xx Yy") . ' DNI ' . $t["docente"]->_get("numero_documento") . '</span></h4>
       
       <div style="clear:both;display:block;margin:0 0 10px 0;padding:10px 0 10px 0;border-top:1px solid #d7d7d7">
