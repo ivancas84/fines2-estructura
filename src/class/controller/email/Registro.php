@@ -31,7 +31,7 @@ class RegistroEmail {
     <li>Declaración Jurada</li>
   </ul>
 </p>
-<p>Posteriormente deberá presentar su Declaración Jurada impresa en el CENS 462 (calle 71 e/ 115 y 116 Nº 232) el día Miércoles 28 de Abril en el horario de 12 a 14, donde se controlará la declaración y se le pedirá que firme la toma de posesión General.</p>
+<p>Posteriormente deberá presentar su Declaración Jurada impresa en el CENS 462 (calle 71 e/ 115 y 116 Nº 232) el día Miércoles 28 de Abril en el horario de 12 a 14, o Viernes 30 de abril de 18 a 19:30 donde se controlará la declaración y se le pedirá que firme la toma de posesión General.</p>
 <p>Dejamos a su disposición el número del director Luis García para cualquier consulta 2215407540</p> 
 <br>
 <p>Para la declaración Jurada puede utilizar el siguiente formato: <a href="https://planfines2.com.ar/wp/wp-content/uploads/2021/04/Declaracion-Jurada-de-Cargos.xls">Descargar</a></p>
