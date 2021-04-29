@@ -23,3 +23,5 @@ programa (pro): string nf.
 observaciones (obs): text nf.
 persona (per): string mu. NOT NULL.
 comision (com): string mu.
+
+UNIQUE MULTIPLE: persona, comision
