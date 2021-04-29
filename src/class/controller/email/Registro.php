@@ -26,7 +26,6 @@ class RegistroEmail {
     <li>Foto DNI</li>
     <li>Foto Título habilitante</li>
     <li>Constancia de CUIL</li>
-    <li>Comprobante de postulación</li>
     <li>Copia de email con aviso de designación</li>
     <li>Declaración Jurada</li>
   </ul>

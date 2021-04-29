@@ -18,7 +18,10 @@ class EmailConfirmacion {
 
   public function main($id){
 
+    $mt = $this->container->getController("model_tools");
     $toma = $this->container->getDb()->get("toma",$id);
+    $curso = $mt->labelCurso($toma,"cur_");
+    $subject = "Toma de posesión: " . $curso;
     
     $horario_ = $this->container->getController("model_tools")->cursoHorario([$toma["curso"]]);
     $horario = count($horario_) ? $horario_[0]["horario"] : null;
@@ -28,8 +31,8 @@ class EmailConfirmacion {
     $body = '
 <p>Hola ' . $t["docente"]->_get("nombres", "Xx Yy") . ' ' . $t["docente"]->_get("apellidos", "Xx Yy") . ', a continuación se indica el comprobante de toma de posesión.</p>
 <p>Comuníquese en primer término con los referentes, ellos conocen la realidad de cada alumno y ofrecen medios de contacto adicionales para la comunicación.</p>
-<p>En el siguiente enlace se encuentran los contactos de los referentes: <a>Contacto Referentes</a></p>
-<p>En el siguiente enlace podrá descargar las listas de alumnos: <a>Lista alumnos</a></p>
+<p>En el siguiente enlace se encuentran los contactos de los referentes: <a href="https://planfines2.com.ar/users/referente-toma?com-id=' . $t["comision"]->_get("id") . '" target="_blank">Contacto Referentes</a></p>
+<p>En el siguiente enlace podrá descargar las listas de alumnos: <a href="https://planfines2.com.ar/users/alumno-comision-toma?com-id=' . $t["comision"]->_get("id") . '">Lista alumnos</a></p>
 <p>Haga clic aquí para unirse al grupo de Whatsapp de docentes: <a href="https://chat.whatsapp.com/I2IAsdRaRLS8FG87i3tqfg">Grupo Whatsapp</a> o escríbanos al número 22167113326 para que lo incorporemos</p>
 <p>Al finalizar el período podrá descargar las <strong>planillas de finalización y sus instrucciones</strong> del siguiente enlace: <a href="https://planfines2.com.ar/wp/planillas-de-finalizacion/">Finalización de semestre</a></p> 
 <div style="margin-left:15px;width:600px;padding:20px;border:1px solid #d0d2d2;border-radius:5px;color:#444444">
@@ -87,7 +90,7 @@ Equipo de Coordinadores del Plan Fines 2 CENS 456 UMuPla
 ';
 
 
-    $subject = "Comprobante toma de posesión: " . $t["asignatura"]->_get("nombre") . " IGE " . $t["curso"]->_get("ige");
+    $subject = "Comprobante toma de posesión: " . $curso;
 
     $email =  (!Validation::is_empty($t["docente"]->_get("email_abc"))) ? $t["docente"]->_get("email_abc") : $t["docente"]->_get("email");
 
