@@ -1,6 +1,6 @@
-file - arc_arc
-persona - per_per
-domicilio - per_dom_dom
+file - arc
+persona - per
+domicilio - per_dom
 
 id (id): string pk. NOT NULL. MAIN. UNIQUE.
 descripcion (des): text nf. NOT NULL.

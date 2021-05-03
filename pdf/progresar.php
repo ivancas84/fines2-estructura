@@ -7,7 +7,7 @@ require_once("class/Container.php");
 
 $container = new Container;
 $render = $container->getRender("persona");
-$render->setCondition(["numero_documento","=","34735235"]);
+$render->setCondition(["numero_documento","=",$_GET["dni"]]);
 $row = $container->getDb()->one("persona",$render);
 $v = $container->getValue("persona")->_fromArray($row,"set");
 
