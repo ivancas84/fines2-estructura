@@ -63,6 +63,9 @@ function get_entity_rel($entityName) {
   'cur_asi' => ['field_id'=>'asignatura', 'field_name'=>'asignatura', 'entity_name'=>'asignatura'],
   'per' => ['field_id'=>'persona', 'field_name'=>'persona', 'entity_name'=>'persona'],
   'per_dom' => ['field_id'=>'domicilio2', 'field_name'=>'domicilio', 'entity_name'=>'domicilio'],
+  'asi' => ['field_id'=>'asignatura1', 'field_name'=>'asignatura', 'entity_name'=>'asignatura'],
+  'pla' => ['field_id'=>'planificacion1', 'field_name'=>'planificacion', 'entity_name'=>'planificacion'],
+  'pla_plb' => ['field_id'=>'plan1', 'field_name'=>'plan', 'entity_name'=>'plan'],
     ];
 
     case 'centro_educativo': return [
