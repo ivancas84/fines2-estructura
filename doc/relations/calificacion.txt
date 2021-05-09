@@ -26,5 +26,5 @@ porcentaje_asistencia (pa): integer nf.
 observaciones (obs): text nf.
 curso (cur): string mu.
 persona (per): string mu. NOT NULL.
-asignatura (asi): string mu.
-planificacion (pla): string mu.
+asignatura (asi): string mu. NOT NULL.
+planificacion (pla): string mu. NOT NULL.
