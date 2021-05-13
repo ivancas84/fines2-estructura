@@ -9,17 +9,19 @@ class MatrizPlanificacionImport extends Import{
    */
   public $mode = "tab";
   public $idPlan;
+  public $observaciones;
   public $comienzoCalificacion = 3;
+  
 
   public function main(){
     $this->container->getEntity("planificacion")->identifier = ["plan","anio", "semestre"];
     $this->container->getEntity("calificacion")->identifier = ["per-numero_documento", "pla-plan", "pla-anio", "pla-semestre", "asi-codigo"];
-    //parent::main();
-     $this->define();
-       $this->identify();
-       $this->query();
-       $this->process();
-    //$this->persist();
+    parent::main();
+    //  $this->define();
+    //    $this->identify();
+    //    $this->query();
+    //    $this->process();
+    // //$this->persist();
   }
 
   
@@ -48,6 +50,7 @@ class MatrizPlanificacionImport extends Import{
 
       $element = $this->container->getImportElement($this->id);
       $element->idPlan = $this->idPlan;
+      $element->observaciones = $this->observaciones;
       $element->index = $i.".".($j-$c);
       $element->setEntities($d);
       array_push($this->elements, $element);
@@ -88,10 +91,22 @@ class MatrizPlanificacionImport extends Import{
     foreach($this->elements as &$element) {
       if(!$element->process) continue;
 
-      if(!$this->insertPersona($element)) continue;
-      if(!$this->existElement($element, "asignatura", "codigo")) continue;
-      if(!$this->existElement($element, "planificacion")) continue;
-      if(!$this->processCalificacion($element)) continue;
+      $dni = $this->insertPersona($element);
+      if($dni === false) continue;
+
+      $codigoAsignatura = $this->existElement($element, "asignatura", "codigo");
+      if($codigoAsignatura === false) continue;
+
+      $idPlanificacion = $this->existElement($element, "planificacion"); 
+      if($idPlanificacion === false) continue;
+      
+      $idCalificacion = $this->processCalificacion($element);
+      if($idCalificacion === false) continue;
+
+      $this->dbs["persona"][$dni] = $element->entities["persona"]->_toArray("get");
+      $this->dbs["asignatura"][$codigoAsignatura] = $element->entities["asignatura"]->_toArray("get");
+      $this->dbs["planificacion"][$idPlanificacion] = $element->entities["planificacion"]->_toArray("get");
+      $this->dbs["calificacion"][$idCalificacion] = $element->entities["calificacion"]->_toArray("get");
 
     }
   }
@@ -108,7 +123,7 @@ class MatrizPlanificacionImport extends Import{
         $element->entities["persona"]->_get("id")
       );
 
-      $this->processElement($element, "calificacion");
+      $idCalificacion = $this->processElement($element, "calificacion");
 
       if(Validation::is_empty($element->entities["calificacion"]->_get("crec"))
         && Validation::is_empty($element->entities["calificacion"]->_get("nota_final"))) {
@@ -116,7 +131,7 @@ class MatrizPlanificacionImport extends Import{
           $element->logs->addLog("calificacion", "info", "Calificacion vacia, no se actualizara ningun valor");
           return false;                
       }
-      return true;
+      return $idCalificacion;
   }
 
 
@@ -140,10 +155,9 @@ class MatrizPlanificacionImport extends Import{
       $element->logs->addLog("persona", "info", "Registro existente, no será actualizado");
     } else {
       $element->insert("persona");
-      $this->dbs["persona"] = $element->entities["persona"]->_toArray("get");
     }
 
-    return true;
+    return $dni;
   }
 
 }

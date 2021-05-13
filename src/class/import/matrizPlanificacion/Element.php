@@ -4,11 +4,12 @@ require_once("class/import/Element.php");
 
 class MatrizPlanificacionImportElement extends ImportElement {
 
-  public $numeroSede;
-  public $division;
+  public $idPlan;
+  public $observaciones;
   public $updateMode = false;
 
   public function setEntities($row) { //@override
+    $row["observaciones"] = $this->observaciones;
     //Si la nota final tiene una C, debe ser considerado como crec
     if(
       strpos(
