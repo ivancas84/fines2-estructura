@@ -10,6 +10,7 @@ class MatrizPlanificacionImport extends Import{
   public $mode = "tab";
   public $idPlan;
   public $observaciones;
+  public $division;
   public $comienzoCalificacion = 3;
   
 
@@ -51,6 +52,7 @@ class MatrizPlanificacionImport extends Import{
       $element = $this->container->getImportElement($this->id);
       $element->idPlan = $this->idPlan;
       $element->observaciones = $this->observaciones;
+      $element->division = $this->division;
       $element->index = $i.".".($j-$c);
       $element->setEntities($d);
       array_push($this->elements, $element);
@@ -123,7 +125,7 @@ class MatrizPlanificacionImport extends Import{
         $element->entities["persona"]->_get("id")
       );
 
-      $idCalificacion = $this->processElement($element, "calificacion");
+      $idCalificacion = $this->processCalificacionElement($element);
 
       if(Validation::is_empty($element->entities["calificacion"]->_get("crec"))
         && Validation::is_empty($element->entities["calificacion"]->_get("nota_final"))) {
@@ -133,6 +135,30 @@ class MatrizPlanificacionImport extends Import{
       }
       return $idCalificacion;
   }
+
+  public function processCalificacionElement(&$element){
+    $value = $element->entities["calificacion"]->_get("identifier");
+    if(key_exists($value, $this->dbs["calificacion"])) {
+      $existente = $this->container->getValue("calificacion");
+      $existente->_fromArray($this->dbs["calificacion"][$value], "set");
+      $element->entities["calificacion"]->_set("id",$existente->_get("id"));
+      $compare = $element->compare("calificacion", $existente);  
+      if(in_array("crec", $compare) || in_array("nota_final", $compare)) {
+        $element->logs->addLog("calificacion", "error", "Calificacion diferente, no se actualizara ningun valor");
+        $element->process = false;
+        return false;
+      }
+      if($compare) {
+        if(!$element->update("calificacion", $existente)) return false;
+      }
+    } else {        
+      if(!$element->insert("calificacion")) return false;
+    }
+
+    return $value;
+  }
+
+
 
 
   public function insertPersona(&$element){

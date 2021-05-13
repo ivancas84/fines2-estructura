@@ -10,6 +10,8 @@ class MatrizPlanificacionImportElement extends ImportElement {
 
   public function setEntities($row) { //@override
     $row["observaciones"] = $this->observaciones;
+    $row["division"] = $this->division;
+
     //Si la nota final tiene una C, debe ser considerado como crec
     if(
       strpos(
@@ -43,6 +45,7 @@ class MatrizPlanificacionImportElement extends ImportElement {
       $row["pla_semestre"]
     );
   }
-  
+
+
   
 }
