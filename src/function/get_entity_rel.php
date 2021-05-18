@@ -3,6 +3,7 @@
 function get_entity_rel($entityName) {
   switch($entityName){
     case 'alumno': return [
+  'pla' => ['field_id'=>'plan', 'field_name'=>'plan', 'entity_name'=>'plan'],
   'per' => ['field_id'=>'persona', 'field_name'=>'persona', 'entity_name'=>'persona'],
   'per_dom' => ['field_id'=>'domicilio', 'field_name'=>'domicilio', 'entity_name'=>'domicilio'],
     ];

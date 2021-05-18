@@ -1,14 +1,12 @@
+plan - pla
 persona - per
 domicilio - per_dom
 
 id (id): string pk. NOT NULL. MAIN. UNIQUE.
-tiene_documento (td): boolean nf. NOT NULL.
-tiene_partida_nacimiento (tpn): boolean nf. NOT NULL.
-tiene_cuil (tc): boolean nf. NOT NULL.
-tiene_certificado_estudios (tce): boolean nf. NOT NULL.
 anio_ingreso (ai): string nf.
 observaciones (obs): text nf.
 legajo_completo (lc): boolean nf. NOT NULL.
 estado_inscripcion (ei): string nf.
 fecha_titulacion (ft): date nf.
+plan (pla): string mu.
 persona (per): string _u. NOT NULL. UNIQUE.
