@@ -2,53 +2,49 @@
 
 require_once("../config/config.php"); 
 require_once("function/array_group_value.php"); 
+require_once("function/array_combine_key2.php"); 
 
 require $_SERVER["DOCUMENT_ROOT"] . "/" . PATH_ROOT . '/vendor/autoload.php';
 
 require_once("class/Container.php");
 require_once("class/tools/SpanishDateTime.php");
+require_once("function/array_group_value.php");
+
 
 $container = new Container;
-$render = $container->getRender("persona");
-$render->setCondition(["numero_documento","=","41325864"]);
-$row = $container->getDb()->one("persona",$render);
-$v = $container->getValue("persona")->_fromArray($row,"set");
 
+$alumnoTools = $container->getController("alumno_tools");
 
+$alumnoTools->initDni($_GET["numero_documento"]);
+$v = $alumnoTools->getValue();
 
-$render = $container->getRender("calificacion");
-$render->setCondition([
-  ["persona","=",$v->_get("id")],
-  [
-    ["nota_final",">=","7"],
-    ["crec",">=","4","OR"],
-  ]
-]);
-$render->setOrder(["pla-anio"=>"asc","pla-semestre"=>"asc","asi-nombre"=>"asc"]);
-$calificaciones  = $container->getDb()->all("calificacion",$render);
+$calificaciones = $alumnoTools->getCalificacionesAprobadas();
 
-$planificacion = $calificaciones[0]["planificacion"];
+$disposiciones = $alumnoTools->getDisposiciones();
 
-//$orientacion = $calificaciones[0]["pla_plb_orientacion"];
-//$resolucion = $calificaciones[0]["pla_plb_resolucion"];
-
-
-
-
-$calificaciones = array_group_value($calificaciones, "pla_anio");
+$disposicionesRestantes = $alumnoTools->disposicionesRestantes($calificaciones, $disposiciones);
+$aniosCursados = $alumnoTools->aniosCursados($disposicionesRestantes);
+$aniosRestantes = $alumnoTools->aniosRestantes($aniosCursados);
 $mpdf = new \Mpdf\Mpdf();
 $html = '
 <html>
     <head>
         <style type="text/css">
-            body, html {color: black; margin: 0; padding: 0; }
+            body, html {
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                color: black;
+                display: table;
+            }
             .container {
                 border: 2px solid black;
-                width: 200mm;
-                height: 270mm;
+                width: 750px;
+                height: 105mm;
                 display: table-cell;
                 vertical-align: middle;
-              }
+            }
             .logo {
                 color: black;
                 width:350;
@@ -63,6 +59,7 @@ $html = '
                 color: black;
                 font-size: 20px;
                 text-align: center;
+
             }
             .person {
                 font-size: 14px;
@@ -72,43 +69,18 @@ $html = '
                 margin-right: auto;
                 text-align:justify;
             }
-
-            .asignaturas {
-              width: 95%;
-              margin-left: auto;
-              margin-right: auto;
-
+            .reason {
+                margin: 20px;
             }
 
-            
-            .asignaturas table {
-              font-size: 14px;
-              border-collapse:collapse;
-            }
+            .firma {       
+              font-size: 14px; font-style: italic; text-align:right; vertical-align:bottom; margin-right:100px;}
+  
+            .footer { text-align:right;       margin-top:30mm; margin-right:30px }
 
-            .asignaturas th{
-              border: 1px solid black;
-          }
+            .data {   text-decoration: underline; font-weight:bold; }
 
-            .asignaturas td{
-                width: 33%;
-                text-align: left;
-                border: 1px solid black;
-            }
-
-          .firma {       
-            font-size: 14px; font-style: italic; text-align:right; vertical-align:bottom; margin-right:100px;}
-
-          .footer { 
-            
-     text-align:right;       margin-top:30mm; margin-right:30px
-  }
-
-
-  .footer img {
-  }
-          
-      </style>
+        </style>
     </head>
     <body>
         <div class="container">
@@ -123,69 +95,39 @@ $html = '
 
 
             <div class="person">
- <p>La Dirección del CENS 462 Distrito La Plata, deja constancia que <strong>' . $v->_get("apellidos","X") . ', ' . $v->_get("nombres", "Xx Yy") . ' DNI ' .  $v->_get("numero_documento") . '</strong> tiene aprobadas las siguientes asignaturas correspondientes al Programa Fines 2 Trayecto Secundario orientación ' . $orientacion. ' resolución ' . $resolucion . ' </p>
-</div>
-
-<div class="asignaturas">
- <table>
-
-<tr>
+ <p>La Dirección del CENS 462 distrito La Plata, deja constancia que <span class="data">&nbsp;&nbsp;&nbsp;' . $v["persona"]->_get("apellidos", "X") . ' ' . $v["persona"]->_get("nombres","Xx Yy") . '&nbsp;&nbsp;&nbsp;</span> DNI <span class="data">&nbsp;&nbsp;&nbsp;' . $v["persona"]->_get("numero_documento","Xx Yy") . '&nbsp;&nbsp;&nbsp;</span> ha cursado los años <span class="data">&nbsp;&nbsp;&nbsp;' . implode(", ", $aniosCursados) . '&nbsp;&nbsp;&nbsp;</span> del Programa Fines 2 Trayecto Secundario orientación <span class="data">&nbsp;&nbsp;&nbsp;' . $v["plan"]->_get("orientacion") . '&nbsp;&nbsp;&nbsp;</span> resolución <span class="data">&nbsp;&nbsp;&nbsp;' . $v["plan"]->_get("resolucion") . '&nbsp;&nbsp;&nbsp;</span>, adeudando las siguientes materias:</p>
+            <ul>
  ';
 
- foreach($calificaciones as $anio => $calif){
-   $html .= "
-  <th>AÑO " . $anio . "</th>
-";
- }
-
- $html .= "</tr><tr>";
-
-foreach($calificaciones as $anio => $calif){
-  $html .= "<td>
-  
-  <ul>
-  ";
-   
-
-  foreach($calif as $ca){
-    $c = $container->getRel("calificacion")->value($ca);
-    $nota = (intval($c["calificacion"]->_get("nota_final")) >= 7) ? $c["calificacion"]->_get("nota_final") : $c["calificacion"]->_get("crec") . " crec";
-  
-    $html .= "<li>" . $c["asignatura"]->_get("nombre") . ": <strong>" . $nota . "</strong></li>";
-  }
-  
-  $html .= "</ul></td>";
+foreach($disposicionesRestantes as $d){
+  if(key_exists($d["pla_anio"], $aniosRestantes)) continue; 
+  $html .= "<li>".$d["asi_nombre"] . " (" . $d["pla_anio"]."º año)</li>";
 }
 
+foreach($aniosRestantes as $a){
+  $html .= "<li>Todas las asignaturas de ". $a . "</li>";
+}
 
-  $date = new SpanishDateTime();
+$date = new SpanishDateTime();
 
-  $html .='</tr></table>
-  </div>
+$html .='</ul>
+  <p>Se extiende la presente a pedido del interesado en La Plata el día <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("d") . ' de ' . $date->format("M") . ' de ' . $date->format("Y"). '&nbsp;&nbsp;&nbsp;</span> para ser presentado ante <span class="data">&nbsp;&nbsp;&nbsp;quien corresponda&nbsp;&nbsp;&nbsp;</span>.</p>
+</div>
+<div class="footer">
+  <img src="sello_cens.png"  width="125" height="160">
+  <img src="firma_director.png"  width="250" height="150">
+</div>
 
+<div class="firma">
+  <p>Firma Autoridad</p>
+</div>
 
-
-  <div class="person">
-
-    <p>Se extiende la presente a pedido del interesado el día ' . $date->format("d") . ' de ' . $date->format("M") . ' de ' . $date->format("Y"). ' para ser presentado ante quien corresponda</p>
-
-  </div>
-  <div class="footer">
-    <img src="sello_cens.png"  width="125" height="160">
-    <img src="firma_director.png"  width="250" height="150">
-  </div>
-
-  <div class="firma">
-    <p>Firma Autoridad</p>
-  </div>
-
-        </div>
+</div>
         
-    </body>
+</body>
 </html>
-
-
 ';
+
 
 $mpdf = new \Mpdf\Mpdf();
 $mpdf->SetProtection(["print"]);

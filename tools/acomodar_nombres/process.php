@@ -47,9 +47,8 @@ foreach($source as $s){
     || (stripos($s, "calificacion") !== false)
     || (stripos($s, "general de") !== false)
     || (stripos($s, "planilla de ca") !== false)
-    || (stripos($s, "del docen") !== false)
+    || (stripos($s, "del docente") !== false)
     || (stripos($s, "viernes") !== false)
-    || (stripos($s, "fecha") !== false)
     || (stripos($s, "en letras") !== false)
     || (stripos($s, "apellido") !== false))   continue;
   $s = preg_replace('/\d+/u', '', $s);
