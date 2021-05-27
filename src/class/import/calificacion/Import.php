@@ -32,6 +32,7 @@ class CalificacionImport extends Import{
     $this->ids["persona"] = [];
     $this->ids["calificacion"] = [];
     foreach($this->elements as &$element){
+      if(!$element->process) continue;
       if(!($dni = $element->getIdentifier("persona", "numero_documento"))) continue;
       
       $idCalificacion = $dni.UNDEFINED.$this->curso["com_pla_plan"].UNDEFINED.$this->curso["com_pla_anio"].UNDEFINED.$this->curso["com_pla_semestre"].UNDEFINED.$this->curso["asi_codigo"];
@@ -102,6 +103,9 @@ class CalificacionImport extends Import{
     );
     $element->entities["calificacion"]->_set("curso",
       $this->curso["id"]
+    );
+    $element->entities["calificacion"]->_set("persona",
+      $element->entities["persona"]->_get("id")
     );
 
     $idCalificacion = $this->processCalificacionElement($element);
