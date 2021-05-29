@@ -7,9 +7,9 @@ class _CalificacionEntity extends Entity {
   public $name = "calificacion";
   public $alias = "cali";
   public $nf = ['nota1', 'nota2', 'nota3', 'nota_final', 'crec', 'porcentaje_asistencia', 'observaciones', 'division'];
-  public $mu = ['curso', 'persona', 'asignatura', 'planificacion'];
+  public $mu = ['curso', 'asignatura', 'planificacion', 'alumno'];
   public $_u = [];
-  public $notNull = ['id', 'persona', 'asignatura', 'planificacion'];
+  public $notNull = ['id', 'asignatura', 'planificacion', 'alumno'];
   public $unique = ['id'];
 
 

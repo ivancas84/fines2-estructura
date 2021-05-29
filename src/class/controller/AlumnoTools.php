@@ -98,6 +98,10 @@ class AlumnoTools {
       }
     }
 
+    return $anios;
+  }
+
+  public function traducirAnios($anios){
     $anios_cursados = [];
     for($i = $this->alumno["anio_ingreso"]; $i <= 3; $i++) {
       if(!key_exists($i, $anios) ||  $anios[$i] < 5) {
@@ -108,9 +112,24 @@ class AlumnoTools {
         }
       }
     }
-
     return $anios_cursados;
   }
+
+  
+  public function traducirAniosAux($anios){
+    $anios_cursados = [];
+    for($i = $this->alumno["anio_ingreso"]; $i <= 3; $i++) {
+      if(!key_exists($i, $anios) ||  $anios[$i] < 5) {
+        switch($i){
+          case 1: array_push($anios_cursados, "Primer"); break;
+          case 2: array_push($anios_cursados, "Segundo"); break;
+          case 3: array_push($anios_cursados, "Tercer"); break;
+        }
+      }
+    }
+    return $anios_cursados;
+  }
+
 
   public function aniosRestantes($aniosCursados){
     $a = [1=>"Primero",2=>"Segundo",3=>"Tercero"];

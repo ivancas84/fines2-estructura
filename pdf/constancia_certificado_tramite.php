@@ -9,7 +9,7 @@ require $_SERVER["DOCUMENT_ROOT"] . "/" . PATH_ROOT . '/vendor/autoload.php';
 require_once("class/Container.php");
 require_once("class/tools/SpanishDateTime.php");
 require_once("function/array_group_value.php");
-
+require_once("function/settypebool.php");
 
 $container = new Container;
 
@@ -24,8 +24,8 @@ $disposiciones = $alumnoTools->getDisposiciones();
 
 $disposicionesRestantes = $alumnoTools->disposicionesRestantes($calificaciones, $disposiciones);
 $anios = $alumnoTools->aniosCursados($disposicionesRestantes);
-$aniosCursados = $alumnoTools->traducirAnios($anios);
-$aniosRestantes = $alumnoTools->aniosRestantes($aniosCursados);
+$aniosCursados = $alumnoTools->traducirAniosAux($anios);
+$date = new SpanishDateTime();
 $mpdf = new \Mpdf\Mpdf();
 $html = '
 <html>
@@ -91,28 +91,20 @@ $html = '
             </div>
 
             <div class="marquee">
-                CONSTANCIA DE PASE
+                CONSTANCIA DE CERTIFICADO DE ESTUDIO EN TRÁMITE
             </div>
 
 
             <div class="person">
- <p>La Dirección del CENS 462 distrito La Plata, deja constancia que <span class="data">&nbsp;&nbsp;&nbsp;' . $v["persona"]->_get("apellidos", "X") . ' ' . $v["persona"]->_get("nombres","Xx Yy") . '&nbsp;&nbsp;&nbsp;</span> DNI <span class="data">&nbsp;&nbsp;&nbsp;' . $v["persona"]->_get("numero_documento","Xx Yy") . '&nbsp;&nbsp;&nbsp;</span> ha cursado los años <span class="data">&nbsp;&nbsp;&nbsp;' . implode(", ", $aniosCursados) . '&nbsp;&nbsp;&nbsp;</span> del Programa Fines 2 Trayecto Secundario orientación <span class="data">&nbsp;&nbsp;&nbsp;' . $v["plan"]->_get("orientacion") . '&nbsp;&nbsp;&nbsp;</span> resolución <span class="data">&nbsp;&nbsp;&nbsp;' . $v["plan"]->_get("resolucion") . '&nbsp;&nbsp;&nbsp;</span>, adeudando las siguientes materias:</p>
-            <ul>
- ';
-
-foreach($disposicionesRestantes as $d){
-  if(key_exists($d["pla_anio"], $aniosRestantes)) continue; 
-  $html .= "<li>".$d["asi_nombre"] . " (" . $d["pla_anio"]."º año)</li>";
-}
-
-foreach($aniosRestantes as $a){
-  $html .= "<li>Todas las asignaturas de ". $a . "</li>";
-}
-
-$date = new SpanishDateTime();
-
-$html .='</ul>
-  <p>Se extiende la presente a pedido del interesado en La Plata el día <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("d") . ' de ' . $date->format("M") . ' de ' . $date->format("Y"). '&nbsp;&nbsp;&nbsp;</span> para ser presentado ante <span class="data">&nbsp;&nbsp;&nbsp;quien corresponda&nbsp;&nbsp;&nbsp;</span>.</p>
+ <p>La Dirección de la Escuela de Educación CENS Nº 462 de La Plata, 
+hace constar por la presente que <span class="data">&nbsp;&nbsp;&nbsp;' . $v["persona"]->_get("apellidos", "X") . ' ' . $v["persona"]->_get("nombres","Xx Yy") . '&nbsp;&nbsp;&nbsp;</span> DNI Nº <span class="data">&nbsp;&nbsp;&nbsp;' . $v["persona"]->_get("numero_documento","Xx Yy") . '&nbsp;&nbsp;&nbsp;</span>
+tiene en trámite un CERTIFICADO ANALÍTICO DE ESTUDIOS <span class="data">&nbsp;&nbsp;&nbsp;COMPLETO&nbsp;&nbsp;&nbsp;</span>
+de <span class="data">&nbsp;&nbsp;&nbsp;' . end($aniosCursados) . '&nbsp;&nbsp;&nbsp;</span> año <span class="data">&nbsp;&nbsp;&nbsp;Programa Fines 2 Trayecto Secundario&nbsp;&nbsp;&nbsp;</span>
+con orientación en <span class="data">&nbsp;&nbsp;&nbsp;' . $v["plan"]->_get("orientacion") . '&nbsp;&nbsp;&nbsp;</span> resolución <span class="data">&nbsp;&nbsp;&nbsp;' . $v["plan"]->_get("resolucion") . '&nbsp;&nbsp;&nbsp;</span>, adeudando: <span class="data">&nbsp;&nbsp;&nbsp;Ninguna materia&nbsp;&nbsp;&nbsp;</span>
+</p>
+<p>A pedido del/de la interesado/a y al sólo efecto de ser presentado ante las autoridades que se lo exijan, se extiene la presente en La Plata a los <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("d") . '&nbsp;&nbsp;&nbsp;</span>
+del mes de <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("M") . '&nbsp;&nbsp;&nbsp;</span> 
+de <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("Y") . '&nbsp;&nbsp;&nbsp;</span>.
 </div>
 <div class="footer">
   <img src="sello_cens.png"  width="125" height="160">
