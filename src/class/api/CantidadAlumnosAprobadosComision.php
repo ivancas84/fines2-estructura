@@ -16,7 +16,7 @@ class CantidadAlumnosAprobadosComisionApi extends BaseApi {
         ["crec",">=","4","OR"]
       ]
     ]);
-    $render->setFields(["aprobados"=>"persona.count"]);
+    $render->setFields(["aprobados"=>"alumno.count"]);
     $render->setGroup(["comision"=>"cur-comision"]);
     
     return $this->container->getDb()->select("calificacion",$render);

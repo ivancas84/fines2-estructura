@@ -13,7 +13,7 @@ class CantidadAlumnosActivosComisionApi extends BaseApi {
       ["comision","=",$idsComisiones],
       ["activo","=",true],
     ]);
-    $render->setFields(["activos"=>"persona.count"]);
+    $render->setFields(["activos"=>"alumno.count"]);
     $render->setGroup(["comision"=>"comision"]);
     
     return $this->container->getDb()->select("alumno_comision",$render);

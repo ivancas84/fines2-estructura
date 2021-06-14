@@ -75,9 +75,9 @@ $html = '
             }
 
             .firma {       
+              margin-top:30mm;
               font-size: 14px; font-style: italic; text-align:right; vertical-align:bottom; margin-right:100px;}
   
-            .footer { text-align:right;       margin-top:30mm; margin-right:30px }
 
             .data {   text-decoration: underline; font-weight:bold; }
 
@@ -102,14 +102,11 @@ tiene en trámite un CERTIFICADO ANALÍTICO DE ESTUDIOS <span class="data">&nbsp
 de <span class="data">&nbsp;&nbsp;&nbsp;' . end($aniosCursados) . '&nbsp;&nbsp;&nbsp;</span> año <span class="data">&nbsp;&nbsp;&nbsp;Programa Fines 2 Trayecto Secundario&nbsp;&nbsp;&nbsp;</span>
 con orientación en <span class="data">&nbsp;&nbsp;&nbsp;' . $v["plan"]->_get("orientacion") . '&nbsp;&nbsp;&nbsp;</span> resolución <span class="data">&nbsp;&nbsp;&nbsp;' . $v["plan"]->_get("resolucion") . '&nbsp;&nbsp;&nbsp;</span>, adeudando: <span class="data">&nbsp;&nbsp;&nbsp;Ninguna materia&nbsp;&nbsp;&nbsp;</span>
 </p>
-<p>A pedido del/de la interesado/a y al sólo efecto de ser presentado ante las autoridades que se lo exijan, se extiene la presente en La Plata a los <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("d") . '&nbsp;&nbsp;&nbsp;</span>
+<p>A pedido del/de la interesado/a y al sólo efecto de ser presentado ante las autoridades que se lo exijan, se extiene la presente en La Plata a los <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("d") . '&nbsp;&nbsp;&nbsp;</span> días
 del mes de <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("F") . '&nbsp;&nbsp;&nbsp;</span> 
 de <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("Y") . '&nbsp;&nbsp;&nbsp;</span>.
 </div>
-<div class="footer">
-  <img src="sello_cens.png"  width="125" height="160">
-  <img src="firma_director.png"  width="250" height="150">
-</div>
+
 
 <div class="firma">
   <p>Firma Autoridad</p>

@@ -10,13 +10,15 @@ planificacion - cur_com_pla
 plan - cur_com_pla_plb
 calendario - cur_com_cal
 asignatura - cur_asi
-asignatura - asi
-planificacion - pla
-plan - pla_plb
 alumno - alu
 plan - alu_pla
+resolucion - alu_ri
 persona - alu_per
 domicilio - alu_per_dom
+disposicion - dis
+asignatura - dis_asi
+planificacion - dis_pla
+plan - dis_pla_plb
 
 id (id): string pk. NOT NULL. MAIN. UNIQUE.
 nota1 (noa): float nf.
@@ -28,6 +30,5 @@ porcentaje_asistencia (pa): integer nf.
 observaciones (obs): text nf.
 division (dia): string nf.
 curso (cur): string mu.
-asignatura (asi): string mu. NOT NULL.
-planificacion (pla): string mu. NOT NULL.
 alumno (alu): string mu. NOT NULL.
+disposicion (dis): string mu.

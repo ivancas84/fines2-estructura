@@ -36,13 +36,13 @@ class AlumnoTools {
   public function getCalificacionesAprobadas(){
     $render = $this->container->getRender("calificacion");
     $render->setCondition([
-      ["persona","=",$this->alumno["persona"]],
+      ["alumno","=",$this->alumno["id"]],
       [
         ["nota_final",">=","7"],
         ["crec",">=","4","OR"],
       ]
     ]);
-    $render->setOrder(["pla-anio"=>"asc","pla-semestre"=>"asc","asi-nombre"=>"asc"]);
+    $render->setOrder(["dis_pla-anio"=>"asc","dis_pla-semestre"=>"asc","dis_asi-nombre"=>"asc"]);
     return $this->container->getDb()->all("calificacion",$render);
   }
 
@@ -52,16 +52,15 @@ class AlumnoTools {
      */
 
      
-    $render = $this->container->getRender("distribucion_horaria");
+    $render = $this->container->getRender("disposicion");
 
     $render->setCondition([
       ["pla-plan","=",$this->alumno["plan"]],
       ["pla-anio",">=",$this->alumno["anio_ingreso"]]
     ]);
     $render->setOrder(["pla-anio"=>"asc","pla-semestre"=>"asc", "asi-nombre"=>"asc"]);
-    $render->setFields(["asignatura", "asi-nombre", "planificacion", "pla-anio"]);
     
-    return $this->container->getDb()->select("distribucion_horaria",$render);
+    return $this->container->getDb()->all("disposicion",$render);
   }
 
   public function disposicionesRestantes($calificacionesAprobadas, $disposiciones){
@@ -70,9 +69,11 @@ class AlumnoTools {
       $disposiciones,
       ["asignatura","planificacion"]
     );
+    
     $ids_c = array_keys(
-      array_combine_key2($calificacionesAprobadas, ["asignatura", "planificacion"])
+      array_combine_key2($calificacionesAprobadas, ["dis_asignatura", "dis_planificacion"])
     );
+
     $ids_d = array_keys($d);
     $ids_r = array_diff($ids_d, $ids_c);
 
@@ -80,6 +81,9 @@ class AlumnoTools {
   }
 
   public function disposicionesRestantesAnio($calificacionesAprobadas, $disposiciones){
+
+    
+
     return array_group_value(
       $this->disposicionesRestantes($calificacionesAprobadas, $disposiciones), 
       "pla_anio"

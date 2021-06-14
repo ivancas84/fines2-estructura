@@ -4,6 +4,7 @@ function get_entity_rel($entityName) {
   switch($entityName){
     case 'alumno': return [
   'pla' => ['field_id'=>'plan', 'field_name'=>'plan', 'entity_name'=>'plan'],
+  'ri' => ['field_id'=>'resolucion_inscripcion', 'field_name'=>'resolucion_inscripcion', 'entity_name'=>'resolucion'],
   'per' => ['field_id'=>'persona', 'field_name'=>'persona', 'entity_name'=>'persona'],
   'per_dom' => ['field_id'=>'domicilio', 'field_name'=>'domicilio', 'entity_name'=>'domicilio'],
     ];
@@ -21,6 +22,7 @@ function get_entity_rel($entityName) {
   'com_cal' => ['field_id'=>'calendario', 'field_name'=>'calendario', 'entity_name'=>'calendario'],
   'alu' => ['field_id'=>'alumno', 'field_name'=>'alumno', 'entity_name'=>'alumno'],
   'alu_pla' => ['field_id'=>'plan1', 'field_name'=>'plan', 'entity_name'=>'plan'],
+  'alu_ri' => ['field_id'=>'resolucion_inscripcion', 'field_name'=>'resolucion_inscripcion', 'entity_name'=>'resolucion'],
   'alu_per' => ['field_id'=>'persona', 'field_name'=>'persona', 'entity_name'=>'persona'],
   'alu_per_dom' => ['field_id'=>'domicilio2', 'field_name'=>'domicilio', 'entity_name'=>'domicilio'],
     ];
@@ -60,13 +62,15 @@ function get_entity_rel($entityName) {
   'cur_com_pla_plb' => ['field_id'=>'plan', 'field_name'=>'plan', 'entity_name'=>'plan'],
   'cur_com_cal' => ['field_id'=>'calendario', 'field_name'=>'calendario', 'entity_name'=>'calendario'],
   'cur_asi' => ['field_id'=>'asignatura', 'field_name'=>'asignatura', 'entity_name'=>'asignatura'],
-  'asi' => ['field_id'=>'asignatura1', 'field_name'=>'asignatura', 'entity_name'=>'asignatura'],
-  'pla' => ['field_id'=>'planificacion1', 'field_name'=>'planificacion', 'entity_name'=>'planificacion'],
-  'pla_plb' => ['field_id'=>'plan1', 'field_name'=>'plan', 'entity_name'=>'plan'],
   'alu' => ['field_id'=>'alumno', 'field_name'=>'alumno', 'entity_name'=>'alumno'],
-  'alu_pla' => ['field_id'=>'plan2', 'field_name'=>'plan', 'entity_name'=>'plan'],
+  'alu_pla' => ['field_id'=>'plan1', 'field_name'=>'plan', 'entity_name'=>'plan'],
+  'alu_ri' => ['field_id'=>'resolucion_inscripcion', 'field_name'=>'resolucion_inscripcion', 'entity_name'=>'resolucion'],
   'alu_per' => ['field_id'=>'persona', 'field_name'=>'persona', 'entity_name'=>'persona'],
   'alu_per_dom' => ['field_id'=>'domicilio2', 'field_name'=>'domicilio', 'entity_name'=>'domicilio'],
+  'dis' => ['field_id'=>'disposicion', 'field_name'=>'disposicion', 'entity_name'=>'disposicion'],
+  'dis_asi' => ['field_id'=>'asignatura1', 'field_name'=>'asignatura', 'entity_name'=>'asignatura'],
+  'dis_pla' => ['field_id'=>'planificacion1', 'field_name'=>'planificacion', 'entity_name'=>'planificacion'],
+  'dis_pla_plb' => ['field_id'=>'plan2', 'field_name'=>'plan', 'entity_name'=>'plan'],
     ];
 
     case 'centro_educativo': return [
@@ -143,10 +147,17 @@ function get_entity_rel($entityName) {
   'per_dom' => ['field_id'=>'domicilio', 'field_name'=>'domicilio', 'entity_name'=>'domicilio'],
     ];
 
-    case 'distribucion_horaria': return [
+    case 'disposicion': return [
   'asi' => ['field_id'=>'asignatura', 'field_name'=>'asignatura', 'entity_name'=>'asignatura'],
   'pla' => ['field_id'=>'planificacion', 'field_name'=>'planificacion', 'entity_name'=>'planificacion'],
   'pla_plb' => ['field_id'=>'plan', 'field_name'=>'plan', 'entity_name'=>'plan'],
+    ];
+
+    case 'distribucion_horaria': return [
+  'dis' => ['field_id'=>'disposicion', 'field_name'=>'disposicion', 'entity_name'=>'disposicion'],
+  'dis_asi' => ['field_id'=>'asignatura', 'field_name'=>'asignatura', 'entity_name'=>'asignatura'],
+  'dis_pla' => ['field_id'=>'planificacion', 'field_name'=>'planificacion', 'entity_name'=>'planificacion'],
+  'dis_pla_plb' => ['field_id'=>'plan', 'field_name'=>'plan', 'entity_name'=>'plan'],
     ];
 
     case 'email': return [

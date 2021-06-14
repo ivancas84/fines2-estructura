@@ -89,8 +89,8 @@ class EmailConfirmacion {
 <br>
 Saluda a Usted muy atentamente:
 <br>
-Equipo de Coordinadores del Plan Fines 2 CENS 456 UMuPla
-<br>http://cens456.planfines2.com.ar
+Equipo de Coordinadores del Plan Fines 2 CENS 462
+<br>https://planfines2.com.ar/
 ';
 
 

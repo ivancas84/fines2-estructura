@@ -10,6 +10,7 @@ plan - com_pla_plb
 calendario - com_cal
 alumno - alu
 plan - alu_pla
+resolucion - alu_ri
 persona - alu_per
 domicilio - alu_per_dom
 

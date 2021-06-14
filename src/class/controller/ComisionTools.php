@@ -15,16 +15,13 @@ class ComisionTools {
 
   public function actualizarPlanAlumnos(){
     /**
-     * Obtiene los alumnos de una determinada comision, y actualiza el plan
+     * Obtiene los alumnos de una determinada comision, y actualiza el plan si no lo tiene definido
      */
     $render = $this->container->getRender("alumno_comision");
-    $render->setCondition([
-      ["persona","=",$this->alumno["persona"]],
-      [
-        ["nota_final",">=","7"],
-        ["crec",">=","4","OR"],
-      ]
-    ]);
+    $render->setFields("alumno");
+    $render->setCondition(["id","=",$this->id]);
+    $rows = $this->container->getDb()->select("alumno_comision",$render);
+    print_r($rows);
   }
 
   

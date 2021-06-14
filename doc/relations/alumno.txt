@@ -1,4 +1,5 @@
 plan - pla
+resolucion - ri
 persona - per
 domicilio - per_dom
 
@@ -8,5 +9,11 @@ observaciones (obs): text nf.
 estado_inscripcion (ei): string nf.
 fecha_titulacion (ft): date nf.
 estado_legajo (el): string nf.
+anio_inscripcion (aia): integer nf.
+semestre_inscripcion (si): integer nf.
+semestre_ingreso (sia): integer nf.
+tramo_inscripcion_completo (tic): string nf.
+adeuda_inscripcion (aib): text nf.
 plan (pla): string mu.
+resolucion_inscripcion (ri): string mu.
 persona (per): string _u. NOT NULL. UNIQUE.
