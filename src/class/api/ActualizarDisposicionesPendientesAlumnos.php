@@ -2,20 +2,20 @@
 
 require_once("class/api/Base.php");
 require_once("function/php_input.php");
+
 require_once("function/array_group_value.php");
 require_once("function/array_unset_keys.php");
 require_once("function/array_combine_key.php");
 
-class CantidadAsignaturasAprobadasAlumnosComisionApi extends BaseApi {
-  /**
-   * Dado un numero de comision se obtienen los alumnos y la cantidad de asignaturas aprobadas
-   */
+class ActualizarDisposicionesPendientesAlumnosApi extends BaseApi {
+
   public $idComision;
   public $comision;
 
   public $idAlumno_ = [];
   public $alumno__calificacionAprobada_ = [];
   public $disposicion_ = [];
+  public $calculo = [];
 
   public function main() {
     $this->container->getAuth()->authorize("alumno", "r");
@@ -25,10 +25,11 @@ class CantidadAsignaturasAprobadasAlumnosComisionApi extends BaseApi {
     $this->idAlumno_();
     $this->alumno__calificacionAprobada_();
     $this->disposicion_();
-    return $this->calcular();
-
+    $this->calcular();
+    return $this->actualizar();
 
   }
+
 
   public function idAlumno_(){
     $render = $this->container->getRender("alumno_comision");
@@ -42,6 +43,7 @@ class CantidadAsignaturasAprobadasAlumnosComisionApi extends BaseApi {
       "alumno"
     );
   }
+
 
 
   public function alumno__calificacionAprobada_(){
@@ -85,8 +87,6 @@ class CantidadAsignaturasAprobadasAlumnosComisionApi extends BaseApi {
 
 
   public function calcular(){
-    $respuesta = [];
-
     foreach($this->alumno__calificacionAprobada_ as $alumno => $calificacionAprobada_){
       $r = [];
       $r["alumno"] = $alumno;
@@ -102,8 +102,41 @@ class CantidadAsignaturasAprobadasAlumnosComisionApi extends BaseApi {
       }
       $r["cantidad_no_aprobada"] = count($disposicionDesaprobadaResultante_);
       $r["_disposicion_no_aprobada"] = $disposicionDesaprobadaResultante_;
-      array_push($respuesta, $r);
+      array_push($this->calculo, $r);
     }
-    return $respuesta;
   }
+
+
+  public function actualizar(){
+    if(empty($this->calculo)) return ["ids"=>[],"detail"=>[]];
+    $sql = "";
+    $detail = [];
+    foreach($this->calculo as $row){
+      $render = $this->container->getRender("disposicion_pendiente")->setCondition(["alumno","=",$row["alumno"]]);
+
+      $idDisposicionEliminar_ = array_column(
+        $this->container->getDb()->all("disposicion_pendiente",$render),
+        "id"
+      );
+
+      foreach($idDisposicionEliminar_ as $id) array_push($detail, "disposicion_pendiente".$id);
+      if(!empty($idDisposicionEliminar_)) $sql .= $this->container->getSqlo("disposicion_pendiente")->delete($idDisposicionEliminar_);
+      foreach($row["_disposicion_no_aprobada"] as $r){
+        $a = [
+          "alumno" => $row["alumno"],
+          "disposicion" => $r["id"]
+        ];
+
+        $persist = $this->container->getControllerEntity("persist_sql", "disposicion_pendiente")->id($a);
+        $sql .= $persist["sql"];
+        array_push($detail, "disposicion_pendiente".$persist["id"]);
+      }
+    }
+
+    $this->container->getDb()->multi_query_transaction($sql);
+    return ["detail"=>$detail];
+  }
+
+  
+  
 }

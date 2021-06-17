@@ -7,7 +7,7 @@ class AlumnoMapping extends MappingEntityOptions{
     return "CONCAT_WS(' ',
       {$this->_pf()}per.nombres, 
       {$this->_pf()}per.apellidos,
-      {$this->_pf()}per.numero_documento,
+      {$this->_pf()}per.numero_documento
     )";
   }
 

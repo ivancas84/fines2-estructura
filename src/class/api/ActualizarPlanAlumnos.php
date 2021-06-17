@@ -37,7 +37,7 @@ class ActualizarPlanAlumnosApi extends BaseApi {
       array_push($detail, "alumno".$persist["id"]);
     }
 
-    //$this->container->getDb()->multi_query_transaction($sql);
+    $this->container->getDb()->multi_query_transaction($sql);
     return ["ids"=>$ids, "detail"=>$detail];
   }
 

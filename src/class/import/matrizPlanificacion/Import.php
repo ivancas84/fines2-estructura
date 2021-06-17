@@ -15,14 +15,17 @@ class MatrizPlanificacionImport extends Import{
   
 
   public function main(){
-    $this->container->getEntity("planificacion")->identifier = ["plan","anio", "semestre"];
-    $this->container->getEntity("calificacion")->identifier = ["per-numero_documento", "pla-plan", "pla-anio", "pla-semestre", "asi-codigo"];
+    $this->container->getEntity("alumno")->identifier = ["per-numero_documento"];
+    $this->container->getEntity("disposicion")->identifier = ["pla-plan", "pla-anio", "pla-semestre", "asi-codigo"];
+    $this->container->getEntity("calificacion")->identifier = ["alu_per-numero_documento", "dis_pla-plan", "dis_pla-anio", "dis_pla-semestre", "dis_asi-codigo"];
     parent::main();
-    //  $this->define();
-    //    $this->identify();
-    //    $this->query();
-    //    $this->process();
-    // //$this->persist();
+    // $this->define();
+    // $this->identify();
+    // $this->query();
+    // $this->process();
+    // $this->persist();
+    //echo "<pre>";
+    //print_r($this);
   }
 
   
@@ -61,32 +64,25 @@ class MatrizPlanificacionImport extends Import{
   }
 
   public function identify(){
-    $this->ids["persona"] = [];
-    $this->ids["calificacion"] = [];
-    $this->ids["asignatura"] = [];
-    $this->ids["planificacion"] = [];
-
-
     foreach($this->elements as &$element){
       if(!($dni = $element->getIdentifier("persona", "numero_documento"))) continue;
-      if(!($idPlanificacion = $element->getIdentifier("planificacion"))) continue;
-      if(!($codigoAsignatura = $element->getIdentifier("asignatura", "codigo"))) continue;
+      if(!($idDisposicion = $element->getIdentifier("disposicion"))) continue;
       
-      $idCalificacion = $dni.UNDEFINED.$idPlanificacion.UNDEFINED.$codigoAsignatura;
+      $idCalificacion = $dni.UNDEFINED.$idDisposicion;
       $element->entities["calificacion"]->_set("identifier", $idCalificacion);
 
       if(!$this->idEntityFieldCheck("calificacion", $idCalificacion, $element)) continue;
-      $this->idEntityField("planificacion", $idPlanificacion);
+      $this->idEntityField("disposicion", $idDisposicion);
       $this->idEntityField("persona", $dni);
-      $this->idEntityField("asignatura", $codigoAsignatura);
+      $this->idEntityField("alumno", $dni);
     }
   }
 
   public function query(){
     $this->queryEntityField("persona","numero_documento");
-    $this->queryEntityField("asignatura","codigo");
-    $this->queryEntityField("planificacion","identifier");
+    $this->queryEntityField("disposicion","identifier");
     $this->queryEntityField("calificacion","identifier");
+    $this->queryEntityField("alumno","identifier");
   }
 
   public function process(){
@@ -95,34 +91,38 @@ class MatrizPlanificacionImport extends Import{
 
       $dni = $this->insertPersona($element);
       if($dni === false) continue;
-
-      $codigoAsignatura = $this->existElement($element, "asignatura", "codigo");
-      if($codigoAsignatura === false) continue;
-
-      $idPlanificacion = $this->existElement($element, "planificacion"); 
-      if($idPlanificacion === false) continue;
       
-      $idCalificacion = $this->processCalificacion($element);
-      if($idCalificacion === false) continue;
+      $identifierDisposicion = $this->existElement($element, "disposicion", "identifier");
+      if($identifierDisposicion === false) continue;
+      
+      $identifierAlumno = $this->processAlumno($element, $dni);
+      if($identifierAlumno === false) continue;
+
+
+      $identifierCalificacion = $this->processCalificacion($element);
+      if($identifierCalificacion === false) continue;
 
       $this->dbs["persona"][$dni] = $element->entities["persona"]->_toArray("get");
-      $this->dbs["asignatura"][$codigoAsignatura] = $element->entities["asignatura"]->_toArray("get");
-      $this->dbs["planificacion"][$idPlanificacion] = $element->entities["planificacion"]->_toArray("get");
-      $this->dbs["calificacion"][$idCalificacion] = $element->entities["calificacion"]->_toArray("get");
-
+      $this->dbs["alumno"][$dni] = $element->entities["alumno"]->_toArray("get");
+      $this->dbs["disposicion"][$identifierDisposicion] = $element->entities["disposicion"]->_toArray("get");
+      $this->dbs["calificacion"][$identifierCalificacion] = $element->entities["calificacion"]->_toArray("get");
     }
+  }
+  
+  public function processAlumno(&$element, $dni){
+    $element->entities["alumno"]->_set("persona",
+      $element->entities["persona"]->_get("id")
+    );
+    return $this->insertElement($element, "alumno", $dni);
   }
   
 
   public function processCalificacion(&$element){
-    $element->entities["calificacion"]->_set("asignatura",
-        $element->entities["asignatura"]->_get("id")
+    $element->entities["calificacion"]->_set("disposicion",
+        $element->entities["disposicion"]->_get("id")
       );
-      $element->entities["calificacion"]->_set("planificacion",
-        $element->entities["planificacion"]->_get("id")
-      );
-      $element->entities["calificacion"]->_set("persona",
-        $element->entities["persona"]->_get("id")
+      $element->entities["calificacion"]->_set("alumno",
+        $element->entities["alumno"]->_get("id")
       );
 
       $idCalificacion = $this->processCalificacionElement($element);

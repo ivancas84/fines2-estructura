@@ -1,0 +1,14 @@
+disposicion - dis
+asignatura - dis_asi
+planificacion - dis_pla
+plan - dis_pla_plb
+alumno - alu
+plan - alu_pla
+resolucion - alu_ri
+persona - alu_per
+domicilio - alu_per_dom
+
+id (id): string pk. NOT NULL. MAIN. UNIQUE.
+modo (moa): string nf.
+disposicion (dis): string mu. NOT NULL.
+alumno (alu): string mu. NOT NULL.

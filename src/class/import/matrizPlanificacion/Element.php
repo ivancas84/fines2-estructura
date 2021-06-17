@@ -30,19 +30,41 @@ class MatrizPlanificacionImportElement extends ImportElement {
     //se permiten numeros y guiones bajos para identificar el dni
     
      
-    $this->setPlanificacion($row);
-    $this->setEntity($row, "asignatura", "asi");
+    $this->setDisposicion($row);
+    $this->setAlumno($row);
     $this->setEntity($row, "persona", "per");
     $this->setEntity($row, "calificacion");
-
   }
 
+  /**
+   * @deprecated
   public function setPlanificacion($row){
     $this->entities["planificacion"] = $this->container->getValue("planificacion");
     $this->entities["planificacion"]->_set("identifier", 
       $this->idPlan . UNDEFINED .
       $row["pla_anio"] . UNDEFINED .
       $row["pla_semestre"]
+    );
+  }
+   */
+
+  public function setDisposicion($row){
+    $this->entities["disposicion"] = $this->container->getValue("disposicion");
+    $this->entities["disposicion"]->_set("identifier", 
+      $this->idPlan . UNDEFINED .
+      $row["pla_anio"] . UNDEFINED .
+      $row["pla_semestre"] . UNDEFINED .
+      $row["asi_codigo"]
+    );
+  }
+
+  public function setAlumno($row){
+    $this->entities["alumno"] = $this->container->getValue("alumno");
+    $this->entities["alumno"]->_set("plan", 
+      $this->idPlan
+    );
+    $this->entities["alumno"]->_set("identifier", 
+      $row["per_numero_documento"]
     );
   }
 
