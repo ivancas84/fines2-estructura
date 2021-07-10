@@ -28,11 +28,11 @@ class RegistroAbcPersistApi extends PersistApi {
       $sql = $this->container->getSqlo("persona")->update($value->_toArray("sql"));
     } else {
       $value->_call("setDefault");
-      $value->set("id",uniqid());
+      $value->_set("id",uniqid());
       $sql = $this->container->getSqlo("persona")->insert($value->_toArray("sql"));
     }
     
-    $persistToma = $this->container->getControllerEntity("persist_sql", "toma_posesion")->main([
+    $persistToma = $this->container->getControllerEntity("persist_sql", "toma_posesion")->id([
       "curso" => $data["curso"], "persona" => $value->_get("id")
     ]);
 

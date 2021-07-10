@@ -6,9 +6,41 @@ require_once("class/model/Ma.php");
 class ModelTools {
   public $container;
 
+  public function labelCurso($data, $prefix){
+    /**
+     * Definir la etiqueta de curso a partir de $data
+     * $data es el resultado de una consulta a la base de datos sin aplicar ningun filtro por ejemplo
+     * ["id" => "v", "field" => "v", "fk_id" => "v", "fk_field" => "v", "fk2_fk_id" => "v" , "fk2_fk_field" => "v", ...]
+     */
+    $label = $data[$prefix."com_sed_numero"] . $data[$prefix."com_division"] . "/";
+
+    if($data[$prefix."com_pla_id"]) 
+      $label .= $data[$prefix."com_pla_anio"].$data[$prefix."com_pla_semestre"];
+
+    $label .= " " . $data[$prefix."asi_nombre"];
+
+    return $label;
+  }
+
+
   public function distribucionesHorarias($planificacion){
     if(empty($planificacion)) throw new Exception("Planificacion vacia");
     return $this->getDb()->all("distribucion_horaria", ["planificacion"=>$planificacion]);
+  }
+
+  public function cantidadAlumnosAprobadosComision($idsComisiones){
+    $render = $this->container->getRender("calificacion");
+    $render->setCondition([
+      ["cur-comision","=",$idsComisiones],
+      [
+        ["nota_final",">","7"],
+        ["crec",">","4"]
+      ]
+    ]);
+    $render->setFields(["aprobados"=>"persona.count"]);
+    $render->setGroup(["comision"=>"cur-comision"]);
+    
+    return $this->container->getDb()->select("calificacion",$render);
   }
 
   public function sumaHorasCatedraAsignaturasGrupo($fechaAnio, $fechaSemestre, $modalidad, $centroEducativo){
@@ -36,9 +68,9 @@ class ModelTools {
   public function cargasHorariasDePlanificacion($planificacion){
     if(empty($planificacion)) throw new Exception("Planificacion no definida");
     $render = $this->container->getRender("distribucion_horaria");
-    $render->setParams(["planificacion" => $planificacion]);
+    $render->setParams(["dis-planificacion" => $planificacion]);
     $render->setFields(["horas_catedra.sum"]);
-    $render->setGroup(["planificacion", "asignatura"]);
+    $render->setGroup(["planificacion" => "dis-planificacion", "asignatura"=>"dis-asignatura"]);
     $render->setOrder(["horas_catedra.sum" => "desc"]);
     $render->setSize(0);
     return $this->container->getDb()->select("distribucion_horaria",$render);
@@ -55,8 +87,8 @@ class ModelTools {
     $cargasHorariasXAsignatura = [];
 
     foreach($distribucionesHorarias as $dh){
-      if(!array_key_exists($dh["asignatura"], $cargasHorariasXAsignatura)) $cargasHorariasXAsignatura[$dh["asignatura"]] = 0;
-      $cargasHorariasXAsignatura[$dh["asignatura"]] += intval($dh["horas_catedra"]);
+      if(!array_key_exists($dh["dis_asignatura"], $cargasHorariasXAsignatura)) $cargasHorariasXAsignatura[$dh["dis_asignatura"]] = 0;
+      $cargasHorariasXAsignatura[$dh["dis_asignatura"]] += intval($dh["horas_catedra"]);
     }
 
     return $cargasHorariasXAsignatura;

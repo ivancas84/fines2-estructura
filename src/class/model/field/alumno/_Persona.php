@@ -5,7 +5,7 @@ require_once("class/model/Field.php");
 class _FieldAlumnoPersona extends Field {
 
   public $type = "varchar";
-  public $fieldType = "mu";
+  public $fieldType = "_u";
   public $default = null;
   public $name = "persona";
   public $alias = "per";

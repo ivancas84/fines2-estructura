@@ -13,8 +13,8 @@ class CursosComisionesGrupoPersist {
    * si una comision ya tiene el horario definido, no se define el horario
    * si el horario de al menos un curso está definido, se ignora toda la comision
    */
-  protected $comisiones;
-  protected $mt;
+  public $comisiones;
+  public $mt;
 
   public function main($grupo){
     $this->mt = new ModelTools();
@@ -31,11 +31,11 @@ class CursosComisionesGrupoPersist {
      */
 
     $this->quitarComisionesConCursos();
+
     /**
      * quitar comisiones con cursos
      */
     $this->definirCursos();
-
     /**
      * definir cursos para las comisiones del grupo
      */

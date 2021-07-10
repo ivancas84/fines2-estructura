@@ -30,7 +30,6 @@ class CursosComisionPersist  {
     /**
      * si la comision tiene cursos, no seran definidos
      */
-
     $this->obtenerCargasHorarias();
     $this->definirCursos();
   }
@@ -58,8 +57,11 @@ class CursosComisionPersist  {
           "asignatura" => $ch["asignatura"],
           "horas_catedra" => $ch["horas_catedra_sum"],
       ];
-      $persist = $this->container->getControllerEntity("persist_sql","curso")->id("curso",$curso);
+      $persist = $this->container->getControllerEntity("persist_sql","curso")->id($curso);
       array_push($detail,"curso".$persist["id"]);
+      
+      //echo "<pre>";
+      //print_r($persist);
       $this->container->getDb()->multi_query_transaction($persist["sql"]);
     }
 

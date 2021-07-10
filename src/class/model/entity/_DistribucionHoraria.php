@@ -7,9 +7,9 @@ class _DistribucionHorariaEntity extends Entity {
   public $name = "distribucion_horaria";
   public $alias = "dh";
   public $nf = ['horas_catedra', 'dia'];
-  public $mu = ['asignatura', 'planificacion'];
+  public $mu = ['disposicion'];
   public $_u = [];
-  public $notNull = ['id', 'horas_catedra', 'dia', 'asignatura', 'planificacion'];
+  public $notNull = ['id', 'horas_catedra', 'dia'];
   public $unique = ['id'];
 
 

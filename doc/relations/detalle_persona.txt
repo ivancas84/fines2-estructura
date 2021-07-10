@@ -3,7 +3,9 @@ persona - per
 domicilio - per_dom
 
 id (id): string pk. NOT NULL. MAIN. UNIQUE.
-descripcion (des): string nf. NOT NULL.
+descripcion (des): text nf. NOT NULL.
 creado (cre): timestamp nf. NOT NULL. DEFAULT: current_timestamp().
+fecha (fec): date nf. DEFAULT: curdate().
+tipo (tip): string nf.
 archivo (arc): string mu.
 persona (per): string mu. NOT NULL.

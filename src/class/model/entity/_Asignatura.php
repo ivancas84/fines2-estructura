@@ -10,7 +10,7 @@ class _AsignaturaEntity extends Entity {
   public $mu = [];
   public $_u = [];
   public $notNull = ['id', 'nombre'];
-  public $unique = ['id', 'nombre'];
+  public $unique = ['id', 'nombre', 'codigo'];
 
 
 }

@@ -15,13 +15,13 @@ class CalificacionCursoPersistApi extends PersistApi {
     $idCurso = file_get_contents("php://input");
     $curso = $this->container->getDb()->get("curso", $idCurso);
 
-    $render = $this->container->getRender("alumno");
+    $render = $this->container->getRender("alumno_comision");
     $render->setCondition([
       ["comision","=",$curso["comision"]],
       //["activo","=","true"]
     ]);
     $render->setSize(0);
-    $alumnos = $this->container->getDb()->all("alumno",$render);
+    $alumnos = $this->container->getDb()->all("alumno_comision",$render);
 
     $render = $this->container->getRender("calificacion");
     $render->setCondition([
