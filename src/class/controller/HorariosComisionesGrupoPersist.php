@@ -27,7 +27,7 @@ class HorariosComisionesGrupoPersist {
     if(empty($grupo["cal-anio"])) throw new Exception("Dato no definido: fecha anio");
     if(empty($grupo["cal-semestre"])) throw new Exception("Dato no definido: fecha semestre");
     if(empty($grupo["modalidad"])) throw new Exception("Dato no definido: modalidad");
-    //if(empty($grupo["sed-centro_educativo"])) throw new Exception("Dato no definido: centro educativo (sed_centro_educativo)");
+    if(empty($grupo["sed-centro_educativo"])) throw new Exception("Dato no definido: centro educativo (sed_centro_educativo)");
        
     $this->consultarComisionesAnterioresConSiguiente($grupo);
     /**

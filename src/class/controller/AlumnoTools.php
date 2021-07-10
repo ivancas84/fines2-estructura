@@ -119,6 +119,34 @@ class AlumnoTools {
     return $anios_cursados;
   }
 
+  public function anioActual2($anios){
+    if(!rsort($anios)) throw new Exception("Error al ordenar");
+    $i = (count($anios)) ? $anios[0] : 1;
+
+    switch($i){
+      case 1: return "Primero";
+      case 2: return "Segundo";
+      default: return "Tercer";
+    }
+  }
+
+  public function anioActual($anios){
+    $anios_cursados = [];
+    
+    for($i = $this->alumno["anio_ingreso"]; $i <= 3; $i++) {
+      if(!key_exists($i, $anios)) continue;
+      else break;
+    }
+
+    switch($i){
+      case 1: return "Primero";
+      case 2: return "Segundo";
+      default: return "Tercero";
+    }
+  }
+
+  
+
   
   public function traducirAniosAux($anios){
     $anios_cursados = [];
@@ -136,8 +164,10 @@ class AlumnoTools {
 
 
   public function aniosRestantes($aniosCursados){
-    $a = [1=>"Primero",2=>"Segundo",3=>"Tercero"];
-    return array_diff($a, $aniosCursados);
+    if(in_array("Tercero",$aniosCursados)) return [];
+    if(in_array("Segundo",$aniosCursados)) return ["Tercero"];
+    if(in_array("Primero",$aniosCursados)) return ["Segundo","Tercero"];
+    return ["Primero","Segundo","Tercero"];
   }
 
 

@@ -4,15 +4,16 @@ require_once("class/import/Import.php");
 require_once("class/model/Db.php");
 
 class ComisionesSiguientesImport extends Import{
-
   /**
-   * Definir
+   * comision: comisiones a definir
+   * comision_anterior: comisiones a actualizar
    */
-  public $idCalendario = null;
-  public $anio = "2020";
-  public $semestre = "2";
-  public $modalidad = "1";
 
+  public $idCalendario = null;
+  public $anio;
+  public $semestre;
+  public $modalidad;
+  public $centroEducativo;
 
   public $mode = "db";
   public $id = "alumno";
@@ -24,7 +25,7 @@ class ComisionesSiguientesImport extends Import{
      * Un elemento posee todos los datos que posteriormente seran insertados y los posibles errores que puede haber
      * Existe una clase abstracta Element que posee un conjunto de metodos de uso habitual
      */
-      $element = $this->container->getImportElement($this->entityName);
+      $element = $this->container->getImportElement("comisiones_siguientes");
       $element->index = $i;
       $element->idCalendario = $this->idCalendario;
       $element->setEntities($data);
@@ -43,6 +44,7 @@ class ComisionesSiguientesImport extends Import{
       ["cal-anio","=",$this->anio],
       ["cal-semestre","=",$this->semestre],
       ["modalidad","=",$this->modalidad],
+      ["sed-centro_educativo","=",$this->centroEducativo],
       ["tramo", "!=","32"]
     ]);
 
@@ -57,34 +59,8 @@ class ComisionesSiguientesImport extends Import{
     $this->ids["comision"] = [];
     $this->ids["comision_anterior"] = [];
     foreach($this->elements as &$element){
-      $idComision = $element->entities["comision"]->_get("identifier");
-      if(Validation::is_empty($idComision)){
-        $element->process = false;                
-        $element->logs->addLog("comision", "error", "El identificador de comision esta vacio para " . $element->entities["comision_anterior"]->_get("id") );
-        continue;  
-      }
-
-      if(in_array($idComision, $this->ids["comision"])) {
-        $element->process = false;                
-        $element->logs->addLog("comision", "error", "El identificador de comision ya se encuentra definido");
-        continue;
-      }
-
-      array_push($this->ids["comision"], $idComision);
-
-      $idComision = $element->entities["comision_anterior"]->_get("identifier");
-      if(Validation::is_empty($idComision)){
-        $element->process = false;                
-        $element->logs->addLog("comision_anterior", "error", "El identificador de comision esta vacio para " . $element->entities["comision_anterior"]->_get("id"));
-        continue;  
-      }
-      if(in_array($idComision, $this->ids["comision_anterior"])) {
-        $element->process = false;                
-        $element->logs->addLog("comision_anterior", "error", "El identificador de comision ya se encuentra definido");
-        continue;
-      }
-      
-      array_push($this->ids["comision_anterior"], $idComision);
+      $this->idEntityFieldCheck("comision",$element->entities["comision"]->_get("identifier"), $element);
+      $this->idEntityFieldCheck("comision_anterior",$element->entities["comision_anterior"]->_get("identifier"), $element);
     }
   }
 
@@ -97,19 +73,14 @@ class ComisionesSiguientesImport extends Import{
     foreach($this->elements as &$element) {
       if(!$element->process) continue;
 
-      $idComision = $element->entities["comision"]->_get("identifier");
-      if(array_key_exists($idComision, $this->dbs["comision"])) {
-        $element->logs->addLog("comision","error","Ya existe la comision siguiente");
+      if(!$this->insertElement($element,"comision")){
         $element->process = false;
         continue;
-      }
-
-      $this->processElement($element, "comision", $idComision);
+      };
 
       $id = $element->entities["comision"]->_get("id");
       $element->entities["comision_anterior"]->_set("comision_siguiente",$id);
-      $idComision = $element->entities["comision_anterior"]->_get("identifier");
-      $this->processElement($element, "comision", $idComision,"comision_anterior");
+      $this->processElement($element, "comision", "identifier","comision_anterior");
     
     }
   }

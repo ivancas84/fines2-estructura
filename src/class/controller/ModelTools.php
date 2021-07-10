@@ -68,9 +68,9 @@ class ModelTools {
   public function cargasHorariasDePlanificacion($planificacion){
     if(empty($planificacion)) throw new Exception("Planificacion no definida");
     $render = $this->container->getRender("distribucion_horaria");
-    $render->setParams(["planificacion" => $planificacion]);
+    $render->setParams(["dis-planificacion" => $planificacion]);
     $render->setFields(["horas_catedra.sum"]);
-    $render->setGroup(["planificacion", "asignatura"]);
+    $render->setGroup(["planificacion" => "dis-planificacion", "asignatura"=>"dis-asignatura"]);
     $render->setOrder(["horas_catedra.sum" => "desc"]);
     $render->setSize(0);
     return $this->container->getDb()->select("distribucion_horaria",$render);
@@ -87,8 +87,8 @@ class ModelTools {
     $cargasHorariasXAsignatura = [];
 
     foreach($distribucionesHorarias as $dh){
-      if(!array_key_exists($dh["asignatura"], $cargasHorariasXAsignatura)) $cargasHorariasXAsignatura[$dh["asignatura"]] = 0;
-      $cargasHorariasXAsignatura[$dh["asignatura"]] += intval($dh["horas_catedra"]);
+      if(!array_key_exists($dh["dis_asignatura"], $cargasHorariasXAsignatura)) $cargasHorariasXAsignatura[$dh["dis_asignatura"]] = 0;
+      $cargasHorariasXAsignatura[$dh["dis_asignatura"]] += intval($dh["horas_catedra"]);
     }
 
     return $cargasHorariasXAsignatura;

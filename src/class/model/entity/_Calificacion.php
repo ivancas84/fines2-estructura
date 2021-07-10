@@ -9,7 +9,7 @@ class _CalificacionEntity extends Entity {
   public $nf = ['nota1', 'nota2', 'nota3', 'nota_final', 'crec', 'porcentaje_asistencia', 'observaciones', 'division'];
   public $mu = ['curso', 'alumno', 'disposicion'];
   public $_u = [];
-  public $notNull = ['id', 'alumno'];
+  public $notNull = ['id', 'alumno', 'disposicion'];
   public $unique = ['id'];
 
 

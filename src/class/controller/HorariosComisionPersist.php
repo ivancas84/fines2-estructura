@@ -33,7 +33,7 @@ class HorariosComisionPersist  {
      */
 
     $this->getCursos();
-
+  
     /**
      * obtener los cursos de la comision para poder asignar los horarios
      * las asignaturas de los cursos deben coincidir con los de las distribuciones horarias
@@ -42,6 +42,8 @@ class HorariosComisionPersist  {
      */
 
     $this->cursosXAsignaturas = array_combine_key($this->cursos,"asignatura");
+
+  
     /**
      * Agrupar los cursos por asignatura
      */
@@ -57,12 +59,17 @@ class HorariosComisionPersist  {
      * Obtener las distribuciones horarias utilizando el plan, año y semestre de la comision
      */
 
+
     $this->cargasHorariasXAsignatura = ModelTools::cargasHorariasXAsignaturaDeDistribucionesHorarias($this->distribucionesHorarias);
     /**
      * Definir las cargas horarias de las asignaturas
      */
 
+     
+
     $this->controlarCargasHorariasDeCursos();
+
+   
     /**
      * Las horas catedra definidas en los cursos deben coincidir con la carga horaria de las asignaturas de las distribuciones horarias.
      */
@@ -86,7 +93,7 @@ class HorariosComisionPersist  {
 
   public function getDistribucionesHorarias() {
     $render = $this->container->getRender("distribucion_horaria");
-    $render->addCondition(["planificacion","=",$this->cursos[0]["com_planificacion"]]);
+    $render->addCondition(["dis-planificacion","=",$this->cursos[0]["com_planificacion"]]);
     $this->distribucionesHorarias = $this->container->getDb()->all("distribucion_horaria", $render);
     
     if(empty($this->distribucionesHorarias)) throw new Exception("No existen distribuciones horarias para la comision indicada: " . $this->id);
@@ -108,6 +115,7 @@ class HorariosComisionPersist  {
     $horasCatedrasDia = [];
 
     $detail = [];
+    $sql = "";
     foreach($this->distribucionesHorarias as $dh){
       $horario = $this->container->getValue("horario"); 
       
@@ -126,12 +134,14 @@ class HorariosComisionPersist  {
       $horasCatedrasDia[$dh["dia"]] += $minutos;
       
       $horario->_fastSet("dia", $this->dias[intval($dh["dia"])-1]);
-      $horario->_fastSet("curso", $this->cursosXAsignaturas[$dh["asignatura"]]["id"]);
+      $horario->_fastSet("curso", $this->cursosXAsignaturas[$dh["dis_asignatura"]]["id"]);
 
-      $persist = $this->container->getController("persist_sql_value")->id("horario",$horario);
+      $persist = $this->container->getControllerEntity("persist_sql_value","horario")->id($horario);
       array_push($detail,"horario".$persist["id"]);
-      $this->container->getDb()->multi_query_transaction($persist["sql"]);
+      $sql .= $persist["sql"];
     }
+
+    $this->container->getDb()->multi_query_transaction($sql);
 
     return ["id" => $this->id, "detail" => $detail];
   }

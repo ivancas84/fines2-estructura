@@ -15,14 +15,8 @@ persona - alu_per
 domicilio - alu_per_dom
 
 id (id): string pk. NOT NULL. MAIN. UNIQUE.
-fotocopia_documento (fd): boolean nf. NOT NULL.
-partida_nacimiento (pn): boolean nf. NOT NULL.
 creado (cre): timestamp nf. NOT NULL. DEFAULT: current_timestamp().
-constancia_cuil (cc): boolean nf. NOT NULL.
-certificado_estudios (ce): boolean nf. NOT NULL.
-anio_ingreso (ai): string nf.
 activo (act): boolean nf.
-programa (pro): string nf.
 observaciones (obs): text nf.
 comision (com): string mu.
 alumno (alu): string mu. NOT NULL.

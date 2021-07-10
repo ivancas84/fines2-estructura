@@ -8,15 +8,19 @@ anio_ingreso (ai): string nf.
 observaciones (obs): text nf.
 estado_inscripcion (ei): string nf.
 fecha_titulacion (ft): date nf.
-estado_legajo (el): string nf.
 anio_inscripcion (aia): integer nf.
 semestre_inscripcion (si): integer nf.
 semestre_ingreso (sia): integer nf.
-tramo_inscripcion_completo (tic): string nf.
 adeuda_legajo (al): string nf.
 adeuda_deudores (ad): string nf.
-adeuda_mesa (am): string nf.
-adeuda_egresar (ae): string nf.
+tiene_dni (td): boolean nf. NOT NULL.
+tiene_partida (tp): boolean nf. NOT NULL.
+tiene_cuil (tc): boolean nf. NOT NULL.
+tiene_constancia_primaria (tcp): boolean nf. NOT NULL.
+tiene_certificado_primaria (tca): boolean nf. NOT NULL.
+tiene_constancia_secundaria (tcs): boolean nf. NOT NULL.
+tiene_analitico_secundaria (tas): boolean nf. NOT NULL.
+tiene_declaracion_jurada (tdj): boolean nf. NOT NULL.
 plan (pla): string mu.
 resolucion_inscripcion (ri): string mu.
 persona (per): string _u. NOT NULL. MAIN. UNIQUE.

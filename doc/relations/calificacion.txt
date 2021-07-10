@@ -31,4 +31,4 @@ observaciones (obs): text nf.
 division (dia): string nf.
 curso (cur): string mu.
 alumno (alu): string mu. NOT NULL.
-disposicion (dis): string mu.
+disposicion (dis): string mu. NOT NULL.

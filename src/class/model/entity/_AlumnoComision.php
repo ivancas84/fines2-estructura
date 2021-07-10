@@ -6,10 +6,10 @@ require_once("class/model/Field.php");
 class _AlumnoComisionEntity extends Entity {
   public $name = "alumno_comision";
   public $alias = "ac";
-  public $nf = ['fotocopia_documento', 'partida_nacimiento', 'creado', 'constancia_cuil', 'certificado_estudios', 'anio_ingreso', 'activo', 'programa', 'observaciones'];
+  public $nf = ['creado', 'activo', 'observaciones'];
   public $mu = ['comision', 'alumno'];
   public $_u = [];
-  public $notNull = ['id', 'fotocopia_documento', 'partida_nacimiento', 'creado', 'constancia_cuil', 'certificado_estudios', 'alumno'];
+  public $notNull = ['id', 'creado', 'alumno'];
   public $unique = ['id'];
 
 
