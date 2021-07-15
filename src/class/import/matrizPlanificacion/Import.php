@@ -29,7 +29,7 @@ class MatrizPlanificacionImport extends Import{
   }
 
   
-  public function element($i, $data){ //@override
+  public function element($i, $data, $import = null){ //@override
     /**
      * Debido a que los parametros poseen mas de un juego de entidades, se sobrescribe element para definir todas las entidades
      */

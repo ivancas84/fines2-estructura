@@ -11,7 +11,7 @@ class EmailInscripcionApi extends BaseApi {
     /**
      * id:persona.id
      */
-    $return = $this->container->getController("email_notas")->main($data["id"]);
+    $return = $this->container->getController("email_calificaciones")->main($data["id"]);
     return $return;
   }
 }

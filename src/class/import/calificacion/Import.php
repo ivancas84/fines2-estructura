@@ -22,12 +22,12 @@ class CalificacionImport extends Import{
     $this->container->getEntity("alumno")->identifier = ["per-numero_documento"];
     $this->container->getEntity("calificacion")->identifier = ["alu_per-numero_documento", "dis-planificacion", "dis-asignatura"];
     $this->container->getEntity("disposicion")->identifier = ["planificacion", "asignatura"];
-    //parent::main();
-    $this->define();
-    $this->identify();
-    $this->query();
-    $this->process();
-    // // $this->persist();
+    parent::main();
+    // $this->define();
+    // $this->identify();
+    // $this->query();
+    // $this->process();
+    // $this->persist();
   }
 
   public function identify(){

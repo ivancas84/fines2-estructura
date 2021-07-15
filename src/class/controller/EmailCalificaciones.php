@@ -91,9 +91,8 @@ Equipo de Coordinadores del Plan Fines 2 CENS 462
 ';
 
 
-echo $body;
-    $email =  $p->_get("email");
-
+    //$email =  $p->_get("email");
+    $email = "ivancas84@gmail.com";
     $addresses = [
       $email => $p->_get("nombres", "Xx Yy") . " " . $p->_get("apellidos", "Xx Yy"),
     ];
