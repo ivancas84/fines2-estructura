@@ -64,7 +64,9 @@ class AlumnoTools {
   }
 
   public function disposicionesRestantes($calificacionesAprobadas, $disposiciones){
-
+    /**
+     * @derecated? 
+     */
     $d = array_combine_key2(
       $disposiciones,
       ["asignatura","planificacion"]
@@ -78,6 +80,15 @@ class AlumnoTools {
     $ids_r = array_diff($ids_d, $ids_c);
 
     return array_intersect_key($d, array_flip($ids_r) );
+  }
+
+  public function disposicionesPendientes(){
+    $render = $this->container->getRender("disposicion_pendiente");
+    $render->setCondition([
+      ["alumno","=",$this->alumno["id"]],
+    ]);
+    $render->setOrder(["dis_pla-anio"=>"asc","dis_pla-semestre"=>"asc","dis_asi-nombre"=>"asc"]);
+    return $this->container->getDb()->all("disposicion_pendiente",$render);
   }
 
   public function disposicionesRestantesAnio($calificacionesAprobadas, $disposiciones){
