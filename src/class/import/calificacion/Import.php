@@ -18,76 +18,79 @@ class CalificacionImport extends Import{
 
     $this->curso = $this->container->getDb()->get("curso", $this->idCurso);
     if(empty($this->curso)) throw new Exception("El curso no existe");
-    $this->container->getEntity("calificacion")->identifier = ["per-numero_documento", "pla-plan", "pla-anio", "pla-semestre", "asi-codigo"];
 
-    parent::main();
-    // $this->define();
-    // $this->identify();
-    // $this->query();
-    // $this->process();
-    // $this->persist();
+    $this->container->getEntity("alumno")->identifier = ["per-numero_documento"];
+    $this->container->getEntity("calificacion")->identifier = ["alu_per-numero_documento", "dis-planificacion", "dis-asignatura"];
+    $this->container->getEntity("disposicion")->identifier = ["planificacion", "asignatura"];
+    //parent::main();
+    $this->define();
+    $this->identify();
+    $this->query();
+    $this->process();
+    // // $this->persist();
   }
-  
+
   public function identify(){
     $this->ids["persona"] = [];
+    $this->ids["disposicion"] = [];
     $this->ids["calificacion"] = [];
+    $this->ids["alumno"] = [];
+    
     foreach($this->elements as &$element){
       if(!$element->process) continue;
       if(!($dni = $element->getIdentifier("persona", "numero_documento"))) continue;
-      
-      $idCalificacion = $dni.UNDEFINED.$this->curso["com_pla_plan"].UNDEFINED.$this->curso["com_pla_anio"].UNDEFINED.$this->curso["com_pla_semestre"].UNDEFINED.$this->curso["asi_codigo"];
-      $element->entities["calificacion"]->_set("identifier", $idCalificacion);
+      if(!($idDisposicion = $element->getIdentifier("disposicion", "identifier"))) continue;
+      if(!($idCalificacion = $element->getIdentifier("calificacion", "identifier"))) continue;
+      if(!($idAlumno = $element->getIdentifier("alumno", "identifier"))) continue;
 
+      
+      if(!$this->idEntityFieldCheck("alumno", $idAlumno, $element)) continue;
       if(!$this->idEntityFieldCheck("calificacion", $idCalificacion, $element)) continue;
       if(!$this->idEntityFieldCheck("persona", $dni, $element)) continue;
+      if(!$this->idEntityField("disposicion", $idDisposicion, $element)) continue;
+      
     }
   }
 
   public function query(){
     $this->queryEntityField("persona","numero_documento");
+    $this->queryEntityField("disposicion","identifier");
     $this->queryEntityField("calificacion","identifier");
+    $this->queryEntityField("alumno","identifier");
+
   }
 
   public function process(){    
     foreach($this->elements as &$element) {
       if(!$element->process) continue;
      
-      $dni = $this->insertPersona($element);
-      if($dni === false) continue;
+      if(!$this->existsPersona($element)) continue;
+      if(!$this->existElement($element, "disposicion", "identifier")) continue;
+      if(!$this->existElement($element, "alumno", "identifier")) continue;
 
-      
+
       $idCalificacion = $this->processCalificacion($element);
       if($idCalificacion === false) continue;
-
-
-      $this->dbs["persona"][$dni] = $element->entities["persona"]->_toArray("get");
-      $this->dbs["calificacion"][$idCalificacion] = $element->entities["calificacion"]->_toArray("get");
     }
   }
 
 
   
-  public function insertPersona(&$element){
-    $dni = $element->entities["persona"]->_get("numero_documento");
+  public function existsPersona(&$element){
+    if(!$this->existElement($element, "persona", "numero_documento")) return false;
+      $dni = $element->entities["persona"]->_get("numero_documento");
  
     /**
      * Variante del insertElement para verificar los nomrbes de la persona
      */
      
-    if(key_exists($dni, $this->dbs["persona"])){
-      $personaExistente = $this->container->getValue("persona");
-      $personaExistente->_fromArray($this->dbs["persona"][$dni], "set");
-      if(!$element->entities["persona"]->checkNombresParecidos($personaExistente)){
-        $element->logs->addLog("persona", "error", "En la base existe una persona cuyos datos no coinciden");
-        $element->process = false;
-        return false;
-      }
-
-      $element->entities["persona"]->_set("id",$personaExistente->_get("id"));
-      $element->logs->addLog("persona", "info", "Registro existente, no será actualizado");
-    } else {
-      $element->insert("persona");
-    }
+    $personaExistente = $this->container->getValue("persona");
+    $personaExistente->_fromArray($this->dbs["persona"][$dni], "set");
+    if(!$element->entities["persona"]->checkNombresParecidos($personaExistente)){
+      $element->logs->addLog("persona", "error", "En la base existe una persona cuyos datos no coinciden");
+      $element->process = false;
+      return false;
+    } 
 
     return $dni;
   }
@@ -95,17 +98,11 @@ class CalificacionImport extends Import{
 
 
   public function processCalificacion(&$element){
-    $element->entities["calificacion"]->_set("asignatura",
-      $this->curso["asignatura"]
+    $element->entities["calificacion"]->_set("disposicion",
+      $element->entities["disposicion"]->_get("id")
     );
-    $element->entities["calificacion"]->_set("planificacion",
-      $this->curso["com_planificacion"]
-    );
-    $element->entities["calificacion"]->_set("curso",
-      $this->curso["id"]
-    );
-    $element->entities["calificacion"]->_set("persona",
-      $element->entities["persona"]->_get("id")
+    $element->entities["calificacion"]->_set("alumno",
+      $element->entities["alumno"]->_get("id")
     );
 
     $idCalificacion = $this->processCalificacionElement($element);
