@@ -29,7 +29,7 @@ class MatrizPlanificacionImport extends Import{
   }
 
   
-  public function element($i, $data, $import = null){ //@override
+  public function element($i, $data, &$import = null){ //@override
     /**
      * Debido a que los parametros poseen mas de un juego de entidades, se sobrescribe element para definir todas las entidades
      */
@@ -98,7 +98,6 @@ class MatrizPlanificacionImport extends Import{
       $identifierAlumno = $this->processAlumno($element, $dni);
       if($identifierAlumno === false) continue;
 
-
       $identifierCalificacion = $this->processCalificacion($element);
       if($identifierCalificacion === false) continue;
 
@@ -113,7 +112,7 @@ class MatrizPlanificacionImport extends Import{
     $element->entities["alumno"]->_set("persona",
       $element->entities["persona"]->_get("id")
     );
-    return $this->insertElement($element, "alumno", $dni);
+    return $this->insertElement($element, "alumno");
   }
   
 

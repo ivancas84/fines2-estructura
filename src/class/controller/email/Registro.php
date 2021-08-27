@@ -28,6 +28,7 @@ class RegistroEmail {
     <li>Constancia de CUIL</li>
     <li>Copia de email con aviso de designación</li>
     <li>Declaración Jurada</li>
+    <li>Proyecto pedagógico</li>
   </ul>
 </p>
 <p>Posteriormente deberá presentar su Declaración Jurada impresa en el CENS 462 (calle 71 e/ 115 y 116 Nº 232) el día Miércoles en el horario de 12 a 14, o Viernes de 18 a 19:30 donde se controlará la declaración y se le pedirá que firme la toma de posesión General.</p>

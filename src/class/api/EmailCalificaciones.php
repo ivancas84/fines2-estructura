@@ -4,7 +4,7 @@
 require_once("class/api/Base.php");
 require_once("function/php_input.php");
 
-class EmailInscripcionApi extends BaseApi {
+class EmailCalificacionesApi extends BaseApi {
 
   public function main() {
     $data = php_input(); 

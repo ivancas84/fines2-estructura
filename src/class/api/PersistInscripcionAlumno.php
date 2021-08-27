@@ -43,7 +43,7 @@ class PersistInscripcionAlumnoApi extends BaseApi {
     $this->insertDetallePersona_();
 
     $this->container->getDb()->multi_query_transaction($this->sql);
-    //$this->emailInscripcion();
+    $this->emailInscripcion();
     //echo $this->sql;
 
     return ["detail" => $this->detail];
@@ -51,6 +51,7 @@ class PersistInscripcionAlumnoApi extends BaseApi {
 
   public function addDetallePersonaInscripcion(){
     array_push($this->data["per-detalle_persona/persona"], ["tipo"=>"Inscripción","descripcion"=>"Inscripción"]);
+    if(!empty($this->data["per"]["mensaje"])) array_push($this->data["per-detalle_persona/persona"], ["tipo"=>"Inscripción","descripcion"=>$this->data["per"]["mensaje"]]);
   }
   
   public function emailInscripcion(){

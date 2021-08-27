@@ -91,13 +91,13 @@ Equipo de Coordinadores del Plan Fines 2 CENS 462
 ';
 
 
-    //$email =  $p->_get("email");
-    $email = "ivancas84@gmail.com";
+    $email =  $p->_get("email");
+    //$email = "ivancas84@gmail.com";
     $addresses = [
       $email => $p->_get("nombres", "Xx Yy") . " " . $p->_get("apellidos", "Xx Yy"),
     ];
 
-    //email2(EMAIL_HOST_A, EMAIL_USER_A, EMAIL_PASSWORD_A, EMAIL_FROM_ADRESS_A, EMAIL_FROM_NAME_A, $addresses, $subject, $body);
+    email2(EMAIL_HOST_A, EMAIL_USER_A, EMAIL_PASSWORD_A, EMAIL_FROM_ADRESS_A, EMAIL_FROM_NAME_A, $addresses, $subject, $body);
 
     return true;
 

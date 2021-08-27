@@ -4,3 +4,4 @@ fin (fin): date nf. MAIN.
 anio (ani): year nf. NOT NULL. MAIN.
 semestre (sem): integer nf. NOT NULL. MAIN.
 insertado (ins): timestamp nf. NOT NULL. DEFAULT: current_timestamp().
+descripcion (des): string nf.
