@@ -22,6 +22,7 @@ class EmailConfirmacion {
     $toma = $this->container->getDb()->get("toma",$id);
     $curso = $mt->labelCurso($toma,"cur_");
     $subject = "Toma de posesión: " . $curso;
+	$idComision = $toma["cur_comision"];
     
     $horario_ = $this->container->getController("model_tools")->cursoHorario([$toma["curso"]]);
     $horario = count($horario_) ? $horario_[0]["horario"] : null;
@@ -35,9 +36,9 @@ class EmailConfirmacion {
     $body = '
 <p>Hola ' . $t["docente"]->_get("nombres", "Xx Yy") . ' ' . $t["docente"]->_get("apellidos", "Xx Yy") . ', a continuación se indica el comprobante de toma de posesión.</p>
 <p>Comuníquese en primer término con los referentes, ellos conocen la realidad de cada alumno y ofrecen medios de contacto adicionales para la comunicación.</p>
-<p>En el siguiente enlace se encuentran los contactos de los referentes: <a href="https://planfines2.com.ar/users/referente-toma?com-id=' . $t["comision"]->_get("id") . '" target="_blank">Contacto Referentes</a></p>
-<p>En el siguiente enlace podrá descargar las listas de alumnos: <a href="https://planfines2.com.ar/users/alumno-comision-toma?com-id=' . $t["comision"]->_get("id") . '">Lista alumnos</a></p>
-<p>Haga clic aquí para unirse al grupo de Whatsapp de docentes: <a href="https://chat.whatsapp.com/I2IAsdRaRLS8FG87i3tqfg">Grupo Whatsapp</a> o escríbanos al número 22167113326 para que lo incorporemos</p>
+<p>En el siguiente enlace se encuentran los contactos de los referentes: <a href="https://planfines2.com.ar/users2/referentes-para-docente?comision='.$idComision.'">Contacto Referentes</a></p>
+<p>En el siguiente enlace podrá descargar las listas de alumnos:  <a href="https://planfines2.com.ar/users2/alumnos-para-docente?comision='.$idComision.'">Lista de Alumnos</a></p>
+<p>Dejamos contacto de Whatsapp 22167113326 para cualquier consulta</p>
 <p>Al finalizar el período podrá descargar las <strong>planillas de finalización y sus instrucciones</strong> del siguiente enlace: <a href="https://planfines2.com.ar/wp/planillas-de-finalizacion/">Finalización de semestre</a></p> 
 <div style="margin-left:15px;width:600px;padding:20px;border:1px solid #d0d2d2;border-radius:5px;color:#444444">
       <h4 style="padding:0 0 12px 0;margin:0;font-weight:bold">Toma de posesión: <span>' . $t["docente"]->_get("apellidos","X") . ', ' . $t["docente"]->_get("nombres","Xx Yy") . ' DNI ' . $t["docente"]->_get("numero_documento") . '</span></h4>
