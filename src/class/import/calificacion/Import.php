@@ -10,7 +10,8 @@ class CalificacionImport extends Import{
    */
   public $mode = "tab";
   public $idCurso;
-  public $curso;
+  public $curso; //curso
+  public $dni_; //dnis de alumnos existentes en el curso
   public $id = "calificacion";
 
   public function main(){
@@ -18,6 +19,8 @@ class CalificacionImport extends Import{
 
     $this->curso = $this->container->getDb()->get("curso", $this->idCurso);
     if(empty($this->curso)) throw new Exception("El curso no existe");
+
+    $this->dni_();
 
     $this->container->getEntity("alumno")->identifier = ["per-numero_documento"];
     $this->container->getEntity("calificacion")->identifier = ["alu_per-numero_documento", "dis-planificacion", "dis-asignatura"];
@@ -28,6 +31,13 @@ class CalificacionImport extends Import{
     // $this->query();
     // $this->process();
     // $this->persist();
+  }
+
+  public function dni_(){
+    $render = $this->container->getController("render_build","alumno_comision")->main();
+    $render->setCondition(["comision","=",$this->curso["comision"]]);
+    $alumnoComision = $this->container->getDb()->all("alumno_comision",$render);
+    $this->dni_ = array_column($alumnoComision,"alu_per_numero_documento");
   }
 
   public function identify(){
@@ -92,6 +102,15 @@ class CalificacionImport extends Import{
       return false;
     } 
 
+    if(!in_array($dni, $this->dni_)) {
+      $element->logs->addLog("persona", "error", "La persona no existe en la comision");
+      $element->process = false;
+      return false;
+    } else {
+      $pos = array_search($dni, $this->dni_);
+      unset($this->dni_[$pos]);
+    }
+
     return $dni;
   }
 
@@ -142,7 +161,14 @@ class CalificacionImport extends Import{
     return $value;
   }
 
-  
+
+  public function summary() {
+    parent::summary();
+    if(count($this->dni_)) {
+      echo "<p>Los siguientes alumnos no fueron evaluados:<p>";
+      foreach($this->dni_ as $dni) echo  $dni . "<br/>";
+    }
+}
 
 
 

@@ -21,6 +21,8 @@ class CalificacionImportElement extends ImportElement {
       if(!empty($row["crec"])) $row["crec"] = preg_replace("/[^0-9]/", "", $row["crec"]);
     }
     
+    if((intval($row["nota_final"]) < 7) && intval($row["crec"]) < 4) $this->logs->addLog($id, "info", "El alumno está desaprobado");                
+ 
     $row["per_numero_documento"] = preg_replace("/[^0-9\_]/", "", $row["per_numero_documento"]);
     //se permiten numeros y guiones bajos para identificar el dni
 
