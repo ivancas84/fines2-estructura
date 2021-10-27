@@ -30,16 +30,18 @@ class EmailConfirmacion {
     $t = $this->container->getRel("toma")->value($toma);
 
     $fechaToma = $t["toma"]->_get("fecha_toma");
-    $fechaFin = clone $fechaToma;
-    $fechaFin->modify("+ 4 month");
+    $fechaFin = new DateTime('2021-12-31');
+
+    // $fechaFin = clone $fechaToma;
+    // $fechaFin->modify("+ 4 month");
   
     $body = '
 <p>Hola ' . $t["docente"]->_get("nombres", "Xx Yy") . ' ' . $t["docente"]->_get("apellidos", "Xx Yy") . ', a continuación se indica el comprobante de toma de posesión.</p>
 <p>Comuníquese en primer término con los referentes, ellos conocen la realidad de cada alumno y ofrecen medios de contacto adicionales para la comunicación.</p>
-<p>En el siguiente enlace se encuentran los contactos de los referentes: <a href="https://planfines2.com.ar/users2/referentes-para-docente?comision='.$idComision.'">Contacto Referentes</a></p>
-<p>En el siguiente enlace podrá descargar las listas de alumnos:  <a href="https://planfines2.com.ar/users2/alumnos-para-docente?comision='.$idComision.'">Lista de Alumnos</a></p>
-<p>Dejamos contacto de Whatsapp 22167113326 para cualquier consulta</p>
-<p>Al finalizar el período podrá descargar las <strong>planillas de finalización y sus instrucciones</strong> del siguiente enlace: <a href="https://planfines2.com.ar/wp/planillas-de-finalizacion/">Finalización de semestre</a></p> 
+<p><a href="https://planfines2.com.ar/users2/referentes-para-docente?comision='.$idComision.'">Contacto Referentes</a></p>
+<p><a href="https://planfines2.com.ar/users2/alumnos-para-docente?comision='.$idComision.'">Lista de Alumnos</a></p>
+<p><a href="https://planfines2.com.ar/wp/planillas-de-finalizacion/">Planillas de finalización e instrucciones</a></p> 
+<p>Contacto de Whatsapp CENS 462: 22167113326</p>
 <div style="margin-left:15px;width:600px;padding:20px;border:1px solid #d0d2d2;border-radius:5px;color:#444444">
       <h4 style="padding:0 0 12px 0;margin:0;font-weight:bold">Toma de posesión: <span>' . $t["docente"]->_get("apellidos","X") . ', ' . $t["docente"]->_get("nombres","Xx Yy") . ' DNI ' . $t["docente"]->_get("numero_documento") . '</span></h4>
       
