@@ -12,7 +12,7 @@ class CalificacionImport extends Import{
   public $idCurso;
   public $curso; //curso
   public $dni_; //dnis de alumnos existentes en el curso
-  public $id = "calificacion";
+  public $id = "calificacion"; //identificacion de la importacion (para facilitara la instanciacion de la clase Element)
 
   public function main(){
     if(Validation::is_empty($this->idCurso)) throw new Exception("El id del curso no se encuentra definido");

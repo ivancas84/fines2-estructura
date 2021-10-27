@@ -89,7 +89,7 @@ class MatrizPlanificacionImport extends Import{
     foreach($this->elements as &$element) {
       if(!$element->process) continue;
 
-      $dni = $this->insertPersona($element);
+      $dni = $this->existsPersona($element);
       if($dni === false) continue;
       
       $identifierDisposicion = $this->existElement($element, "disposicion", "identifier");
@@ -159,6 +159,31 @@ class MatrizPlanificacionImport extends Import{
 
 
 
+  public function existsPersona(&$element){
+    $dni = $element->entities["persona"]->_get("numero_documento");
+ 
+    /**
+     * Variante del insertElement para verificar los nomrbes de la persona
+     */
+    if(!key_exists($dni, $this->dbs["persona"])){
+      $element->process = false;
+      $element->logs->addLog("persona", "error", "No existe persona en la base de datos");
+      return false;
+    }
+
+    $personaExistente = $this->container->getValue("persona");
+    $personaExistente->_fromArray($this->dbs["persona"][$dni], "set");
+    if(!$element->entities["persona"]->checkNombresParecidos($personaExistente)){
+      $element->logs->addLog("persona", "error", "En la base existe una persona cuyos datos no coinciden");
+      $element->process = false;
+      return false;
+    }
+
+    $element->entities["persona"]->_set("id",$personaExistente->_get("id"));
+    $element->logs->addLog("persona", "info", "Registro existente, no será actualizado");
+
+    return $dni;
+  }
 
   public function insertPersona(&$element){
     $dni = $element->entities["persona"]->_get("numero_documento");
