@@ -15,7 +15,7 @@ $container = new Container;
 
 $alumnoTools = $container->getController("alumno_tools");
 
-$alumnoTools->initDni($_GET["numero_documento"]);
+$alumnoTools->init($_GET["id"]);
 $v = $alumnoTools->getValue();
 
 $calificaciones = $alumnoTools->getCalificacionesAprobadas();
