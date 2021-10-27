@@ -4,8 +4,6 @@ require_once("class/import/Element.php");
 
 class CalificacionImportElement extends ImportElement {
 
-  public $curso;
-
   public function setEntities($row) { //@override
     //Si la nota final tiene una C, debe ser considerado como crec
     if(
@@ -26,6 +24,7 @@ class CalificacionImportElement extends ImportElement {
     $row["per_numero_documento"] = preg_replace("/[^0-9\_]/", "", $row["per_numero_documento"]);
     //se permiten numeros y guiones bajos para identificar el dni
 
+    $row["curso"] = $this->import->curso["id"];
     $this->setEntity($row, "persona", "per");
     $this->setEntity($row, "calificacion");
     $this->setEntity($row, "alumno");
