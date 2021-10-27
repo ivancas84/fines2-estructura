@@ -10,7 +10,7 @@ class ActualizarPlanAlumnosApi extends BaseApi {
      * Si el alumno tiene plan definido no sera actualizado
      */
     $this->container->getAuth()->authorize("alumno", "w");
-    $idComision = php_input();
+    $idComision = php_input()["id"];
 
     $render = $this->container->getRender("alumno_comision");
     $render->setCondition([
@@ -19,7 +19,7 @@ class ActualizarPlanAlumnosApi extends BaseApi {
     ]);
     $render->setFields(["alumno"]);
     
-    $rows = $this->container->getDb()->select("alumno_comision",$render);
+    $rows = $this->container->getDb()->all("alumno_comision",$render);
 
     if(empty($rows)) return ["ids"=>[],"detail"=>[]];
     $sql = "";
