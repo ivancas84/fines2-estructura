@@ -7,5 +7,6 @@ descripcion (des): text nf. NOT NULL.
 creado (cre): timestamp nf. NOT NULL. DEFAULT: current_timestamp().
 fecha (fec): date nf. DEFAULT: curdate().
 tipo (tip): string nf.
+asunto (asu): string nf.
 archivo (arc): string mu.
 persona (per): string mu. NOT NULL.
