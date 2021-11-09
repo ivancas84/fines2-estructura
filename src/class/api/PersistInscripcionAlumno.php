@@ -63,13 +63,13 @@ class PersistInscripcionAlumnoApi extends BaseApi {
   }
 
   public function personaExistente(){
-    $render = $this->container->getControllerEntity("render_build", "persona")->main();
+    $render = $this->container->getRender("persona");
     $p = $this->container->getDb()->unique("persona",$this->data["per"]);
     if(!empty($p)) $this->personaExistente = $this->container->getValue("persona")->_fromArray($p, "set");
   }
 
   public function emailUnicoInsertable(){
-    $render = $this->container->getControllerEntity("render_build","persona")->main();
+    $render = $this->container->getRender("persona");
     $render->addCondition([
       ["email","=",$this->data["per"]["email"]],
     ]);
@@ -77,7 +77,7 @@ class PersistInscripcionAlumnoApi extends BaseApi {
   }
 
   public function emailUnicoActualizable(){
-    $render = $this->container->getControllerEntity("render_build","persona")->main();
+    $render = $this->container->getRender("persona");
     $render->addCondition([
       ["email","=",$this->data["per"]["email"]],
       ["id","!=",$this->personaExistente->_get("id")],

@@ -9,7 +9,7 @@ class PersistCalificacionApi extends PersistRelArrayUniqueApi{
     if(empty($this->params)) $this->params = php_input();
     $this->assignParams();
 
-    $render = $this->container->getControllerEntity("render_build", "persona")->main();
+    $render = $this->container->getRender("persona");
     
     $value = $this->container->getValue("persona")->_fromArray($this->params["per"], "set");
 

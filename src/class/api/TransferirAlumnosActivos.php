@@ -38,14 +38,14 @@ class TransferirAlumnosActivosApi extends BaseApi {
   }
 
   protected function alumnoComision_(){
-    $render = $this->container->getControllerEntity("render_build", "alumno_comision")->main();
+    $render = $this->container->getRender("alumno_comision");
     $render->setCondition(["comision","=",$this->comision["id"]]);
     $render->setSize(0);
     $this->alumnoComision_ = $this->container->getDb()->all("alumno_comision",$render);
   }
 
   protected function alumnoComisionSiguiente_(){
-    $render = $this->container->getControllerEntity("render_build", "alumno_comision")->main();
+    $render = $this->container->getRender("alumno_comision");
     $render->setCondition(["comision","=",$this->comision["comision_siguiente"]]);
     $render->setSize(0);
     $this->alumnoComisionSiguiente_ = $this->container->getDb()->all("alumno_comision",$render);

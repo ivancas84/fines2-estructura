@@ -39,7 +39,7 @@ class GenerarCalificacionAlumnosApi extends BaseApi {
 
 
   public function idAlumno_(){
-    $render = $this->container->getControllerEntity("render_build", "alumno_comision")->main();
+    $render = $this->container->getRender("alumno_comision");
     $render->setCondition([
       ["comision","=",$this->comision["id"]],
     ]);
