@@ -5,7 +5,7 @@
 /upload
 /vendor
 /script
-
+/script_
 
 # IDE - VSCode
 .vscode/*
