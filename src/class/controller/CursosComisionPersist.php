@@ -6,19 +6,18 @@ require_once("function/array_combine_keys.php");
 require_once("function/array_combine_key.php");
 
 
-class CursosComisionPersist  {
+class CursosComisionPersistSql {
   /**
    * Definir horarios de todos los cursos de una comision
    * Los días y horarios se acomodan aleatoriamente
    */
 
   protected $id; //id de comision
-  protected $comision; //datos de comision
-  protected $mt; //ModelTools
+  public $comision; //datos de comision
+  public $container;
+
 
   public function main($id) {
-    $this->mt = new ModelTools;
-    $this->mt->container = $this->container;
     /**
      * @param $id Id de la comision a la cual se definiran los cursos
      */
@@ -45,7 +44,7 @@ class CursosComisionPersist  {
   }
 
   public function obtenerCargasHorarias(){
-    $this->cargasHorarias = $this->mt->cargasHorariasDePlanificacion( $this->comision["planificacion"] );
+    $this->cargasHorarias = $this->container->getMt()->cargasHorariasDePlanificacion( $this->comision["planificacion"] );
     if(!count($this->cargasHorarias)) throw new Exception("No existen cargas horarias asociadas a la planificacion");
   }
 
