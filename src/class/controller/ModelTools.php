@@ -4,6 +4,9 @@ require_once("class/model/Render.php");
 require_once("class/model/Ma.php");
 
 class ModelTools {
+  /**
+   * Clase especial para colocar codigo de uso comun
+   */
   public $container;
 
   public function labelCurso($data, $prefix){
