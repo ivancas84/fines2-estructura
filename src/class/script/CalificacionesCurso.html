@@ -1,0 +1,33 @@
+<? require_once("../config/config.php"); 
+$headers = (isset($_GET["headers"]))? $_GET["headers"] : "per_apellidos, per_nombres, per_numero_documento, nota_final, crec, observaciones"; 
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+textarea {
+  width: 1000px;
+  height: 150px;
+}
+</style>
+</head>
+<body>
+
+
+<h2>Importar Calificacion</h2>
+
+<form action="calificaciones_curso_procesar" method="POST">
+  <br>id curso:<br>
+  <input type="text" name="id_curso"/>
+  <br>Encabezados:<br>
+  <textarea name="headers"><?=$headers?>
+  </textarea>
+  <br>Source:<br>
+  <textarea name="source"></textarea>
+  <br>  
+  <input type="submit" value="Submit">
+</form> 
+
+</body>
+</html>
