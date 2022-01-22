@@ -62,31 +62,15 @@ class AlumnosComisionImport extends Import{
     foreach($this->elements as &$element) {
       if(!$element->process) continue;
 
-      if(!$idPersona = $this->processPersona($element)) continue;
+      if(!$idPersona = $this->processElement($element,"persona","numero_documento")) continue;
 
       $element->entities["alumno"]->_set("persona",$idPersona);
       if(!$idAlumno = $this->processElement($element,"alumno")) continue;
 
       $element->entities["alumno_comision"]->_set("alumno",$idAlumno);
-
       if(!$this->processElement($element,"alumno_comision")) continue;
-
     }
   }
 
-  public function processPersona(&$element){
-    $dni = $element->entities["persona"]->_get("numero_documento");
-    if(key_exists($dni, $this->dbs["persona"])){
-      $personaExistente = $this->container->getValue("persona");
-      $personaExistente->_fromArray($this->dbs["persona"][$dni], "set");
-      if(!$element->entities["persona"]->checkNombresParecidos($personaExistente)){
-        $element->logs->addLog("persona", "error", "En la base existe una persona cuyos datos no coinciden");
-        $element->process = false;
-        return false;
-      }
-    }
-    
-    return $this->processElement($element,"persona","numero_documento", false);
-  }
-
+  
 }
