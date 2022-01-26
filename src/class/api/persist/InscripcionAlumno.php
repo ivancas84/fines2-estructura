@@ -4,7 +4,7 @@ require_once("class/api/Base.php");
 require_once("function/php_input.php");
 require_once("function/nombres_parecidos.php");
 
-class PersistInscripcionAlumnoApi extends BaseApi {
+class InscripcionAlumnoPersistApi extends BaseApi {
 
   public $persona;
   public $personaExistente;
@@ -14,8 +14,9 @@ class PersistInscripcionAlumnoApi extends BaseApi {
   public function main() {
     $this->data = php_input();
     /**
-     * "per":"persona"
-     * "per-detalle_persona/persona":"detalle_persona_"
+     * "persona":"persona"
+     * "dom":"domicilio"
+     * "detalle_persona/persona":"detalle_persona_"
      */
 
     
@@ -32,7 +33,7 @@ class PersistInscripcionAlumnoApi extends BaseApi {
       $this->emailUnicoActualizable();
 
       if($this->isUpdatable()) {
-        $this->updateAlumno();
+        $this->updatePersona();
       } else {
         $this->modifyPersona();
         $this->persistPersonaUnique();
@@ -42,16 +43,16 @@ class PersistInscripcionAlumnoApi extends BaseApi {
     $this->persistAlumnoUnique();
     $this->insertDetallePersona_();
 
-    $this->container->getDb()->multi_query_transaction($this->sql);
-    $this->emailInscripcion();
-    //echo $this->sql;
+    //$this->container->getDb()->multi_query_transaction($this->sql);
+    //$this->emailInscripcion();
+    // echo $this->sql;
 
     return ["detail" => $this->detail];
   }
 
   public function addDetallePersonaInscripcion(){
-    array_push($this->data["per-detalle_persona/persona"], ["tipo"=>"Inscripción","descripcion"=>"Inscripción"]);
-    if(!empty($this->data["per"]["mensaje"])) array_push($this->data["per-detalle_persona/persona"], ["tipo"=>"Inscripción","descripcion"=>$this->data["per"]["mensaje"]]);
+    array_push($this->data["detalle_persona/persona"], ["tipo"=>"Inscripción","descripcion"=>"Inscripción"]);
+    if(!empty($this->data["persona"]["mensaje"])) array_push($this->data["detalle_persona/persona"], ["tipo"=>"Inscripción","descripcion"=>$this->data["persona"]["mensaje"]]);
   }
   
   public function emailInscripcion(){
@@ -59,31 +60,33 @@ class PersistInscripcionAlumnoApi extends BaseApi {
   }
 
   public function persona(){
-    $this->persona = $this->container->getValue("persona")->_fromArray($this->data["per"], "set");
+    $this->persona = $this->container->getValue("persona")->_fromArray($this->data["persona"], "set");
   }
 
   public function personaExistente(){
     $render = $this->container->getRender("persona");
-    $p = $this->container->getDb()->unique("persona",$this->data["per"]);
+    $p = $this->container->getDb()->unique("persona",$this->data["persona"]);
     if(!empty($p)) $this->personaExistente = $this->container->getValue("persona")->_fromArray($p, "set");
   }
 
   public function emailUnicoInsertable(){
     $render = $this->container->getRender("persona");
     $render->addCondition([
-      ["email","=",$this->data["per"]["email"]],
+      ["email","=",$this->data["persona"]["email"]],
     ]);
-    if($this->container->getDb()->count("persona",$render)) throw new Exception("El email ingresado ya esta siendo utilizado");
+    if($this->container->getDb()->count("persona",$render)) throw new Exception("ERROR E1: No se puede realizar la inscripción, comunique el error a coordinadores.cens462@gmail.com");
   }
 
   public function emailUnicoActualizable(){
     $render = $this->container->getRender("persona");
     $render->addCondition([
-      ["email","=",$this->data["per"]["email"]],
+      ["email","=",$this->data["persona"]["email"]],
       ["id","!=",$this->personaExistente->_get("id")],
     ]);
 
-    if($this->container->getDb()->count("persona",$render)) throw new Exception("El email ingresado ya esta siendo utilizado");
+    if($this->container->getDb()->count("persona",$render)) {
+      throw new Exception("ERROR E2: No se puede realizar la inscripción, comunique el error a coordinadores.cens462@gmail.com");
+    }
   }
 
   public function persistPersonaId(){
@@ -107,7 +110,7 @@ class PersistInscripcionAlumnoApi extends BaseApi {
   }
 
   public function insertDomicilio(){
-    $p = $this->container->getControllerEntity("persist_sql", "domicilio")->id($this->data["per_dom"]);
+    $p = $this->container->getControllerEntity("persist_sql", "domicilio")->id($this->data["dom"]);
     $this->sql .= $p["sql"];
     $this->persona->_set("domicilio", $p["id"]);
     array_push($this->detail, "domicilio".$p["id"]);
@@ -115,7 +118,7 @@ class PersistInscripcionAlumnoApi extends BaseApi {
   
 
   public function insertDetallePersona_(){
-    foreach($this->data["per-detalle_persona/persona"] as $dp){
+    foreach($this->data["detalle_persona/persona"] as $dp){
       if(empty($dp["descripcion"])) $dp["descripcion"] = "Legajo";
       if(empty($dp["tipo"])) $dp["tipo"] = "Legajo";
       $dp["persona"] = $this->persona->_get("id");
@@ -139,37 +142,37 @@ class PersistInscripcionAlumnoApi extends BaseApi {
     $response = true;
 
     if(!$this->personaExistente->checkNombresParecidos($this->persona)) {
-      array_push($this->data["per-detalle_persona/persona"], ["tipo"=>"Inscripción","descripcion"=>"Nombres diferente"]);
+      array_push($this->data["detalle_persona/persona"], ["tipo"=>"Inscripción","descripcion"=>"Nombres diferente"]);
       $response = false;
     }
 
     if($this->personaExistente->_get("numero_documento") != $this->persona->_get("numero_documento")) {
-      array_push($this->data["per-detalle_persona/persona"], ["tipo"=>"Inscripción","descripcion"=>"DNI diferente"]);
+      array_push($this->data["detalle_persona/persona"], ["tipo"=>"Inscripción","descripcion"=>"DNI diferente"]);
       $response = false;
     }
 
     if(!empty($this->personaExistente->_get("cuil")) && ($this->personaExistente->_get("cuil") != $this->persona->_get("cuil"))) {
-      array_push($this->data["per-detalle_persona/persona"], ["tipo"=>"Inscripción","descripcion"=>"CUIL diferente"]);
+      array_push($this->data["detalle_persona/persona"], ["tipo"=>"Inscripción","descripcion"=>"CUIL diferente"]);
       $response = false;
     }
 
     if(!empty($this->personaExistente->_get("fecha_nacimiento")) && ($this->personaExistente->_get("fecha_nacimiento") != $this->persona->_get("fecha_nacimiento"))) {
-      array_push($this->data["per-detalle_persona/persona"], ["tipo"=>"Inscripción","descripcion"=>"Fecha de nacimiento diferente"]);
+      array_push($this->data["detalle_persona/persona"], ["tipo"=>"Inscripción","descripcion"=>"Fecha de nacimiento diferente"]);
       $response = false;
     }
 
     if(!empty($this->personaExistente->_get("lugar_nacimiento")) && ($this->personaExistente->_get("lugar_nacimiento") != $this->persona->_get("lugar_nacimiento"))) {
-      array_push($this->data["per-detalle_persona/persona"], ["tipo"=>"Inscripción","descripcion"=>"Lugar de nacimiento diferente"]);
+      array_push($this->data["detalle_persona/persona"], ["tipo"=>"Inscripción","descripcion"=>"Lugar de nacimiento diferente"]);
       $response = false;
     }
 
     if($this->personaExistente->_get("email_verificado") && ($this->personaExistente->_get("email") != $this->persona->_get("email"))) {
-      array_push($this->data["per-detalle_persona/persona"], ["tipo"=>"Inscripción","descripcion"=>"Email diferente"]);
+      array_push($this->data["detalle_persona/persona"], ["tipo"=>"Inscripción","descripcion"=>"Email diferente"]);
       $response = false;
     }
 
     if($this->personaExistente->_get("telefono_verificado") && ($this->personaExistente->_get("telefono") != $this->persona->_get("telefono"))) {
-      array_push($this->data["per-detalle_persona/persona"], ["tipo"=>"Inscripción","descripcion"=>"Telefono diferente"]);
+      array_push($this->data["detalle_persona/persona"], ["tipo"=>"Inscripción","descripcion"=>"Telefono diferente"]);
       $response = false;
     }
 
@@ -177,10 +180,10 @@ class PersistInscripcionAlumnoApi extends BaseApi {
   }
 
 
-  public function updateAlumno(){
+  public function updatePersona(){
     $this->persona->_set("id",$this->personaExistente->_get("id"));
     $domicilio = $this->personaExistente->_get("domicilio");
-    $this->persona->_set("domicilio", $this->data["per_dom"]["id"]);
+    $this->persona->_set("domicilio", $this->data["dom"]["id"]);
     $this->persistPersonaId();
     if(!empty($domicilio)){
       $this->sql .= $this->container->getSqlo("domicilio")->delete([$domicilio]);
