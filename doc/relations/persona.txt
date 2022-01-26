@@ -15,4 +15,5 @@ alta (alt): timestamp nf. NOT NULL. DEFAULT: current_timestamp().
 lugar_nacimiento (ln): string nf.
 telefono_verificado (tv): boolean nf. NOT NULL.
 email_verificado (ev): boolean nf. NOT NULL.
+info_verificada (iv): boolean nf. NOT NULL.
 domicilio (dom): string mu.
