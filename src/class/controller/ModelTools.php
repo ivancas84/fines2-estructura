@@ -6,6 +6,10 @@ require_once("class/model/Ma.php");
 class ModelTools {
   /**
    * Clase especial para colocar codigo de uso comun
+   * 
+   * La idea de ModelTools es ejecutar consultas a la base de datos de uso
+   * general. ModelTools no almacena ninguna información, puede ser utilizada
+   * como singleton.
    */
   public $container;
 
@@ -218,6 +222,21 @@ GROUP BY curso.id
     $result->free();
     return $rows;
   }
+
+  public function cantidadCalificacionesAprobadas_($idAlumno_, $planificacion){
+    $render = $this->container->getRender();
+    $render->addCondition(["dis-planificacion","=",$planificacion]);
+    $render->addCondition(["alumno","=",$idAlumno_]);
+    $render->addCondition([
+      ["nota_final",">=","7"],
+      ["crec",">=","4","OR"]
+    ]);
+    $render->addFields(["alumno", "cantidad"=> "count"]);
+    $render->setSize(0);
+    $render->setGroup(["alumno"]);
+    return $this->container->getDb()->select("calificacion",$render);
+  }
+
 
 
 }
