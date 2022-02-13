@@ -46,7 +46,7 @@ $disposiciones = $alumnoTools->getDisposiciones();
 
 $disposicionesRestantes = $alumnoTools->disposicionesRestantes($calificaciones, $disposiciones);
 
-$anios = $alumnoTools->aniosCursados($disposicionesRestantes);
+$anios = $alumnoTools->sumaDisposicionesPorAnio($disposicionesRestantes);
 $anioActual = $alumnoTools->anioActual2($anios);
 $date = new SpanishDateTime();
 $mpdf = new \Mpdf\Mpdf();

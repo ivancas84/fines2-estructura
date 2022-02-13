@@ -23,7 +23,7 @@ $disposiciones = $alumnoTools->getDisposiciones();
 
 $disposicionesRestantes = $alumnoTools->disposicionesRestantes($calificaciones, $disposiciones);
 
-$anios = $alumnoTools->aniosCursados($disposicionesRestantes);
+$anios = $alumnoTools->sumaDisposicionesPorAnio($disposicionesRestantes);
 $aniosCursados = $alumnoTools->traducirAniosAux($anios);
 $date = new SpanishDateTime();
 $mpdf = new \Mpdf\Mpdf();
@@ -104,7 +104,7 @@ con orientación en <span class="data">&nbsp;&nbsp;&nbsp;' . $v["plan"]->_get("o
 </p>
 <p>A pedido del/de la interesado/a y al sólo efecto de ser presentado ante las autoridades que se lo exijan, se extiene la presente en La Plata a los <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("d") . '&nbsp;&nbsp;&nbsp;</span>
 del mes de <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("F") . '&nbsp;&nbsp;&nbsp;</span> 
-de <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("Y") . '&nbsp;&nbsp;&nbsp;</span>.
+de <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("Y") . '&nbsp;&nbsp;&nbsp;</span>.</p>
 </div>
 <div class="footer">
   <img src="sello_cens.png"  width="125" height="160">

@@ -19,7 +19,6 @@ class CalificacionImportElement extends ImportElement {
       if(!empty($row["crec"])) $row["crec"] = preg_replace("/[^0-9]/", "", $row["crec"]);
     }
     
-    if((intval($row["nota_final"]) < 7) && intval($row["crec"]) < 4) $this->logs->addLog($id, "info", "El alumno está desaprobado");                
  
     $row["per_numero_documento"] = preg_replace("/[^0-9\_]/", "", $row["per_numero_documento"]);
     //se permiten numeros y guiones bajos para identificar el dni
@@ -28,7 +27,15 @@ class CalificacionImportElement extends ImportElement {
     $this->setEntity($row, "persona", "per");
     $this->setEntity($row, "calificacion");
     $this->setEntity($row, "alumno");
-    
+
+    $this->import->cantidadEvaluados++;
+    if((intval($row["nota_final"]) < 7) && intval($row["crec"]) < 4) {
+      $this->import->cantidadDesaprobados++;
+      $this->logs->addLog("persona", "info", "El alumno está desaprobado");
+    } else {
+      $this->import->cantidadAprobados++;
+    }
+
     $this->entities["alumno"] = $this->container->getValue("alumno");
     $this->entities["alumno"]->_set("identifier", $this->entities["persona"]->_get("numero_documento"));
     $this->entities["disposicion"] = $this->container->getValue("disposicion");

@@ -43,8 +43,8 @@ class InscripcionAlumnoPersistApi extends BaseApi {
     $this->persistAlumnoUnique();
     $this->insertDetallePersona_();
 
-    //$this->container->getDb()->multi_query_transaction($this->sql);
-    //$this->emailInscripcion();
+    $this->container->getDb()->multi_query_transaction($this->sql);
+    $this->emailInscripcion();
     // echo $this->sql;
 
     return ["detail" => $this->detail];

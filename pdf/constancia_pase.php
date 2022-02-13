@@ -23,7 +23,7 @@ $calificaciones = $alumnoTools->getCalificacionesAprobadas();
 $disposiciones = $alumnoTools->getDisposiciones();
 
 $disposicionesRestantes = $alumnoTools->disposicionesRestantes($calificaciones, $disposiciones);
-$anios = $alumnoTools->aniosCursados($disposicionesRestantes);
+$anios = $alumnoTools->sumaDisposicionesPorAnio($disposicionesRestantes);
 $aniosCursados = $alumnoTools->traducirAnios($anios);
 $aniosRestantes = $alumnoTools->aniosRestantes($aniosCursados);
 $mpdf = new \Mpdf\Mpdf();

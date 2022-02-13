@@ -3,6 +3,7 @@
 require_once("class/import/Import.php");
 require_once("class/model/Db.php");
 require_once("class/tools/Validation.php");
+require_once("function/array_group_value.php");
 
 class CalificacionImport extends Import{
   /**
@@ -12,7 +13,11 @@ class CalificacionImport extends Import{
   public $idCurso;
   public $curso; //curso
   public $dni_; //dnis de alumnos existentes en el curso
+  public $alumno_; //datos de alumnos existentes en el curso
   public $id = "calificacion"; //identificacion de la importacion (para facilitara la instanciacion de la clase Element)
+  public $cantidadEvaluados = 0;
+  public $cantidadAprobados = 0;
+  public $cantidadDesaprobados = 0;
 
   public function main(){
     if(Validation::is_empty($this->idCurso)) throw new Exception("El id del curso no se encuentra definido");
@@ -38,6 +43,7 @@ class CalificacionImport extends Import{
     $render->setCondition(["comision","=",$this->curso["comision"]]);
     $alumnoComision = $this->container->getDb()->all("alumno_comision",$render);
     $this->dni_ = array_column($alumnoComision,"alu_per_numero_documento");
+    $this->alumno_ = array_group_value($alumnoComision, "alu_per_numero_documento");
   }
 
   public function identify(){
@@ -136,29 +142,38 @@ class CalificacionImport extends Import{
   }
 
   public function processCalificacionElement(&$element){
-    $value = $element->entities["calificacion"]->_get("identifier");
-    if(key_exists($value, $this->dbs["calificacion"])) {
-      $existente = $this->container->getValue("calificacion");
-      $existente->_fromArray($this->dbs["calificacion"][$value], "set");
-      $element->entities["calificacion"]->_set("id",$existente->_get("id"));
-      $compare = $element->compare("calificacion", $existente);  
-      
-      if(
-        (in_array("crec", $compare) && !Validation::is_empty($existente->_get("crec"))) 
-        || (in_array("nota_final", $compare) && !Validation::is_empty($existente->_get("nota_final")))
-      ) {
-        $element->logs->addLog("calificacion", "error", "Calificacion diferente, no se actualizara ningun valor");
-        $element->process = false;
-        return false;
+
+    try {
+
+      $value = $element->entities["calificacion"]->_get("identifier");
+      if(key_exists($value, $this->dbs["calificacion"])) {
+        $existente = $this->container->getValue("calificacion");
+        $existente->_fromArray($this->dbs["calificacion"][$value], "set");
+        $element->entities["calificacion"]->_set("id",$existente->_get("id"));
+        $compare = $element->compare("calificacion", $existente);  
+        
+        if(
+          (in_array("crec", $compare) && !Validation::is_empty($existente->_get("crec"))) 
+          || (in_array("nota_final", $compare) && !Validation::is_empty($existente->_get("nota_final")))
+        ) {
+          $element->logs->addLog("calificacion", "error", "Calificacion diferente, no se actualizara ningun valor");
+          $element->process = false;
+          return false;
+        }
+        if(!empty($compare))  throw new Exception("El registro debe ser actualizado, comparar");
+      } else {        
+        $element->insert("calificacion");
       }
-      if($compare) {
-        if(!$element->update("calificacion", $existente)) return false;
-      }
-    } else {        
-      if(!$element->insert("calificacion")) return false;
+  
+      return $value;
+    } catch (Exception $e) {
+      $element->process = false;
+      $element->logs->addLog($name,"error",$e->getMessage());
+      return false;
     }
 
-    return $value;
+
+
   }
 
 
@@ -166,7 +181,7 @@ class CalificacionImport extends Import{
     parent::summary();
     if(count($this->dni_)) {
       echo "<p>Los siguientes alumnos no fueron evaluados:<p>";
-      foreach($this->dni_ as $dni) echo  $dni . "<br/>";
+      foreach($this->dni_ as $dni) echo  $dni . " " . $this->alumno_[$dni][0]["alu_per_apellidos"] . " " . $this->alumno_[$dni][0]["alu_per_nombres"]. "<br/>";
     }
 }
 

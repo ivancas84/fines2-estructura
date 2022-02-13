@@ -45,6 +45,19 @@ class AlumnoTools {
     $render->setOrder(["dis_pla-anio"=>"asc","dis_pla-semestre"=>"asc","dis_asi-nombre"=>"asc"]);
     return $this->container->getDb()->all("calificacion",$render);
   }
+  
+  public function getCalificacionesAprobadasPlan($plan){
+    $render = $this->container->getRender("calificacion");
+    $render->setCondition([
+      ["alumno","=",$this->alumno["id"]],
+      [
+        ["nota_final",">=","7"],
+        ["crec",">=","4","OR"],
+      ]
+    ]);
+    $render->setOrder(["dis_pla-anio"=>"asc","dis_pla-semestre"=>"asc","dis_asi-nombre"=>"asc"]);
+    return $this->container->getDb()->all("calificacion",$render);
+  }
 
   public function getDisposiciones(){
     /**
@@ -93,16 +106,25 @@ class AlumnoTools {
 
   public function disposicionesRestantesAnio($calificacionesAprobadas, $disposiciones){
 
-    
-
     return array_group_value(
       $this->disposicionesRestantes($calificacionesAprobadas, $disposiciones), 
       "pla_anio"
     );
   }
 
+  
 
-  public function aniosCursados($disposicionesRestantes){
+  public function sumaDisposicionesPorAnio($disposicionesRestantes){
+    /**
+     * sumar por anio las disposiciones que faltan, con esa info se puede cal-
+     * cular los años cursados.
+     * 
+     * [
+     *   1 => 2
+     *   2 => 3
+     *   3 => 1
+     * ] 
+     */
     $anios = [];
     foreach($disposicionesRestantes as $dr){
       if(!key_exists($dr["pla_anio"], $anios)) {
@@ -115,6 +137,7 @@ class AlumnoTools {
 
     return $anios;
   }
+
 
   public function traducirAnios($anios){
     $anios_cursados = [];

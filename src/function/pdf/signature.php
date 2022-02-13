@@ -1,5 +1,7 @@
 <?
 function htmlToPdfSignature() {
+  $selloSrc = ".." . DIRECTORY_SEPARATOR . "img" . DIRECTORY_SEPARATOR . "sello_cens.png";
+  $firmaSrc = ".." . DIRECTORY_SEPARATOR . "img" . DIRECTORY_SEPARATOR . "firma_director.png";
   return '
   <br>
   <br>
@@ -9,9 +11,9 @@ function htmlToPdfSignature() {
   <tr>
     <td style="width:30%; text-align:center">  
     </td>
-    <td style="width:30%; text-align:center">  <img src="sello_cens.png"  width="125" height="160">
+    <td style="width:30%; text-align:center">  <img src="' . $selloSrc . '"  width="125" height="160">
     </td>
-    <td style="width:40%; text-align:center">  <img src="firma_director.png"  width="250" height="150">
+    <td style="width:40%; text-align:center">  <img src="' . $firmaSrc . '"  width="250" height="150">
     </td>
   </tr>
   <tr>

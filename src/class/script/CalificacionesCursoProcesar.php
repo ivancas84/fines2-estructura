@@ -23,6 +23,12 @@ class CalificacionesCursoProcesarScript extends BaseController{
     //echo "<pre>";
     //print_r($import);
     $import->summary();
+    echo "<br><br>RESUMEN DEL PROCESAMIENTO DE NOTAS<br>";
+    echo "Cantidad de alumnos evaluados " . $import->cantidadEvaluados . "<br>";
+    echo "Cantidad de alumnos aprobados " . $import->cantidadAprobados . "<br>";
+    echo "Cantidad de alumnos desaprobados " . $import->cantidadDesaprobados . "<br>";
+    
+
   }    
  
 }

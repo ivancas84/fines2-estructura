@@ -1,11 +1,9 @@
 <?php
 
-require_once("../config/config.php"); 
+set_time_limit(0);  
+require_once("class/controller/Base.php");
 require_once("function/array_group_value.php"); 
 require_once("function/array_combine_key2.php"); 
-
-require $_SERVER["DOCUMENT_ROOT"] . "/" . PATH_ROOT . '/vendor/autoload.php';
-
 require_once("class/Container.php");
 require_once("class/tools/SpanishDateTime.php");
 require_once("function/array_group_value.php");
@@ -14,35 +12,39 @@ require_once("function/qr.php");
 require_once("function/pdf/index.php");
 require_once("function/pdf/header.php");
 require_once("function/pdf/signature.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/" . PATH_ROOT . '/vendor/autoload.php');
 
 
 
 
-// Source: http://stackoverflow.com/questions/5943368/dynamically-generating-a-qr-code-with-php
-// Google Charts Documentation: https://developers.google.com/chart/infographics/docs/qr_codes?csw=1#overview
 
+class CertificadoAlumnoRegularPdf extends BaseController{
+ /**
+   * Formulario para cargar calificaciones
+   * ./script/calificacion_form
+   */
 
-$qrcode = qr($_GET["url"]);
+  public function main(){
 
-$container = new Container;
+    $qrcode = qr($_GET["url"]);
 
-$alumnoTools = $container->getController("alumno_tools");
+    $alumnoTools = $this->container->getController("alumno_tools");
 
-$alumnoTools->init($_GET["id"]);
-$v = $alumnoTools->getValue();
+    $alumnoTools->init($_GET["id"]);
+    $v = $alumnoTools->getValue();
 
-$calificaciones = $alumnoTools->getCalificacionesAprobadas();
-$disposiciones = $alumnoTools->getDisposiciones();
+    $calificaciones = $alumnoTools->getCalificacionesAprobadas();
+    $disposiciones = $alumnoTools->getDisposiciones();
 
-$disposicionesRestantes = $alumnoTools->disposicionesRestantes($calificaciones, $disposiciones);
+    $disposicionesRestantes = $alumnoTools->disposicionesRestantes($calificaciones, $disposiciones);
 
-$anios = $alumnoTools->sumaDisposicionesPorAnio($disposicionesRestantes);
-$anioActual = $alumnoTools->anioActual2($anios);
-$date = new SpanishDateTime();
-$mpdf = new \Mpdf\Mpdf();
+    $anios = $alumnoTools->sumaDisposicionesPorAnio($disposicionesRestantes);
+    $anioActual = $alumnoTools->anioActual2($anios);
+    $date = new SpanishDateTime();
+    $mpdf = new \Mpdf\Mpdf();
 
-$c = htmlToPdfHeader($qrcode);
-$c .= '
+    $c = htmlToPdfHeader($qrcode);
+    $c .= '
 <div class="title">
   CONSTANCIA DE ALUMNO REGULAR
 </div>
@@ -58,13 +60,15 @@ de <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("Y") . '&nbsp;&nbsp;&n
   </p>
 </div>
 ';
-$c .= htmlToPdfSignature();
-$html = htmlToPdfIndex($c); 
+    $c .= htmlToPdfSignature();
+    $html = htmlToPdfIndex($c); 
 
 
-// echo $html;
-$mpdf = new \Mpdf\Mpdf();
-$mpdf->SetProtection(["print"]);
+    // echo $html;
+    $mpdf = new \Mpdf\Mpdf();
+    $mpdf->SetProtection(["print"]);
 
-$mpdf->WriteHTML($html);
-$mpdf->Output("constancia.pdf", 'I');
+    $mpdf->WriteHTML($html);
+    $mpdf->Output("constancia.pdf", 'I');
+  }
+}

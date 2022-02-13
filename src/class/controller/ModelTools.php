@@ -237,6 +237,56 @@ GROUP BY curso.id
     return $this->container->getDb()->select("calificacion",$render);
   }
 
+  public function calificacionesAprobadasAlumnoPlan($idAlumno, $plan){
+    $render = $this->container->getRender("calificacion");
+    $render->setCondition([
+      ["dis_pla-plan","=",$plan],
+      ["alumno","=",$idAlumno],
+      [
+        ["nota_final",">=","7"],
+        ["crec",">=","4","OR"],
+      ]
+    ]);
+    $render->setOrder(["dis_pla-anio"=>"asc","dis_pla-semestre"=>"asc","dis_asi-nombre"=>"asc"]);
+    return $this->container->getDb()->all("calificacion",$render);
+  }
+
+  public function cantidadPlanificacionCalificacionesAprobadasAlumnoPlan($idAlumno, $plan){
+    
+    $render = $this->container->getRender("calificacion");
+    $render->setCondition([
+      ["dis_pla-plan","=",$plan],      
+      ["alumno","=",$idAlumno],
+      [
+        ["nota_final",">=","7"],
+        ["crec",">=","4","OR"],
+      ]
+    ]);
+    $render->setFields(["anio"=>"dis_pla-anio","semestre"=>"dis_pla-semestre","cantidad"=> "count"]);
+    $render->setSize(0);
+    $render->setGroup(["anio"=>"dis_pla-anio","semestre"=>"dis_pla-semestre"]);
+    $render->setOrder(["dis_pla-anio"=>"asc","dis_pla-semestre"=>"asc"]);
+    return $this->container->getDb()->select("calificacion",$render);
+  }
+
+  public function cantidadAnioCalificacionesAprobadasAlumnoPlan($idAlumno, $plan){
+    
+    $render = $this->container->getRender("calificacion");
+    $render->setCondition([
+      ["dis_pla-plan","=",$plan],      
+      ["alumno","=",$idAlumno],
+      [
+        ["nota_final",">=","7"],
+        ["crec",">=","4","OR"],
+      ]
+    ]);
+    $render->setFields(["anio"=>"dis_pla-anio","cantidad"=> "count"]);
+    $render->setSize(0);
+    $render->setGroup(["anio"=>"dis_pla-anio"]);
+    $render->setOrder(["dis_pla-anio"=>"asc"]);
+    return $this->container->getDb()->select("calificacion",$render);
+  }
+
 
 
 }
