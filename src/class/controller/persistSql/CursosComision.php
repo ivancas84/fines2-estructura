@@ -8,8 +8,6 @@ require_once("function/array_combine_key.php");
 
 class CursosComisionPersistSql {
   /**
-   * @deprecated Se puede utilizar persistSql/CursosComision?
-   * 
    * Definir horarios de todos los cursos de una comision
    * Los días y horarios se acomodan aleatoriamente
    */
@@ -28,11 +26,11 @@ class CursosComisionPersistSql {
     $this->id = $id;
     $this->consultarComision();
     $this->verificarCursos();
-    /**
-     * si la comision tiene cursos, no seran definidos
-     */
+    // /**
+    //  * si la comision tiene cursos, no seran definidos
+    //  */
     $this->obtenerCargasHorarias();
-    $this->definirCursos();
+    return $this->definirCursos();
   }
 
   public function consultarComision(){
@@ -52,6 +50,7 @@ class CursosComisionPersistSql {
 
   public function definirCursos(){
     $detail = [];
+    $sql = "";
     foreach($this->cargasHorarias as $ch){
       $curso = [
           "comision" => $this->id,
@@ -60,13 +59,14 @@ class CursosComisionPersistSql {
       ];
       $persist = $this->container->getControllerEntity("persist_sql","curso")->id($curso);
       array_push($detail,"curso".$persist["id"]);
-      
+      $sql .= $persist["sql"];
       //echo "<pre>";
       //print_r($persist);
-      $this->container->getDb()->multi_query_transaction($persist["sql"]);
+      //$this->container->getDb()->multi_query_transaction($persist["sql"]);
     }
 
-    return ["id" => $this->id, "detail" => $detail];
+
+    return ["id" => $this->id, "detail" => $detail, "sql"=>$sql];
   }
 
   

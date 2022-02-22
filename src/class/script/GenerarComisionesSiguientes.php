@@ -11,12 +11,14 @@ class GenerarComisionesSiguientesScript extends BaseController{
     $import->idCalendario = 2;
     $import->anio ="2021";
     $import->semestre = "2";
-    $import->modalidad =  '1';
+    $import->modalidad =  '7';
     $import->centroEducativo = '6047d36d50316';
     $import->initialize();
     $import->defineSource();
     $import->main();
     $import->summary();
+    // echo "<pre>";
+    // print_r($import);
   }    
  
 }

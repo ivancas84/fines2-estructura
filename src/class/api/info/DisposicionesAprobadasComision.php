@@ -10,7 +10,7 @@ class DisposicionesAprobadasComisionInfoApi  extends BaseApi {
 
   public function main() {
     $idComision =  file_get_contents("php://input");
-    return $this->container->getController("disposiciones_aprobadas_comision")->main($idComision);
+    return $this->container->getController("disposiciones_aprobadas_alumno_comision")->main($idComision);
   }
 }
 
