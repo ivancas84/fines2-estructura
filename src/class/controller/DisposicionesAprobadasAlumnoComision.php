@@ -6,7 +6,7 @@ require_once("function/array_combine_keys.php");
 require_once("function/array_combine_key.php");
 
 
-class DisposicionesAprobadasComision {
+class DisposicionesAprobadasAlumnoComision {
   /**
    * Disposiciones aprobadas para los alumnos de una comision.
    * 

@@ -33,4 +33,28 @@ class ComisionesSiguientesImportElement extends ImportElement {
 
   }
   
+ 
+  public function compareUpdate($entityName, $id, $updateMode = true, $name = null){
+    /**
+     * Realiza la comparacion y actualiza
+     * 
+     * Este metodo se define de forma independiente para facilitar su reimplementacion
+     * @param $id Valor del identificador
+     * @param $updateMode: Modo de actualizacion 
+     *   true actualiza
+     *   false error log indicando que debe actualizarse)
+     * @param $name Nombre alternativo de la entityName que es utilizado para identificar la entidad
+     */
+
+    if($name == "comision_anterior") {
+      $existente = $this->container->getValue($entityName);
+      $existente->_fromArray($this->import->dbs[$name][$id], "set");
+      $this->entities[$name]->_set("id",$existente->_get("id"));
+      $compare = $this->compare($name, $existente);  
+      return $this->update($compare, $entityName, $existente, $name, true);
+    } 
+
+    return parent::compareUpdate($entityName, $id, $updateMode, $name);
+    
+  }
 }

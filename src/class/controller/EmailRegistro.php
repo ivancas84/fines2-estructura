@@ -4,7 +4,7 @@ require_once("../config/config.php");
 require_once("class/Container.php");
 require_once("function/email.php");
 
-class RegistroEmail {
+class EmailRegistro {
 
   public $entityName;
   public $container;
@@ -46,7 +46,7 @@ Equipo de Coordinadores del Plan Fines 2 CENS 462
 
 
 
-    $email =  (!Validation::is_empty($t["docente"]->_get("email_abc"))) ? $t["docente"]->_get("email_abc") : $t["docente"]->_get("email");
+    $email =  (!Validation::is_empty($t["docente"]->_get("email"))) ? $t["docente"]->_get("email") : $t["docente"]->_get("email");
 
     $addresses = [
       $email => $t["docente"]->_get("nombres") . " " . $t["docente"]->_get("apellidos"),

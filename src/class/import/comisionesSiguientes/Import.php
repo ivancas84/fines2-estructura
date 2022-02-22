@@ -64,7 +64,7 @@ class ComisionesSiguientesImport extends Import{
 
       $id = $element->entities["comision"]->_get("id");
       $element->entities["comision_anterior"]->_set("comision_siguiente",$id);
-      $this->processElement($element, "comision", "identifier","comision_anterior");
+      $this->processElement($element, "comision", "identifier",true, "comision_anterior");
     
     }
   }

@@ -80,6 +80,7 @@ class GenerarCursosComisionesScript extends BaseController{
     }
  
      $this->container->getDb()->multi_query_transaction($persist["sql"]);
+     print_r($persist);
      return ["ids"=>$ids, "detail"=>$detail];
      //array_push($this->logs, ["sql"=>$controller->getSql(), "detail"=>$controller->getDetail()]);
    }

@@ -7,7 +7,7 @@ require_once("function/array_combine_key.php");
 require_once("function/array_group_value.php");
 
 
-class AlumnosAprobadosComision   {
+class CantidadAprobadosComision   {
   /**
    * Disposiciones aprobadas para los alumnos de una comision.
    * 
@@ -35,7 +35,6 @@ class AlumnosAprobadosComision   {
       $this->cantidadAprobadosComision($idComision,$alumnoComision_);
     
     return $this->response;
-
   }
 
   protected function alumnoComision_(){
