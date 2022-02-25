@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+textarea {
+  width: 1000px;
+  height: 150px;
+}
+</style>
+</head>
+<body>
+
+
+<h2>Importar Alumnos Comision</h2>
+
+<form action="procesar_inscripcion_nacion" method="POST">
+  <br>Encabezados:<br>
+  <textarea name="headers"><?=$headers?>
+  </textarea>
+  <br>Source:<br>
+  <textarea name="source"></textarea>
+  <br>  
+  <input type="submit" value="Submit">
+</form> 
+
+</body>
+</html>
