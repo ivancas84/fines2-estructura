@@ -24,7 +24,10 @@ class CantidadAprobadosComision   {
    */
 
   protected $response = [];
+
+
   public function main(array $idComision_) {
+
     if(empty($idComision_)) throw new Exception("Dato no definido: id comision");
 
     $this->idComision_ = $idComision_;
@@ -32,7 +35,7 @@ class CantidadAprobadosComision   {
     $this->alumnoComision_();
     
     foreach($this->alumnoComision_ as $idComision => $alumnoComision_)
-      $this->cantidadAprobadosComision($idComision,$alumnoComision_);
+      $this->getCantidadAprobadosComision($idComision,$alumnoComision_);
     
     return $this->response;
   }
@@ -48,7 +51,7 @@ class CantidadAprobadosComision   {
   }
 
 
-  protected function cantidadAprobadosComision($idComision,$alumnoComision_){
+  public function getCantidadAprobadosComision($idComision,$alumnoComision_){
     $idAlumno_ = array_unique(array_column($alumnoComision_, "alumno"));
     $planificacion = $alumnoComision_[0]["com_planificacion"];
     $cantidad_ = $this->container->getMt()->cantidadCalificacionesAprobadas_($idAlumno_, $planificacion);

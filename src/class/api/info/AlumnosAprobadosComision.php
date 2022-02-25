@@ -8,7 +8,7 @@ class AlumnosAprobadosComisionInfoApi  extends BaseApi {
 
   public function main() {
     $idComision_ = php_input();
-    return $this->container->getController("alumnos_aprobados_comision")->main($idComision_);
+    return $this->container->getController("cantidad_aprobados_comision")->main($idComision_);
   }
 }
 

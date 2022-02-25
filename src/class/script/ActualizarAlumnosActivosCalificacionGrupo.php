@@ -14,7 +14,7 @@ class ActualizarAlumnosActivosCalificacionGrupoScript extends BaseController{
     $render->setCondition([
       ["cal-anio","=","2021"],
       ["cal-semestre","=","2"],
-      ["modalidad","=","1"],
+      ["modalidad","=","7"],
       ["autorizada","=",true],
       ["comision_siguiente","=",true]
     ]);
