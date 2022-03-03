@@ -4,7 +4,16 @@ require_once("class/controller/Base.php");
 require_once("function/array_combine_key.php");
 
 class ActualizarAlumnosActivosCalificacionGrupoScript extends BaseController{
- 
+  /**
+   * Actualizar alumnos activos de las comisiones de un grupo.
+   * 
+   * Consultar comisiones de grupo. Consultar alumnos de dichas comisiones.
+   * Desactivar alumnos con menos de 3 materias aprobadas. Transferir alumnos
+   * con 3 o mas materias aprobadas.
+   * 
+   * La condicion se define directamente en el script. Se genera sql para co-
+   * piar.
+   */
   protected $comision_ = [];
   protected $sql = "";
 
@@ -12,11 +21,12 @@ class ActualizarAlumnosActivosCalificacionGrupoScript extends BaseController{
     $render = $this->container->getRender("comision");
 
     $render->setCondition([
-      ["cal-anio","=","2021"],
-      ["cal-semestre","=","2"],
-      ["modalidad","=","7"],
-      ["autorizada","=",true],
-      ["comision_siguiente","=",true]
+      ["id","=","6209156c68e89"]
+      // ["cal-anio","=","2021"],
+      // ["cal-semestre","=","2"],
+      // ["modalidad","=","7"],
+      // ["autorizada","=",true],
+      // ["comision_siguiente","=",true]
     ]);
     $render->setSize(0);
 

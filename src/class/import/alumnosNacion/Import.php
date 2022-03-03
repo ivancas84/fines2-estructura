@@ -3,6 +3,8 @@
 require_once("class/import/Import.php");
 require_once("class/model/Db.php");
 require_once("class/tools/Validation.php");
+require_once("function/array_group_value.php");
+
 
 class AlumnosNacionImport extends Import{
   /**
@@ -25,7 +27,7 @@ class AlumnosNacionImport extends Import{
     $this->query();
      $this->process();
     // echo "<pre>";
-    // print_r($this);
+    echo "CANTIDAD " . count($this->elements);
   }
 
   public function identify(){
@@ -77,30 +79,52 @@ class AlumnosNacionImport extends Import{
         ]
       ]
     ]);
-    // $render->addCondition(["com_cal-semestre","=","1"]);
+    $render->setOrder(["com_cal-anio"=>"DESC", "com_cal-semestre"=>"DESC"]);
+    
     $rows = $this->container->getDb()->all("alumno_comision", $render);
 
     //si se devuelven varias instancias del mismo identificador (no deberia pasar) solo se considerara una
-    $this->dbs["alumno_comision"] = array_combine_key(
+    $this->dbs["alumno_comision"] = array_group_value(
       $rows,
       "alu_per_numero_documento"
     );
+   
   }
 
   public function process(){
 
-    $i = 2;    
+
+    $i = 2;
+    $j=0;    
     foreach($this->elements as &$element) {
       $i++;
-      if(!$element->process) {
-        echo "$i sin procesar<br>";
-        continue;
-      } 
 
       $dni = $element->entities["persona"]->_get("numero_documento");
-      if(array_key_exists($dni, $this->dbs["alumno_comision"])) echo $i . " ESTA EN COMISION " . $this->dbs[$dni]["com_id"]."<br>"; 
-      elseif($element->institucion == "CENTRO EDUCATIVO DE NIVEL SECUNDARIO Nº462") echo $i ." " . $dni. " no esta en ninguna comision"."<br>"; 
-      //else echo $i . " pertenece a otro cens";
+
+      if($element->institucion == "CENTRO EDUCATIVO DE NIVEL SECUNDARIO Nº462"){
+        $j++;
+        if(!$element->process) {
+          echo "$i sin procesar";
+          echo " ($j)<br>";
+        } else {
+
+          if(array_key_exists($dni, $this->dbs["alumno_comision"])) {
+            $d = $this->dbs["alumno_comision"][$dni][0];
+            echo $i . " " . $dni . " ESTA EN COMISION " . $d["com_sed_numero"]. $d["com_division"] . "/".$d["com_pla_anio"].$d["com_pla_semestre"]  ." " . $d["com_cal_anio"]."-".$d["com_cal_semestre"]; 
+          } else {
+            echo $i ." " . $dni. " no esta en ninguna comision"; 
+            if (array_key_exists($dni, $this->dbs["persona"])) echo " (existe la persona)";
+            else echo " (no existe la persona)";
+          }
+          echo " ($j)<br>";
+        }
+      } elseif(array_key_exists($dni, $this->dbs["alumno_comision"])) {
+        $j++;
+        $d = $this->dbs["alumno_comision"][$dni][0];
+        echo $i . " " . $dni . " ESTA EN COMISION " . $d["com_sed_numero"]. $d["com_division"] . "/".$d["com_pla_anio"].$d["com_pla_semestre"]  ." " . $d["com_cal_anio"]."-".$d["com_cal_semestre"] . " PERTENECE A OTRO CENS"; 
+        echo " ($j)<br>";
+
+      }
     }
   }
 
