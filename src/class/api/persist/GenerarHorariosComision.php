@@ -18,19 +18,13 @@ class GenerarHorariosComisionPersistApi extends PersistApi {
     if(empty($data["horarios"]) || empty($data["horarios"]["dias"])) throw new Exception("Dato no definido: dias");
     if(empty($data["horarios"]) || empty($data["horarios"]["hora_inicio"])) throw new Exception("Dato no definido: hora inicio");
 
-
-    $data = [
+    $persist = $this->container->getController("horarios_comision_persist_sql")->main([
       "id" => $data["comision"]["id"],
       "dias" => $data["horarios"]["dias"],
       "hora_inicio" => $data["horarios"]["hora_inicio"]
-    ];
-    $this->id = $data["comision"]["id"];
-    $this->horaInicio = $data["horarios"]["hora_inicio"];
-    $this->dias = $data["horarios"]["dias"];
+    ]);
 
-    $persist = $this->container->getController("horarios_comision_persist_sql");
-
-    $this->container->multi_query_transaction($persist["sql"]);
+    $persist = $this->container->getDb()->multi_query_transaction($persist["sql"]);
 
     return [
       "id" => $data["comision"]["id"],
