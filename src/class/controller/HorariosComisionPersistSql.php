@@ -119,7 +119,7 @@ class HorariosComisionPersistSql  {
     foreach($this->distribucionesHorarias as $dh){
       $horario = $this->container->getValue("horario"); 
       
-      $hora = DateTime::createFromFormat("H:i:s", $horaInicio);  
+      $hora = DateTime::createFromFormat("H:i", $horaInicio);  
       
       if(!key_exists($dh["dia"], $horasCatedrasDia)) $horasCatedrasDia[$dh["dia"]] = 0;
       $minutos = $horasCatedrasDia[$dh["dia"]];
