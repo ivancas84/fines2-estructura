@@ -15,7 +15,7 @@ $container = new Container;
 
 $alumnoTools = $container->getController("alumno_tools");
 
-$alumnoTools->initDni($_GET["numero_documento"]);
+$alumnoTools->init($_GET["id"]);
 $v = $alumnoTools->getValue();
 
 $calificaciones = $alumnoTools->getCalificacionesAprobadas();
@@ -23,7 +23,7 @@ $calificaciones = $alumnoTools->getCalificacionesAprobadas();
 $disposiciones = $alumnoTools->getDisposiciones();
 
 $disposicionesRestantes = $alumnoTools->disposicionesRestantes($calificaciones, $disposiciones);
-$anios = $alumnoTools->aniosCursados($disposicionesRestantes);
+$anios = $alumnoTools->sumaDisposicionesPorAnio($disposicionesRestantes);
 $aniosCursados = $alumnoTools->traducirAnios($anios);
 $aniosRestantes = $alumnoTools->aniosRestantes($aniosCursados);
 $mpdf = new \Mpdf\Mpdf();
@@ -112,8 +112,22 @@ foreach($aniosRestantes as $a){
 $date = new SpanishDateTime();
 
 $html .='</ul>
-  <p>Se extiende la presente a pedido del interesado en La Plata el día <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("d") . ' de ' . $date->format("M") . ' de ' . $date->format("Y"). '&nbsp;&nbsp;&nbsp;</span> para ser presentado ante <span class="data">&nbsp;&nbsp;&nbsp;quien corresponda&nbsp;&nbsp;&nbsp;</span>.</p>
-</div>
+';
+
+if($_GET["observaciones"]) {
+
+  $html .='
+  <p>Observaciones: <span class="data">&nbsp;&nbsp;&nbsp;'.$_GET["observaciones"].'&nbsp;&nbsp;&nbsp;</span> 
+  </p> 
+  ';
+  
+}
+
+$html .='</ul>
+
+  <p>Se extiende la presente a pedido del interesado en La Plata el día <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("d") . ' de ' . $date->format("F") . ' de ' . $date->format("Y"). '&nbsp;&nbsp;&nbsp;</span> para ser presentado ante <span class="data">&nbsp;&nbsp;&nbsp;quien corresponda&nbsp;&nbsp;&nbsp;</span>.</p>
+    </div>
+
 <div class="footer">
   <img src="sello_cens.png"  width="125" height="160">
   <img src="firma_director.png"  width="250" height="150">

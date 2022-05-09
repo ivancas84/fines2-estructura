@@ -13,20 +13,24 @@ class TomaPosesionPersistApi extends PersistApi {
     $data = php_input();
     
     /**
-     * $data["id"]: Id curso
-     * $data["email_abc"]: Email abc
+     * $data["curso"]: Id curso
+     * $data["email"]: Email abc
      */
 
-    $persona = $this->container->getDb()->unique("persona", ["email_abc"=>$data["email_abc"]]);
+    $render = $this->container->getRender("persona");
+    $render->setCondition(["email","=",$data["email"]]);
+    $persona = $this->container->getDb()->oneOrNull("persona", $render);
 
     if(!$persona) return false;
 
     $persistToma = $this->container->getControllerEntity("persist_sql", "toma_posesion")->id([
-      "curso" => $data["id"], "persona" => $persona["id"]
+      "curso" => $data["curso"], "persona" => $persona["id"]
     ]);
 
+
+
     $this->container->getDb()->multi_query_transaction($persistToma["sql"]);
-    $this->container->getControllerEntity("email", "registro")->main($persistToma["id"]);
+    $this->container->getController("email_registro")->main($persistToma["id"]);
 
     return true;
   }

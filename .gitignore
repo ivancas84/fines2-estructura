@@ -4,8 +4,9 @@
 /config
 /upload
 /vendor
+/pdf_
 /script
-
+/script_
 
 # IDE - VSCode
 .vscode/*

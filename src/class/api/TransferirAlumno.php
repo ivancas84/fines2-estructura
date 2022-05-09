@@ -220,7 +220,7 @@ class TransferirAlumnoApi extends BaseApi {
 
 
   public function transferirEntidadDisposicionPendiente_(){
-    $render = $this->container->getControllerEntity("render_build", "disposicion_pendiente")->main();
+    $render = $this->container->getRender("disposicion_pendiente");
     $render->setCondition([
       ["alumno","=",$this->alumnoTransferir["id"]]
     ]);
@@ -229,7 +229,7 @@ class TransferirAlumnoApi extends BaseApi {
       "disposicion"
     );
 
-    $render = $this->container->getControllerEntity("render_build", "disposicion_pendiente")->main();
+    $render = $this->container->getRender("disposicion_pendiente");
     $render->setCondition([
       ["alumno","=",$this->alumnoExistente["id"]]
     ]);

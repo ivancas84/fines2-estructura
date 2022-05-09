@@ -4,6 +4,13 @@ require_once("class/model/Render.php");
 require_once("class/model/Ma.php");
 
 class ModelTools {
+  /**
+   * Clase especial para colocar codigo de uso comun
+   * 
+   * La idea de ModelTools es ejecutar consultas a la base de datos de uso
+   * general. ModelTools no almacena ninguna información, puede ser utilizada
+   * como singleton.
+   */
   public $container;
 
   public function labelCurso($data, $prefix){
@@ -130,15 +137,32 @@ class ModelTools {
 SELECT id AS toma_activa, curso
 FROM toma
 WHERE (toma.estado = 'Aprobada' OR toma.estado = 'Pendiente') AND (toma.estado_contralor != 'Modificar')
-AND curso.id IN ('{$idCursos_}')
+AND curso IN ('{$idCursos_}')
 ";
+
+    $result = $this->container->getDb()->query($sql);
+    $rows = $result->fetch_all(MYSQLI_ASSOC);
+    $result->free();
+    return $rows;
   }
 
   public function cursoHorario($idCursos){
+    /**
+     * @return [
+     *   "curso" => "id curso",
+     *   "horario" => "Lunes 16:00 a 19:00, Martes 16:00 a 19:00"
+     * ]
+     */
     $idCursos_ = implode("','",$idCursos);
     
     $sql = "
-SELECT curso.id AS curso, GROUP_CONCAT(dia.dia, \" \", TIME_FORMAT(horario.hora_inicio, '%H:%i'), \" a \", TIME_FORMAT(horario.hora_fin, '%H:%i') ORDER BY dia.numero ASC SEPARATOR ', ') AS horario
+SELECT curso.id AS curso, GROUP_CONCAT(
+  dia.dia, 
+  \" \", 
+  TIME_FORMAT(horario.hora_inicio, '%H:%i'), 
+  \" a \", 
+  TIME_FORMAT(horario.hora_fin, '%H:%i') ORDER BY dia.numero ASC SEPARATOR ', '
+) AS horario
 FROM curso
 INNER JOIN horario ON (horario.curso = curso.id)
 INNER JOIN dia ON (dia.id = horario.dia)
@@ -215,6 +239,117 @@ GROUP BY curso.id
     $result->free();
     return $rows;
   }
+
+  public function disposicionesRestantes($calificaciones, $disposiciones){
+    /**
+     * @derecated? 
+     */
+    $d = array_combine_key2(
+      $disposiciones,
+      ["asignatura","planificacion"]
+    );
+    
+    $ids_c = array_keys(
+      array_combine_key2($calificaciones, ["dis_asignatura", "dis_planificacion"])
+    );
+
+    $ids_d = array_keys($d);
+    $ids_r = array_diff($ids_d, $ids_c);
+
+    return array_intersect_key($d, array_flip($ids_r) );
+  }
+
+  public function disposicionesRestantesAnio($calificaciones, $disposiciones){
+
+    return array_group_value(
+      $this->disposicionesRestantes($calificaciones, $disposiciones), 
+      "pla_anio"
+    );
+  }
+
+  public function disposicionesPlanAnio($plan, $anio){
+    /**
+     * Disposiciones de plan y el anio ingreso
+     */
+    $render = $this->container->getRender("disposicion");
+
+    $render->setCondition([
+      ["pla-plan","=",$plan],
+      ["pla-anio",">=",$anio]
+    ]);
+    $render->setOrder(["pla-anio"=>"asc","pla-semestre"=>"asc", "asi-nombre"=>"asc"]);
+    
+    return $this->container->getDb()->all("disposicion",$render);
+  }
+
+  public function cantidadCalificacionesAprobadas_($idAlumno_, $planificacion){
+    $render = $this->container->getRender();
+    $render->addCondition(["dis-planificacion","=",$planificacion]);
+    $render->addCondition(["alumno","=",$idAlumno_]);
+    $render->addCondition([
+      ["nota_final",">=","7"],
+      ["crec",">=","4","OR"]
+    ]);
+    $render->addFields(["alumno", "cantidad"=> "count"]);
+    $render->setSize(0);
+    $render->setGroup(["alumno"]);
+    return $this->container->getDb()->select("calificacion",$render);
+  }
+
+  public function calificacionesAprobadasAlumnoPlan($idAlumno, $plan){
+    $render = $this->container->getRender("calificacion");
+    $render->setCondition([
+      ["dis_pla-plan","=",$plan],
+      ["alumno","=",$idAlumno],
+      [
+        ["nota_final",">=","7"],
+        ["crec",">=","4","OR"],
+      ]
+    ]);
+    $render->setOrder(["dis_pla-anio"=>"asc","dis_pla-semestre"=>"asc","dis_asi-nombre"=>"asc"]);
+    return $this->container->getDb()->all("calificacion",$render);
+  }
+
+  public function cantidadPlanificacionCalificacionesAprobadasAlumnoPlan($idAlumno, $plan){
+    
+    $render = $this->container->getRender("calificacion");
+    $render->setCondition([
+      ["dis_pla-plan","=",$plan],      
+      ["alumno","=",$idAlumno],
+      [
+        ["nota_final",">=","7"],
+        ["crec",">=","4","OR"],
+      ]
+    ]);
+    $render->setFields(["anio"=>"dis_pla-anio","semestre"=>"dis_pla-semestre","cantidad"=> "count"]);
+    $render->setSize(0);
+    $render->setGroup(["anio"=>"dis_pla-anio","semestre"=>"dis_pla-semestre"]);
+    $render->setOrder(["dis_pla-anio"=>"asc","dis_pla-semestre"=>"asc"]);
+    return $this->container->getDb()->select("calificacion",$render);
+  }
+
+  public function cantidadAnioCalificacionesAprobadasAlumnoPlan($idAlumno, $plan){
+    /**
+     * @return [
+     *   [anio,cantidad]
+     * ]
+     **/   
+    $render = $this->container->getRender("calificacion");
+    $render->setCondition([
+      ["dis_pla-plan","=",$plan],      
+      ["alumno","=",$idAlumno],
+      [
+        ["nota_final",">=","7"],
+        ["crec",">=","4","OR"],
+      ]
+    ]);
+    $render->setFields(["anio"=>"dis_pla-anio","cantidad"=> "count"]);
+    $render->setSize(0);
+    $render->setGroup(["anio"=>"dis_pla-anio"]);
+    $render->setOrder(["dis_pla-anio"=>"asc"]);
+    return $this->container->getDb()->select("calificacion",$render);
+  }
+
 
 
 }

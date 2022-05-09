@@ -16,25 +16,11 @@ class ComisionesSiguientesImport extends Import{
   public $centroEducativo;
 
   public $mode = "db";
-  public $id = "alumno";
+  public $id = "comisiones_siguientes";
 
 
-  public function element($i, $data){
-    /**
-     * Definir elemento y asignarle los datos e indice
-     * Un elemento posee todos los datos que posteriormente seran insertados y los posibles errores que puede haber
-     * Existe una clase abstracta Element que posee un conjunto de metodos de uso habitual
-     */
-      $element = $this->container->getImportElement("comisiones_siguientes");
-      $element->index = $i;
-      $element->idCalendario = $this->idCalendario;
-      $element->setEntities($data);
-      array_push($this->elements, $element);
-    }
-      
   public function initialize(){
     $this->container->getEntity("comision")->identifier = ["sed-numero","division", "planificacion"]; 
-
   }
   
   public function defineSource(){
@@ -56,8 +42,6 @@ class ComisionesSiguientesImport extends Import{
   }
 
   public function identify(){
-    $this->ids["comision"] = [];
-    $this->ids["comision_anterior"] = [];
     foreach($this->elements as &$element){
       $this->idEntityFieldCheck("comision",$element->entities["comision"]->_get("identifier"), $element);
       $this->idEntityFieldCheck("comision_anterior",$element->entities["comision_anterior"]->_get("identifier"), $element);
@@ -80,7 +64,7 @@ class ComisionesSiguientesImport extends Import{
 
       $id = $element->entities["comision"]->_get("id");
       $element->entities["comision_anterior"]->_set("comision_siguiente",$id);
-      $this->processElement($element, "comision", "identifier","comision_anterior");
+      $this->processElement($element, "comision", "identifier",true, "comision_anterior");
     
     }
   }

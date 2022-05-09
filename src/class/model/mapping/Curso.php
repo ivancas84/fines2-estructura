@@ -17,7 +17,9 @@ class CursoMapping extends MappingEntityOptions{
         ''
       ),
       ' ',
-      {$this->_pf()}asi.nombre
+      {$this->_pf()}asi.codigo,
+      ' ',
+      {$this->_pf()}com_sed.nombre
     )";
   }
 

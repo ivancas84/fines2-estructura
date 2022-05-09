@@ -6,7 +6,7 @@ require $_SERVER["DOCUMENT_ROOT"] . "/" . PATH_ROOT . '/vendor/autoload.php';
 require_once("class/Container.php");
 
 $container = new Container;
-$render = $this->container->getControllerEntity("render_build", "persona")->main();
+$render = $container->getRender("persona");
 $render->setCondition(["numero_documento","=",$_GET["dni"]]);
 $row = $container->getDb()->one("persona",$render);
 $v = $container->getValue("persona")->_fromArray($row,"set");
@@ -61,7 +61,7 @@ $mpdf->Cell(0,6,"0");
 
 // opcion cantidad de materias restantes
 $mpdf->SetXY(155,191);
-$mpdf->Cell(0,6,"15");
+$mpdf->Cell(0,6,"30");
 
 
 $mpdf->Image('firma_director.png', 20, 190, 80  , 42, 'png', '', true, false);

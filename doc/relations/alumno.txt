@@ -13,14 +13,10 @@ semestre_inscripcion (si): integer nf.
 semestre_ingreso (sia): integer nf.
 adeuda_legajo (al): string nf.
 adeuda_deudores (ad): string nf.
-tiene_dni (td): boolean nf. NOT NULL.
-tiene_partida (tp): boolean nf. NOT NULL.
-tiene_cuil (tc): boolean nf. NOT NULL.
-tiene_constancia_primaria (tcp): boolean nf. NOT NULL.
-tiene_certificado_primaria (tca): boolean nf. NOT NULL.
-tiene_constancia_secundaria (tcs): boolean nf. NOT NULL.
-tiene_analitico_secundaria (tas): boolean nf. NOT NULL.
-tiene_declaracion_jurada (tdj): boolean nf. NOT NULL.
+documentacion_inscripcion (di): string nf.
+anio_inscripcion_completo (aic): boolean nf.
+establecimiento_inscripcion (eia): string nf.
+libro_folio (lf): string nf. UNIQUE.
 plan (pla): string mu.
 resolucion_inscripcion (ri): string mu.
 persona (per): string _u. NOT NULL. MAIN. UNIQUE.

@@ -11,7 +11,6 @@ class CursoHorarioInfoApi extends BaseApi {
   public function main() {
     $idCursos = php_input();
     return  $this->container->getController("model_tools")->cursoHorario($idCursos);
-
   }
 }
 
