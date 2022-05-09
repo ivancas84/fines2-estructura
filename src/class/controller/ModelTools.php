@@ -137,8 +137,13 @@ class ModelTools {
 SELECT id AS toma_activa, curso
 FROM toma
 WHERE (toma.estado = 'Aprobada' OR toma.estado = 'Pendiente') AND (toma.estado_contralor != 'Modificar')
-AND curso.id IN ('{$idCursos_}')
+AND curso IN ('{$idCursos_}')
 ";
+
+    $result = $this->container->getDb()->query($sql);
+    $rows = $result->fetch_all(MYSQLI_ASSOC);
+    $result->free();
+    return $rows;
   }
 
   public function cursoHorario($idCursos){
@@ -235,6 +240,48 @@ GROUP BY curso.id
     return $rows;
   }
 
+  public function disposicionesRestantes($calificaciones, $disposiciones){
+    /**
+     * @derecated? 
+     */
+    $d = array_combine_key2(
+      $disposiciones,
+      ["asignatura","planificacion"]
+    );
+    
+    $ids_c = array_keys(
+      array_combine_key2($calificaciones, ["dis_asignatura", "dis_planificacion"])
+    );
+
+    $ids_d = array_keys($d);
+    $ids_r = array_diff($ids_d, $ids_c);
+
+    return array_intersect_key($d, array_flip($ids_r) );
+  }
+
+  public function disposicionesRestantesAnio($calificaciones, $disposiciones){
+
+    return array_group_value(
+      $this->disposicionesRestantes($calificaciones, $disposiciones), 
+      "pla_anio"
+    );
+  }
+
+  public function disposicionesPlanAnio($plan, $anio){
+    /**
+     * Disposiciones de plan y el anio ingreso
+     */
+    $render = $this->container->getRender("disposicion");
+
+    $render->setCondition([
+      ["pla-plan","=",$plan],
+      ["pla-anio",">=",$anio]
+    ]);
+    $render->setOrder(["pla-anio"=>"asc","pla-semestre"=>"asc", "asi-nombre"=>"asc"]);
+    
+    return $this->container->getDb()->all("disposicion",$render);
+  }
+
   public function cantidadCalificacionesAprobadas_($idAlumno_, $planificacion){
     $render = $this->container->getRender();
     $render->addCondition(["dis-planificacion","=",$planificacion]);
@@ -282,7 +329,11 @@ GROUP BY curso.id
   }
 
   public function cantidadAnioCalificacionesAprobadasAlumnoPlan($idAlumno, $plan){
-    
+    /**
+     * @return [
+     *   [anio,cantidad]
+     * ]
+     **/   
     $render = $this->container->getRender("calificacion");
     $render->setCondition([
       ["dis_pla-plan","=",$plan],      

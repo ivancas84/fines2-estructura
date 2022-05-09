@@ -41,6 +41,24 @@ function htmlToPdfIndex($container) {
 .signature {
   float:right;
 }
+
+
+.simple-table {
+  font-family: arial, sans-serif;
+  font-size:10px;
+  table-layout: fixed ;
+  width: 100% ;
+}
+
+.simple-table td {
+  width: 33% ;
+}
+
+.simple-table td, th {
+  border: 1px solid black;
+  text-align: left;
+  collapse:
+}
 </style>
 <body>
 <div class="container">

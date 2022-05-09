@@ -43,6 +43,8 @@ class ConstanciaGeneralFinalizoPdf extends BaseController{
     $aniosRestantes = $alumnoTools->aniosRestantes($aniosCursados);
     $mpdf = new \Mpdf\Mpdf();
     $qrcode = qr($_GET["url"]);
+    $signature = array_key_exists("firma", $_GET)? settypebool($_GET["firma"]) : true;
+    $notes = $_GET["observaciones"];
     
     
     $c = htmlToPdfHeader($qrcode);
@@ -86,12 +88,15 @@ class ConstanciaGeneralFinalizoPdf extends BaseController{
     
     $date = new SpanishDateTime();
     
-    $c .='</ul>
-    <p>Se extiende la presente a pedido del interesado en La Plata el día 
+    $c .= '</ul>';
+
+    if(!empty($notes)) $c .= '<p><span class="data">&nbsp;&nbsp;&nbsp;'. $notes . '&nbsp;&nbsp;&nbsp;</span></p>';
+
+    $c .= '<p>Se extiende la presente a pedido del interesado en La Plata el día 
     <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("d") . ' de ' . $date->format("F") . ' de ' . $date->format("Y"). '&nbsp;&nbsp;&nbsp;</span> para ser presentado ante <span class="data">&nbsp;&nbsp;&nbsp;quien corresponda&nbsp;&nbsp;&nbsp;</span>.</p>
     </div>
     ';
-    $c .= htmlToPdfSignature();
+    $c .= htmlToPdfSignature($signature);
     $html = htmlToPdfIndex($c); 
     
     

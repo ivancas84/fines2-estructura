@@ -1,7 +1,8 @@
 <?
-function htmlToPdfSignature() {
-  $selloSrc = ".." . DIRECTORY_SEPARATOR . "img" . DIRECTORY_SEPARATOR . "sello_cens.png";
-  $firmaSrc = ".." . DIRECTORY_SEPARATOR . "img" . DIRECTORY_SEPARATOR . "firma_director.png";
+function htmlToPdfSignature($firmar = true) {
+
+  $selloSrc = ($firmar) ? '<img src="..' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'sello_cens.png"  width="125" height="160">' : '';
+  $firmaSrc = ($firmar) ? '<img src="..' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'firma_director.png" width="250" height="150">' : '';
   return '
   <br>
   <br>
@@ -11,10 +12,8 @@ function htmlToPdfSignature() {
   <tr>
     <td style="width:30%; text-align:center">  
     </td>
-    <td style="width:30%; text-align:center">  <img src="' . $selloSrc . '"  width="125" height="160">
-    </td>
-    <td style="width:40%; text-align:center">  <img src="' . $firmaSrc . '"  width="250" height="150">
-    </td>
+    <td style="width:30%; text-align:center">' . $selloSrc . '</td>
+    <td style="width:40%; text-align:center">' . $firmaSrc . '</td>
   </tr>
   <tr>
   <td style="width:30%; text-align:center">  

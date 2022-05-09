@@ -26,13 +26,13 @@ class EmailRegistro {
     <li>Foto DNI</li>
     <li>Foto Título habilitante</li>
     <li>Constancia de CUIL</li>
-    <li>Copia de email con aviso de designación</li>
     <li>Declaración Jurada</li>
     <li>Proyecto pedagógico</li>
+    <li>Copia de email con aviso de designación (para docentes designados en SAD)</li>
   </ul>
 </p>
-<p>Posteriormente deberá presentar su Declaración Jurada impresa en el CENS 462 (calle 71 e/ 115 y 116 Nº 232) el día Miércoles en el horario de 12 a 14, o Viernes de 18 a 19:30 donde se controlará la declaración y se le pedirá que firme la toma de posesión General.</p>
-<p>Dejamos a su disposición el número del director Luis García para cualquier consulta 2215407540</p> 
+<p>Posteriormente deberá presentarse a una entrevista con el director en el CENS 462 (calle 71 e/ 115 y 116 Nº 232) de Lunes a Jueves en el horario de 12 a 15, o los días Lunes de 18 a 21 o Viernes de 18 a 21 para firmar la toma de posesión.</p>
+<p>Dejamos a su disposición el número del CENS 462 para cualquier consulta 2216713326 (solo mensajes y audios de Whatsapp)</p> 
 <br>
 <p>Para la declaración Jurada puede utilizar el siguiente formato: <a href="https://planfines2.com.ar/wp/wp-content/uploads/2021/04/Declaracion-Jurada-de-Cargos.xls">Descargar</a></p>
 <br>

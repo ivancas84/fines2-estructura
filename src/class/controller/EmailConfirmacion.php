@@ -30,16 +30,16 @@ class EmailConfirmacion {
     $t = $this->container->getRel("toma")->value($toma);
 
     $fechaToma = $t["toma"]->_get("fecha_toma");
-    $fechaFin = new DateTime('2021-12-31');
+    //$fechaFin = new DateTime('2022-07-27');
 
-    // $fechaFin = clone $fechaToma;
-    // $fechaFin->modify("+ 4 month");
+    $fechaFin = clone $fechaToma;
+    $fechaFin->modify("+ 4 month");
   
     $body = '
 <p>Hola ' . $t["docente"]->_get("nombres", "Xx Yy") . ' ' . $t["docente"]->_get("apellidos", "Xx Yy") . ', a continuación se indica el comprobante de toma de posesión.</p>
 <p>Comuníquese en primer término con los referentes, ellos conocen la realidad de cada alumno y ofrecen medios de contacto adicionales para la comunicación.</p>
-<p><a href="https://planfines2.com.ar/users2/referentes-para-docente?comision='.$idComision.'">Contacto Referentes</a></p>
-<p><a href="https://planfines2.com.ar/users2/alumnos-para-docente?comision='.$idComision.'">Lista de Alumnos</a></p>
+<p><a href="https://planfines2.com.ar/docente/referentes-para-docente?comision='.$idComision.'">Contacto Referentes</a></p>
+<p><a href="https://planfines2.com.ar/docente/alumnos-para-docente?comision='.$idComision.'">Lista de Alumnos</a></p>
 <p><a href="https://planfines2.com.ar/wp/planillas-de-finalizacion/">Planillas de finalización e instrucciones</a></p> 
 <p>Contacto de Whatsapp CENS 462: 22167113326</p>
 <div style="margin-left:15px;width:600px;padding:20px;border:1px solid #d0d2d2;border-radius:5px;color:#444444">

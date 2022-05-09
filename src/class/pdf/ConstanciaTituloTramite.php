@@ -15,9 +15,6 @@ require_once("function/pdf/signature.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/" . PATH_ROOT . '/vendor/autoload.php');
 
 
-
-
-
 class ConstanciaTituloTramitePdf extends BaseController{
  /**
    * Formulario para cargar calificaciones
@@ -27,7 +24,7 @@ class ConstanciaTituloTramitePdf extends BaseController{
   public function main(){
 
     $qrcode = qr($_GET["url"]);
-
+    $signature = array_key_exists("firma", $_GET)? settypebool($_GET["firma"]) : true;
     
 
     $this->alumno = $this->container->getDb()->get("alumno",$_GET["id"]);
@@ -41,17 +38,17 @@ class ConstanciaTituloTramitePdf extends BaseController{
     if(empty($cantidades)) throw new Exception("No tiene cargadas asignaturas aprobadas");
 
     $completo = true;
-    $anio = 0;
+    $anio = intval($this->alumno["anio_ingreso"]);
 
     foreach($cantidades as $q){
-      if(intval($q["anio"]) != $anio+1) throw new Exception("Existe un error al obtener las asignaturas aprobadas, falta un año");
-      $anio = intval($q["anio"]);
+      if(intval($q["anio"]) != $anio) throw new Exception("Existe un error al obtener las asignaturas aprobadas, falta un año");
       if($q["cantidad"] < 10) $completo = false;
+      $anio++;
     }
 
 
     $completoPrint = ($completo)? "COMPLETO":"INCOMPLETO";
-    switch($anio){
+    switch($anio-1){
       case 1:
         $anioPrint = "PRIMERO";
       break;
@@ -91,7 +88,7 @@ del mes de <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("F") . '&nbsp;
 de <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("Y") . '&nbsp;&nbsp;&nbsp;</span>.</p>
 </div>
 ';
-    $c .= htmlToPdfSignature();
+    $c .= htmlToPdfSignature($signature);
     $html = htmlToPdfIndex($c); 
 
 
