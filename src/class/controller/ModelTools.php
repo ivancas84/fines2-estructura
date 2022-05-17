@@ -136,7 +136,7 @@ class ModelTools {
     $sql = "
 SELECT id AS toma_activa, curso
 FROM toma
-WHERE (toma.estado = 'Aprobada' OR toma.estado = 'Pendiente') AND (toma.estado_contralor != 'Modificar')
+WHERE (toma.estado = 'Aprobada') AND (toma.estado_contralor != 'Modificar')
 AND curso IN ('{$idCursos_}')
 ";
 
