@@ -19,8 +19,7 @@ class CantidadAsignaturasAprobadasAlumnosApi extends BaseApi {
 
   public function main() {
     $this->container->getAuth()->authorize("alumno", "r");
-    $this->idAlumno_ = file_get_contents("php://input");
-
+    $this->idAlumno_ = php_input();
     $this->alumno__calificacionAprobada_();
     
     // $this->disposicion_();
