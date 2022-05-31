@@ -11,19 +11,10 @@ function htmlToPdfIndex($container) {
 	vertical-align: middle;
 	margin :0 auto;
 }
-#left{    
- margin-left:10px;
- margin-top:10px;
- 
- float: left;  
-}  
- #right{    
-  margin-right:10px;
-  margin-top:10px;
-  
- 
- float: right;  
- }
+
+.alignleft{ float: left; }  
+.alignright{ float: right; }
+
 .title {
 	color: black;
 	font-size: 20px;

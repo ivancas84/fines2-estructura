@@ -43,40 +43,39 @@ class LibroMatrizPdf extends BaseController{
     $calificaciones = $modelTools->calificacionesAlumnoPlanAnio($this->alumno["id"], $this->alumno["plan"], $this->alumno["anio_ingreso"]);
     if(empty($calificaciones) || (count($calificaciones) != (40-($anio*10)))) throw new Exception("La cantidad de calificaciones obtenida para el plan y el año no coincide");
 
+
     $v = $this->container->getRel("alumno")->value($this->alumno);
+
     $date = new SpanishDateTime();
     $mpdf = new \Mpdf\Mpdf();
 
     $fechaNacimiento = new SpanishDateTime($v["persona"]->_get("fecha_nacimiento","Y-m-d"));
-
     $calificaciones = array_group_value($calificaciones, "dis_pla_anio");
-
     
     $c = '
 <div class="title">
-  Libro <span class="data">&nbsp;&nbsp;&nbsp; ' . $this->ev($v["persona"]->_get("libro")) . ' &nbsp;&nbsp;&nbsp;</span>,
-  Folio<span class="data">&nbsp;&nbsp;&nbsp;' . $this->ev($v["persona"]->_get("folio")) .'&nbsp;&nbsp;&nbsp;</span>
+  Libro <span class="data">' . $this->ev($v["alumno"]->_get("libro")) . '</span>,
+  Folio<span class="data">' . $this->ev($v["alumno"]->_get("folio")) .'</span>
 </div>
 <div class="content">
-  <p>El alumno/a <span class="data">&nbsp;&nbsp;&nbsp;' . $v["persona"]->_get("apellidos", "X") . ' ' 
-. $v["persona"]->_get("nombres","Xx Yy") . '&nbsp;&nbsp;&nbsp;</span> DNI Nº 
-<span class="data">&nbsp;&nbsp;&nbsp;' . $v["persona"]->_get("numero_documento","Xx Yy") . '&nbsp;&nbsp;&nbsp;</span>
-nacido en <span class="data">&nbsp;&nbsp;&nbsp;' . $this->ev($v["persona"]->_get("lugar_nacimiento", "Xx Yy")) . '&nbsp;&nbsp;&nbsp;</span>,
-el día <span class="data">&nbsp;&nbsp;&nbsp;' . $this->ev($v["persona"]->_get("fecha_nacimiento","d")) . '&nbsp;&nbsp;&nbsp;</span>
-de <span class="data">&nbsp;&nbsp;&nbsp;' . $this->ev($v["persona"]->_get("fecha_nacimiento","F")) . '&nbsp;&nbsp;&nbsp;</span>
-de <span class="data">&nbsp;&nbsp;&nbsp;' . $this->ev($v["persona"]->_get("fecha_nacimiento","Y")) . '&nbsp;&nbsp;&nbsp;</span>,
-ingreso con certificado de <span class="data">&nbsp;&nbsp;&nbsp;' . $this->ev($v["alumno"]->_get("establecimiento_inscripcion","Y")) . '&nbsp;&nbsp;&nbsp;</span>,
-al plan <span class="data">&nbsp;&nbsp;&nbsp;Programa Fines 2 Trayecto Secundario&nbsp;&nbsp;&nbsp;</span>,
-orientacion <span class="data">&nbsp;&nbsp;&nbsp;' . $v["plan"]->_get("orientacion") . '&nbsp;&nbsp;&nbsp;</span>,
-resolución <span class="data">&nbsp;&nbsp;&nbsp;' . $v["plan"]->_get("resolucion") . '&nbsp;&nbsp;&nbsp;</span>.
+  <p>El alumno/a <span class="data">' . $this->ev($v["persona"]->_get("apellidos", "X") . ' ' 
+. $v["persona"]->_get("nombres","Xx Yy")) . '</span> DNI Nº 
+<span class="data">' . $this->ev($v["persona"]->_get("numero_documento","Xx Yy")) . '</span>
+nacido en <span class="data">' . $this->ev($v["persona"]->_get("lugar_nacimiento", "Xx Yy")) . '</span>,
+el día <span class="data">' . $this->ev($v["persona"]->_get("fecha_nacimiento","d")) . '</span>
+de <span class="data">' . $this->ev($v["persona"]->_get("fecha_nacimiento","F")) . '</span>
+de <span class="data">' . $this->ev($v["persona"]->_get("fecha_nacimiento","Y")) . '</span>,
+ingreso con certificado de <span class="data">' . $this->ev($v["alumno"]->_get("establecimiento_inscripcion","Y")) . '</span>,
+al plan <span class="data">'. $this->ev('Programa Fines 2 Trayecto Secundario') . '</span>,
+orientacion <span class="data">' . $this->ev($v["plan"]->_get("orientacion")) . '</span>,
+resolución <span class="data">' . $this->ev($v["plan"]->_get("resolucion")) . '</span>.
+  </p>
 
 </div>
 ';
 
 
-
-
-  $formatterES = new NumberFormatter("es", NumberFormatter::SPELLOUT);
+    $formatterES = new NumberFormatter("es", NumberFormatter::SPELLOUT);
 
 
   
@@ -108,25 +107,45 @@ resolución <span class="data">&nbsp;&nbsp;&nbsp;' . $v["plan"]->_get("resolucio
 
     }
 
+
+    $c.= '<div class="content"><p>Observaciones: <span class="data">' . $this->ev($v["alumno"]->_get("comentarios"), 0) . '</span>';
+    $c.= '</p>
+    <br />
+    <br />  <br />
+    <br />
+    </div>
+    <div class="content">
+      <div style="float: left; width: 10%">&nbsp;</div>
+      <div style="float: left; width: 20%">Fecha</div>
+      <div style="float: left; width: 50%">&nbsp;</div>
+      <div style="float: left; width: 20%">Firma</div>
+    </div>
+    <br />
+   ';
+    
     $html = htmlToPdfIndex($c); 
     
 
 
-    // echo $html;
     $mpdf = new \Mpdf\Mpdf();
     $mpdf->SetProtection(["print"]);
 
     $mpdf->WriteHTML($html);
     $mpdf->Output("constancia.pdf", 'I');
+    //echo $html;
   }
 
 
    /**
    * Imprime el texto enviado como parametro.
-   * Si es vacio imprime 10 espacios en blanco para que el usuario complete.
+   * Si es vacio imprime espacios en blanco para que el usuario complete.
    */
-  protected function ev($imprimir){
+  protected function ev($imprimir, $long = 20){
     $i = trim($imprimir);
-    return (empty($i) || $i == UNDEFINED) ? "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" : $i;
+    if(!empty($i) && $i != UNDEFINED) return "&nbsp;&nbsp;&nbsp;".$i."&nbsp;&nbsp;&nbsp;";
+
+    $r = "";
+    for($j = 0; $j < $long; $j++) $r .= "&nbsp;";
+    return $r;
   }
 }
