@@ -23,10 +23,8 @@ class LibroMatrizPdf extends BaseController{
    * ./script/calificacion_form
    */
 
-  protected function ev($imprimir){
-    $i = trim($imprimir);
-    return (empty($i) || $i == UNDEFINED) ? "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" : $i;
-  }
+
+ 
 
   public function main(){
 
@@ -76,45 +74,39 @@ resolución <span class="data">&nbsp;&nbsp;&nbsp;' . $v["plan"]->_get("resolucio
 ';
 
 
-  $c .= '<table class="simple-table">';
 
 
   $formatterES = new NumberFormatter("es", NumberFormatter::SPELLOUT);
 
 
-  $anio_ = $anio;
+  
+    foreach($calificaciones as $anio => $cals){
+      $c .= '<table class="simple-table">';
+      $c .= '<tr>';
+      $c .= '<th rowspan="2">' . $anio . 'º AÑO</th><th colspan="2">Calificación</th><th rowspan="2">Fecha</th>';
+      $c .= '</tr>';
+      $c .= '<tr>';
+      $c .= '<th>Números</th><th>Letras</th>';
+      $c .= '</tr>';
 
-  while($anio_ <= $anio) {
-    $c .= '<tr>';
-
-    foreach($calificaciones as $anio => $d_){
-      $c .= '<th>' . $anio . 'º AÑO</th><th>Calificación</th><th>Fecha</th>';
-
-      
-    }
-
-
-  }
+      foreach($cals as $d){
+        if((intval($d["nota_final"]) < 7) && (intval($d["crec"]) >= 4)){
+          $calificacionLetras = $formatterES->format($d["crec"]) . " CREC";
+          $calificacion = round($d["crec"],0) . " C";
+        } else {
+          $calificacionLetras = $formatterES->format($d["nota_final"]);
+          $calificacion = round($d["nota_final"],0);
+        }
 
 
-
-  foreach($calificaciones as $anio => $d_){
-      
-
-      $c .= "<td><ul>";
-
-      foreach($d_ as $d){
-        $calificacion = ($d["nota_final"] >= 4) ? intval($d["nota_final"]) . " (". $formatterES->format($d["nota_final"]) .")" : intval($d["crec"]) . " (". $formatterES->format($d["crec"]) .") CREC"; 
-        $c .= "<li>".$d["dis_asi_nombre"] . ": " . $calificacion . "</li>";
+        $c .= '<tr>';
+        $c .= '<td>' . $d["dis_asi_nombre"] . '</td><td>' . $calificacion . '</td>><td>' . $calificacionLetras . '</td><td></td>';
+        $c .= '</tr>';
+    
       }
+      $c .= "</tr></table><br/>";
 
-      $c .= "</ul></td>";
-
-  }
-
-  $c .= "</tr></table>";
-
-}
+    }
 
     $html = htmlToPdfIndex($c); 
     
@@ -126,5 +118,15 @@ resolución <span class="data">&nbsp;&nbsp;&nbsp;' . $v["plan"]->_get("resolucio
 
     $mpdf->WriteHTML($html);
     $mpdf->Output("constancia.pdf", 'I');
+  }
+
+
+   /**
+   * Imprime el texto enviado como parametro.
+   * Si es vacio imprime 10 espacios en blanco para que el usuario complete.
+   */
+  protected function ev($imprimir){
+    $i = trim($imprimir);
+    return (empty($i) || $i == UNDEFINED) ? "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" : $i;
   }
 }
