@@ -48,6 +48,7 @@ function htmlToPdfIndex($container) {
   font-size:10px;
   table-layout: fixed ;
   width: 100% ;
+  border-collapse: collapse;
 }
 
 .simple-table td {
@@ -57,7 +58,6 @@ function htmlToPdfIndex($container) {
 .simple-table td, th {
   border: 1px solid black;
   text-align: left;
-  collapse:
 }
 </style>
 <body>
