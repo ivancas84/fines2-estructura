@@ -17,6 +17,9 @@ documentacion_inscripcion (di): string nf.
 anio_inscripcion_completo (aic): boolean nf.
 establecimiento_inscripcion (eia): string nf.
 libro_folio (lf): string nf. UNIQUE.
+libro (lib): string nf.
+folio (fol): string nf.
+comentarios (com): text nf.
 plan (pla): string mu.
 resolucion_inscripcion (ri): string mu.
 persona (per): string _u. NOT NULL. MAIN. UNIQUE.
