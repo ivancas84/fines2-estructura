@@ -4,19 +4,17 @@ set_time_limit(0);
 require_once("class/controller/Base.php");
 require_once("function/array_group_value.php");
 require_once("function/array_combine_key.php");
-
+require_once("function/settypebool.php");
 
 class GenerarHorariosComisionesSiguientesScript extends BaseController{
  /**
-   * Definir horarios de todos los cursos de un grupo (año calendario, semes-
-   * tre calendario, modalidad y centro educativo) basandose en la comision 
-   * anterior
-   * 
-   * Si una comision es siguiente de mas de una comision, no se define el ho-
-   * rario.
-   * Si una comision ya tiene el horario definido, no se define el horario.
-   * Si el horario de al menos un curso está definido, se ignora toda la co-
-   * mision
+   * consultar comisiones anteriores con siguiente
+   * quitarComisionesAnterioresMismoSiguiente
+   * quitarComisionesAnterioresSinHorario
+   * quitarComisionesAnterioresConHorarioGrupoActual
+   * quitarComisionesAnterioresConGrupoActualSinAutorizar
+   * definirDiasHorariosComisionesAnteriores
+   * definirHorariosComisiones
    * 
    * ./script/generar_horarios_comisiones_siguientes
    */
@@ -26,10 +24,9 @@ class GenerarHorariosComisionesSiguientesScript extends BaseController{
 
   public function main(){
 
-    $grupo = ["cal-anio"=>'2022',"cal-semestre"=>1,"modalidad"=>"1", "sed-centro_educativo"=>"6047d36d50316"];
+    $grupo = ["cal-anio"=>'2022',"cal-semestre"=>2,"modalidad"=>"1", "sed-centro_educativo"=>"6047d36d50316"];
 
-    $this->mt = new ModelTools();
-    $this->mt->container = $this->container;
+    $this->mt = $this->container->getController("model_tools");
 
     if(empty($grupo["cal-anio"])) throw new Exception("Dato no definido: fecha anio");
     if(empty($grupo["cal-semestre"])) throw new Exception("Dato no definido: fecha semestre");
@@ -55,6 +52,8 @@ class GenerarHorariosComisionesSiguientesScript extends BaseController{
     /**
      *  "quitar comisiones anteriores cuyo horario de la comision siguiente este definido";
      */
+
+    $this->quitarComisionesAnterioresConGrupoActualSinAutorizar();
 
     $this->definirDiasHorariosComisionesAnteriores();
     /**
@@ -129,6 +128,30 @@ class GenerarHorariosComisionesSiguientesScript extends BaseController{
         unset($this->comisionesAnteriores[$i]);
       }
     }
+
+    $this->comisionesAnteriores = array_values($this->comisionesAnteriores);
+  }
+
+  protected  function quitarComisionesAnterioresConGrupoActualSinAutorizar(){
+    $idsComisionesGrupoActual = array_column($this->comisionesAnteriores, "comision_siguiente");
+    $render = $this->container->getRender("comision");
+    $render->setSize(0);
+    $comision_ = $this->container->getDb()->getAll("comision",$idsComisionesGrupoActual);
+    $idComisionesGrupoActualSinAutorizar = [];
+
+    foreach($comision_ as $c){
+      if(!settypebool($c["autorizada"])) {
+        array_push($idComisionesGrupoActualSinAutorizar, $c["id"]);
+      }
+    }
+
+    for($i = 0; $i < count($idsComisionesGrupoActual); $i++) {
+      if(in_array($idsComisionesGrupoActual[$i], $idComisionesGrupoActualSinAutorizar)){
+        unset($this->comisionesAnteriores[$i]);
+      }
+    }
+
+    $this->comisionesAnteriores = array_values($this->comisionesAnteriores);
   }
 
   protected function definirDiasHorariosComisionesAnteriores (){
@@ -159,7 +182,9 @@ class GenerarHorariosComisionesSiguientesScript extends BaseController{
       $this->container->getDb()->multi_query_transaction($persist["sql"]);
     }
 
-    return ["ids"=>$ids, "detail"=>$detail];
+    echo "<pre>";
+    print_r(["ids"=>$ids, "detail"=>$detail]);
+    //return ["ids"=>$ids, "detail"=>$detail];
 
     //array_push($this->logs, ["sql"=>$controller->getSql(), "detail"=>$controller->getDetail()]);
   }

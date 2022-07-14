@@ -16,6 +16,7 @@ class HorariosComisionPersistSql  {
 
 
   public function main($data) {
+
     /**
      * @param $data["id"] Id de la comision a la cual se definiran los horarios
      * @param $data["dias"] Dias de la comision a la cual se definiran los horarios
@@ -26,7 +27,7 @@ class HorariosComisionPersistSql  {
     if(empty($data["hora_inicio"])) throw new Exception("Dato no definido: hora inicio");
 
     $this->id = $data["id"];
-    
+
     $this->verificarHorarios();
     /**
      * si la comision tiene horarios, no seran definidos
@@ -119,7 +120,8 @@ class HorariosComisionPersistSql  {
     foreach($this->distribucionesHorarias as $dh){
       $horario = $this->container->getValue("horario"); 
       
-      $hora = DateTime::createFromFormat("H:i", $horaInicio);  
+      $hora = DateTime::createFromFormat("H:i", $horaInicio); 
+      if(!$hora) $hora = DateTime::createFromFormat("H:i:s", $horaInicio); 
       
       if(!key_exists($dh["dia"], $horasCatedrasDia)) $horasCatedrasDia[$dh["dia"]] = 0;
       $minutos = $horasCatedrasDia[$dh["dia"]];

@@ -9,24 +9,17 @@ require_once("function/array_combine_key.php");
 
 class GenerarCursosComisionesScript extends BaseController{
   /**
-    * Definir horarios de todos los cursos de un grupo (año calendario, semes-
-    * tre calendario, modalidad y centro educativo) basandose en la comision 
-    * anterior
-    * 
-    * Si una comision es siguiente de mas de una comision, no se define el ho-
-    * rario.
-    * Si una comision ya tiene el horario definido, no se define el horario.
-    * Si el horario de al menos un curso está definido, se ignora toda la co-
-    * mision
-    * 
-    * ./script/generar_horarios_comisiones_siguientes
-    */
+   * Consultar las comisiones del grupo indicado.
+   * Quitar aquellas comisiones que ya poseen cursos.
+   * Definir los cursos para las comisiones sin cursos.
+   * 
+   * ./script/generar_comisiones_cursos
+   */
    protected $comisionesAnteriores;
    protected $diasHorarios;
  
    public function main(){
- 
-     $grupo = ["cal-anio"=>'2022',"cal-semestre"=>1,"modalidad"=>"7","autorizada"=>true];
+     $grupo = ["cal-anio"=>'2022',"cal-semestre"=>2,"modalidad"=>"1","autorizada"=>true];
  
      if(empty($grupo["cal-anio"])) throw new Exception("Dato no definido: fecha anio");
      if(empty($grupo["cal-semestre"])) throw new Exception("Dato no definido: fecha semestre");
@@ -39,10 +32,10 @@ class GenerarCursosComisionesScript extends BaseController{
       */
  
      $this->quitarComisionesConCursos();
- 
      /**
       * quitar comisiones con cursos
       */
+
      $this->definirCursos();
      /**
       * definir cursos para las comisiones del grupo
@@ -50,6 +43,7 @@ class GenerarCursosComisionesScript extends BaseController{
    }
    
    protected function consultarComisiones($grupo){
+
      $render = $this->container->getRender("comision");
      $render->setParams($grupo);
      $render->setSize(0);  
@@ -77,11 +71,12 @@ class GenerarCursosComisionesScript extends BaseController{
         array_push($ids, $persist["id"]);
         $detail = array_merge($detail,$persist["detail"]);
         $sql .= $persist["sql"];
-    }
- 
-     $this->container->getDb()->multi_query_transaction($persist["sql"]);
-     print_r($persist);
-     return ["ids"=>$ids, "detail"=>$detail];
+      }
+  
+      $this->container->getDb()->multi_query_transaction($sql);
+      echo "<pre>";
+      echo $sql;
+     //return ["ids"=>$ids, "detail"=>$detail];
      //array_push($this->logs, ["sql"=>$controller->getSql(), "detail"=>$controller->getDetail()]);
    }
  
