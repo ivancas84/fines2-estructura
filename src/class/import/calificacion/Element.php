@@ -19,7 +19,9 @@ class CalificacionImportElement extends ImportElement {
       if(!empty($row["crec"])) $row["crec"] = preg_replace("/[^0-9]/", "", $row["crec"]);
     }
     
- 
+
+    if($this->import->fecha) $row["fecha"] = $this->import->fecha;
+    
     $row["per_numero_documento"] = preg_replace("/[^0-9\_]/", "", $row["per_numero_documento"]);
     //se permiten numeros y guiones bajos para identificar el dni
 

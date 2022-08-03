@@ -18,6 +18,7 @@ class CalificacionImport extends Import{
   public $cantidadEvaluados = 0;
   public $cantidadAprobados = 0;
   public $cantidadDesaprobados = 0;
+  public $fecha = null;
 
   public function main(){
     if(Validation::is_empty($this->idCurso)) throw new Exception("El id del curso no se encuentra definido");
