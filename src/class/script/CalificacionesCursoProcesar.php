@@ -18,6 +18,8 @@ class CalificacionesCursoProcesarScript extends BaseController{
     
     $import->source = $_REQUEST["source"]; //informacion a procesar
     $import->idCurso = $_REQUEST["id_curso"];
+    if(!empty($_REQUEST["fecha"])) $import->fecha = $_REQUEST["fecha"];
+
     $import->main();
     
     //echo "<pre>";

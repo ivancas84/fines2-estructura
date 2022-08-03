@@ -4,6 +4,7 @@ require_once("class/import/Import.php");
 require_once("class/model/Db.php");
 require_once("class/tools/Validation.php");
 require_once("function/array_group_value.php");
+require_once("function/settypebool.php");
 
 class CalificacionImport extends Import{
   /**
@@ -36,7 +37,9 @@ class CalificacionImport extends Import{
     // $this->identify();
     // $this->query();
     // $this->process();
-    // $this->persist();
+    // // echo "<pre>";
+    // print_r($this);
+    //$this->persist();
   }
 
   public function dni_(){
@@ -181,8 +184,12 @@ class CalificacionImport extends Import{
   public function summary() {
     parent::summary();
     if(count($this->dni_)) {
-      echo "<p>Los siguientes alumnos no fueron evaluados:<p>";
-      foreach($this->dni_ as $dni) echo  $dni . " " . $this->alumno_[$dni][0]["alu_per_apellidos"] . " " . $this->alumno_[$dni][0]["alu_per_nombres"]. "<br/>";
+      echo "<p>Los siguientes alumnos activos no fueron evaluados:<p>";
+
+      foreach($this->dni_ as $dni) {
+        $activo = settypebool($this->alumno_[$dni][0]["activo"]);
+        if($activo) echo  $dni . " " . $this->alumno_[$dni][0]["alu_per_apellidos"] . " " . $this->alumno_[$dni][0]["alu_per_nombres"]. "<br/>";
+      }
     }
 }
 
