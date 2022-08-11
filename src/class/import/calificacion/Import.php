@@ -164,7 +164,9 @@ class CalificacionImport extends Import{
           $element->process = false;
           return false;
         }
-        if(!empty($compare))  throw new Exception("El registro debe ser actualizado, comparar");
+
+        
+        $element->update($compare, "calificacion", $existente, "calificacion", true);
       } else {        
         $element->insert("calificacion");
       }
