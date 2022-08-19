@@ -22,7 +22,7 @@ class EmailConfirmacion {
     $toma = $this->container->getDb()->get("toma",$id);
     $curso = $mt->labelCurso($toma,"cur_");
     $subject = "Toma de posesión: " . $curso;
-	$idComision = $toma["cur_comision"];
+	  $idComision = $toma["cur_comision"];
     
     $horario_ = $this->container->getController("model_tools")->cursoHorario([$toma["curso"]]);
     $horario = count($horario_) ? $horario_[0]["horario"] : null;
@@ -42,6 +42,12 @@ class EmailConfirmacion {
 <p><a href="https://planfines2.com.ar/docente/alumnos-para-docente?comision='.$idComision.'">Lista de Alumnos</a></p>
 <p><a href="https://planfines2.com.ar/wp/planillas-de-finalizacion/">Planillas de finalización e instrucciones</a></p> 
 <p>Contacto de Whatsapp CENS 462: 22167113326</p>
+
+
+
+
+
+
 <div style="margin-left:15px;width:600px;padding:20px;border:1px solid #d0d2d2;border-radius:5px;color:#444444">
       <h4 style="padding:0 0 12px 0;margin:0;font-weight:bold">Toma de posesión: <span>' . $t["docente"]->_get("apellidos","X") . ', ' . $t["docente"]->_get("nombres","Xx Yy") . ' DNI ' . $t["docente"]->_get("numero_documento") . '</span></h4>
       
@@ -84,7 +90,14 @@ class EmailConfirmacion {
         </table>
       </div>
       <div style="clear:both;display:block;margin:0 0 10px 0;padding:10px 0 10px 0;border-top:1px solid #d7d7d7">
-        <p>El/la docente asume el compromiso de: participar en las mesas examinadoras a las que fuera convocado, colaborar con el referente de la sede y entregar una copia impresa de las planillas solicitadas al finalizar el cuatrimestre al CENS al cual corresponde la comisión y sede. Declara no estar en uso de licencia, cambio de funciones o superposición horaria).</p>
+        <p>El/la docente asume el compromiso de:</p>
+        <ul>
+          <li>Mentener al día todas las planillas de finalización (pueden ser solicitadas en cualquier momento)</li>
+          <li>Avisar inmediatamente al CENS si hay algun alumno que no se encuentra en la lista</li>
+          <li>Avisar inmediatamente al CENS si hay algun alumno de la lista que no va a cursar y debe ser dado de baja</li>
+          <li>Participar de las mesas examinadoras y reuniones a las que fuera convocado</li> 
+        </ul>
+        <p>Se recuerda que las últimas dos clases corresponden a período de recuperación y mesa de examen</p>
       </div>    
     
 </div>
