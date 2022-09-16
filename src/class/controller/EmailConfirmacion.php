@@ -30,6 +30,7 @@ class EmailConfirmacion {
 
     $fechaToma = $t["toma"]->_get("fecha_toma");
     $fechaFin = new DateTime('2022-12-23');
+    $fechaFin = new DateTime('2022-12-30');
 
     // $fechaFin = clone $fechaToma;
     // $fechaFin->modify("+ 4 month");

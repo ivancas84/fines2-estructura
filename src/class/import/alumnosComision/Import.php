@@ -9,66 +9,115 @@ class AlumnosComisionImport extends Import{
    * Importar Alumnos de Comision
    */
 
-  public $id = "alumnos_comision"; //identificacion de la importacion (para facilitara la instanciacion de la clase Element)
-  public $mode = "tab";
   public $idComision;
-  public $dniExistente_ = [];
-  /**
-   * @property $dni_: Alumnos existentes en la comisión
-   */
+  public $anio = 2022; //anio calendario de la comision
+  public $semestre = 2; //semestre calendario de la comision
+  public $comision; //datos de la comision actualmente siendo procesada
+  public $alumnosDeOtraComision = [];
 
-  public function main(){
-    if(Validation::is_empty($this->idComision)) throw new Exception("El id del curso no se encuentra definido");
+  public function config(){
+    if(Validation::is_empty($this->idComision)) throw new Exception("El id no se encuentra definido");
 
-  
+    $this->container->getEntity("persona")->identifier = ["numero_documento"];
     $this->container->getEntity("alumno")->identifier = ["per-numero_documento"];
     $this->container->getEntity("alumno_comision")->identifier = ["alu_per-numero_documento", "comision"];
+  }
 
-    parent::main();
-    // $this->define();
-    // $this->identify();
-    // $this->query();
-    // $this->process();
-    // echo "<pre>";
-    // print_r($this);
-
+  public function main(){
+    $this->config(); 
+    $this->define();
+    $this->identify();
+    $this->query();
+    $this->process();
+    //$this->persist();
   }
 
   public function identify(){
-    $this->ids["persona"] = [];
-    $this->ids["alumno"] = [];
-    $this->ids["alumno_comision"] = [];
-
-    
     foreach($this->elements as &$element){
       if(!$element->process) continue;
-      if(!($dni = $element->getIdentifier("persona", "numero_documento"))) continue;
-      if(!($idAlumno = $element->getIdentifier("alumno"))) continue;
-      if(!($idAlumnoComision = $element->getIdentifier("alumno_comision"))) continue;
-
-      if(!$this->idEntityFieldCheck("alumno", $idAlumno, $element)) continue;
-      if(!$this->idEntityFieldCheck("persona", $dni, $element)) continue;
-      if(!$this->idEntityFieldCheck("alumno_comision", $idAlumnoComision, $element)) continue;
+      try{
+        $element->identifyCheck("alumno");
+        $element->identifyCheck("persona");
+        $element->identifyCheck("alumno_comision");
+      } catch(Exception $exception){
+        $element->process = false;
+        $element->logs->addLog("identify","error",$exception->getMessage());
+      }
     }
   }
 
   public function query(){
-    $this->queryEntityField("persona","numero_documento");
+    $this->queryEntityField("persona");
     $this->queryEntityField("alumno");
     $this->queryEntityField("alumno_comision");
+
+    $this->comision = $this->container->getDb()->get("comision", $this->idComision);
+    $this->queryOtraComisionPeriodoAnterior_();
+    $this->queryComisionPeriodoAnterior_();
+  }
+
+
+  public function queryOtraComisionPeriodoAnterior_(){
+    $render = $this->container->getRender("alumno_comision");
+    $render->setSize(false);
+    $render->addCondition(["alu_per-numero_documento","=",$this->ids["persona"]]);
+    $render->addCondition(["com_cal-anio","=",$this->anio]);
+    $render->addCondition(["com_cal-semestre","=",($this->semestre - 1)]);
+    $render->addCondition(["comision","!=",$this->idComision]);
+    $render->addCondition(["activo","=",true]);
+
+    $rows = $this->container->getDb()->all("alumno_comision", $render);
+    foreach($rows as $row) {
+      echo $row["com_division"] . " " . $this->comision["division"];
+      echo $row["com_sede"] . " " . $this->comision["sede"];
+       
+      if(($row["com_division"] != $this->comision["division"]) || ($row["com_sede"] != $this->comision["sede"]) ){
+        $data = [
+          "numero_documento" => $row["alu_per_numero_documento"],
+          "division" => $row["com_sed_numero"].$row["com_division"],
+        ];
+        
+        array_push($this->alumnosDeOtraComision, $data );
+      }
+    }
+  }
+
+  public function queryComisionPeriodoAnterior_(){
+    $render = $this->container->getRender("alumno_comision");
+    $render->setSize(false);
+    $render->addCondition(["com-comision_siguiente","=",$this->idComision]);
+    $render->addCondition(["activo","=",true]);
+
+    $rows = $this->container->getDb()->all("alumno_comision", $render);
+    foreach($rows as $row) {
+      echo $row["com_division"] . " " . $this->comision["division"];
+      echo $row["com_sede"] . " " . $this->comision["sede"];
+       
+      if(($row["com_division"] != $this->comision["division"]) || ($row["com_sede"] != $this->comision["sede"]) ){
+        $data = [
+          "numero_documento" => $row["alu_per_numero_documento"],
+          "division" => $row["com_sed_numero"].$row["com_division"],
+        ];
+        
+        array_push($this->alumnosDeOtraComision, $data );
+      }
+    }
   }
 
   public function process(){    
     foreach($this->elements as &$element) {
       if(!$element->process) continue;
-
-      if(!$idPersona = $this->processElement($element,"persona","numero_documento")) continue;
-
-      $element->entities["alumno"]->_set("persona",$idPersona);
-      if(!$idAlumno = $this->processElement($element,"alumno")) continue;
-
-      $element->entities["alumno_comision"]->_set("alumno",$idAlumno);
-      if(!$this->processElement($element,"alumno_comision")) continue;
+      try{
+        $idPersona = $element->process("persona");
+        $element->entities["alumno"]->_set("persona",$idPersona);
+        $idAlumno = $element->process("alumno");
+        $element->entities["alumno_comision"]->_set("alumno",$idAlumno);
+        $element->process("alumno_comision");
+      } catch(Exception $exception){
+        $element->process = false;
+        $element->logs->addLog("process", "error", $exception->getMessage());
+      }
+      
     }
   }
 

@@ -14,5 +14,9 @@ class DisposicionMapping extends MappingEntityOptions{
     )";
   }
 
+  public function tramo() {
+    return "CONCAT(COALESCE({$this->_pf()}pla.anio,''), COALESCE({$this->_pf()}pla.semestre,''))";
+  }
+
 
 }
