@@ -94,9 +94,9 @@ class MatrizImport extends Import{
   }
 
   public function query(){
-    $this->queryEntityField("persona","numero_documento");
-    $this->queryEntityField("curso","identifier");
-    $this->queryEntityField("calificacion","identifier");
+    $this->queryEntity("persona","numero_documento");
+    $this->queryEntity("curso","identifier");
+    $this->queryEntity("calificacion","identifier");
   }
 
   public function process(){

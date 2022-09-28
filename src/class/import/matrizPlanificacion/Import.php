@@ -79,10 +79,10 @@ class MatrizPlanificacionImport extends Import{
   }
 
   public function query(){
-    $this->queryEntityField("persona","numero_documento");
-    $this->queryEntityField("disposicion","identifier");
-    $this->queryEntityField("calificacion","identifier");
-    $this->queryEntityField("alumno","identifier");
+    $this->queryEntity("persona","numero_documento");
+    $this->queryEntity("disposicion","identifier");
+    $this->queryEntity("calificacion","identifier");
+    $this->queryEntity("alumno","identifier");
   }
 
   public function process(){

@@ -73,7 +73,7 @@ class ComisionesSiguientesAlumnosImport extends Import{
   }
 
   public function query(){
-    $this->queryEntityField("alumno","identifier");
+    $this->queryEntity("alumno","identifier");
   }
 
   public function process(){    

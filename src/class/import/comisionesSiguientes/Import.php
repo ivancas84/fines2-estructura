@@ -49,8 +49,8 @@ class ComisionesSiguientesImport extends Import{
   }
 
   public function query(){
-    $this->queryEntityField("comision","identifier");
-    $this->queryEntityField("comision","identifier","comision_anterior");
+    $this->queryEntity("comision","identifier");
+    $this->queryEntity("comision","identifier","comision_anterior");
   }
 
   public function process(){    

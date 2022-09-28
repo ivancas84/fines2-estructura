@@ -8,6 +8,7 @@
  */
 set_time_limit(0);  
 require_once("class/controller/Base.php");
+require_once("function/settypebool.php");
 
 class AlumnosComisionProcesarScript extends BaseController{
  
@@ -19,6 +20,9 @@ class AlumnosComisionProcesarScript extends BaseController{
     $import->source = $_REQUEST["source"]; //informacion a procesar
     $import->idComision = $_REQUEST["id_comision"];
     $import->main();
+    if(settypebool($_REQUEST["persist"])) $import->persist();
+    // echo "<pre>";
+    // print_r($import);
     $import->summary();
   }    
  

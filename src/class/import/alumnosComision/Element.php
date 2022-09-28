@@ -1,6 +1,7 @@
 <?php
 
 require_once("class/import/Element.php");
+require_once("function/nombres_parecidos.php");
 
 class AlumnosComisionImportElement extends ImportElement {
 
@@ -28,17 +29,19 @@ class AlumnosComisionImportElement extends ImportElement {
 
   }
 
-  public function compare($name, $includeNull = false){
+  public function compare($name, $includeNull = false, $ignoreFields = []){
     /**
      * @param $name Identificador de la entidad
      */
 
     if($name == "persona"){  
       $existent = $this->getExistentValue($name);
-      if (!$this->entities["persona"]->checkNombresParecidos($existent)) throw new Exception("En la base existe una persona cuyos datos no coinciden");
+      if (!nombres_parecidos($this->entities["persona"]->_get("nombre"), $existent->_get("nombre"), 5)) throw new Exception("En la base existe una persona cuyos datos no coinciden: EXISTENTE " . $existent->_get("nombre") . " NUEVO ". $this->entities["persona"]->_get("nombre"));      
+      return parent::compare($name, $includeNull,["nombres","apellidos"]);
+
     }
-        
     return parent::compare($name, $includeNull);
+        
   }
 
  
