@@ -4,6 +4,8 @@ require_once("class/import/Import.php");
 require_once("class/model/Db.php");
 require_once("class/tools/Validation.php");
 require_once("function/periodo_anterior.php");
+require_once("function/periodo_calendario_anterior.php");
+
 require_once("function/array_combine_key.php");
 
 class AlumnosComisionImport extends Import{
@@ -53,10 +55,10 @@ class AlumnosComisionImport extends Import{
 
     $this->comision = $this->container->getDb()->get("comision", $this->idComision);
     $this->tieneAnterior(); 
+    $this->queryOtraComisionPeriodoAnterior_();
     if($this->tieneAnterior){
-      $this->queryOtraComisionPeriodoAnterior_();
-      $this->queryComisionPeriodoAnterior_();
       $this->queryCalificacionesAprobadasPeriodoAnterior_();
+      $this->queryComisionPeriodoAnterior_();
     } 
   }
 
@@ -70,11 +72,12 @@ class AlumnosComisionImport extends Import{
   }
 
   public function queryOtraComisionPeriodoAnterior_(){
+
+    $cal = periodo_calendario_anterior($this->anio, $this->semestre);
     $render = $this->container->getRender("alumno_comision");
+    
     $render->setSize(false);
     $render->addCondition(["alu_per-numero_documento","=",$this->ids["persona"]]);
-    $render->addCondition(["com_cal-anio","=",$this->anio]);
-    $render->addCondition(["com_cal-semestre","=",($this->semestre - 1)]);
     $render->addCondition(["comision","!=",$this->idComision]);
     $render->addCondition(["activo","=",true]);
 
@@ -171,12 +174,14 @@ class AlumnosComisionImport extends Import{
 
 
   public function summaryAlumnoOtraComision_(){
+    echo "<pre>";
+    print_r($this->alumnoOtraComision_);
     if(count($this->alumnoOtraComision_)){
-      echo "<h3>Alumnos que  se encuentran cargados en otra comision del periodo anterior</h3>";
+      echo "<h3>Alumnos que  se encuentran cargados en otra comision</h3>";
       echo "<ul>";
       foreach($this->alumnoOtraComision_ as $aoc){
         $a = $this->container->getRel("alumno_comision")->value($aoc);
-        echo "<li>".$a["persona"]->_get("nombres") . " " . $a["persona"]->_get("apellidos") . " " . $a["persona"]->_get("numero_documento") . "</li>"; 
+        echo "<li>".$a["persona"]->_get("nombres") . " " . $a["persona"]->_get("apellidos") . " " . $a["persona"]->_get("numero_documento") . " (" . $a["sede"]->_get("numero") . $a["comision"]->_get("division") . "/" . $a["planificacion"]->_get("anio").$a["planificacion"]->_get("semestre") . " / " . $a["calendario"]->_get("anio","Y")."-".$a["calendario"]->_get("semestre").")</li>"; 
       }
       echo "</ul>";
 
@@ -186,9 +191,9 @@ class AlumnosComisionImport extends Import{
 
   public function summary() {
     parent::summary();
+    $this->summaryAlumnoOtraComision_();
     if($this->tieneAnterior){
       $this->summaryAlumnoSinComisionPeriodoAnterior_();
-      $this->summaryAlumnoOtraComision_();
       $this->summaryAlumnoMenos3CalificacionesAprobaadas_();
     }
   }
