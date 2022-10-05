@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<h1>Rindex Comisión</h1>
+<table>
+  <tr>
+    <th>ALUMNO</th>
+    <th>TRAMO INGRESO</th>
+    <th>ACTIVO</th>
+<?foreach($disposicion_ as $d):?>
+    <th><?=$d["asi_nombre"]." ".$d["pla_tramo"]?></th>
+<?endforeach;?>
+  </tr>
+<?foreach($alumnoComision_ as $ac): $acp = $this->container->getRel("alumno_comision")->value($ac); ?>
+  <tr>
+    <td><a href="https://www.planfines2.com.ar/users3/alumno-admin?id=<?=$ac['alumno']?>" target="_blank"><?=$acp["persona"]->_get("apellidos", "X")?>, <?=$acp["persona"]->_get("nombres", "Xx Yy")?> <?=$ac["alu_per_numero_documento"]?></a></td>
+    <td><?=$ac["alu_tramo_ingreso"]?></td>
+    <td><?=(settypebool($ac["activo"]))?"SI":"NO"?></td>
+
+    <?if(array_key_exists($ac["alumno"], $alumno__calificacionAprobada_)):?>
+      <?foreach($disposicion_ as $d):?>
+        <td>
+        <?foreach($alumno__calificacionAprobada_[$ac["alumno"]] as $c):?>
+          <?if($d["pla_tramo"].$d["asignatura"] == $c["dis_pla_tramo"].$c["dis_asignatura"]):?>
+            <?=(intval($c["nota_final"]))?intval($c["nota_final"]):intval($c["crec"])."c"?>
+          <?break; endif;?>
+        <?endforeach;?>
+        </td>
+      <?endforeach;?>
+    <?else:?>
+      <?foreach($disposicion_ as $d):?>
+        <td></td>
+      <?endforeach;?>
+    <?endif;?>
+  </tr>
+<?endforeach;?>
+</table>
+</body>
+</html>
