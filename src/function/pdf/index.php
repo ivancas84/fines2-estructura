@@ -11,19 +11,10 @@ function htmlToPdfIndex($container) {
 	vertical-align: middle;
 	margin :0 auto;
 }
-#left{    
- margin-left:10px;
- margin-top:10px;
- 
- float: left;  
-}  
- #right{    
-  margin-right:10px;
-  margin-top:10px;
-  
- 
- float: right;  
- }
+
+.alignleft{ float: left; }  
+.alignright{ float: right; }
+
 .title {
 	color: black;
 	font-size: 20px;
@@ -48,6 +39,7 @@ function htmlToPdfIndex($container) {
   font-size:10px;
   table-layout: fixed ;
   width: 100% ;
+  border-collapse: collapse;
 }
 
 .simple-table td {
@@ -57,7 +49,6 @@ function htmlToPdfIndex($container) {
 .simple-table td, th {
   border: 1px solid black;
   text-align: left;
-  collapse:
 }
 </style>
 <body>

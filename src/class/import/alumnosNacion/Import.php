@@ -49,8 +49,8 @@ class AlumnosNacionImport extends Import{
   }
 
   public function query(){
-    $this->queryEntityField("persona","numero_documento");
-    $this->queryEntityField("alumno");
+    $this->queryEntity("persona","numero_documento");
+    $this->queryEntity("alumno");
     $this->queryAlumnoComision();
   }
 

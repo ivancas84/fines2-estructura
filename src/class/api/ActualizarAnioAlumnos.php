@@ -2,11 +2,11 @@
 
 require_once("class/api/Base.php");
 require_once("function/php_input.php");
-class ActualizarPlanAlumnosApi extends BaseApi {
+class ActualizarAnioAlumnosApi extends BaseApi {
 
   /**
-   * Actualizar plan de alumnos pertenecientes a una comision
-   * Si el alumno tiene plan definido no sera actualizado
+   * Actualizar año de alumnos pertenecientes a una comision
+   * Si el alumno tiene año definido no sera actualizado
    */
   public function main() {
     
@@ -18,9 +18,8 @@ class ActualizarPlanAlumnosApi extends BaseApi {
     $render = $this->container->getRender("alumno_comision");
     $render->setCondition([
       ["comision","=",$idComision],
-      ["alu-plan","=",false],
+      ["alu-anio_ingreso","=",false],
     ]);
-    $render->setFields(["alumno"]);
     
     $rows = $this->container->getDb()->all("alumno_comision",$render);
 
@@ -31,7 +30,7 @@ class ActualizarPlanAlumnosApi extends BaseApi {
     foreach($rows as $row){
       $a = [
         "id" => $row["alumno"],
-        "plan" => $row["com_pla_plan"]
+        "anio_ingreso" => $row["com_pla_anio"]
       ];
 
       $persist = $this->container->getControllerEntity("persist_sql", "alumno")->id($a);

@@ -8,9 +8,9 @@ class GenerarComisionesSiguientesScript extends BaseController{
   public function main(){
     $container = new Container;
     $import = $container->getImport("comisiones_siguientes");
-    $import->idCalendario = 2;
-    $import->anio ="2021";
-    $import->semestre = "2";
+    $import->idCalendario = '62c2eea47c189';
+    $import->anio ="2022";
+    $import->semestre = "1";
     $import->modalidad =  '7';
     $import->centroEducativo = '6047d36d50316';
     $import->initialize();

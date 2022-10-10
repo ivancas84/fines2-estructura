@@ -34,7 +34,7 @@ class ComisionesSiguientesImportElement extends ImportElement {
   }
   
  
-  public function compareUpdate($entityName, $id, $updateMode = true, $name = null){
+  public function compareUpdate($entityName, $id, $name = null){
     /**
      * Realiza la comparacion y actualiza
      * 
@@ -54,7 +54,7 @@ class ComisionesSiguientesImportElement extends ImportElement {
       return $this->update($compare, $entityName, $existente, $name, true);
     } 
 
-    return parent::compareUpdate($entityName, $id, $updateMode, $name);
+    return parent::compareUpdate($entityName, $id, $name);
     
   }
 }

@@ -29,6 +29,7 @@ crec (cre): float nf.
 porcentaje_asistencia (pa): integer nf.
 observaciones (obs): text nf.
 division (dia): string nf.
+fecha (fec): date nf.
 curso (cur): string mu.
 alumno (alu): string mu. NOT NULL.
 disposicion (dis): string mu. NOT NULL.

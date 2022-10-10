@@ -8,7 +8,7 @@ require_once("function/array_combine_key.php");
 
 class AlumnosComisionScript extends BaseController{
  /**
-   * Formulario para cargar calificaciones
+   * Formulario para cargar alumnos de comision
    * ./script/calificacion_form
    */
 

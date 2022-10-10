@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<table>
+  <tr>
+    <th>REGION</th>
+    <th>DISTRITO</th>
+    <th>CENS</th>
+    <th>SEDE</th>
+    <th>DIRECCIÓN</th>
+    <th>COMISIÓN</th>
+    <th>CONFIGURACIÓN</th>
+    <th>ORIENTACIÓN</th>
+    <th>AÑO-CUATRIMESTRE</th>
+    <th>TURNO</th>
+    <th>ESTUDIANTES</th>
+    <th>MATERIA</th>
+    <th>CODIGO LISTADO FINES</th>
+    <th>HS.C</th>
+    <th>LUNES</th>
+    <th>MARTES</th>
+    <th>MIÉRCOLES</th>
+    <th>JUEVES</th>
+    <th>VIERNES</th>
+    <th>ID COMISION</th>
+    <th>APELLIDO</th>
+    <th>NOMBRE</th>
+    <th>CUIL</th>
+    <th>FECHA DE NACIMIENTO</th>
+  </tr>
+<? foreach($comision_cursos_horarios as $comision => $cursos):
+  $first = true;
+  $first2 = true;
+  foreach($cursos as $curso => $horarios): 
+    $d = $this->container->getRel("horario")->value($horarios[0]);
+    $h = $this->container->getRel("horario")->value($horarios[0]) ?>
+  <tr>
+    <?if($first): $first = false; ?>
+    <td rowspan="<?=count($cursos)?>">1</td>
+    <td rowspan="<?=count($cursos)?>">LA PLATA</td>
+    <td rowspan="<?=count($cursos)?>">456</td>
+    <td rowspan="<?=count($cursos)?>"><?=$d["sede"]->_get("nombre")?></td>
+    <td rowspan="<?=count($cursos)?>"><?=$d["domicilio"]->_get("label")?></td>
+    <td rowspan="<?=count($cursos)?>"><?=$d["sede"]->_get("numero").$d["comision"]->_get("division")."/".$d["planificacion"]->_get("anio","Y").$d["planificacion"]->_get("semestre")?></td>
+    <td rowspan="<?=count($cursos)?>"><?=($d["comision"]->_get("apertura"))? "NUEVA" : "HISTORICA" ?></td>
+    <td rowspan="<?=count($cursos)?>"><?=$d["plan"]->_get("orientacion")?></td>
+    <td rowspan="<?=count($cursos)?>"><?=$d["planificacion"]->_get("anio")."°".$d["planificacion"]->_get("semestre")."C"?></td>
+    <td rowspan="<?=count($cursos)?>"><?=$d["comision"]->_get("turno")?></td>
+    <td rowspan="<?=count($cursos)?>"></td>
+    <?endif;?>
+    <td><?=$h["asignatura"]->_get("nombre")?></td>
+    <td><?=$h["asignatura"]->_get("codigo")?></td>
+    <td><?=$h["curso"]->_get("horas_catedra")?></td>
+    
+    <?foreach($cursos_horarios[$curso] as $horario):?>
+    <td><?=$horario?></td>
+    <?endforeach;?>
+
+    
+    <?if($first2): $first2 = false; ?>
+    <td rowspan="<?=count($cursos)?>"><?=$d["comision"]->_get("identificacion")?></td>
+    <?endif;?>
+    
+    <?if(array_key_exists($curso, $curso_docentes)): $p = $this->container->getRel("toma")->value($curso_docentes[$curso]);?>
+      <td><?=$p["docente"]->_get("nombres", "Xx Yy")?></td>
+      <td><?=$p["docente"]->_get("apellidos", "Xx Yy")?></td>
+      <td><?=$p["docente"]->_get("cuil")?></td>
+      <td><?=$p["docente"]->_get("fecha_nacimiento","d/m/Y")?></td>
+    <?else:?>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    <?endif?>
+  </tr>
+<?endforeach; 
+endforeach;?>
+</table>
+
+</body>
+</html>

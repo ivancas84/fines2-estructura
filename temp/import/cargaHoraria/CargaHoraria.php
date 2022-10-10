@@ -34,8 +34,8 @@ class CargaHorariaImport extends Import {
 
 
     public function query(){
-        $this->queryEntityField_("asignatura","nombre");
-        $this->queryEntityField_("clasificacion","nombre");
+        $this->queryEntity_("asignatura","nombre");
+        $this->queryEntity_("clasificacion","nombre");
         $this->queryEntityIdentifier_("plan");
         $this->queryEntityIdentifier_("carga_horaria");
     }

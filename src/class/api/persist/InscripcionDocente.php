@@ -9,14 +9,13 @@ class InscripcionDocentePersistApi extends PersistApi {
   public function main(){
     $data = php_input();
     /**
-     * $data["persona"] //datos de persona que incluye el id de curso
-     * $data["dm"] //datos de domiclio
+     * $data //datos de persona que incluye el id de curso
      * 
      */
 
     if(empty($data)) throw new Exception("Se está intentando persistir un conjunto de datos vacío");
 
-    $value = $this->container->getValue("persona")->_fromArray($data["persona"], "set")->_call("reset");
+    $value = $this->container->getValue("persona")->_fromArray($data, "set")->_call("reset");
     $row = $this->container->getDb()->unique("persona", $value->_toArray("json"));
 
     if($row){
@@ -38,7 +37,7 @@ class InscripcionDocentePersistApi extends PersistApi {
     }
     
     $persistToma = $this->container->getControllerEntity("persist_sql", "toma_posesion")->id([
-      "curso" => $data["persona"]["curso"], "persona" => $value->_get("id")
+      "curso" => $data["curso"], "persona" => $value->_get("id")
     ]);
 
     $sql .= $persistToma["sql"];

@@ -136,7 +136,7 @@ class ModelTools {
     $sql = "
 SELECT id AS toma_activa, curso
 FROM toma
-WHERE (toma.estado = 'Aprobada' OR toma.estado = 'Pendiente') AND (toma.estado_contralor != 'Modificar')
+WHERE (toma.estado = 'Aprobada') AND (toma.estado_contralor != 'Modificar')
 AND curso IN ('{$idCursos_}')
 ";
 
@@ -310,6 +310,17 @@ GROUP BY curso.id
     return $this->container->getDb()->all("calificacion",$render);
   }
 
+  public function calificacionesAlumnoPlanAnio($idAlumno, $plan, $anio){
+    $render = $this->container->getRender("calificacion");
+    $render->setCondition([
+      ["dis_pla-plan","=",$plan],
+      ["dis_pla-anio",">=",$anio],
+      ["alumno","=",$idAlumno],
+    ]);
+    $render->setOrder(["dis_pla-anio"=>"asc","dis_pla-semestre"=>"asc","dis_asi-nombre"=>"asc"]);
+    return $this->container->getDb()->all("calificacion",$render);
+  }
+
   public function cantidadPlanificacionCalificacionesAprobadasAlumnoPlan($idAlumno, $plan){
     
     $render = $this->container->getRender("calificacion");
@@ -328,7 +339,7 @@ GROUP BY curso.id
     return $this->container->getDb()->select("calificacion",$render);
   }
 
-  public function cantidadAnioCalificacionesAprobadasAlumnoPlan($idAlumno, $plan){
+  public function cantidadAnioCalificacionesAprobadasAlumnoPlan($idAlumno, $plan, $anio = 1){
     /**
      * @return [
      *   [anio,cantidad]
@@ -336,7 +347,8 @@ GROUP BY curso.id
      **/   
     $render = $this->container->getRender("calificacion");
     $render->setCondition([
-      ["dis_pla-plan","=",$plan],      
+      ["dis_pla-plan","=",$plan],  
+      ["dis_pla-anio",">=",$anio],      
       ["alumno","=",$idAlumno],
       [
         ["nota_final",">=","7"],
@@ -347,6 +359,7 @@ GROUP BY curso.id
     $render->setSize(0);
     $render->setGroup(["anio"=>"dis_pla-anio"]);
     $render->setOrder(["dis_pla-anio"=>"asc"]);
+    $render->setOrder(["dis_pla-semestre"=>"asc"]);
     return $this->container->getDb()->select("calificacion",$render);
   }
 

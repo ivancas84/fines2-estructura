@@ -1,4 +1,4 @@
 id (id): string pk. NOT NULL. UNIQUE.
 numero (num): string nf. NOT NULL. MAIN.
-año (añ): year nf.
+anio (ani): year nf.
 tipo (tip): string nf.
