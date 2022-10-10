@@ -38,7 +38,7 @@ class ModelTools {
   public function cantidadAlumnosAprobadosComision($idsComisiones){
     $render = $this->container->getRender("calificacion");
     $render->setCondition([
-      ["cur-comision","=",$idsComisiones],
+      ["comision-id","=",$idsComisiones],
       [
         ["nota_final",">","7"],
         ["crec",">","4"]
@@ -274,8 +274,8 @@ GROUP BY curso.id
     $render = $this->container->getRender("disposicion");
 
     $render->setCondition([
-      ["pla-plan","=",$plan],
-      ["pla-anio",">=",$anio]
+      ["plan-id","=",$plan],
+      ["planificacion-anio",">=",$anio]
     ]);
     $render->setOrder(["pla-anio"=>"asc","pla-semestre"=>"asc", "asi-nombre"=>"asc"]);
     
@@ -299,7 +299,7 @@ GROUP BY curso.id
   public function calificacionesAprobadasAlumnoPlan($idAlumno, $plan){
     $render = $this->container->getRender("calificacion");
     $render->setCondition([
-      ["dis_pla-plan","=",$plan],
+      ["plan-id","=",$plan],
       ["alumno","=",$idAlumno],
       [
         ["nota_final",">=","7"],
@@ -313,8 +313,8 @@ GROUP BY curso.id
   public function calificacionesAlumnoPlanAnio($idAlumno, $plan, $anio){
     $render = $this->container->getRender("calificacion");
     $render->setCondition([
-      ["dis_pla-plan","=",$plan],
-      ["dis_pla-anio",">=",$anio],
+      ["plan-id","=",$plan],
+      ["planificacion-anio",">=",$anio],
       ["alumno","=",$idAlumno],
     ]);
     $render->setOrder(["dis_pla-anio"=>"asc","dis_pla-semestre"=>"asc","dis_asi-nombre"=>"asc"]);
@@ -325,7 +325,7 @@ GROUP BY curso.id
     
     $render = $this->container->getRender("calificacion");
     $render->setCondition([
-      ["dis_pla-plan","=",$plan],      
+      ["plan-id","=",$plan],      
       ["alumno","=",$idAlumno],
       [
         ["nota_final",">=","7"],
@@ -347,8 +347,8 @@ GROUP BY curso.id
      **/   
     $render = $this->container->getRender("calificacion");
     $render->setCondition([
-      ["dis_pla-plan","=",$plan],  
-      ["dis_pla-anio",">=",$anio],      
+      ["plan-id","=",$plan],  
+      ["planificacion-anio",">=",$anio],      
       ["alumno","=",$idAlumno],
       [
         ["nota_final",">=","7"],

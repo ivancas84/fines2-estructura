@@ -15,8 +15,8 @@ class PreigesScript extends BaseController{
   public function main(){
     $render = $this->container->getRender("horario");
     $render->setCondition([
-      ["cur_com_cal-anio","=","2022"],
-      ["cur_com_cal-semestre","=","2"],
+      ["calendario-anio","=","2022"],
+      ["calendario-semestre","=","2"],
       //["cur_com_sed-centro_educativo","=","1"],
     ]);
     $render->setSize(false);
@@ -25,9 +25,9 @@ class PreigesScript extends BaseController{
     
     $render = $this->container->getRender("toma");
     $render->setCondition([
-      ["cur_com_cal-anio","=","2022"],
-      ["cur_com_cal-semestre","=","2"],
-      ["cur_com_sed-centro_educativo","=","1"],
+      ["calendario-anio","=","2022"],
+      ["calendario-semestre","=","2"],
+      ["centro_educativo-id","=","1"],
       ["estado","=","Aprobada"],
       ["estado_contralor","=","Pasar"]
     ]);

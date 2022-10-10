@@ -22,7 +22,7 @@ function getCalificaciones($idAlumno){
   $render->setCondition([
     ["alumno","=",$idAlumno],
   ]);
-  $render->setOrder(["dis_pla-anio"=>"asc","dis_pla-semestre"=>"asc","dis_asi-nombre"=>"asc"]);
+  $render->setOrder(["planificacion-anio"=>"asc","planificacion-semestre"=>"asc","asignatura-nombre"=>"asc"]);
   return $container->getDb()->all("calificacion",$render);
 }
 

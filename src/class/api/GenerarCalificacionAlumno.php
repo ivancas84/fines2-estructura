@@ -46,7 +46,7 @@ class GenerarCalificacionAlumnoApi extends BaseApi {
     $render->setSize(0);
     $render->setCondition([
       ["alumno","=",$this->idAlumno],
-      ["dis_pla-plan","=",$this->alumno["plan"]],
+      ["plan-id","=",$this->alumno["plan"]],
     ]);
     //$render->setFields(["cantidad"=>"id.count"]);
     //$render->setGroup(["alumno"=>"alumno"]);
@@ -60,9 +60,9 @@ class GenerarCalificacionAlumnoApi extends BaseApi {
     $render = $this->container->getRender("disposicion");
     $render->setSize(0);
     $render->setCondition([
-      ["pla-plan","=",$this->alumno["plan"]],
+      ["plan-id","=",$this->alumno["plan"]],
     ]);
-    $render->setOrder(["pla-anio"=>"asc","pla-semestre"=>"asc", "asi-nombre"=>"asc"]);
+    $render->setOrder(["planificacion-anio"=>"asc","planificacion-semestre"=>"asc", "asignatura-nombre"=>"asc"]);
     
     $this->disposicion_ = array_combine_key(
       $this->container->getDb()->all("disposicion",$render),

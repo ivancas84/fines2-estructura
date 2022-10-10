@@ -26,16 +26,16 @@ class PersistCalificacionesAlumnoApi {
 
 
     $render = $this->container->getRender("disposicion");
-    $render->setCondition(["pla-plan","=",$params["alumno"]["plan"]]);
+    $render->setCondition(["plan-id","=",$params["alumno"]["plan"]]);
     $disposicion_ = array_combine_key2(
       $this->container->getDb()->all("disposicion", $render),
-      ["asignatura","pla_anio","pla_semestre"]
+      ["asignatura","planificacion_anio","planificacion_semestre"]
     );
 
     $controlDisposiciones = [];
 
     foreach($params["calificacion/alumno"] as $k => $row){
-      $identifierDisposicion = $row["dis-asignatura"].UNDEFINED. $row["dis_pla-anio"].UNDEFINED.$row["dis_pla-semestre"];
+      $identifierDisposicion = $row["disposicion-asignatura"].UNDEFINED. $row["planificacion-anio"].UNDEFINED.$row["planificacion-semestre"];
 
       if(in_array($identifierDisposicion, $controlDisposiciones)) throw new Exception("Disposicion repetida");
       if(!array_key_exists($identifierDisposicion, $disposicion_)) throw new Exception("Disposicion inexistente");

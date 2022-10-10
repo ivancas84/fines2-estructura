@@ -38,7 +38,7 @@ class ComisionTools {
         ["crec",">=","4","OR"],
       ]
     ]);
-    $render->setOrder(["pla-anio"=>"asc","pla-semestre"=>"asc","asi-nombre"=>"asc"]);
+    $render->setOrder(["planificacion-anio"=>"asc","planificacion-semestre"=>"asc","asignatura-nombre"=>"asc"]);
     return $this->container->getDb()->all("calificacion",$render);
   }
 

@@ -80,7 +80,7 @@ class HorariosComisionPersistSql  {
 
   public function verificarHorarios(){
     $render = new Render("horario");
-    $render->setCondition(["cur-comision","=", $this->id]);
+    $render->setCondition(["comision-id","=", $this->id]);
     if($this->container->getDb()->count("horario", $render)) throw new Exception("Ya existen horarios para la comision " . $this->id);
   }
 

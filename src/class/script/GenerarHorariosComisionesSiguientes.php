@@ -118,7 +118,7 @@ class GenerarHorariosComisionesSiguientesScript extends BaseController{
   protected  function quitarComisionesAnterioresConHorarioGrupoActual(){
     $idsComisionesGrupoActual = array_column($this->comisionesAnteriores, "comision_siguiente");
     $render = $this->container->getRender("horario");
-    $render->setCondition(["cur-comision","=",$idsComisionesGrupoActual]);
+    $render->setCondition(["comision-id","=",$idsComisionesGrupoActual]);
     $render->setSize(0);
     $horariosGrupoActual = $this->container->getDb()->all("horario",$render);
 

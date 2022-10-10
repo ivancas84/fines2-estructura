@@ -41,8 +41,8 @@ class ComisionesSiguientesAlumnosImport extends Import{
   public function defineSource(){
     $render = $this->container->getRender("comision");
     $render->setCondition([
-      ["cal-anio","=",$this->anio],
-      ["cal-semestre","=",$this->semestre],
+      ["calendario-anio","=",$this->anio],
+      ["calendario-semestre","=",$this->semestre],
       ["modalidad","=",$this->modalidad],
     ]);
     $render->setSize(0);
@@ -51,7 +51,7 @@ class ComisionesSiguientesAlumnosImport extends Import{
     $render = $this->container->getRender("alumno");
     $render->setSize(0);
 
-    $render->setCondition(["com-comision_siguiente","=",array_keys($comisionesActuales)]);
+    $render->setCondition(["comision-comision_siguiente","=",array_keys($comisionesActuales)]);
     $sql = $this->container->getSqlo("alumno")->select($render);
     $this->source = $this->container->getDb()->all("alumno",$render);
   }

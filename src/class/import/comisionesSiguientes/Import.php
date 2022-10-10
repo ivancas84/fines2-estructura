@@ -20,17 +20,17 @@ class ComisionesSiguientesImport extends Import{
 
 
   public function initialize(){
-    $this->container->getEntity("comision")->identifier = ["sed-numero","division", "planificacion"]; 
+    $this->container->getEntity("comision")->identifier = ["sede-numero","division", "planificacion"]; 
   }
   
   public function defineSource(){
     $render = $this->container->getRender("comision");
     $render->setCondition([
       ["autorizada","=",true],
-      ["cal-anio","=",$this->anio],
-      ["cal-semestre","=",$this->semestre],
+      ["calendario-anio","=",$this->anio],
+      ["calendario-semestre","=",$this->semestre],
       ["modalidad","=",$this->modalidad],
-      ["sed-centro_educativo","=",$this->centroEducativo],
+      ["sede-centro_educativo","=",$this->centroEducativo],
       ["tramo", "!=","32"]
     ]);
 

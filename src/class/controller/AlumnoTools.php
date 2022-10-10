@@ -19,7 +19,7 @@ class AlumnoTools {
 
   public function initDni($dni){
     $render = $this->container->getRender("alumno");
-    $render->setCondition(["per-numero_documento","=",$dni]);
+    $render->setCondition(["persona-numero_documento","=",$dni]);
     $this->alumno = $this->container->getDb()->one("alumno",$render);
     $this->postInit();
   }
@@ -68,8 +68,8 @@ class AlumnoTools {
     $render = $this->container->getRender("disposicion");
 
     $render->setCondition([
-      ["pla-plan","=",$this->alumno["plan"]],
-      ["pla-anio",">=",$this->alumno["anio_ingreso"]]
+      ["plan-id","=",$this->alumno["plan"]],
+      ["planificacion-anio",">=",$this->alumno["anio_ingreso"]]
     ]);
     $render->setOrder(["pla-anio"=>"asc","pla-semestre"=>"asc", "asi-nombre"=>"asc"]);
     
@@ -100,7 +100,7 @@ class AlumnoTools {
     $render->setCondition([
       ["alumno","=",$this->alumno["id"]],
     ]);
-    $render->setOrder(["dis_pla-anio"=>"asc","dis_pla-semestre"=>"asc","dis_asi-nombre"=>"asc"]);
+    $render->setOrder(["planificacion-anio"=>"asc","planificacion-semestre"=>"asc","asignatura-nombre"=>"asc"]);
     return $this->container->getDb()->all("disposicion_pendiente",$render);
   }
 

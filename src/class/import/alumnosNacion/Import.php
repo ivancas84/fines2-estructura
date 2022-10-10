@@ -69,17 +69,17 @@ class AlumnosNacionImport extends Import{
     $render = new Render();
     $render->setSize(false);
     $render->setCondition([
-      ["alu_per-numero_documento","=",$this->ids["persona"]],
+      ["persona-numero_documento","=",$this->ids["persona"]],
       [
         [
-          ["com_cal-anio","=","2022"],["com_cal-semestre","=","1"]
+          ["calendario-anio","=","2022"],["calendario-semestre","=","1"]
         ],
         [
-         ["com_cal-anio","=","2021","OR"], ["com_cal-semestre","=","2"]
+         ["calendario-anio","=","2021","OR"], ["calendario-semestre","=","2"]
         ]
       ]
     ]);
-    $render->setOrder(["com_cal-anio"=>"DESC", "com_cal-semestre"=>"DESC"]);
+    $render->setOrder(["calendario-anio"=>"DESC", "calendario-semestre"=>"DESC"]);
     
     $rows = $this->container->getDb()->all("alumno_comision", $render);
 

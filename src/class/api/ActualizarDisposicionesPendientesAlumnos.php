@@ -55,7 +55,7 @@ class ActualizarDisposicionesPendientesAlumnosApi extends BaseApi {
     $render->setSize(0);
     $render->setCondition([
       ["alumno","=",$this->idAlumno_],
-      ["dis_pla-plan","=",$this->comision["pla_plan"]],
+      ["plan-id","=",$this->comision["plan_id"]],
       [
         ["nota_final",">=","7"],
         ["crec",">=","4","OR"]
@@ -75,9 +75,9 @@ class ActualizarDisposicionesPendientesAlumnosApi extends BaseApi {
     $render = $this->container->getRender("disposicion");
     $render->setSize(0);
     $render->setCondition([
-      ["pla-plan","=",$this->comision["pla_plan"]],
+      ["plan-id","=",$this->comision["plan_id"]],
     ]);
-    $render->setOrder(["pla-anio"=>"asc","pla-semestre"=>"asc", "asi-nombre"=>"asc"]);
+    $render->setOrder(["planificacion-anio"=>"asc","planificacion-semestre"=>"asc", "asignatura-nombre"=>"asc"]);
     
     $this->disposicion_ = array_combine_key(
       $this->container->getDb()->all("disposicion",$render),

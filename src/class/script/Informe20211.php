@@ -19,9 +19,9 @@ class Informe20211Script extends BaseController{
     $render = $this->container->getRender("alumno_comision");
     $render->setSize(false);
     $render->setCondition([
-      ["com_cal-anio","=","2021"],
-      ["com_cal-semestre","=","2"],
-      ["com_sed-centro_educativo","=",'6047d36d50316'],
+      ["calendario-anio","=","2021"],
+      ["calendario-semestre","=","2"],
+      ["sede-centro_educativo","=",'6047d36d50316'],
       ["activo","=",true]
     ]);
 
