@@ -19,7 +19,7 @@
     "entityName": "calificacion",
     "dataType": "float",  
     "subtype": "float",  
-    "length": 4,2,
+    "length": 4.2,
     "name": "nota1"
   },
 
@@ -31,7 +31,7 @@
     "entityName": "calificacion",
     "dataType": "float",  
     "subtype": "float",  
-    "length": 4,2,
+    "length": 4.2,
     "name": "nota2"
   },
 
@@ -43,7 +43,7 @@
     "entityName": "calificacion",
     "dataType": "float",  
     "subtype": "float",  
-    "length": 4,2,
+    "length": 4.2,
     "name": "nota3"
   },
 
@@ -55,7 +55,7 @@
     "entityName": "calificacion",
     "dataType": "float",  
     "subtype": "float",  
-    "length": 4,2,
+    "length": 4.2,
     "name": "nota_final"
   },
 
@@ -67,7 +67,7 @@
     "entityName": "calificacion",
     "dataType": "float",  
     "subtype": "float",  
-    "length": 4,2,
+    "length": 4.2,
     "name": "crec"
   },
 

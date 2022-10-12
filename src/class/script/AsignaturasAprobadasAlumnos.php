@@ -15,7 +15,6 @@ require_once("function/array_group_value.php");
 class AsignaturasAprobadasAlumnosScript extends BaseController {
 
   function main() {
-    
     $idComision = $_REQUEST["comision"];
     $alumnoComision_ = $this->alumnoComision_($idComision);
 
@@ -23,14 +22,18 @@ class AsignaturasAprobadasAlumnosScript extends BaseController {
       array_column($alumnoComision_, "alumno")
     );
 
-    $plan = $this->container->getDb()->get("comision", $idComision)["pla_plan"];
+    $comision = $this->container->getDb()->get("comision", $idComision);
+    $comisionValue = $this->container->getRel("comision")->value($comision);
 
-    $disposicion_ = $this->disposicion_($plan);
+    $disposicion_ = $this->disposicion_($comision["pla_plan"]);
 
-    $alumno__calificacionAprobada_ = $this->alumno__calificacionAprobada_($idAlumno_, $plan);
+    $alumno__calificacionAprobada_ = $this->alumno__calificacionAprobada_($idAlumno_, $comision["pla_plan"]);
     require_once("class/script/AsignaturasAprobadasAlumnos.html");
 
   }
+
+
+
 
   public function alumnoComision_($idComision){
     $render = $this->container->getRender("alumno_comision");
@@ -74,9 +77,6 @@ class AsignaturasAprobadasAlumnosScript extends BaseController {
       $this->container->getDb()->select("calificacion",$render),
       "alumno"
     );
-
-
-
 
   }
 

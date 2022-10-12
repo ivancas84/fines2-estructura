@@ -3,7 +3,6 @@
 <head>
 <style>
 table {
-  font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
@@ -14,27 +13,37 @@ td, th {
   padding: 8px;
 }
 
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
 </style>
 </head>
 <body>
-<h1>Rindex Comisión</h1>
 <table>
   <tr>
-    <th>ALUMNO</th>
-    <th>TRAMO INGRESO</th>
-    <th>ACTIVO</th>
+    <td colspan="2"><strong>Sede:</strong> <?=$comisionValue["sede"]->_get("nombre")?></td>
+    <td colspan="5"><strong>Dirección:</strong> <?=$comisionValue["domicilio"]->_get("label")?></td>
+    <td colspan="5"><strong>Año:</strong> <?=$comisionValue["calendario"]->_get("anio", "Y")?> - <?=$comisionValue["calendario"]->_get("semestre")?></td>
+    <td colspan="5"><strong>Turno:</strong> <?=$comisionValue["comision"]->_get("turno")?></td>
+    <td colspan="5"><strong>Comision:</strong> <?=$comisionValue["sede"]->_get("numero")?><?=$comisionValue["comision"]->_get("division")?>/<?=$comisionValue["planificacion"]->_get("anio")?><?=$comisionValue["planificacion"]->_get("semestre")?></td>
+    <td colspan="5"></td>
+  </tr>
+  <tr>
+    <th rowspan="2">APELLIDO Y NOMBRE</th>
+    <th rowspan="2">DNI</th>
+    <th colspan="5">1° año 1° tramo</th>
+    <th colspan="5">1° año 2° tramo</th>
+    <th colspan="5">2° año 1° tramo</th>
+    <th colspan="5">2° año 2° tramo</th>
+    <th colspan="5">3° año 1° tramo</th>
+    <th colspan="5">3° año 2° tramo</th>
+  </tr>
+  <tr>
 <?foreach($disposicion_ as $d):?>
-    <th><?=$d["asi_nombre"]." ".$d["pla_tramo"]?></th>
+    <th><?=$d["asi_nombre"]?></th>
 <?endforeach;?>
   </tr>
 <?foreach($alumnoComision_ as $ac): $acp = $this->container->getRel("alumno_comision")->value($ac); ?>
   <tr>
-    <td><a href="https://www.planfines2.com.ar/users3/alumno-admin?id=<?=$ac['alumno']?>" target="_blank"><?=$acp["persona"]->_get("apellidos", "X")?>, <?=$acp["persona"]->_get("nombres", "Xx Yy")?> <?=$ac["alu_per_numero_documento"]?></a></td>
-    <td><?=$ac["alu_tramo_ingreso"]?></td>
-    <td><?=(settypebool($ac["activo"]))?"SI":"NO"?></td>
+    <td><?=$acp["persona"]->_get("apellidos", "X")?>, <?=$acp["persona"]->_get("nombres", "Xx Yy")?></td>
+    <td><?=$acp["persona"]->_get("numero_documento")?></td>
 
     <?if(array_key_exists($ac["alumno"], $alumno__calificacionAprobada_)):?>
       <?foreach($disposicion_ as $d):?>
