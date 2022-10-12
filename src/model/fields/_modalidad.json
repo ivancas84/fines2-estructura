@@ -1,0 +1,25 @@
+{
+  "id": {
+    "type": "varchar",
+    "fieldType": "pk",
+    "default": null,
+    "alias": "id",
+    "entityName": "modalidad",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "nombre": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "nom",
+    "entityName": "modalidad",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "nombre"
+  }
+}

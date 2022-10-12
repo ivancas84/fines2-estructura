@@ -1,0 +1,61 @@
+{
+  "id": {
+    "type": "varchar",
+    "fieldType": "pk",
+    "default": null,
+    "alias": "id",
+    "entityName": "horario",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "hora_inicio": {
+    "type": "time",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "hi",
+    "entityName": "horario",
+    "dataType": "time",  
+    "subtype": "time",  
+    "name": "hora_inicio"
+  },
+
+  "hora_fin": {
+    "type": "time",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "hf",
+    "entityName": "horario",
+    "dataType": "time",  
+    "subtype": "time",  
+    "name": "hora_fin"
+  },
+
+  "curso": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "cur",
+    "entityName": "horario",
+    "entityRefName": "curso",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "curso"
+  },
+
+  "dia": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "dia",
+    "entityName": "horario",
+    "entityRefName": "dia",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "dia"
+  }
+}

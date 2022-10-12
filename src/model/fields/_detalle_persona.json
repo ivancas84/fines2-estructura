@@ -1,0 +1,97 @@
+{
+  "id": {
+    "type": "varchar",
+    "fieldType": "pk",
+    "default": null,
+    "alias": "id",
+    "entityName": "detalle_persona",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "descripcion": {
+    "type": "text",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "des",
+    "entityName": "detalle_persona",
+    "dataType": "text",  
+    "subtype": "textarea",  
+    "length": 65535,
+    "name": "descripcion"
+  },
+
+  "archivo": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "arc",
+    "entityName": "detalle_persona",
+    "entityRefName": "file",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "archivo"
+  },
+
+  "creado": {
+    "type": "timestamp",
+    "fieldType": "nf",
+    "default": "current_timestamp()",
+    "alias": "cre",
+    "entityName": "detalle_persona",
+    "dataType": "timestamp",  
+    "subtype": "timestamp",  
+    "name": "creado"
+  },
+
+  "persona": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "per",
+    "entityName": "detalle_persona",
+    "entityRefName": "persona",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "persona"
+  },
+
+  "fecha": {
+    "type": "date",
+    "fieldType": "nf",
+    "default": "curdate()",
+    "alias": "fec",
+    "entityName": "detalle_persona",
+    "dataType": "date",  
+    "subtype": "date",  
+    "name": "fecha"
+  },
+
+  "tipo": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "tip",
+    "entityName": "detalle_persona",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 255,
+    "name": "tipo"
+  },
+
+  "asunto": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "asu",
+    "entityName": "detalle_persona",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 255,
+    "name": "asunto"
+  }
+}

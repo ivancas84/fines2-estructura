@@ -1,15 +1,15 @@
 <?php
 
 require_once("../config/config.php");
-require_once("class/controller/Model.php");
 require_once("class/Container.php");
+require_once("class/model/Entity.php");
 
 $container = new Container();
+$a = $container->getEntity("alumno");
+echo $a->getName();
+$b = $container->getEntity("persona");
+echo $b->getName();
 
-echo "<pre>";
-print_r($container->getRel("comision")->fieldNames());
-die();
-$render = $container->getRender();
-$render->addFields($container->getRel($entityName)->fieldNames());
-$comisionSqlo = $container->getSqlo("comision");
-$comisionSqlo->select($render);
+//print_r($a);
+//$a = $container->getStructure();
+

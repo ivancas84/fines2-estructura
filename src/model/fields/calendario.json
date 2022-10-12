@@ -1,0 +1,11 @@
+{
+  "anio": {
+    "minLength": "2000"
+  },
+
+  "semestre": {
+    "subtype": "select_text",
+    "selectValues": ["1","2"]
+  }
+
+}

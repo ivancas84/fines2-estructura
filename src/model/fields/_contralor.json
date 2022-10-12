@@ -1,0 +1,59 @@
+{
+  "id": {
+    "type": "varchar",
+    "fieldType": "pk",
+    "default": null,
+    "alias": "id",
+    "entityName": "contralor",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "fecha_contralor": {
+    "type": "date",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "fc",
+    "entityName": "contralor",
+    "dataType": "date",  
+    "subtype": "date",  
+    "name": "fecha_contralor"
+  },
+
+  "fecha_consejo": {
+    "type": "date",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "fca",
+    "entityName": "contralor",
+    "dataType": "date",  
+    "subtype": "date",  
+    "name": "fecha_consejo"
+  },
+
+  "insertado": {
+    "type": "timestamp",
+    "fieldType": "nf",
+    "default": "current_timestamp()",
+    "alias": "ins",
+    "entityName": "contralor",
+    "dataType": "timestamp",  
+    "subtype": "timestamp",  
+    "name": "insertado"
+  },
+
+  "planilla_docente": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "pd",
+    "entityName": "contralor",
+    "entityRefName": "planilla_docente",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "planilla_docente"
+  }
+}

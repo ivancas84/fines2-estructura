@@ -1,0 +1,209 @@
+{
+  "id": {
+    "type": "varchar",
+    "fieldType": "pk",
+    "default": null,
+    "alias": "id",
+    "entityName": "comision",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "turno": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "tur",
+    "entityName": "comision",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "turno"
+  },
+
+  "division": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "dia",
+    "entityName": "comision",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "division"
+  },
+
+  "comentario": {
+    "type": "text",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "com",
+    "entityName": "comision",
+    "dataType": "text",  
+    "subtype": "textarea",  
+    "length": 65535,
+    "name": "comentario"
+  },
+
+  "autorizada": {
+    "type": "tinyint",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "aut",
+    "entityName": "comision",
+    "dataType": "boolean",  
+    "subtype": "checkbox",  
+    "length": 1,
+    "name": "autorizada"
+  },
+
+  "apertura": {
+    "type": "tinyint",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "ape",
+    "entityName": "comision",
+    "dataType": "boolean",  
+    "subtype": "checkbox",  
+    "length": 1,
+    "name": "apertura"
+  },
+
+  "publicada": {
+    "type": "tinyint",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "pub",
+    "entityName": "comision",
+    "dataType": "boolean",  
+    "subtype": "checkbox",  
+    "length": 1,
+    "name": "publicada"
+  },
+
+  "observaciones": {
+    "type": "text",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "obs",
+    "entityName": "comision",
+    "dataType": "text",  
+    "subtype": "textarea",  
+    "length": 65535,
+    "name": "observaciones"
+  },
+
+  "alta": {
+    "type": "timestamp",
+    "fieldType": "nf",
+    "default": "current_timestamp()",
+    "alias": "alt",
+    "entityName": "comision",
+    "dataType": "timestamp",  
+    "subtype": "timestamp",  
+    "name": "alta"
+  },
+
+  "sede": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "sed",
+    "entityName": "comision",
+    "entityRefName": "sede",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "sede"
+  },
+
+  "modalidad": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "moa",
+    "entityName": "comision",
+    "entityRefName": "modalidad",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "modalidad"
+  },
+
+  "planificacion": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "pla",
+    "entityName": "comision",
+    "entityRefName": "planificacion",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "planificacion"
+  },
+
+  "comision_siguiente": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "cs",
+    "entityName": "comision",
+    "entityRefName": "comision",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "comision_siguiente"
+  },
+
+  "calendario": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "cal",
+    "entityName": "comision",
+    "entityRefName": "calendario",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "calendario"
+  },
+
+  "identificacion": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "ide",
+    "entityName": "comision",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "identificacion"
+  },
+
+  "estado": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": "Confirma",
+    "alias": "est",
+    "entityName": "comision",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "estado"
+  },
+
+  "configuracion": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": "Histórica",
+    "alias": "con",
+    "entityName": "comision",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "configuracion"
+  }
+}

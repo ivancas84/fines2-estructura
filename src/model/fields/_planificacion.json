@@ -1,0 +1,50 @@
+{
+  "id": {
+    "type": "varchar",
+    "fieldType": "pk",
+    "default": null,
+    "alias": "id",
+    "entityName": "planificacion",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "anio": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "ani",
+    "entityName": "planificacion",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "anio"
+  },
+
+  "semestre": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "sem",
+    "entityName": "planificacion",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "semestre"
+  },
+
+  "plan": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "plb",
+    "entityName": "planificacion",
+    "entityRefName": "plan",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "plan"
+  }
+}

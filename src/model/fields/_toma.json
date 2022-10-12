@@ -1,0 +1,195 @@
+{
+  "id": {
+    "type": "varchar",
+    "fieldType": "pk",
+    "default": null,
+    "alias": "id",
+    "entityName": "toma",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "fecha_toma": {
+    "type": "date",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "ft",
+    "entityName": "toma",
+    "dataType": "date",  
+    "subtype": "date",  
+    "name": "fecha_toma"
+  },
+
+  "estado": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "est",
+    "entityName": "toma",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "estado"
+  },
+
+  "observaciones": {
+    "type": "text",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "obs",
+    "entityName": "toma",
+    "dataType": "text",  
+    "subtype": "textarea",  
+    "length": 65535,
+    "name": "observaciones"
+  },
+
+  "comentario": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "com",
+    "entityName": "toma",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "comentario"
+  },
+
+  "tipo_movimiento": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "tm",
+    "entityName": "toma",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "tipo_movimiento"
+  },
+
+  "estado_contralor": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "ec",
+    "entityName": "toma",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "estado_contralor"
+  },
+
+  "alta": {
+    "type": "timestamp",
+    "fieldType": "nf",
+    "default": "current_timestamp()",
+    "alias": "alt",
+    "entityName": "toma",
+    "dataType": "timestamp",  
+    "subtype": "timestamp",  
+    "name": "alta"
+  },
+
+  "curso": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "cur",
+    "entityName": "toma",
+    "entityRefName": "curso",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "curso"
+  },
+
+  "docente": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "doc",
+    "entityName": "toma",
+    "entityRefName": "persona",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "docente"
+  },
+
+  "reemplazo": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "ree",
+    "entityName": "toma",
+    "entityRefName": "persona",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "reemplazo"
+  },
+
+  "planilla_docente": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "pd",
+    "entityName": "toma",
+    "entityRefName": "planilla_docente",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "planilla_docente"
+  },
+
+  "calificacion": {
+    "type": "tinyint",
+    "fieldType": "nf",
+    "default": "0",
+    "alias": "cal",
+    "entityName": "toma",
+    "dataType": "boolean",  
+    "subtype": "checkbox",  
+    "length": 1,
+    "name": "calificacion"
+  },
+
+  "temas_tratados": {
+    "type": "tinyint",
+    "fieldType": "nf",
+    "default": "0",
+    "alias": "tt",
+    "entityName": "toma",
+    "dataType": "boolean",  
+    "subtype": "checkbox",  
+    "length": 1,
+    "name": "temas_tratados"
+  },
+
+  "asistencia": {
+    "type": "tinyint",
+    "fieldType": "nf",
+    "default": "0",
+    "alias": "asi",
+    "entityName": "toma",
+    "dataType": "boolean",  
+    "subtype": "checkbox",  
+    "length": 1,
+    "name": "asistencia"
+  },
+
+  "sin_planillas": {
+    "type": "tinyint",
+    "fieldType": "nf",
+    "default": "0",
+    "alias": "sp",
+    "entityName": "toma",
+    "dataType": "boolean",  
+    "subtype": "checkbox",  
+    "length": 1,
+    "name": "sin_planillas"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "centro_educativo": {
+    "subtype": "select"
+  },
+
+  "tipo_sede": {
+    "subtype": "select"
+  }
+
+}

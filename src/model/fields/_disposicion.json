@@ -1,0 +1,39 @@
+{
+  "id": {
+    "type": "varchar",
+    "fieldType": "pk",
+    "default": null,
+    "alias": "id",
+    "entityName": "disposicion",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "asignatura": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "asi",
+    "entityName": "disposicion",
+    "entityRefName": "asignatura",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "asignatura"
+  },
+
+  "planificacion": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "pla",
+    "entityName": "disposicion",
+    "entityRefName": "planificacion",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "planificacion"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "id": {
+    "type": "varchar",
+    "fieldType": "pk",
+    "default": null,
+    "alias": "id",
+    "entityName": "distribucion_horaria",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "horas_catedra": {
+    "type": "int",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "hc",
+    "entityName": "distribucion_horaria",
+    "dataType": "integer",  
+    "subtype": "integer",  
+    "length": 10,
+    "name": "horas_catedra"
+  },
+
+  "dia": {
+    "type": "int",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "dia",
+    "entityName": "distribucion_horaria",
+    "dataType": "integer",  
+    "subtype": "integer",  
+    "length": 10,
+    "name": "dia"
+  },
+
+  "disposicion": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "dis",
+    "entityName": "distribucion_horaria",
+    "entityRefName": "disposicion",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "disposicion"
+  }
+}

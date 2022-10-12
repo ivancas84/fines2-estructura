@@ -1,0 +1,94 @@
+{
+  "alumno": {
+    "main": ["persona"]
+  },
+
+  "asignatura": {
+    "main": ["nombre"]
+  },
+
+  "calendario": {
+    "main": ["descripcion","anio", "semestre"]
+  },
+
+  "calificacion": {
+    "name": "calificacion",
+    "alias": "cali",
+    "nf": ["nota1", "nota2", "nota3", "nota_final", "crec", "porcentaje_asistencia", "observaciones", "division", "fecha"],
+    "mu": ["curso", "alumno", "disposicion"],
+    "_u": [],
+    "notNull": ["id", "alumno", "disposicion"],
+    "unique": ["id"]
+  },
+
+  "cargo": {
+    "main": ["descripcion"]
+  },
+
+  "centro_educativo": {
+    "main": ["nombre"]
+  },
+
+  "comision": {
+    "main": ["sede", "division", "calendario",  "planificacion"]
+  },
+
+  "curso": {
+    "main": ["asignatura", "comision"]
+  },
+
+  "dia": {
+    "orderDefault": {"numero":"asc"},
+    "main": ["dia"]
+  },
+
+  "disposicion": {
+    "main": ["asignatura", "planificacion"]
+  },
+
+  "domicilio": {
+    "main": ["calle", "numero", "barrio"]
+  },
+
+  "file": {
+    "main": ["name"]
+  },
+
+  "modalidad": {
+    "main": ["nombre"]
+  },
+
+  "persona": {
+    "main": ["nombres","apellidos","numero_documento"]
+  },
+
+  "plan": {
+    "main": ["orientacion", "distribucion_horaria"],
+    "uniqueMultiple": ["orientacion", "distribucion_horaria"]
+  },
+
+  "planificacion": {
+    "main":["anio","semestre","plan"],
+    "uniqueMultiple": ["plan", "anio", "semestre"]
+  },
+
+  "planilla_docente": {
+    "main":  ["numero"],
+    "unique": ["id", "numero"]
+  },
+
+  "resolucion": {
+    "main": ["numero"]
+  },
+
+  "sede": {
+    "main": ["numero", "nombre"],
+    "orderDefault": {"numero_pad":"asc"},
+    "uniqueMultiple":["numero", "centro_educativo"]
+  },
+
+  "tipo_sede": {
+    "main": ["descripcion"]
+  }
+
+}

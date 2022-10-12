@@ -1,0 +1,243 @@
+{
+  "id": {
+    "type": "varchar",
+    "fieldType": "pk",
+    "default": null,
+    "alias": "id",
+    "entityName": "alumno",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "anio_ingreso": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "ai",
+    "entityName": "alumno",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "anio_ingreso"
+  },
+
+  "observaciones": {
+    "type": "text",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "obs",
+    "entityName": "alumno",
+    "dataType": "text",  
+    "subtype": "textarea",  
+    "length": 65535,
+    "name": "observaciones"
+  },
+
+  "persona": {
+    "type": "varchar",
+    "fieldType": "_u",
+    "default": null,
+    "alias": "per",
+    "entityName": "alumno",
+    "entityRefName": "persona",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "persona"
+  },
+
+  "estado_inscripcion": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "ei",
+    "entityName": "alumno",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "estado_inscripcion"
+  },
+
+  "fecha_titulacion": {
+    "type": "date",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "ft",
+    "entityName": "alumno",
+    "dataType": "date",  
+    "subtype": "date",  
+    "name": "fecha_titulacion"
+  },
+
+  "plan": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "pla",
+    "entityName": "alumno",
+    "entityRefName": "plan",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "plan"
+  },
+
+  "resolucion_inscripcion": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "ri",
+    "entityName": "alumno",
+    "entityRefName": "resolucion",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "resolucion_inscripcion"
+  },
+
+  "anio_inscripcion": {
+    "type": "smallint",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "aia",
+    "entityName": "alumno",
+    "dataType": "integer",  
+    "subtype": "integer",  
+    "length": 1,
+    "name": "anio_inscripcion"
+  },
+
+  "semestre_inscripcion": {
+    "type": "smallint",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "si",
+    "entityName": "alumno",
+    "dataType": "integer",  
+    "subtype": "integer",  
+    "length": 1,
+    "name": "semestre_inscripcion"
+  },
+
+  "semestre_ingreso": {
+    "type": "smallint",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "sia",
+    "entityName": "alumno",
+    "dataType": "integer",  
+    "subtype": "integer",  
+    "length": 1,
+    "name": "semestre_ingreso"
+  },
+
+  "adeuda_legajo": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "al",
+    "entityName": "alumno",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 255,
+    "name": "adeuda_legajo"
+  },
+
+  "adeuda_deudores": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "ad",
+    "entityName": "alumno",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 255,
+    "name": "adeuda_deudores"
+  },
+
+  "documentacion_inscripcion": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "di",
+    "entityName": "alumno",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 255,
+    "name": "documentacion_inscripcion"
+  },
+
+  "anio_inscripcion_completo": {
+    "type": "tinyint",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "aic",
+    "entityName": "alumno",
+    "dataType": "boolean",  
+    "subtype": "checkbox",  
+    "length": 1,
+    "name": "anio_inscripcion_completo"
+  },
+
+  "establecimiento_inscripcion": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "eia",
+    "entityName": "alumno",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 255,
+    "name": "establecimiento_inscripcion"
+  },
+
+  "libro_folio": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "lf",
+    "entityName": "alumno",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 255,
+    "name": "libro_folio"
+  },
+
+  "libro": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "lib",
+    "entityName": "alumno",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "libro"
+  },
+
+  "folio": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "fol",
+    "entityName": "alumno",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "folio"
+  },
+
+  "comentarios": {
+    "type": "text",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "com",
+    "entityName": "alumno",
+    "dataType": "text",  
+    "subtype": "textarea",  
+    "length": 65535,
+    "name": "comentarios"
+  }
+}

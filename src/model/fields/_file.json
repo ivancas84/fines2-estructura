@@ -1,0 +1,72 @@
+{
+  "id": {
+    "type": "varchar",
+    "fieldType": "pk",
+    "default": null,
+    "alias": "id",
+    "entityName": "file",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "name": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "nam",
+    "entityName": "file",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 255,
+    "name": "name"
+  },
+
+  "type": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "typ",
+    "entityName": "file",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 255,
+    "name": "type"
+  },
+
+  "content": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "con",
+    "entityName": "file",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 255,
+    "name": "content"
+  },
+
+  "size": {
+    "type": "int",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "siz",
+    "entityName": "file",
+    "dataType": "integer",  
+    "subtype": "integer",  
+    "length": 10,
+    "name": "size"
+  },
+
+  "created": {
+    "type": "timestamp",
+    "fieldType": "nf",
+    "default": "current_timestamp()",
+    "alias": "cre",
+    "entityName": "file",
+    "dataType": "timestamp",  
+    "subtype": "timestamp",  
+    "name": "created"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "id": {
+    "type": "varchar",
+    "fieldType": "pk",
+    "default": null,
+    "alias": "id",
+    "entityName": "email",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "email": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "ema",
+    "entityName": "email",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 255,
+    "name": "email"
+  },
+
+  "verificado": {
+    "type": "tinyint",
+    "fieldType": "nf",
+    "default": "0",
+    "alias": "ver",
+    "entityName": "email",
+    "dataType": "boolean",  
+    "subtype": "checkbox",  
+    "length": 1,
+    "name": "verificado"
+  },
+
+  "insertado": {
+    "type": "timestamp",
+    "fieldType": "nf",
+    "default": "current_timestamp()",
+    "alias": "ins",
+    "entityName": "email",
+    "dataType": "timestamp",  
+    "subtype": "timestamp",  
+    "name": "insertado"
+  },
+
+  "eliminado": {
+    "type": "timestamp",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "eli",
+    "entityName": "email",
+    "dataType": "timestamp",  
+    "subtype": "timestamp",  
+    "name": "eliminado"
+  },
+
+  "persona": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "per",
+    "entityName": "email",
+    "entityRefName": "persona",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "persona"
+  }
+}

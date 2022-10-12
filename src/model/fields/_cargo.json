@@ -1,0 +1,25 @@
+{
+  "id": {
+    "type": "varchar",
+    "fieldType": "pk",
+    "default": null,
+    "alias": "id",
+    "entityName": "cargo",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "descripcion": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "des",
+    "entityName": "cargo",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 255,
+    "name": "descripcion"
+  }
+}

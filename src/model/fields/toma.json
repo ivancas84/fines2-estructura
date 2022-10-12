@@ -1,0 +1,17 @@
+{
+  "estado": {
+    "subtype": "select_text",
+    "selectValues": ["Aprobada", "Pendiente", "Renuncia", "Error", "Baja", "Modificada", "Observada"]
+  },
+
+  "estado_contralor": {
+    "subtype": "select_text",
+    "selectValues": ["Pasar", "Modificar", "No pasar"]
+  },
+
+  "tipo_movimiento": {
+    "subtype": "select_text",
+    "selectValues": ["AI", "CP", "CC"]
+  }
+
+}

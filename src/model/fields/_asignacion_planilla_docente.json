@@ -1,0 +1,74 @@
+{
+  "id": {
+    "type": "varchar",
+    "fieldType": "pk",
+    "default": null,
+    "alias": "id",
+    "entityName": "asignacion_planilla_docente",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "planilla_docente": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "pd",
+    "entityName": "asignacion_planilla_docente",
+    "entityRefName": "planilla_docente",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "planilla_docente"
+  },
+
+  "toma": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "tom",
+    "entityName": "asignacion_planilla_docente",
+    "entityRefName": "toma",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "toma"
+  },
+
+  "insertado": {
+    "type": "timestamp",
+    "fieldType": "nf",
+    "default": "current_timestamp()",
+    "alias": "ins",
+    "entityName": "asignacion_planilla_docente",
+    "dataType": "timestamp",  
+    "subtype": "timestamp",  
+    "name": "insertado"
+  },
+
+  "comentario": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "com",
+    "entityName": "asignacion_planilla_docente",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 255,
+    "name": "comentario"
+  },
+
+  "reclamo": {
+    "type": "tinyint",
+    "fieldType": "nf",
+    "default": "0",
+    "alias": "rec",
+    "entityName": "asignacion_planilla_docente",
+    "dataType": "boolean",  
+    "subtype": "checkbox",  
+    "length": 1,
+    "name": "reclamo"
+  }
+}

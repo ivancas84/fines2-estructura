@@ -1,0 +1,321 @@
+{
+  "alumno": {
+    "name": "alumno",
+    "alias": "alum",
+    "nf": ["anio_ingreso", "observaciones", "estado_inscripcion", "fecha_titulacion", "anio_inscripcion", "semestre_inscripcion", "semestre_ingreso", "adeuda_legajo", "adeuda_deudores", "documentacion_inscripcion", "anio_inscripcion_completo", "establecimiento_inscripcion", "libro_folio", "libro", "folio", "comentarios"],
+    "mu": ["plan", "resolucion_inscripcion"],
+    "_u": ["persona"],
+    "notNull": ["id", "persona"],
+    "unique": ["id", "persona", "libro_folio"]
+  },
+
+  "alumno_comision": {
+    "name": "alumno_comision",
+    "alias": "ac",
+    "nf": ["creado", "activo", "observaciones"],
+    "mu": ["comision", "alumno"],
+    "_u": [],
+    "notNull": ["id", "creado", "alumno"],
+    "unique": ["id"]
+  },
+
+  "asignacion_planilla_docente": {
+    "name": "asignacion_planilla_docente",
+    "alias": "apd",
+    "nf": ["insertado", "comentario", "reclamo"],
+    "mu": ["planilla_docente", "toma"],
+    "_u": [],
+    "notNull": ["id", "planilla_docente", "toma", "insertado", "reclamo"],
+    "unique": ["id"]
+  },
+
+  "asignatura": {
+    "name": "asignatura",
+    "alias": "asig",
+    "nf": ["nombre", "formacion", "clasificacion", "codigo", "perfil"],
+    "mu": [],
+    "_u": [],
+    "notNull": ["id", "nombre"],
+    "unique": ["id", "nombre", "codigo"]
+  },
+
+  "calendario": {
+    "name": "calendario",
+    "alias": "cale",
+    "nf": ["inicio", "fin", "anio", "semestre", "insertado", "descripcion"],
+    "mu": [],
+    "_u": [],
+    "notNull": ["id", "anio", "semestre", "insertado"],
+    "unique": ["id"]
+  },
+
+  "calificacion": {
+    "name": "calificacion",
+    "alias": "cali",
+    "nf": ["nota1", "nota2", "nota3", "nota_final", "crec", "porcentaje_asistencia", "observaciones", "division", "fecha"],
+    "mu": ["curso", "alumno", "disposicion"],
+    "_u": [],
+    "notNull": ["id", "alumno", "disposicion"],
+    "unique": ["id"]
+  },
+
+  "cargo": {
+    "name": "cargo",
+    "alias": "carg",
+    "nf": ["descripcion"],
+    "mu": [],
+    "_u": [],
+    "notNull": ["id", "descripcion"],
+    "unique": ["id", "descripcion"]
+  },
+
+  "centro_educativo": {
+    "name": "centro_educativo",
+    "alias": "ce",
+    "nf": ["nombre", "cue", "observaciones"],
+    "mu": ["domicilio"],
+    "_u": [],
+    "notNull": ["id", "nombre"],
+    "unique": ["id", "cue"]
+  },
+
+  "comision": {
+    "name": "comision",
+    "alias": "comi",
+    "nf": ["turno", "division", "comentario", "autorizada", "apertura", "publicada", "observaciones", "alta", "identificacion", "estado", "configuracion"],
+    "mu": ["sede", "modalidad", "planificacion", "comision_siguiente", "calendario"],
+    "_u": [],
+    "notNull": ["id", "division", "autorizada", "apertura", "publicada", "alta", "sede", "modalidad", "calendario"],
+    "unique": ["id"]
+  },
+
+  "comision_relacionada": {
+    "name": "comision_relacionada",
+    "alias": "cr",
+    "nf": [],
+    "mu": ["comision", "relacion"],
+    "_u": [],
+    "notNull": ["id", "comision", "relacion"],
+    "unique": ["id"]
+  },
+
+  "contralor": {
+    "name": "contralor",
+    "alias": "cont",
+    "nf": ["fecha_contralor", "fecha_consejo", "insertado"],
+    "mu": ["planilla_docente"],
+    "_u": [],
+    "notNull": ["id", "insertado", "planilla_docente"],
+    "unique": ["id"]
+  },
+
+  "curso": {
+    "name": "curso",
+    "alias": "curs",
+    "nf": ["horas_catedra", "ige", "alta"],
+    "mu": ["comision", "asignatura"],
+    "_u": [],
+    "notNull": ["id", "horas_catedra", "comision", "asignatura", "alta"],
+    "unique": ["id"]
+  },
+
+  "designacion": {
+    "name": "designacion",
+    "alias": "desi",
+    "nf": ["desde", "hasta", "alta"],
+    "mu": ["cargo", "sede", "persona"],
+    "_u": [],
+    "notNull": ["id", "cargo", "sede", "persona", "alta"],
+    "unique": ["id"]
+  },
+
+  "detalle_persona": {
+    "name": "detalle_persona",
+    "alias": "dp",
+    "nf": ["descripcion", "creado", "fecha", "tipo", "asunto"],
+    "mu": ["archivo", "persona"],
+    "_u": [],
+    "notNull": ["id", "descripcion", "creado", "persona"],
+    "unique": ["id"]
+  },
+
+  "dia": {
+    "name": "dia",
+    "alias": "dia",
+    "nf": ["numero", "dia"],
+    "mu": [],
+    "_u": [],
+    "notNull": ["id", "numero", "dia"],
+    "unique": ["id", "numero", "dia"]
+  },
+
+  "disposicion": {
+    "name": "disposicion",
+    "alias": "disp",
+    "nf": [],
+    "mu": ["asignatura", "planificacion"],
+    "_u": [],
+    "notNull": ["id", "asignatura", "planificacion"],
+    "unique": ["id"]
+  },
+
+  "disposicion_pendiente": {
+    "name": "disposicion_pendiente",
+    "alias": "dpa",
+    "nf": ["modo"],
+    "mu": ["disposicion", "alumno"],
+    "_u": [],
+    "notNull": ["id", "disposicion", "alumno"],
+    "unique": ["id"]
+  },
+
+  "distribucion_horaria": {
+    "name": "distribucion_horaria",
+    "alias": "dh",
+    "nf": ["horas_catedra", "dia"],
+    "mu": ["disposicion"],
+    "_u": [],
+    "notNull": ["id", "horas_catedra", "dia"],
+    "unique": ["id"]
+  },
+
+  "domicilio": {
+    "name": "domicilio",
+    "alias": "domi",
+    "nf": ["calle", "entre", "numero", "piso", "departamento", "barrio", "localidad"],
+    "mu": [],
+    "_u": [],
+    "notNull": ["id", "calle", "numero", "localidad"],
+    "unique": ["id"]
+  },
+
+  "email": {
+    "name": "email",
+    "alias": "emai",
+    "nf": ["email", "verificado", "insertado", "eliminado"],
+    "mu": ["persona"],
+    "_u": [],
+    "notNull": ["id", "email", "verificado", "insertado", "persona"],
+    "unique": ["id"]
+  },
+
+  "file": {
+    "name": "file",
+    "alias": "file",
+    "nf": ["name", "type", "content", "size", "created"],
+    "mu": [],
+    "_u": [],
+    "notNull": ["id", "name", "type", "content", "size", "created"],
+    "unique": ["id"]
+  },
+
+  "horario": {
+    "name": "horario",
+    "alias": "hora",
+    "nf": ["hora_inicio", "hora_fin"],
+    "mu": ["curso", "dia"],
+    "_u": [],
+    "notNull": ["id", "hora_inicio", "hora_fin", "curso", "dia"],
+    "unique": ["id"]
+  },
+
+  "modalidad": {
+    "name": "modalidad",
+    "alias": "moda",
+    "nf": ["nombre"],
+    "mu": [],
+    "_u": [],
+    "notNull": ["id", "nombre"],
+    "unique": ["id", "nombre"]
+  },
+
+  "persona": {
+    "name": "persona",
+    "alias": "pers",
+    "nf": ["nombres", "apellidos", "fecha_nacimiento", "numero_documento", "cuil", "genero", "apodo", "telefono", "email", "email_abc", "alta", "lugar_nacimiento", "telefono_verificado", "email_verificado", "info_verificada"],
+    "mu": ["domicilio"],
+    "_u": [],
+    "notNull": ["id", "nombres", "numero_documento", "alta", "telefono_verificado", "email_verificado", "info_verificada"],
+    "unique": ["id", "numero_documento", "cuil", "email_abc"]
+  },
+
+  "plan": {
+    "name": "plan",
+    "alias": "plan",
+    "nf": ["orientacion", "resolucion", "distribucion_horaria"],
+    "mu": [],
+    "_u": [],
+    "notNull": ["id", "orientacion"],
+    "unique": ["id"]
+  },
+
+  "planificacion": {
+    "name": "planificacion",
+    "alias": "pla",
+    "nf": ["anio", "semestre"],
+    "mu": ["plan"],
+    "_u": [],
+    "notNull": ["id", "anio", "semestre", "plan"],
+    "unique": ["id"]
+  },
+
+  "planilla_docente": {
+    "name": "planilla_docente",
+    "alias": "pd",
+    "nf": ["numero", "insertado", "fecha_contralor", "fecha_consejo", "observaciones"],
+    "mu": [],
+    "_u": [],
+    "notNull": ["id", "numero", "insertado"],
+    "unique": ["id"]
+  },
+
+  "resolucion": {
+    "name": "resolucion",
+    "alias": "reso",
+    "nf": ["numero", "anio", "tipo"],
+    "mu": [],
+    "_u": [],
+    "notNull": ["id", "numero"],
+    "unique": ["id"]
+  },
+
+  "sede": {
+    "name": "sede",
+    "alias": "sede",
+    "nf": ["numero", "nombre", "observaciones", "alta", "baja", "fecha_traspaso"],
+    "mu": ["domicilio", "tipo_sede", "centro_educativo"],
+    "_u": [],
+    "notNull": ["id", "numero", "nombre", "alta"],
+    "unique": ["id"]
+  },
+
+  "telefono": {
+    "name": "telefono",
+    "alias": "tele",
+    "nf": ["tipo", "prefijo", "numero", "insertado", "eliminado"],
+    "mu": ["persona"],
+    "_u": [],
+    "notNull": ["id", "numero", "insertado", "persona"],
+    "unique": ["id"]
+  },
+
+  "tipo_sede": {
+    "name": "tipo_sede",
+    "alias": "ts",
+    "nf": ["descripcion"],
+    "mu": [],
+    "_u": [],
+    "notNull": ["id", "descripcion"],
+    "unique": ["id", "descripcion"]
+  },
+
+  "toma": {
+    "name": "toma",
+    "alias": "toma",
+    "nf": ["fecha_toma", "estado", "observaciones", "comentario", "tipo_movimiento", "estado_contralor", "alta", "calificacion", "temas_tratados", "asistencia", "sin_planillas"],
+    "mu": ["curso", "docente", "reemplazo", "planilla_docente"],
+    "_u": [],
+    "notNull": ["id", "tipo_movimiento", "alta", "curso", "calificacion", "temas_tratados", "asistencia", "sin_planillas"],
+    "unique": ["id"]
+  }
+}

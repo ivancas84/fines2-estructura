@@ -1,0 +1,81 @@
+{
+  "id": {
+    "type": "varchar",
+    "fieldType": "pk",
+    "default": null,
+    "alias": "id",
+    "entityName": "calendario",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "inicio": {
+    "type": "date",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "ini",
+    "entityName": "calendario",
+    "dataType": "date",  
+    "subtype": "date",  
+    "name": "inicio"
+  },
+
+  "fin": {
+    "type": "date",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "fin",
+    "entityName": "calendario",
+    "dataType": "date",  
+    "subtype": "date",  
+    "name": "fin"
+  },
+
+  "anio": {
+    "type": "year",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "ani",
+    "entityName": "calendario",
+    "dataType": "year",  
+    "subtype": "year",  
+    "name": "anio"
+  },
+
+  "semestre": {
+    "type": "smallint",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "sem",
+    "entityName": "calendario",
+    "dataType": "integer",  
+    "subtype": "integer",  
+    "length": 5,
+    "name": "semestre"
+  },
+
+  "insertado": {
+    "type": "timestamp",
+    "fieldType": "nf",
+    "default": "current_timestamp()",
+    "alias": "ins",
+    "entityName": "calendario",
+    "dataType": "timestamp",  
+    "subtype": "timestamp",  
+    "name": "insertado"
+  },
+
+  "descripcion": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "des",
+    "entityName": "calendario",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 255,
+    "name": "descripcion"
+  }
+}

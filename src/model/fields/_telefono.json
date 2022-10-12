@@ -1,0 +1,84 @@
+{
+  "id": {
+    "type": "varchar",
+    "fieldType": "pk",
+    "default": null,
+    "alias": "id",
+    "entityName": "telefono",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "tipo": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "tip",
+    "entityName": "telefono",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "tipo"
+  },
+
+  "prefijo": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "pre",
+    "entityName": "telefono",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "prefijo"
+  },
+
+  "numero": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "num",
+    "entityName": "telefono",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 255,
+    "name": "numero"
+  },
+
+  "insertado": {
+    "type": "timestamp",
+    "fieldType": "nf",
+    "default": "current_timestamp()",
+    "alias": "ins",
+    "entityName": "telefono",
+    "dataType": "timestamp",  
+    "subtype": "timestamp",  
+    "name": "insertado"
+  },
+
+  "eliminado": {
+    "type": "timestamp",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "eli",
+    "entityName": "telefono",
+    "dataType": "timestamp",  
+    "subtype": "timestamp",  
+    "name": "eliminado"
+  },
+
+  "persona": {
+    "type": "varchar",
+    "fieldType": "mu",
+    "default": null,
+    "alias": "per",
+    "entityName": "telefono",
+    "entityRefName": "persona",  
+    "dataType": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "persona"
+  }
+}

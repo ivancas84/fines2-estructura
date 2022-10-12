@@ -1,0 +1,70 @@
+{
+  "id": {
+    "type": "varchar",
+    "fieldType": "pk",
+    "default": null,
+    "alias": "id",
+    "entityName": "planilla_docente",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "numero": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "num",
+    "entityName": "planilla_docente",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 255,
+    "name": "numero"
+  },
+
+  "insertado": {
+    "type": "timestamp",
+    "fieldType": "nf",
+    "default": "current_timestamp()",
+    "alias": "ins",
+    "entityName": "planilla_docente",
+    "dataType": "timestamp",  
+    "subtype": "timestamp",  
+    "name": "insertado"
+  },
+
+  "fecha_contralor": {
+    "type": "date",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "fc",
+    "entityName": "planilla_docente",
+    "dataType": "date",  
+    "subtype": "date",  
+    "name": "fecha_contralor"
+  },
+
+  "fecha_consejo": {
+    "type": "date",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "fca",
+    "entityName": "planilla_docente",
+    "dataType": "date",  
+    "subtype": "date",  
+    "name": "fecha_consejo"
+  },
+
+  "observaciones": {
+    "type": "text",
+    "fieldType": "nf",
+    "default": null,
+    "alias": "obs",
+    "entityName": "planilla_docente",
+    "dataType": "text",  
+    "subtype": "textarea",  
+    "length": 65535,
+    "name": "observaciones"
+  }
+}

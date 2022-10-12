@@ -1,0 +1,25 @@
+{
+  "configuracion": {
+    "subtype": "select_text",
+    "selectValues": ["Histórica", "Nueva"]
+  },
+
+  "estado": {
+    "subtype": "select_text",
+    "selectValues": ["Confirma", "Rectifica", "Desdobla", "Reagrupa"]
+  },
+
+  "modalidad": {
+    "subtype": "select"
+  },
+
+  "planificacion": {
+    "subtype": "select"
+  },
+
+  "turno": {
+    "subtype": "select_text",
+    "selectValues": ["Mañana", "Tarde", "Vespertino"]
+  }
+
+}
