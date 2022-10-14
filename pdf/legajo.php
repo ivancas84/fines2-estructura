@@ -18,7 +18,7 @@ require_once("function/pdf/index.php");
 
 function getCalificaciones($idAlumno){
   global $container;
-  $render = $container->getRender("calificacion");
+  $render = $container->getEntityRender("calificacion");
   $render->setCondition([
     ["alumno","=",$idAlumno],
   ]);
@@ -69,7 +69,7 @@ resolución <span class="data">&nbsp;&nbsp;&nbsp;' . $v["plan"]->_get("resolucio
 // print_r($calificaciones);
 //die();
 foreach($calificaciones as $cal){
-  $ca = $container->getRel("calificacion")->value($cal);
+  $ca = $container->getEntityTools("calificacion")->value($cal);
   $c .= "<li>".$ca["asignatura"]->_get("nombre") . "</li>";
 }
 

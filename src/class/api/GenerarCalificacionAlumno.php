@@ -42,7 +42,7 @@ class GenerarCalificacionAlumnoApi extends BaseApi {
     /**
      * Array asociativo id_alumno => array de calificaciones aprobadas
      */
-    $render = $this->container->getRender("calificacion");
+    $render = $this->container->getEntityRender("calificacion");
     $render->setSize(0);
     $render->setCondition([
       ["alumno","=",$this->idAlumno],
@@ -57,7 +57,7 @@ class GenerarCalificacionAlumnoApi extends BaseApi {
   }
 
   public function disposicion_(){
-    $render = $this->container->getRender("disposicion");
+    $render = $this->container->getEntityRender("disposicion");
     $render->setSize(0);
     $render->setCondition([
       ["plan-id","=",$this->alumno["plan"]],

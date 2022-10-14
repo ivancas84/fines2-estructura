@@ -23,7 +23,7 @@ class AsignaturasAprobadasAlumnosScript extends BaseController {
     );
 
     $comision = $this->container->getDb()->get("comision", $idComision);
-    $comisionValue = $this->container->getRel("comision")->value($comision);
+    $comisionValue = $this->container->getEntityTools("comision")->value($comision);
 
     $disposicion_ = $this->disposicion_($comision["pla_plan"]);
 
@@ -36,7 +36,7 @@ class AsignaturasAprobadasAlumnosScript extends BaseController {
 
 
   public function alumnoComision_($idComision){
-    $render = $this->container->getRender("alumno_comision");
+    $render = $this->container->getEntityRender("alumno_comision");
     $render->setFields(["id","alumno","activo","alu_per-nombres","alu_per-apellidos","alu_per-numero_documento","alu-tramo_ingreso"]);
     $render->setSize(0);
     $render->setCondition([
@@ -58,7 +58,7 @@ class AsignaturasAprobadasAlumnosScript extends BaseController {
      * Array asociativo id_alumno => array de calificaciones aprobadas
      */
     if(empty($idAlumno_)) return [];
-    $render = $this->container->getRender("calificacion");
+    $render = $this->container->getEntityRender("calificacion");
     $render->setFields(["id","alumno","nota_final","crec", "alu_per-nombres","alu_per-apellidos","alu_per-numero_documento","alu-tramo_ingreso","alu-plan","dis_pla-tramo","dis_pla-plan","dis-asignatura"]);
 
     $render->setSize(0);
@@ -81,7 +81,7 @@ class AsignaturasAprobadasAlumnosScript extends BaseController {
   }
 
   public function disposicion_($plan){
-    $render = $this->container->getRender("disposicion");
+    $render = $this->container->getEntityRender("disposicion");
     $render->setFields(["id","pla-tramo", "asignatura", "asi-nombre"]);
     $render->setSize(0);
     $render->setCondition([

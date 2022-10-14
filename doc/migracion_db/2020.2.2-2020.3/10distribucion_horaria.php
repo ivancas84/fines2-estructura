@@ -3,7 +3,7 @@
 //Ejecutar en el server
 require_once($_SERVER["DOCUMENT_ROOT"]."/config/config.php");
 require_once("class/model/db/Dba.php");
-require_once("class/model/Render.php");
+require_once("class/model/EntityRender.php");
 require_once("class/model/Ma.php");
 
 function obtenerIdPlanificacion($anio, $semestre,$plan){

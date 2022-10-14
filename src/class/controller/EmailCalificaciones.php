@@ -40,7 +40,7 @@ class EmailCalificaciones {
 ';
 
     for($i = 0; $i < count($calificacionesAprobadas)  ; $i++){
-      $c = $this->container->getRel("calificacion")->value($calificacionesAprobadas[$i]);
+      $c = $this->container->getEntityTools("calificacion")->value($calificacionesAprobadas[$i]);
       $nota =  (intval($c["calificacion"]->_get("nota_final")) >= 7) ? $c["calificacion"]->_get("nota_final") : $c["calificacion"]->_get("crec");
 
       $body .= '
@@ -66,7 +66,7 @@ class EmailCalificaciones {
 ';
 
     for($i = 0; $i < count($disposicionesRestantes)  ; $i++){
-      $di = $this->container->getRel("disposicion_pendiente")->value($disposicionesRestantes[$i]);
+      $di = $this->container->getEntityTools("disposicion_pendiente")->value($disposicionesRestantes[$i]);
 
       $body .= '
           <tr>

@@ -19,7 +19,7 @@ class ComisionValue extends ValueEntityOptions{
     
     if(($anio == 3) && ($semestre == 2)) return null;
 
-    $render = new Render();
+    $render = new EntityRender();
     $render->setCondition([
       ["plan","=",$planificacion["plan"]],
     ]);

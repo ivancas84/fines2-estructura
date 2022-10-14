@@ -13,7 +13,7 @@ class GenerarTicketTomaPersistApi extends BaseApi {
 
     public function main() {
         $idToma = $this->idToma();
-        $toma = $this->container->getRel("toma")->value(
+        $toma = $this->container->getEntityTools("toma")->value(
             $this->toma($idToma)
         );
 

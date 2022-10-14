@@ -41,7 +41,7 @@ class CantidadAprobadosComision   {
   }
 
   protected function alumnoComision_(){
-    $render = $this->container->getRender();
+    $render = $this->container->getEntityRender();
     $render->addCondition(["comision","=",$this->idComision_]);
     $render->setSize(0);
     $this->alumnoComision_ = array_group_value(

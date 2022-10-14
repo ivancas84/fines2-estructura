@@ -8,7 +8,7 @@ class PlanillaCargadaApi extends BaseApi {
     $this->container->getAuth()->authorize("toma", "r");
     $idToma_ = php_input();
 
-    $render = $this->container->getRender("toma");
+    $render = $this->container->getEntityRender("toma");
     $render->setCondition([
       ["id","=",$idToma_],
     ]);
@@ -17,7 +17,7 @@ class PlanillaCargadaApi extends BaseApi {
     $toma_ = $this->container->getDb()->select("toma",$render);
     $idCurso_ = array_column($toma_, "curso");
 
-    $render = $this->container->getRender("calificacion");
+    $render = $this->container->getEntityRender("calificacion");
     $render->setCondition([
       ["curso","=",$idCurso_],
     ]);

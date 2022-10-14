@@ -79,13 +79,13 @@ class HorariosComisionPersistSql  {
   }
 
   public function verificarHorarios(){
-    $render = new Render("horario");
+    $render = new EntityRender("horario");
     $render->setCondition(["comision-id","=", $this->id]);
     if($this->container->getDb()->count("horario", $render)) throw new Exception("Ya existen horarios para la comision " . $this->id);
   }
 
   public function curso_(){
-    $render = new Render("curso");
+    $render = new EntityRender("curso");
     $render->setCondition(["comision","=", $this->id]);
     $this->curso_ = $this->container->getDb()->all("curso", $render);  
     if(empty($this->curso_)) throw new Exception("No existen cursos para la comision " . $this->id);
@@ -93,7 +93,7 @@ class HorariosComisionPersistSql  {
 
 
   public function getDistribucionesHorarias() {
-    $render = $this->container->getRender("distribucion_horaria");
+    $render = $this->container->getEntityRender("distribucion_horaria");
     $render->addCondition(["dis-planificacion","=",$this->curso_[0]["com_planificacion"]]);
     $this->distribucionesHorarias = $this->container->getDb()->all("distribucion_horaria", $render);
     

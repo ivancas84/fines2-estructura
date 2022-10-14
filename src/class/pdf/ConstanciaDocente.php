@@ -30,7 +30,7 @@ class ConstanciaDocentePdf extends BaseController{
     $signature = array_key_exists("firma", $_GET)? settypebool(filter_get("firma")) : true;
     $id = filter_get("id");
     
-    $v = $this->container->getRel("toma")->value(
+    $v = $this->container->getEntityTools("toma")->value(
       $this->container->getDb()->get("toma",$id)
     );
 

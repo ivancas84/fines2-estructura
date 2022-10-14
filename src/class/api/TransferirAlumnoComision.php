@@ -33,7 +33,7 @@ class TransferirAlumnoComisionApi extends BaseApi {
   }
 
   protected function consultarComisionAlumnos(){
-    $render = $this->container->getRender("alumno_comision");
+    $render = $this->container->getEntityRender("alumno_comision");
     $render->setCondition(["comision","=",$this->data["id"]]);
     $this->alumnoComisionArray = array_combine_key( 
       $this->container->getDb()->all("alumno_comision", $render),
@@ -42,7 +42,7 @@ class TransferirAlumnoComisionApi extends BaseApi {
   }
 
   protected function consultarAlumnos(){
-    $render = $this->container->getRender("alumno");
+    $render = $this->container->getEntityRender("alumno");
     
     $render->setCondition([
       "persona",
@@ -58,10 +58,10 @@ class TransferirAlumnoComisionApi extends BaseApi {
 
   protected function persistirAlumnos(){
     foreach($this->alumnoComisionArray as $idPersona => $alumnoComision){
-      $ac = $this->container->getRel("alumno_comision")->value($alumnoComision)["alumno_comision"];
+      $ac = $this->container->getEntityTools("alumno_comision")->value($alumnoComision)["alumno_comision"];
       $anioIngresoAc = (int) filter_var($ac->_get("anio_ingreso"), FILTER_SANITIZE_NUMBER_INT);  
       if(array_key_exists($idPersona, $this->alumnoArray)){
-        $a = $this->container->getRel("alumno")->value($this->alumnoArray[$idPersona])["alumno"];
+        $a = $this->container->getEntityTools("alumno")->value($this->alumnoArray[$idPersona])["alumno"];
 
         //actualizar solo si corresponde
         if($ac->_get("fotocopia_documento")) $a->_fastSet("tiene_documento", true);

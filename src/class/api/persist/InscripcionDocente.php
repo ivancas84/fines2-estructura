@@ -29,11 +29,11 @@ class InscripcionDocentePersistApi extends PersistApi {
       if(!nombres_parecidos($personaExistente->_get("nombre"), $value->_get("nombre")))  throw new Exception("El nombre ingresado no es válido");
 
       $value->_set("id",$personaExistente->_get("id"));
-      $sql = $this->container->getSqlo("persona")->update($value->_toArray("sql"));
+      $sql = $this->container->getEntitySqlo("persona")->update($value->_toArray("sql"));
     } else {
       $value->_call("setDefault");
       $value->_set("id",uniqid());
-      $sql = $this->container->getSqlo("persona")->insert($value->_toArray("sql"));
+      $sql = $this->container->getEntitySqlo("persona")->insert($value->_toArray("sql"));
     }
     
     $persistToma = $this->container->getControllerEntity("persist_sql", "toma_posesion")->id([

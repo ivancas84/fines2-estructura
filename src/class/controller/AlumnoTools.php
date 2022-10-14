@@ -18,7 +18,7 @@ class AlumnoTools {
   }
 
   public function initDni($dni){
-    $render = $this->container->getRender("alumno");
+    $render = $this->container->getEntityRender("alumno");
     $render->setCondition(["persona-numero_documento","=",$dni]);
     $this->alumno = $this->container->getDb()->one("alumno",$render);
     $this->postInit();
@@ -30,11 +30,11 @@ class AlumnoTools {
   }
 
   public function getValue(){
-    return $this->container->getRel("alumno")->value($this->alumno);
+    return $this->container->getEntityTools("alumno")->value($this->alumno);
   }
 
   public function getCalificacionesAprobadas(){
-    $render = $this->container->getRender("calificacion");
+    $render = $this->container->getEntityRender("calificacion");
     $render->setCondition([
       ["alumno","=",$this->alumno["id"]],
       [
@@ -47,7 +47,7 @@ class AlumnoTools {
   }
   
   public function getCalificacionesAprobadasPlan($plan){
-    $render = $this->container->getRender("calificacion");
+    $render = $this->container->getEntityRender("calificacion");
     $render->setCondition([
       ["alumno","=",$this->alumno["id"]],
       [
@@ -65,7 +65,7 @@ class AlumnoTools {
      */
 
      
-    $render = $this->container->getRender("disposicion");
+    $render = $this->container->getEntityRender("disposicion");
 
     $render->setCondition([
       ["plan-id","=",$this->alumno["plan"]],
@@ -96,7 +96,7 @@ class AlumnoTools {
   }
 
   public function disposicionesPendientes(){
-    $render = $this->container->getRender("disposicion_pendiente");
+    $render = $this->container->getEntityRender("disposicion_pendiente");
     $render->setCondition([
       ["alumno","=",$this->alumno["id"]],
     ]);

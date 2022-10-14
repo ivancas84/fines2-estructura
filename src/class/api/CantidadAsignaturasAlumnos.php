@@ -17,7 +17,7 @@ class CantidadAsignaturasAlumnosApi extends BaseApi {
      */
 
     
-    $render = $this->container->getRender("calificacion");
+    $render = $this->container->getEntityRender("calificacion");
     $render->setCondition([
       ["persona","=",$idsPersonas],
       [

@@ -24,7 +24,7 @@ class ComisionFurtherErrorApi extends FurtherErrorApi {
           empty($data["planificacion"])
           || empty($row = $this->container->getDb()->get("planificacion", $data["planificacion"]))
         ) return ["planificacion" => true ];
-        $render= new Render();
+        $render= new EntityRender();
         $render->addCondition(["sede","=",$data["sede"]]);
         $render->addCondition(["division","=",$data["division"]]);
         $render->addCondition(["modalidad","=",$data["modalidad"]]);
@@ -41,7 +41,7 @@ class ComisionFurtherErrorApi extends FurtherErrorApi {
           && empty($row = $this->container->getDb()->get("planificacion", $data["planificacion"]))
         ) return null;
 
-        $render= new Render();
+        $render= new EntityRender();
         $render->addCondition(["sede","=",$data["sede"]]);
         $render->addCondition(["division","=",$data["division"]]);
         $render->addCondition(["modalidad","=",$data["modalidad"]]);

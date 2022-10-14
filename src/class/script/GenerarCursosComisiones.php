@@ -44,7 +44,7 @@ class GenerarCursosComisionesScript extends BaseController{
    
    protected function consultarComisiones($grupo){
 
-     $render = $this->container->getRender("comision");
+     $render = $this->container->getEntityRender("comision");
      $render->setParams($grupo);
      $render->setSize(0);  
      $this->comisiones = array_combine_key($this->container->getDb()->all("comision",$render),"id");
@@ -52,7 +52,7 @@ class GenerarCursosComisionesScript extends BaseController{
  
    protected  function quitarComisionesConCursos(){
      $ids = array_column($this->comisiones, "id");
-     $render = $this->container->getRender("curso");
+     $render = $this->container->getEntityRender("curso");
      $render->addCondition(["comision","=",$ids]);
      $render->setSize(0);
      $cursos = $this->container->getDb()->all("curso",$render);
@@ -76,8 +76,6 @@ class GenerarCursosComisionesScript extends BaseController{
       $this->container->getDb()->multi_query_transaction($sql);
       echo "<pre>";
       echo $sql;
-     //return ["ids"=>$ids, "detail"=>$detail];
-     //array_push($this->logs, ["sql"=>$controller->getSql(), "detail"=>$controller->getDetail()]);
    }
  
 }

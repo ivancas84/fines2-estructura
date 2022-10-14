@@ -13,7 +13,7 @@ class PreigesScript extends BaseController{
    */
 
   public function main(){
-    $render = $this->container->getRender("horario");
+    $render = $this->container->getEntityRender("horario");
     $render->setCondition([
       ["calendario-anio","=","2022"],
       ["calendario-semestre","=","2"],
@@ -23,7 +23,7 @@ class PreigesScript extends BaseController{
     $render->setOrder(["cur_com_sed-numero"=>"ASC","cur_com-division"=>"ASC"]);
     $horarios = $this->container->getDb()->all("horario",$render);
     
-    $render = $this->container->getRender("toma");
+    $render = $this->container->getEntityRender("toma");
     $render->setCondition([
       ["calendario-anio","=","2022"],
       ["calendario-semestre","=","2"],
@@ -48,7 +48,7 @@ class PreigesScript extends BaseController{
       foreach($cursos as $curso => $horarios){
         $cursos_horarios[$curso] = ["","","","",""];
         foreach($horarios as $horario){
-          $h = $this->container->getRel("horario")->value($horario);
+          $h = $this->container->getEntityTools("horario")->value($horario);
           switch($h["dia"]->_get("numero")){
             case "0":
               $cursos_horarios[$curso][0] = $h["horario"]->_get("hora_inicio", "H:i") . " a " . $h["horario"]->_get("hora_fin","H:i");

@@ -44,7 +44,7 @@ class LibroMatrizPdf extends BaseController{
     if(empty($calificaciones) || (count($calificaciones) != (40-($anio*10)))) throw new Exception("La cantidad de calificaciones obtenida para el plan y el año no coincide");
 
 
-    $v = $this->container->getRel("alumno")->value($this->alumno);
+    $v = $this->container->getEntityTools("alumno")->value($this->alumno);
 
     $date = new SpanishDateTime();
     $mpdf = new \Mpdf\Mpdf();

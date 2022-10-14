@@ -51,8 +51,8 @@ tr:nth-child(even) {
   $first = true;
   $first2 = true;
   foreach($cursos as $curso => $horarios): 
-    $d = $this->container->getRel("horario")->value($horarios[0]);
-    $h = $this->container->getRel("horario")->value($horarios[0]) ?>
+    $d = $this->container->getEntityTools("horario")->value($horarios[0]);
+    $h = $this->container->getEntityTools("horario")->value($horarios[0]) ?>
   <tr>
     <?if($first): $first = false; ?>
     <td rowspan="<?=count($cursos)?>">1</td>
@@ -80,7 +80,7 @@ tr:nth-child(even) {
     <td rowspan="<?=count($cursos)?>"><?=$d["comision"]->_get("identificacion")?></td>
     <?endif;?>
     
-    <?if(array_key_exists($curso, $curso_docentes)): $p = $this->container->getRel("toma")->value($curso_docentes[$curso]);?>
+    <?if(array_key_exists($curso, $curso_docentes)): $p = $this->container->getEntityTools("toma")->value($curso_docentes[$curso]);?>
       <td><?=$p["docente"]->_get("nombres", "Xx Yy")?></td>
       <td><?=$p["docente"]->_get("apellidos", "Xx Yy")?></td>
       <td><?=$p["docente"]->_get("cuil")?></td>

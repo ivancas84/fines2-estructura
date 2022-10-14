@@ -17,7 +17,7 @@ class ComisionTools {
     /**
      * Obtiene los alumnos de una determinada comision, y actualiza el plan si no lo tiene definido
      */
-    $render = $this->container->getRender("alumno_comision");
+    $render = $this->container->getEntityRender("alumno_comision");
     $render->setFields("alumno");
     $render->setCondition(["id","=",$this->id]);
     $rows = $this->container->getDb()->select("alumno_comision",$render);
@@ -30,7 +30,7 @@ class ComisionTools {
      * Obtener informacion de alumnos aprobados (id de persona y cantidad de asignaturas aprobadas)
      * @return ["persona", "cantidad"]
      */
-    $render = $this->container->getRender("calificacion");
+    $render = $this->container->getEntityRender("calificacion");
     $render->setCondition([
       ["persona","=",$this->alumno["persona"]],
       [
@@ -49,7 +49,7 @@ class ComisionTools {
   }
 
   public function getValue(){
-    return $this->container->getRel("comision")->value($this->comision);
+    return $this->container->getEntityTools("comision")->value($this->comision);
   }
 
 }

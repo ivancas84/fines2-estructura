@@ -14,7 +14,7 @@ class EmailRegistro {
     $mt = $this->container->getController("model_tools");
     $toma = $this->container->getDb()->get("toma",$id);
     $curso = $mt->labelCurso($toma,"cur_");
-    $t = $this->container->getRel("toma")->value($toma);
+    $t = $this->container->getEntityTools("toma")->value($toma);
 
     $subject = "Toma de posesión: " . $curso;
 

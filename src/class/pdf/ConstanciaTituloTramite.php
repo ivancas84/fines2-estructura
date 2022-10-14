@@ -62,7 +62,7 @@ class ConstanciaTituloTramitePdf extends BaseController{
         throw new Exception("El año definido es incorrecto");
     }
 
-    $v = $this->container->getRel("alumno")->value($this->alumno);
+    $v = $this->container->getEntityTools("alumno")->value($this->alumno);
     $date = new SpanishDateTime();
     $mpdf = new \Mpdf\Mpdf();
 

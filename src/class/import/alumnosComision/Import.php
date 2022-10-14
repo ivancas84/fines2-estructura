@@ -64,7 +64,7 @@ class AlumnosComisionImport extends Import{
 
 
   public function tieneAnterior(){
-      $render = $this->container->getRender("comision");
+      $render = $this->container->getEntityRender("comision");
       $render->addCondition(["comision_siguiente","=",$this->idComision]);
   
       $count = $this->container->getDb()->count("comision", $render);
@@ -74,7 +74,7 @@ class AlumnosComisionImport extends Import{
   public function queryOtraComisionPeriodoAnterior_(){
 
     $cal = periodo_calendario_anterior($this->anio, $this->semestre);
-    $render = $this->container->getRender("alumno_comision");
+    $render = $this->container->getEntityRender("alumno_comision");
     
     $render->setSize(false);
     $render->addCondition(["alu_per-numero_documento","=",$this->ids["persona"]]);
@@ -92,7 +92,7 @@ class AlumnosComisionImport extends Import{
   
   public function queryCalificacionesAprobadasPeriodoAnterior_(){
     $periodoAnterior = periodo_anterior2($this->comision, "pla_");
-    $render = $this->container->getRender("calificacion");
+    $render = $this->container->getEntityRender("calificacion");
     $render->setSize(false);
     $render->setFields(["cantidad"=>"count"]);
     $render->setGroup(["alu_per-numero_documento"]);
@@ -111,7 +111,7 @@ class AlumnosComisionImport extends Import{
   }
 
   public function queryComisionPeriodoAnterior_(){
-    $render = $this->container->getRender("alumno_comision");
+    $render = $this->container->getEntityRender("alumno_comision");
     $render->setSize(false);
     $render->addCondition(["com-comision_siguiente","=",$this->idComision]);
     $render->addCondition(["activo","=",true]);
@@ -180,7 +180,7 @@ class AlumnosComisionImport extends Import{
       echo "<h3>Alumnos que  se encuentran cargados en otra comision</h3>";
       echo "<ul>";
       foreach($this->alumnoOtraComision_ as $aoc){
-        $a = $this->container->getRel("alumno_comision")->value($aoc);
+        $a = $this->container->getEntityTools("alumno_comision")->value($aoc);
         echo "<li>".$a["persona"]->_get("nombres") . " " . $a["persona"]->_get("apellidos") . " " . $a["persona"]->_get("numero_documento") . " (" . $a["sede"]->_get("numero") . $a["comision"]->_get("division") . "/" . $a["planificacion"]->_get("anio").$a["planificacion"]->_get("semestre") . " / " . $a["calendario"]->_get("anio","Y")."-".$a["calendario"]->_get("semestre").")</li>"; 
       }
       echo "</ul>";

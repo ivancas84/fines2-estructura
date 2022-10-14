@@ -37,7 +37,7 @@ class AlumnosNacionImportElement extends ImportElement {
     } 
     
     $this->logs->addLog($name,"info","Registro existente, se actualizara campos");
-    $this->sql .= $this->container->getSqlo($entityName)->update($this->entities[$name]->_toArray("sql"));
+    $this->sql .= $this->container->getEntitySqlo($entityName)->update($this->entities[$name]->_toArray("sql"));
     return true;
   }
  

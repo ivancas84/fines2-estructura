@@ -56,7 +56,7 @@ class ConstanciaAlumnoRegularPdf extends BaseController{
     }
 
 
-    $v = $this->container->getRel("alumno")->value($this->alumno);
+    $v = $this->container->getEntityTools("alumno")->value($this->alumno);
     $date = new SpanishDateTime();
     $mpdf = new \Mpdf\Mpdf();
 

@@ -31,7 +31,7 @@ class CantidadAsignaturasAprobadasAlumnosComisionApi extends BaseApi {
   }
 
   public function idAlumno_(){
-    $render = $this->container->getRender("alumno_comision");
+    $render = $this->container->getEntityRender("alumno_comision");
     $render->setCondition([
       ["comision","=",$this->comision["id"]],
     ]);
@@ -49,7 +49,7 @@ class CantidadAsignaturasAprobadasAlumnosComisionApi extends BaseApi {
      * Array asociativo id_alumno => array de calificaciones aprobadas
      */
     if(empty($this->idAlumno_)) return [];
-    $render = $this->container->getRender("calificacion");
+    $render = $this->container->getEntityRender("calificacion");
     $render->setSize(0);
     $render->setCondition([
       ["alumno","=",$this->idAlumno_],
@@ -70,7 +70,7 @@ class CantidadAsignaturasAprobadasAlumnosComisionApi extends BaseApi {
 
 
   public function disposicion_(){
-    $render = $this->container->getRender("disposicion");
+    $render = $this->container->getEntityRender("disposicion");
     $render->setSize(0);
     $render->setCondition([
       ["plan-id","=",$this->comision["plan_id"]],

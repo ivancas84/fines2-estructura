@@ -18,7 +18,7 @@ class ActualizarAlumnosActivosCalificacionGrupoScript extends BaseController{
   protected $sql = "";
 
   public function comision_(){
-    $render = $this->container->getRender("comision");
+    $render = $this->container->getEntityRender("comision");
 
     $render->setCondition([
       ["id","=","61e874faabe4f"]
@@ -66,7 +66,7 @@ class ActualizarAlumnosActivosCalificacionGrupoScript extends BaseController{
 
 
   protected function alumnoComision_($idComision){
-    $render = $this->container->getRender();
+    $render = $this->container->getEntityRender();
     $render->addCondition(["comision","=",$idComision]);
     $render->setSize(0);
     return  array_combine_key(
@@ -76,7 +76,7 @@ class ActualizarAlumnosActivosCalificacionGrupoScript extends BaseController{
   }
 
   protected function verificarExistenciaComisionSiguiente_(){
-    $render = $this->container->getRender("alumno_comision");
+    $render = $this->container->getEntityRender("alumno_comision");
     
     $render->setCondition([
       "comision",

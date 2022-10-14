@@ -17,7 +17,7 @@ class TomaPosesionPersistApi extends PersistApi {
      * $data["email"]: Email abc
      */
 
-    $render = $this->container->getRender("persona");
+    $render = $this->container->getEntityRender("persona");
     $render->setCondition(["email","=",$data["email"]]);
     $persona = $this->container->getDb()->oneOrNull("persona", $render);
 

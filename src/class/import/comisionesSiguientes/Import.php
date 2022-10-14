@@ -24,7 +24,7 @@ class ComisionesSiguientesImport extends Import{
   }
   
   public function defineSource(){
-    $render = $this->container->getRender("comision");
+    $render = $this->container->getEntityRender("comision");
     $render->setCondition([
       ["autorizada","=",true],
       ["calendario-anio","=",$this->anio],
@@ -34,7 +34,7 @@ class ComisionesSiguientesImport extends Import{
       ["tramo", "!=","32"]
     ]);
 
-    $fields = $this->container->getRel("comision")->fieldNames();
+    $fields = $this->container->getEntityTools("comision")->fieldNames();
     array_push($fields, "identifier");
     $render->setFields($fields);
 

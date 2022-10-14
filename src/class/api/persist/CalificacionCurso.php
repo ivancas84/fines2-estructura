@@ -15,7 +15,7 @@ class CalificacionCursoPersistApi extends PersistApi {
     $idCurso = file_get_contents("php://input");
     $curso = $this->container->getDb()->get("curso", $idCurso);
 
-    $render = $this->container->getRender("alumno_comision");
+    $render = $this->container->getEntityRender("alumno_comision");
     $render->setCondition([
       ["comision","=",$curso["comision"]],
       //["activo","=","true"]
@@ -23,7 +23,7 @@ class CalificacionCursoPersistApi extends PersistApi {
     $render->setSize(0);
     $alumnos = $this->container->getDb()->all("alumno_comision",$render);
 
-    $render = $this->container->getRender("calificacion");
+    $render = $this->container->getEntityRender("calificacion");
     $render->setCondition([
       ["curso","=",$idCurso],
     ]);
@@ -46,7 +46,7 @@ class CalificacionCursoPersistApi extends PersistApi {
       $calificacion->_call("reset")->_call("check");
       if($calificacion->_getLogs()->isError()) throw new Exception($calificacion->_getLogs()->toString());
       $calificacion->_call("setDefault");
-      $sql .= $this->container->getSqlo("calificacion")->insert($calificacion->_toArray("sql"));
+      $sql .= $this->container->getEntitySqlo("calificacion")->insert($calificacion->_toArray("sql"));
       array_push($ids, $calificacion->_get("id"));
       array_push($detail, "calificacion".$calificacion->_get("id"));
     }

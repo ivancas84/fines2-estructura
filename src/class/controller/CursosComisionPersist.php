@@ -40,7 +40,7 @@ class CursosComisionPersistSql {
   }
 
   public function verificarCursos(){
-    $render = new Render("curso");
+    $render = new EntityRender("curso");
     $render->setCondition(["comision","=", $this->id]);
     if($this->container->getDb()->count("curso", $render)) throw new Exception("Ya existen cursos para la comision " . $this->id);
   }

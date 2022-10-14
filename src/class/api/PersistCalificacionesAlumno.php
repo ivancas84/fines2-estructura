@@ -24,7 +24,7 @@ class PersistCalificacionesAlumnoApi {
     if(!$params["alumno"]["plan"]) throw new Exception("No se encuentra definido el plan del alumno");
 
 
-    $render = $this->container->getRender("disposicion");
+    $render = $this->container->getEntityRender("disposicion");
     $render->setCondition(["plan-id","=",$params["alumno"]["plan"]]);
     $disposicion_ = array_combine_key2(
       $this->container->getDb()->all("disposicion", $render),

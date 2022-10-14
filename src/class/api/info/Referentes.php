@@ -9,7 +9,7 @@ class ReferentesInfoApi  extends BaseApi {
 
   public function main() {
     $ids = php_input();
-    $render = $this->container->getRender("designacion");
+    $render = $this->container->getEntityRender("designacion");
     $render->addCondition(["sede","=",$ids]);
     $render->addCondition(["hasta","=",false]);
     $render->addCondition(["cargo","=","1"]); //referente

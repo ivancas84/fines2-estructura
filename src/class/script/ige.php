@@ -2,13 +2,13 @@
 
 require_once("../config/config.php");
 require_once("class/Container.php");
-require_once("class/model/Render.php");
+require_once("class/model/EntityRender.php");
 require_once("function/array_group_value.php");
 require_once("function/array_combine_key.php");
 
 $container = new Container();
 
-$render = new Render();
+$render = new EntityRender();
 $render->setCondition([
   ["cur_com_cal-anio","=","2020"],
   ["cur_com_cal-semestre","=","2"],
@@ -18,7 +18,7 @@ $render->setSize(false);
 $render->setOrder(["cur_com_sed-numero"=>"ASC","cur_com-division"=>"ASC"]);
 $horarios = $container->getDb()->all("horario",$render);
 
-$render = new Render();
+$render = new EntityRender();
 $render->setCondition([
   ["cur_com_cal-anio","=","2020"],
   ["cur_com_cal-semestre","=","2"],
@@ -43,7 +43,7 @@ foreach($comision_cursos_horarios as $comision => $cursos){
   foreach($cursos as $curso => $horarios){
     $cursos_horarios[$curso] = ["","","","",""];
     foreach($horarios as $horario){
-      $h = $container->getRel("horario")->value($horario);
+      $h = $container->getEntityTools("horario")->value($horario);
       switch($h["dia"]->_get("numero")){
         case "0":
           $cursos_horarios[$curso][0] = $h["horario"]->_get("hora_inicio", "H:i") . " a " . $h["horario"]->_get("hora_fin","H:i");
@@ -120,8 +120,8 @@ tr:nth-child(even) {
   $first = true;
   $first2 = true;
   foreach($cursos as $curso => $horarios): 
-    $d = $container->getRel("horario")->value($horarios[0]);
-    $h = $container->getRel("horario")->value($horarios[0]) ?>
+    $d = $container->getEntityTools("horario")->value($horarios[0]);
+    $h = $container->getEntityTools("horario")->value($horarios[0]) ?>
   <tr>
     <?if($first): $first = false; ?>
     <td rowspan="<?=count($cursos)?>">1</td>
@@ -149,7 +149,7 @@ tr:nth-child(even) {
     <td rowspan="<?=count($cursos)?>"><?=$d["comision"]->_get("identificacion")?></td>
     <?endif;?>
     
-    <?if(array_key_exists($curso, $curso_docentes)): $p = $container->getRel("toma")->value($curso_docentes[$curso]);?>
+    <?if(array_key_exists($curso, $curso_docentes)): $p = $container->getEntityTools("toma")->value($curso_docentes[$curso]);?>
       <td><?=$p["docente"]->_get("nombres", "Xx Yy")?></td>
       <td><?=$p["docente"]->_get("apellidos", "Xx Yy")?></td>
       <td><?=$p["docente"]->_get("cuil")?></td>

@@ -28,7 +28,7 @@ class ComisionCursosPersistApi extends PersistApi {
       if($curso->_getLogs()->isError()) throw new Exception($curso->_getLogs()->toString());
       $curso->_call("setDefault");
       $curso->_set("id", uniqid());
-      $sql .= $this->container->getSqlo("curso")->insert($curso->_toArray("sql"));
+      $sql .= $this->container->getEntitySqlo("curso")->insert($curso->_toArray("sql"));
       array_push($detail, "curso".$curso->_get("id"));
     }
 

@@ -33,7 +33,7 @@ class DisposicionesAprobadasAlumnoComision {
   }
 
   protected function alumnoComision_(){
-    $render = $this->container->getRender();
+    $render = $this->container->getEntityRender();
     $render->addCondition(["comision","=",$this->idComision]);
     $render->setSize(0);
     $this->alumnoComision_ =  $this->container->getDb()->all("alumno_comision", $render);

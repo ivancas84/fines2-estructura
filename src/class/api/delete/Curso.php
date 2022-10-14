@@ -16,11 +16,11 @@ class CursoDeleteApi extends DeleteApi {
     $sql = "";
     $detail = [];
     if(!empty($idsHorarios)) {
-      $sql .= $this->container->getSqlo("horario")->deleteAll($idsHorarios);
+      $sql .= $this->container->getEntitySqlo("horario")->deleteAll($idsHorarios);
       $detail = array_map(array($this, 'concatHorario'), $idsHorarios);    
     }
 
-    $sql .= $this->container->getSqlo("curso")->deleteAll($idsCursos);
+    $sql .= $this->container->getEntitySqlo("curso")->deleteAll($idsCursos);
 
     $this->container->getDb()->multi_query_transaction_log($sql);
     $detail = array_merge($detail, array_map(array($this, 'concat'), $idsCursos));    

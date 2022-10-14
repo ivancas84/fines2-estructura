@@ -26,7 +26,7 @@ class CantidadAsignaturasAprobadasAlumnosTramo  {
      * Array asociativo id_alumno => array de calificaciones aprobadas
      */
     if(empty($this->idAlumno_)) return [];
-    $render = $this->container->getRender("calificacion");
+    $render = $this->container->getEntityRender("calificacion");
     $render->setFields(["id","alumno","nota_final","crec", "alu-tramo_ingreso","alu-plan","dis_pla-tramo","dis_pla-plan","dis-asignatura"]);
 
     $render->setSize(0);

@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/model/Render.php");
+require_once("class/model/EntityRender.php");
 require_once("class/model/Ma.php");
 
 class ModelTools {
@@ -36,7 +36,7 @@ class ModelTools {
   }
 
   public function cantidadAlumnosAprobadosComision($idsComisiones){
-    $render = $this->container->getRender("calificacion");
+    $render = $this->container->getEntityRender("calificacion");
     $render->setCondition([
       ["comision-id","=",$idsComisiones],
       [
@@ -64,7 +64,7 @@ class ModelTools {
       "com_sed_centro_educativo" => $centroEducativo
     ];
 
-    $render = Render::getInstanceParams($params);
+    $render = EntityRender::getInstanceParams($params);
     $render->setAggregate(["ch_sum_horas_catedra"]);
     $render->setGroup(["ch_asignatura"]);
     $render->setOrder(["ch_sum_horas_catedra" =>"desc"]);
@@ -74,7 +74,7 @@ class ModelTools {
 
   public function cargasHorariasDePlanificacion($planificacion){
     if(empty($planificacion)) throw new Exception("Planificacion no definida");
-    $render = $this->container->getRender("distribucion_horaria");
+    $render = $this->container->getEntityRender("distribucion_horaria");
     $render->setParams(["dis-planificacion" => $planificacion]);
     $render->setFields(["horas_catedra.sum"]);
     $render->setGroup(["planificacion" => "dis-planificacion", "asignatura"=>"dis-asignatura"]);
@@ -271,7 +271,7 @@ GROUP BY curso.id
     /**
      * Disposiciones de plan y el anio ingreso
      */
-    $render = $this->container->getRender("disposicion");
+    $render = $this->container->getEntityRender("disposicion");
 
     $render->setCondition([
       ["plan-id","=",$plan],
@@ -283,7 +283,7 @@ GROUP BY curso.id
   }
 
   public function cantidadCalificacionesAprobadas_($idAlumno_, $planificacion){
-    $render = $this->container->getRender();
+    $render = $this->container->getEntityRender();
     $render->addCondition(["dis-planificacion","=",$planificacion]);
     $render->addCondition(["alumno","=",$idAlumno_]);
     $render->addCondition([
@@ -297,7 +297,7 @@ GROUP BY curso.id
   }
 
   public function calificacionesAprobadasAlumnoPlan($idAlumno, $plan){
-    $render = $this->container->getRender("calificacion");
+    $render = $this->container->getEntityRender("calificacion");
     $render->setCondition([
       ["plan-id","=",$plan],
       ["alumno","=",$idAlumno],
@@ -311,7 +311,7 @@ GROUP BY curso.id
   }
 
   public function calificacionesAlumnoPlanAnio($idAlumno, $plan, $anio){
-    $render = $this->container->getRender("calificacion");
+    $render = $this->container->getEntityRender("calificacion");
     $render->setCondition([
       ["plan-id","=",$plan],
       ["planificacion-anio",">=",$anio],
@@ -323,7 +323,7 @@ GROUP BY curso.id
 
   public function cantidadPlanificacionCalificacionesAprobadasAlumnoPlan($idAlumno, $plan){
     
-    $render = $this->container->getRender("calificacion");
+    $render = $this->container->getEntityRender("calificacion");
     $render->setCondition([
       ["plan-id","=",$plan],      
       ["alumno","=",$idAlumno],
@@ -345,7 +345,7 @@ GROUP BY curso.id
      *   [anio,cantidad]
      * ]
      **/   
-    $render = $this->container->getRender("calificacion");
+    $render = $this->container->getEntityRender("calificacion");
     $render->setCondition([
       ["plan-id","=",$plan],  
       ["planificacion-anio",">=",$anio],      

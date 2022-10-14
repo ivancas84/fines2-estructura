@@ -1,7 +1,7 @@
 <?php
 
 require_once("class/api/Count.php");
-require_once("class/model/Render.php");
+require_once("class/model/EntityRender.php");
 require_once("function/php_input.php");
 
 class DocenteCountApi extends CountApi {
@@ -10,7 +10,7 @@ class DocenteCountApi extends CountApi {
     $this->container->getAuth()->authorize($this->entityName, $this->permission);
     $display = php_input();
 
-    $render = Render::getInstanceDisplay($display);
+    $render = EntityRender::getInstanceDisplay($display);
 
     $render->addPrefix("doc-");
     $render->setFields(["docente"]);

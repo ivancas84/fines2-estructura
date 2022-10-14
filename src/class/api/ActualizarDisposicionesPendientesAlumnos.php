@@ -32,7 +32,7 @@ class ActualizarDisposicionesPendientesAlumnosApi extends BaseApi {
 
 
   public function idAlumno_(){
-    $render = $this->container->getRender("alumno_comision");
+    $render = $this->container->getEntityRender("alumno_comision");
     $render->setCondition([
       ["comision","=",$this->comision["id"]],
     ]);
@@ -51,7 +51,7 @@ class ActualizarDisposicionesPendientesAlumnosApi extends BaseApi {
      * Array asociativo id_alumno => array de calificaciones aprobadas
      */
     if(empty($this->idAlumno_)) return [];
-    $render = $this->container->getRender("calificacion");
+    $render = $this->container->getEntityRender("calificacion");
     $render->setSize(0);
     $render->setCondition([
       ["alumno","=",$this->idAlumno_],
@@ -72,7 +72,7 @@ class ActualizarDisposicionesPendientesAlumnosApi extends BaseApi {
 
 
   public function disposicion_(){
-    $render = $this->container->getRender("disposicion");
+    $render = $this->container->getEntityRender("disposicion");
     $render->setSize(0);
     $render->setCondition([
       ["plan-id","=",$this->comision["plan_id"]],
@@ -112,7 +112,7 @@ class ActualizarDisposicionesPendientesAlumnosApi extends BaseApi {
     $sql = "";
     $detail = [];
     foreach($this->calculo as $row){
-      $render = $this->container->getRender("disposicion_pendiente")->setCondition(["alumno","=",$row["alumno"]]);
+      $render = $this->container->getEntityRender("disposicion_pendiente")->setCondition(["alumno","=",$row["alumno"]]);
 
       $idDisposicionEliminar_ = array_column(
         $this->container->getDb()->all("disposicion_pendiente",$render),
@@ -120,7 +120,7 @@ class ActualizarDisposicionesPendientesAlumnosApi extends BaseApi {
       );
 
       foreach($idDisposicionEliminar_ as $id) array_push($detail, "disposicion_pendiente".$id);
-      if(!empty($idDisposicionEliminar_)) $sql .= $this->container->getSqlo("disposicion_pendiente")->delete($idDisposicionEliminar_);
+      if(!empty($idDisposicionEliminar_)) $sql .= $this->container->getEntitySqlo("disposicion_pendiente")->delete($idDisposicionEliminar_);
       foreach($row["_disposicion_no_aprobada"] as $r){
         $a = [
           "alumno" => $row["alumno"],

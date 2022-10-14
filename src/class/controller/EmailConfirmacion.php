@@ -26,7 +26,7 @@ class EmailConfirmacion {
     $horario_ = $this->container->getController("model_tools")->cursoHorario([$toma["curso"]]);
     $horario = count($horario_) ? $horario_[0]["horario"] : null;
 
-    $t = $this->container->getRel("toma")->value($toma);
+    $t = $this->container->getEntityTools("toma")->value($toma);
 
     $fechaToma = $t["toma"]->_get("fecha_toma");
     $fechaFin = new DateTime('2022-12-23');

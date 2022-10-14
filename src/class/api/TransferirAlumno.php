@@ -29,11 +29,11 @@ class TransferirAlumnoApi extends BaseApi {
     $this->transferirEntidadDetallePersona();
 
     if($this->alumnoTransferir) {
-      $this->sql .= $this->container->getSqlo("alumno")->delete([$this->alumnoTransferir["id"]]);
+      $this->sql .= $this->container->getEntitySqlo("alumno")->delete([$this->alumnoTransferir["id"]]);
       array_push($this->detail, "alumno".$this->alumnoTransferir["id"]);
     }
 
-    $this->sql .= $this->container->getSqlo("persona")->delete([$this->data["id"]]);
+    $this->sql .= $this->container->getEntitySqlo("persona")->delete([$this->data["id"]]);
     array_push($this->detail, "persona".$this->data["id"]);
 
     $this->actualizarPersona();
@@ -58,7 +58,7 @@ class TransferirAlumnoApi extends BaseApi {
   public function transferirEntidadAlumnoComision(){
     if(!$this->alumnoTransferir) return;
 
-    $render = $this->container->getRender("alumno_comision");
+    $render = $this->container->getEntityRender("alumno_comision");
     $render->setCondition([
       ["alumno","=",$this->alumnoTransferir["id"]]
     ]);
@@ -69,7 +69,7 @@ class TransferirAlumnoApi extends BaseApi {
 
     $existentes = [];
     if($this->alumnoExistente){
-      $render = $this->container->getRender("alumno_comision");
+      $render = $this->container->getEntityRender("alumno_comision");
       $render->setCondition([
         ["alumno","=",$this->alumnoExistente["id"]]
       ]);
@@ -80,10 +80,10 @@ class TransferirAlumnoApi extends BaseApi {
     }
 
     foreach($transferir as $comisionAt => $alumnoComision){
-      $at = $this->container->getRel("alumno_comision")->value($alumnoComision)["alumno_comision"];
+      $at = $this->container->getEntityTools("alumno_comision")->value($alumnoComision)["alumno_comision"];
 
       if(in_array($comisionAt, $existentes)){
-        $ae = $this->container->getRel("alumno_comision")->value($existentes[$comisionAt])["alumno_comision"];
+        $ae = $this->container->getEntityTools("alumno_comision")->value($existentes[$comisionAt])["alumno_comision"];
         
         $this->transferirElementoExistente($at, $ae, "activo");
         $this->transferirElementoAdicional($at, $ae, "observaciones");
@@ -99,19 +99,19 @@ class TransferirAlumnoApi extends BaseApi {
     $elemento->_fastSet("alumno",$this->alumnoExistente["id"]);
     $elemento->_call("reset")->_call("check");
     if($elemento->logs->isError()) throw new Exception($elemento->logs->toString());
-    $this->sql .= $this->container->getSqlo($entityName)->update($elemento->_toArray("sql"));      
+    $this->sql .= $this->container->getEntitySqlo($entityName)->update($elemento->_toArray("sql"));      
     array_push($this->detail, $entityName.$elemento->_get("id"));
   }
 
   public function actualizarElemento($elemento, $entityName) {
     $elemento->_call("reset")->_call("check");
     if($elemento->logs->isError()) throw new Exception($elemento->logs->toString());
-    $this->sql .= $this->container->getSqlo($entityName)->update($elemento->_toArray("sql"));    
+    $this->sql .= $this->container->getEntitySqlo($entityName)->update($elemento->_toArray("sql"));    
     array_push($this->detail, $entityName.$elemento->_get("id"));
   }
 
   public function eliminarElemento($elemento, $entityName){
-    $this->sql .= $this->container->getSqlo($entityName)->delete([$elemento->_get("id")]);
+    $this->sql .= $this->container->getEntitySqlo($entityName)->delete([$elemento->_get("id")]);
     array_push($this->detail, $entityName.$elemento->_get("id"));  
   }
   
@@ -130,7 +130,7 @@ class TransferirAlumnoApi extends BaseApi {
 
   
   public function alumnoTransferir(){
-    $render = $this->container->getRender("alumno");
+    $render = $this->container->getEntityRender("alumno");
     $render->setCondition([
       ["persona","=",$this->data["id"]]
     ]);
@@ -138,7 +138,7 @@ class TransferirAlumnoApi extends BaseApi {
   }
 
   public function alumnoExistente(){
-    $render = $this->container->getRender("alumno");
+    $render = $this->container->getEntityRender("alumno");
     $render->setCondition([
       ["persona","=",$this->data["persona"]]
     ]);
@@ -173,7 +173,7 @@ class TransferirAlumnoApi extends BaseApi {
 
 
   public function transferirEntidadCalificacion(){
-    $render = $this->container->getRender("calificacion");
+    $render = $this->container->getEntityRender("calificacion");
     $render->setCondition([
       ["alumno","=",$this->alumnoTransferir["id"]]
     ]);
@@ -182,7 +182,7 @@ class TransferirAlumnoApi extends BaseApi {
       "disposicion"
     );
 
-    $render = $this->container->getRender("calificacion");
+    $render = $this->container->getEntityRender("calificacion");
     $render->setCondition([
       ["alumno","=",$this->alumnoExistente["id"]]
     ]);
@@ -192,10 +192,10 @@ class TransferirAlumnoApi extends BaseApi {
     );
 
     foreach($transferir as $disposicion => $calificacion){
-      $tr = $this->container->getRel("calificacion")->value($calificacion)["calificacion"];
+      $tr = $this->container->getEntityTools("calificacion")->value($calificacion)["calificacion"];
 
       if(in_array($disposicion, $existentes)){
-        $ex = $this->container->getRel("calificacion")->value($existentes[$curso])["calificacion"];
+        $ex = $this->container->getEntityTools("calificacion")->value($existentes[$curso])["calificacion"];
         
         $compare = $this->compareCalificacion($tr,$ex);
         if(!empty($compare)) throw new Exception("No se puede transferir, comparacion erronea: ". $compare);
@@ -220,7 +220,7 @@ class TransferirAlumnoApi extends BaseApi {
 
 
   public function transferirEntidadDisposicionPendiente_(){
-    $render = $this->container->getRender("disposicion_pendiente");
+    $render = $this->container->getEntityRender("disposicion_pendiente");
     $render->setCondition([
       ["alumno","=",$this->alumnoTransferir["id"]]
     ]);
@@ -229,7 +229,7 @@ class TransferirAlumnoApi extends BaseApi {
       "disposicion"
     );
 
-    $render = $this->container->getRender("disposicion_pendiente");
+    $render = $this->container->getEntityRender("disposicion_pendiente");
     $render->setCondition([
       ["alumno","=",$this->alumnoExistente["id"]]
     ]);
@@ -239,10 +239,10 @@ class TransferirAlumnoApi extends BaseApi {
     );
 
     foreach($transferir as $disposicion => $disposicionPendiente){
-      $tr = $this->container->getRel("disposicion_pendiente")->value($disposicionPendiente)["disposicion_pendiente"];
+      $tr = $this->container->getEntityTools("disposicion_pendiente")->value($disposicionPendiente)["disposicion_pendiente"];
 
       if(in_array($disposicion, $existentes)){
-        $ex = $this->container->getRel("disposicion_pendiente")->value($existentes[$curso])["calificacion"];
+        $ex = $this->container->getEntityTools("disposicion_pendiente")->value($existentes[$curso])["calificacion"];
         
         $this->transferirElementoExistente($tr, $ex, "modo");
         $this->actualizarElemento($ex, "disposicion_pendiente");

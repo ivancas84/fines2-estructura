@@ -22,8 +22,8 @@ class TomaPosesionPersistSql  {
     $toma->_set("docente",$data["persona"]);
     $toma->_set("tipo_movimiento","AI");
     $toma->_set("estado_contralor","Pasar");
-    $sqlo = $this->container->getSqlo("toma");
-    $sql = $this->container->getSqlo("toma")->insert($toma->_toArray("sql"));
+    $sqlo = $this->container->getEntitySqlo("toma");
+    $sql = $this->container->getEntitySqlo("toma")->insert($toma->_toArray("sql"));
     return["id" => $toma->_get("id"),"sql"=>$sql];
   }
 }

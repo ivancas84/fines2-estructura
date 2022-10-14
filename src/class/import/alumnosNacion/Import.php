@@ -66,7 +66,7 @@ class AlumnosNacionImport extends Import{
      */
     $this->dbs["alumno_comision"] = [];
 
-    $render = new Render();
+    $render = new EntityRender();
     $render->setSize(false);
     $render->setCondition([
       ["persona-numero_documento","=",$this->ids["persona"]],

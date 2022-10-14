@@ -9,7 +9,7 @@ class PersistCalificacionApi extends PersistRelArrayUniqueApi{
     if(empty($this->params)) $this->params = php_input();
     $this->assignParams();
 
-    $render = $this->container->getRender("persona");
+    $render = $this->container->getEntityRender("persona");
     
     $value = $this->container->getValue("persona")->_fromArray($this->params["per"], "set");
 
@@ -22,13 +22,13 @@ class PersistCalificacionApi extends PersistRelArrayUniqueApi{
         $this->container->getValue("persona")->_fromArray($datosPersonaExistente, "set")
       );
       if($value->logs->isError()) throw new Exception($value->logs->toString());
-      $sql = $this->container->getSqlo("persona")->update($value->_toArray("sql"));
+      $sql = $this->container->getEntitySqlo("persona")->update($value->_toArray("sql"));
     } else {
       $value->_call("setDefault");
       $value->_set("id",uniqid()); //id habitualmente esta en null y no se asigna al definir valores por defecto
       $value->_call("reset")->_call("check");
       if($value->logs->isError()) throw new Exception($value->logs->toString());
-      $sql = $this->container->getSqlo("persona")->insert($value->_toArray("sql"));
+      $sql = $this->container->getEntitySqlo("persona")->insert($value->_toArray("sql"));
     }
     $persist = ["id" => $value->_get("id"),"sql"=>$sql];
     $detail = ["persona".$persist["id"]];

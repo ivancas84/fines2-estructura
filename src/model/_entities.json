@@ -2,11 +2,39 @@
   "alumno": {
     "name": "alumno",
     "alias": "alum",
-    "nf": ["anio_ingreso", "observaciones", "estado_inscripcion", "fecha_titulacion", "anio_inscripcion", "semestre_inscripcion", "semestre_ingreso", "adeuda_legajo", "adeuda_deudores", "documentacion_inscripcion", "anio_inscripcion_completo", "establecimiento_inscripcion", "libro_folio", "libro", "folio", "comentarios"],
-    "mu": ["plan", "resolucion_inscripcion"],
-    "_u": ["persona"],
-    "notNull": ["id", "persona"],
-    "unique": ["id", "persona", "libro_folio"]
+    "nf": [
+      "anio_ingreso", 
+      "observaciones", 
+      "estado_inscripcion", 
+      "fecha_titulacion", 
+      "anio_inscripcion", 
+      "semestre_inscripcion",
+      "semestre_ingreso", "adeuda_legajo", 
+      "adeuda_deudores", 
+      "documentacion_inscripcion", 
+      "anio_inscripcion_completo", 
+      "establecimiento_inscripcion", 
+      "libro_folio", 
+      "libro", 
+      "folio", 
+      "comentarios"
+    ],
+    "mu": [
+      "plan", 
+      "resolucion_inscripcion"
+    ],
+    "_u": [
+      "persona"
+    ],
+    "notNull": [
+      "id", 
+      "persona"
+    ],
+    "unique": [
+      "id",
+      "persona", 
+      "libro_folio"
+    ]
   },
 
   "alumno_comision": {

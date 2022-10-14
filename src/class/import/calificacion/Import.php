@@ -43,7 +43,7 @@ class CalificacionImport extends Import{
   }
 
   public function dni_(){
-    $render = $this->container->getRender("alumno_comision");
+    $render = $this->container->getEntityRender("alumno_comision");
     $render->setCondition(["comision","=",$this->curso["comision"]]);
     $alumnoComision = $this->container->getDb()->all("alumno_comision",$render);
     $this->dni_ = array_column($alumnoComision,"alu_per_numero_documento");

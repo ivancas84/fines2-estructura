@@ -68,7 +68,7 @@ class GenerarHorariosComisionesSiguientesScript extends BaseController{
   
   protected function consultarComisionesAnterioresConSiguiente($grupo){
     $grupoAnterior = $this->mt->intervaloAnterior($grupo, "cal-");
-    $render = $this->container->getRender("comision");
+    $render = $this->container->getEntityRender("comision");
     $render->setParams($grupoAnterior);
     $render->addCondition(["comision_siguiente","=",true]);
     $render->setSize(0);
@@ -100,7 +100,7 @@ class GenerarHorariosComisionesSiguientesScript extends BaseController{
 
   protected  function quitarComisionesAnterioresSinHorario(){
     $idsComisionesAnteriores = array_column($this->comisionesAnteriores, "id");
-    $render = $this->container->getRender("horario");
+    $render = $this->container->getEntityRender("horario");
     $render->addCondition(["cur-comision","=",$idsComisionesAnteriores]);
     $render->setSize(0);
     $horariosGrupoAnterior = $this->container->getDb()->all("horario",$render);
@@ -117,7 +117,7 @@ class GenerarHorariosComisionesSiguientesScript extends BaseController{
 
   protected  function quitarComisionesAnterioresConHorarioGrupoActual(){
     $idsComisionesGrupoActual = array_column($this->comisionesAnteriores, "comision_siguiente");
-    $render = $this->container->getRender("horario");
+    $render = $this->container->getEntityRender("horario");
     $render->setCondition(["comision-id","=",$idsComisionesGrupoActual]);
     $render->setSize(0);
     $horariosGrupoActual = $this->container->getDb()->all("horario",$render);
@@ -134,7 +134,7 @@ class GenerarHorariosComisionesSiguientesScript extends BaseController{
 
   protected  function quitarComisionesAnterioresConGrupoActualSinAutorizar(){
     $idsComisionesGrupoActual = array_column($this->comisionesAnteriores, "comision_siguiente");
-    $render = $this->container->getRender("comision");
+    $render = $this->container->getEntityRender("comision");
     $render->setSize(0);
     $comision_ = $this->container->getDb()->getAll("comision",$idsComisionesGrupoActual);
     $idComisionesGrupoActualSinAutorizar = [];
@@ -185,8 +185,6 @@ class GenerarHorariosComisionesSiguientesScript extends BaseController{
     echo "<pre>";
     print_r(["ids"=>$ids, "detail"=>$detail]);
     //return ["ids"=>$ids, "detail"=>$detail];
-
-    //array_push($this->logs, ["sql"=>$controller->getSql(), "detail"=>$controller->getDetail()]);
   }
 
 }

@@ -15,7 +15,7 @@ class ActualizarAnioAlumnosApi extends BaseApi {
 
     if(!$idComision) throw new Exception("No esta definido el id de comision");
 
-    $render = $this->container->getRender("alumno_comision");
+    $render = $this->container->getEntityRender("alumno_comision");
     $render->setCondition([
       ["comision","=",$idComision],
       ["alu-anio_ingreso","=",false],

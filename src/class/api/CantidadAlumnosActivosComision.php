@@ -8,7 +8,7 @@ class CantidadAlumnosActivosComisionApi extends BaseApi {
     $this->container->getAuth()->authorize($this->entityName, $this->permission);
     $idsComisiones = php_input();
 
-    $render = $this->container->getRender("alumno_comision");
+    $render = $this->container->getEntityRender("alumno_comision");
     $render->setCondition([
       ["comision","=",$idsComisiones],
       ["activo","=",true],

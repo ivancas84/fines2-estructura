@@ -45,20 +45,20 @@ class ComisionesSiguientesGrupoPersist extends Persist {
 
       $controller = new ComisionCursosPersist();
       $comision["comision_siguiente"] = $controller->main($nuevaComision->_toArray());
-      array_push($this->logs, ["sql"=>$controller->getSql(), "detail"=>$controller->getDetail()]);
+      array_push($this->logs, ["sql"=>$controller->getEntitySqlo(), "detail"=>$controller->getDetail()]);
       $this->update("comision", $comision);
     }
   }
 
   public function checkComisionesGrupo(){
-    $render = Render::getInstanceParams($this->grupo);
+    $render = EntityRender::getInstanceParams($this->grupo);
     $render->addCondition(["autorizada","=",true]);
     if(Ma::count("comision",$render)) throw new Exception("Ya existen comisiones para el grupo: " . implode(" " , $this->grupo));
   }
 
   public function getComisionesGrupoAnterior(){
     $grupoAnterior = ModelTools::intervaloAnterior($this->grupo);
-    $render = Render::getInstanceParams($grupoAnterior);
+    $render = EntityRender::getInstanceParams($grupoAnterior);
     $render->addCondition(["autorizada","=",true]);
     //$render->addCondition(["anio","=",true]);
     $this->comisionesAnteriores = Ma::all("comision",$render);

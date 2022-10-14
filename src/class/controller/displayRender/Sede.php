@@ -1,9 +1,9 @@
 <?php
 
-require_once("class/controller/DisplayRender.php");
+require_once("class/controller/DisplayEntityRender.php");
 require_once("function/array_unique_key.php");
 
-class SedeDisplayRender extends DisplayRender {
+class SedeDisplayEntityRender extends DisplayEntityRender {
 
   public $display;
   /**
@@ -22,7 +22,7 @@ class SedeDisplayRender extends DisplayRender {
     $this->display = $display;
     $this->paramsComision = false;
     if(array_key_exists ("params" , $this->display)){
-      $this->renderComision = new Render();
+      $this->renderComision = new EntityRender();
       foreach($this->display["params"] as $key => $value){
         switch($key) {
           case "centro_educativo":
@@ -51,7 +51,7 @@ class SedeDisplayRender extends DisplayRender {
       }
     }
 
-    $render = Render::getInstanceDisplay($this->display);
+    $render = EntityRender::getInstanceDisplay($this->display);
     if(isset($sedes)) $render->addCondition("id","=",$sedes);
 
     return $render;

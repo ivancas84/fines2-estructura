@@ -10,7 +10,7 @@
  * calcular($toma, $sumaDiciembre, $fechaLimiteDiciembre, $sumaMarzo, $fechaLimiteMarzo)
  */
 function calcular(array $row, $suma, DateTime $fechaLimite = null, $suma2 = null, DateTime $fechaLimite2 = null){
-  $r = $container->getRel("toma")->value($row);
+  $r = $container->getEntityTools("toma")->value($row);
   $fechaToma = $r["toma"]->_get("fecha_toma");
   $fechaFin = clone $fechaToma;
   $fechaFin->modify("+ " . $suma . " month");

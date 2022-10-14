@@ -16,7 +16,7 @@ class Informe20211Script extends BaseController{
   }
 
   public function idAlumno_(){
-    $render = $this->container->getRender("alumno_comision");
+    $render = $this->container->getEntityRender("alumno_comision");
     $render->setSize(false);
     $render->setCondition([
       ["calendario-anio","=","2021"],
@@ -37,7 +37,7 @@ class Informe20211Script extends BaseController{
 
 
   public function alumno_(){
-    $render = $this->container->getRender("calificacion");
+    $render = $this->container->getEntityRender("calificacion");
     $render->setSize(false);
     $render->setOrder(["dis_pla-plan"=>"ASC","dis_pla-anio"=>"ASC","dis_pla-semestre"=>"ASC","dis_asi-codigo"=>"ASC"]);
     $render->setCondition([
@@ -77,7 +77,7 @@ class Informe20211Script extends BaseController{
     $i = 0;
     foreach($this->alumno_ as $idAlumno  => $data){
       $i++;
-      $a = $this->container->getRel("calificacion")->value($data[0]);
+      $a = $this->container->getEntityTools("calificacion")->value($data[0]);
       $html .= "<h2>".$i . " " . $a["persona"]->_get("apellidos","X").", ".$a["persona"]->_get("nombres","Xx Yy")." DNI " .$a["persona"]->_get("numero_documento"  ). "</h2>";
 
       $html .= "<h3>".$a["plan1"]->_get("orientacion","Xx")." " . $a["plan1"]->_get("resolucion"). " (" . $a["plan1"]->_get("distribucion_horaria"). ")</h3>";
@@ -87,7 +87,7 @@ class Informe20211Script extends BaseController{
           $html .= "<h4> Calificaciones " . $anio . "/" . $semestre . "</h4>
           <ul>";
           foreach($calificacion_ as $calificacion){                 
-            $c = $this->container->getRel("calificacion")->value($calificacion);
+            $c = $this->container->getEntityTools("calificacion")->value($calificacion);
             $nota = ($c["calificacion"]->_get("nota_final")) ? $c["calificacion"]->_get("nota_final") : $c["calificacion"]  ->_get("crec")."c";
             $html .= "<li>".$c["asignatura1"]->_get("nombre","xx").": " . $nota ."</li>";
           }
@@ -117,7 +117,7 @@ class Informe20211Script extends BaseController{
     foreach($this->alumnoComision_ as $idAlumno  => $data){
       if(in_array($idAlumno,$idAlumnosConCalificacion)) continue;
       $i++;
-      $a = $this->container->getRel("alumno_comision")->value($data[0]);
+      $a = $this->container->getEntityTools("alumno_comision")->value($data[0]);
       $html .= "<h2>".$i . " " . $a["persona"]->_get("apellidos","X").", ".$a["persona"]->_get("nombres","Xx Yy")." DNI " .$a["persona"]->_get("numero_documento"  ). "</h2>
 ";  
     }

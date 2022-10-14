@@ -15,7 +15,7 @@ class PruebaAlumnosAprobadosComisionScript extends BaseController{
 
     $idComision_ = $_GET["id_comision"];
 
-    $render = $this->container->getRender("comision");
+    $render = $this->container->getEntityRender("comision");
     $render->addCondition(["cal-anio","=","2021"]);
     $idComision_ = $this->container->getDb()->ids("comision",$render);
 

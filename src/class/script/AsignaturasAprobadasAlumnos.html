@@ -40,7 +40,7 @@ td, th {
     <th><?=$d["asi_nombre"]?></th>
 <?endforeach;?>
   </tr>
-<?foreach($alumnoComision_ as $ac): $acp = $this->container->getRel("alumno_comision")->value($ac); ?>
+<?foreach($alumnoComision_ as $ac): $acp = $this->container->getEntityTools("alumno_comision")->value($ac); ?>
   <tr>
     <td><?=$acp["persona"]->_get("apellidos", "X")?>, <?=$acp["persona"]->_get("nombres", "Xx Yy")?></td>
     <td><?=$acp["persona"]->_get("numero_documento")?></td>

@@ -64,13 +64,13 @@ class InscripcionAlumnoPersistApi extends BaseApi {
   }
 
   public function personaExistente(){
-    $render = $this->container->getRender("persona");
+    $render = $this->container->getEntityRender("persona");
     $p = $this->container->getDb()->unique("persona",$this->data["persona"]);
     if(!empty($p)) $this->personaExistente = $this->container->getValue("persona")->_fromArray($p, "set");
   }
 
   public function emailUnicoInsertable(){
-    $render = $this->container->getRender("persona");
+    $render = $this->container->getEntityRender("persona");
     $render->addCondition([
       ["email","=",$this->data["persona"]["email"]],
     ]);
@@ -78,7 +78,7 @@ class InscripcionAlumnoPersistApi extends BaseApi {
   }
 
   public function emailUnicoActualizable(){
-    $render = $this->container->getRender("persona");
+    $render = $this->container->getEntityRender("persona");
     $render->addCondition([
       ["email","=",$this->data["persona"]["email"]],
       ["id","!=",$this->personaExistente->_get("id")],
@@ -186,7 +186,7 @@ class InscripcionAlumnoPersistApi extends BaseApi {
     $this->persona->_set("domicilio", $this->data["dom"]["id"]);
     $this->persistPersonaId();
     if(!empty($domicilio)){
-      $this->sql .= $this->container->getSqlo("domicilio")->delete([$domicilio]);
+      $this->sql .= $this->container->getEntitySqlo("domicilio")->delete([$domicilio]);
       array_push($this->detail, "domicilio".$domicilio);
     }
   }

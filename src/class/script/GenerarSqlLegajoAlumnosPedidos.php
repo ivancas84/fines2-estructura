@@ -15,7 +15,7 @@ class GenerarHorariosComisionesSiguientesScript extends BaseController{
 
     $idComision = $_GET["comision"];
 
-    $render = $this->container->getRender("alumno_comision");
+    $render = $this->container->getEntityRender("alumno_comision");
     $render->setSize(0);
     $render->setCondition(["comision","=",$idComision]);
     
