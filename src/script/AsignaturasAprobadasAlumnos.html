@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+</style>
+</head>
+<body>
+<table>
+  <tr>
+    <td colspan="2"><strong>Sede:</strong> <?=$comisionValue["sede"]->_get("nombre")?></td>
+    <td colspan="5"><strong>Dirección:</strong> <?=$comisionValue["domicilio"]->_get("label")?></td>
+    <td colspan="5"><strong>Año:</strong> <?=$comisionValue["calendario"]->_get("anio", "Y")?> - <?=$comisionValue["calendario"]->_get("semestre")?></td>
+    <td colspan="5"><strong>Turno:</strong> <?=$comisionValue["comision"]->_get("turno")?></td>
+    <td colspan="5"><strong>Comision:</strong> <?=$comisionValue["sede"]->_get("numero")?><?=$comisionValue["comision"]->_get("division")?>/<?=$comisionValue["planificacion"]->_get("anio")?><?=$comisionValue["planificacion"]->_get("semestre")?></td>
+    <td colspan="5"></td>
+  </tr>
+  <tr>
+    <th rowspan="2">APELLIDO Y NOMBRE</th>
+    <th rowspan="2">DNI</th>
+    <th colspan="5">1° año 1° tramo</th>
+    <th colspan="5">1° año 2° tramo</th>
+    <th colspan="5">2° año 1° tramo</th>
+    <th colspan="5">2° año 2° tramo</th>
+    <th colspan="5">3° año 1° tramo</th>
+    <th colspan="5">3° año 2° tramo</th>
+  </tr>
+  <tr>
+<?foreach($disposicion_ as $d):?>
+    <th><?=$d["asi_nombre"]?></th>
+<?endforeach;?>
+  </tr>
+<?foreach($alumnoComision_ as $ac): $acp = $this->container->tools("alumno_comision")->value($ac); ?>
+  <tr>
+    <td><?=$acp["persona"]->_get("apellidos", "X")?>, <?=$acp["persona"]->_get("nombres", "Xx Yy")?></td>
+    <td><?=$acp["persona"]->_get("numero_documento")?></td>
+
+    <?if(array_key_exists($ac["alumno"], $alumno__calificacionAprobada_)):?>
+      <?foreach($disposicion_ as $d):?>
+        <td>
+        <?foreach($alumno__calificacionAprobada_[$ac["alumno"]] as $c):?>
+          <?if($d["pla_tramo"].$d["asignatura"] == $c["dis_pla_tramo"].$c["dis_asignatura"]):?>
+            <?=(intval($c["nota_final"]))?intval($c["nota_final"]):intval($c["crec"])."c"?>
+          <?break; endif;?>
+        <?endforeach;?>
+        </td>
+      <?endforeach;?>
+    <?else:?>
+      <?foreach($disposicion_ as $d):?>
+        <td></td>
+      <?endforeach;?>
+    <?endif;?>
+  </tr>
+<?endforeach;?>
+</table>
+</body>
+</html>

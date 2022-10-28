@@ -69,7 +69,7 @@ resolución <span class="data">&nbsp;&nbsp;&nbsp;' . $v["plan"]->_get("resolucio
 // print_r($calificaciones);
 //die();
 foreach($calificaciones as $cal){
-  $ca = $container->getEntityTools("calificacion")->value($cal);
+  $ca = $container->tools("calificacion")->value($cal);
   $c .= "<li>".$ca["asignatura"]->_get("nombre") . "</li>";
 }
 

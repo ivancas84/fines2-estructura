@@ -21,7 +21,7 @@ $curso = $mt->labelCurso($toma,"cur_");
 $horario_ = $container->getController("model_tools")->cursoHorario([$toma["curso"]]);
 $horario = count($horario_) ? $horario_[0]["horario"] : null;
 
-$t = $container->getEntityTools("toma")->value($toma);
+$t = $container->tools("toma")->value($toma);
 
 $fechaToma = $t["toma"]->_get("fecha_toma");
 $fechaFin = clone $fechaToma;

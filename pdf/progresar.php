@@ -9,7 +9,7 @@ $container = new Container;
 $render = $container->getEntityRender("persona");
 $render->setCondition(["numero_documento","=",$_GET["dni"]]);
 $row = $container->getDb()->one("persona",$render);
-$v = $container->getValue("persona")->_fromArray($row,"set");
+$v = $container->value("persona")->_fromArray($row,"set");
 
 $mpdf = new \Mpdf\Mpdf();
 
