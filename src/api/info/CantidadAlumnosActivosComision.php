@@ -8,16 +8,15 @@ class CantidadAlumnosActivosComisionInfoApi  extends BaseApi {
 
   public function main() {
     $idComision_ = php_input();
-    $render = $this->container->getEntityRender();
-    $render->addCondition(["comision","=",$idComision_]);
-    $render->addCondition(["activo","=",true]);
-    $render->setSize(0);
-    $render->setFields([
-      "comision", "cantidad"=>"alumno.count"
-    ]);
 
-    $render->setGroup(["comision"]);
-    return $this->container->db()->select("alumno_comision", $render);
+    return $this->container->query("alumno_comision")
+    ->cond(["comision","=",$idComision_])
+    ->cond(["activo","=",true])
+    ->size(0)
+    ->fields([
+      "comision", "cantidad"=>"alumno.count"
+    ])
+    ->group(["comision"]);
   }
 }
 
