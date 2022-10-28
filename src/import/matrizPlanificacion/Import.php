@@ -1,7 +1,7 @@
 <?php
 
-require_once("class/import/Import.php");
-require_once("class/model/Db.php");
+require_once("import/Import.php");
+require_once("model/Db.php");
 
 class MatrizPlanificacionImport extends Import{
   /**
@@ -15,9 +15,9 @@ class MatrizPlanificacionImport extends Import{
   
 
   public function main(){
-    $this->container->getEntity("alumno")->identifier = ["per-numero_documento"];
-    $this->container->getEntity("disposicion")->identifier = ["pla-plan", "pla-anio", "pla-semestre", "asi-codigo"];
-    $this->container->getEntity("calificacion")->identifier = ["alu_per-numero_documento", "dis_pla-plan", "dis_pla-anio", "dis_pla-semestre", "dis_asi-codigo"];
+    $this->container->entity("alumno")->identifier = ["per-numero_documento"];
+    $this->container->entity("disposicion")->identifier = ["pla-plan", "pla-anio", "pla-semestre", "asi-codigo"];
+    $this->container->entity("calificacion")->identifier = ["alu_per-numero_documento", "dis_pla-plan", "dis_pla-anio", "dis_pla-semestre", "dis_asi-codigo"];
     parent::main();
     // $this->define();
     // $this->identify();

@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/controller/ModelTools.php");
+require_once("controller/ModelTools.php");
 
 require_once("function/array_combine_keys.php");
 require_once("function/array_combine_key.php");
@@ -34,13 +34,13 @@ class CursosComisionPersistSql {
   }
 
   public function consultarComision(){
-    $this->comision =  $this->container->getDb()->get("comision", $this->id);
+    $this->comision =  $this->container->db()->get("comision", $this->id);
   }
 
   public function verificarCursos(){
     $render = new EntityRender("curso");
     $render->setCondition(["comision","=", $this->id]);
-    if($this->container->getDb()->count("curso", $render)) throw new Exception("Ya existen cursos para la comision " . $this->id);
+    if($this->container->db()->count("curso", $render)) throw new Exception("Ya existen cursos para la comision " . $this->id);
   }
 
   public function obtenerCargasHorarias(){
@@ -62,7 +62,7 @@ class CursosComisionPersistSql {
       $sql .= $persist["sql"];
       //echo "<pre>";
       //print_r($persist);
-      //$this->container->getDb()->multi_query_transaction($persist["sql"]);
+      //$this->container->db()->multi_query_transaction($persist["sql"]);
     }
 
 

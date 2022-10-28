@@ -1,13 +1,13 @@
 <?php
 
 set_time_limit(0);  
-require_once("class/controller/Base.php");
+require_once("controller/Base.php");
 require_once("function/ordinal.php"); 
 require_once("function/array_group_value.php"); 
 require_once("function/array_combine_key.php"); 
 require_once("function/array_combine_key2.php"); 
 
-require_once("class/tools/SpanishDateTime.php");
+require_once("tools/SpanishDateTime.php");
 require_once("function/qr.php");
 require_once("function/settypebool.php");
 require_once("function/pdf/index.php");
@@ -26,10 +26,10 @@ class ConstanciaPasePdf extends BaseController{
 
     $signature = array_key_exists("firma", $_GET)? settypebool($_GET["firma"]) : true;
 
-    $this->alumno = $this->container->getDb()->get("alumno",$_GET["id"]);
+    $this->alumno = $this->container->db()->get("alumno",$_GET["id"]);
     if(empty($this->alumno["plan"])) throw new Exception("El alumno no tiene plan definido");
 
-    $modelTools = $this->container->getController("model_tools");
+    $modelTools = $this->container->controller_("model_tools");
 
 
     $calificaciones = $modelTools->calificacionesAprobadasAlumnoPlan($this->alumno["id"], $this->alumno["plan"]);

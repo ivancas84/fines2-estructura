@@ -1,7 +1,7 @@
 <?php
 
-require_once("class/api/Persist.php");
-require_once("class/controller/ModelTools.php");
+require_once("api/Persist.php");
+require_once("controller/ModelTools.php");
 require_once("function/php_input.php");
 
 class TomaPosesionPersistApi extends PersistApi {
@@ -19,7 +19,7 @@ class TomaPosesionPersistApi extends PersistApi {
 
     $render = $this->container->getEntityRender("persona");
     $render->setCondition(["email","=",$data["email"]]);
-    $persona = $this->container->getDb()->oneOrNull("persona", $render);
+    $persona = $this->container->db()->oneOrNull("persona", $render);
 
     if(!$persona) return false;
 
@@ -29,8 +29,8 @@ class TomaPosesionPersistApi extends PersistApi {
 
 
 
-    $this->container->getDb()->multi_query_transaction($persistToma["sql"]);
-    $this->container->getController("email_registro")->main($persistToma["id"]);
+    $this->container->db()->multi_query_transaction($persistToma["sql"]);
+    $this->container->controller_("email_registro")->main($persistToma["id"]);
 
     return true;
   }

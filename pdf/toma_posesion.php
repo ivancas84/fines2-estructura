@@ -6,19 +6,20 @@ require_once("function/array_combine_key2.php");
 
 require $_SERVER["DOCUMENT_ROOT"] . "/" . PATH_ROOT . '/vendor/autoload.php';
 
-require_once("class/Container.php");
-require_once("class/tools/SpanishDateTime.php");
+require_once("Container.php");
+require_once("tools/SpanishDateTime.php");
 require_once("function/array_group_value.php");
 require_once("function/settypebool.php");
 
 $container = new Container;
 //$toma = "609dae4ce9b7d";
 
-$mt = $container->getController("model_tools");
-$toma = $container->getDb()->get("toma",$_GET["toma"]);
+$mt = $container->controller_("model_tools");
+$toma = $container->query("toma")->param("id",$_GET["toma"])->fieldsTree()->one();
+
 $curso = $mt->labelCurso($toma,"cur_");
 
-$horario_ = $container->getController("model_tools")->cursoHorario([$toma["curso"]]);
+$horario_ = $container->controller_("model_tools")->cursoHorario([$toma["curso"]]);
 $horario = count($horario_) ? $horario_[0]["horario"] : null;
 
 $t = $container->tools("toma")->value($toma);

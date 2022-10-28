@@ -1,7 +1,7 @@
 <?php
 
 set_time_limit(0);  
-require_once("class/controller/Base.php");
+require_once("controller/Base.php");
 require_once("function/array_group_value.php");
 require_once("function/array_combine_key.php");
 
@@ -21,7 +21,7 @@ class PreigesScript extends BaseController{
     ]);
     $render->setSize(false);
     $render->setOrder(["cur_com_sed-numero"=>"ASC","cur_com-division"=>"ASC"]);
-    $horarios = $this->container->getDb()->all("horario",$render);
+    $horarios = $this->container->db()->all("horario",$render);
     
     $render = $this->container->getEntityRender("toma");
     $render->setCondition([
@@ -33,7 +33,7 @@ class PreigesScript extends BaseController{
     ]);
     $render->setSize(false);
     $render->setOrder(["doc-nombres"=>"ASC","doc-apellidos"=>"ASC"]);
-    $docentes = $this->container->getDb()->all("toma",$render);
+    $docentes = $this->container->db()->all("toma",$render);
     $curso_docentes = array_combine_key($docentes, "curso");
     
     $comision_horarios = array_group_value($horarios, "cur_comision");
@@ -69,6 +69,6 @@ class PreigesScript extends BaseController{
         }
       }
     }
-    require_once("class/script/Preiges.html");
+    require_once("script/Preiges.html");
   }
 }

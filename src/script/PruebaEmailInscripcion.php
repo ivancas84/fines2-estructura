@@ -7,13 +7,13 @@
  * si se vuelve a cargar el mismo archivo (respetando los parámetros), se actualizaran los datos. Con esto se da la posibilidad de correjir los errores en el csv y volverlo a cargar.
  */
 set_time_limit(0);  
-require_once("class/controller/Base.php");
+require_once("controller/Base.php");
 
 class PruebaEmailInscripcionScript extends BaseController{
  
 
   public function main(){
-    $return = $this->container->getController("email_inscripcion")->main("3FF");
+    $return = $this->container->controller_("email_inscripcion")->main("3FF");
     return $return;
   }    
  

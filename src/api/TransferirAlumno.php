@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/api/Base.php");
+require_once("api/Base.php");
 require_once("function/php_input.php");
 require_once("function/array_combine_key.php");
 
@@ -39,12 +39,12 @@ class TransferirAlumnoApi extends BaseApi {
     $this->actualizarPersona();
 
     //echo "<pre>".$this->sql;
-    $this->container->getDb()->multi_query_transaction($this->sql);
+    $this->container->db()->multi_query_transaction($this->sql);
     return(["id"=>null,"detail"=>$this->detail]);
   }
 
   public function actualizarPersona(){
-    $persona = $this->container->getDb()->get("persona",$this->data["persona"]);
+    $persona = $this->container->db()->get("persona",$this->data["persona"]);
     $p = [
       "id" => $persona["id"],
       "numero_documento" => trim($persona["numero_documento"], "_"),
@@ -63,7 +63,7 @@ class TransferirAlumnoApi extends BaseApi {
       ["alumno","=",$this->alumnoTransferir["id"]]
     ]);
     $transferir = array_combine_key(
-      $this->container->getDb()->all("alumno_comision",$render),
+      $this->container->db()->all("alumno_comision",$render),
       "comision"
     );
 
@@ -74,7 +74,7 @@ class TransferirAlumnoApi extends BaseApi {
         ["alumno","=",$this->alumnoExistente["id"]]
       ]);
       $existentes = array_combine_key( 
-        $this->container->getDb()->all("alumno_comision",$render),
+        $this->container->db()->all("alumno_comision",$render),
         "comision"
       );
     }
@@ -134,7 +134,7 @@ class TransferirAlumnoApi extends BaseApi {
     $render->setCondition([
       ["persona","=",$this->data["id"]]
     ]);
-    $this->alumnoTransferir = $this->container->getDb()->oneOrNull("alumno",$render);
+    $this->alumnoTransferir = $this->container->db()->oneOrNull("alumno",$render);
   }
 
   public function alumnoExistente(){
@@ -142,7 +142,7 @@ class TransferirAlumnoApi extends BaseApi {
     $render->setCondition([
       ["persona","=",$this->data["persona"]]
     ]);
-    $this->alumnoExistente = $this->container->getDb()->oneOrNull("alumno",$render);
+    $this->alumnoExistente = $this->container->db()->oneOrNull("alumno",$render);
   }
 
   
@@ -178,7 +178,7 @@ class TransferirAlumnoApi extends BaseApi {
       ["alumno","=",$this->alumnoTransferir["id"]]
     ]);
     $transferir = array_combine_key(
-      $this->container->getDb()->all("calificacion",$render),
+      $this->container->db()->all("calificacion",$render),
       "disposicion"
     );
 
@@ -187,7 +187,7 @@ class TransferirAlumnoApi extends BaseApi {
       ["alumno","=",$this->alumnoExistente["id"]]
     ]);
     $existentes = array_combine_key( 
-      $this->container->getDb()->all("calificacion",$render),
+      $this->container->db()->all("calificacion",$render),
       "disposicion"
     );
 
@@ -225,7 +225,7 @@ class TransferirAlumnoApi extends BaseApi {
       ["alumno","=",$this->alumnoTransferir["id"]]
     ]);
     $transferir = array_combine_key(
-      $this->container->getDb()->all("disposicion_pendiente",$render),
+      $this->container->db()->all("disposicion_pendiente",$render),
       "disposicion"
     );
 
@@ -234,7 +234,7 @@ class TransferirAlumnoApi extends BaseApi {
       ["alumno","=",$this->alumnoExistente["id"]]
     ]);
     $existentes = array_combine_key( 
-      $this->container->getDb()->all("disposicion_pendiente",$render),
+      $this->container->db()->all("disposicion_pendiente",$render),
       "disposicion"
     );
 
@@ -257,7 +257,7 @@ class TransferirAlumnoApi extends BaseApi {
 
 
   public function transferirEntidadDetallePersona(){
-    $persist = $this->container->getController("model_resources")->transferirEntidad("detalle_persona","persona", $this->data["id"],$this->data["persona"]);
+    $persist = $this->container->controller_("model_resources")->transferirEntidad("detalle_persona","persona", $this->data["id"],$this->data["persona"]);
     $this->sql .= $persist["sql"];
     $this->detail = array_merge($this->detail,$persist["detail"]);
   }

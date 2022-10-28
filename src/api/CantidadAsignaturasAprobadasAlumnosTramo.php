@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/api/Base.php");
+require_once("api/Base.php");
 require_once("function/php_input.php");
 require_once("function/array_group_value.php");
 require_once("function/array_unset_keys.php");
@@ -16,7 +16,7 @@ class CantidadAsignaturasAprobadasAlumnosTramoApi extends BaseApi {
     $this->container->getAuth()->authorize("alumno", "r");
     $this->idAlumno_ = php_input();
     
-    return $this->container->getController("cantidad_asignaturas_aprobadas_alumnos_tramo")->main($this->idAlumno_);
+    return $this->container->controller_("cantidad_asignaturas_aprobadas_alumnos_tramo")->main($this->idAlumno_);
   }
 
 }

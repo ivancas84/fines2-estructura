@@ -1,7 +1,7 @@
 <?php
 
 set_time_limit(0);  
-require_once("class/controller/Base.php");
+require_once("controller/Base.php");
 // require_once("function/array_group_value.php");
 // require_once("function/array_combine_key.php");
 
@@ -19,7 +19,7 @@ class GenerarHorariosComisionesSiguientesScript extends BaseController{
     $render->setSize(0);
     $render->setCondition(["comision","=",$idComision]);
     
-    $alumnoComision_ = $this->container->getDb()->all("alumno_comision",$render);
+    $alumnoComision_ = $this->container->db()->all("alumno_comision",$render);
     
 
   }

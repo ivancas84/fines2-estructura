@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/import/Element.php");
+require_once("import/Element.php");
 require_once("function/nombres_parecidos.php");
 
 class AlumnosComisionImportElement extends ImportElement {

@@ -40,7 +40,7 @@ class CantidadAsignaturasAprobadasAlumnosTramo  {
     $render->setOrder(["dis_pla-anio"=>"ASC", "dis_pla-semestre"=>"ASC"]);
     
     $this->alumno__calificacionAprobada_ = array_group_value(
-      $this->container->getDb()->select("calificacion",$render),
+      $this->container->db()->select("calificacion",$render),
       "alumno"
     );
   }

@@ -6,8 +6,8 @@ require_once("function/array_combine_key2.php");
 
 require $_SERVER["DOCUMENT_ROOT"] . "/" . PATH_ROOT . '/vendor/autoload.php';
 
-require_once("class/Container.php");
-require_once("class/tools/SpanishDateTime.php");
+require_once("Container.php");
+require_once("tools/SpanishDateTime.php");
 require_once("function/array_group_value.php");
 require_once("function/settypebool.php");
 require_once("function/qr.php");
@@ -26,7 +26,7 @@ $qrcode = qr($_GET["url"]);
 
 $container = new Container;
 
-$alumnoTools = $container->getController("alumno_tools");
+$alumnoTools = $container->controller_("alumno_tools");
 
 $alumnoTools->init($_GET["id"]);
 $v = $alumnoTools->getValue();

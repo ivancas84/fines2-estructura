@@ -1,7 +1,7 @@
 <?php
 
 set_time_limit(0);  
-require_once("class/controller/Base.php");
+require_once("controller/Base.php");
 require_once("function/array_group_value.php");
 require_once("function/array_combine_key.php");
 require_once("function/settypebool.php");
@@ -26,7 +26,7 @@ class GenerarHorariosComisionesSiguientesScript extends BaseController{
 
     $grupo = ["cal-anio"=>'2022',"cal-semestre"=>2,"modalidad"=>"1", "sed-centro_educativo"=>"6047d36d50316"];
 
-    $this->mt = $this->container->getController("model_tools");
+    $this->mt = $this->container->controller_("model_tools");
 
     if(empty($grupo["cal-anio"])) throw new Exception("Dato no definido: fecha anio");
     if(empty($grupo["cal-semestre"])) throw new Exception("Dato no definido: fecha semestre");
@@ -72,7 +72,7 @@ class GenerarHorariosComisionesSiguientesScript extends BaseController{
     $render->setParams($grupoAnterior);
     $render->addCondition(["comision_siguiente","=",true]);
     $render->setSize(0);
-    $this->comisionesAnteriores = $this->container->getDb()->all("comision",$render);
+    $this->comisionesAnteriores = $this->container->db()->all("comision",$render);
   }
 
   protected function quitarComisionesAnterioresMismoSiguiente() {
@@ -103,7 +103,7 @@ class GenerarHorariosComisionesSiguientesScript extends BaseController{
     $render = $this->container->getEntityRender("horario");
     $render->addCondition(["cur-comision","=",$idsComisionesAnteriores]);
     $render->setSize(0);
-    $horariosGrupoAnterior = $this->container->getDb()->all("horario",$render);
+    $horariosGrupoAnterior = $this->container->db()->all("horario",$render);
     $idsComisionesAnteriores = array_column($this->comisionesAnteriores, "id");
 
     $idComisionesAnterioresConHorarios = array_values(array_unique(array_column($horariosGrupoAnterior, "cur_comision")));
@@ -120,7 +120,7 @@ class GenerarHorariosComisionesSiguientesScript extends BaseController{
     $render = $this->container->getEntityRender("horario");
     $render->setCondition(["comision-id","=",$idsComisionesGrupoActual]);
     $render->setSize(0);
-    $horariosGrupoActual = $this->container->getDb()->all("horario",$render);
+    $horariosGrupoActual = $this->container->db()->all("horario",$render);
 
     $idComisionesGrupoActualConHorarios = array_values(array_unique(array_column($horariosGrupoActual, "cur_comision")));
     for($i = 0; $i < count($idsComisionesGrupoActual); $i++) {
@@ -136,7 +136,7 @@ class GenerarHorariosComisionesSiguientesScript extends BaseController{
     $idsComisionesGrupoActual = array_column($this->comisionesAnteriores, "comision_siguiente");
     $render = $this->container->getEntityRender("comision");
     $render->setSize(0);
-    $comision_ = $this->container->getDb()->getAll("comision",$idsComisionesGrupoActual);
+    $comision_ = $this->container->db()->getAll("comision",$idsComisionesGrupoActual);
     $idComisionesGrupoActualSinAutorizar = [];
 
     foreach($comision_ as $c){
@@ -162,7 +162,7 @@ class GenerarHorariosComisionesSiguientesScript extends BaseController{
 
   protected function definirHorariosComisiones(){
     
-    $controller = $this->container->getController("horarios_comision_persist_sql");
+    $controller = $this->container->controller_("horarios_comision_persist_sql");
 
     $ids = [];
     $detail = [];
@@ -179,7 +179,7 @@ class GenerarHorariosComisionesSiguientesScript extends BaseController{
       
       array_push($ids, $persist["id"]);
       $detail = array_merge($detail,$persist["detail"]);
-      $this->container->getDb()->multi_query_transaction($persist["sql"]);
+      $this->container->db()->multi_query_transaction($persist["sql"]);
     }
 
     echo "<pre>";

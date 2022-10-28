@@ -6,7 +6,7 @@
  * si se vuelve a cargar el mismo archivo (respetando los parámetros), se actualizaran los datos. Con esto se da la posibilidad de correjir los errores en el csv y volverlo a cargar.
  */
 require_once("../../config/config.php"); 
-require_once("class/Container.php");
+require_once("Container.php");
 set_time_limit ( 0 );
 
 

@@ -1,7 +1,7 @@
 <?php
 
-require_once("class/import/Import.php");
-require_once("class/model/Db.php");
+require_once("import/Import.php");
+require_once("model/Db.php");
 require_once("function/array_combine_key.php");
 
 class ComisionesSiguientesAlumnosImport extends Import{
@@ -20,7 +20,7 @@ class ComisionesSiguientesAlumnosImport extends Import{
 
   
   public function initialize(){
-    $this->container->getEntity("alumno")->identifier = ["persona","comision"]; 
+    $this->container->entity("alumno")->identifier = ["persona","comision"]; 
 
   }
 
@@ -46,14 +46,14 @@ class ComisionesSiguientesAlumnosImport extends Import{
       ["modalidad","=",$this->modalidad],
     ]);
     $render->setSize(0);
-    $comisionesActuales = array_combine_key($this->container->getDb()->all("comision", $render), "id");
+    $comisionesActuales = array_combine_key($this->container->db()->all("comision", $render), "id");
     
     $render = $this->container->getEntityRender("alumno");
     $render->setSize(0);
 
     $render->setCondition(["comision-comision_siguiente","=",array_keys($comisionesActuales)]);
     $sql = $this->container->getEntitySqlo("alumno")->select($render);
-    $this->source = $this->container->getDb()->all("alumno",$render);
+    $this->source = $this->container->db()->all("alumno",$render);
   }
 
   public function identify(){

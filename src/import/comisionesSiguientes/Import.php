@@ -1,7 +1,7 @@
 <?php
 
-require_once("class/import/Import.php");
-require_once("class/model/Db.php");
+require_once("import/Import.php");
+require_once("model/Db.php");
 
 class ComisionesSiguientesImport extends Import{
   /**
@@ -20,7 +20,7 @@ class ComisionesSiguientesImport extends Import{
 
 
   public function initialize(){
-    $this->container->getEntity("comision")->identifier = ["sede-numero","division", "planificacion"]; 
+    $this->container->entity("comision")->identifier = ["sede-numero","division", "planificacion"]; 
   }
   
   public function defineSource(){
@@ -38,7 +38,7 @@ class ComisionesSiguientesImport extends Import{
     array_push($fields, "identifier");
     $render->setFields($fields);
 
-    $this->source = $this->container->getDb()->select("comision", $render);
+    $this->source = $this->container->db()->select("comision", $render);
   }
 
   public function identify(){

@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/controller/DisplayEntityRender.php");
+require_once("controller/DisplayEntityRender.php");
 require_once("function/array_unique_key.php");
 
 class SedeDisplayEntityRender extends DisplayEntityRender {

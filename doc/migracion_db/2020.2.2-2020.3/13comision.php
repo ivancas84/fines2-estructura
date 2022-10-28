@@ -2,9 +2,9 @@
 
 //Ejecutar en el server
 require_once($_SERVER["DOCUMENT_ROOT"]."/config/config.php");
-require_once("class/model/db/Dba.php");
-require_once("class/model/EntityRender.php");
-require_once("class/model/Ma.php");
+require_once("model/db/Dba.php");
+require_once("model/EntityRender.php");
+require_once("model/Ma.php");
 
 function obtenerIdPlanificacion($anio, $semestre,$plan){
     if(empty($anio) || empty($semestre) || empty($plan)) return "null";

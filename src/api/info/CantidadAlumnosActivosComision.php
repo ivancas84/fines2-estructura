@@ -1,7 +1,7 @@
 <?php
 
-require_once("class/api/Base.php");
-require_once("class/controller/ModelTools.php");
+require_once("api/Base.php");
+require_once("controller/ModelTools.php");
 require_once("function/php_input.php");
 
 class CantidadAlumnosActivosComisionInfoApi  extends BaseApi {
@@ -17,7 +17,7 @@ class CantidadAlumnosActivosComisionInfoApi  extends BaseApi {
     ]);
 
     $render->setGroup(["comision"]);
-    return $this->container->getDb()->select("alumno_comision", $render);
+    return $this->container->db()->select("alumno_comision", $render);
   }
 }
 

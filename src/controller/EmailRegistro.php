@@ -1,7 +1,7 @@
 <?php
 
 require_once("../config/config.php");
-require_once("class/Container.php");
+require_once("Container.php");
 require_once("function/email.php");
 
 class EmailRegistro {
@@ -11,8 +11,8 @@ class EmailRegistro {
 
   public function main($id){
 
-    $mt = $this->container->getController("model_tools");
-    $toma = $this->container->getDb()->get("toma",$id);
+    $mt = $this->container->controller_("model_tools");
+    $toma = $this->container->db()->get("toma",$id);
     $curso = $mt->labelCurso($toma,"cur_");
     $t = $this->container->tools("toma")->value($toma);
 

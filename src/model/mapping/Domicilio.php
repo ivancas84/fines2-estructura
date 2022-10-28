@@ -1,5 +1,5 @@
 <?php
-require_once("class/model/entityOptions/Mapping.php");
+require_once("model/entityOptions/Mapping.php");
 
 class DomicilioMapping extends MappingEntityOptions{
 

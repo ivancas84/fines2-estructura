@@ -1,7 +1,7 @@
 <?php
 
-require_once("class/import/Import.php");
-require_once("class/model/Db.php");
+require_once("import/Import.php");
+require_once("model/Db.php");
 
 class ControlDuplicadosImport extends Import{
   /**

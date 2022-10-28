@@ -1,7 +1,7 @@
 <?php
 
-require_once("class/import/Import.php");
-require_once("class/model/Db.php");
+require_once("import/Import.php");
+require_once("model/Db.php");
 
 class MatrizImport extends Import{
   /**
@@ -14,8 +14,8 @@ class MatrizImport extends Import{
   public $comienzoCalificacion = 3;
 
   public function main(){
-    $this->container->getEntity("curso")->identifier = ["com_sed-numero", "com-division", "com_pla-anio", "com_pla-semestre","asi-codigo"];
-    $this->container->getEntity("calificacion")->identifier = ["per-numero_documento", "cur_com_sed-numero", "cur_com-division", "cur_com_pla-anio", "cur_com_pla-semestre","cur_asi-codigo"];
+    $this->container->entity("curso")->identifier = ["com_sed-numero", "com-division", "com_pla-anio", "com_pla-semestre","asi-codigo"];
+    $this->container->entity("calificacion")->identifier = ["per-numero_documento", "cur_com_sed-numero", "cur_com-division", "cur_com_pla-anio", "cur_com_pla-semestre","cur_asi-codigo"];
     parent::main();
     // $this->define();
     //   $this->identify();

@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/controller/ModelTools.php");
+require_once("controller/ModelTools.php");
 
 require_once("function/array_combine_keys.php");
 require_once("function/array_combine_key.php");
@@ -45,7 +45,7 @@ class CantidadAprobadosComision   {
     $render->addCondition(["comision","=",$this->idComision_]);
     $render->setSize(0);
     $this->alumnoComision_ = array_group_value(
-      $this->container->getDb()->all("alumno_comision", $render),
+      $this->container->db()->all("alumno_comision", $render),
       "comision"
     );  
   }

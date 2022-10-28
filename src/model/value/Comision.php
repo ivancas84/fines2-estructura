@@ -1,5 +1,5 @@
 <?php
-require_once("class/model/entityOptions/Value.php");
+require_once("model/entityOptions/Value.php");
 require_once("function/nombres_parecidos.php");
 
 class ComisionValue extends ValueEntityOptions{
@@ -7,7 +7,7 @@ class ComisionValue extends ValueEntityOptions{
   public function planificacionSiguiente(){
     
 
-    $planificacion = $this->container->getDb()->get("planificacion",$this->_get("planificacion"));
+    $planificacion = $this->container->db()->get("planificacion",$this->_get("planificacion"));
     if (
       (empty($planificacion["anio"])) 
       || (empty($planificacion["semestre"]))
@@ -36,7 +36,7 @@ class ComisionValue extends ValueEntityOptions{
       ]);
     }
 
-    $planificacion = $this->container->getDb()->oneOrNull("planificacion",$render);
+    $planificacion = $this->container->db()->oneOrNull("planificacion",$render);
 
     return ($planificacion) ? $planificacion["id"] : null;
   }

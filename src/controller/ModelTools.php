@@ -1,7 +1,5 @@
 <?php
 
-require_once("class/model/EntityRender.php");
-require_once("class/model/Ma.php");
 
 class ModelTools {
   /**
@@ -47,7 +45,7 @@ class ModelTools {
     $render->setFields(["aprobados"=>"persona.count"]);
     $render->setGroup(["comision"=>"cur-comision"]);
     
-    return $this->container->getDb()->select("calificacion",$render);
+    return $this->container->db()->select("calificacion",$render);
   }
 
   public function sumaHorasCatedraAsignaturasGrupo($fechaAnio, $fechaSemestre, $modalidad, $centroEducativo){
@@ -69,7 +67,7 @@ class ModelTools {
     $render->setGroup(["ch_asignatura"]);
     $render->setOrder(["ch_sum_horas_catedra" =>"desc"]);
 
-    return $this->container->getDb()->advanced("curso",$render);
+    return $this->container->db()->advanced("curso",$render);
   }
 
   public function cargasHorariasDePlanificacion($planificacion){
@@ -80,7 +78,7 @@ class ModelTools {
     $render->setGroup(["planificacion" => "dis-planificacion", "asignatura"=>"dis-asignatura"]);
     $render->setOrder(["horas_catedra.sum" => "desc"]);
     $render->setSize(0);
-    return $this->container->getDb()->select("distribucion_horaria",$render);
+    return $this->container->db()->select("distribucion_horaria",$render);
   }
 
   public function cargasHorariasXAsignaturaDeDistribucionesHorarias($distribucionesHorarias){
@@ -140,7 +138,7 @@ WHERE (toma.estado = 'Aprobada') AND (toma.estado_contralor != 'Modificar')
 AND curso IN ('{$idCursos_}')
 ";
 
-    $result = $this->container->getDb()->query($sql);
+    $result = $this->container->db()->query($sql);
     $rows = $result->fetch_all(MYSQLI_ASSOC);
     $result->free();
     return $rows;
@@ -171,7 +169,7 @@ GROUP BY curso.id
   ";
 
     $container = new Container();
-    $result = $container->getDb()->query($sql);
+    $result = $container->db()->query($sql);
     $rows = $result->fetch_all(MYSQLI_ASSOC);
     $result->free();
     return $rows;
@@ -188,7 +186,7 @@ GROUP BY curso.id
   GROUP BY curso.id
   ";
 
-    $result = $this->container->getDb()->query($sql);
+    $result = $this->container->db()->query($sql);
     $rows = $result->fetch_all(MYSQLI_ASSOC);
     $result->free();
     return $rows;
@@ -234,7 +232,7 @@ GROUP BY curso.id
     
 ";
 
-    $result = $this->container->getDb()->query($sql);
+    $result = $this->container->db()->query($sql);
     $rows = $result->fetch_all(MYSQLI_ASSOC);
     $result->free();
     return $rows;
@@ -279,7 +277,7 @@ GROUP BY curso.id
     ]);
     $render->setOrder(["pla-anio"=>"asc","pla-semestre"=>"asc", "asi-nombre"=>"asc"]);
     
-    return $this->container->getDb()->all("disposicion",$render);
+    return $this->container->db()->all("disposicion",$render);
   }
 
   public function cantidadCalificacionesAprobadas_($idAlumno_, $planificacion){
@@ -293,7 +291,7 @@ GROUP BY curso.id
     $render->addFields(["alumno", "cantidad"=> "count"]);
     $render->setSize(0);
     $render->setGroup(["alumno"]);
-    return $this->container->getDb()->select("calificacion",$render);
+    return $this->container->db()->select("calificacion",$render);
   }
 
   public function calificacionesAprobadasAlumnoPlan($idAlumno, $plan){
@@ -307,7 +305,7 @@ GROUP BY curso.id
       ]
     ]);
     $render->setOrder(["dis_pla-anio"=>"asc","dis_pla-semestre"=>"asc","dis_asi-nombre"=>"asc"]);
-    return $this->container->getDb()->all("calificacion",$render);
+    return $this->container->db()->all("calificacion",$render);
   }
 
   public function calificacionesAlumnoPlanAnio($idAlumno, $plan, $anio){
@@ -318,7 +316,7 @@ GROUP BY curso.id
       ["alumno","=",$idAlumno],
     ]);
     $render->setOrder(["dis_pla-anio"=>"asc","dis_pla-semestre"=>"asc","dis_asi-nombre"=>"asc"]);
-    return $this->container->getDb()->all("calificacion",$render);
+    return $this->container->db()->all("calificacion",$render);
   }
 
   public function cantidadPlanificacionCalificacionesAprobadasAlumnoPlan($idAlumno, $plan){
@@ -336,7 +334,7 @@ GROUP BY curso.id
     $render->setSize(0);
     $render->setGroup(["anio"=>"dis_pla-anio","semestre"=>"dis_pla-semestre"]);
     $render->setOrder(["dis_pla-anio"=>"asc","dis_pla-semestre"=>"asc"]);
-    return $this->container->getDb()->select("calificacion",$render);
+    return $this->container->db()->select("calificacion",$render);
   }
 
   public function cantidadAnioCalificacionesAprobadasAlumnoPlan($idAlumno, $plan, $anio = 1){
@@ -360,7 +358,7 @@ GROUP BY curso.id
     $render->setGroup(["anio"=>"dis_pla-anio"]);
     $render->setOrder(["dis_pla-anio"=>"asc"]);
     $render->setOrder(["dis_pla-semestre"=>"asc"]);
-    return $this->container->getDb()->select("calificacion",$render);
+    return $this->container->db()->select("calificacion",$render);
   }
 
 

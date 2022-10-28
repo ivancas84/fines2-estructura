@@ -1,12 +1,12 @@
 <?php
 
 
-require_once("class/api/All.php");
-require_once("class/model/Ma.php");
-require_once("class/model/Values.php");
+require_once("api/All.php");
+require_once("model/Ma.php");
+require_once("model/Values.php");
 
 //@todo
-require_once("class/controller/persist/ComisionCursos.php");
+require_once("controller/persist/ComisionCursos.php");
 
 class ComisionesGrupoAllApi extends AllApi {
   /**

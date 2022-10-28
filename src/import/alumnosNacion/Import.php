@@ -1,8 +1,8 @@
 <?php
 
-require_once("class/import/Import.php");
-require_once("class/model/Db.php");
-require_once("class/tools/Validation.php");
+require_once("import/Import.php");
+require_once("model/Db.php");
+require_once("tools/Validation.php");
 require_once("function/array_group_value.php");
 
 
@@ -18,8 +18,8 @@ class AlumnosNacionImport extends Import{
    */
 
   public function main(){
-    $this->container->getEntity("alumno")->identifier = ["per-numero_documento"];
-    // $this->container->getEntity("alumno_comision")->identifier = ["alu_per-numero_documento", "comision"];
+    $this->container->entity("alumno")->identifier = ["per-numero_documento"];
+    // $this->container->entity("alumno_comision")->identifier = ["alu_per-numero_documento", "comision"];
 
     //parent::main();
     $this->define();
@@ -81,7 +81,7 @@ class AlumnosNacionImport extends Import{
     ]);
     $render->setOrder(["calendario-anio"=>"DESC", "calendario-semestre"=>"DESC"]);
     
-    $rows = $this->container->getDb()->all("alumno_comision", $render);
+    $rows = $this->container->db()->all("alumno_comision", $render);
 
     //si se devuelven varias instancias del mismo identificador (no deberia pasar) solo se considerara una
     $this->dbs["alumno_comision"] = array_group_value(

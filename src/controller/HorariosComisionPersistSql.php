@@ -81,13 +81,13 @@ class HorariosComisionPersistSql  {
   public function verificarHorarios(){
     $render = new EntityRender("horario");
     $render->setCondition(["comision-id","=", $this->id]);
-    if($this->container->getDb()->count("horario", $render)) throw new Exception("Ya existen horarios para la comision " . $this->id);
+    if($this->container->db()->count("horario", $render)) throw new Exception("Ya existen horarios para la comision " . $this->id);
   }
 
   public function curso_(){
     $render = new EntityRender("curso");
     $render->setCondition(["comision","=", $this->id]);
-    $this->curso_ = $this->container->getDb()->all("curso", $render);  
+    $this->curso_ = $this->container->db()->all("curso", $render);  
     if(empty($this->curso_)) throw new Exception("No existen cursos para la comision " . $this->id);
   }
 
@@ -95,7 +95,7 @@ class HorariosComisionPersistSql  {
   public function getDistribucionesHorarias() {
     $render = $this->container->getEntityRender("distribucion_horaria");
     $render->addCondition(["dis-planificacion","=",$this->curso_[0]["com_planificacion"]]);
-    $this->distribucionesHorarias = $this->container->getDb()->all("distribucion_horaria", $render);
+    $this->distribucionesHorarias = $this->container->db()->all("distribucion_horaria", $render);
     
     if(empty($this->distribucionesHorarias)) throw new Exception("No existen distribuciones horarias para la comision indicada: " . $this->id);
     if(!shuffle($this->distribucionesHorarias)) throw new Exception("No se pudo asignar orden aleatorio a la distribucion horaria");
@@ -143,7 +143,7 @@ class HorariosComisionPersistSql  {
       $sql .= $persist["sql"];
     }
 
-    //$this->container->getDb()->multi_query_transaction($sql);
+    //$this->container->db()->multi_query_transaction($sql);
 
     return ["id" => $this->id, "detail" => $detail, "sql"=>$sql];
   }

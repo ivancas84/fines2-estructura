@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/api/Base.php");
+require_once("api/Base.php");
 require_once("function/php_input.php");
 require_once("function/array_combine_key.php");
 
@@ -26,14 +26,14 @@ class TransferirAlumnosActivosApi extends BaseApi {
      * id: comision a transferir
      */
     
-    $this->comision = $this->container->getDb()->get("comision",$this->data["id"]);
+    $this->comision = $this->container->db()->get("comision",$this->data["id"]);
 
     $this->alumnoComision_();
     $this->alumnoComisionSiguiente_();
     $this->alumnoComisionInsertar_();
     $this->persistAlumnoComisionInsertar_();
 
-    $this->container->getDb()->multi_query_transaction($this->sql);
+    $this->container->db()->multi_query_transaction($this->sql);
     return(["id"=>$this->data["id"],"detail"=>$this->detail]);
   }
 
@@ -41,14 +41,14 @@ class TransferirAlumnosActivosApi extends BaseApi {
     $render = $this->container->getEntityRender("alumno_comision");
     $render->setCondition(["comision","=",$this->comision["id"]]);
     $render->setSize(0);
-    $this->alumnoComision_ = $this->container->getDb()->all("alumno_comision",$render);
+    $this->alumnoComision_ = $this->container->db()->all("alumno_comision",$render);
   }
 
   protected function alumnoComisionSiguiente_(){
     $render = $this->container->getEntityRender("alumno_comision");
     $render->setCondition(["comision","=",$this->comision["comision_siguiente"]]);
     $render->setSize(0);
-    $this->alumnoComisionSiguiente_ = $this->container->getDb()->all("alumno_comision",$render);
+    $this->alumnoComisionSiguiente_ = $this->container->db()->all("alumno_comision",$render);
   }
 
   protected function alumnoComisionInsertar_(){

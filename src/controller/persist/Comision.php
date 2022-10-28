@@ -1,8 +1,8 @@
 <?php
 
-require_once("class/controller/Persist.php");
-require_once("class/controller/ModelTools.php");
-require_once("class/model/db/Dba.php");
+require_once("controller/Persist.php");
+require_once("controller/ModelTools.php");
+require_once("model/db/Dba.php");
 
 class ComisionPersist extends Persist {
   protected $entityName = "comision";

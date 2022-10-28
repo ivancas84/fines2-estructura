@@ -1,8 +1,8 @@
 <?php
 
-require_once("class/import/Import.php");
-require_once("class/model/Db.php");
-require_once("class/tools/Validation.php");
+require_once("import/Import.php");
+require_once("model/Db.php");
+require_once("tools/Validation.php");
 require_once("function/array_group_value.php");
 require_once("function/settypebool.php");
 
@@ -24,14 +24,14 @@ class CalificacionImport extends Import{
   public function main(){
     if(Validation::is_empty($this->idCurso)) throw new Exception("El id del curso no se encuentra definido");
 
-    $this->curso = $this->container->getDb()->get("curso", $this->idCurso);
+    $this->curso = $this->container->db()->get("curso", $this->idCurso);
     if(empty($this->curso)) throw new Exception("El curso no existe");
 
     $this->dni_();
 
-    $this->container->getEntity("alumno")->identifier = ["per-numero_documento"];
-    $this->container->getEntity("calificacion")->identifier = ["alu_per-numero_documento", "dis-planificacion", "dis-asignatura"];
-    $this->container->getEntity("disposicion")->identifier = ["planificacion", "asignatura"];
+    $this->container->entity("alumno")->identifier = ["per-numero_documento"];
+    $this->container->entity("calificacion")->identifier = ["alu_per-numero_documento", "dis-planificacion", "dis-asignatura"];
+    $this->container->entity("disposicion")->identifier = ["planificacion", "asignatura"];
     parent::main();
     // $this->define();
     // $this->identify();
@@ -45,7 +45,7 @@ class CalificacionImport extends Import{
   public function dni_(){
     $render = $this->container->getEntityRender("alumno_comision");
     $render->setCondition(["comision","=",$this->curso["comision"]]);
-    $alumnoComision = $this->container->getDb()->all("alumno_comision",$render);
+    $alumnoComision = $this->container->db()->all("alumno_comision",$render);
     $this->dni_ = array_column($alumnoComision,"alu_per_numero_documento");
     $this->alumno_ = array_group_value($alumnoComision, "alu_per_numero_documento");
   }

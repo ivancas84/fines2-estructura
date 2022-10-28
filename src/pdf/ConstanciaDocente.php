@@ -1,12 +1,12 @@
 <?php
 
 set_time_limit(0);  
-require_once("class/controller/Base.php");
+require_once("controller/Base.php");
 require_once("function/filter_get.php");
 require_once("function/array_group_value.php"); 
 require_once("function/array_combine_key2.php"); 
-require_once("class/Container.php");
-require_once("class/tools/SpanishDateTime.php");
+require_once("Container.php");
+require_once("tools/SpanishDateTime.php");
 require_once("function/array_group_value.php");
 require_once("function/settypebool.php");
 require_once("function/qr.php");
@@ -31,10 +31,10 @@ class ConstanciaDocentePdf extends BaseController{
     $id = filter_get("id");
     
     $v = $this->container->tools("toma")->value(
-      $this->container->getDb()->get("toma",$id)
+      $this->container->db()->get("toma",$id)
     );
 
-    $modelTools = $this->container->getController("model_tools");
+    $modelTools = $this->container->controller_("model_tools");
 
     $date = new SpanishDateTime();
 

@@ -1,7 +1,7 @@
 <?php
 
-require_once("class/api/Persist.php");
-require_once("class/controller/ModelTools.php");
+require_once("api/Persist.php");
+require_once("controller/ModelTools.php");
 require_once("function/php_input.php");
 
 class ComisionCursosPersistApi extends PersistApi {
@@ -12,7 +12,7 @@ class ComisionCursosPersistApi extends PersistApi {
   public function main(){
     $idComision = php_input()["id"];
 
-    $comision = $this->container->getDb()->get("comision", $idComision);
+    $comision = $this->container->db()->get("comision", $idComision);
 
     $cargasHorarias = $this->container->getMt()->cargasHorariasDePlanificacion( $comision["planificacion"] );
     if(!count($cargasHorarias)) throw new Exception("No existen cargas horarias asociadas a la planificacion");
@@ -32,7 +32,7 @@ class ComisionCursosPersistApi extends PersistApi {
       array_push($detail, "curso".$curso->_get("id"));
     }
 
-    $this->container->getDb()->multi_query_transaction_log($sql);
+    $this->container->db()->multi_query_transaction_log($sql);
 
     return ["id" => $idComision, "detail" => $detail];
 

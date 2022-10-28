@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/model/Rel.php");
+require_once("model/Rel.php");
 require_once("function/php_input.php");
 require_once("function/array_combine_key2.php");
 
@@ -27,7 +27,7 @@ class PersistCalificacionesAlumnoApi {
     $render = $this->container->getEntityRender("disposicion");
     $render->setCondition(["plan-id","=",$params["alumno"]["plan"]]);
     $disposicion_ = array_combine_key2(
-      $this->container->getDb()->all("disposicion", $render),
+      $this->container->db()->all("disposicion", $render),
       ["asignatura","planificacion_anio","planificacion_semestre"]
     );
 
@@ -50,7 +50,7 @@ class PersistCalificacionesAlumnoApi {
       $sql .= $p["sql"];
     }
 
-    $this->container->getDb()->multi_query_transaction($sql);
+    $this->container->db()->multi_query_transaction($sql);
     return ["id" => $params["alumno"]["id"], "detail" => $detail];
   }
 }

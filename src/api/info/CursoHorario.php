@@ -1,7 +1,6 @@
 <?php
 
-require_once("class/api/Base.php");
-require_once("class/controller/ModelTools.php");
+require_once("api/Base.php");
 require_once("function/php_input.php");
 
 class CursoHorarioInfoApi extends BaseApi {
@@ -10,7 +9,7 @@ class CursoHorarioInfoApi extends BaseApi {
 
   public function main() {
     $idCursos = php_input();
-    return  $this->container->getController("model_tools")->cursoHorario($idCursos);
+    return  $this->container->controller_("model_tools")->cursoHorario($idCursos);
   }
 }
 

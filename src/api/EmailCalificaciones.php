@@ -1,7 +1,7 @@
 <?php
 
 
-require_once("class/api/Base.php");
+require_once("api/Base.php");
 require_once("function/php_input.php");
 
 class EmailCalificacionesApi extends BaseApi {
@@ -11,7 +11,7 @@ class EmailCalificacionesApi extends BaseApi {
     /**
      * id:persona.id
      */
-    $return = $this->container->getController("email_calificaciones")->main($data["id"]);
+    $return = $this->container->controller_("email_calificaciones")->main($data["id"]);
     return $return;
   }
 }

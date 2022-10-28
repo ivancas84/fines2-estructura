@@ -1,7 +1,7 @@
 <?php
 
-require_once("class/api/Count.php");
-require_once("class/model/EntityRender.php");
+require_once("api/Count.php");
+require_once("model/EntityRender.php");
 require_once("function/php_input.php");
 
 class DocenteCountApi extends CountApi {
@@ -17,7 +17,7 @@ class DocenteCountApi extends CountApi {
     $render->addCondition(["docente","=",true]);
     $render->setSize(0);
 
-    $tomas = $this->container->getDb()->advanced("toma",$render);
+    $tomas = $this->container->db()->advanced("toma",$render);
     return count($tomas);
   }
 

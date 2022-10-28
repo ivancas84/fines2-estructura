@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/api/Base.php");
+require_once("api/Base.php");
 require_once("function/php_input.php");
 require_once("function/array_combine_key.php");
 
@@ -28,7 +28,7 @@ class TransferirAlumnoComisionApi extends BaseApi {
     $this->consultarAlumnos();
     $this->persistirAlumnos();
 
-    $this->container->getDb()->multi_query_transaction($this->sql);
+    $this->container->db()->multi_query_transaction($this->sql);
     return(["id"=>$this->data["id"],"detail"=>$this->detail]);
   }
 
@@ -36,7 +36,7 @@ class TransferirAlumnoComisionApi extends BaseApi {
     $render = $this->container->getEntityRender("alumno_comision");
     $render->setCondition(["comision","=",$this->data["id"]]);
     $this->alumnoComisionArray = array_combine_key( 
-      $this->container->getDb()->all("alumno_comision", $render),
+      $this->container->db()->all("alumno_comision", $render),
       "persona"
     );
   }
@@ -51,7 +51,7 @@ class TransferirAlumnoComisionApi extends BaseApi {
     ]);
     
     $this->alumnoArray = array_combine_key( 
-      $this->container->getDb()->all("alumno", $render),
+      $this->container->db()->all("alumno", $render),
       "persona"
     );
   }

@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/api/Base.php");
+require_once("api/Base.php");
 
 require_once("function/php_input.php");
 
@@ -10,7 +10,7 @@ class HorariosComisionInfoApi extends BaseApi {
 
   public function main() {
     $ids = php_input();
-    return $this->container->getController("model_tools")->diasHorariosComision($ids);
+    return $this->container->controller_("model_tools")->diasHorariosComision($ids);
   }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/import/Element.php");
+require_once("import/Element.php");
 
 class AlumnosNacionImportElement extends ImportElement {
 

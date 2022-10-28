@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/api/Base.php");
+require_once("api/Base.php");
 require_once("function/php_input.php");
 
 require_once("function/array_group_value.php");
@@ -24,13 +24,13 @@ class GenerarCalificacionAlumnoApi extends BaseApi {
     $this->idAlumno = file_get_contents("php://input");
 
 
-    $this->alumno = $this->container->getDb()->get("alumno",$this->idAlumno);
+    $this->alumno = $this->container->db()->get("alumno",$this->idAlumno);
 
     $this->calificacion_(); //calificaciones del alumno
     $this->disposicion_(); //disposiciones del plan del alumno
     $this->setCalificacionFaltate_(); //agregar calificaciones faltantes del alumno
     
-    if($this->sql) $this->container->getDb()->multi_query_transaction($this->sql);
+    if($this->sql) $this->container->db()->multi_query_transaction($this->sql);
     return ["id"=>$this->idAlumno, "detail"=>$this->detail];
   }
 
@@ -51,7 +51,7 @@ class GenerarCalificacionAlumnoApi extends BaseApi {
     //$render->setFields(["cantidad"=>"id.count"]);
     //$render->setGroup(["alumno"=>"alumno"]);
     
-    $this->calificacion_ = $this->container->getDb()->all("calificacion",$render);
+    $this->calificacion_ = $this->container->db()->all("calificacion",$render);
 
 
   }
@@ -65,7 +65,7 @@ class GenerarCalificacionAlumnoApi extends BaseApi {
     $render->setOrder(["planificacion-anio"=>"asc","planificacion-semestre"=>"asc", "asignatura-nombre"=>"asc"]);
     
     $this->disposicion_ = array_combine_key(
-      $this->container->getDb()->all("disposicion",$render),
+      $this->container->db()->all("disposicion",$render),
       "id"
     );
   }

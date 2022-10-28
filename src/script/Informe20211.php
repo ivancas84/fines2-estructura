@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/controller/Base.php");
+require_once("controller/Base.php");
 require_once("function/array_group_value.php");
 require_once("function/array_combine_key.php");
 
@@ -26,7 +26,7 @@ class Informe20211Script extends BaseController{
     ]);
 
     $this->alumnoComision_ = array_group_value(
-      $this->container->getDb()->all("alumno_comision",$render),
+      $this->container->db()->all("alumno_comision",$render),
       "alumno"
     );
 
@@ -51,7 +51,7 @@ class Informe20211Script extends BaseController{
 
 
     $this->alumno_ = array_group_value(
-      $this->container->getDb()->all("calificacion",$render),
+      $this->container->db()->all("calificacion",$render),
       "alumno"
     );
 

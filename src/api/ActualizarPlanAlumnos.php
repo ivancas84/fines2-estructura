@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/api/Base.php");
+require_once("api/Base.php");
 require_once("function/php_input.php");
 class ActualizarPlanAlumnosApi extends BaseApi {
 
@@ -22,7 +22,7 @@ class ActualizarPlanAlumnosApi extends BaseApi {
     ]);
     $render->setFields(["alumno"]);
     
-    $rows = $this->container->getDb()->all("alumno_comision",$render);
+    $rows = $this->container->db()->all("alumno_comision",$render);
 
     if(empty($rows)) return ["ids"=>[],"detail"=>[]];
     $sql = "";
@@ -40,7 +40,7 @@ class ActualizarPlanAlumnosApi extends BaseApi {
       array_push($detail, "alumno".$persist["id"]);
     }
 
-    $this->container->getDb()->multi_query_transaction($sql);
+    $this->container->db()->multi_query_transaction($sql);
     return ["ids"=>$ids, "detail"=>$detail];
   }
 

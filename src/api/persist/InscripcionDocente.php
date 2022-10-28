@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/api/Persist.php");
+require_once("api/Persist.php");
 require_once("function/nombres_parecidos.php");
 require_once("function/php_input.php");
 
@@ -16,7 +16,7 @@ class InscripcionDocentePersistApi extends PersistApi {
     if(empty($data)) throw new Exception("Se está intentando persistir un conjunto de datos vacío");
 
     $value = $this->container->value("persona")->_fromArray($data, "set")->_call("reset");
-    $row = $this->container->getDb()->unique("persona", $value->_toArray("json"));
+    $row = $this->container->db()->unique("persona", $value->_toArray("json"));
 
     if($row){
       $personaExistente = $this->container->value("persona")->_fromArray($row, "set");
@@ -43,8 +43,8 @@ class InscripcionDocentePersistApi extends PersistApi {
     $sql .= $persistToma["sql"];
     $detail = ["persona".$value->_get("id"), "toma".$persistToma["id"]];
 
-    $this->container->getDb()->multi_query_transaction($sql);
-    $this->container->getController("email_registro")->main($persistToma["id"]);
+    $this->container->db()->multi_query_transaction($sql);
+    $this->container->controller_("email_registro")->main($persistToma["id"]);
 
     return ["id" => $value->_get("id"), "detail" => $detail];
   }

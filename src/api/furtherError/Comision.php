@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/api/FurtherError.php");
+require_once("api/FurtherError.php");
 require_once("function/php_input.php");
 
 class ComisionFurtherErrorApi extends FurtherErrorApi {
@@ -22,7 +22,7 @@ class ComisionFurtherErrorApi extends FurtherErrorApi {
       case "1": case "2": //fines2, secundaria con oficios
         if( 
           empty($data["planificacion"])
-          || empty($row = $this->container->getDb()->get("planificacion", $data["planificacion"]))
+          || empty($row = $this->container->db()->get("planificacion", $data["planificacion"]))
         ) return ["planificacion" => true ];
         $render= new EntityRender();
         $render->addCondition(["sede","=",$data["sede"]]);
@@ -30,7 +30,7 @@ class ComisionFurtherErrorApi extends FurtherErrorApi {
         $render->addCondition(["modalidad","=",$data["modalidad"]]);
         $render->addCondition(["pla-anio","=",$row["anio"]]);
         $render->addCondition(["pla-semestre","=",$row["semestre"]]);
-        $rows = $this->container->getDb()->all("comision", $render);
+        $rows = $this->container->db()->all("comision", $render);
         if(count($rows) > 1) return [ "multiple" => true ];
         return ((count($rows) == 1) && ($rows[0]["id"] != $data["id"])) ? ["notUnique" => $rows[0]["id"]] : null;
           
@@ -38,7 +38,7 @@ class ComisionFurtherErrorApi extends FurtherErrorApi {
         if( empty($data["planificacion"])) return ["planificacion" => true ];
         if( 
           empty($data["calendario"])
-          && empty($row = $this->container->getDb()->get("planificacion", $data["planificacion"]))
+          && empty($row = $this->container->db()->get("planificacion", $data["planificacion"]))
         ) return null;
 
         $render= new EntityRender();
@@ -53,7 +53,7 @@ class ComisionFurtherErrorApi extends FurtherErrorApi {
           $render->addCondition(["cal-semestre","=",$row["semestre"]]);
         }
 
-        $id = $this->container->getDb()->idOrNull("comision", $render);
+        $id = $this->container->db()->idOrNull("comision", $render);
         return ($id && ($id != $data["id"])) ? [ "notUnique" => $id ] : null;
       default:
         return null;

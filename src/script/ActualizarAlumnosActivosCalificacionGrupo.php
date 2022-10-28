@@ -1,6 +1,6 @@
 <?php
 set_time_limit(0);  
-require_once("class/controller/Base.php");
+require_once("controller/Base.php");
 require_once("function/array_combine_key.php");
 
 class ActualizarAlumnosActivosCalificacionGrupoScript extends BaseController{
@@ -31,7 +31,7 @@ class ActualizarAlumnosActivosCalificacionGrupoScript extends BaseController{
     $render->setSize(0);
 
     $this->comision_ = array_combine_key(
-      $this->container->getDb()->all("comision", $render),
+      $this->container->db()->all("comision", $render),
       "id"
     ); 
   }
@@ -70,7 +70,7 @@ class ActualizarAlumnosActivosCalificacionGrupoScript extends BaseController{
     $render->addCondition(["comision","=",$idComision]);
     $render->setSize(0);
     return  array_combine_key(
-      $this->container->getDb()->all("alumno_comision", $render), 
+      $this->container->db()->all("alumno_comision", $render), 
       "alumno"
     );
   }
@@ -84,7 +84,7 @@ class ActualizarAlumnosActivosCalificacionGrupoScript extends BaseController{
       array_column($this->comision_, "comision_siguiente")
     ]);
     
-    $cantidad = $this->container->getDb()->count("alumno_comision",$render);
+    $cantidad = $this->container->db()->count("alumno_comision",$render);
 
     if($cantidad) throw new Exception("Ya existen alumnos activos para las comisiones del grupo siguiente");
 
@@ -96,7 +96,7 @@ class ActualizarAlumnosActivosCalificacionGrupoScript extends BaseController{
 
     foreach($this->comision_ as $comision){
 
-      $disposicionesAprobadas_ = $this->container->getController("disposiciones_aprobadas_alumno_comision")->main($comision["id"]);
+      $disposicionesAprobadas_ = $this->container->controller_("disposiciones_aprobadas_alumno_comision")->main($comision["id"]);
       $alumnoComision_ = $this->alumnoComision_($comision["id"]);
       
       foreach($disposicionesAprobadas_ as $da){
@@ -106,7 +106,7 @@ class ActualizarAlumnosActivosCalificacionGrupoScript extends BaseController{
 
     }
     
-    // $this->container->getDb()->multi_query_transaction($this->sql);
+    // $this->container->db()->multi_query_transaction($this->sql);
     echo "<pre>".$this->sql;
   }    
  

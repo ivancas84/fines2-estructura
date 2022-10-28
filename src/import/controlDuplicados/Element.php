@@ -1,7 +1,7 @@
 <?php
 
-require_once("class/import/Element.php");
-require_once("class/tools/Validation.php");
+require_once("import/Element.php");
+require_once("tools/Validation.php");
 
 
 class ControlDuplicadosImportElement extends ImportElement {

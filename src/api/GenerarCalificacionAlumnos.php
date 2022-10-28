@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/api/Base.php");
+require_once("api/Base.php");
 require_once("function/php_input.php");
 
 require_once("function/array_group_value.php");
@@ -21,7 +21,7 @@ class GenerarCalificacionAlumnosApi extends BaseApi {
   public function main() {
     $this->container->getAuth()->authorize("calificacion", "w");
     $this->idComision = php_input()["id"];
-    $this->comision = $this->container->getDb()->get("comision", $this->idComision);
+    $this->comision = $this->container->db()->get("comision", $this->idComision);
 
     $this->idAlumno_();
     $this->idAlumno_calificacion_();
@@ -29,11 +29,11 @@ class GenerarCalificacionAlumnosApi extends BaseApi {
     $this->setCalificacionFaltate_();
 
     $this->idAlumnoSinCalificacion_ = array_diff($this->idAlumno_, array_keys($this->idAlumno_calificacion_));
-    $this->alumnoSinCalificacion_ = $this->container->getDb()->getAll("alumno",$this->idAlumnoSinCalificacion_);
+    $this->alumnoSinCalificacion_ = $this->container->db()->getAll("alumno",$this->idAlumnoSinCalificacion_);
     $this->setCalificacion_();
     
 
-    if($this->sql) $this->container->getDb()->multi_query_transaction($this->sql);
+    if($this->sql) $this->container->db()->multi_query_transaction($this->sql);
     return ["detail"=>$this->detail];
   }
 
@@ -46,7 +46,7 @@ class GenerarCalificacionAlumnosApi extends BaseApi {
     $render->setFields(["alumno"]);
     $render->setSize(0);
     $this->idAlumno_ = array_column(
-      $this->container->getDb()->select("alumno_comision",$render),
+      $this->container->db()->select("alumno_comision",$render),
       "alumno"
     );
   }
@@ -68,7 +68,7 @@ class GenerarCalificacionAlumnosApi extends BaseApi {
     //$render->setGroup(["alumno"=>"alumno"]);
     
     $this->idAlumno_calificacion_ = array_group_value(
-      $this->container->getDb()->all("calificacion",$render),
+      $this->container->db()->all("calificacion",$render),
       "alumno"
     );
 
@@ -84,7 +84,7 @@ class GenerarCalificacionAlumnosApi extends BaseApi {
     $render->setOrder(["planificacion-anio"=>"asc","planificacion-semestre"=>"asc", "asignatura-nombre"=>"asc"]);
     
     $this->disposicion_ = array_combine_key(
-      $this->container->getDb()->all("disposicion",$render),
+      $this->container->db()->all("disposicion",$render),
       "id"
     );
   }

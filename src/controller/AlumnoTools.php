@@ -13,14 +13,14 @@ class AlumnoTools {
   }
 
   public function init($id){
-    $this->alumno = $this->container->getDb()->get("alumno",$id);
+    $this->alumno = $this->container->db()->get("alumno",$id);
     $this->postInit();
   }
 
   public function initDni($dni){
     $render = $this->container->getEntityRender("alumno");
     $render->setCondition(["persona-numero_documento","=",$dni]);
-    $this->alumno = $this->container->getDb()->one("alumno",$render);
+    $this->alumno = $this->container->db()->one("alumno",$render);
     $this->postInit();
   }
 
@@ -43,7 +43,7 @@ class AlumnoTools {
       ]
     ]);
     $render->setOrder(["dis_pla-anio"=>"asc","dis_pla-semestre"=>"asc","dis_asi-nombre"=>"asc"]);
-    return $this->container->getDb()->all("calificacion",$render);
+    return $this->container->db()->all("calificacion",$render);
   }
   
   public function getCalificacionesAprobadasPlan($plan){
@@ -56,7 +56,7 @@ class AlumnoTools {
       ]
     ]);
     $render->setOrder(["dis_pla-anio"=>"asc","dis_pla-semestre"=>"asc","dis_asi-nombre"=>"asc"]);
-    return $this->container->getDb()->all("calificacion",$render);
+    return $this->container->db()->all("calificacion",$render);
   }
 
   public function getDisposiciones(){
@@ -73,7 +73,7 @@ class AlumnoTools {
     ]);
     $render->setOrder(["pla-anio"=>"asc","pla-semestre"=>"asc", "asi-nombre"=>"asc"]);
     
-    return $this->container->getDb()->all("disposicion",$render);
+    return $this->container->db()->all("disposicion",$render);
   }
 
   public function disposicionesRestantes($calificacionesAprobadas, $disposiciones){
@@ -101,7 +101,7 @@ class AlumnoTools {
       ["alumno","=",$this->alumno["id"]],
     ]);
     $render->setOrder(["planificacion-anio"=>"asc","planificacion-semestre"=>"asc","asignatura-nombre"=>"asc"]);
-    return $this->container->getDb()->all("disposicion_pendiente",$render);
+    return $this->container->db()->all("disposicion_pendiente",$render);
   }
 
   public function disposicionesRestantesAnio($calificacionesAprobadas, $disposiciones){

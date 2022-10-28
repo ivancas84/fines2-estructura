@@ -3,12 +3,10 @@
 require_once("../config/config.php"); 
 require $_SERVER["DOCUMENT_ROOT"] . "/" . PATH_ROOT . '/vendor/autoload.php';
 
-require_once("class/Container.php");
+require_once("Container.php");
 
 $container = new Container;
-$render = $container->getEntityRender("persona");
-$render->setCondition(["numero_documento","=",$_GET["dni"]]);
-$row = $container->getDb()->one("persona",$render);
+$row = $container->query("persona")->cond(["numero_documento","=",$_GET["dni"]])->fieldsTree()->one();
 $v = $container->value("persona")->_fromArray($row,"set");
 
 $mpdf = new \Mpdf\Mpdf();

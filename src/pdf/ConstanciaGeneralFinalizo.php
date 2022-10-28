@@ -1,11 +1,11 @@
 <?php
 
 set_time_limit(0);  
-require_once("class/controller/Base.php");
+require_once("controller/Base.php");
 require_once("function/array_group_value.php"); 
 require_once("function/array_combine_key2.php"); 
-require_once("class/Container.php");
-require_once("class/tools/SpanishDateTime.php");
+require_once("Container.php");
+require_once("tools/SpanishDateTime.php");
 require_once("function/array_group_value.php");
 require_once("function/settypebool.php");
 require_once("function/qr.php");
@@ -28,7 +28,7 @@ class ConstanciaGeneralFinalizoPdf extends BaseController{
     
     $container = new Container;
     
-    $alumnoTools = $container->getController("alumno_tools");
+    $alumnoTools = $container->controller_("alumno_tools");
     
     $alumnoTools->init($_GET["id"]);
     $v = $alumnoTools->getValue();

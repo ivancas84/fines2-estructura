@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/api/Base.php");
+require_once("api/Base.php");
 require_once("function/php_input.php");
 require_once("function/nombres_parecidos.php");
 
@@ -43,7 +43,7 @@ class InscripcionAlumnoPersistApi extends BaseApi {
     $this->persistAlumnoUnique();
     $this->insertDetallePersona_();
 
-    $this->container->getDb()->multi_query_transaction($this->sql);
+    $this->container->db()->multi_query_transaction($this->sql);
     $this->emailInscripcion();
     // echo $this->sql;
 
@@ -56,7 +56,7 @@ class InscripcionAlumnoPersistApi extends BaseApi {
   }
   
   public function emailInscripcion(){
-    $this->container->getController("email_inscripcion")->main($this->persona->_get("id"));
+    $this->container->controller_("email_inscripcion")->main($this->persona->_get("id"));
   }
 
   public function persona(){
@@ -65,7 +65,7 @@ class InscripcionAlumnoPersistApi extends BaseApi {
 
   public function personaExistente(){
     $render = $this->container->getEntityRender("persona");
-    $p = $this->container->getDb()->unique("persona",$this->data["persona"]);
+    $p = $this->container->db()->unique("persona",$this->data["persona"]);
     if(!empty($p)) $this->personaExistente = $this->container->value("persona")->_fromArray($p, "set");
   }
 
@@ -74,7 +74,7 @@ class InscripcionAlumnoPersistApi extends BaseApi {
     $render->addCondition([
       ["email","=",$this->data["persona"]["email"]],
     ]);
-    if($this->container->getDb()->count("persona",$render)) throw new Exception("ERROR E1: No se puede realizar la inscripción, comunique el error a coordinadores.cens462@gmail.com");
+    if($this->container->db()->count("persona",$render)) throw new Exception("ERROR E1: No se puede realizar la inscripción, comunique el error a coordinadores.cens462@gmail.com");
   }
 
   public function emailUnicoActualizable(){
@@ -84,7 +84,7 @@ class InscripcionAlumnoPersistApi extends BaseApi {
       ["id","!=",$this->personaExistente->_get("id")],
     ]);
 
-    if($this->container->getDb()->count("persona",$render)) {
+    if($this->container->db()->count("persona",$render)) {
       throw new Exception("ERROR E2: No se puede realizar la inscripción, comunique el error a coordinadores.cens462@gmail.com");
     }
   }

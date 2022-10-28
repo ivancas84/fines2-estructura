@@ -1,7 +1,7 @@
 <?php
 
-require_once("class/api/Persist.php");
-require_once("class/controller/ModelTools.php");
+require_once("api/Persist.php");
+require_once("controller/ModelTools.php");
 require_once("function/php_input.php");
 
 class CalificacionCursoPersistApi extends PersistApi {
@@ -13,7 +13,7 @@ class CalificacionCursoPersistApi extends PersistApi {
 
   public function main(){
     $idCurso = file_get_contents("php://input");
-    $curso = $this->container->getDb()->get("curso", $idCurso);
+    $curso = $this->container->db()->get("curso", $idCurso);
 
     $render = $this->container->getEntityRender("alumno_comision");
     $render->setCondition([
@@ -21,14 +21,14 @@ class CalificacionCursoPersistApi extends PersistApi {
       //["activo","=","true"]
     ]);
     $render->setSize(0);
-    $alumnos = $this->container->getDb()->all("alumno_comision",$render);
+    $alumnos = $this->container->db()->all("alumno_comision",$render);
 
     $render = $this->container->getEntityRender("calificacion");
     $render->setCondition([
       ["curso","=",$idCurso],
     ]);
     $render->setSize(0);
-    $calificaciones = $this->container->getDb()->all("calificacion",$render);
+    $calificaciones = $this->container->db()->all("calificacion",$render);
 
     $idPersonas = array_diff(
       array_column($alumnos,"persona"),
@@ -51,7 +51,7 @@ class CalificacionCursoPersistApi extends PersistApi {
       array_push($detail, "calificacion".$calificacion->_get("id"));
     }
 
-    if(!empty($sql)) $this->container->getDb()->multi_query_transaction($sql);
+    if(!empty($sql)) $this->container->db()->multi_query_transaction($sql);
     return ["ids"=>$ids,"detail"=>$detail];
   }
 }

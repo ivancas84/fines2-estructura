@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/api/Base.php");
+require_once("api/Base.php");
 require_once("function/php_input.php");
 class PlanillaCargadaApi extends BaseApi {
 
@@ -14,7 +14,7 @@ class PlanillaCargadaApi extends BaseApi {
     ]);
     $render->setFields(["id","curso"]);
     
-    $toma_ = $this->container->getDb()->select("toma",$render);
+    $toma_ = $this->container->db()->select("toma",$render);
     $idCurso_ = array_column($toma_, "curso");
 
     $render = $this->container->getEntityRender("calificacion");
@@ -24,7 +24,7 @@ class PlanillaCargadaApi extends BaseApi {
     $render->setFields(["curso"]);
 
     $cursoConCalificacion_ = array_column(
-      $this->container->getDb()->select("calificacion",$render),
+      $this->container->db()->select("calificacion",$render),
       "curso"
     );
 

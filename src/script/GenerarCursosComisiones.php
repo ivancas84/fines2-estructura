@@ -1,8 +1,8 @@
 <?php
 set_time_limit(0);  
 require_once("../config/config.php");
-require_once("class/Container.php");
-require_once("class/controller/Base.php");
+require_once("Container.php");
+require_once("controller/Base.php");
 require_once("function/array_combine_key.php");
 
 
@@ -47,7 +47,7 @@ class GenerarCursosComisionesScript extends BaseController{
      $render = $this->container->getEntityRender("comision");
      $render->setParams($grupo);
      $render->setSize(0);  
-     $this->comisiones = array_combine_key($this->container->getDb()->all("comision",$render),"id");
+     $this->comisiones = array_combine_key($this->container->db()->all("comision",$render),"id");
    }
  
    protected  function quitarComisionesConCursos(){
@@ -55,7 +55,7 @@ class GenerarCursosComisionesScript extends BaseController{
      $render = $this->container->getEntityRender("curso");
      $render->addCondition(["comision","=",$ids]);
      $render->setSize(0);
-     $cursos = $this->container->getDb()->all("curso",$render);
+     $cursos = $this->container->db()->all("curso",$render);
      $idsConCursos = array_values(array_unique(array_column($cursos, "comision")));
      
      foreach($idsConCursos as $id) unset($this->comisiones[$id]);
@@ -73,7 +73,7 @@ class GenerarCursosComisionesScript extends BaseController{
         $sql .= $persist["sql"];
       }
   
-      $this->container->getDb()->multi_query_transaction($sql);
+      $this->container->db()->multi_query_transaction($sql);
       echo "<pre>";
       echo $sql;
    }

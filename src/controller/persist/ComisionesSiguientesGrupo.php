@@ -1,11 +1,11 @@
 <?php
 
 
-require_once("class/controller/Persist.php");
-require_once("class/model/Ma.php");
-require_once("class/model/Values.php");
-require_once("class/controller/persist/ComisionCursos.php");
-require_once("class/controller/ModelTools.php");
+require_once("controller/Persist.php");
+require_once("model/Ma.php");
+require_once("model/Values.php");
+require_once("controller/persist/ComisionCursos.php");
+require_once("controller/ModelTools.php");
 
 class ComisionesSiguientesGrupoPersist extends Persist {
   /**

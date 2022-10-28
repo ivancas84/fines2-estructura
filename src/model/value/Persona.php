@@ -1,5 +1,5 @@
 <?php
-require_once("class/model/entityOptions/Value.php");
+require_once("model/entityOptions/Value.php");
 require_once("function/nombres_parecidos.php");
 
 class PersonaValue extends ValueEntityOptions{

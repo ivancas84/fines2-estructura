@@ -20,7 +20,7 @@ class ComisionTools {
     $render = $this->container->getEntityRender("alumno_comision");
     $render->setFields("alumno");
     $render->setCondition(["id","=",$this->id]);
-    $rows = $this->container->getDb()->select("alumno_comision",$render);
+    $rows = $this->container->db()->select("alumno_comision",$render);
     print_r($rows);
   }
 
@@ -39,12 +39,12 @@ class ComisionTools {
       ]
     ]);
     $render->setOrder(["planificacion-anio"=>"asc","planificacion-semestre"=>"asc","asignatura-nombre"=>"asc"]);
-    return $this->container->getDb()->all("calificacion",$render);
+    return $this->container->db()->all("calificacion",$render);
   }
 
   public function init($id){
     $this->id = $id;
-    $this->comision = $this->container->getDb()->get("comision",$id);
+    $this->comision = $this->container->db()->get("comision",$id);
     $this->initialize = true;
   }
 

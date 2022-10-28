@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/controller/ModelTools.php");
+require_once("controller/ModelTools.php");
 
 require_once("function/array_combine_keys.php");
 require_once("function/array_combine_key.php");
@@ -36,7 +36,7 @@ class DisposicionesAprobadasAlumnoComision {
     $render = $this->container->getEntityRender();
     $render->addCondition(["comision","=",$this->idComision]);
     $render->setSize(0);
-    $this->alumnoComision_ =  $this->container->getDb()->all("alumno_comision", $render);
+    $this->alumnoComision_ =  $this->container->db()->all("alumno_comision", $render);
   }
 
 

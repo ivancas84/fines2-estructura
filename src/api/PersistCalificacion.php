@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/api/PersistRelArrayUnique.php");
+require_once("api/PersistRelArrayUnique.php");
 
 class PersistCalificacionApi extends PersistRelArrayUniqueApi{
 
@@ -13,7 +13,7 @@ class PersistCalificacionApi extends PersistRelArrayUniqueApi{
     
     $value = $this->container->value("persona")->_fromArray($this->params["per"], "set");
 
-    $datosPersonaExistente = $this->container->getDb()->unique("persona", $value->_toArray("json"));
+    $datosPersonaExistente = $this->container->db()->unique("persona", $value->_toArray("json"));
     
     if (!empty($datosPersonaExistente)){ 
       $value->_set("id",$datosPersonaExistente["id"]);
@@ -36,7 +36,7 @@ class PersistCalificacionApi extends PersistRelArrayUniqueApi{
     $this->params["calificacion"]["persona"] = $persist["id"];
     $persist = $this->container->controller("persist_sql", "calificacion")->id($this->params["calificacion"]);
     $sql .= $persist["sql"];
-    $this->container->getDb()->multi_query_transaction($sql);
+    $this->container->db()->multi_query_transaction($sql);
 
     array_push($detail, "calificacion".$persist["id"]);
 

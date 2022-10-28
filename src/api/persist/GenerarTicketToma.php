@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/api/Base.php");
+require_once("api/Base.php");
 require_once("function/php_input.php");
 require_once("function/nombres_parecidos.php");
 
@@ -53,7 +53,7 @@ class GenerarTicketTomaPersistApi extends BaseApi {
     }
 
     public function toma($idToma){
-        return $this->container->getDb()->get("toma", $idToma);
+        return $this->container->db()->get("toma", $idToma);
     }
 
     public function postsData($idPosts){

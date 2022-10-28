@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/api/Base.php");
+require_once("api/Base.php");
 require_once("function/php_input.php");
 require_once("function/array_group_value.php");
 require_once("function/array_unset_keys.php");
@@ -20,7 +20,7 @@ class CantidadAsignaturasAprobadasAlumnosComisionApi extends BaseApi {
   public function main() {
     $this->container->getAuth()->authorize("alumno", "r");
     $this->idComision = file_get_contents("php://input");
-    $this->comision = $this->container->getDb()->get("comision", $this->idComision);
+    $this->comision = $this->container->db()->get("comision", $this->idComision);
 
     $this->idAlumno_();
     $this->alumno__calificacionAprobada_();
@@ -38,7 +38,7 @@ class CantidadAsignaturasAprobadasAlumnosComisionApi extends BaseApi {
     $render->setFields(["alumno"]);
     $render->setSize(0);
     $this->idAlumno_ = array_column(
-      $this->container->getDb()->select("alumno_comision",$render),
+      $this->container->db()->select("alumno_comision",$render),
       "alumno"
     );
   }
@@ -63,7 +63,7 @@ class CantidadAsignaturasAprobadasAlumnosComisionApi extends BaseApi {
     //$render->setGroup(["alumno"=>"alumno"]);
     
     $this->alumno__calificacionAprobada_ = array_group_value(
-      $this->container->getDb()->all("calificacion",$render),
+      $this->container->db()->all("calificacion",$render),
       "alumno"
     );
   }
@@ -78,7 +78,7 @@ class CantidadAsignaturasAprobadasAlumnosComisionApi extends BaseApi {
     $render->setOrder(["planificacion-anio"=>"asc","planificacion-semestre"=>"asc", "asignatura-nombre"=>"asc"]);
     
     $this->disposicion_ = array_combine_key(
-      $this->container->getDb()->all("disposicion",$render),
+      $this->container->db()->all("disposicion",$render),
       "id"
     );
   }

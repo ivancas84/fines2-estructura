@@ -1,8 +1,8 @@
 <?php
 
 require_once("../config/config.php");
-require_once("class/Container.php");
-require_once("class/model/EntityRender.php");
+require_once("Container.php");
+require_once("model/EntityRender.php");
 require_once("function/array_group_value.php");
 require_once("function/array_combine_key.php");
 
@@ -16,7 +16,7 @@ $render->setCondition([
 ]);
 $render->setSize(false);
 $render->setOrder(["cur_com_sed-numero"=>"ASC","cur_com-division"=>"ASC"]);
-$horarios = $container->getDb()->all("horario",$render);
+$horarios = $container->db()->all("horario",$render);
 
 $render = new EntityRender();
 $render->setCondition([
@@ -28,7 +28,7 @@ $render->setCondition([
 ]);
 $render->setSize(false);
 $render->setOrder(["doc-nombres"=>"ASC","doc-apellidos"=>"ASC"]);
-$docentes = $container->getDb()->all("toma",$render);
+$docentes = $container->db()->all("toma",$render);
 $curso_docentes = array_combine_key($docentes, "curso");
 
 $comision_horarios = array_group_value($horarios, "cur_comision");

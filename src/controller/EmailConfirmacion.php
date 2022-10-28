@@ -9,7 +9,7 @@ use PHPMailer\PHPMailer\Exception;
 require $_SERVER["DOCUMENT_ROOT"] . "/" . PATH_ROOT . '/vendor/autoload.php';
 
 require_once("../config/config.php");
-require_once("class/Container.php");
+require_once("Container.php");
 require_once("function/email.php");
 
 class EmailConfirmacion {
@@ -18,12 +18,12 @@ class EmailConfirmacion {
 
   public function main($id){
 
-    $mt = $this->container->getController("model_tools");
-    $toma = $this->container->getDb()->get("toma",$id);
+    $mt = $this->container->controller_("model_tools");
+    $toma = $this->container->db()->get("toma",$id);
     $curso = $mt->labelCurso($toma,"cur_");
 	  $idComision = $toma["cur_comision"];
     
-    $horario_ = $this->container->getController("model_tools")->cursoHorario([$toma["curso"]]);
+    $horario_ = $this->container->controller_("model_tools")->cursoHorario([$toma["curso"]]);
     $horario = count($horario_) ? $horario_[0]["horario"] : null;
 
     $t = $this->container->tools("toma")->value($toma);

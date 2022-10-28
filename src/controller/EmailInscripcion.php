@@ -9,7 +9,7 @@ use PHPMailer\PHPMailer\Exception;
 require $_SERVER["DOCUMENT_ROOT"] . "/" . PATH_ROOT . '/vendor/autoload.php';
 
 require_once("../config/config.php");
-require_once("class/Container.php");
+require_once("Container.php");
 require_once("function/email2.php");
 
 class EmailInscripcion {
@@ -18,7 +18,7 @@ class EmailInscripcion {
 
   public function main($id){
     $p = $this->container->value("persona")->_fromArray(
-      $this->container->getDb()->get("persona",$id), 
+      $this->container->db()->get("persona",$id), 
       "set"
     );
 

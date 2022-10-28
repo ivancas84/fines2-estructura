@@ -7,7 +7,7 @@
  * si se vuelve a cargar el mismo archivo (respetando los parámetros), se actualizaran los datos. Con esto se da la posibilidad de correjir los errores en el csv y volverlo a cargar.
  */
 set_time_limit(0);  
-require_once("class/controller/Base.php");
+require_once("controller/Base.php");
 require_once("function/settypebool.php");
 require_once("function/array_group_value.php");
 
@@ -22,13 +22,13 @@ class AsignaturasAprobadasAlumnosScript extends BaseController {
       array_column($alumnoComision_, "alumno")
     );
 
-    $comision = $this->container->getDb()->get("comision", $idComision);
+    $comision = $this->container->db()->get("comision", $idComision);
     $comisionValue = $this->container->tools("comision")->value($comision);
 
     $disposicion_ = $this->disposicion_($comision["pla_plan"]);
 
     $alumno__calificacionAprobada_ = $this->alumno__calificacionAprobada_($idAlumno_, $comision["pla_plan"]);
-    require_once("class/script/AsignaturasAprobadasAlumnos.html");
+    require_once("script/AsignaturasAprobadasAlumnos.html");
 
   }
 
@@ -47,7 +47,7 @@ class AsignaturasAprobadasAlumnosScript extends BaseController {
       "alu_per-apellidos"=>"ASC",
       "alu_per-nombres"=>"ASC",
     ]);
-    return $this->container->getDb()->select("alumno_comision", $render);
+    return $this->container->db()->select("alumno_comision", $render);
   }
 
 
@@ -74,7 +74,7 @@ class AsignaturasAprobadasAlumnosScript extends BaseController {
     $render->setOrder(["dis_pla-anio"=>"ASC", "dis_pla-semestre"=>"ASC"]);
     
     return array_group_value(
-      $this->container->getDb()->select("calificacion",$render),
+      $this->container->db()->select("calificacion",$render),
       "alumno"
     );
 
@@ -93,7 +93,7 @@ class AsignaturasAprobadasAlumnosScript extends BaseController {
       "asi-nombre" => "ASC",
     ]);
 
-    return $this->container->getDb()->select("disposicion", $render);
+    return $this->container->db()->select("disposicion", $render);
   }
 
 }

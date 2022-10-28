@@ -1,6 +1,6 @@
 <?php
 
-require_once("class/api/Base.php");
+require_once("api/Base.php");
 require_once("function/php_input.php");
 class CantidadAsignaturasAlumnosApi extends BaseApi {
 
@@ -30,7 +30,7 @@ class CantidadAsignaturasAlumnosApi extends BaseApi {
     $render->setFields(["persona", ]);
     $render->setGroup(["persona"=>"persona"]);
     
-    return $this->container->getDb()->select("calificacion",$render);
+    return $this->container->db()->select("calificacion",$render);
   }
 
 }

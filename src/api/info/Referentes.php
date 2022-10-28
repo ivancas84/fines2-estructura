@@ -1,7 +1,7 @@
 <?php
 
-require_once("class/api/Base.php");
-require_once("class/controller/ModelTools.php");
+require_once("api/Base.php");
+require_once("controller/ModelTools.php");
 require_once("function/php_input.php");
 
 class ReferentesInfoApi  extends BaseApi {
