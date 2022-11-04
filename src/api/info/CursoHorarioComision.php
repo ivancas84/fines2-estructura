@@ -9,7 +9,7 @@ class CursoHorarioComisionInfoApi extends BaseApi {
   public $entityName = "curso_horario_comision";
 
   public function main($idComision) {
-    return ModelTools::cursosConHorariosDeComision($idComision);
+    return $this->container->controller_("model_tools")->cursosConHorariosDeComision($idComision);
   }
 
 }
