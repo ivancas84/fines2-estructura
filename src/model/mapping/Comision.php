@@ -14,14 +14,10 @@ class ComisionMapping extends MappingEntityOptions{
   }
 
   public function label() {
-    return $this->numero();
-
     return "CONCAT(
       {$this->_pf()}sede.numero, {$this->_pt()}.division,
-      IF({$this->_pf()}planificacion.id, CONCAT({$this->_pf()}planificacion.anio,{$this->_pf()}planificacion.semestre), ''),
-      IF({$this->_pf()}calendario.id, CONCAT(' ',{$this->_pf()}calendario.anio,'-',{$this->_pf()}calendario.semestre), ''),
-      IF({$this->_pf()}calendario.inicio,CONCAT(' ', {$this->_pf()}calendario.inicio),''),
-      IF({$this->_pf()}calendario.fin,CONCAT(' ', {$this->_pf()}calendario.fin),'')
+      IF({$this->_pf()}planificacion.id, CONCAT('/',{$this->_pf()}planificacion.anio,{$this->_pf()}planificacion.semestre), ''),
+      IF({$this->_pf()}calendario.id, CONCAT(' ',{$this->_pf()}calendario.anio,'-',{$this->_pf()}calendario.semestre), '')
     )";
   }
 
