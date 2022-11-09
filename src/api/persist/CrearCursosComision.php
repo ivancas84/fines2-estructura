@@ -11,10 +11,14 @@ class CrearCursosComisionPersistApi extends PersistApi {
 
   public function main(){
     $idComision = file_get_contents("php://input");
-    $comision = $this->container->db()->get("comision", $idComision);
 
-    $cargasHorarias = $this->container->getMt()->cargasHorariasDePlanificacion( $comision["planificacion"] );
+    $comision = $this->container->query("comision")->fieldsTree()->param("id",$idComision)->one();
+
+    $cargasHorarias = $this->container->controller_("model_tools")->cargasHorariasDePlanificacion( $comision["planificacion"] );
     if(!count($cargasHorarias)) throw new Exception("No existen cargas horarias asociadas a la planificacion");
+
+    $cantidadCursos = $this->container->query("curso")->field("count")->param("comision",$idComision)->columnOne();
+    if(intval($cantidadCursos)) throw new Exception("Ya existen cursos en la comisión");
 
     $sql = "";
     $detail = [];

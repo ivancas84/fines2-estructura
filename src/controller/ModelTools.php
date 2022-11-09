@@ -34,18 +34,16 @@ class ModelTools {
   }
 
   public function cantidadAlumnosAprobadosComision($idsComisiones){
-    $render = $this->container->getEntityRender("calificacion");
-    $render->setCondition([
+    return $this->container->query("calificacion")
+    ->cond([
       ["comision-id","=",$idsComisiones],
       [
         ["nota_final",">","7"],
         ["crec",">","4"]
       ]
-    ]);
-    $render->setFields(["aprobados"=>"persona.count"]);
-    $render->setGroup(["comision"=>"cur-comision"]);
-    
-    return $this->container->db()->select("calificacion",$render);
+    ])
+    ->fields(["aprobados"=>"persona.count"])
+    ->group(["comision"=>"curso-comision"])->all();
   }
 
   public function sumaHorasCatedraAsignaturasGrupo($fechaAnio, $fechaSemestre, $modalidad, $centroEducativo){
@@ -72,13 +70,12 @@ class ModelTools {
 
   public function cargasHorariasDePlanificacion($planificacion){
     if(empty($planificacion)) throw new Exception("Planificacion no definida");
-    $render = $this->container->getEntityRender("distribucion_horaria");
-    $render->setParams(["dis-planificacion" => $planificacion]);
-    $render->setFields(["horas_catedra.sum"]);
-    $render->setGroup(["planificacion" => "dis-planificacion", "asignatura"=>"dis-asignatura"]);
-    $render->setOrder(["horas_catedra.sum" => "desc"]);
-    $render->setSize(0);
-    return $this->container->db()->select("distribucion_horaria",$render);
+    return $this->container->query("distribucion_horaria")
+      ->param("disposicion-planificacion", $planificacion)
+      ->fields(["horas_catedra.sum"])
+      ->group(["planificacion" => "disposicion-planificacion", "asignatura"=>"disposicion-asignatura"])
+      ->order(["horas_catedra.sum" => "desc"])
+      ->size(0)->all();
   }
 
   public function cargasHorariasXAsignaturaDeDistribucionesHorarias($distribucionesHorarias){
