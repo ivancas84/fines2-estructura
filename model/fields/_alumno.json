@@ -239,5 +239,65 @@
     "subtype": "textarea",  
     "length": 65535,
     "name": "comentarios"
+  },
+
+  "tiene_dni": {
+    "type": "tinyint",
+    "fieldType": "nf",
+    "default": "0",
+    "alias": "td",
+    "entityName": "alumno",
+    "dataType": "boolean",  
+    "subtype": "checkbox",  
+    "length": 1,
+    "name": "tiene_dni"
+  },
+
+  "tiene_constancia": {
+    "type": "tinyint",
+    "fieldType": "nf",
+    "default": "0",
+    "alias": "tc",
+    "entityName": "alumno",
+    "dataType": "boolean",  
+    "subtype": "checkbox",  
+    "length": 1,
+    "name": "tiene_constancia"
+  },
+
+  "tiene_certificado": {
+    "type": "tinyint",
+    "fieldType": "nf",
+    "default": "0",
+    "alias": "tca",
+    "entityName": "alumno",
+    "dataType": "boolean",  
+    "subtype": "checkbox",  
+    "length": 1,
+    "name": "tiene_certificado"
+  },
+
+  "previas_completas": {
+    "type": "tinyint",
+    "fieldType": "nf",
+    "default": "0",
+    "alias": "pc",
+    "entityName": "alumno",
+    "dataType": "boolean",  
+    "subtype": "checkbox",  
+    "length": 1,
+    "name": "previas_completas"
+  },
+
+  "tiene_partida": {
+    "type": "tinyint",
+    "fieldType": "nf",
+    "default": "0",
+    "alias": "tp",
+    "entityName": "alumno",
+    "dataType": "boolean",  
+    "subtype": "checkbox",  
+    "length": 1,
+    "name": "tiene_partida"
   }
 }
