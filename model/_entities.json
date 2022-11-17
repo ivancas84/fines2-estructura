@@ -12,7 +12,7 @@
   "alumno_comision": {
     "name": "alumno_comision",
     "alias": "ac",
-    "nf": ["creado", "activo", "observaciones"],
+    "nf": ["creado", "activo", "observaciones", "estado"],
     "mu": ["comision", "alumno"],
     "_u": [],
     "notNull": ["id", "creado", "alumno"],

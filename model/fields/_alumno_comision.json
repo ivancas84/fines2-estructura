@@ -70,5 +70,17 @@
     "subtype": "typeahead",  
     "length": 45,
     "name": "alumno"
+  },
+
+  "estado": {
+    "type": "varchar",
+    "fieldType": "nf",
+    "default": "`activo`",
+    "alias": "est",
+    "entityName": "alumno_comision",
+    "dataType": "string",  
+    "subtype": "text",  
+    "length": 100,
+    "name": "estado"
   }
 }
