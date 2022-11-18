@@ -4,13 +4,13 @@ require_once("model/entityOptions/Mapping.php");
 class DisposicionMapping extends MappingEntityOptions{
 
   public function label() {
-    return "CONCAT(
-      {$this->_pf()}asi.nombre, 
-      {$this->_pf()}pla.anio,
-      {$this->_pf()}pla.semestre,
-      {$this->_pf()}pla_plb.orientacion,
-      {$this->_pf()}pla_plb.resolucion,
-      {$this->_pf()}pla_plb.distribucion_horaria
+    return "CONCAT_WS(' ',
+      {$this->_pf()}asignatura.nombre, 
+      {$this->_pf()}planificacion.anio,
+      {$this->_pf()}planificacion.semestre,
+      {$this->_pf()}plan.orientacion,
+      {$this->_pf()}plan.resolucion,
+      {$this->_pf()}plan.distribucion_horaria
     )";
   }
 
