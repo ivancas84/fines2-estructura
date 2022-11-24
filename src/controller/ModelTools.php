@@ -262,19 +262,14 @@ GROUP BY curso.id
     );
   }
 
-  public function disposicionesPlanAnio($plan, $anio){
-    /**
+  /**
      * Disposiciones de plan y el anio ingreso
      */
-    $render = $this->container->getEntityRender("disposicion");
-
-    $render->setCondition([
+  public function disposicionesPlanAnio($plan, $anio){
+    return $this->container->query("disposicion")->cond([
       ["plan-id","=",$plan],
       ["planificacion-anio",">=",$anio]
-    ]);
-    $render->setOrder(["pla-anio"=>"asc","pla-semestre"=>"asc", "asi-nombre"=>"asc"]);
-    
-    return $this->container->db()->all("disposicion",$render);
+    ])->order(["planificacion-anio"=>"asc","planificacion-semestre"=>"asc", "asignatura-nombre"=>"asc"])->fields()->all();
   }
 
   public function cantidadCalificacionesAprobadas_($idAlumno_, $planificacion){
@@ -320,7 +315,7 @@ GROUP BY curso.id
     
     $render = $this->container->getEntityRender("calificacion");
     $render->setCondition([
-      ["plan-id","=",$plan],      
+      ["plan_pla-id","=",$plan],      
       ["alumno","=",$idAlumno],
       [
         ["nota_final",">=","7"],
@@ -340,22 +335,19 @@ GROUP BY curso.id
      *   [anio,cantidad]
      * ]
      **/   
-    $render = $this->container->getEntityRender("calificacion");
-    $render->setCondition([
-      ["plan-id","=",$plan],  
-      ["planificacion-anio",">=",$anio],      
+    return $this->container->query("calificacion")->cond([
+      ["plan_pla-id","=",$plan],  
+      ["planificacion_dis-anio",">=",$anio],      
       ["alumno","=",$idAlumno],
       [
         ["nota_final",">=","7"],
         ["crec",">=","4","OR"],
       ]
-    ]);
-    $render->setFields(["anio"=>"dis_pla-anio","cantidad"=> "count"]);
-    $render->setSize(0);
-    $render->setGroup(["anio"=>"dis_pla-anio"]);
-    $render->setOrder(["dis_pla-anio"=>"asc"]);
-    $render->setOrder(["dis_pla-semestre"=>"asc"]);
-    return $this->container->db()->select("calificacion",$render);
+    ])->fields(["anio"=>"planificacion_dis-anio","cantidad"=> "count"])
+    ->size(0)
+    ->group(["anio"=>"planificacion_dis-anio"])
+    ->order(["planificacion_dis-anio"=>"asc"])
+    ->order(["planificacion_dis-semestre"=>"asc"])->all();
   }
 
 

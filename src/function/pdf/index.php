@@ -50,6 +50,8 @@ function htmlToPdfIndex($container) {
   border: 1px solid black;
   text-align: left;
 }
+
+
 </style>
 <body>
 <div class="container">

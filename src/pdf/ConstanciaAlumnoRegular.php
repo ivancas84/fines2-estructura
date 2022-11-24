@@ -14,10 +14,6 @@ require_once("function/pdf/header.php");
 require_once("function/pdf/signature.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/" . PATH_ROOT . '/vendor/autoload.php');
 
-
-
-
-
 class ConstanciaAlumnoRegularPdf extends BaseController{
  /**
    * Generar pdf constancia de alumno regular
@@ -27,7 +23,8 @@ class ConstanciaAlumnoRegularPdf extends BaseController{
     $qrcode = qr($_GET["url"]);
     $signature = array_key_exists("firma", $_GET)? settypebool($_GET["firma"]) : true;
     
-    $this->alumno = $this->container->db()->get("alumno",$_GET["id"]);
+
+    $this->alumno = $this->container->query("alumno")->param("id",$_GET["id"])->fields()->one();
     
     $anio = intval($this->alumno["anio_ingreso"]);
 
@@ -68,7 +65,7 @@ class ConstanciaAlumnoRegularPdf extends BaseController{
 <div class="content">
   <p>La Dirección de la Escuela de Educación CENS Nº 462 de La Plata, 
 hace constar por la presente que <span class="data">&nbsp;&nbsp;&nbsp;' . $v["persona"]->_get("apellidos", "X") . ' ' . $v["persona"]->_get("nombres","Xx Yy") . '&nbsp;&nbsp;&nbsp;</span> DNI Nº <span class="data">&nbsp;&nbsp;&nbsp;' . $v["persona"]->_get("numero_documento","Xx Yy") . '&nbsp;&nbsp;&nbsp;</span>
-es alumna regular de <span class="data">&nbsp;&nbsp;&nbsp;' . $anioPrint . '&nbsp;&nbsp;&nbsp;</span> año <span class="data">&nbsp;&nbsp;&nbsp;Programa Fines 2 Trayecto Secundario&nbsp;&nbsp;&nbsp;</span>
+es alumno/a regular de <span class="data">&nbsp;&nbsp;&nbsp;' . $anioPrint . '&nbsp;&nbsp;&nbsp;</span> año <span class="data">&nbsp;&nbsp;&nbsp;Programa Fines 2 Trayecto Secundario&nbsp;&nbsp;&nbsp;</span>
 con orientación en <span class="data">&nbsp;&nbsp;&nbsp;' . $v["plan"]->_get("orientacion") . '&nbsp;&nbsp;&nbsp;</span> resolución <span class="data">&nbsp;&nbsp;&nbsp;' . $v["plan"]->_get("resolucion") . '&nbsp;&nbsp;&nbsp;</span>
   </p>
   <p>A pedido del/de la interesado/a y al sólo efecto de ser presentado ante las autoridades que se lo exijan, se extiene la presente en La Plata a los <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("d") . '&nbsp;&nbsp;&nbsp;</span> días
@@ -81,6 +78,7 @@ de <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("Y") . '&nbsp;&nbsp;&n
     $html = htmlToPdfIndex($c); 
 
 
+  
     // echo $html;
     $mpdf = new \Mpdf\Mpdf();
     $mpdf->SetProtection(["print"]);
