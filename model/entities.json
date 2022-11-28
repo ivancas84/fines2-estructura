@@ -8,6 +8,7 @@
   },
 
   "calendario": {
+    "orderDefault": {"anio":"DESC", "semestre":"DESC"},
     "main": ["descripcion","anio", "semestre"]
   },
 
