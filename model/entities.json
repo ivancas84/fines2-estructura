@@ -4,12 +4,15 @@
   },
 
   "asignatura": {
-    "main": ["nombre"]
+    "main": ["nombre"],
+    "unique": ["nombre"]
+
   },
 
   "calendario": {
     "orderDefault": {"anio":"DESC", "semestre":"DESC"},
-    "main": ["descripcion","anio", "semestre"]
+    "main": ["descripcion","anio", "semestre"],
+    "unique": ["descripcion"]
   },
 
   "calificacion": {
