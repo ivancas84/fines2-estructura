@@ -1,28 +1,18 @@
 {
   "alumno": {
-    "main": ["persona"]
+    "main": ["persona"],
+    "nf+":["tramo_ingreso"]
   },
 
   "asignatura": {
     "main": ["nombre"],
     "unique": ["nombre"]
-
   },
 
   "calendario": {
     "orderDefault": {"anio":"DESC", "semestre":"DESC"},
     "main": ["descripcion","anio", "semestre"],
     "unique": ["descripcion"]
-  },
-
-  "calificacion": {
-    "name": "calificacion",
-    "alias": "cali",
-    "nf": ["nota1", "nota2", "nota3", "nota_final", "crec", "porcentaje_asistencia", "observaciones", "division", "fecha"],
-    "mu": ["curso", "alumno", "disposicion"],
-    "_u": [],
-    "notNull": ["id", "alumno", "disposicion"],
-    "unique": ["id"]
   },
 
   "cargo": {
@@ -73,7 +63,8 @@
 
   "planificacion": {
     "main":["anio","semestre","plan"],
-    "uniqueMultiple": ["plan", "anio", "semestre"]
+    "uniqueMultiple": ["plan", "anio", "semestre"],
+    "nf+":["tramo"]
   },
 
   "planilla_docente": {

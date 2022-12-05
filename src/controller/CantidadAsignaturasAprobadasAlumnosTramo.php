@@ -26,21 +26,18 @@ class CantidadAsignaturasAprobadasAlumnosTramo  {
      * Array asociativo id_alumno => array de calificaciones aprobadas
      */
     if(empty($this->idAlumno_)) return [];
-    $render = $this->container->getEntityRender("calificacion");
-    $render->setFields(["id","alumno","nota_final","crec", "alu-tramo_ingreso","alu-plan","dis_pla-tramo","dis_pla-plan","dis-asignatura"]);
-
-    $render->setSize(0);
-    $render->setCondition([
+    $calificacion_ = $this->container->query("calificacion")->fields()
+    ->size(0)->cond([
       ["alumno","=",$this->idAlumno_],
       [
         ["nota_final",">=","7"],
         ["crec",">=","4","OR"]
       ]
-    ]);
-    $render->setOrder(["dis_pla-anio"=>"ASC", "dis_pla-semestre"=>"ASC"]);
+    ])
+    ->order(["planificacion_dis-anio"=>"ASC", "planificacion_dis-semestre"=>"ASC"])->all();
     
     $this->alumno__calificacionAprobada_ = array_group_value(
-      $this->container->db()->select("calificacion",$render),
+      $calificacion_,
       "alumno"
     );
   }
@@ -60,8 +57,8 @@ class CantidadAsignaturasAprobadasAlumnosTramo  {
       $r["cantidad_aprobadas"] = 0;
 
       foreach($calificacionAprobada_ as $ca){
-        if((intval($ca["dis_pla_tramo"]) < intval($ca["alu_tramo_ingreso"]))
-          || ($ca["dis_pla_plan"] != $ca["alu_plan"])) continue;
+        if((intval($ca["planificacion_dis_tramo"]) < intval($ca["alu_tramo_ingreso"]))
+          || ($ca["planificacion_dis_plan"] != $ca["alu_plan"])) continue;
           
         $r["cantidad_aprobadas_".$ca["dis_pla_tramo"]]++;
       }
