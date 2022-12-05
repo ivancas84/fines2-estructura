@@ -57,10 +57,10 @@ class CantidadAsignaturasAprobadasAlumnosTramo  {
       $r["cantidad_aprobadas"] = 0;
 
       foreach($calificacionAprobada_ as $ca){
-        if((intval($ca["planificacion_dis_tramo"]) < intval($ca["alu_tramo_ingreso"]))
-          || ($ca["planificacion_dis_plan"] != $ca["alu_plan"])) continue;
+        if((intval($ca["planificacion_dis_tramo"]) < intval($ca["alumno_tramo_ingreso"]))
+          || ($ca["planificacion_dis_plan"] != $ca["alumno_plan"])) continue;
           
-        $r["cantidad_aprobadas_".$ca["dis_pla_tramo"]]++;
+        $r["cantidad_aprobadas_".$ca["planificacion_dis_tramo"]]++;
       }
 
       $r["cantidad_aprobadas"] = $r["cantidad_aprobadas_11"]+$r["cantidad_aprobadas_12"]+$r["cantidad_aprobadas_21"]+$r["cantidad_aprobadas_22"]+$r["cantidad_aprobadas_31"]+$r["cantidad_aprobadas_32"];

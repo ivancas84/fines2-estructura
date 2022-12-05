@@ -13,7 +13,7 @@ class CantidadAsignaturasAprobadasAlumnosTramoApi extends BaseApi {
   public $idAlumno_ = [];
 
   public function main() {
-    $this->container->getAuth()->authorize("alumno", "r");
+    $this->container->auth()->authorize("alumno", "r");
     $this->idAlumno_ = php_input();
     
     return $this->container->controller_("cantidad_asignaturas_aprobadas_alumnos_tramo")->main($this->idAlumno_);
