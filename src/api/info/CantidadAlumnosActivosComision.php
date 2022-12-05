@@ -16,7 +16,7 @@ class CantidadAlumnosActivosComisionInfoApi  extends BaseApi {
     ->fields([
       "comision", "cantidad"=>"alumno.count"
     ])
-    ->group(["comision"]);
+    ->group(["comision"])->all();
   }
 }
 
