@@ -20,11 +20,11 @@ class GenerarCalificacionAlumnoApi extends BaseApi {
   public $detail = [];
   
   public function main() {
-    $this->container->getAuth()->authorize("calificacion", "w");
+    $this->container->auth()->authorize("calificacion", "w");
     $this->idAlumno = file_get_contents("php://input");
 
 
-    $this->alumno = $this->container->db()->get("alumno",$this->idAlumno);
+    $this->alumno = $this->container->query("alumno")->param("id",$this->idAlumno)->fields()->one();
 
     $this->calificacion_(); //calificaciones del alumno
     $this->disposicion_(); //disposiciones del plan del alumno
@@ -42,32 +42,27 @@ class GenerarCalificacionAlumnoApi extends BaseApi {
     /**
      * Array asociativo id_alumno => array de calificaciones aprobadas
      */
-    $render = $this->container->getEntityRender("calificacion");
-    $render->setSize(0);
-    $render->setCondition([
+    $this->calificacion_ = $this->container->query("calificacion")
+    ->size(0)
+    ->fields()
+    ->cond([
       ["alumno","=",$this->idAlumno],
       ["plan-id","=",$this->alumno["plan"]],
-    ]);
+    ])->all();
     //$render->setFields(["cantidad"=>"id.count"]);
-    //$render->setGroup(["alumno"=>"alumno"]);
-    
-    $this->calificacion_ = $this->container->db()->all("calificacion",$render);
-
-
+    //$render->setGroup(["alumno"=>"alumno"]);    
   }
 
   public function disposicion_(){
-    $render = $this->container->getEntityRender("disposicion");
-    $render->setSize(0);
-    $render->setCondition([
+    $d = $this->container->query("disposicion")
+    ->size(0)->fields()
+    ->cond([
       ["plan-id","=",$this->alumno["plan"]],
-    ]);
-    $render->setOrder(["planificacion-anio"=>"asc","planificacion-semestre"=>"asc", "asignatura-nombre"=>"asc"]);
+    ])
+    ->order(["planificacion-anio"=>"asc","planificacion-semestre"=>"asc", "asignatura-nombre"=>"asc"])
+    ->all();
     
-    $this->disposicion_ = array_combine_key(
-      $this->container->db()->all("disposicion",$render),
-      "id"
-    );
+    $this->disposicion_ = array_combine_key($d,"id");
   }
 
 
@@ -78,7 +73,7 @@ class GenerarCalificacionAlumnoApi extends BaseApi {
       $disposicion_ = array_unset_keys($this->disposicion_, $idDisposicion_);
       
       foreach($disposicion_ as $dd){
-        if(intval($dd["pla_anio"]) < $anioIngreso) continue;
+        if(intval($dd["planificacion_anio"]) < $anioIngreso) continue;
 
         $a = [
           "alumno" => $this->idAlumno,
