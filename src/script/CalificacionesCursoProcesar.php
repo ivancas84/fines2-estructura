@@ -22,8 +22,8 @@ class CalificacionesCursoProcesarScript extends BaseController{
 
     $import->main();
     
-    //echo "<pre>";
-    //print_r($import);
+    if(settypebool($_REQUEST["persist"])) $import->persist();
+
     $import->summary();
     echo "<br><br>RESUMEN DEL PROCESAMIENTO DE NOTAS<br>";
     echo "Cantidad de alumnos evaluados " . $import->cantidadEvaluados . "<br>";

@@ -74,47 +74,47 @@ class CalificacionImport extends Import{
      
       
       $this->existsPersona($element);
-      $element->exists("disposicion");
-      $element->exists("alumno");
+      if(!$element->exists("disposicion")) {
+        $element->logs->addLog("disposicion", "error", "No existe la disposicion en la base de datos");
+        $element->process = false;
+      }
+      if(!$element->exists("alumno")) {
+        $element->logs->addLog("alumno", "error", "No existe el alumno en la base de datos");
+        $element->process = false;
+      }
 
-
-      $idCalificacion = $this->processCalificacion($element);
+      $this->processCalificacion($element);
     }
   }
 
 
   
   public function existsPersona(&$element){
-    $element->exists("persona");
-    $dni = $element->entities["persona"]->_get("numero_documento");
- 
-    /**
-     * Variante del insertElement para verificar los nomrbes de la persona
-     */
-     
-    $personaExistente = $this->container->value("persona");
-    $personaExistente->_fromArray($this->dbs["persona"][$dni], "set");
+    if(!$personaExistente = $element->exists("persona")){
+      $element->logs->addLog("persona", "error", "No existe la persona en la base de datos");
+      $element->process = false;
+    }
+
     if(!$element->entities["persona"]->checkNombresParecidos($personaExistente)){
       $element->logs->addLog("persona", "error", "En la base existe una persona cuyos datos no coinciden");
       $element->process = false;
       return false;
     } 
 
-    if(!in_array($dni, $this->dni_)) {
+    if(!in_array($element->entities["persona"]->_get("numero_documento"), $this->dni_)) {
       $element->logs->addLog("persona", "error", "La persona no existe en la comision");
       $element->process = false;
       return false;
     } else {
-      $pos = array_search($dni, $this->dni_);
+      $pos = array_search($element->entities["persona"]->_get("numero_documento"), $this->dni_);
       unset($this->dni_[$pos]);
     }
-
-    return $dni;
   }
 
 
 
   public function processCalificacion(&$element){
+    if(!$element->process = false) return;
     $element->entities["calificacion"]->_set("disposicion",
       $element->entities["disposicion"]->_get("id")
     );
@@ -154,7 +154,7 @@ class CalificacionImport extends Import{
         }
 
         
-        $element->update($compare, "calificacion", $existente, "calificacion", true);
+        $element->update("calificacion");
       } else {        
         $element->insert("calificacion");
       }
