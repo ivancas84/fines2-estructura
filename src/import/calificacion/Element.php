@@ -38,13 +38,14 @@ class CalificacionImportElement extends ImportElement {
       $this->import->cantidadAprobados++;
     }
 
+    $this->entities["persona"]->_set("identifier", $this->entities["persona"]->_get("numero_documento"));
     $this->entities["alumno"] = $this->container->value("alumno");
     $this->entities["alumno"]->_set("identifier", $this->entities["persona"]->_get("numero_documento"));
     $this->entities["disposicion"] = $this->container->value("disposicion");
-    $this->entities["disposicion"]->_set("identifier", $this->import->curso["com_planificacion"].UNDEFINED.$this->import->curso["asignatura"]);
+    $this->entities["disposicion"]->_set("identifier", $this->import->curso["comision_planificacion"].UNDEFINED.$this->import->curso["asignatura"]);
     $this->entities["calificacion"]->_set("identifier", 
       $this->entities["persona"]->_get("numero_documento").UNDEFINED.
-      $this->import->curso["com_planificacion"].UNDEFINED.
+      $this->import->curso["comision_planificacion"].UNDEFINED.
       $this->import->curso["asignatura"]
     );
 

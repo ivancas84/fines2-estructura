@@ -13,7 +13,7 @@ class CalificacionesCursoProcesarScript extends BaseController{
  
 
   public function main(){
-    $import = $this->container->getImport("calificacion");
+    $import = $this->container->import("calificacion");
     $import->headers = array_map('trim', explode(",",$_REQUEST["headers"])); //encabezados a procesar
     
     $import->source = $_REQUEST["source"]; //informacion a procesar

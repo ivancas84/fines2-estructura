@@ -21,33 +21,27 @@ class CalificacionImport extends Import{
   public $cantidadDesaprobados = 0;
   public $fecha = null;
 
-  public function main(){
+  public function config(){
     if(Validation::is_empty($this->idCurso)) throw new Exception("El id del curso no se encuentra definido");
 
-    $this->curso = $this->container->db()->get("curso", $this->idCurso);
+    $this->curso = $this->container->query("curso")->fieldsTree()->param("id", $this->idCurso)->one();
     if(empty($this->curso)) throw new Exception("El curso no existe");
 
     $this->dni_();
-
-    $this->container->entity("alumno")->identifier = ["per-numero_documento"];
-    $this->container->entity("calificacion")->identifier = ["alu_per-numero_documento", "dis-planificacion", "dis-asignatura"];
+    $this->container->entity("persona")->identifier = ["numero_documento"];
+    $this->container->entity("alumno")->identifier = ["persona-numero_documento"];
+    $this->container->entity("calificacion")->identifier = ["persona-numero_documento", "disposicion-planificacion", "disposicion-asignatura"];
     $this->container->entity("disposicion")->identifier = ["planificacion", "asignatura"];
-    parent::main();
-    // $this->define();
-    // $this->identify();
-    // $this->query();
-    // $this->process();
-    // // echo "<pre>";
-    // print_r($this);
-    //$this->persist();
   }
 
+
   public function dni_(){
-    $render = $this->container->getEntityRender("alumno_comision");
-    $render->setCondition(["comision","=",$this->curso["comision"]]);
-    $alumnoComision = $this->container->db()->all("alumno_comision",$render);
-    $this->dni_ = array_column($alumnoComision,"alu_per_numero_documento");
-    $this->alumno_ = array_group_value($alumnoComision, "alu_per_numero_documento");
+    $alumnoComision = $this->container->query("alumno_comision")
+    ->cond(["comision","=",$this->curso["comision"]])
+    ->fields()
+    ->all();
+    $this->dni_ = array_column($alumnoComision,"persona_numero_documento");
+    $this->alumno_ = array_group_value($alumnoComision, "persona_numero_documento");
   }
 
   public function identify(){
@@ -58,25 +52,19 @@ class CalificacionImport extends Import{
     
     foreach($this->elements as &$element){
       if(!$element->process) continue;
-      if(!($dni = $element->getIdentifier("persona", "numero_documento"))) continue;
-      if(!($idDisposicion = $element->getIdentifier("disposicion", "identifier"))) continue;
-      if(!($idCalificacion = $element->getIdentifier("calificacion", "identifier"))) continue;
-      if(!($idAlumno = $element->getIdentifier("alumno", "identifier"))) continue;
-
-      
-      if(!$this->idEntityFieldCheck("alumno", $idAlumno, $element)) continue;
-      if(!$this->idEntityFieldCheck("calificacion", $idCalificacion, $element)) continue;
-      if(!$this->idEntityFieldCheck("persona", $dni, $element)) continue;
-      if(!$this->idEntityField("disposicion", $idDisposicion, $element)) continue;
+      if($element->identifyCheck("alumno")) continue;
+      if($element->identifyCheck("calificacion")) continue;
+      if($element->identifyCheck("persona")) continue;
+      if($element->identify("disposicion")) continue;
       
     }
   }
 
   public function query(){
-    $this->queryEntity("persona","numero_documento");
-    $this->queryEntity("disposicion","identifier");
-    $this->queryEntity("calificacion","identifier");
-    $this->queryEntity("alumno","identifier");
+    $this->queryEntity("persona");
+    $this->queryEntity("disposicion");
+    $this->queryEntity("calificacion");
+    $this->queryEntity("alumno");
 
   }
 
@@ -84,21 +72,21 @@ class CalificacionImport extends Import{
     foreach($this->elements as &$element) {
       if(!$element->process) continue;
      
-      if(!$this->existsPersona($element)) continue;
-      if(!$this->existElement($element, "disposicion", "identifier")) continue;
-      if(!$this->existElement($element, "alumno", "identifier")) continue;
+      
+      $this->existsPersona($element);
+      $element->exists("disposicion");
+      $element->exists("alumno");
 
 
       $idCalificacion = $this->processCalificacion($element);
-      if($idCalificacion === false) continue;
     }
   }
 
 
   
   public function existsPersona(&$element){
-    if(!$this->existElement($element, "persona", "numero_documento")) return false;
-      $dni = $element->entities["persona"]->_get("numero_documento");
+    $element->exists("persona");
+    $dni = $element->entities["persona"]->_get("numero_documento");
  
     /**
      * Variante del insertElement para verificar los nomrbes de la persona
@@ -190,7 +178,7 @@ class CalificacionImport extends Import{
 
       foreach($this->dni_ as $dni) {
         $activo = settypebool($this->alumno_[$dni][0]["activo"]);
-        if($activo) echo  $dni . " " . $this->alumno_[$dni][0]["alu_per_apellidos"] . " " . $this->alumno_[$dni][0]["alu_per_nombres"]. "<br/>";
+        if($activo) echo  $dni . " " . $this->alumno_[$dni][0]["persona_apellidos"] . " " . $this->alumno_[$dni][0]["persona_nombres"]. "<br/>";
       }
     }
 }
