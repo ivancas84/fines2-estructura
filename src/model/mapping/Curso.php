@@ -5,21 +5,21 @@ class CursoMapping extends MappingEntityOptions{
 
   public function label() {
     return "CONCAT(
-      {$this->_pf()}com_sed.numero, 
-      {$this->_pf()}com.division,
+      sede.numero, 
+      comision.division,
       '/',
       IF(
-        {$this->_pf()}com_pla.id, 
+        planificacion.id, 
         CONCAT(
-          {$this->_pf()}com_pla.anio,
-          {$this->_pf()}com_pla.semestre
+          planificacion.anio,
+          planificacion.semestre
         ), 
         ''
       ),
       ' ',
-      {$this->_pf()}asi.codigo,
+      asignatura.nombre,
       ' ',
-      {$this->_pf()}com_sed.nombre
+      sede.nombre
     )";
   }
 
