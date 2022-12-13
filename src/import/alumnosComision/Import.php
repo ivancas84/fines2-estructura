@@ -29,6 +29,9 @@ class AlumnosComisionImport extends Import{
   public function config(){
     if(Validation::is_empty($this->idComision)) throw new Exception("El id no se encuentra definido");
 
+    $this->comision = $this->container->query("comision")->fields()->param("id", $this->idComision)->one();
+    $this->tieneAnterior(); 
+
     $this->container->entity("persona")->identifier = ["numero_documento"];
     $this->container->entity("alumno")->identifier = ["persona-numero_documento"];
     $this->container->entity("alumno_comision")->identifier = ["persona-numero_documento", "comision"];
@@ -53,8 +56,6 @@ class AlumnosComisionImport extends Import{
     $this->queryEntity("alumno");
     $this->queryEntity("alumno_comision");
 
-    $this->comision = $this->container->db()->get("comision", $this->idComision);
-    $this->tieneAnterior(); 
     $this->queryOtraComisionPeriodoAnterior_();
     if($this->tieneAnterior){
       $this->queryCalificacionesAprobadasPeriodoAnterior_();
@@ -64,60 +65,67 @@ class AlumnosComisionImport extends Import{
 
 
   public function tieneAnterior(){
-      $render = $this->container->getEntityRender("comision");
-      $render->addCondition(["comision_siguiente","=",$this->idComision]);
+      $count = intval(
+          $this->container->query("comision")
+          ->cond(["comision_siguiente","=",$this->idComision])
+          ->size(0)
+          ->page(1)
+          ->fields(["count"])
+          ->columnOne()
+      );
   
-      $count = $this->container->db()->count("comision", $render);
       $this->tieneAnterior = ($count) ? true : false;
   }
 
   public function queryOtraComisionPeriodoAnterior_(){
 
     $cal = periodo_calendario_anterior($this->anio, $this->semestre);
-    $render = $this->container->getEntityRender("alumno_comision");
-    
-    $render->setSize(false);
-    $render->addCondition(["alu_per-numero_documento","=",$this->ids["persona"]]);
-    $render->addCondition(["comision","!=",$this->idComision]);
-    $render->addCondition(["activo","=",true]);
+    $rows = $this->container->query("alumno_comision")
+      ->size(false)
+      ->fields()
+      ->cond(["persona-numero_documento","=",$this->ids["persona"]])
+      ->cond(["comision","!=",$this->idComision])
+      ->cond(["activo","=",true])
+      ->all();
 
-    $rows = $this->container->db()->all("alumno_comision", $render);
     foreach($rows as $row) {
-      if(($row["com_division"] != $this->comision["division"]) || ($row["com_sede"] != $this->comision["sede"]) ){
+      if(($row["comision_division"] != $this->comision["division"]) || ($row["comision_sede"] != $this->comision["sede"]) ){
         array_push($this->alumnoOtraComision_, $row );
       }
     }
   }
 
   
-  public function queryCalificacionesAprobadasPeriodoAnterior_(){
-    $periodoAnterior = periodo_anterior2($this->comision, "pla_");
-    $render = $this->container->getEntityRender("calificacion");
-    $render->setSize(false);
-    $render->setFields(["cantidad"=>"count"]);
-    $render->setGroup(["alu_per-numero_documento"]);
-    $render->addCondition(["alu_per-numero_documento","=",$this->ids["persona"]]);
-    $render->addCondition(["dis_pla-anio","=",$periodoAnterior["anio"]]);
-    $render->addCondition(["dis_pla-semestre","=",$periodoAnterior["semestre"]]);
-    $render->addCondition([
-      ["nota_final",">=","7"],
-      ["crec",">=","4","OR"]
-    ]);
-    
-    $this->calificacionesAprobadasPeriodoAnterior_ = array_combine_key(
-      $this->container->db()->select("calificacion", $render),
-      "alu_per_numero_documento"
-    );  
+  public function queryCalificacionesAprobadasPeriodoAnterior_() {
+      $periodoAnterior = periodo_anterior2($this->comision, "planificacion_");
+      $rows = $this->container->query("calificacion")
+          ->size(false)
+          ->fieldsTree()
+          ->fields(["cantidad"=>"count"])
+          ->group(["persona-numero_documento"])
+          ->cond(["persona-numero_documento","=",$this->ids["persona"]])
+          ->cond(["planificacion-anio","=",$periodoAnterior["anio"]])
+          ->cond(["planificacion-semestre","=",$periodoAnterior["semestre"]])
+          ->cond([
+              ["nota_final",">=","7"],
+              ["crec",">=","4","OR"]
+          ])->all();
+      
+      $this->calificacionesAprobadasPeriodoAnterior_ = array_combine_key(
+          $rows,
+          "persona_numero_documento"
+      );  
   }
 
   public function queryComisionPeriodoAnterior_(){
-    $render = $this->container->getEntityRender("alumno_comision");
-    $render->setSize(false);
-    $render->addCondition(["com-comision_siguiente","=",$this->idComision]);
-    $render->addCondition(["activo","=",true]);
-
-    $rows = $this->container->db()->all("alumno_comision", $render);
-    foreach($rows as $row) array_push($this->dniComisionPeriodoAnterior_, $row["alu_per_numero_documento"]);
+      $rows = $this->container->query("alumno_comision")
+          ->fields()
+          ->size(false)
+          ->cond(["comision-comision_siguiente","=",$this->idComision])
+          ->cond(["activo","=",true])
+          ->all();
+      
+      foreach($rows as $row) array_push($this->dniComisionPeriodoAnterior_, $row["persona_numero_documento"]);
   }
 
   
@@ -174,8 +182,6 @@ class AlumnosComisionImport extends Import{
 
 
   public function summaryAlumnoOtraComision_(){
-    echo "<pre>";
-    print_r($this->alumnoOtraComision_);
     if(count($this->alumnoOtraComision_)){
       echo "<h3>Alumnos que  se encuentran cargados en otra comision</h3>";
       echo "<ul>";
