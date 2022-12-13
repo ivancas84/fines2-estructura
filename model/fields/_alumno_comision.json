@@ -75,7 +75,7 @@
   "estado": {
     "type": "varchar",
     "fieldType": "nf",
-    "default": "`activo`",
+    "default": "Activo",
     "alias": "est",
     "entityName": "alumno_comision",
     "dataType": "string",  
