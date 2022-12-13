@@ -10,12 +10,10 @@ class CalificacionImport extends Import{
   /**
    * Importar Calificaciones
    */
-  public $mode = "tab";
   public $idCurso;
   public $curso; //curso
   public $dni_; //dnis de alumnos existentes en el curso
   public $alumno_; //datos de alumnos existentes en el curso
-  public $id = "calificacion"; //identificacion de la importacion (para facilitara la instanciacion de la clase Element)
   public $cantidadEvaluados = 0;
   public $cantidadAprobados = 0;
   public $cantidadDesaprobados = 0;
@@ -45,130 +43,83 @@ class CalificacionImport extends Import{
   }
 
   public function identify(){
-    $this->ids["persona"] = [];
-    $this->ids["disposicion"] = [];
-    $this->ids["calificacion"] = [];
-    $this->ids["alumno"] = [];
-    
     foreach($this->elements as &$element){
       if(!$element->process) continue;
-      if($element->identifyCheck("alumno")) continue;
-      if($element->identifyCheck("calificacion")) continue;
-      if($element->identifyCheck("persona")) continue;
-      if($element->identify("disposicion")) continue;
-      
+      try{
+        $element->identifyCheck("alumno");
+        $element->identifyCheck("calificacion");
+        $element->identifyCheck("persona");
+        $element->identify("disposicion");
+
+      } catch(Exception $exception){
+        $element->process = false;
+        $element->logs->addLog("identify","error",$exception->getMessage());
+      }
     }
   }
 
   public function query(){
+
     $this->queryEntity("persona");
     $this->queryEntity("disposicion");
     $this->queryEntity("calificacion");
     $this->queryEntity("alumno");
-
   }
 
   public function process(){    
     foreach($this->elements as &$element) {
       if(!$element->process) continue;
-     
-      
-      $this->existsPersona($element);
-      if(!$element->exists("disposicion")) {
-        $element->logs->addLog("disposicion", "error", "No existe la disposicion en la base de datos");
+      try{
+        $idPersona = $this->existsPersona($element);
+        $idDisposicion = $element->exists("disposicion");
+        $idAlumno = $element->exists("alumno");
+
+        $element->entities["calificacion"]->_set("disposicion", $idDisposicion);
+        $element->entities["calificacion"]->_set("alumno", $idAlumno);
+  
+        $existente = $element->getExistent("calificacion");
+        if($existente){
+          $compare = $element->compare("calificacion");
+          if(
+            (in_array("crec", $compare) && !Validation::is_empty($existente->_get("crec"))) 
+            || (in_array("nota_final", $compare) && !Validation::is_empty($existente->_get("nota_final")))
+          ) {
+            throw new Exception("Calificacion diferente, no se actualizara ningun valor");
+          }
+
+          $element->update("calificacion");
+        } else {        
+          $element->insert("calificacion");
+        }
+    
+        if(Validation::is_empty($element->entities["calificacion"]->_get("crec"))
+          && Validation::is_empty($element->entities["calificacion"]->_get("nota_final")))
+            throw new Exception("calificacion vacia, no se actualizara ningun valor");
+  
+
+      } catch(Exception $exception){
         $element->process = false;
-      }
-      if(!$element->exists("alumno")) {
-        $element->logs->addLog("alumno", "error", "No existe el alumno en la base de datos");
-        $element->process = false;
+        $element->logs->addLog("process", "error", $exception->getMessage());
       }
 
-      $this->processCalificacion($element);
     }
   }
 
 
   
   public function existsPersona(&$element){
-    if(!$personaExistente = $element->exists("persona")){
-      $element->logs->addLog("persona", "error", "No existe la persona en la base de datos");
-      $element->process = false;
-    }
+    $personaExistente = $element->getExistent("persona");
+    if(!$personaExistente) throw new Exception("Los datos de la persona no existen en la base de datos");
+    
+    if(!$element->entities["persona"]->checkNombresParecidos($personaExistente)) throw new Exception("En la base existe una persona cuyos datos no coinciden");
 
-    if(!$element->entities["persona"]->checkNombresParecidos($personaExistente)){
-      $element->logs->addLog("persona", "error", "En la base existe una persona cuyos datos no coinciden");
-      $element->process = false;
-      return false;
-    } 
-
-    if(!in_array($element->entities["persona"]->_get("numero_documento"), $this->dni_)) {
-      $element->logs->addLog("persona", "error", "La persona no existe en la comision");
-      $element->process = false;
-      return false;
-    } else {
-      $pos = array_search($element->entities["persona"]->_get("numero_documento"), $this->dni_);
-      unset($this->dni_[$pos]);
-    }
+    if(!in_array($element->entities["persona"]->_get("numero_documento"), $this->dni_)) throw new Exception("La persona no existe en la comisión");
+    
+    $pos = array_search($element->entities["persona"]->_get("numero_documento"), $this->dni_);
+    unset($this->dni_[$pos]);
   }
 
 
-
-  public function processCalificacion(&$element){
-    if(!$element->process = false) return;
-    $element->entities["calificacion"]->_set("disposicion",
-      $element->entities["disposicion"]->_get("id")
-    );
-    $element->entities["calificacion"]->_set("alumno",
-      $element->entities["alumno"]->_get("id")
-    );
-
-    $idCalificacion = $this->processCalificacionElement($element);
-
-    if(Validation::is_empty($element->entities["calificacion"]->_get("crec"))
-      && Validation::is_empty($element->entities["calificacion"]->_get("nota_final"))) {
-        $element->process = false;
-        $element->logs->addLog("calificacion", "info", "Calificacion vacia, no se actualizara ningun valor");
-        return false;                
-    }
-    return $idCalificacion;
-  }
-
-  public function processCalificacionElement(&$element){
-
-    try {
-
-      $value = $element->entities["calificacion"]->_get("identifier");
-      if(key_exists($value, $this->dbs["calificacion"])) {
-        $existente = $this->container->value("calificacion");
-        $existente->_fromArray($this->dbs["calificacion"][$value], "set");
-        $element->entities["calificacion"]->_set("id",$existente->_get("id"));
-        $compare = $element->compare("calificacion", $existente);  
-        
-        if(
-          (in_array("crec", $compare) && !Validation::is_empty($existente->_get("crec"))) 
-          || (in_array("nota_final", $compare) && !Validation::is_empty($existente->_get("nota_final")))
-        ) {
-          $element->logs->addLog("calificacion", "error", "Calificacion diferente, no se actualizara ningun valor");
-          $element->process = false;
-          return false;
-        }
-
-        
-        $element->update("calificacion");
-      } else {        
-        $element->insert("calificacion");
-      }
-  
-      return $value;
-    } catch (Exception $e) {
-      $element->process = false;
-      $element->logs->addLog($name,"error",$e->getMessage());
-      return false;
-    }
-
-
-
-  }
 
 
   public function summary() {

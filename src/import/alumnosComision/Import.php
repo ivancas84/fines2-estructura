@@ -30,8 +30,8 @@ class AlumnosComisionImport extends Import{
     if(Validation::is_empty($this->idComision)) throw new Exception("El id no se encuentra definido");
 
     $this->container->entity("persona")->identifier = ["numero_documento"];
-    $this->container->entity("alumno")->identifier = ["per-numero_documento"];
-    $this->container->entity("alumno_comision")->identifier = ["alu_per-numero_documento", "comision"];
+    $this->container->entity("alumno")->identifier = ["persona-numero_documento"];
+    $this->container->entity("alumno_comision")->identifier = ["persona-numero_documento", "comision"];
   }
 
   public function identify(){
