@@ -19,9 +19,7 @@ class AlumnosComisionImportElement extends ImportElement {
     $this->entities["alumno_comision"]->_set("comision", 
       $this->import->idComision
     );
-    $this->entities["alumno_comision"]->_set("activo", 
-      true
-    );
+    $this->entities["alumno_comision"]->_set("estado", 'Activo');
     $this->entities["alumno_comision"]->_set("identifier", 
       $this->entities["persona"]->_get("numero_documento") . UNDEFINED .
       $this->import->idComision
