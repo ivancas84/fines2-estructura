@@ -1,7 +1,8 @@
 {
   "alumno": {
     "main": ["persona"],
-    "nf+":["tramo_ingreso"]
+    "nf+":["tramo_ingreso"],
+    "noAdmin":["tramo_ingreso"]
   },
 
   "asignatura": {
