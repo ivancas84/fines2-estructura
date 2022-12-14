@@ -97,7 +97,7 @@ class AlumnosComisionImport extends Import{
 
   
   public function queryCalificacionesAprobadasPeriodoAnterior_() {
-      $periodoAnterior = periodo_anterior2($this->comision, "planificacion_");
+      $periodoAnterior = periodo_anterior2($this->comision, "planificacion-");
       $rows = $this->container->query("calificacion")
           ->size(false)
           ->fieldsTree()
@@ -113,7 +113,7 @@ class AlumnosComisionImport extends Import{
       
       $this->calificacionesAprobadasPeriodoAnterior_ = array_combine_key(
           $rows,
-          "persona_numero_documento"
+          "persona-numero_documento"
       );  
   }
 
@@ -125,7 +125,7 @@ class AlumnosComisionImport extends Import{
           ->cond(["activo","=",true])
           ->all();
       
-      foreach($rows as $row) array_push($this->dniComisionPeriodoAnterior_, $row["persona_numero_documento"]);
+      foreach($rows as $row) array_push($this->dniComisionPeriodoAnterior_, $row["persona-numero_documento"]);
   }
 
   
