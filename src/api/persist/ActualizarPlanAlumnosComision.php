@@ -2,11 +2,11 @@
 
 require_once("api/Base.php");
 require_once("function/php_input.php");
-class ActualizarAnioAlumnosApi extends BaseApi {
+class ActualizarPlanAlumnosComisionApi extends BaseApi {
 
   /**
-   * Actualizar año de alumnos pertenecientes a una comision
-   * Si el alumno tiene año definido no sera actualizado
+   * Actualizar plan de alumnos pertenecientes a una comision
+   * Si el alumno tiene plan definido no sera actualizado
    */
   public function main() {
     
@@ -15,13 +15,13 @@ class ActualizarAnioAlumnosApi extends BaseApi {
 
     if(!$idComision) throw new Exception("No esta definido el id de comision");
 
-    $render = $this->container->getEntityRender("alumno_comision");
-    $render->setCondition([
-      ["comision","=",$idComision],
-      ["alu-anio_ingreso","=",false],
-    ]);
-    
-    $rows = $this->container->db()->all("alumno_comision",$render);
+    $rows = $this->container->query("alumno_comision")
+      ->cond([
+        ["comision","=",$idComision],
+        ["alumno-plan","=",false],
+      ])
+      ->cond(["alumno"])
+      ->all();
 
     if(empty($rows)) return ["ids"=>[],"detail"=>[]];
     $sql = "";
@@ -30,7 +30,7 @@ class ActualizarAnioAlumnosApi extends BaseApi {
     foreach($rows as $row){
       $a = [
         "id" => $row["alumno"],
-        "anio_ingreso" => $row["com_pla_anio"]
+        "plan" => $row["plan-id"]
       ];
 
       $persist = $this->container->controller("persist_sql", "alumno")->id($a);
