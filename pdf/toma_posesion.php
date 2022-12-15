@@ -14,10 +14,11 @@ require_once("function/settypebool.php");
 $container = new Container;
 //$toma = "609dae4ce9b7d";
 
-$mt = $container->controller_("model_tools");
 $toma = $container->query("toma")->param("id",$_GET["toma"])->fieldsTree()->one();
 
-$curso = $mt->labelCurso($toma,"cur_");
+$curso = $toma["sede-numero"] . $toma["comision-division"] . "/";
+$curso .= $toma["planificacion-anio"].$toma["planificacion-semestre"];
+$curso .= " " . $toma["asignatura-nombre"];
 
 $horario_ = $container->controller_("model_tools")->cursoHorario([$toma["curso"]]);
 $horario = count($horario_) ? $horario_[0]["horario"] : null;
