@@ -2,7 +2,7 @@
 
 require_once("api/Base.php");
 require_once("function/php_input.php");
-class ActualizarPlanAnioAlumnosComisionApi extends BaseApi {
+class ActualizarPlanAnioAlumnosComisionPersistApi extends BaseApi {
 
   /**
    * Actualizar plan de alumnos pertenecientes a una comision
@@ -10,7 +10,7 @@ class ActualizarPlanAnioAlumnosComisionApi extends BaseApi {
    */
   public function main() {
     
-    $this->container->getAuth()->authorize("alumno", "w");
+    $this->container->auth()->authorize("alumno", "w");
     $idComision = file_get_contents("php://input");
 
     if(!$idComision) throw new Exception("No esta definido el id de comision");
