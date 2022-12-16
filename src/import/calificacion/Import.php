@@ -38,8 +38,8 @@ class CalificacionImport extends Import{
     ->cond(["comision","=",$this->curso["comision"]])
     ->fields()
     ->all();
-    $this->dni_ = array_column($alumnoComision,"persona_numero_documento");
-    $this->alumno_ = array_group_value($alumnoComision, "persona_numero_documento");
+    $this->dni_ = array_column($alumnoComision,"persona-numero_documento");
+    $this->alumno_ = array_group_value($alumnoComision, "persona-numero_documento");
   }
 
   public function identify(){
@@ -129,7 +129,7 @@ class CalificacionImport extends Import{
 
       foreach($this->dni_ as $dni) {
         $activo = settypebool($this->alumno_[$dni][0]["activo"]);
-        if($activo) echo  $dni . " " . $this->alumno_[$dni][0]["persona_apellidos"] . " " . $this->alumno_[$dni][0]["persona_nombres"]. "<br/>";
+        if($activo) echo  $dni . " " . $this->alumno_[$dni][0]["persona-apellidos"] . " " . $this->alumno_[$dni][0]["persona-nombres"]. "<br/>";
       }
     }
 }

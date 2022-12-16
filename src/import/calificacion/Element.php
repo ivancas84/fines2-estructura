@@ -22,11 +22,11 @@ class CalificacionImportElement extends ImportElement {
 
     if($this->import->fecha) $row["fecha"] = $this->import->fecha;
     
-    $row["per_numero_documento"] = preg_replace("/[^0-9\_]/", "", $row["per_numero_documento"]);
+    $row["persona-numero_documento"] = preg_replace("/[^0-9\_]/", "", $row["persona-numero_documento"]);
     //se permiten numeros y guiones bajos para identificar el dni
 
     $row["curso"] = $this->import->curso["id"];
-    $this->setEntity($row, "persona", "per");
+    $this->setEntity($row, "persona", "persona");
     $this->setEntity($row, "calificacion");
     $this->setEntity($row, "alumno");
 
@@ -42,10 +42,10 @@ class CalificacionImportElement extends ImportElement {
     $this->entities["alumno"] = $this->container->value("alumno");
     $this->entities["alumno"]->_set("identifier", $this->entities["persona"]->_get("numero_documento"));
     $this->entities["disposicion"] = $this->container->value("disposicion");
-    $this->entities["disposicion"]->_set("identifier", $this->import->curso["comision_planificacion"].UNDEFINED.$this->import->curso["asignatura"]);
+    $this->entities["disposicion"]->_set("identifier", $this->import->curso["comision-planificacion"].UNDEFINED.$this->import->curso["asignatura"]);
     $this->entities["calificacion"]->_set("identifier", 
       $this->entities["persona"]->_get("numero_documento").UNDEFINED.
-      $this->import->curso["comision_planificacion"].UNDEFINED.
+      $this->import->curso["comision-planificacion"].UNDEFINED.
       $this->import->curso["asignatura"]
     );
 

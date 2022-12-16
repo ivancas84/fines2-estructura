@@ -13,7 +13,7 @@ class CalificacionesCursoScript extends BaseController{
    */
 
   public function main(){
-    $headers = (isset($_GET["headers"]))? $_GET["headers"] : "per_apellidos, per_nombres, per_numero_documento, nota_final, crec, observaciones"; 
+    $headers = (isset($_GET["headers"]))? $_GET["headers"] : "persona-apellidos, persona-nombres, persona-numero_documento, nota_final, crec, observaciones"; 
     require_once("script/CalificacionesCurso.html");
   }
 }

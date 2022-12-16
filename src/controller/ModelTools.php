@@ -127,6 +127,15 @@ AND curso IN ('{$idCursos_}')
     return $rows;
   }
 
+  public function cantidadCalificacionesCargadasDeCursos($idCursos){
+      return $this->container->query("calificacion")
+          ->param("curso",$idCursos)
+          ->fields(["cantidad_calificaciones" => "id.count", "curso"])
+          ->group(["curso"])
+          ->size(0)
+          ->all();
+  }
+
   public function cursoHorario($idCursos){
     /**
      * @return [
