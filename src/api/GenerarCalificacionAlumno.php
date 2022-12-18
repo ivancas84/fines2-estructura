@@ -26,8 +26,8 @@ class GenerarCalificacionAlumnoApi extends BaseApi {
 
     $this->alumno = $this->container->query("alumno")->param("id",$this->idAlumno)->fields()->one();
 
-    $this->calificacion_(); //calificaciones del alumno
-    $this->disposicion_(); //disposiciones del plan del alumno
+    $this->calificacion_ = $this->calificacion_(); //calificaciones del alumno
+    $this->disposicion_ = $this->disposicion_(); //disposiciones del plan del alumno
     $this->setCalificacionFaltate_(); //agregar calificaciones faltantes del alumno
     
     if($this->sql) $this->container->db()->multi_query_transaction($this->sql);
@@ -42,12 +42,12 @@ class GenerarCalificacionAlumnoApi extends BaseApi {
     /**
      * Array asociativo id_alumno => array de calificaciones aprobadas
      */
-    $this->calificacion_ = $this->container->query("calificacion")
+    return $this->container->query("calificacion")
     ->size(0)
     ->fields()
     ->cond([
       ["alumno","=",$this->idAlumno],
-      ["plan-id","=",$this->alumno["plan"]],
+      ["plan_pla-id","=",$this->alumno["plan"]],
     ])->all();
     //$render->setFields(["cantidad"=>"id.count"]);
     //$render->setGroup(["alumno"=>"alumno"]);    
@@ -62,7 +62,7 @@ class GenerarCalificacionAlumnoApi extends BaseApi {
     ->order(["planificacion-anio"=>"asc","planificacion-semestre"=>"asc", "asignatura-nombre"=>"asc"])
     ->all();
     
-    $this->disposicion_ = array_combine_key($d,"id");
+    return array_combine_key($d,"id");
   }
 
 
@@ -71,9 +71,8 @@ class GenerarCalificacionAlumnoApi extends BaseApi {
 
       $idDisposicion_ = array_column($this->calificacion_, "disposicion");
       $disposicion_ = array_unset_keys($this->disposicion_, $idDisposicion_);
-      
       foreach($disposicion_ as $dd){
-        if(intval($dd["planificacion_anio"]) < $anioIngreso) continue;
+        if(intval($dd["planificacion-anio"]) < $anioIngreso) continue;
 
         $a = [
           "alumno" => $this->idAlumno,
