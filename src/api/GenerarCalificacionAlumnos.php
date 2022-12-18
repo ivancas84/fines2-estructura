@@ -62,7 +62,7 @@ class GenerarCalificacionAlumnosApi extends BaseApi {
     $render->setSize(0);
     $render->setCondition([
       ["alumno","=",$this->idAlumno_],
-      ["plan-id","=",$this->comision["plan_id"]],
+      ["plan_pla-id","=",$this->comision["plan_id"]],
     ]);
     //$render->setFields(["cantidad"=>"id.count"]);
     //$render->setGroup(["alumno"=>"alumno"]);
