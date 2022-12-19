@@ -27,7 +27,7 @@ class ConstanciaTituloTramitePdf extends BaseController{
     $signature = array_key_exists("firma", $_GET)? settypebool($_GET["firma"]) : true;
     
 
-    $this->alumno = $this->container->db()->get("alumno",$_GET["id"]);
+    $this->alumno = $this->container->query("alumno")->param("id",$_GET["id"])->fields()->one();
     if(empty($this->alumno["plan"])) throw new Exception("El alumno no tiene plan definido");
 
     

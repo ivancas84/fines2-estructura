@@ -240,7 +240,7 @@ GROUP BY curso.id
     );
     
     $ids_c = array_keys(
-      array_combine_key2($calificaciones, ["dis_asignatura", "dis_planificacion"])
+      array_combine_key2($calificaciones, ["disposicion-asignatura", "disposicion-planificacion"])
     );
 
     $ids_d = array_keys($d);
@@ -253,7 +253,7 @@ GROUP BY curso.id
 
     return array_group_value(
       $this->disposicionesRestantes($calificaciones, $disposiciones), 
-      "pla_anio"
+      "planificacion-anio"
     );
   }
 
@@ -264,7 +264,9 @@ GROUP BY curso.id
     return $this->container->query("disposicion")->cond([
       ["plan-id","=",$plan],
       ["planificacion-anio",">=",$anio]
-    ])->order(["planificacion-anio"=>"asc","planificacion-semestre"=>"asc", "asignatura-nombre"=>"asc"])->fields()->all();
+    ])->order(["planificacion-anio"=>"asc","planificacion-semestre"=>"asc", "asignatura-nombre"=>"asc"])
+    ->fields()
+    ->all();
   }
 
   public function cantidadCalificacionesAprobadas_($idAlumno_, $planificacion){
@@ -282,17 +284,18 @@ GROUP BY curso.id
   }
 
   public function calificacionesAprobadasAlumnoPlan($idAlumno, $plan){
-    $render = $this->container->getEntityRender("calificacion");
-    $render->setCondition([
+    return $this->container->query("calificacion")
+    ->cond([
       ["plan-id","=",$plan],
       ["alumno","=",$idAlumno],
       [
         ["nota_final",">=","7"],
         ["crec",">=","4","OR"],
       ]
-    ]);
-    $render->setOrder(["dis_pla-anio"=>"asc","dis_pla-semestre"=>"asc","dis_asi-nombre"=>"asc"]);
-    return $this->container->db()->all("calificacion",$render);
+    ])
+    ->order(["planificacion_dis-anio"=>"asc","planificacion_dis-semestre"=>"asc","asignatura_dis-nombre"=>"asc"])
+    ->fields()
+    ->all();
   }
 
   public function calificacionesAlumnoPlanAnio($idAlumno, $plan, $anio){

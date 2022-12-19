@@ -8,6 +8,7 @@ require_once("function/array_combine_key.php");
 require_once("function/array_combine_key2.php"); 
 
 require_once("tools/SpanishDateTime.php");
+  
 require_once("function/qr.php");
 require_once("function/settypebool.php");
 require_once("function/pdf/index.php");
@@ -26,7 +27,7 @@ class ConstanciaPasePdf extends BaseController{
 
     $signature = array_key_exists("firma", $_GET)? settypebool($_GET["firma"]) : true;
 
-    $this->alumno = $this->container->db()->get("alumno",$_GET["id"]);
+    $this->alumno = $this->container->query("alumno")->param("id",$_GET["id"])->fields()->one();
     if(empty($this->alumno["plan"])) throw new Exception("El alumno no tiene plan definido");
 
     $modelTools = $this->container->controller_("model_tools");
@@ -42,7 +43,7 @@ class ConstanciaPasePdf extends BaseController{
     );
     if(empty($cantidades)) throw new Exception("No tiene cargadas asignaturas aprobadas");
 
-    $calificaciones = array_group_value($calificaciones, "dis_pla_anio");
+    $calificaciones = array_group_value($calificaciones, "planificacion_dis-anio");
 
     $aniosCursadosNumero = array_keys($cantidades);
     $aniosCursados = [];
@@ -88,7 +89,7 @@ if(count($disposicionesRestantes)){
       
       foreach($d_ as $d) {
       //if(key_exists($d["pla_anio"], $aniosRestantes)) continue; 
-        $c .= "<li>".$d["asi_nombre"] . " (" . $d["pla_anio"]."º año)</li>";
+        $c .= "<li>".$d["asignatura-nombre"] . " (" . $d["planificacion-anio"]."º año)</li>";
       }
 
     }
@@ -123,7 +124,7 @@ if(count($calificaciones)){
 
       foreach($d_ as $d){
         $calificacion = ($d["nota_final"] >= 4) ? intval($d["nota_final"]) . " (". $formatterES->format($d["nota_final"]) .")" : intval($d["crec"]) . " (". $formatterES->format($d["crec"]) .") CREC"; 
-        $c .= "<li>".$d["dis_asi_nombre"] . ": " . $calificacion . "</li>";
+        $c .= "<li>".$d["asignatura_dis-nombre"] . ": " . $calificacion . "</li>";
       }
 
       $c .= "</ul></td>";
@@ -151,6 +152,6 @@ $c .='<p>Se extiende la presente a pedido del interesado en La Plata el día
     $mpdf->SetProtection(["print"]);
 
     $mpdf->WriteHTML($html);
-    $mpdf->Output("constancia_general_" . $v["persona"]->_get("numero_documento") . ".pdf", 'I');
+    $mpdf->Output("constancia_pase_" . $v["persona"]->_get("numero_documento") . ".pdf", 'I');
   }
 }
