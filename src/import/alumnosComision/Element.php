@@ -35,8 +35,7 @@ class AlumnosComisionImportElement extends ImportElement {
     if($name == "persona"){  
       $existent = $this->getExistent($name);
       if (!nombres_parecidos($this->entities["persona"]->_get("nombre"), $existent->_get("nombre"), 5)) throw new Exception("En la base existe una persona cuyos datos no coinciden: EXISTENTE " . $existent->_get("nombre") . " NUEVO ". $this->entities["persona"]->_get("nombre"));      
-      return parent::compare($name, $includeNull,["nombres","apellidos"]);
-
+      return parent::compare($name, $includeNull,["nombres","apellidos","genero"]);
     }
     return parent::compare($name, $includeNull);
         
