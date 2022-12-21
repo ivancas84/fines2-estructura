@@ -6,6 +6,7 @@ require_once("function/ordinal.php");
 require_once("function/array_group_value.php"); 
 require_once("function/array_combine_key.php"); 
 require_once("function/array_combine_key2.php"); 
+require_once("function/traducir-anios.php"); 
 
 require_once("tools/SpanishDateTime.php");
   

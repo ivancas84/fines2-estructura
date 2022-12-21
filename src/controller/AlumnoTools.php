@@ -13,14 +13,12 @@ class AlumnoTools {
   }
 
   public function init($id){
-    $this->alumno = $this->container->db()->get("alumno",$id);
+    $this->alumno = $this->container->query("alumno")->param("id",$id)->fields()->one();
     $this->postInit();
   }
 
   public function initDni($dni){
-    $render = $this->container->getEntityRender("alumno");
-    $render->setCondition(["persona-numero_documento","=",$dni]);
-    $this->alumno = $this->container->db()->one("alumno",$render);
+    $this->alumno = $this->container->query("alumno")->cond(["persona-numero_documento","=",$dni])->fields()->one();
     $this->postInit();
   }
 
@@ -46,18 +44,6 @@ class AlumnoTools {
     return $this->container->db()->all("calificacion",$render);
   }
   
-  public function getCalificacionesAprobadasPlan($plan){
-    $render = $this->container->getEntityRender("calificacion");
-    $render->setCondition([
-      ["alumno","=",$this->alumno["id"]],
-      [
-        ["nota_final",">=","7"],
-        ["crec",">=","4","OR"],
-      ]
-    ]);
-    $render->setOrder(["dis_pla-anio"=>"asc","dis_pla-semestre"=>"asc","dis_asi-nombre"=>"asc"]);
-    return $this->container->db()->all("calificacion",$render);
-  }
 
   public function getDisposiciones(){
     /**
@@ -114,44 +100,9 @@ class AlumnoTools {
 
   
 
-  public function sumaDisposicionesPorAnio($disposicionesRestantes){
-    /**
-     * sumar por anio las disposiciones que faltan, con esa info se puede cal-
-     * cular los años cursados.
-     * 
-     * [
-     *   1 => 2
-     *   2 => 3
-     *   3 => 1
-     * ] 
-     */
-    $anios = [];
-    foreach($disposicionesRestantes as $dr){
-      if(!key_exists($dr["pla_anio"], $anios)) {
-        $anios[$dr["pla_anio"]] = 1;
-      }
-      else {
-        $anios[$dr["pla_anio"]]++;
-      }
-    }
-
-    return $anios;
-  }
+  
 
 
-  public function traducirAnios($anios){
-    $anios_cursados = [];
-    for($i = $this->alumno["anio_ingreso"]; $i <= 3; $i++) {
-      if(!key_exists($i, $anios) ||  $anios[$i] < 5) {
-        switch($i){
-          case 1: array_push($anios_cursados, "Primero"); break;
-          case 2: array_push($anios_cursados, "Segundo"); break;
-          case 3: array_push($anios_cursados, "Tercero"); break;
-        }
-      }
-    }
-    return $anios_cursados;
-  }
 
   public function anioActual2($anios){
     if(!rsort($anios)) throw new Exception("Error al ordenar");
@@ -197,12 +148,7 @@ class AlumnoTools {
   }
 
 
-  public function aniosRestantes($aniosCursados){
-    if(in_array("Tercero",$aniosCursados)) return [];
-    if(in_array("Segundo",$aniosCursados)) return ["Tercero"];
-    if(in_array("Primero",$aniosCursados)) return ["Segundo","Tercero"];
-    return ["Primero","Segundo","Tercero"];
-  }
+  
 
 
 

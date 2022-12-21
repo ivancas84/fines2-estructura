@@ -7,6 +7,10 @@ require_once("function/array_combine_key2.php");
 require_once("Container.php");
 require_once("tools/SpanishDateTime.php");
 require_once("function/array_group_value.php");
+require_once("function/suma-disposiciones-por-anio.php");
+require_once("function/anios-restantes.php");
+require_once("function/traducir-anios.php");
+
 require_once("function/settypebool.php");
 require_once("function/qr.php");
 require_once("function/pdf/index.php");
@@ -28,19 +32,18 @@ class ConstanciaGeneralFinalizoPdf extends BaseController{
     
     $container = new Container;
     
-    $alumnoTools = $container->controller_("alumno_tools");
     
-    $alumnoTools->init($_GET["id"]);
-    $v = $alumnoTools->getValue();
+    $this->alumno = $this->container->query("alumno")->param("id",$_GET["id"])->fields()->one();
+    if(empty($this->alumno["plan"]) || empty($this->alumno["anio_ingreso"])) throw new Exception("El alumno no tiene plan o año definido");
+    $modelTools = $this->container->controller_("model_tools");
+    $v = $this->container->tools("alumno")->value($this->alumno);
     
-    $calificaciones = $alumnoTools->getCalificacionesAprobadas();
-    
-    $disposiciones = $alumnoTools->getDisposiciones();
-    
-    $disposicionesRestantes = $alumnoTools->disposicionesRestantes($calificaciones, $disposiciones);
-    $anios = $alumnoTools->sumaDisposicionesPorAnio($disposicionesRestantes);
-    $aniosCursados = $alumnoTools->traducirAnios($anios);
-    $aniosRestantes = $alumnoTools->aniosRestantes($aniosCursados);
+    $calificaciones = $modelTools->calificacionesAprobadasAlumnoPlan($this->alumno["id"], $this->alumno["plan"]);
+    $disposiciones = $modelTools->disposicionesPlanAnio($this->alumno["plan"], $this->alumno["anio_ingreso"]);
+    $disposicionesRestantes = $modelTools->disposicionesRestantes($calificaciones, $disposiciones);
+    $anios = sumaDisposicionesPorAnio($disposicionesRestantes);
+    $aniosCursados = traducirAnios($anios);
+    $aniosRestantes = aniosRestantes($aniosCursados);
     $mpdf = new \Mpdf\Mpdf();
     $qrcode = qr($_GET["url"]);
     $signature = array_key_exists("firma", $_GET)? settypebool($_GET["firma"]) : true;
