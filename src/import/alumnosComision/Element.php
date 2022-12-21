@@ -7,10 +7,10 @@ class AlumnosComisionImportElement extends ImportElement {
 
 
   public function setEntities($row) { //@override
-    $row["per_numero_documento"] = preg_replace("/[^0-9\_]/", "", $row["per_numero_documento"]);
+    $row["persona-numero_documento"] = preg_replace("/[^0-9\_]/", "", $row["persona-numero_documento"]);
     //se permiten numeros y guiones bajos para identificar el dni
 
-    $this->setEntity($row, "persona", "per");
+    $this->setEntity($row, "persona", "persona");
     $this->setEntity($row, "alumno");
     $this->setEntity($row, "alumno_comision","?"); //se define una instancia vacia de alumno comision
     

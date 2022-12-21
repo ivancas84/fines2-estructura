@@ -11,7 +11,7 @@ class CantidadAlumnosActivosComisionInfoApi  extends BaseApi {
 
     return $this->container->query("alumno_comision")
     ->cond(["comision","=",$idComision_])
-    ->cond(["activo","=",true])
+    ->cond(["estado","=","Activo"])
     ->size(0)
     ->fields([
       "comision", "cantidad"=>"alumno.count"

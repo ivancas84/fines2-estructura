@@ -13,7 +13,7 @@ class AlumnosComisionScript extends BaseController{
    */
 
   public function main(){
-    $headers = (isset($_GET["headers"]))? $_GET["headers"] : "per_apellidos, per_nombres, per_numero_documento, per_fecha_nacimiento, per_telefono"; 
+    $headers = (isset($_GET["headers"]))? $_GET["headers"] : "persona-apellidos, persona-nombres, persona-numero_documento, persona-fecha_nacimiento, persona-telefono"; 
     require_once("script/AlumnosComision.html");
   }
 }

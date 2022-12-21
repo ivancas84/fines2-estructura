@@ -89,7 +89,7 @@ class AlumnosComisionImport extends Import{
       ->all();
 
     foreach($rows as $row) {
-      if(($row["comision_division"] != $this->comision["division"]) || ($row["comision_sede"] != $this->comision["sede"]) ){
+      if(($row["comision-division"] != $this->comision["division"]) || ($row["comision-sede"] != $this->comision["sede"]) ){
         array_push($this->alumnoOtraComision_, $row );
       }
     }
