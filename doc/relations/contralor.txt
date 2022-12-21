@@ -1,7 +1,0 @@
-planilla_docente - pd
-
-id (id): string pk. NOT NULL. MAIN. UNIQUE.
-fecha_contralor (fc): date nf.
-fecha_consejo (fca): date nf.
-insertado (ins): timestamp nf. NOT NULL. DEFAULT: current_timestamp().
-planilla_docente (pd): string mu. NOT NULL.

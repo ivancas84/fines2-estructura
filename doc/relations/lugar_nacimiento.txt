@@ -1,5 +1,0 @@
-id (id): integer pk. NOT NULL. MAIN. UNIQUE.
-ciudad (ciu): string nf.
-provincia (pro): string nf.
-pais (pai): string nf.
-alta (alt): timestamp nf. NOT NULL. DEFAULT: CURRENT_TIMESTAMP.

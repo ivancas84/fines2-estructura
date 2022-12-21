@@ -1,6 +1,0 @@
-id (id): string pk. NOT NULL. UNIQUE.
-numero (num): string nf. NOT NULL. MAIN. UNIQUE.
-insertado (ins): timestamp nf. NOT NULL. DEFAULT: current_timestamp().
-fecha_contralor (fc): date nf.
-fecha_consejo (fca): date nf.
-observaciones (obs): text nf.
