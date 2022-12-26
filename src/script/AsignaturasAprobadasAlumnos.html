@@ -37,7 +37,7 @@ td, th {
   </tr>
   <tr>
 <?foreach($disposicion_ as $d):?>
-    <th><?=$d["asi_nombre"]?></th>
+    <th><?=$d["asignatura-nombre"]?></th>
 <?endforeach;?>
   </tr>
 <?foreach($alumnoComision_ as $ac): $acp = $this->container->tools("alumno_comision")->value($ac); ?>
@@ -49,7 +49,7 @@ td, th {
       <?foreach($disposicion_ as $d):?>
         <td>
         <?foreach($alumno__calificacionAprobada_[$ac["alumno"]] as $c):?>
-          <?if($d["pla_tramo"].$d["asignatura"] == $c["dis_pla_tramo"].$c["dis_asignatura"]):?>
+          <?if($d["planificacion-tramo"].$d["asignatura"] == $c["planificacion_dis-tramo"].$c["disposicion-asignatura"]):?>
             <?=(intval($c["nota_final"]))?intval($c["nota_final"]):intval($c["crec"])."c"?>
           <?break; endif;?>
         <?endforeach;?>

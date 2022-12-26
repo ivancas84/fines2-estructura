@@ -10,9 +10,11 @@ set_time_limit(0);
 require_once("controller/Base.php");
 require_once("function/settypebool.php");
 require_once("function/array_group_value.php");
+require_once("function/get-semester.php");
 
 
-class AsignaturasAprobadasAlumnosScript extends BaseController {
+
+class Nomina20222Script extends BaseController {
 
   function main() {
     $idComision = $_REQUEST["comision"];
@@ -28,7 +30,7 @@ class AsignaturasAprobadasAlumnosScript extends BaseController {
     $disposicion_ = $this->disposicion_($comision["planificacion-plan"]);
 
     $alumno__calificacionAprobada_ = $this->alumno__calificacionAprobada_($idAlumno_, $comision["planificacion-plan"]);
-    require_once("script/AsignaturasAprobadasAlumnos.html");
+    require_once("script/Nomina20222.html");
 
   }
 
@@ -37,7 +39,7 @@ class AsignaturasAprobadasAlumnosScript extends BaseController {
 
   public function alumnoComision_($idComision){
     return $this->container->query("alumno_comision")
-    ->fields(["id","alumno","estado","persona-nombres","persona-apellidos","persona-numero_documento","alumno-tramo_ingreso"])
+    ->fields()
     ->size(0)
     ->cond([
       ["estado",NONEQUAL,"Mesa"],
@@ -90,4 +92,7 @@ class AsignaturasAprobadasAlumnosScript extends BaseController {
     ->all();
   }
 
+  public function fechaIngreso(DateTime $alta){
+    return getSemester($alta) . "ºC " ;  
+  }
 }

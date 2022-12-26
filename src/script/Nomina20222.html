@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+</style>
+</head>
+<body>
+<table>
+  <tr>
+    <th rowspan="2">REGION</th>
+    <th rowspan="2">DISTRITO</th>
+    <th rowspan="2">CENS</th>
+    <th rowspan="2">SEDE</th>
+    <th rowspan="2">ID COMISIÓN</th>
+    <th rowspan="2">AÑO Y CUATRIMESTRE</th>
+    <th rowspan="2">FECHA DE INGRESO A FINES</th>
+    <th rowspan="2">APELLIDO</th>
+    <th rowspan="2">NOMBRE</th>
+    <th rowspan="2">DNI</th>
+    <th rowspan="2">GENERO</th>
+    <th rowspan="2">FECHA DE NACIMIENTO</th>
+    <th rowspan="2">TELEFONO</th>
+    <th rowspan="2">DNI ACTUALIZADO</th>
+    <th rowspan="2">CONSTANCIA CUIL</th>
+    <th rowspan="2">PARTIDA DE NACIMIENTO</th>
+    <th rowspan="2">CERTIF DE ESTUDIOS ANTERIORES</th>
+    <th rowspan="2">SITUACIÓN DEL/DE LA ESTUDIANTE</th>
+    <th colspan="5">1° año 1° tramo</th>
+    <th colspan="5">1° año 2° tramo</th>
+    <th colspan="5">2° año 1° tramo</th>
+    <th colspan="5">2° año 2° tramo</th >
+    <th colspan="5">3° año 1° tramo</th>
+    <th colspan="5">3° año 2° tramo</th>
+    <th colspan="5">NOMBRE DE LA ORGANIZACIÓN / ENTIDAD CONVENIANTE</th>
+  </tr>
+  <tr>
+<?foreach($disposicion_ as $d):?>
+    <th><?=$d["asignatura-nombre"]?></th>
+<?endforeach;?>
+  </tr>
+<?foreach($alumnoComision_ as $ac): $acp = $this->container->tools("alumno_comision")->value($ac); ?>
+  <tr>
+    <td>1</td>
+    <td>LA PLATA</td>
+    <td>462</td>
+    <td><?=$acp["sede"]->_get("nombre")?></td>
+    <td><?=$acp["comision"]->_get("identificacion")?></td>
+    <td><?=$acp["planificacion"]->_get("anio")?>º<?=$acp["planificacion"]->_get("semestre")?>C</td>
+    <td>2ºC 2022</td>
+    <td><?=$acp["persona"]->_get("apellidos", "X")?></td>
+    <td><?=$acp["persona"]->_get("nombres", "X")?></td>
+    <td><?=$acp["persona"]->_get("numero_documento")?></td>
+    <td><?=$acp["persona"]->_get("genero","X")?></td>
+    <td><?=$acp["persona"]->_get("fecha_nacimiento","d/m/Y")?></td>
+    <td><?=$acp["persona"]->_get("telefono")?></td>
+    <td><?=$acp["persona"]->_get("email")?></td>
+    <td><?=$acp["alumno"]->_get("tiene_dni","S")?></td>
+    <td><?=$acp["alumno"]->_get("tiene_dni","S")?></td>
+    <td><?=$acp["alumno"]->_get("tiene_partida","S")?></td>
+    <td><?=$acp["alumno_comision"]->_get("estado","X")?></td>
+    <?if(array_key_exists($ac["alumno"], $alumno__calificacionAprobada_)):?>
+      <?foreach($disposicion_ as $d):?>
+        <td>
+        <?foreach($alumno__calificacionAprobada_[$ac["alumno"]] as $c):?>
+          <?if($d["planificacion-tramo"].$d["asignatura"] == $c["planificacion_dis-tramo"].$c["disposicion-asignatura"]):?>
+            <?=(intval($c["nota_final"]))?intval($c["nota_final"]):intval($c["crec"])."c"?>
+          <?break; endif;?>
+        <?endforeach;?>
+        </td>
+      <?endforeach;?>
+    <?else:?>
+      <?foreach($disposicion_ as $d):?>
+        <td></td>
+      <?endforeach;?>
+    <?endif;?>
+    <td><?=$acp["sede"]->_get("nombre","X")?></td>
+
+  </tr>
+<?endforeach;?>
+</table>
+</body>
+</html>
