@@ -20,8 +20,16 @@ class TransferirAlumnoApi extends BaseApi {
      * persona: dni de la persona a las cuales se transferiran los datos
      */
 
-    $this->alumnoTransferir();
-    $this->alumnoExistente();
+    $this->alumnoTransferir = $this->container->query("alumno")
+    ->param(["persona",$this->data["id"]])
+    ->fields()
+    ->oneOrNull();
+
+    $this->alumnoExistente = $this->container->query("alumno")
+    ->param(["persona","=",$this->data["persona"]])
+    ->fields()
+    ->oneOrNull();
+
     $this->transferirEntidadAlumno();
     $this->transferirEntidadAlumnoComision();
     $this->transferirEntidadCalificacion();
@@ -126,23 +134,6 @@ class TransferirAlumnoApi extends BaseApi {
       if($existente->_get($key)) $existente->_fastSet($key, $existente->_get($key) . " / " . $transferir->_get($key));
       else $existente->_fastSet($key, $transferir->_get($key));
     }
-  }
-
-  
-  public function alumnoTransferir(){
-    $render = $this->container->getEntityRender("alumno");
-    $render->setCondition([
-      ["persona","=",$this->data["id"]]
-    ]);
-    $this->alumnoTransferir = $this->container->db()->oneOrNull("alumno",$render);
-  }
-
-  public function alumnoExistente(){
-    $render = $this->container->getEntityRender("alumno");
-    $render->setCondition([
-      ["persona","=",$this->data["persona"]]
-    ]);
-    $this->alumnoExistente = $this->container->db()->oneOrNull("alumno",$render);
   }
 
   

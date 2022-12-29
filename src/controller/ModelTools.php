@@ -283,6 +283,8 @@ GROUP BY curso.id
     return $this->container->db()->select("calificacion",$render);
   }
 
+  
+
   public function calificacionesAprobadasAlumnoPlan($idAlumno, $plan){
     return $this->container->query("calificacion")
     ->cond([
