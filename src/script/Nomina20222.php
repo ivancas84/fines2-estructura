@@ -37,20 +37,20 @@ class Nomina20222Script extends BaseController {
 
 
 
-  public function alumnoComision_($idComision){
-    return $this->container->query("alumno_comision")
-    ->fields()
-    ->size(0)
-    ->cond([
-      ["estado",NONEQUAL,"Mesa"],
-      ["comision","=",$idComision],
-    ])
-    ->order([
-      "activo"=>"DESC",
-      "persona-apellidos"=>"ASC",
-      "persona-nombres"=>"ASC",
-    ])->all();
-  }
+    public function alumnoComision_($idComision){
+        return $this->container->query("alumno_comision")
+        ->fields()
+        ->size(0)
+        ->cond([
+        ["estado",NONEQUAL,"Mesa"],
+        ["comision","=",$idComision],
+        ])
+        ->order([
+        "activo"=>"DESC",
+        "persona-apellidos"=>"ASC",
+        "persona-nombres"=>"ASC",
+        ])->all();
+    }
 
 
 

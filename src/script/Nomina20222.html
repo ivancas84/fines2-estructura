@@ -31,6 +31,7 @@ td, th {
     <th rowspan="2">GENERO</th>
     <th rowspan="2">FECHA DE NACIMIENTO</th>
     <th rowspan="2">TELEFONO</th>
+    <th rowspan="2">CORREO ELECTRÓNICO</th>
     <th rowspan="2">DNI ACTUALIZADO</th>
     <th rowspan="2">CONSTANCIA CUIL</th>
     <th rowspan="2">PARTIDA DE NACIMIENTO</th>
@@ -57,7 +58,7 @@ td, th {
     <td><?=$acp["sede"]->_get("nombre")?></td>
     <td><?=$acp["comision"]->_get("identificacion")?></td>
     <td><?=$acp["planificacion"]->_get("anio")?>º<?=$acp["planificacion"]->_get("semestre")?>C</td>
-    <td><?=$acp["persona"]->_get("alta")?></td>
+    <td><?=$acp["persona"]->_get("ingreso")?></td>
     <td><?=$acp["persona"]->_get("apellidos", "X")?></td>
     <td><?=$acp["persona"]->_get("nombres", "X")?></td>
     <td><?=$acp["persona"]->_get("numero_documento")?></td>
@@ -66,8 +67,9 @@ td, th {
     <td><?=$acp["persona"]->_get("telefono")?></td>
     <td><?=$acp["persona"]->_get("email")?></td>
     <td><?=$acp["alumno"]->_get("tiene_dni","S")?></td>
-    <td><?=$acp["alumno"]->_get("tiene_dni","S")?></td>
+    <td><?=$acp["alumno"]->_get("tiene_constancia","S")?></td>
     <td><?=$acp["alumno"]->_get("tiene_partida","S")?></td>
+    <td><?=$acp["alumno"]->_get("tiene_certificado","S")?></td>
     <td><?=$acp["alumno_comision"]->_get("estado","X")?></td>
     <?if(array_key_exists($ac["alumno"], $alumno__calificacionAprobada_)):?>
       <?foreach($disposicion_ as $d):?>
