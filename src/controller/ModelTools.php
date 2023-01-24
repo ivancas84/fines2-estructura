@@ -269,18 +269,18 @@ GROUP BY curso.id
     ->all();
   }
 
-  public function cantidadCalificacionesAprobadas_($idAlumno_, $planificacion){
-    $render = $this->container->getEntityRender();
-    $render->addCondition(["dis-planificacion","=",$planificacion]);
-    $render->addCondition(["alumno","=",$idAlumno_]);
-    $render->addCondition([
+  public function cantidadCalificacionesAprobadasPlanificacion_($idAlumno_, $planificacion){
+    return $this->container->query("calificacion")
+    ->cond(["planificacion_dis-id","=",$planificacion])
+    ->cond(["alumno","=",$idAlumno_])
+    ->cond([
       ["nota_final",">=","7"],
       ["crec",">=","4","OR"]
-    ]);
-    $render->addFields(["alumno", "cantidad"=> "count"]);
-    $render->setSize(0);
-    $render->setGroup(["alumno"]);
-    return $this->container->db()->select("calificacion",$render);
+    ])
+    ->fields(["alumno", "cantidad"=> "count"])
+    ->size(0)
+    ->group(["alumno"])
+    ->all();
   }
 
   
