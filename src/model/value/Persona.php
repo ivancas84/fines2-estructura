@@ -32,4 +32,8 @@ class PersonaValue extends ValueEntityOptions{
         return getSemester($this->_get("alta")) . "ºC " . $this->_get("alta", "Y");
     }
 
+    public function getIngresoShort(){
+        return $this->_get("alta", "Y").getSemester($this->_get("alta"));
+    }
+
 }

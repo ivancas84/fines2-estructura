@@ -269,18 +269,22 @@ GROUP BY curso.id
     ->all();
   }
 
+  /**
+   * Si el alumno no tiene calificaciones cargadas, no se retorna en el array
+   */
   public function cantidadCalificacionesAprobadasPlanificacion_($idAlumno_, $planificacion){
-    return $this->container->query("calificacion")
+    $q = $this->container->query("calificacion")
     ->cond(["planificacion_dis-id","=",$planificacion])
     ->cond(["alumno","=",$idAlumno_])
     ->cond([
       ["nota_final",">=","7"],
       ["crec",">=","4","OR"]
     ])
-    ->fields(["alumno", "cantidad"=> "count"])
+    ->fields(["cantidad"=> "count"])
     ->size(0)
-    ->group(["alumno"])
-    ->all();
+    ->group(["alumno"]);
+    // echo "<pre>" . $q->sql();
+    return $q->all();
   }
 
   

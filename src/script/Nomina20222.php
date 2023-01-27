@@ -17,19 +17,22 @@ require_once("function/get-semester.php");
 class Nomina20222Script extends BaseController {
 
   function main() {
-    $idComision = $_REQUEST["comision"];
-    $alumnoComision_ = $this->alumnoComision_($idComision);
+    $anioCalendario = $_REQUEST["anio"];
+    $semestreCalendario = $_REQUEST["semestre"];
+    $alumnoComision_ = $this->alumnoComision_($anioCalendario, $semestreCalendario);
 
-    $idAlumno_ = array_unique(
-      array_column($alumnoComision_, "alumno")
-    );
+    $alumnoComision_ = array_group_value($alumnoComision_, "comision");
 
-    $comision = $this->container->query("comision")->param("id",$idComision)->fields()->one();
-    $comisionValue = $this->container->tools("comision")->value($comision);
+    $comision_ = [];
+    foreach($alumnoComision_ as $idComision => $aluCom_){
+        $comision_[$idComision] = [];
+        $idAlumno_ = array_column($aluCom_, "alumno");
+        $comision_[$idComision]["disposicion_"] = $this->disposicion_($aluCom_[0]["planificacion-plan"]);
+        $comision_[$idComision]["calificacion_"] = $this->alumno__calificacionAprobada_($idAlumno_, $aluCom_[0]["planificacion-plan"]);
 
-    $disposicion_ = $this->disposicion_($comision["planificacion-plan"]);
+        
+    }
 
-    $alumno__calificacionAprobada_ = $this->alumno__calificacionAprobada_($idAlumno_, $comision["planificacion-plan"]);
     require_once("script/Nomina20222.html");
 
   }
@@ -37,18 +40,20 @@ class Nomina20222Script extends BaseController {
 
 
 
-    public function alumnoComision_($idComision){
+    public function alumnoComision_($anio, $semestre){
         return $this->container->query("alumno_comision")
         ->fields()
         ->size(0)
         ->cond([
-        ["estado",NONEQUAL,"Mesa"],
-        ["comision","=",$idComision],
+            ["estado",NONEQUAL,"Mesa"],
+            ["calendario-anio","=",$anio],
+            ["calendario-semestre","=",$semestre],
         ])
         ->order([
-        "activo"=>"DESC",
-        "persona-apellidos"=>"ASC",
-        "persona-nombres"=>"ASC",
+            "sede-numero" => "ASC",
+            "comision-division" => "ASC",
+            "persona-apellidos"=>"ASC",
+            "persona-nombres"=>"ASC",
         ])->all();
     }
 
@@ -94,5 +99,12 @@ class Nomina20222Script extends BaseController {
 
   public function fechaIngreso(DateTime $alta){
     return getSemester($alta) . "ºC " ;  
+  }
+
+  public function estado($estado, $ingreso){
+      if($estado == "No activo") return "TRAYECTORIA INTERRUMPIDA";
+      if($estado == "Activo" && $ingreso == "20222") return "INGRESANTE";
+      if($estado == "Activo" && $ingreso != "2ºC 2022") return "CONTINUA TRAYECTORIA";
+      return $estado;
   }
 }
