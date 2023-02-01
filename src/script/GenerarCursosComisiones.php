@@ -8,75 +8,85 @@ require_once("function/array_combine_key.php");
 
 
 class GenerarCursosComisionesScript extends BaseController{
-  /**
-   * Consultar las comisiones del grupo indicado.
-   * Quitar aquellas comisiones que ya poseen cursos.
-   * Definir los cursos para las comisiones sin cursos.
-   * 
-   * ./script/generar_comisiones_cursos
-   */
-   protected $comisionesAnteriores;
-   protected $diasHorarios;
+    /**
+     * Consultar las comisiones del grupo indicado.
+     * Quitar aquellas comisiones que ya poseen cursos.
+     * Definir los cursos para las comisiones sin cursos.
+     * 
+      * ./script/generar_comisiones_cursos
+     */
+    protected $comisionesAnteriores;
+    protected $diasHorarios;
  
-   public function main(){
-     $grupo = ["cal-anio"=>'2022',"cal-semestre"=>2,"modalidad"=>"1","autorizada"=>true];
- 
-     if(empty($grupo["cal-anio"])) throw new Exception("Dato no definido: fecha anio");
-     if(empty($grupo["cal-semestre"])) throw new Exception("Dato no definido: fecha semestre");
-     if(empty($grupo["modalidad"])) throw new Exception("Dato no definido: modalidad");
-     //if(empty($grupo["sed-centro_educativo"])) throw new Exception("Dato no definido: centro educativo (sed_centro_educativo)");
+    public function main(){
+        $anioCalendario = $_REQUEST["anio"];
+        $semestreCalendario = $_REQUEST["semestre"];
         
-     $this->consultarComisiones($grupo);
-     /**
-      * Consultar comisiones del grupo, que tengan el campo siguiente definido
-      */
- 
-     $this->quitarComisionesConCursos();
-     /**
-      * quitar comisiones con cursos
-      */
+        if(empty($anioCalendario) || empty($semestreCalendario)) throw new Exception("Parámetros no definidos");
+            
+        $comisiones = $this->consultarComisiones($anioCalendario,$semestreCalendario);
+        /**
+         * Consultar comisiones del semestre
+        */
+    
+        $comisiones = $this->quitarComisionesConCursos($comisiones);
+        /**
+         * quitar comisiones con cursos
+        */
 
-     $this->definirCursos();
-     /**
-      * definir cursos para las comisiones del grupo
-      */
-   }
-   
-   protected function consultarComisiones($grupo){
+        foreach($comisiones as $comision){
+            $cargasHorarias = $this->container->controller_("model_tools")->cargasHorariasDePlanificacion($comision["planificacion"]);
+            $sql = $this->definirCursos($comision["id"], $cargasHorarias);
+            echo "<pre>".$sql;
+            $this->container->db()->multi_query_transaction($sql);
 
-     $render = $this->container->getEntityRender("comision");
-     $render->setParams($grupo);
-     $render->setSize(0);  
-     $this->comisiones = array_combine_key($this->container->db()->all("comision",$render),"id");
-   }
- 
-   protected  function quitarComisionesConCursos(){
-     $ids = array_column($this->comisiones, "id");
-     $render = $this->container->getEntityRender("curso");
-     $render->addCondition(["comision","=",$ids]);
-     $render->setSize(0);
-     $cursos = $this->container->db()->all("curso",$render);
-     $idsConCursos = array_values(array_unique(array_column($cursos, "comision")));
-     
-     foreach($idsConCursos as $id) unset($this->comisiones[$id]);
-   }
- 
-    protected function definirCursos(){
-      $controller = $this->container->controller("persist_sql", "cursos_comision");
-      $ids = [];
-      $detail = [];
-      $sql = "";
-      foreach($this->comisiones as $id => $comision){
-        $persist = $controller->main($id);
-        array_push($ids, $persist["id"]);
-        $detail = array_merge($detail,$persist["detail"]);
-        $sql .= $persist["sql"];
-      }
-  
-      $this->container->db()->multi_query_transaction($sql);
-      echo "<pre>";
-      echo $sql;
-   }
- 
+        }
+    }
+    
+    protected function consultarComisiones($anioCalendario, $semestreCalendario){
+        $c = $this->container->query("comision")
+        ->param("calendario-anio",$anioCalendario)
+        ->param("calendario-semestre",$semestreCalendario)
+        ->size(0)
+        ->fields()
+        ->all();
+        return array_combine_key($c,"id");
+    }
+    
+    protected  function quitarComisionesConCursos($comisiones){
+        $ids = array_column($comisiones, "id");
+
+        $c = $this->container->query("curso")
+        ->param("comision",$ids)
+        ->size(0)
+        ->fields()
+        ->all();
+
+        $idsConCursos = array_values(array_unique(array_column($c, "comision")));
+        
+
+        foreach($idsConCursos as $id) unset($comisiones[$id]);
+        return $comisiones;
+    }
+    
+
+    public function definirCursos($idComision, $cargasHorarias){
+        $detail = [];
+        $sql = "";
+        foreach($cargasHorarias as $ch){
+          $curso = [
+              "comision" => $idComision,
+              "asignatura" => $ch["asignatura"],
+              "horas_catedra" => $ch["horas_catedra.sum"],
+          ];
+          $persist = $this->container->controller("persist_sql","curso")->id($curso);
+          array_push($detail,"curso".$persist["id"]);
+          $sql .= $persist["sql"];
+        }
+
+        return $sql;
+    
+    }
+    
 }
  

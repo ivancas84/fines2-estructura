@@ -46,7 +46,7 @@ class DesactivarAlumnosDesaprobadosPeriodoScript extends BaseController{
                 if($aluComAux_[$idAlumno]["estado"] == "No activo") continue;
                 array_push($response["alumno_comision_desactivar"],$aluComAux_[$idAlumno]["id"]);
                 array_push($response["alumno_desactivar"],$idAlumno);
-            }   
+            }
 
             for($i = 0; $i < count($cantidadCalificacionAlumno_); $i++){
                 $idAlumno = $cantidadCalificacionAlumno_[$i]["alumno"];
