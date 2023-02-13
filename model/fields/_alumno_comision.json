@@ -1,11 +1,11 @@
 {
   "id": {
     "type": "varchar",
-    "fieldType": "pk",
+    "field_type": "pk",
     "default": null,
     "alias": "id",
-    "entityName": "alumno_comision",
-    "dataType": "string",  
+    "entity_name": "alumno_comision",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "id"
@@ -13,22 +13,22 @@
 
   "creado": {
     "type": "timestamp",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "current_timestamp()",
     "alias": "cre",
-    "entityName": "alumno_comision",
-    "dataType": "timestamp",  
+    "entity_name": "alumno_comision",
+    "data_type": "timestamp",  
     "subtype": "timestamp",  
     "name": "creado"
   },
 
   "activo": {
     "type": "tinyint",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "0",
     "alias": "act",
-    "entityName": "alumno_comision",
-    "dataType": "boolean",  
+    "entity_name": "alumno_comision",
+    "data_type": "boolean",  
     "subtype": "checkbox",  
     "length": 1,
     "name": "activo"
@@ -36,11 +36,11 @@
 
   "observaciones": {
     "type": "text",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "obs",
-    "entityName": "alumno_comision",
-    "dataType": "text",  
+    "entity_name": "alumno_comision",
+    "data_type": "text",  
     "subtype": "textarea",  
     "length": 65535,
     "name": "observaciones"
@@ -48,12 +48,12 @@
 
   "comision": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "com",
-    "entityName": "alumno_comision",
-    "entityRefName": "comision",  
-    "dataType": "string",  
+    "entity_name": "alumno_comision",
+    "entity_ref_name": "comision",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "comision"
@@ -61,12 +61,12 @@
 
   "alumno": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "alu",
-    "entityName": "alumno_comision",
-    "entityRefName": "alumno",  
-    "dataType": "string",  
+    "entity_name": "alumno_comision",
+    "entity_ref_name": "alumno",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "alumno"
@@ -74,11 +74,11 @@
 
   "estado": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "Activo",
     "alias": "est",
-    "entityName": "alumno_comision",
-    "dataType": "string",  
+    "entity_name": "alumno_comision",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 100,
     "name": "estado"

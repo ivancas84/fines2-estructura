@@ -1,11 +1,11 @@
 {
   "id": {
     "type": "varchar",
-    "fieldType": "pk",
+    "field_type": "pk",
     "default": null,
     "alias": "id",
-    "entityName": "sede",
-    "dataType": "string",  
+    "entity_name": "sede",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "id"
@@ -13,11 +13,11 @@
 
   "numero": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "num",
-    "entityName": "sede",
-    "dataType": "string",  
+    "entity_name": "sede",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "numero"
@@ -25,11 +25,11 @@
 
   "nombre": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "nom",
-    "entityName": "sede",
-    "dataType": "string",  
+    "entity_name": "sede",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "nombre"
@@ -37,11 +37,11 @@
 
   "observaciones": {
     "type": "text",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "obs",
-    "entityName": "sede",
-    "dataType": "text",  
+    "entity_name": "sede",
+    "data_type": "text",  
     "subtype": "textarea",  
     "length": 65535,
     "name": "observaciones"
@@ -49,34 +49,34 @@
 
   "alta": {
     "type": "timestamp",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "current_timestamp()",
     "alias": "alt",
-    "entityName": "sede",
-    "dataType": "timestamp",  
+    "entity_name": "sede",
+    "data_type": "timestamp",  
     "subtype": "timestamp",  
     "name": "alta"
   },
 
   "baja": {
     "type": "timestamp",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "baj",
-    "entityName": "sede",
-    "dataType": "timestamp",  
+    "entity_name": "sede",
+    "data_type": "timestamp",  
     "subtype": "timestamp",  
     "name": "baja"
   },
 
   "domicilio": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "dom",
-    "entityName": "sede",
-    "entityRefName": "domicilio",  
-    "dataType": "string",  
+    "entity_name": "sede",
+    "entity_ref_name": "domicilio",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "domicilio"
@@ -84,12 +84,12 @@
 
   "tipo_sede": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "ts",
-    "entityName": "sede",
-    "entityRefName": "tipo_sede",  
-    "dataType": "string",  
+    "entity_name": "sede",
+    "entity_ref_name": "tipo_sede",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "tipo_sede"
@@ -97,12 +97,12 @@
 
   "centro_educativo": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "ce",
-    "entityName": "sede",
-    "entityRefName": "centro_educativo",  
-    "dataType": "string",  
+    "entity_name": "sede",
+    "entity_ref_name": "centro_educativo",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "centro_educativo"
@@ -110,11 +110,11 @@
 
   "fecha_traspaso": {
     "type": "date",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "ft",
-    "entityName": "sede",
-    "dataType": "date",  
+    "entity_name": "sede",
+    "data_type": "date",  
     "subtype": "date",  
     "name": "fecha_traspaso"
   }

@@ -1,11 +1,11 @@
 {
   "id": {
     "type": "varchar",
-    "fieldType": "pk",
+    "field_type": "pk",
     "default": null,
     "alias": "id",
-    "entityName": "comision",
-    "dataType": "string",  
+    "entity_name": "comision",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "id"
@@ -13,11 +13,11 @@
 
   "turno": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "tur",
-    "entityName": "comision",
-    "dataType": "string",  
+    "entity_name": "comision",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "turno"
@@ -25,11 +25,11 @@
 
   "division": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "dia",
-    "entityName": "comision",
-    "dataType": "string",  
+    "entity_name": "comision",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "division"
@@ -37,11 +37,11 @@
 
   "comentario": {
     "type": "text",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "com",
-    "entityName": "comision",
-    "dataType": "text",  
+    "entity_name": "comision",
+    "data_type": "text",  
     "subtype": "textarea",  
     "length": 65535,
     "name": "comentario"
@@ -49,11 +49,11 @@
 
   "autorizada": {
     "type": "tinyint",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "aut",
-    "entityName": "comision",
-    "dataType": "boolean",  
+    "entity_name": "comision",
+    "data_type": "boolean",  
     "subtype": "checkbox",  
     "length": 1,
     "name": "autorizada"
@@ -61,11 +61,11 @@
 
   "apertura": {
     "type": "tinyint",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "ape",
-    "entityName": "comision",
-    "dataType": "boolean",  
+    "entity_name": "comision",
+    "data_type": "boolean",  
     "subtype": "checkbox",  
     "length": 1,
     "name": "apertura"
@@ -73,11 +73,11 @@
 
   "publicada": {
     "type": "tinyint",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "pub",
-    "entityName": "comision",
-    "dataType": "boolean",  
+    "entity_name": "comision",
+    "data_type": "boolean",  
     "subtype": "checkbox",  
     "length": 1,
     "name": "publicada"
@@ -85,11 +85,11 @@
 
   "observaciones": {
     "type": "text",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "obs",
-    "entityName": "comision",
-    "dataType": "text",  
+    "entity_name": "comision",
+    "data_type": "text",  
     "subtype": "textarea",  
     "length": 65535,
     "name": "observaciones"
@@ -97,23 +97,23 @@
 
   "alta": {
     "type": "timestamp",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "current_timestamp()",
     "alias": "alt",
-    "entityName": "comision",
-    "dataType": "timestamp",  
+    "entity_name": "comision",
+    "data_type": "timestamp",  
     "subtype": "timestamp",  
     "name": "alta"
   },
 
   "sede": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "sed",
-    "entityName": "comision",
-    "entityRefName": "sede",  
-    "dataType": "string",  
+    "entity_name": "comision",
+    "entity_ref_name": "sede",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "sede"
@@ -121,12 +121,12 @@
 
   "modalidad": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "moa",
-    "entityName": "comision",
-    "entityRefName": "modalidad",  
-    "dataType": "string",  
+    "entity_name": "comision",
+    "entity_ref_name": "modalidad",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "modalidad"
@@ -134,12 +134,12 @@
 
   "planificacion": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "pla",
-    "entityName": "comision",
-    "entityRefName": "planificacion",  
-    "dataType": "string",  
+    "entity_name": "comision",
+    "entity_ref_name": "planificacion",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "planificacion"
@@ -147,12 +147,12 @@
 
   "comision_siguiente": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "cs",
-    "entityName": "comision",
-    "entityRefName": "comision",  
-    "dataType": "string",  
+    "entity_name": "comision",
+    "entity_ref_name": "comision",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "comision_siguiente"
@@ -160,12 +160,12 @@
 
   "calendario": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "cal",
-    "entityName": "comision",
-    "entityRefName": "calendario",  
-    "dataType": "string",  
+    "entity_name": "comision",
+    "entity_ref_name": "calendario",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "calendario"
@@ -173,11 +173,11 @@
 
   "identificacion": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "ide",
-    "entityName": "comision",
-    "dataType": "string",  
+    "entity_name": "comision",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "identificacion"
@@ -185,11 +185,11 @@
 
   "estado": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "Confirma",
     "alias": "est",
-    "entityName": "comision",
-    "dataType": "string",  
+    "entity_name": "comision",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "estado"
@@ -197,11 +197,11 @@
 
   "configuracion": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "Histórica",
     "alias": "con",
-    "entityName": "comision",
-    "dataType": "string",  
+    "entity_name": "comision",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "configuracion"

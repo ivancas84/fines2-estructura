@@ -1,11 +1,11 @@
 {
   "id": {
     "type": "varchar",
-    "fieldType": "pk",
+    "field_type": "pk",
     "default": null,
     "alias": "id",
-    "entityName": "persona",
-    "dataType": "string",  
+    "entity_name": "persona",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "id"
@@ -13,11 +13,11 @@
 
   "nombres": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "nom",
-    "entityName": "persona",
-    "dataType": "string",  
+    "entity_name": "persona",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "nombres"
@@ -25,11 +25,11 @@
 
   "apellidos": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "ape",
-    "entityName": "persona",
-    "dataType": "string",  
+    "entity_name": "persona",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "apellidos"
@@ -37,22 +37,22 @@
 
   "fecha_nacimiento": {
     "type": "date",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "fn",
-    "entityName": "persona",
-    "dataType": "date",  
+    "entity_name": "persona",
+    "data_type": "date",  
     "subtype": "date",  
     "name": "fecha_nacimiento"
   },
 
   "numero_documento": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "nd",
-    "entityName": "persona",
-    "dataType": "string",  
+    "entity_name": "persona",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "numero_documento"
@@ -60,11 +60,11 @@
 
   "cuil": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "cui",
-    "entityName": "persona",
-    "dataType": "string",  
+    "entity_name": "persona",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "cuil"
@@ -72,11 +72,11 @@
 
   "genero": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "gen",
-    "entityName": "persona",
-    "dataType": "string",  
+    "entity_name": "persona",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "genero"
@@ -84,11 +84,11 @@
 
   "apodo": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "apo",
-    "entityName": "persona",
-    "dataType": "string",  
+    "entity_name": "persona",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "apodo"
@@ -96,11 +96,11 @@
 
   "telefono": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "tel",
-    "entityName": "persona",
-    "dataType": "string",  
+    "entity_name": "persona",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "telefono"
@@ -108,11 +108,11 @@
 
   "email": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "ema",
-    "entityName": "persona",
-    "dataType": "string",  
+    "entity_name": "persona",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "email"
@@ -120,11 +120,11 @@
 
   "email_abc": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "ea",
-    "entityName": "persona",
-    "dataType": "string",  
+    "entity_name": "persona",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "email_abc"
@@ -132,23 +132,23 @@
 
   "alta": {
     "type": "timestamp",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "current_timestamp()",
     "alias": "alt",
-    "entityName": "persona",
-    "dataType": "timestamp",  
+    "entity_name": "persona",
+    "data_type": "timestamp",  
     "subtype": "timestamp",  
     "name": "alta"
   },
 
   "domicilio": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "dom",
-    "entityName": "persona",
-    "entityRefName": "domicilio",  
-    "dataType": "string",  
+    "entity_name": "persona",
+    "entity_ref_name": "domicilio",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "domicilio"
@@ -156,11 +156,11 @@
 
   "lugar_nacimiento": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "ln",
-    "entityName": "persona",
-    "dataType": "string",  
+    "entity_name": "persona",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "lugar_nacimiento"
@@ -168,11 +168,11 @@
 
   "telefono_verificado": {
     "type": "tinyint",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "0",
     "alias": "tv",
-    "entityName": "persona",
-    "dataType": "boolean",  
+    "entity_name": "persona",
+    "data_type": "boolean",  
     "subtype": "checkbox",  
     "length": 1,
     "name": "telefono_verificado"
@@ -180,11 +180,11 @@
 
   "email_verificado": {
     "type": "tinyint",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "0",
     "alias": "ev",
-    "entityName": "persona",
-    "dataType": "boolean",  
+    "entity_name": "persona",
+    "data_type": "boolean",  
     "subtype": "checkbox",  
     "length": 1,
     "name": "email_verificado"
@@ -192,11 +192,11 @@
 
   "info_verificada": {
     "type": "tinyint",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "0",
     "alias": "iv",
-    "entityName": "persona",
-    "dataType": "boolean",  
+    "entity_name": "persona",
+    "data_type": "boolean",  
     "subtype": "checkbox",  
     "length": 1,
     "name": "info_verificada"

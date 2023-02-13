@@ -1,11 +1,11 @@
 {
   "id": {
     "type": "varchar",
-    "fieldType": "pk",
+    "field_type": "pk",
     "default": null,
     "alias": "id",
-    "entityName": "domicilio",
-    "dataType": "string",  
+    "entity_name": "domicilio",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "id"
@@ -13,11 +13,11 @@
 
   "calle": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "cal",
-    "entityName": "domicilio",
-    "dataType": "string",  
+    "entity_name": "domicilio",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "calle"
@@ -25,11 +25,11 @@
 
   "entre": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "ent",
-    "entityName": "domicilio",
-    "dataType": "string",  
+    "entity_name": "domicilio",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "entre"
@@ -37,11 +37,11 @@
 
   "numero": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "num",
-    "entityName": "domicilio",
-    "dataType": "string",  
+    "entity_name": "domicilio",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "numero"
@@ -49,11 +49,11 @@
 
   "piso": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "pis",
-    "entityName": "domicilio",
-    "dataType": "string",  
+    "entity_name": "domicilio",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "piso"
@@ -61,11 +61,11 @@
 
   "departamento": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "dep",
-    "entityName": "domicilio",
-    "dataType": "string",  
+    "entity_name": "domicilio",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "departamento"
@@ -73,11 +73,11 @@
 
   "barrio": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "bar",
-    "entityName": "domicilio",
-    "dataType": "string",  
+    "entity_name": "domicilio",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "barrio"
@@ -85,11 +85,11 @@
 
   "localidad": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "loc",
-    "entityName": "domicilio",
-    "dataType": "string",  
+    "entity_name": "domicilio",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "localidad"

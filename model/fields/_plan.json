@@ -1,11 +1,11 @@
 {
   "id": {
     "type": "varchar",
-    "fieldType": "pk",
+    "field_type": "pk",
     "default": null,
     "alias": "id",
-    "entityName": "plan",
-    "dataType": "string",  
+    "entity_name": "plan",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "id"
@@ -13,11 +13,11 @@
 
   "orientacion": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "ori",
-    "entityName": "plan",
-    "dataType": "string",  
+    "entity_name": "plan",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "orientacion"
@@ -25,11 +25,11 @@
 
   "resolucion": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "res",
-    "entityName": "plan",
-    "dataType": "string",  
+    "entity_name": "plan",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "resolucion"
@@ -37,11 +37,11 @@
 
   "distribucion_horaria": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "dh",
-    "entityName": "plan",
-    "dataType": "string",  
+    "entity_name": "plan",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "distribucion_horaria"

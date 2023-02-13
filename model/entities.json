@@ -2,7 +2,7 @@
   "alumno": {
     "main": ["persona"],
     "nf+":["tramo_ingreso"],
-    "noAdmin":["tramo_ingreso"]
+    "no_admin":["tramo_ingreso"]
   },
 
   "asignatura": {
@@ -11,7 +11,7 @@
   },
 
   "calendario": {
-    "orderDefault": {"anio":"DESC", "semestre":"DESC"},
+    "order_default": {"anio":"DESC", "semestre":"DESC"},
     "main": ["descripcion","anio", "semestre"],
     "unique": ["descripcion"]
   },
@@ -33,7 +33,7 @@
   },
 
   "dia": {
-    "orderDefault": {"numero":"asc"},
+    "order_default": {"numero":"asc"},
     "main": ["dia"]
   },
 
@@ -59,12 +59,12 @@
 
   "plan": {
     "main": ["orientacion", "distribucion_horaria"],
-    "uniqueMultiple": ["orientacion", "distribucion_horaria"]
+    "unique_multiple": ["orientacion", "distribucion_horaria"]
   },
 
   "planificacion": {
     "main":["anio","semestre","plan"],
-    "uniqueMultiple": ["plan", "anio", "semestre"],
+    "unique_multiple": ["plan", "anio", "semestre"],
     "nf+":["tramo"]
   },
 
@@ -79,8 +79,8 @@
 
   "sede": {
     "main": ["numero", "nombre"],
-    "orderDefault": {"numero_pad":"asc"},
-    "uniqueMultiple":["numero", "centro_educativo"]
+    "order_default": {"numero_pad":"asc"},
+    "unique_multiple":["numero", "centro_educativo"]
   },
 
   "tipo_sede": {

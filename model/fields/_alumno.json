@@ -1,11 +1,11 @@
 {
   "id": {
     "type": "varchar",
-    "fieldType": "pk",
+    "field_type": "pk",
     "default": null,
     "alias": "id",
-    "entityName": "alumno",
-    "dataType": "string",  
+    "entity_name": "alumno",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "id"
@@ -13,11 +13,11 @@
 
   "anio_ingreso": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "ai",
-    "entityName": "alumno",
-    "dataType": "string",  
+    "entity_name": "alumno",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "anio_ingreso"
@@ -25,11 +25,11 @@
 
   "observaciones": {
     "type": "text",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "obs",
-    "entityName": "alumno",
-    "dataType": "text",  
+    "entity_name": "alumno",
+    "data_type": "text",  
     "subtype": "textarea",  
     "length": 65535,
     "name": "observaciones"
@@ -37,12 +37,12 @@
 
   "persona": {
     "type": "varchar",
-    "fieldType": "_u",
+    "field_type": "_u",
     "default": null,
     "alias": "per",
-    "entityName": "alumno",
-    "entityRefName": "persona",  
-    "dataType": "string",  
+    "entity_name": "alumno",
+    "entity_ref_name": "persona",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "persona"
@@ -50,11 +50,11 @@
 
   "estado_inscripcion": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "ei",
-    "entityName": "alumno",
-    "dataType": "string",  
+    "entity_name": "alumno",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "estado_inscripcion"
@@ -62,23 +62,23 @@
 
   "fecha_titulacion": {
     "type": "date",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "ft",
-    "entityName": "alumno",
-    "dataType": "date",  
+    "entity_name": "alumno",
+    "data_type": "date",  
     "subtype": "date",  
     "name": "fecha_titulacion"
   },
 
   "plan": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "pla",
-    "entityName": "alumno",
-    "entityRefName": "plan",  
-    "dataType": "string",  
+    "entity_name": "alumno",
+    "entity_ref_name": "plan",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "plan"
@@ -86,12 +86,12 @@
 
   "resolucion_inscripcion": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "ri",
-    "entityName": "alumno",
-    "entityRefName": "resolucion",  
-    "dataType": "string",  
+    "entity_name": "alumno",
+    "entity_ref_name": "resolucion",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "resolucion_inscripcion"
@@ -99,11 +99,11 @@
 
   "anio_inscripcion": {
     "type": "smallint",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "aia",
-    "entityName": "alumno",
-    "dataType": "integer",  
+    "entity_name": "alumno",
+    "data_type": "integer",  
     "subtype": "integer",  
     "length": 1,
     "name": "anio_inscripcion"
@@ -111,11 +111,11 @@
 
   "semestre_inscripcion": {
     "type": "smallint",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "si",
-    "entityName": "alumno",
-    "dataType": "integer",  
+    "entity_name": "alumno",
+    "data_type": "integer",  
     "subtype": "integer",  
     "length": 1,
     "name": "semestre_inscripcion"
@@ -123,11 +123,11 @@
 
   "semestre_ingreso": {
     "type": "smallint",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "sia",
-    "entityName": "alumno",
-    "dataType": "integer",  
+    "entity_name": "alumno",
+    "data_type": "integer",  
     "subtype": "integer",  
     "length": 1,
     "name": "semestre_ingreso"
@@ -135,11 +135,11 @@
 
   "adeuda_legajo": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "al",
-    "entityName": "alumno",
-    "dataType": "string",  
+    "entity_name": "alumno",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "adeuda_legajo"
@@ -147,11 +147,11 @@
 
   "adeuda_deudores": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "ad",
-    "entityName": "alumno",
-    "dataType": "string",  
+    "entity_name": "alumno",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "adeuda_deudores"
@@ -159,11 +159,11 @@
 
   "documentacion_inscripcion": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "di",
-    "entityName": "alumno",
-    "dataType": "string",  
+    "entity_name": "alumno",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "documentacion_inscripcion"
@@ -171,11 +171,11 @@
 
   "anio_inscripcion_completo": {
     "type": "tinyint",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "aic",
-    "entityName": "alumno",
-    "dataType": "boolean",  
+    "entity_name": "alumno",
+    "data_type": "boolean",  
     "subtype": "checkbox",  
     "length": 1,
     "name": "anio_inscripcion_completo"
@@ -183,11 +183,11 @@
 
   "establecimiento_inscripcion": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "eia",
-    "entityName": "alumno",
-    "dataType": "string",  
+    "entity_name": "alumno",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "establecimiento_inscripcion"
@@ -195,11 +195,11 @@
 
   "libro_folio": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "lf",
-    "entityName": "alumno",
-    "dataType": "string",  
+    "entity_name": "alumno",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "libro_folio"
@@ -207,11 +207,11 @@
 
   "libro": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "lib",
-    "entityName": "alumno",
-    "dataType": "string",  
+    "entity_name": "alumno",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "libro"
@@ -219,11 +219,11 @@
 
   "folio": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "fol",
-    "entityName": "alumno",
-    "dataType": "string",  
+    "entity_name": "alumno",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "folio"
@@ -231,11 +231,11 @@
 
   "comentarios": {
     "type": "text",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "com",
-    "entityName": "alumno",
-    "dataType": "text",  
+    "entity_name": "alumno",
+    "data_type": "text",  
     "subtype": "textarea",  
     "length": 65535,
     "name": "comentarios"
@@ -243,11 +243,11 @@
 
   "tiene_dni": {
     "type": "tinyint",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "0",
     "alias": "td",
-    "entityName": "alumno",
-    "dataType": "boolean",  
+    "entity_name": "alumno",
+    "data_type": "boolean",  
     "subtype": "checkbox",  
     "length": 1,
     "name": "tiene_dni"
@@ -255,11 +255,11 @@
 
   "tiene_constancia": {
     "type": "tinyint",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "0",
     "alias": "tc",
-    "entityName": "alumno",
-    "dataType": "boolean",  
+    "entity_name": "alumno",
+    "data_type": "boolean",  
     "subtype": "checkbox",  
     "length": 1,
     "name": "tiene_constancia"
@@ -267,11 +267,11 @@
 
   "tiene_certificado": {
     "type": "tinyint",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "0",
     "alias": "tca",
-    "entityName": "alumno",
-    "dataType": "boolean",  
+    "entity_name": "alumno",
+    "data_type": "boolean",  
     "subtype": "checkbox",  
     "length": 1,
     "name": "tiene_certificado"
@@ -279,11 +279,11 @@
 
   "previas_completas": {
     "type": "tinyint",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "0",
     "alias": "pc",
-    "entityName": "alumno",
-    "dataType": "boolean",  
+    "entity_name": "alumno",
+    "data_type": "boolean",  
     "subtype": "checkbox",  
     "length": 1,
     "name": "previas_completas"
@@ -291,11 +291,11 @@
 
   "tiene_partida": {
     "type": "tinyint",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "0",
     "alias": "tp",
-    "entityName": "alumno",
-    "dataType": "boolean",  
+    "entity_name": "alumno",
+    "data_type": "boolean",  
     "subtype": "checkbox",  
     "length": 1,
     "name": "tiene_partida"

@@ -1,11 +1,11 @@
 {
   "id": {
     "type": "varchar",
-    "fieldType": "pk",
+    "field_type": "pk",
     "default": null,
     "alias": "id",
-    "entityName": "comision_relacionada",
-    "dataType": "string",  
+    "entity_name": "comision_relacionada",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "id"
@@ -13,12 +13,12 @@
 
   "comision": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "com",
-    "entityName": "comision_relacionada",
-    "entityRefName": "comision",  
-    "dataType": "string",  
+    "entity_name": "comision_relacionada",
+    "entity_ref_name": "comision",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "comision"
@@ -26,12 +26,12 @@
 
   "relacion": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "rel",
-    "entityName": "comision_relacionada",
-    "entityRefName": "comision",  
-    "dataType": "string",  
+    "entity_name": "comision_relacionada",
+    "entity_ref_name": "comision",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "relacion"

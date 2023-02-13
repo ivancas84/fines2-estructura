@@ -1,11 +1,11 @@
 {
   "id": {
     "type": "varchar",
-    "fieldType": "pk",
+    "field_type": "pk",
     "default": null,
     "alias": "id",
-    "entityName": "cargo",
-    "dataType": "string",  
+    "entity_name": "cargo",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "id"
@@ -13,11 +13,11 @@
 
   "descripcion": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "des",
-    "entityName": "cargo",
-    "dataType": "string",  
+    "entity_name": "cargo",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "descripcion"

@@ -1,11 +1,11 @@
 {
   "id": {
     "type": "varchar",
-    "fieldType": "pk",
+    "field_type": "pk",
     "default": null,
     "alias": "id",
-    "entityName": "distribucion_horaria",
-    "dataType": "string",  
+    "entity_name": "distribucion_horaria",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "id"
@@ -13,11 +13,11 @@
 
   "horas_catedra": {
     "type": "int",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "hc",
-    "entityName": "distribucion_horaria",
-    "dataType": "integer",  
+    "entity_name": "distribucion_horaria",
+    "data_type": "integer",  
     "subtype": "integer",  
     "length": 10,
     "name": "horas_catedra"
@@ -25,11 +25,11 @@
 
   "dia": {
     "type": "int",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "dia",
-    "entityName": "distribucion_horaria",
-    "dataType": "integer",  
+    "entity_name": "distribucion_horaria",
+    "data_type": "integer",  
     "subtype": "integer",  
     "length": 10,
     "name": "dia"
@@ -37,12 +37,12 @@
 
   "disposicion": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "dis",
-    "entityName": "distribucion_horaria",
-    "entityRefName": "disposicion",  
-    "dataType": "string",  
+    "entity_name": "distribucion_horaria",
+    "entity_ref_name": "disposicion",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "disposicion"

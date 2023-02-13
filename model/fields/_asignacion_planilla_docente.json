@@ -1,11 +1,11 @@
 {
   "id": {
     "type": "varchar",
-    "fieldType": "pk",
+    "field_type": "pk",
     "default": null,
     "alias": "id",
-    "entityName": "asignacion_planilla_docente",
-    "dataType": "string",  
+    "entity_name": "asignacion_planilla_docente",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "id"
@@ -13,12 +13,12 @@
 
   "planilla_docente": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "pd",
-    "entityName": "asignacion_planilla_docente",
-    "entityRefName": "planilla_docente",  
-    "dataType": "string",  
+    "entity_name": "asignacion_planilla_docente",
+    "entity_ref_name": "planilla_docente",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "planilla_docente"
@@ -26,12 +26,12 @@
 
   "toma": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "tom",
-    "entityName": "asignacion_planilla_docente",
-    "entityRefName": "toma",  
-    "dataType": "string",  
+    "entity_name": "asignacion_planilla_docente",
+    "entity_ref_name": "toma",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "toma"
@@ -39,22 +39,22 @@
 
   "insertado": {
     "type": "timestamp",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "current_timestamp()",
     "alias": "ins",
-    "entityName": "asignacion_planilla_docente",
-    "dataType": "timestamp",  
+    "entity_name": "asignacion_planilla_docente",
+    "data_type": "timestamp",  
     "subtype": "timestamp",  
     "name": "insertado"
   },
 
   "comentario": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "com",
-    "entityName": "asignacion_planilla_docente",
-    "dataType": "string",  
+    "entity_name": "asignacion_planilla_docente",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "comentario"
@@ -62,11 +62,11 @@
 
   "reclamo": {
     "type": "tinyint",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "0",
     "alias": "rec",
-    "entityName": "asignacion_planilla_docente",
-    "dataType": "boolean",  
+    "entity_name": "asignacion_planilla_docente",
+    "data_type": "boolean",  
     "subtype": "checkbox",  
     "length": 1,
     "name": "reclamo"

@@ -1,11 +1,11 @@
 {
   "id": {
     "type": "varchar",
-    "fieldType": "pk",
+    "field_type": "pk",
     "default": null,
     "alias": "id",
-    "entityName": "calificacion",
-    "dataType": "string",  
+    "entity_name": "calificacion",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "id"
@@ -13,11 +13,11 @@
 
   "nota1": {
     "type": "decimal",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "noa",
-    "entityName": "calificacion",
-    "dataType": "float",  
+    "entity_name": "calificacion",
+    "data_type": "float",  
     "subtype": "float",  
     "length": 4.2,
     "name": "nota1"
@@ -25,11 +25,11 @@
 
   "nota2": {
     "type": "decimal",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "nob",
-    "entityName": "calificacion",
-    "dataType": "float",  
+    "entity_name": "calificacion",
+    "data_type": "float",  
     "subtype": "float",  
     "length": 4.2,
     "name": "nota2"
@@ -37,11 +37,11 @@
 
   "nota3": {
     "type": "decimal",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "noc",
-    "entityName": "calificacion",
-    "dataType": "float",  
+    "entity_name": "calificacion",
+    "data_type": "float",  
     "subtype": "float",  
     "length": 4.2,
     "name": "nota3"
@@ -49,11 +49,11 @@
 
   "nota_final": {
     "type": "decimal",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "nf",
-    "entityName": "calificacion",
-    "dataType": "float",  
+    "entity_name": "calificacion",
+    "data_type": "float",  
     "subtype": "float",  
     "length": 4.2,
     "name": "nota_final"
@@ -61,11 +61,11 @@
 
   "crec": {
     "type": "decimal",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "cre",
-    "entityName": "calificacion",
-    "dataType": "float",  
+    "entity_name": "calificacion",
+    "data_type": "float",  
     "subtype": "float",  
     "length": 4.2,
     "name": "crec"
@@ -73,12 +73,12 @@
 
   "curso": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "cur",
-    "entityName": "calificacion",
-    "entityRefName": "curso",  
-    "dataType": "string",  
+    "entity_name": "calificacion",
+    "entity_ref_name": "curso",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "curso"
@@ -86,11 +86,11 @@
 
   "porcentaje_asistencia": {
     "type": "int",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "pa",
-    "entityName": "calificacion",
-    "dataType": "integer",  
+    "entity_name": "calificacion",
+    "data_type": "integer",  
     "subtype": "integer",  
     "length": 3,
     "name": "porcentaje_asistencia"
@@ -98,11 +98,11 @@
 
   "observaciones": {
     "type": "text",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "obs",
-    "entityName": "calificacion",
-    "dataType": "text",  
+    "entity_name": "calificacion",
+    "data_type": "text",  
     "subtype": "textarea",  
     "length": 65535,
     "name": "observaciones"
@@ -110,11 +110,11 @@
 
   "division": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "dia",
-    "entityName": "calificacion",
-    "dataType": "string",  
+    "entity_name": "calificacion",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "division"
@@ -122,12 +122,12 @@
 
   "alumno": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "alu",
-    "entityName": "calificacion",
-    "entityRefName": "alumno",  
-    "dataType": "string",  
+    "entity_name": "calificacion",
+    "entity_ref_name": "alumno",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "alumno"
@@ -135,12 +135,12 @@
 
   "disposicion": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "dis",
-    "entityName": "calificacion",
-    "entityRefName": "disposicion",  
-    "dataType": "string",  
+    "entity_name": "calificacion",
+    "entity_ref_name": "disposicion",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "disposicion"
@@ -148,11 +148,11 @@
 
   "fecha": {
     "type": "date",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "fec",
-    "entityName": "calificacion",
-    "dataType": "date",  
+    "entity_name": "calificacion",
+    "data_type": "date",  
     "subtype": "date",  
     "name": "fecha"
   }

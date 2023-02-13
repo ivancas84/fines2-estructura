@@ -1,11 +1,11 @@
 {
   "id": {
     "type": "varchar",
-    "fieldType": "pk",
+    "field_type": "pk",
     "default": null,
     "alias": "id",
-    "entityName": "disposicion_pendiente",
-    "dataType": "string",  
+    "entity_name": "disposicion_pendiente",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "id"
@@ -13,12 +13,12 @@
 
   "disposicion": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "dis",
-    "entityName": "disposicion_pendiente",
-    "entityRefName": "disposicion",  
-    "dataType": "string",  
+    "entity_name": "disposicion_pendiente",
+    "entity_ref_name": "disposicion",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "disposicion"
@@ -26,12 +26,12 @@
 
   "alumno": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "alu",
-    "entityName": "disposicion_pendiente",
-    "entityRefName": "alumno",  
-    "dataType": "string",  
+    "entity_name": "disposicion_pendiente",
+    "entity_ref_name": "alumno",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "alumno"
@@ -39,11 +39,11 @@
 
   "modo": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "moa",
-    "entityName": "disposicion_pendiente",
-    "dataType": "string",  
+    "entity_name": "disposicion_pendiente",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "modo"

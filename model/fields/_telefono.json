@@ -1,11 +1,11 @@
 {
   "id": {
     "type": "varchar",
-    "fieldType": "pk",
+    "field_type": "pk",
     "default": null,
     "alias": "id",
-    "entityName": "telefono",
-    "dataType": "string",  
+    "entity_name": "telefono",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "id"
@@ -13,11 +13,11 @@
 
   "tipo": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "tip",
-    "entityName": "telefono",
-    "dataType": "string",  
+    "entity_name": "telefono",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "tipo"
@@ -25,11 +25,11 @@
 
   "prefijo": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "pre",
-    "entityName": "telefono",
-    "dataType": "string",  
+    "entity_name": "telefono",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "prefijo"
@@ -37,11 +37,11 @@
 
   "numero": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "num",
-    "entityName": "telefono",
-    "dataType": "string",  
+    "entity_name": "telefono",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "numero"
@@ -49,34 +49,34 @@
 
   "insertado": {
     "type": "timestamp",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "current_timestamp()",
     "alias": "ins",
-    "entityName": "telefono",
-    "dataType": "timestamp",  
+    "entity_name": "telefono",
+    "data_type": "timestamp",  
     "subtype": "timestamp",  
     "name": "insertado"
   },
 
   "eliminado": {
     "type": "timestamp",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "eli",
-    "entityName": "telefono",
-    "dataType": "timestamp",  
+    "entity_name": "telefono",
+    "data_type": "timestamp",  
     "subtype": "timestamp",  
     "name": "eliminado"
   },
 
   "persona": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "per",
-    "entityName": "telefono",
-    "entityRefName": "persona",  
-    "dataType": "string",  
+    "entity_name": "telefono",
+    "entity_ref_name": "persona",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "persona"

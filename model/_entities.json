@@ -3,9 +3,9 @@
     "name": "alumno",
     "alias": "alum",
     "nf": ["anio_ingreso", "observaciones", "estado_inscripcion", "fecha_titulacion", "anio_inscripcion", "semestre_inscripcion", "semestre_ingreso", "adeuda_legajo", "adeuda_deudores", "documentacion_inscripcion", "anio_inscripcion_completo", "establecimiento_inscripcion", "libro_folio", "libro", "folio", "comentarios", "tiene_dni", "tiene_constancia", "tiene_certificado", "previas_completas", "tiene_partida"],
-    "mu": ["plan", "resolucion_inscripcion"],
-    "_u": ["persona"],
-    "notNull": ["id", "persona", "tiene_dni", "tiene_constancia", "tiene_certificado", "previas_completas", "tiene_partida"],
+    "mo": ["plan", "resolucion_inscripcion"],
+    "oo": ["persona"],
+    "not_null": ["id", "persona", "tiene_dni", "tiene_constancia", "tiene_certificado", "previas_completas", "tiene_partida"],
     "unique": ["id", "persona", "libro_folio"]
   },
 
@@ -13,9 +13,9 @@
     "name": "alumno_comision",
     "alias": "ac",
     "nf": ["creado", "activo", "observaciones", "estado"],
-    "mu": ["comision", "alumno"],
-    "_u": [],
-    "notNull": ["id", "creado", "alumno"],
+    "mo": ["comision", "alumno"],
+    "oo": [],
+    "not_null": ["id", "creado", "alumno"],
     "unique": ["id"]
   },
 
@@ -23,9 +23,9 @@
     "name": "asignacion_planilla_docente",
     "alias": "apd",
     "nf": ["insertado", "comentario", "reclamo"],
-    "mu": ["planilla_docente", "toma"],
-    "_u": [],
-    "notNull": ["id", "planilla_docente", "toma", "insertado", "reclamo"],
+    "mo": ["planilla_docente", "toma"],
+    "oo": [],
+    "not_null": ["id", "planilla_docente", "toma", "insertado", "reclamo"],
     "unique": ["id"]
   },
 
@@ -33,9 +33,9 @@
     "name": "asignatura",
     "alias": "asig",
     "nf": ["nombre", "formacion", "clasificacion", "codigo", "perfil"],
-    "mu": [],
-    "_u": [],
-    "notNull": ["id", "nombre"],
+    "mo": [],
+    "oo": [],
+    "not_null": ["id", "nombre"],
     "unique": ["id", "nombre", "codigo"]
   },
 
@@ -43,9 +43,9 @@
     "name": "calendario",
     "alias": "cale",
     "nf": ["inicio", "fin", "anio", "semestre", "insertado", "descripcion"],
-    "mu": [],
-    "_u": [],
-    "notNull": ["id", "anio", "semestre", "insertado"],
+    "mo": [],
+    "oo": [],
+    "not_null": ["id", "anio", "semestre", "insertado"],
     "unique": ["id"]
   },
 
@@ -53,9 +53,9 @@
     "name": "calificacion",
     "alias": "cali",
     "nf": ["nota1", "nota2", "nota3", "nota_final", "crec", "porcentaje_asistencia", "observaciones", "division", "fecha"],
-    "mu": ["curso", "alumno", "disposicion"],
-    "_u": [],
-    "notNull": ["id", "alumno", "disposicion"],
+    "mo": ["curso", "alumno", "disposicion"],
+    "oo": [],
+    "not_null": ["id", "alumno", "disposicion"],
     "unique": ["id"]
   },
 
@@ -63,9 +63,9 @@
     "name": "cargo",
     "alias": "carg",
     "nf": ["descripcion"],
-    "mu": [],
-    "_u": [],
-    "notNull": ["id", "descripcion"],
+    "mo": [],
+    "oo": [],
+    "not_null": ["id", "descripcion"],
     "unique": ["id", "descripcion"]
   },
 
@@ -73,9 +73,9 @@
     "name": "centro_educativo",
     "alias": "ce",
     "nf": ["nombre", "cue", "observaciones"],
-    "mu": ["domicilio"],
-    "_u": [],
-    "notNull": ["id", "nombre"],
+    "mo": ["domicilio"],
+    "oo": [],
+    "not_null": ["id", "nombre"],
     "unique": ["id", "cue"]
   },
 
@@ -83,9 +83,9 @@
     "name": "comision",
     "alias": "comi",
     "nf": ["turno", "division", "comentario", "autorizada", "apertura", "publicada", "observaciones", "alta", "identificacion", "estado", "configuracion"],
-    "mu": ["sede", "modalidad", "planificacion", "comision_siguiente", "calendario"],
-    "_u": [],
-    "notNull": ["id", "division", "autorizada", "apertura", "publicada", "alta", "sede", "modalidad", "calendario"],
+    "mo": ["sede", "modalidad", "planificacion", "comision_siguiente", "calendario"],
+    "oo": [],
+    "not_null": ["id", "division", "autorizada", "apertura", "publicada", "alta", "sede", "modalidad", "calendario"],
     "unique": ["id"]
   },
 
@@ -93,9 +93,9 @@
     "name": "comision_relacionada",
     "alias": "cr",
     "nf": [],
-    "mu": ["comision", "relacion"],
-    "_u": [],
-    "notNull": ["id", "comision", "relacion"],
+    "mo": ["comision", "relacion"],
+    "oo": [],
+    "not_null": ["id", "comision", "relacion"],
     "unique": ["id"]
   },
 
@@ -103,9 +103,9 @@
     "name": "contralor",
     "alias": "cont",
     "nf": ["fecha_contralor", "fecha_consejo", "insertado"],
-    "mu": ["planilla_docente"],
-    "_u": [],
-    "notNull": ["id", "insertado", "planilla_docente"],
+    "mo": ["planilla_docente"],
+    "oo": [],
+    "not_null": ["id", "insertado", "planilla_docente"],
     "unique": ["id"]
   },
 
@@ -113,9 +113,9 @@
     "name": "curso",
     "alias": "curs",
     "nf": ["horas_catedra", "ige", "alta"],
-    "mu": ["comision", "asignatura"],
-    "_u": [],
-    "notNull": ["id", "horas_catedra", "comision", "asignatura", "alta"],
+    "mo": ["comision", "asignatura"],
+    "oo": [],
+    "not_null": ["id", "horas_catedra", "comision", "asignatura", "alta"],
     "unique": ["id"]
   },
 
@@ -123,9 +123,9 @@
     "name": "designacion",
     "alias": "desi",
     "nf": ["desde", "hasta", "alta"],
-    "mu": ["cargo", "sede", "persona"],
-    "_u": [],
-    "notNull": ["id", "cargo", "sede", "persona", "alta"],
+    "mo": ["cargo", "sede", "persona"],
+    "oo": [],
+    "not_null": ["id", "cargo", "sede", "persona", "alta"],
     "unique": ["id"]
   },
 
@@ -133,9 +133,9 @@
     "name": "detalle_persona",
     "alias": "dp",
     "nf": ["descripcion", "creado", "fecha", "tipo", "asunto"],
-    "mu": ["archivo", "persona"],
-    "_u": [],
-    "notNull": ["id", "descripcion", "creado", "persona"],
+    "mo": ["archivo", "persona"],
+    "oo": [],
+    "not_null": ["id", "descripcion", "creado", "persona"],
     "unique": ["id"]
   },
 
@@ -143,9 +143,9 @@
     "name": "dia",
     "alias": "dia",
     "nf": ["numero", "dia"],
-    "mu": [],
-    "_u": [],
-    "notNull": ["id", "numero", "dia"],
+    "mo": [],
+    "oo": [],
+    "not_null": ["id", "numero", "dia"],
     "unique": ["id", "numero", "dia"]
   },
 
@@ -153,9 +153,9 @@
     "name": "disposicion",
     "alias": "disp",
     "nf": [],
-    "mu": ["asignatura", "planificacion"],
-    "_u": [],
-    "notNull": ["id", "asignatura", "planificacion"],
+    "mo": ["asignatura", "planificacion"],
+    "oo": [],
+    "not_null": ["id", "asignatura", "planificacion"],
     "unique": ["id"]
   },
 
@@ -163,9 +163,9 @@
     "name": "disposicion_pendiente",
     "alias": "dpa",
     "nf": ["modo"],
-    "mu": ["disposicion", "alumno"],
-    "_u": [],
-    "notNull": ["id", "disposicion", "alumno"],
+    "mo": ["disposicion", "alumno"],
+    "oo": [],
+    "not_null": ["id", "disposicion", "alumno"],
     "unique": ["id"]
   },
 
@@ -173,9 +173,9 @@
     "name": "distribucion_horaria",
     "alias": "dh",
     "nf": ["horas_catedra", "dia"],
-    "mu": ["disposicion"],
-    "_u": [],
-    "notNull": ["id", "horas_catedra", "dia"],
+    "mo": ["disposicion"],
+    "oo": [],
+    "not_null": ["id", "horas_catedra", "dia"],
     "unique": ["id"]
   },
 
@@ -183,9 +183,9 @@
     "name": "domicilio",
     "alias": "domi",
     "nf": ["calle", "entre", "numero", "piso", "departamento", "barrio", "localidad"],
-    "mu": [],
-    "_u": [],
-    "notNull": ["id", "calle", "numero", "localidad"],
+    "mo": [],
+    "oo": [],
+    "not_null": ["id", "calle", "numero", "localidad"],
     "unique": ["id"]
   },
 
@@ -193,9 +193,9 @@
     "name": "email",
     "alias": "emai",
     "nf": ["email", "verificado", "insertado", "eliminado"],
-    "mu": ["persona"],
-    "_u": [],
-    "notNull": ["id", "email", "verificado", "insertado", "persona"],
+    "mo": ["persona"],
+    "oo": [],
+    "not_null": ["id", "email", "verificado", "insertado", "persona"],
     "unique": ["id"]
   },
 
@@ -203,9 +203,9 @@
     "name": "file",
     "alias": "file",
     "nf": ["name", "type", "content", "size", "created"],
-    "mu": [],
-    "_u": [],
-    "notNull": ["id", "name", "type", "content", "size", "created"],
+    "mo": [],
+    "oo": [],
+    "not_null": ["id", "name", "type", "content", "size", "created"],
     "unique": ["id"]
   },
 
@@ -213,9 +213,9 @@
     "name": "horario",
     "alias": "hora",
     "nf": ["hora_inicio", "hora_fin"],
-    "mu": ["curso", "dia"],
-    "_u": [],
-    "notNull": ["id", "hora_inicio", "hora_fin", "curso", "dia"],
+    "mo": ["curso", "dia"],
+    "oo": [],
+    "not_null": ["id", "hora_inicio", "hora_fin", "curso", "dia"],
     "unique": ["id"]
   },
 
@@ -223,9 +223,9 @@
     "name": "modalidad",
     "alias": "moda",
     "nf": ["nombre"],
-    "mu": [],
-    "_u": [],
-    "notNull": ["id", "nombre"],
+    "mo": [],
+    "oo": [],
+    "not_null": ["id", "nombre"],
     "unique": ["id", "nombre"]
   },
 
@@ -233,9 +233,9 @@
     "name": "persona",
     "alias": "pers",
     "nf": ["nombres", "apellidos", "fecha_nacimiento", "numero_documento", "cuil", "genero", "apodo", "telefono", "email", "email_abc", "alta", "lugar_nacimiento", "telefono_verificado", "email_verificado", "info_verificada"],
-    "mu": ["domicilio"],
-    "_u": [],
-    "notNull": ["id", "nombres", "numero_documento", "alta", "telefono_verificado", "email_verificado", "info_verificada"],
+    "mo": ["domicilio"],
+    "oo": [],
+    "not_null": ["id", "nombres", "numero_documento", "alta", "telefono_verificado", "email_verificado", "info_verificada"],
     "unique": ["id", "numero_documento", "cuil", "email_abc"]
   },
 
@@ -243,9 +243,9 @@
     "name": "plan",
     "alias": "plan",
     "nf": ["orientacion", "resolucion", "distribucion_horaria"],
-    "mu": [],
-    "_u": [],
-    "notNull": ["id", "orientacion"],
+    "mo": [],
+    "oo": [],
+    "not_null": ["id", "orientacion"],
     "unique": ["id"]
   },
 
@@ -253,9 +253,9 @@
     "name": "planificacion",
     "alias": "pla",
     "nf": ["anio", "semestre"],
-    "mu": ["plan"],
-    "_u": [],
-    "notNull": ["id", "anio", "semestre", "plan"],
+    "mo": ["plan"],
+    "oo": [],
+    "not_null": ["id", "anio", "semestre", "plan"],
     "unique": ["id"]
   },
 
@@ -263,9 +263,9 @@
     "name": "planilla_docente",
     "alias": "pd",
     "nf": ["numero", "insertado", "fecha_contralor", "fecha_consejo", "observaciones"],
-    "mu": [],
-    "_u": [],
-    "notNull": ["id", "numero", "insertado"],
+    "mo": [],
+    "oo": [],
+    "not_null": ["id", "numero", "insertado"],
     "unique": ["id"]
   },
 
@@ -273,9 +273,9 @@
     "name": "resolucion",
     "alias": "reso",
     "nf": ["numero", "anio", "tipo"],
-    "mu": [],
-    "_u": [],
-    "notNull": ["id", "numero"],
+    "mo": [],
+    "oo": [],
+    "not_null": ["id", "numero"],
     "unique": ["id"]
   },
 
@@ -283,9 +283,9 @@
     "name": "sede",
     "alias": "sede",
     "nf": ["numero", "nombre", "observaciones", "alta", "baja", "fecha_traspaso"],
-    "mu": ["domicilio", "tipo_sede", "centro_educativo"],
-    "_u": [],
-    "notNull": ["id", "numero", "nombre", "alta"],
+    "mo": ["domicilio", "tipo_sede", "centro_educativo"],
+    "oo": [],
+    "not_null": ["id", "numero", "nombre", "alta"],
     "unique": ["id"]
   },
 
@@ -293,9 +293,9 @@
     "name": "telefono",
     "alias": "tele",
     "nf": ["tipo", "prefijo", "numero", "insertado", "eliminado"],
-    "mu": ["persona"],
-    "_u": [],
-    "notNull": ["id", "numero", "insertado", "persona"],
+    "mo": ["persona"],
+    "oo": [],
+    "not_null": ["id", "numero", "insertado", "persona"],
     "unique": ["id"]
   },
 
@@ -303,9 +303,9 @@
     "name": "tipo_sede",
     "alias": "ts",
     "nf": ["descripcion"],
-    "mu": [],
-    "_u": [],
-    "notNull": ["id", "descripcion"],
+    "mo": [],
+    "oo": [],
+    "not_null": ["id", "descripcion"],
     "unique": ["id", "descripcion"]
   },
 
@@ -313,9 +313,9 @@
     "name": "toma",
     "alias": "toma",
     "nf": ["fecha_toma", "estado", "observaciones", "comentario", "tipo_movimiento", "estado_contralor", "alta", "calificacion", "temas_tratados", "asistencia", "sin_planillas"],
-    "mu": ["curso", "docente", "reemplazo", "planilla_docente"],
-    "_u": [],
-    "notNull": ["id", "tipo_movimiento", "alta", "curso", "calificacion", "temas_tratados", "asistencia", "sin_planillas"],
+    "mo": ["curso", "docente", "reemplazo", "planilla_docente"],
+    "oo": [],
+    "not_null": ["id", "tipo_movimiento", "alta", "curso", "calificacion", "temas_tratados", "asistencia", "sin_planillas"],
     "unique": ["id"]
   }
 }

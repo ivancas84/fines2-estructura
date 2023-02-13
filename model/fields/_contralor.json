@@ -1,11 +1,11 @@
 {
   "id": {
     "type": "varchar",
-    "fieldType": "pk",
+    "field_type": "pk",
     "default": null,
     "alias": "id",
-    "entityName": "contralor",
-    "dataType": "string",  
+    "entity_name": "contralor",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "id"
@@ -13,45 +13,45 @@
 
   "fecha_contralor": {
     "type": "date",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "fc",
-    "entityName": "contralor",
-    "dataType": "date",  
+    "entity_name": "contralor",
+    "data_type": "date",  
     "subtype": "date",  
     "name": "fecha_contralor"
   },
 
   "fecha_consejo": {
     "type": "date",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "fca",
-    "entityName": "contralor",
-    "dataType": "date",  
+    "entity_name": "contralor",
+    "data_type": "date",  
     "subtype": "date",  
     "name": "fecha_consejo"
   },
 
   "insertado": {
     "type": "timestamp",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "current_timestamp()",
     "alias": "ins",
-    "entityName": "contralor",
-    "dataType": "timestamp",  
+    "entity_name": "contralor",
+    "data_type": "timestamp",  
     "subtype": "timestamp",  
     "name": "insertado"
   },
 
   "planilla_docente": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "pd",
-    "entityName": "contralor",
-    "entityRefName": "planilla_docente",  
-    "dataType": "string",  
+    "entity_name": "contralor",
+    "entity_ref_name": "planilla_docente",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "planilla_docente"

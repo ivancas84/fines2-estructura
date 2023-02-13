@@ -1,11 +1,11 @@
 {
   "id": {
     "type": "varchar",
-    "fieldType": "pk",
+    "field_type": "pk",
     "default": null,
     "alias": "id",
-    "entityName": "designacion",
-    "dataType": "string",  
+    "entity_name": "designacion",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "id"
@@ -13,34 +13,34 @@
 
   "desde": {
     "type": "date",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "des",
-    "entityName": "designacion",
-    "dataType": "date",  
+    "entity_name": "designacion",
+    "data_type": "date",  
     "subtype": "date",  
     "name": "desde"
   },
 
   "hasta": {
     "type": "date",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "has",
-    "entityName": "designacion",
-    "dataType": "date",  
+    "entity_name": "designacion",
+    "data_type": "date",  
     "subtype": "date",  
     "name": "hasta"
   },
 
   "cargo": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "car",
-    "entityName": "designacion",
-    "entityRefName": "cargo",  
-    "dataType": "string",  
+    "entity_name": "designacion",
+    "entity_ref_name": "cargo",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "cargo"
@@ -48,12 +48,12 @@
 
   "sede": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "sed",
-    "entityName": "designacion",
-    "entityRefName": "sede",  
-    "dataType": "string",  
+    "entity_name": "designacion",
+    "entity_ref_name": "sede",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "sede"
@@ -61,12 +61,12 @@
 
   "persona": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "per",
-    "entityName": "designacion",
-    "entityRefName": "persona",  
-    "dataType": "string",  
+    "entity_name": "designacion",
+    "entity_ref_name": "persona",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "persona"
@@ -74,11 +74,11 @@
 
   "alta": {
     "type": "timestamp",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "current_timestamp()",
     "alias": "alt",
-    "entityName": "designacion",
-    "dataType": "timestamp",  
+    "entity_name": "designacion",
+    "data_type": "timestamp",  
     "subtype": "timestamp",  
     "name": "alta"
   }

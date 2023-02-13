@@ -1,11 +1,11 @@
 {
   "id": {
     "type": "varchar",
-    "fieldType": "pk",
+    "field_type": "pk",
     "default": null,
     "alias": "id",
-    "entityName": "disposicion",
-    "dataType": "string",  
+    "entity_name": "disposicion",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "id"
@@ -13,12 +13,12 @@
 
   "asignatura": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "asi",
-    "entityName": "disposicion",
-    "entityRefName": "asignatura",  
-    "dataType": "string",  
+    "entity_name": "disposicion",
+    "entity_ref_name": "asignatura",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "asignatura"
@@ -26,12 +26,12 @@
 
   "planificacion": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "pla",
-    "entityName": "disposicion",
-    "entityRefName": "planificacion",  
-    "dataType": "string",  
+    "entity_name": "disposicion",
+    "entity_ref_name": "planificacion",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "planificacion"

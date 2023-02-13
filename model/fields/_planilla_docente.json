@@ -1,11 +1,11 @@
 {
   "id": {
     "type": "varchar",
-    "fieldType": "pk",
+    "field_type": "pk",
     "default": null,
     "alias": "id",
-    "entityName": "planilla_docente",
-    "dataType": "string",  
+    "entity_name": "planilla_docente",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "id"
@@ -13,11 +13,11 @@
 
   "numero": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "num",
-    "entityName": "planilla_docente",
-    "dataType": "string",  
+    "entity_name": "planilla_docente",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "numero"
@@ -25,44 +25,44 @@
 
   "insertado": {
     "type": "timestamp",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "current_timestamp()",
     "alias": "ins",
-    "entityName": "planilla_docente",
-    "dataType": "timestamp",  
+    "entity_name": "planilla_docente",
+    "data_type": "timestamp",  
     "subtype": "timestamp",  
     "name": "insertado"
   },
 
   "fecha_contralor": {
     "type": "date",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "fc",
-    "entityName": "planilla_docente",
-    "dataType": "date",  
+    "entity_name": "planilla_docente",
+    "data_type": "date",  
     "subtype": "date",  
     "name": "fecha_contralor"
   },
 
   "fecha_consejo": {
     "type": "date",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "fca",
-    "entityName": "planilla_docente",
-    "dataType": "date",  
+    "entity_name": "planilla_docente",
+    "data_type": "date",  
     "subtype": "date",  
     "name": "fecha_consejo"
   },
 
   "observaciones": {
     "type": "text",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "obs",
-    "entityName": "planilla_docente",
-    "dataType": "text",  
+    "entity_name": "planilla_docente",
+    "data_type": "text",  
     "subtype": "textarea",  
     "length": 65535,
     "name": "observaciones"

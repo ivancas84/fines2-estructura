@@ -1,11 +1,11 @@
 {
   "id": {
     "type": "varchar",
-    "fieldType": "pk",
+    "field_type": "pk",
     "default": null,
     "alias": "id",
-    "entityName": "centro_educativo",
-    "dataType": "string",  
+    "entity_name": "centro_educativo",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "id"
@@ -13,11 +13,11 @@
 
   "nombre": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "nom",
-    "entityName": "centro_educativo",
-    "dataType": "string",  
+    "entity_name": "centro_educativo",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "nombre"
@@ -25,11 +25,11 @@
 
   "cue": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "cue",
-    "entityName": "centro_educativo",
-    "dataType": "string",  
+    "entity_name": "centro_educativo",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "cue"
@@ -37,12 +37,12 @@
 
   "domicilio": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "dom",
-    "entityName": "centro_educativo",
-    "entityRefName": "domicilio",  
-    "dataType": "string",  
+    "entity_name": "centro_educativo",
+    "entity_ref_name": "domicilio",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "domicilio"
@@ -50,11 +50,11 @@
 
   "observaciones": {
     "type": "text",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "obs",
-    "entityName": "centro_educativo",
-    "dataType": "text",  
+    "entity_name": "centro_educativo",
+    "data_type": "text",  
     "subtype": "textarea",  
     "length": 65535,
     "name": "observaciones"

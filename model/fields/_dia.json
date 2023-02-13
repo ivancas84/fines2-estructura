@@ -1,11 +1,11 @@
 {
   "id": {
     "type": "varchar",
-    "fieldType": "pk",
+    "field_type": "pk",
     "default": null,
     "alias": "id",
-    "entityName": "dia",
-    "dataType": "string",  
+    "entity_name": "dia",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "id"
@@ -13,11 +13,11 @@
 
   "numero": {
     "type": "smallint",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "num",
-    "entityName": "dia",
-    "dataType": "integer",  
+    "entity_name": "dia",
+    "data_type": "integer",  
     "subtype": "integer",  
     "length": 1,
     "name": "numero"
@@ -25,11 +25,11 @@
 
   "dia": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "dib",
-    "entityName": "dia",
-    "dataType": "string",  
+    "entity_name": "dia",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 9,
     "name": "dia"

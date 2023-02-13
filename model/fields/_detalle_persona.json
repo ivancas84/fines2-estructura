@@ -1,11 +1,11 @@
 {
   "id": {
     "type": "varchar",
-    "fieldType": "pk",
+    "field_type": "pk",
     "default": null,
     "alias": "id",
-    "entityName": "detalle_persona",
-    "dataType": "string",  
+    "entity_name": "detalle_persona",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "id"
@@ -13,11 +13,11 @@
 
   "descripcion": {
     "type": "text",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "des",
-    "entityName": "detalle_persona",
-    "dataType": "text",  
+    "entity_name": "detalle_persona",
+    "data_type": "text",  
     "subtype": "textarea",  
     "length": 65535,
     "name": "descripcion"
@@ -25,12 +25,12 @@
 
   "archivo": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "arc",
-    "entityName": "detalle_persona",
-    "entityRefName": "file",  
-    "dataType": "string",  
+    "entity_name": "detalle_persona",
+    "entity_ref_name": "file",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "archivo"
@@ -38,23 +38,23 @@
 
   "creado": {
     "type": "timestamp",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "current_timestamp()",
     "alias": "cre",
-    "entityName": "detalle_persona",
-    "dataType": "timestamp",  
+    "entity_name": "detalle_persona",
+    "data_type": "timestamp",  
     "subtype": "timestamp",  
     "name": "creado"
   },
 
   "persona": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "per",
-    "entityName": "detalle_persona",
-    "entityRefName": "persona",  
-    "dataType": "string",  
+    "entity_name": "detalle_persona",
+    "entity_ref_name": "persona",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "persona"
@@ -62,22 +62,22 @@
 
   "fecha": {
     "type": "date",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "curdate()",
     "alias": "fec",
-    "entityName": "detalle_persona",
-    "dataType": "date",  
+    "entity_name": "detalle_persona",
+    "data_type": "date",  
     "subtype": "date",  
     "name": "fecha"
   },
 
   "tipo": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "tip",
-    "entityName": "detalle_persona",
-    "dataType": "string",  
+    "entity_name": "detalle_persona",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "tipo"
@@ -85,11 +85,11 @@
 
   "asunto": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "asu",
-    "entityName": "detalle_persona",
-    "dataType": "string",  
+    "entity_name": "detalle_persona",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "asunto"

@@ -1,11 +1,11 @@
 {
   "id": {
     "type": "varchar",
-    "fieldType": "pk",
+    "field_type": "pk",
     "default": null,
     "alias": "id",
-    "entityName": "email",
-    "dataType": "string",  
+    "entity_name": "email",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "id"
@@ -13,11 +13,11 @@
 
   "email": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "ema",
-    "entityName": "email",
-    "dataType": "string",  
+    "entity_name": "email",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "email"
@@ -25,11 +25,11 @@
 
   "verificado": {
     "type": "tinyint",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "0",
     "alias": "ver",
-    "entityName": "email",
-    "dataType": "boolean",  
+    "entity_name": "email",
+    "data_type": "boolean",  
     "subtype": "checkbox",  
     "length": 1,
     "name": "verificado"
@@ -37,34 +37,34 @@
 
   "insertado": {
     "type": "timestamp",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "current_timestamp()",
     "alias": "ins",
-    "entityName": "email",
-    "dataType": "timestamp",  
+    "entity_name": "email",
+    "data_type": "timestamp",  
     "subtype": "timestamp",  
     "name": "insertado"
   },
 
   "eliminado": {
     "type": "timestamp",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "eli",
-    "entityName": "email",
-    "dataType": "timestamp",  
+    "entity_name": "email",
+    "data_type": "timestamp",  
     "subtype": "timestamp",  
     "name": "eliminado"
   },
 
   "persona": {
     "type": "varchar",
-    "fieldType": "mu",
+    "field_type": "mu",
     "default": null,
     "alias": "per",
-    "entityName": "email",
-    "entityRefName": "persona",  
-    "dataType": "string",  
+    "entity_name": "email",
+    "entity_ref_name": "persona",  
+    "data_type": "string",  
     "subtype": "typeahead",  
     "length": 45,
     "name": "persona"

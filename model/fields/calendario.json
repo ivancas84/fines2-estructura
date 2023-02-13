@@ -5,7 +5,7 @@
 
   "semestre": {
     "subtype": "select_text",
-    "selectValues": ["1","2"]
+    "select_values": ["1","2"]
   }
 
 }

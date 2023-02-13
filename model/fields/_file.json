@@ -1,11 +1,11 @@
 {
   "id": {
     "type": "varchar",
-    "fieldType": "pk",
+    "field_type": "pk",
     "default": null,
     "alias": "id",
-    "entityName": "file",
-    "dataType": "string",  
+    "entity_name": "file",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 45,
     "name": "id"
@@ -13,11 +13,11 @@
 
   "name": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "nam",
-    "entityName": "file",
-    "dataType": "string",  
+    "entity_name": "file",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "name"
@@ -25,11 +25,11 @@
 
   "type": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "typ",
-    "entityName": "file",
-    "dataType": "string",  
+    "entity_name": "file",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "type"
@@ -37,11 +37,11 @@
 
   "content": {
     "type": "varchar",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "con",
-    "entityName": "file",
-    "dataType": "string",  
+    "entity_name": "file",
+    "data_type": "string",  
     "subtype": "text",  
     "length": 255,
     "name": "content"
@@ -49,11 +49,11 @@
 
   "size": {
     "type": "int",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": null,
     "alias": "siz",
-    "entityName": "file",
-    "dataType": "integer",  
+    "entity_name": "file",
+    "data_type": "integer",  
     "subtype": "integer",  
     "length": 10,
     "name": "size"
@@ -61,11 +61,11 @@
 
   "created": {
     "type": "timestamp",
-    "fieldType": "nf",
+    "field_type": "nf",
     "default": "current_timestamp()",
     "alias": "cre",
-    "entityName": "file",
-    "dataType": "timestamp",  
+    "entity_name": "file",
+    "data_type": "timestamp",  
     "subtype": "timestamp",  
     "name": "created"
   }
