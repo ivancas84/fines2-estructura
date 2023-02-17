@@ -167,68 +167,9 @@ GROUP BY curso.id
     return $rows;
   }
 
-  public function cursosConHorariosDeComision($idComision){
-    
-    $sql = "
-  SELECT curso.id AS curso, GROUP_CONCAT(dia.dia, \" \", TIME_FORMAT(horario.hora_inicio, '%H:%i'), \" a \", TIME_FORMAT(horario.hora_fin, '%H:%i') ORDER BY dia.numero ASC SEPARATOR ', ') AS horario
-  FROM curso
-  INNER JOIN horario ON (horario.curso = curso.id)
-  INNER JOIN dia ON (dia.id = horario.dia)
-  WHERE curso.comision = '{$idComision}'
-  GROUP BY curso.id
-  ";
-
-    $result = $this->container->db()->query($sql);
-    $rows = $result->fetch_all(MYSQLI_ASSOC);
-    $result->free();
-    return $rows;
-  }
 
   
-  public function diasHorariosComision(array $ids) {
-    $ids_ = implode("','", $ids);
 
-    $sql =  "
-
-    SELECT comision.id AS comision, dias.dias_dias, dias.dias_ids, horas.hora_inicio, horas.hora_fin    
-    FROM comision
-    INNER JOIN (
-    
-    
-      SELECT DISTINCT dias_.comision AS comision, GROUP_CONCAT(dias_.dia ORDER BY dias_.numero) AS dias_dias, GROUP_CONCAT(dias_.id ORDER BY dias_.numero) AS dias_ids
-      FROM (
-        SELECT DISTINCT comision.id AS comision, dia.dia, dia.id, dia.numero
-        FROM horario
-        INNER JOIN dia ON (dia.id = horario.dia)
-        INNER JOIN curso ON (curso.id = horario.curso)
-        INNER JOIN comision ON (comision.id = curso.comision)
-        WHERE comision.id IN ('{$ids_}')
-        ORDER BY dia.numero
-      ) AS dias_
-      GROUP BY comision
-      
-      
-    ) AS dias ON (dias.comision = comision.id)
-    INNER JOIN (
-
-
-      SELECT DISTINCT comision.id AS comision, MIN(horario.hora_inicio) AS hora_inicio, MAX(horario.hora_fin) AS hora_fin
-      FROM horario
-      INNER JOIN curso ON (curso.id = horario.curso)
-      INNER JOIN comision ON (comision.id = curso.comision)
-      WHERE comision.id IN ('{$ids_}')    
-      GROUP BY comision
-    
-    
-    ) AS horas ON (horas.comision = comision.id)
-    
-";
-
-    $result = $this->container->db()->query($sql);
-    $rows = $result->fetch_all(MYSQLI_ASSOC);
-    $result->free();
-    return $rows;
-  }
 
   public function disposicionesRestantes($calificaciones, $disposiciones){
     /**
