@@ -7,7 +7,7 @@ require_once("function/array_combine_key2.php");
 
 
 
-class TransferirAlumnosActivosScript extends BaseController{
+class CalendarioTransferirAlumnosActivosScript extends BaseController{
 
     public function main(){
         $anioCalendario = $_REQUEST["anio"];
