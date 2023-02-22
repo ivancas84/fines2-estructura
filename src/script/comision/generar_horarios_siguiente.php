@@ -14,6 +14,8 @@ class ComisionGenerarHorariosSiguienteScript {
             ["comision_siguiente",EQUAL,true]
         ])->size(0)->column();
 
-        $this->container->controller("generar_horarios_siguiente","comision")->main($ids_comision);
+        $response = $this->container->controller("horarios","comision")->generar_horarios_siguiente($ids_comision);
+        echo "<pre>";
+        print_r($response);
     }
 }

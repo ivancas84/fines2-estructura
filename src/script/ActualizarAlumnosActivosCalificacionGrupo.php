@@ -1,6 +1,6 @@
 <?php
 set_time_limit(0);  
-require_once("controller/Base.php");
+require_once("controller/base.php");
 require_once("function/array_combine_key.php");
 
 class ActualizarAlumnosActivosCalificacionGrupoScript extends BaseController{

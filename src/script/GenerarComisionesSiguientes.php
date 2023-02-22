@@ -1,6 +1,6 @@
 <?php
 
-require_once("controller/Base.php");
+require_once("controller/base.php");
 require_once("function/periodo_siguiente.php");
 require_once("function/tramo_siguiente.php");
 

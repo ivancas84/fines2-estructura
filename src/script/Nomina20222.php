@@ -7,7 +7,7 @@
  * si se vuelve a cargar el mismo archivo (respetando los parámetros), se actualizaran los datos. Con esto se da la posibilidad de correjir los errores en el csv y volverlo a cargar.
  */
 set_time_limit(0);  
-require_once("controller/Base.php");
+require_once("controller/base.php");
 require_once("function/settypebool.php");
 require_once("function/array_group_value.php");
 require_once("function/get-semester.php");

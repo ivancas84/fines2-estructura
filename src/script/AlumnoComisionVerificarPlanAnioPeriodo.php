@@ -1,6 +1,6 @@
 <?php
 
-require_once("controller/Base.php");
+require_once("controller/base.php");
 require_once("function/array_combine_key.php");
 require_once("function/array_group_value.php");
 

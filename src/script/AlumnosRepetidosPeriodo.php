@@ -1,6 +1,6 @@
 <?php
 
-require_once("controller/Base.php");
+require_once("controller/base.php");
 
 /**
  * Buscar alumnos repetidos para un periodo (año y semestre)      

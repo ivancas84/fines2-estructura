@@ -1,7 +1,7 @@
 <?php
 
 
-require_once("api/Base.php");
+require_once("api/base.php");
 require_once("function/php_input.php");
 
 class EmailConfirmacionApi extends BaseApi {

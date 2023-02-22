@@ -1,9 +1,11 @@
 <?php
 
 set_time_limit(0);  
-require_once("controller/Base.php");
+require_once("controller/base.php");
 require_once("function/array_group_value.php"); 
 require_once("function/array_combine_key2.php"); 
+require_once("function/array_combine_key.php"); 
+
 require_once("Container.php");
 require_once("tools/SpanishDateTime.php");
 require_once("function/array_group_value.php");
@@ -34,21 +36,23 @@ class ConstanciaTituloTramitePdf extends BaseController{
 
     $modelTools = $this->container->controller_("model_tools");
 
-    $cantidades = $modelTools->cantidadAnioCalificacionesAprobadasAlumnoPlan($this->alumno["id"], $this->alumno["plan"]);
+    $cantidades = $this->container->controller("calificaciones","alumno")->aprobadas_por_anio($this->alumno["id"], $this->alumno["plan"]);
+
     if(empty($cantidades)) throw new Exception("No tiene cargadas asignaturas aprobadas");
 
     $completo = true;
     $anio = intval($this->alumno["anio_ingreso"]);
 
-    foreach($cantidades as $q){
-      if(intval($q["anio"]) != $anio) throw new Exception("Existe un error al obtener las asignaturas aprobadas, falta un año");
-      if($q["cantidad"] < 10) $completo = false;
-      $anio++;
+    $cantidades_anio = array_combine_key($cantidades, "anio");
+
+    for($i = 1; $i <= 3; $i++){
+      if($anio > $i) continue;
+      if(!array_key_exists($i, $cantidades_anio)) throw new Exception("Existe un error al obtener las asignaturas aprobadas, falta un año");
+      if($cantidades_anio[$i]["cantidad"] < 10) $completo = false;
     }
-
-
+    
     $completoPrint = ($completo)? "COMPLETO":"INCOMPLETO";
-    switch($anio-1){
+    switch($anio){
       case 1:
         $anioPrint = "PRIMERO";
       break;

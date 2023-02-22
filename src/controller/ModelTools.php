@@ -275,26 +275,7 @@ GROUP BY curso.id
     return $this->container->db()->select("calificacion",$render);
   }
 
-  public function cantidadAnioCalificacionesAprobadasAlumnoPlan($idAlumno, $plan, $anio = 1){
-    /**
-     * @return [
-     *   [anio,cantidad]
-     * ]
-     **/   
-    return $this->container->query("calificacion")->cond([
-      ["plan_pla-id","=",$plan],  
-      ["planificacion_dis-anio",">=",$anio],      
-      ["alumno","=",$idAlumno],
-      [
-        ["nota_final",">=","7"],
-        ["crec",">=","4","OR"],
-      ]
-    ])->fields(["anio"=>"planificacion_dis-anio","cantidad"=> "count"])
-    ->size(0)
-    ->group(["anio"=>"planificacion_dis-anio"])
-    ->order(["planificacion_dis-anio"=>"asc"])
-    ->order(["planificacion_dis-semestre"=>"asc"])->all();
-  }
+  
 
   
 

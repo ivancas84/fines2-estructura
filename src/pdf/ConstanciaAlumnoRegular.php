@@ -1,7 +1,7 @@
 <?php
 
 set_time_limit(0);  
-require_once("controller/Base.php");
+require_once("controller/base.php");
 require_once("function/array_group_value.php"); 
 require_once("function/array_combine_key2.php"); 
 require_once("Container.php");
@@ -30,7 +30,7 @@ class ConstanciaAlumnoRegularPdf extends BaseController{
 
     $modelTools = $this->container->controller_("model_tools");
 
-    $cantidades = $modelTools->cantidadAnioCalificacionesAprobadasAlumnoPlan($this->alumno["id"], $this->alumno["plan"]);
+    $cantidades = $this->container-controller("calificaciones","alumno")->aprobadas_por_anio($this->alumno["id"], $this->alumno["plan"]);
 
     foreach($cantidades as $q){
       if(intval($q["anio"]) != $anio) throw new Exception("Existe un error al obtener las asignaturas aprobadas, falta un año");

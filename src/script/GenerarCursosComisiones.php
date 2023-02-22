@@ -2,7 +2,7 @@
 set_time_limit(0);  
 require_once("../config/config.php");
 require_once("Container.php");
-require_once("controller/Base.php");
+require_once("controller/base.php");
 require_once("function/array_combine_key.php");
 
 

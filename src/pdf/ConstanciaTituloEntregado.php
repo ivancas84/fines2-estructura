@@ -1,7 +1,7 @@
 <?php
 
 set_time_limit(0);  
-require_once("controller/Base.php");
+require_once("controller/base.php");
 require_once("function/ordinal.php"); 
 require_once("function/array_group_value.php"); 
 require_once("function/array_combine_key.php"); 
@@ -37,7 +37,7 @@ class ConstanciaTituloEntregadoPdf extends BaseController{
     $disposicionesRestantes = $modelTools->disposicionesRestantesAnio($calificaciones, $disposiciones);
 
     $cantidades = array_combine_key(
-      $modelTools->cantidadAnioCalificacionesAprobadasAlumnoPlan($this->alumno["id"], $this->alumno["plan"]),
+      $this->container-controller("calificaciones","alumno")->aprobadas_por_anio($this->alumno["id"], $this->alumno["plan"]),
       "anio"
     );
     if(empty($cantidades)) throw new Exception("No tiene cargadas asignaturas aprobadas");

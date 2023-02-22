@@ -1,6 +1,6 @@
 <?php
 set_time_limit(0);  
-require_once("controller/Base.php");
+require_once("controller/base.php");
 
 class ProcesarInscripcionNacionScript extends BaseController{
  
