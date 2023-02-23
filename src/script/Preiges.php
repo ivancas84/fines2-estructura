@@ -13,37 +13,23 @@ class PreigesScript extends BaseController{
    */
 
   public function main(){
-    $render = $this->container->getEntityRender("horario");
-    $render->setCondition([
-      ["calendario-anio","=","2022"],
-      ["calendario-semestre","=","2"],
-      //["cur_com_sed-centro_educativo","=","1"],
-    ]);
-    $render->setSize(false);
-    $render->setOrder(["cur_com_sed-numero"=>"ASC","cur_com-division"=>"ASC"]);
-    $horarios = $this->container->db()->all("horario",$render);
-    
-    $render = $this->container->getEntityRender("toma");
-    $render->setCondition([
-      ["calendario-anio","=","2022"],
-      ["calendario-semestre","=","2"],
-      ["centro_educativo-id","=","1"],
-      ["estado","=","Aprobada"],
-      ["estado_contralor","=","Pasar"]
-    ]);
-    $render->setSize(false);
-    $render->setOrder(["doc-nombres"=>"ASC","doc-apellidos"=>"ASC"]);
-    $docentes = $this->container->db()->all("toma",$render);
-    $curso_docentes = array_combine_key($docentes, "curso");
-    
-    $comision_horarios = array_group_value($horarios, "cur_comision");
+    $anio_calendario = $_GET["anio_calendario"];
+    $semestre_calendario = $_GET["semestre_calendario"];
+
+    $calendario_comisiones = $this->container->controller("comisiones","calendario");
+
+    $horarios = $calendario_comisiones->horarios_comisiones_autorizadas($anio_calendario, $semestre_calendario);
+    $comision_horarios = array_group_value($horarios, "comision-id");
+
+    $docentes = $calendario_comisiones->tomas_aprobadas_comisiones_autorizadas($anio_calendario, $semestre_calendario);
+    $curso_docentes = array_combine_key($docentes, "curso-id");
     
     $comision_cursos_horarios = [];
-    $cursos_horarios = [];
     foreach($comision_horarios as $key => $horarios_comision){
       $comision_cursos_horarios[$key] = array_group_value($horarios_comision, "curso");
     }
-    
+
+    $cursos_horarios = [];
     foreach($comision_cursos_horarios as $comision => $cursos){
       foreach($cursos as $curso => $horarios){
         $cursos_horarios[$curso] = ["","","","",""];
@@ -69,6 +55,8 @@ class PreigesScript extends BaseController{
         }
       }
     }
-    require_once("script/Preiges.html");
+    require_once("script/preiges.html");
   }
+
+  
 }

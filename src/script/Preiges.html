@@ -26,9 +26,13 @@ tr:nth-child(even) {
     <th>DISTRITO</th>
     <th>CENS</th>
     <th>SEDE</th>
+    <th>REFERENTE</th>
+    <th>TELEFONO</th>
+    <th>EMAIL</th>
+    <th>SEDE</th>
     <th>DIRECCIÓN</th>
     <th>COMISIÓN</th>
-    <th>CONFIGURACIÓN</th>
+    <!-- <th>CONFIGURACIÓN</th> -->
     <th>ORIENTACIÓN</th>
     <th>AÑO-CUATRIMESTRE</th>
     <th>TURNO</th>
@@ -57,11 +61,15 @@ tr:nth-child(even) {
     <?if($first): $first = false; ?>
     <td rowspan="<?=count($cursos)?>">1</td>
     <td rowspan="<?=count($cursos)?>">LA PLATA</td>
-    <td rowspan="<?=count($cursos)?>">456</td>
+    <td rowspan="<?=count($cursos)?>">462</td>
+    <td rowspan="<?=count($cursos)?>"><?=$d["sede"]->_get("nombre")?></td>
+    <td rowspan="<?=count($cursos)?>"></td>
+    <td rowspan="<?=count($cursos)?>"></td>
+    <td rowspan="<?=count($cursos)?>"></td>
     <td rowspan="<?=count($cursos)?>"><?=$d["sede"]->_get("nombre")?></td>
     <td rowspan="<?=count($cursos)?>"><?=$d["domicilio"]->_get("label")?></td>
     <td rowspan="<?=count($cursos)?>"><?=$d["sede"]->_get("numero").$d["comision"]->_get("division")."/".$d["planificacion"]->_get("anio","Y").$d["planificacion"]->_get("semestre")?></td>
-    <td rowspan="<?=count($cursos)?>"><?=($d["comision"]->_get("apertura"))? "NUEVA" : "HISTORICA" ?></td>
+    <!-- <td rowspan="<?=count($cursos)?>"><?=($d["comision"]->_get("apertura"))? "NUEVA" : "HISTORICA" ?></td> -->
     <td rowspan="<?=count($cursos)?>"><?=$d["plan"]->_get("orientacion")?></td>
     <td rowspan="<?=count($cursos)?>"><?=$d["planificacion"]->_get("anio")."°".$d["planificacion"]->_get("semestre")."C"?></td>
     <td rowspan="<?=count($cursos)?>"><?=$d["comision"]->_get("turno")?></td>
