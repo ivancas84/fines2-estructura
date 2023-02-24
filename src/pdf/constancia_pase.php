@@ -1,6 +1,7 @@
 <?php
 
 set_time_limit(0);  
+
 require_once("controller/base.php");
 require_once("function/ordinal.php"); 
 require_once("function/array_group_value.php"); 
@@ -25,9 +26,7 @@ class ConstanciaPasePdf extends BaseController{
 
   public function main(){
     $qrcode = qr($_GET["url"]);
-    $notes = qr($_GET["observaciones"]);
-    echo "test";
-    echo $notes;
+    $notes = $_GET["observaciones"];
 
 
     $signature = array_key_exists("firma", $_GET)? settypebool($_GET["firma"]) : true;
@@ -150,16 +149,14 @@ $c .='<p>Se extiende la presente a pedido del interesado en La Plata el día
 </div>
 ';
 
-    // // $c .= htmlToPdfSignature($signature);
+    $c .= htmlToPdfSignature($signature);
     
-    // // $html = htmlToPdfIndex($c); 
+    $html = htmlToPdfIndex($c); 
 
-    // echo $html;
-    // // echo $html;
-    // $mpdf = new \Mpdf\Mpdf();
-    // $mpdf->SetProtection(["print"]);
+    $mpdf = new \Mpdf\Mpdf();
+    $mpdf->SetProtection(["print"]);
 
-    // $mpdf->WriteHTML($html);
-    // // $mpdf->Output("constancia_pase_" . $v["persona"]->_get("numero_documento") . ".pdf", 'I');
+    $mpdf->WriteHTML($html);
+    $mpdf->Output("constancia_pase_" . $v["persona"]->_get("numero_documento") . ".pdf", 'I');
   }
 }
