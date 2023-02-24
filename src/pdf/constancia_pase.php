@@ -25,6 +25,10 @@ class ConstanciaPasePdf extends BaseController{
 
   public function main(){
     $qrcode = qr($_GET["url"]);
+    $notes = qr($_GET["observaciones"]);
+    echo "test";
+    echo $notes;
+
 
     $signature = array_key_exists("firma", $_GET)? settypebool($_GET["firma"]) : true;
 
@@ -39,7 +43,7 @@ class ConstanciaPasePdf extends BaseController{
     $disposicionesRestantes = $modelTools->disposicionesRestantesAnio($calificaciones, $disposiciones);
 
     $cantidades = array_combine_key(
-      $this->container-controller("calificaciones","alumno")->aprobadas_por_anio($this->alumno["id"], $this->alumno["plan"]),
+      $this->container->controller("calificaciones","alumno")->aprobadas_por_anio($this->alumno["id"], $this->alumno["plan"]),
       "anio"
     );
     if(empty($cantidades)) throw new Exception("No tiene cargadas asignaturas aprobadas");
@@ -136,6 +140,8 @@ if(count($calificaciones)){
 
 }
 
+if(!empty($notes)) $c .= '<p><span class="data">&nbsp;&nbsp;&nbsp;'. $notes . '&nbsp;&nbsp;&nbsp;</span></p>';
+
   
 $date = new SpanishDateTime();
     
@@ -144,15 +150,16 @@ $c .='<p>Se extiende la presente a pedido del interesado en La Plata el día
 </div>
 ';
 
-    $c .= htmlToPdfSignature($signature);
+    // // $c .= htmlToPdfSignature($signature);
     
-    $html = htmlToPdfIndex($c); 
+    // // $html = htmlToPdfIndex($c); 
 
     // echo $html;
-    $mpdf = new \Mpdf\Mpdf();
-    $mpdf->SetProtection(["print"]);
+    // // echo $html;
+    // $mpdf = new \Mpdf\Mpdf();
+    // $mpdf->SetProtection(["print"]);
 
-    $mpdf->WriteHTML($html);
-    $mpdf->Output("constancia_pase_" . $v["persona"]->_get("numero_documento") . ".pdf", 'I');
+    // $mpdf->WriteHTML($html);
+    // // $mpdf->Output("constancia_pase_" . $v["persona"]->_get("numero_documento") . ".pdf", 'I');
   }
 }
