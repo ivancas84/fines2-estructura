@@ -15,14 +15,8 @@ class ComisionReferentes  {
         $id_sedes = array_unique(array_column($comisiones,"sede"));
 
 
-        $sede_referentes = $this->container->query("designacion")
-        ->str_agg(["referentes"=>["persona-nombres", "persona-apellidos", "persona-telefono"]])
-        ->param("sede",$id_sedes)
-        ->param("hasta",false)
-        ->param("cargo-descripcion","Referente")
-        ->group(["sede"])->all();
-
-
+        $sede_referentes = $this->container->controller("referentes","sede")->nombre_telefono($id_sedes);
+        
         $sede_referentes = array_combine_key($sede_referentes,"sede");
 
         foreach($comisiones as &$comision){
