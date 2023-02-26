@@ -9,15 +9,8 @@ class SedeReferentesApi  extends BaseApi {
 
   public function main() {
     $ids = php_input();
-    $render = $this->container->getEntityRender("designacion");
-    $render->addCondition(["sede","=",$ids]);
-    $render->addCondition(["hasta","=",false]);
-    $render->addCondition(["cargo","=","1"]); //referente
-
-    $render->setSize(0);
-    $render->setFields([
-      "persona", "sede"
-    ]);
+    $render = $this->container->controller("referentes","sede")->nombres_telefono($ids);
+    
   }
 }
 

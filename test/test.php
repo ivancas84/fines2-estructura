@@ -6,5 +6,7 @@ require_once("Container.php");
 $container = new Container();
 
 echo "<pre>";
-print_r($container->query("comision")->size(100)->fields(["planificacion-tramo.max"])->sql());
-// print_r(get_defined_constants(true));
+print_r(
+    $container->controller("referentes","sede")
+    ->nombre_telefono(["614230b21033d", "61eba92698ae6"])
+);
