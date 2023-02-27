@@ -26,6 +26,27 @@ class ComisionReferentes  {
         return $comisiones;
     }
 
+
+    public function referente_mas_actual(array $ids_comision){
+        if(empty($ids_comision)) return [];
+        
+        $sql = "SELECT comision.id as comision, sub.persona
+                FROM comision
+                INNER JOIN (
+                SELECT sede, MAX(hasta), persona
+                FROM designacion
+                WHERE hasta IS NULL
+                GROUP BY sede
+                ) sub ON comision.sede = sub.sede
+                WHERE comision.id IN ('" . implode("', '", $ids_comision). "');
+       ";
+
+
+        $result = $this->container->db()->query($sql);
+        $rows = $result->fetch_all(MYSQLI_ASSOC);
+        $result->free();
+        return $rows;
+    }
 }
 
 

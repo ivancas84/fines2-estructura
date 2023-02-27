@@ -52,7 +52,7 @@ tr:nth-child(even) {
     <th>CUIL</th>
     <th>FECHA DE NACIMIENTO</th>
   </tr>
-<? foreach($comision_cursos_horarios as $comision => $cursos):
+<? foreach($comision_cursos_horarios as $id_comision => $cursos):
   $first = true;
   $first2 = true;
   foreach($cursos as $curso => $horarios): 
@@ -64,7 +64,24 @@ tr:nth-child(even) {
     <td rowspan="<?=count($cursos)?>">LA PLATA</td>
     <td rowspan="<?=count($cursos)?>">462</td>
     <td rowspan="<?=count($cursos)?>"><?=$d["sede"]->_get("nombre")?></td>
-    <td rowspan="<?=count($cursos)?>"></td>
+    <td rowspan="<?=count($cursos)?>">
+      <?if(key_exists($id_comision, $referentes_mas_actual)): 
+        $idp = $referentes_mas_actual[$id_comision];
+        echo $personas[$idp]["nombres"] . " " .$personas[$idp]["apellidos"];
+      endif;?>
+    </td>
+    <td rowspan="<?=count($cursos)?>">
+      <?if(key_exists($id_comision, $referentes_mas_actual)): 
+        $idp = $referentes_mas_actual[$id_comision];
+        echo $personas[$idp]["telefono"];
+      endif;?>
+    </td>
+    <td rowspan="<?=count($cursos)?>">
+      <?if(key_exists($id_comision, $referentes_mas_actual)):
+        $idp = $referentes_mas_actual[$id_comision];
+        echo $personas[$idp]["email"];
+      endif;?>
+    </td>
     <td rowspan="<?=count($cursos)?>"></td>
     <td rowspan="<?=count($cursos)?>"></td>
     <td rowspan="<?=count($cursos)?>"></td>
@@ -75,6 +92,11 @@ tr:nth-child(even) {
     <td rowspan="<?=count($cursos)?>"><?=$d["plan"]->_get("orientacion")?></td>
     <td rowspan="<?=count($cursos)?>"><?=$d["planificacion"]->_get("anio")."°".$d["planificacion"]->_get("semestre")."C"?></td>
     <td rowspan="<?=count($cursos)?>"><?=$d["comision"]->_get("turno")?></td>
+    <td rowspan="<?=count($cursos)?>">
+      <?if(key_exists($id_comision, $cantidad_alumnos_activos)):        
+        echo $cantidad_alumnos_activos[$id_comision];
+      endif;?>
+    </td>
     <td rowspan="<?=count($cursos)?>"></td>
     <?endif;?>
     <td><?=$h["asignatura"]->_get("nombre")?></td>
@@ -90,7 +112,7 @@ tr:nth-child(even) {
     <td rowspan="<?=count($cursos)?>"><?=$d["comision"]->_get("identificacion")?></td>
     <?endif;?>
     
-    <?if(array_key_exists($curso, $curso_docentes)): $p = $this->container->tools("toma")->value($curso_docentes[$curso]);?>
+    <?if(array_key_exists($curso, $curso_tomas_aprobadas)): $p = $this->container->tools("toma")->value($curso_tomas_aprobadas[$curso]);?>
       <td><?=$p["docente"]->_get("nombres", "Xx Yy")?></td>
       <td><?=$p["docente"]->_get("apellidos", "Xx Yy")?></td>
       <td><?=$p["docente"]->_get("cuil")?></td>

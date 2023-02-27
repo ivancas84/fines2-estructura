@@ -9,7 +9,7 @@ class SedeReferentesApi  extends BaseApi {
 
   public function main() {
     $ids = php_input();
-    $render = $this->container->controller("referentes","sede")->nombres_telefono($ids);
+    return $this->container->controller("referentes","sede")->nombre_telefono($ids);
     
   }
 }

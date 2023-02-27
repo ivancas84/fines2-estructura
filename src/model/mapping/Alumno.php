@@ -11,7 +11,7 @@ class AlumnoMapping extends MappingEntityOptions{
     )";
   }
 
-  public function tramoIngreso() {
+  public function tramo_ingreso() {
     return "CONCAT(COALESCE({$this->_pt()}.anio_ingreso,''), COALESCE({$this->_pt()}.semestre_ingreso,''))";
   }
 

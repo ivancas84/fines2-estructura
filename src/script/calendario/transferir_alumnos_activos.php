@@ -18,13 +18,23 @@ class CalendarioTransferirAlumnosActivosScript extends BaseController{
         
         if(empty($anio_calendario) || empty($semestre_calendario)) throw new Exception("Parámetros no definidos");
             
-        $calendario_alumnos = $this->container->controller("alumnos","calendario");
-
-        $alumnos_comision_activos = $calendario_alumnos->alumnos_comision_activos_con_siguiente($anio_calendario, $semestre_calendario);
+        $alumnos_comision_activos = $this->container->query("alumno_comision")
+            ->param("calendario-anio",$anio_calendario)
+            ->param("calendario-semestre",$semestre_calendario)
+            ->param("estado","Activo")
+            ->param("comision-comision_siguiente",true)
+            ->size(0)
+            ->fields()
+            ->all();
 
         $periodo_siguiente = periodo_siguiente($anio_calendario, $semestre_calendario);
 
-        $alumnos_comision_existentes = $calendario_alumnos->alumnos_comision($periodo_siguiente["anio"], $periodo_siguiente["semestre"]);
+        $alumnos_comision_existentes = $this->container->query("alumno_comision")
+        ->param("calendario-anio",$anio_calendario)
+        ->param("calendario-semestre",$semestre_calendario)
+        ->size(0)
+        ->fields()
+        ->all();
 
         $alumnos_comision_existentes = array_combine_key2($alumnos_comision_existentes, ["comision","alumno"]);
 
