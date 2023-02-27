@@ -8,17 +8,17 @@ class ComisionAlumnos  {
 
     public function cantidad_alumnos_activos(array $ids_comision) {
         return $this->container->query("alumno_comision")
-        ->cond(["comision", EQUAL, $ids_comision])
-        ->cond(["estado", EQUAL, "Activo"])
-        ->fields(["cantidad"=>"count"])
-        ->group(["comision"])
-        ->size(0)->all();
+            ->cond(["comision", EQUAL, $ids_comision])
+            ->cond(["estado", EQUAL, "Activo"])
+            ->fields(["cantidad"=>"count"])
+            ->group(["comision"])
+            ->size(0)->all();
     }
 
     public function cantidad_aprobados(array $ids_comision) {
         $alumno_comision = $this->container->query("alumno_comision")
-        ->cond(["comision", EQUAL, $ids_comision])
-        ->size(0)->fields()->all();
+            ->cond(["comision", EQUAL, $ids_comision])
+            ->size(0)->fields()->all();
         $alumno_comision = array_group_value($alumno_comision,"comision");
         
         $response = [];
@@ -35,8 +35,8 @@ class ComisionAlumnos  {
               if($c["cantidad"]>=3) $total++;
             }
         
-            array_push($this->response, [
-              "comision" => $idComision,
+            array_push($response, [
+              "comision" => $id_comision,
               "cantidad_aprobados" => $total,
             ]);
         }
