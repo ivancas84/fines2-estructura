@@ -20,7 +20,7 @@ class EmailTomaPosesion {
     $subject = "Toma de posesión: " . $curso;
 
     $body = '
-<p>Hola ' . $t["docente"]->_get("nombres", "Xx Yy") . ' ' . $t["docente"]->_get("apellidos", "Xx Yy") . ', usted ha recibido este email porque fue designado/a en la asignatura <strong>' . $curso . '.</strong> de sede ' . $toma["sede-nombre"] . '</p>
+<p>Hola ' . $t["docente"]->_get("nombres", "Xx Yy") . ' ' . $t["docente"]->_get("apellidos", "Xx Yy") . ', usted ha recibido este email porque fue designado/a en la asignatura <strong>' . $curso . '</strong> de sede ' . $toma["sede-nombre"] . '</p>
 <p>Para completar su toma de posesión, necesitamos que responda este email y nos envíe por este medio los siguientes documentos para poder armar su legajo:</p>
 <p>
   <ul>

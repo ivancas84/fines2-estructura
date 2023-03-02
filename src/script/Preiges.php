@@ -28,7 +28,7 @@ class PreigesScript extends BaseController{
     $curso_tomas_aprobadas = $this->container->query("toma")
       ->cond([
           ["comision-id","=",$ids_comisiones_autorizadas],
-          ["estado","=","Aprobada"],
+          // ["estado","=","Aprobada"],
           ["estado_contralor","=","Pasar"]
         ])
       ->order(["docente-nombres"=>"ASC","docente-apellidos"=>"ASC"])
