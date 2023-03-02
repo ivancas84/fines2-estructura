@@ -4,22 +4,23 @@ require_once("../config/config.php");
 require_once("Container.php");
 require_once("function/email.php");
 
-class EmailRegistro {
+class EmailTomaPosesion {
 
-  public $entityName;
-  public $container;
+    public $entityName;
+    public $container;
 
-  public function main($id){
+    public function main($id_toma){
+        $toma = $this->container->query("toma")
+          ->param("id",$id_toma)->fields()->one();
 
-    $mt = $this->container->controller_("model_tools");
-    $toma = $this->container->db()->get("toma",$id);
-    $curso = $mt->labelCurso($toma,"cur_");
+        
     $t = $this->container->tools("toma")->value($toma);
 
+    $curso = $toma["sede-numero"].$toma["comision-division"]."/".$toma["planificacion-anio"].$toma["planificacion-semestre"]." ".$toma["asignatura-nombre"];
     $subject = "Toma de posesión: " . $curso;
 
     $body = '
-<p>Hola ' . $t["docente"]->_get("nombres", "Xx Yy") . ' ' . $t["docente"]->_get("apellidos", "Xx Yy") . ', usted ha recibido este email porque fue designado/a en la asignatura <strong>' . $curso . '.</strong></p>
+<p>Hola ' . $t["docente"]->_get("nombres", "Xx Yy") . ' ' . $t["docente"]->_get("apellidos", "Xx Yy") . ', usted ha recibido este email porque fue designado/a en la asignatura <strong>' . $curso . '.</strong> de sede ' . $toma["sede-nombre"] . '</p>
 <p>Para completar su toma de posesión, necesitamos que responda este email y nos envíe por este medio los siguientes documentos para poder armar su legajo:</p>
 <p>
   <ul>
@@ -35,6 +36,9 @@ class EmailRegistro {
 <p>Dejamos a su disposición el número del CENS 462 para cualquier consulta 2216713326 (solo mensajes y audios de Whatsapp)</p> 
 <br>
 <p>Para la declaración Jurada puede utilizar el siguiente formato: <a href="https://planfines2.com.ar/wp/wp-content/uploads/2021/04/Declaracion-Jurada-de-Cargos.xls">Descargar</a></p>
+<br>
+<p><strong>Importante</strong></p>
+<p>Si toma posesión en más de una asignatura, envié la misma información en cada email de forma separada</p>
 <br>
 -- 
 <br>
