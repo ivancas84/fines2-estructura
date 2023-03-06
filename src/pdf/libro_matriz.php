@@ -36,11 +36,11 @@ class LibroMatrizPdf extends BaseController{
     if(empty($this->alumno["plan"])) throw new Exception("El alumno no tiene plan definido");
     if(empty($this->alumno["anio_ingreso"])) throw new Exception("El alumno no tiene año de Ingreso definido");
 
-    $modelTools = $this->container->controller_("model_tools");
+    $model_tools = $this->container->controller_("model_tools");
 
     $anio = intval($this->alumno["anio_ingreso"]);
 
-    $calificaciones = $modelTools->calificacionesAlumnoPlanAnio($this->alumno["id"], $this->alumno["plan"], $this->alumno["anio_ingreso"]);
+    $calificaciones = $model_tools->calificacionesAlumnoPlanAnio($this->alumno["id"], $this->alumno["plan"], $this->alumno["anio_ingreso"]);
     if(empty($calificaciones) || (count($calificaciones) != (40-($anio*10)))) throw new Exception("La cantidad de calificaciones obtenida para el plan y el año no coincide");
 
 

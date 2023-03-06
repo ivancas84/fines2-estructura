@@ -5,7 +5,7 @@ class TomaInscripcionPersistSql  {
    * Toma posesion realizada por los docentes
    */
 
-    public $entityName;
+    public $entity_name;
     public $controller;
     
     public function main($data) {
@@ -23,7 +23,7 @@ class TomaInscripcionPersistSql  {
         $toma->_set("estado_contralor","Pasar");
         $toma->_call("reset")->_call("check");
         if($toma->logs->isError()) throw new Exception($toma->logs->toString());
-        $sql = $this->container->persist($this->entityName)->insert($toma->_toArray("sql"));
+        $sql = $this->container->persist($this->entity_name)->insert($toma->_toArray("sql"));
         return["id" => $toma->_get("id"),"sql"=>$sql];
     }
 }

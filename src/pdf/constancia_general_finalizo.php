@@ -36,12 +36,12 @@ class ConstanciaGeneralFinalizoPdf extends BaseController{
     
     $alumno = $this->container->query("alumno")->param("id",$_GET["id"])->fields()->one();
     if(empty($alumno["plan"]) || empty($alumno["anio_ingreso"])) throw new Exception("El alumno no tiene plan o año definido");
-    $modelTools = $this->container->controller_("model_tools");
+    $model_tools = $this->container->controller_("model_tools");
     $v = $this->container->tools("alumno")->value($alumno);
     
-    $calificaciones = $modelTools->calificacionesAprobadasAlumnoPlan($alumno["id"], $alumno["plan"]);
-    $disposiciones = $modelTools->disposicionesPlanAnio($alumno["plan"], $alumno["anio_ingreso"]);
-    $disposicionesRestantes = $modelTools->disposicionesRestantes($calificaciones, $disposiciones);
+    $calificaciones = $model_tools->calificacionesAprobadasAlumnoPlan($alumno["id"], $alumno["plan"]);
+    $disposiciones = $model_tools->disposicionesPlanAnio($alumno["plan"], $alumno["anio_ingreso"]);
+    $disposicionesRestantes = $model_tools->disposicionesRestantes($calificaciones, $disposiciones);
     $anios = sumaDisposicionesPorAnio($disposicionesRestantes);
     $aniosCursados = traducirAnios($anios, $alumno["anio_ingreso"]);
     $aniosRestantes = aniosRestantes($aniosCursados);

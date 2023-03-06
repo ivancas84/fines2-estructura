@@ -5,7 +5,7 @@ require_once("controller/ModelTools.php");
 require_once("model/db/Dba.php");
 
 class ComisionPersist extends Persist {
-  protected $entityName = "comision";
+  protected $entity_name = "comision";
 
   public function main($comision) {
     /**

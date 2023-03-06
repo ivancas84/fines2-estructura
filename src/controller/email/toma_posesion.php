@@ -6,7 +6,7 @@ require_once("function/email.php");
 
 class EmailTomaPosesion {
 
-    public $entityName;
+    public $entity_name;
     public $container;
 
     public function main($id_toma){

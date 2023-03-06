@@ -30,7 +30,7 @@ class ComisionesSiguientesAlumnosImport extends Import{
      * Un elemento posee todos los datos que posteriormente seran insertados y los posibles errores que puede haber
      * Existe una clase abstracta Element que posee un conjunto de metodos de uso habitual
      */
-      $element = $this->container->getImportElement($this->entityName);
+      $element = $this->container->getImportElement($this->entity_name);
       $element->index = $i;
       $element->idCalendario = $this->idCalendario;
       $element->setEntities($data);

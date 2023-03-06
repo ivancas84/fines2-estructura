@@ -25,7 +25,7 @@ class ConstanciaParticularPdf extends BaseController{
     $signature = array_key_exists("firma", $_GET)? settypebool($_GET["firma"]) : true;
     
 
-    $modelTools = $this->container->controller_("model_tools");
+    $model_tools = $this->container->controller_("model_tools");
 
     $mpdf = new \Mpdf\Mpdf();
 

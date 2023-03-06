@@ -10,7 +10,7 @@ class PersistCalificacionesAlumnoApi {
    * Recibe como parametro un array multiple
    */
 
-  public $entityName; //entidad principal
+  public $entity_name; //entidad principal
   public $container;
   public $permission = "w";
 

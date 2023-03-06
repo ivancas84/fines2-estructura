@@ -34,7 +34,7 @@ class ConstanciaDocentePdf extends BaseController{
       $this->container->db()->get("toma",$id)
     );
 
-    $modelTools = $this->container->controller_("model_tools");
+    $model_tools = $this->container->controller_("model_tools");
 
     $date = new SpanishDateTime();
 

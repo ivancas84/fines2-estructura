@@ -26,7 +26,7 @@ class AlumnosNacionImportElement extends ImportElement {
   }
 
 
-  public function update($compare, $entityName, $existente, $name, $updateNullExistent = null){
+  public function update($compare, $entity_name, $existente, $name, $updateNullExistent = null){
     if(empty($compare)) return true;
 
     if($name == "persona") {
@@ -37,7 +37,7 @@ class AlumnosNacionImportElement extends ImportElement {
     } 
     
     $this->logs->addLog($name,"info","Registro existente, se actualizara campos");
-    $this->sql .= $this->container->getEntitySqlo($entityName)->update($this->entities[$name]->_toArray("sql"));
+    $this->sql .= $this->container->getEntitySqlo($entity_name)->update($this->entities[$name]->_toArray("sql"));
     return true;
   }
  

@@ -79,13 +79,12 @@ class AlumnosComisionImport extends Import{
 
   public function queryOtraComisionPeriodoAnterior_(){
 
-    $cal = periodo_calendario_anterior($this->anio, $this->semestre);
     $rows = $this->container->query("alumno_comision")
       ->size(false)
       ->fields()
       ->cond(["persona-numero_documento","=",$this->ids["persona"]])
       ->cond(["comision","!=",$this->idComision])
-      ->cond(["activo","=",true])
+      ->cond(["estado","=","Activo"])
       ->all();
 
     foreach($rows as $row) {
@@ -122,8 +121,9 @@ class AlumnosComisionImport extends Import{
           ->fields()
           ->size(false)
           ->cond(["comision-comision_siguiente","=",$this->idComision])
-          ->cond(["activo","=",true])
+          ->cond(["estado","=","Activo"])
           ->all();
+
       
       foreach($rows as $row) array_push($this->dniComisionPeriodoAnterior_, $row["persona-numero_documento"]);
   }
@@ -131,6 +131,7 @@ class AlumnosComisionImport extends Import{
   
 
   public function process(){    
+    print_r($this->dniComisionPeriodoAnterior_);
     foreach($this->elements as &$element) {
       if(!$element->process) continue;
       try{

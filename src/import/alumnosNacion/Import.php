@@ -57,7 +57,7 @@ class AlumnosNacionImport extends Import{
 
   protected function queryAlumnoComision(){
     /**
-     * Consulta a la base de datos de la entidad $entityName.
+     * Consulta a la base de datos de la entidad $entity_name.
      * 
      * Utilizando el campo $field (supuestamente unico) y el valor almacenado 
      * de field desde el atributo "ids".

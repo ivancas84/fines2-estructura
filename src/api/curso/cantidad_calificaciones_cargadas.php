@@ -5,7 +5,7 @@ require_once("controller/ModelTools.php");
 require_once("function/php_input.php");
 
 class CursoCantidadCalificacionesCargadasApi extends BaseApi {
-  public $entityName = "calificacion";
+  public $entity_name = "calificacion";
   public $permission = "r";
   
   public function main() {

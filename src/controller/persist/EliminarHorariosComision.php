@@ -7,7 +7,7 @@ require_once("controller/Persist.php");
 
 class EliminarHorariosComisionPersist extends Persist {
 
-    protected $entityName = "eliminar_horarios_comision";
+    protected $entity_name = "eliminar_horarios_comision";
 
     public function main($idComision){
         if(empty($idComision)) throw new Exception("La identificacion de comision es erronea");

@@ -4,7 +4,7 @@ require_once("controller/Persist.php");
 
 class SedePersist extends Persist { 
 
-    protected $entityName = "sede";
+    protected $entity_name = "sede";
 
     public function main($data){
 

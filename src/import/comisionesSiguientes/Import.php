@@ -34,7 +34,7 @@ class ComisionesSiguientesImport extends Import{
       ["tramo", "!=","32"]
     ]);
 
-    $fields = $this->container->tools("comision")->fieldNames();
+    $fields = $this->container->tools("comision")->field_names();
     array_push($fields, "identifier");
     $render->setFields($fields);
 

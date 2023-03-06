@@ -10,14 +10,14 @@ class TransferirAlumnoComisionApi extends BaseApi {
   public $sql = "";
   public $detail = [];
   public $permission = "w";
-  public $entityName = "alumno_comision";
+  public $entity_name = "alumno_comision";
 
   public function main() {
     /**
      * Los datos de la entidad semiobsoleta alumno-comision para una determinada comision indicada como parametro,
      * son transferidos a los alumnos, se actualizan valores si no existen
      */
-    $this->container->getAuth()->authorize($this->entityName, $this->permission);
+    $this->container->getAuth()->authorize($this->entity_name, $this->permission);
     if(!$this->data) $this->data = php_input();
     /**
      * id: comision a transferir

@@ -4,7 +4,7 @@ require_once("api/base.php");
 require_once("function/php_input.php");
 
 class CursoHorarioApi extends BaseApi {
-  public $entityName = "curso";
+  public $entity_name = "curso";
   public $permission = "r";
 
   public function main() {

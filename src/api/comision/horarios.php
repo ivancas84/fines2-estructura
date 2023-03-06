@@ -6,7 +6,7 @@ require_once("function/php_input.php");
 
 
 class ComisionHorariosApi extends BaseApi {
-  public $entityName = "comision";
+  public $entity_name = "comision";
 
   public function main() {
     $ids = php_input();

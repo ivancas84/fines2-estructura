@@ -5,7 +5,7 @@ require_once("controller/ModelTools.php");
 require_once("function/php_input.php");
 
 class ComisionDisposicionesAprobadasApi  extends BaseApi {
-  public $entityName = "disposicion";
+  public $entity_name = "disposicion";
   public $permission = "r";
 
   public function main() {

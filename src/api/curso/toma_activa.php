@@ -5,7 +5,7 @@ require_once("controller/ModelTools.php");
 require_once("function/php_input.php");
 
 class CursoTomaActivaApi extends BaseApi {
-  public $entityName = "curso";
+  public $entity_name = "curso";
   public $permission = "r";
 
   public function main() {

@@ -13,7 +13,7 @@ class TransferirAlumnoApi extends BaseApi {
   public $alumnoExistente = [];
 
   public function main() {
-    $this->container->getAuth()->authorize($this->entityName, $this->permission);
+    $this->container->getAuth()->authorize($this->entity_name, $this->permission);
     $this->data = php_input();
     /**
      * id: persona a transferir
@@ -103,24 +103,24 @@ class TransferirAlumnoApi extends BaseApi {
     }
   }
 
-  public function insertarElemento($elemento, $entityName, $fkName, $id){
+  public function insertarElemento($elemento, $entity_name, $fkName, $id){
     $elemento->_fastSet("alumno",$this->alumnoExistente["id"]);
     $elemento->_call("reset")->_call("check");
     if($elemento->logs->isError()) throw new Exception($elemento->logs->toString());
-    $this->sql .= $this->container->getEntitySqlo($entityName)->update($elemento->_toArray("sql"));      
-    array_push($this->detail, $entityName.$elemento->_get("id"));
+    $this->sql .= $this->container->getEntitySqlo($entity_name)->update($elemento->_toArray("sql"));      
+    array_push($this->detail, $entity_name.$elemento->_get("id"));
   }
 
-  public function actualizarElemento($elemento, $entityName) {
+  public function actualizarElemento($elemento, $entity_name) {
     $elemento->_call("reset")->_call("check");
     if($elemento->logs->isError()) throw new Exception($elemento->logs->toString());
-    $this->sql .= $this->container->getEntitySqlo($entityName)->update($elemento->_toArray("sql"));    
-    array_push($this->detail, $entityName.$elemento->_get("id"));
+    $this->sql .= $this->container->getEntitySqlo($entity_name)->update($elemento->_toArray("sql"));    
+    array_push($this->detail, $entity_name.$elemento->_get("id"));
   }
 
-  public function eliminarElemento($elemento, $entityName){
-    $this->sql .= $this->container->getEntitySqlo($entityName)->delete([$elemento->_get("id")]);
-    array_push($this->detail, $entityName.$elemento->_get("id"));  
+  public function eliminarElemento($elemento, $entity_name){
+    $this->sql .= $this->container->getEntitySqlo($entity_name)->delete([$elemento->_get("id")]);
+    array_push($this->detail, $entity_name.$elemento->_get("id"));  
   }
   
   public function transferirElementoExistente($transferir, &$existente, $key){

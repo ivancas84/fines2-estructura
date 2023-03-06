@@ -29,12 +29,12 @@ class ConstanciaTituloEntregadoPdf extends BaseController{
     $this->alumno = $this->container->db()->get("alumno",$_GET["id"]);
     if(empty($this->alumno["plan"])) throw new Exception("El alumno no tiene plan definido");
 
-    $modelTools = $this->container->controller_("model_tools");
+    $model_tools = $this->container->controller_("model_tools");
 
 
-    $calificaciones = $modelTools->calificacionesAprobadasAlumnoPlan($this->alumno["id"], $this->alumno["plan"]);
-    $disposiciones = $modelTools->disposicionesPlanAnio($this->alumno["plan"], $this->alumno["anio_ingreso"]);
-    $disposicionesRestantes = $modelTools->disposicionesRestantesAnio($calificaciones, $disposiciones);
+    $calificaciones = $model_tools->calificacionesAprobadasAlumnoPlan($this->alumno["id"], $this->alumno["plan"]);
+    $disposiciones = $model_tools->disposicionesPlanAnio($this->alumno["plan"], $this->alumno["anio_ingreso"]);
+    $disposicionesRestantes = $model_tools->disposicionesRestantesAnio($calificaciones, $disposiciones);
 
     $cantidades = array_combine_key(
       $this->container-controller("calificaciones","alumno")->aprobadas_por_anio($this->alumno["id"], $this->alumno["plan"]),

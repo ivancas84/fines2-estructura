@@ -5,7 +5,7 @@ require_once("api/PersistRelArrayUnique.php");
 class PersistCalificacionApi extends PersistRelArrayUniqueApi{
 
   public function main(){
-    $this->container->getAuth()->authorize($this->entityName, $this->permission);
+    $this->container->getAuth()->authorize($this->entity_name, $this->permission);
     if(empty($this->params)) $this->params = php_input();
     $this->assignParams();
 

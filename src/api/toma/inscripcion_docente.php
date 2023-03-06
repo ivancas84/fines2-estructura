@@ -13,7 +13,7 @@ class TomaInscripcionDocenteApi  extends PersistApi {
         if(empty($data)) throw new Exception("Se está intentando persistir un conjunto de datos vacío");
 
         $value = $this->container->value("persona")->_fromArray($data, "set")->_call("reset");
-        $row = $this->container->query("persona")->unique($value->_toArray("json"))->fields()->one();
+        $row = $this->container->query("persona")->unique($value->_toArray("json"))->fields()->oneOrNull();
 
         if($row){
             $personaExistente = $this->container->value("persona")->_fromArray($row, "set");

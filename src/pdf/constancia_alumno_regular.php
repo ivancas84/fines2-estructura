@@ -28,7 +28,7 @@ class ConstanciaAlumnoRegularPdf extends BaseController{
     
     $anio = intval($this->alumno["anio_ingreso"]);
 
-    $modelTools = $this->container->controller_("model_tools");
+    $model_tools = $this->container->controller_("model_tools");
 
     $cantidades = $this->container-controller("calificaciones","alumno")->aprobadas_por_anio($this->alumno["id"], $this->alumno["plan"]);
 
