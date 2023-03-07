@@ -28,9 +28,7 @@ class ConstanciaAlumnoRegularPdf extends BaseController{
     
     $anio = intval($this->alumno["anio_ingreso"]);
 
-    $model_tools = $this->container->controller_("model_tools");
-
-    $cantidades = $this->container-controller("calificaciones","alumno")->aprobadas_por_anio($this->alumno["id"], $this->alumno["plan"]);
+    $cantidades = $this->container->controller("calificaciones","alumno")->aprobadas_por_anio($this->alumno["id"], $this->alumno["plan"]);
 
     foreach($cantidades as $q){
       if(intval($q["anio"]) != $anio) throw new Exception("Existe un error al obtener las asignaturas aprobadas, falta un año");
