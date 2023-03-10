@@ -13,7 +13,7 @@
 
   "comision": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "com",
     "entity_name": "comision_relacionada",
@@ -26,7 +26,7 @@
 
   "relacion": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "rel",
     "entity_name": "comision_relacionada",

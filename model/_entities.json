@@ -2,10 +2,10 @@
   "alumno": {
     "name": "alumno",
     "alias": "alum",
-    "nf": ["anio_ingreso", "observaciones", "estado_inscripcion", "fecha_titulacion", "anio_inscripcion", "semestre_inscripcion", "semestre_ingreso", "adeuda_legajo", "adeuda_deudores", "documentacion_inscripcion", "anio_inscripcion_completo", "establecimiento_inscripcion", "libro_folio", "libro", "folio", "comentarios", "tiene_dni", "tiene_constancia", "tiene_certificado", "previas_completas", "tiene_partida"],
+    "nf": ["anio_ingreso", "observaciones", "estado_inscripcion", "fecha_titulacion", "anio_inscripcion", "semestre_inscripcion", "semestre_ingreso", "adeuda_legajo", "adeuda_deudores", "documentacion_inscripcion", "anio_inscripcion_completo", "establecimiento_inscripcion", "libro_folio", "libro", "folio", "comentarios", "tiene_dni", "tiene_constancia", "tiene_certificado", "previas_completas", "tiene_partida", "creado", "confirmado_direccion"],
     "mo": ["plan", "resolucion_inscripcion"],
     "oo": ["persona"],
-    "not_null": ["id", "persona", "tiene_dni", "tiene_constancia", "tiene_certificado", "previas_completas", "tiene_partida"],
+    "not_null": ["id", "persona", "tiene_dni", "tiene_constancia", "tiene_certificado", "previas_completas", "tiene_partida", "creado", "confirmado_direccion"],
     "unique": ["id", "persona", "libro_folio"]
   },
 

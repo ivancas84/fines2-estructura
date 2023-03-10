@@ -37,7 +37,7 @@
 
   "plan": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "plb",
     "entity_name": "planificacion",

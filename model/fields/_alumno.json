@@ -37,7 +37,7 @@
 
   "persona": {
     "type": "varchar",
-    "field_type": "_u",
+    "field_type": "oo",
     "default": null,
     "alias": "per",
     "entity_name": "alumno",
@@ -73,7 +73,7 @@
 
   "plan": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "pla",
     "entity_name": "alumno",
@@ -86,7 +86,7 @@
 
   "resolucion_inscripcion": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "ri",
     "entity_name": "alumno",
@@ -299,5 +299,28 @@
     "subtype": "checkbox",  
     "length": 1,
     "name": "tiene_partida"
+  },
+
+  "creado": {
+    "type": "timestamp",
+    "field_type": "nf",
+    "default": "current_timestamp()",
+    "alias": "cre",
+    "entity_name": "alumno",
+    "data_type": "timestamp",  
+    "subtype": "timestamp",  
+    "name": "creado"
+  },
+
+  "confirmado_direccion": {
+    "type": "tinyint",
+    "field_type": "nf",
+    "default": "0",
+    "alias": "cd",
+    "entity_name": "alumno",
+    "data_type": "boolean",  
+    "subtype": "checkbox",  
+    "length": 1,
+    "name": "confirmado_direccion"
   }
 }

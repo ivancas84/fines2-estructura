@@ -73,7 +73,7 @@
 
   "curso": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "cur",
     "entity_name": "calificacion",
@@ -122,7 +122,7 @@
 
   "alumno": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "alu",
     "entity_name": "calificacion",
@@ -135,7 +135,7 @@
 
   "disposicion": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "dis",
     "entity_name": "calificacion",

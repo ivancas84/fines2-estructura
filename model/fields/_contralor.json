@@ -46,7 +46,7 @@
 
   "planilla_docente": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "pd",
     "entity_name": "contralor",

@@ -108,7 +108,7 @@
 
   "sede": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "sed",
     "entity_name": "comision",
@@ -121,7 +121,7 @@
 
   "modalidad": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "moa",
     "entity_name": "comision",
@@ -134,7 +134,7 @@
 
   "planificacion": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "pla",
     "entity_name": "comision",
@@ -147,7 +147,7 @@
 
   "comision_siguiente": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "cs",
     "entity_name": "comision",
@@ -160,7 +160,7 @@
 
   "calendario": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "cal",
     "entity_name": "comision",

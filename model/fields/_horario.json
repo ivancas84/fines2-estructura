@@ -35,7 +35,7 @@
 
   "curso": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "cur",
     "entity_name": "horario",
@@ -48,7 +48,7 @@
 
   "dia": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "dia",
     "entity_name": "horario",

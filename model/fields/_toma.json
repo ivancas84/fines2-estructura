@@ -95,7 +95,7 @@
 
   "curso": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "cur",
     "entity_name": "toma",
@@ -108,7 +108,7 @@
 
   "docente": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "doc",
     "entity_name": "toma",
@@ -121,7 +121,7 @@
 
   "reemplazo": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "ree",
     "entity_name": "toma",
@@ -134,7 +134,7 @@
 
   "planilla_docente": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "pd",
     "entity_name": "toma",

@@ -13,7 +13,7 @@
 
   "asignatura": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "asi",
     "entity_name": "disposicion",
@@ -26,7 +26,7 @@
 
   "planificacion": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "pla",
     "entity_name": "disposicion",

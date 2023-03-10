@@ -7,7 +7,7 @@ require_once("function/array_group_value.php");
 require_once("function/array_unset_keys.php");
 require_once("function/array_combine_key.php");
 
-class GenerarCalificacionAlumnoApi extends BaseApi {
+class AlumnoGenerarCalificacionApi extends BaseApi {
 
   public $idAlumno;
   public $alumno;

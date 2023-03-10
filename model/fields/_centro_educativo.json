@@ -37,7 +37,7 @@
 
   "domicilio": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "dom",
     "entity_name": "centro_educativo",

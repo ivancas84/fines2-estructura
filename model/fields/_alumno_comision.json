@@ -48,7 +48,7 @@
 
   "comision": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "com",
     "entity_name": "alumno_comision",
@@ -61,7 +61,7 @@
 
   "alumno": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "alu",
     "entity_name": "alumno_comision",

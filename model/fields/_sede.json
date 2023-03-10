@@ -71,7 +71,7 @@
 
   "domicilio": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "dom",
     "entity_name": "sede",
@@ -84,7 +84,7 @@
 
   "tipo_sede": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "ts",
     "entity_name": "sede",
@@ -97,7 +97,7 @@
 
   "centro_educativo": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "ce",
     "entity_name": "sede",

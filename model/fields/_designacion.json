@@ -35,7 +35,7 @@
 
   "cargo": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "car",
     "entity_name": "designacion",
@@ -48,7 +48,7 @@
 
   "sede": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "sed",
     "entity_name": "designacion",
@@ -61,7 +61,7 @@
 
   "persona": {
     "type": "varchar",
-    "field_type": "mu",
+    "field_type": "mo",
     "default": null,
     "alias": "per",
     "entity_name": "designacion",
