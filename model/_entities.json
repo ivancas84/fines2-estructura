@@ -283,7 +283,7 @@
     "name": "sede",
     "alias": "sede",
     "nf": ["numero", "nombre", "observaciones", "alta", "baja", "fecha_traspaso"],
-    "mo": ["domicilio", "tipo_sede", "centro_educativo"],
+    "mo": ["domicilio", "tipo_sede", "centro_educativo", "organizacion"],
     "oo": [],
     "not_null": ["id", "numero", "nombre", "alta"],
     "unique": ["id"]

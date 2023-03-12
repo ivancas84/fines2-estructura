@@ -117,5 +117,18 @@
     "data_type": "date",  
     "subtype": "date",  
     "name": "fecha_traspaso"
+  },
+
+  "organizacion": {
+    "type": "varchar",
+    "field_type": "mo",
+    "default": null,
+    "alias": "org",
+    "entity_name": "sede",
+    "entity_ref_name": "sede",  
+    "data_type": "string",  
+    "subtype": "typeahead",  
+    "length": 45,
+    "name": "organizacion"
   }
 }
