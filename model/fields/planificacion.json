@@ -1,16 +1,9 @@
 {
   "anio": {
-    "subtype": "select_text",
-    "select_values": ["1","2","3"]
+    "values": ["1","2","3"]
   },
 
   "semestre": {
-    "subtype": "select_text",
-    "select_values": ["1","2"]
-  },
-
-  "plan": {
-    "subtype": "select"
+    "values": ["1","2"]
   }
-
 }

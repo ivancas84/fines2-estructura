@@ -1,25 +1,14 @@
 {
   "configuracion": {
-    "subtype": "select_text",
-    "select_values": ["Histórica", "Nueva"]
+    "values": ["Histórica", "Nueva"]
   },
 
   "estado": {
-    "subtype": "select_text",
-    "select_values": ["Confirma", "Rectifica", "Desdobla", "Reagrupa"]
-  },
-
-  "modalidad": {
-    "subtype": "select"
-  },
-
-  "planificacion": {
-    "subtype": "select"
+    "values": ["Confirma", "Rectifica", "Desdobla", "Reagrupa"]
   },
 
   "turno": {
-    "subtype": "select_text",
-    "select_values": ["Mañana", "Tarde", "Vespertino"]
+    "values": ["Mañana", "Tarde", "Vespertino"]
   }
 
 }

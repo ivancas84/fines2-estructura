@@ -1,7 +1,6 @@
 {
   "genero": {
-    "subtype": "select_text",
-    "select_values": ["Femenino", "Masculino", "Otro"]
+    "values": ["Femenino", "Masculino", "Otro"]
   }
 
 }
