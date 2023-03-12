@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "calificacion",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "noa",
     "entity_name": "calificacion",
     "data_type": "float",  
-    "subtype": "float",  
     "length": 4.2,
     "name": "nota1"
   },
@@ -30,7 +28,6 @@
     "alias": "nob",
     "entity_name": "calificacion",
     "data_type": "float",  
-    "subtype": "float",  
     "length": 4.2,
     "name": "nota2"
   },
@@ -42,7 +39,6 @@
     "alias": "noc",
     "entity_name": "calificacion",
     "data_type": "float",  
-    "subtype": "float",  
     "length": 4.2,
     "name": "nota3"
   },
@@ -54,7 +50,6 @@
     "alias": "nf",
     "entity_name": "calificacion",
     "data_type": "float",  
-    "subtype": "float",  
     "length": 4.2,
     "name": "nota_final"
   },
@@ -66,7 +61,6 @@
     "alias": "cre",
     "entity_name": "calificacion",
     "data_type": "float",  
-    "subtype": "float",  
     "length": 4.2,
     "name": "crec"
   },
@@ -79,7 +73,6 @@
     "entity_name": "calificacion",
     "entity_ref_name": "curso",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "curso"
   },
@@ -91,7 +84,6 @@
     "alias": "pa",
     "entity_name": "calificacion",
     "data_type": "integer",  
-    "subtype": "integer",  
     "length": 3,
     "name": "porcentaje_asistencia"
   },
@@ -103,7 +95,6 @@
     "alias": "obs",
     "entity_name": "calificacion",
     "data_type": "text",  
-    "subtype": "textarea",  
     "length": 65535,
     "name": "observaciones"
   },
@@ -115,7 +106,6 @@
     "alias": "dia",
     "entity_name": "calificacion",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "division"
   },
@@ -128,7 +118,6 @@
     "entity_name": "calificacion",
     "entity_ref_name": "alumno",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "alumno"
   },
@@ -141,7 +130,6 @@
     "entity_name": "calificacion",
     "entity_ref_name": "disposicion",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "disposicion"
   },
@@ -153,7 +141,6 @@
     "alias": "fec",
     "entity_name": "calificacion",
     "data_type": "date",  
-    "subtype": "date",  
     "name": "fecha"
   }
 }

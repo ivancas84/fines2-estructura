@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "disposicion",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -19,7 +18,6 @@
     "entity_name": "disposicion",
     "entity_ref_name": "asignatura",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "asignatura"
   },
@@ -32,7 +30,6 @@
     "entity_name": "disposicion",
     "entity_ref_name": "planificacion",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "planificacion"
   }

@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "telefono",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "tip",
     "entity_name": "telefono",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "tipo"
   },
@@ -30,7 +28,6 @@
     "alias": "pre",
     "entity_name": "telefono",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "prefijo"
   },
@@ -42,7 +39,6 @@
     "alias": "num",
     "entity_name": "telefono",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "numero"
   },
@@ -54,7 +50,6 @@
     "alias": "ins",
     "entity_name": "telefono",
     "data_type": "timestamp",  
-    "subtype": "timestamp",  
     "name": "insertado"
   },
 
@@ -65,7 +60,6 @@
     "alias": "eli",
     "entity_name": "telefono",
     "data_type": "timestamp",  
-    "subtype": "timestamp",  
     "name": "eliminado"
   },
 
@@ -77,7 +71,6 @@
     "entity_name": "telefono",
     "entity_ref_name": "persona",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "persona"
   }

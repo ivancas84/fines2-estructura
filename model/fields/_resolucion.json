@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "resolucion",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "num",
     "entity_name": "resolucion",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "numero"
   },
@@ -30,7 +28,6 @@
     "alias": "ani",
     "entity_name": "resolucion",
     "data_type": "year",  
-    "subtype": "year",  
     "name": "anio"
   },
 
@@ -41,7 +38,6 @@
     "alias": "tip",
     "entity_name": "resolucion",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "tipo"
   }

@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "alumno_comision",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "cre",
     "entity_name": "alumno_comision",
     "data_type": "timestamp",  
-    "subtype": "timestamp",  
     "name": "creado"
   },
 
@@ -29,7 +27,6 @@
     "alias": "act",
     "entity_name": "alumno_comision",
     "data_type": "boolean",  
-    "subtype": "checkbox",  
     "length": 1,
     "name": "activo"
   },
@@ -41,7 +38,6 @@
     "alias": "obs",
     "entity_name": "alumno_comision",
     "data_type": "text",  
-    "subtype": "textarea",  
     "length": 65535,
     "name": "observaciones"
   },
@@ -54,7 +50,6 @@
     "entity_name": "alumno_comision",
     "entity_ref_name": "comision",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "comision"
   },
@@ -67,7 +62,6 @@
     "entity_name": "alumno_comision",
     "entity_ref_name": "alumno",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "alumno"
   },
@@ -79,7 +73,6 @@
     "alias": "est",
     "entity_name": "alumno_comision",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 100,
     "name": "estado"
   }

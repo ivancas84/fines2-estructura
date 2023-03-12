@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "plan",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "ori",
     "entity_name": "plan",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "orientacion"
   },
@@ -30,7 +28,6 @@
     "alias": "res",
     "entity_name": "plan",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "resolucion"
   },
@@ -42,7 +39,6 @@
     "alias": "dh",
     "entity_name": "plan",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "distribucion_horaria"
   }

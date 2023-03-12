@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "horario",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "hi",
     "entity_name": "horario",
     "data_type": "time",  
-    "subtype": "time",  
     "name": "hora_inicio"
   },
 
@@ -29,7 +27,6 @@
     "alias": "hf",
     "entity_name": "horario",
     "data_type": "time",  
-    "subtype": "time",  
     "name": "hora_fin"
   },
 
@@ -41,7 +38,6 @@
     "entity_name": "horario",
     "entity_ref_name": "curso",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "curso"
   },
@@ -54,7 +50,6 @@
     "entity_name": "horario",
     "entity_ref_name": "dia",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "dia"
   }

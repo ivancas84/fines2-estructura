@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "file",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "nam",
     "entity_name": "file",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "name"
   },
@@ -30,7 +28,6 @@
     "alias": "typ",
     "entity_name": "file",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "type"
   },
@@ -42,7 +39,6 @@
     "alias": "con",
     "entity_name": "file",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "content"
   },
@@ -54,7 +50,6 @@
     "alias": "siz",
     "entity_name": "file",
     "data_type": "integer",  
-    "subtype": "integer",  
     "length": 10,
     "name": "size"
   },
@@ -66,7 +61,6 @@
     "alias": "cre",
     "entity_name": "file",
     "data_type": "timestamp",  
-    "subtype": "timestamp",  
     "name": "created"
   }
 }

@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "email",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "ema",
     "entity_name": "email",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "email"
   },
@@ -30,7 +28,6 @@
     "alias": "ver",
     "entity_name": "email",
     "data_type": "boolean",  
-    "subtype": "checkbox",  
     "length": 1,
     "name": "verificado"
   },
@@ -42,7 +39,6 @@
     "alias": "ins",
     "entity_name": "email",
     "data_type": "timestamp",  
-    "subtype": "timestamp",  
     "name": "insertado"
   },
 
@@ -53,7 +49,6 @@
     "alias": "eli",
     "entity_name": "email",
     "data_type": "timestamp",  
-    "subtype": "timestamp",  
     "name": "eliminado"
   },
 
@@ -65,7 +60,6 @@
     "entity_name": "email",
     "entity_ref_name": "persona",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "persona"
   }

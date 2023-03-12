@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "asignatura",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "nom",
     "entity_name": "asignatura",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "nombre"
   },
@@ -30,7 +28,6 @@
     "alias": "for",
     "entity_name": "asignatura",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "formacion"
   },
@@ -42,7 +39,6 @@
     "alias": "cla",
     "entity_name": "asignatura",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "clasificacion"
   },
@@ -54,7 +50,6 @@
     "alias": "cod",
     "entity_name": "asignatura",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "codigo"
   },
@@ -66,7 +61,6 @@
     "alias": "per",
     "entity_name": "asignatura",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "perfil"
   }

@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "calendario",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "ini",
     "entity_name": "calendario",
     "data_type": "date",  
-    "subtype": "date",  
     "name": "inicio"
   },
 
@@ -29,7 +27,6 @@
     "alias": "fin",
     "entity_name": "calendario",
     "data_type": "date",  
-    "subtype": "date",  
     "name": "fin"
   },
 
@@ -40,7 +37,6 @@
     "alias": "ani",
     "entity_name": "calendario",
     "data_type": "year",  
-    "subtype": "year",  
     "name": "anio"
   },
 
@@ -51,7 +47,6 @@
     "alias": "sem",
     "entity_name": "calendario",
     "data_type": "integer",  
-    "subtype": "integer",  
     "length": 5,
     "name": "semestre"
   },
@@ -63,7 +58,6 @@
     "alias": "ins",
     "entity_name": "calendario",
     "data_type": "timestamp",  
-    "subtype": "timestamp",  
     "name": "insertado"
   },
 
@@ -74,7 +68,6 @@
     "alias": "des",
     "entity_name": "calendario",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "descripcion"
   }

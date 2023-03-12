@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "comision_relacionada",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -19,7 +18,6 @@
     "entity_name": "comision_relacionada",
     "entity_ref_name": "comision",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "comision"
   },
@@ -32,7 +30,6 @@
     "entity_name": "comision_relacionada",
     "entity_ref_name": "comision",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "relacion"
   }

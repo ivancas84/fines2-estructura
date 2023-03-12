@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "centro_educativo",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "nom",
     "entity_name": "centro_educativo",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "nombre"
   },
@@ -30,7 +28,6 @@
     "alias": "cue",
     "entity_name": "centro_educativo",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "cue"
   },
@@ -43,7 +40,6 @@
     "entity_name": "centro_educativo",
     "entity_ref_name": "domicilio",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "domicilio"
   },
@@ -55,7 +51,6 @@
     "alias": "obs",
     "entity_name": "centro_educativo",
     "data_type": "text",  
-    "subtype": "textarea",  
     "length": 65535,
     "name": "observaciones"
   }

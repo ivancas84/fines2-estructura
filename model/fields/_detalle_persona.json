@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "detalle_persona",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "des",
     "entity_name": "detalle_persona",
     "data_type": "text",  
-    "subtype": "textarea",  
     "length": 65535,
     "name": "descripcion"
   },
@@ -31,7 +29,6 @@
     "entity_name": "detalle_persona",
     "entity_ref_name": "file",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "archivo"
   },
@@ -43,7 +40,6 @@
     "alias": "cre",
     "entity_name": "detalle_persona",
     "data_type": "timestamp",  
-    "subtype": "timestamp",  
     "name": "creado"
   },
 
@@ -55,7 +51,6 @@
     "entity_name": "detalle_persona",
     "entity_ref_name": "persona",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "persona"
   },
@@ -67,7 +62,6 @@
     "alias": "fec",
     "entity_name": "detalle_persona",
     "data_type": "date",  
-    "subtype": "date",  
     "name": "fecha"
   },
 
@@ -78,7 +72,6 @@
     "alias": "tip",
     "entity_name": "detalle_persona",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "tipo"
   },
@@ -90,7 +83,6 @@
     "alias": "asu",
     "entity_name": "detalle_persona",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "asunto"
   }

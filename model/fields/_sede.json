@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "sede",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "num",
     "entity_name": "sede",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "numero"
   },
@@ -30,7 +28,6 @@
     "alias": "nom",
     "entity_name": "sede",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "nombre"
   },
@@ -42,7 +39,6 @@
     "alias": "obs",
     "entity_name": "sede",
     "data_type": "text",  
-    "subtype": "textarea",  
     "length": 65535,
     "name": "observaciones"
   },
@@ -54,7 +50,6 @@
     "alias": "alt",
     "entity_name": "sede",
     "data_type": "timestamp",  
-    "subtype": "timestamp",  
     "name": "alta"
   },
 
@@ -65,7 +60,6 @@
     "alias": "baj",
     "entity_name": "sede",
     "data_type": "timestamp",  
-    "subtype": "timestamp",  
     "name": "baja"
   },
 
@@ -77,7 +71,6 @@
     "entity_name": "sede",
     "entity_ref_name": "domicilio",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "domicilio"
   },
@@ -90,7 +83,6 @@
     "entity_name": "sede",
     "entity_ref_name": "tipo_sede",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "tipo_sede"
   },
@@ -103,7 +95,6 @@
     "entity_name": "sede",
     "entity_ref_name": "centro_educativo",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "centro_educativo"
   },
@@ -115,7 +106,6 @@
     "alias": "ft",
     "entity_name": "sede",
     "data_type": "date",  
-    "subtype": "date",  
     "name": "fecha_traspaso"
   },
 
@@ -127,7 +117,6 @@
     "entity_name": "sede",
     "entity_ref_name": "sede",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "organizacion"
   }

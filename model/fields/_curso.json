@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "curso",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "hc",
     "entity_name": "curso",
     "data_type": "integer",  
-    "subtype": "integer",  
     "length": 10,
     "name": "horas_catedra"
   },
@@ -30,7 +28,6 @@
     "alias": "ige",
     "entity_name": "curso",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "ige"
   },
@@ -43,7 +40,6 @@
     "entity_name": "curso",
     "entity_ref_name": "comision",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "comision"
   },
@@ -56,7 +52,6 @@
     "entity_name": "curso",
     "entity_ref_name": "asignatura",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "asignatura"
   },
@@ -68,7 +63,6 @@
     "alias": "alt",
     "entity_name": "curso",
     "data_type": "timestamp",  
-    "subtype": "timestamp",  
     "name": "alta"
   }
 }

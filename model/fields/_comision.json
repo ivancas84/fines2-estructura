@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "comision",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "tur",
     "entity_name": "comision",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "turno"
   },
@@ -30,7 +28,6 @@
     "alias": "dia",
     "entity_name": "comision",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "division"
   },
@@ -42,7 +39,6 @@
     "alias": "com",
     "entity_name": "comision",
     "data_type": "text",  
-    "subtype": "textarea",  
     "length": 65535,
     "name": "comentario"
   },
@@ -54,7 +50,6 @@
     "alias": "aut",
     "entity_name": "comision",
     "data_type": "boolean",  
-    "subtype": "checkbox",  
     "length": 1,
     "name": "autorizada"
   },
@@ -66,7 +61,6 @@
     "alias": "ape",
     "entity_name": "comision",
     "data_type": "boolean",  
-    "subtype": "checkbox",  
     "length": 1,
     "name": "apertura"
   },
@@ -78,7 +72,6 @@
     "alias": "pub",
     "entity_name": "comision",
     "data_type": "boolean",  
-    "subtype": "checkbox",  
     "length": 1,
     "name": "publicada"
   },
@@ -90,7 +83,6 @@
     "alias": "obs",
     "entity_name": "comision",
     "data_type": "text",  
-    "subtype": "textarea",  
     "length": 65535,
     "name": "observaciones"
   },
@@ -102,7 +94,6 @@
     "alias": "alt",
     "entity_name": "comision",
     "data_type": "timestamp",  
-    "subtype": "timestamp",  
     "name": "alta"
   },
 
@@ -114,7 +105,6 @@
     "entity_name": "comision",
     "entity_ref_name": "sede",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "sede"
   },
@@ -127,7 +117,6 @@
     "entity_name": "comision",
     "entity_ref_name": "modalidad",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "modalidad"
   },
@@ -140,7 +129,6 @@
     "entity_name": "comision",
     "entity_ref_name": "planificacion",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "planificacion"
   },
@@ -153,7 +141,6 @@
     "entity_name": "comision",
     "entity_ref_name": "comision",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "comision_siguiente"
   },
@@ -166,7 +153,6 @@
     "entity_name": "comision",
     "entity_ref_name": "calendario",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "calendario"
   },
@@ -178,7 +164,6 @@
     "alias": "ide",
     "entity_name": "comision",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "identificacion"
   },
@@ -190,7 +175,6 @@
     "alias": "est",
     "entity_name": "comision",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "estado"
   },
@@ -202,7 +186,6 @@
     "alias": "con",
     "entity_name": "comision",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "configuracion"
   }

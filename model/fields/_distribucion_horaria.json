@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "distribucion_horaria",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "hc",
     "entity_name": "distribucion_horaria",
     "data_type": "integer",  
-    "subtype": "integer",  
     "length": 10,
     "name": "horas_catedra"
   },
@@ -30,7 +28,6 @@
     "alias": "dia",
     "entity_name": "distribucion_horaria",
     "data_type": "integer",  
-    "subtype": "integer",  
     "length": 10,
     "name": "dia"
   },
@@ -43,7 +40,6 @@
     "entity_name": "distribucion_horaria",
     "entity_ref_name": "disposicion",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "disposicion"
   }

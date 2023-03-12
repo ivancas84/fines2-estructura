@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "alumno",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "ai",
     "entity_name": "alumno",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "anio_ingreso"
   },
@@ -30,7 +28,6 @@
     "alias": "obs",
     "entity_name": "alumno",
     "data_type": "text",  
-    "subtype": "textarea",  
     "length": 65535,
     "name": "observaciones"
   },
@@ -43,7 +40,6 @@
     "entity_name": "alumno",
     "entity_ref_name": "persona",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "persona"
   },
@@ -55,7 +51,6 @@
     "alias": "ei",
     "entity_name": "alumno",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "estado_inscripcion"
   },
@@ -67,7 +62,6 @@
     "alias": "ft",
     "entity_name": "alumno",
     "data_type": "date",  
-    "subtype": "date",  
     "name": "fecha_titulacion"
   },
 
@@ -79,7 +73,6 @@
     "entity_name": "alumno",
     "entity_ref_name": "plan",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "plan"
   },
@@ -92,7 +85,6 @@
     "entity_name": "alumno",
     "entity_ref_name": "resolucion",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "resolucion_inscripcion"
   },
@@ -104,7 +96,6 @@
     "alias": "aia",
     "entity_name": "alumno",
     "data_type": "integer",  
-    "subtype": "integer",  
     "length": 1,
     "name": "anio_inscripcion"
   },
@@ -116,7 +107,6 @@
     "alias": "si",
     "entity_name": "alumno",
     "data_type": "integer",  
-    "subtype": "integer",  
     "length": 1,
     "name": "semestre_inscripcion"
   },
@@ -128,7 +118,6 @@
     "alias": "sia",
     "entity_name": "alumno",
     "data_type": "integer",  
-    "subtype": "integer",  
     "length": 1,
     "name": "semestre_ingreso"
   },
@@ -140,7 +129,6 @@
     "alias": "al",
     "entity_name": "alumno",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "adeuda_legajo"
   },
@@ -152,7 +140,6 @@
     "alias": "ad",
     "entity_name": "alumno",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "adeuda_deudores"
   },
@@ -164,7 +151,6 @@
     "alias": "di",
     "entity_name": "alumno",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "documentacion_inscripcion"
   },
@@ -176,7 +162,6 @@
     "alias": "aic",
     "entity_name": "alumno",
     "data_type": "boolean",  
-    "subtype": "checkbox",  
     "length": 1,
     "name": "anio_inscripcion_completo"
   },
@@ -188,7 +173,6 @@
     "alias": "eia",
     "entity_name": "alumno",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "establecimiento_inscripcion"
   },
@@ -200,7 +184,6 @@
     "alias": "lf",
     "entity_name": "alumno",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "libro_folio"
   },
@@ -212,7 +195,6 @@
     "alias": "lib",
     "entity_name": "alumno",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "libro"
   },
@@ -224,7 +206,6 @@
     "alias": "fol",
     "entity_name": "alumno",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "folio"
   },
@@ -236,7 +217,6 @@
     "alias": "com",
     "entity_name": "alumno",
     "data_type": "text",  
-    "subtype": "textarea",  
     "length": 65535,
     "name": "comentarios"
   },
@@ -248,7 +228,6 @@
     "alias": "td",
     "entity_name": "alumno",
     "data_type": "boolean",  
-    "subtype": "checkbox",  
     "length": 1,
     "name": "tiene_dni"
   },
@@ -260,7 +239,6 @@
     "alias": "tc",
     "entity_name": "alumno",
     "data_type": "boolean",  
-    "subtype": "checkbox",  
     "length": 1,
     "name": "tiene_constancia"
   },
@@ -272,7 +250,6 @@
     "alias": "tca",
     "entity_name": "alumno",
     "data_type": "boolean",  
-    "subtype": "checkbox",  
     "length": 1,
     "name": "tiene_certificado"
   },
@@ -284,7 +261,6 @@
     "alias": "pc",
     "entity_name": "alumno",
     "data_type": "boolean",  
-    "subtype": "checkbox",  
     "length": 1,
     "name": "previas_completas"
   },
@@ -296,7 +272,6 @@
     "alias": "tp",
     "entity_name": "alumno",
     "data_type": "boolean",  
-    "subtype": "checkbox",  
     "length": 1,
     "name": "tiene_partida"
   },
@@ -308,7 +283,6 @@
     "alias": "cre",
     "entity_name": "alumno",
     "data_type": "timestamp",  
-    "subtype": "timestamp",  
     "name": "creado"
   },
 
@@ -319,7 +293,6 @@
     "alias": "cd",
     "entity_name": "alumno",
     "data_type": "boolean",  
-    "subtype": "checkbox",  
     "length": 1,
     "name": "confirmado_direccion"
   }

@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "domicilio",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "cal",
     "entity_name": "domicilio",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "calle"
   },
@@ -30,7 +28,6 @@
     "alias": "ent",
     "entity_name": "domicilio",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "entre"
   },
@@ -42,7 +39,6 @@
     "alias": "num",
     "entity_name": "domicilio",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "numero"
   },
@@ -54,7 +50,6 @@
     "alias": "pis",
     "entity_name": "domicilio",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "piso"
   },
@@ -66,7 +61,6 @@
     "alias": "dep",
     "entity_name": "domicilio",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "departamento"
   },
@@ -78,7 +72,6 @@
     "alias": "bar",
     "entity_name": "domicilio",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "barrio"
   },
@@ -90,7 +83,6 @@
     "alias": "loc",
     "entity_name": "domicilio",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "localidad"
   }

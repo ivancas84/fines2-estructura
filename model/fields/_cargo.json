@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "cargo",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "des",
     "entity_name": "cargo",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "descripcion"
   }

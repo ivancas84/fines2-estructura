@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "contralor",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "fc",
     "entity_name": "contralor",
     "data_type": "date",  
-    "subtype": "date",  
     "name": "fecha_contralor"
   },
 
@@ -29,7 +27,6 @@
     "alias": "fca",
     "entity_name": "contralor",
     "data_type": "date",  
-    "subtype": "date",  
     "name": "fecha_consejo"
   },
 
@@ -40,7 +37,6 @@
     "alias": "ins",
     "entity_name": "contralor",
     "data_type": "timestamp",  
-    "subtype": "timestamp",  
     "name": "insertado"
   },
 
@@ -52,7 +48,6 @@
     "entity_name": "contralor",
     "entity_ref_name": "planilla_docente",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "planilla_docente"
   }

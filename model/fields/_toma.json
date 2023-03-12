@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "toma",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "ft",
     "entity_name": "toma",
     "data_type": "date",  
-    "subtype": "date",  
     "name": "fecha_toma"
   },
 
@@ -29,7 +27,6 @@
     "alias": "est",
     "entity_name": "toma",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "estado"
   },
@@ -41,7 +38,6 @@
     "alias": "obs",
     "entity_name": "toma",
     "data_type": "text",  
-    "subtype": "textarea",  
     "length": 65535,
     "name": "observaciones"
   },
@@ -53,7 +49,6 @@
     "alias": "com",
     "entity_name": "toma",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "comentario"
   },
@@ -65,7 +60,6 @@
     "alias": "tm",
     "entity_name": "toma",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "tipo_movimiento"
   },
@@ -77,7 +71,6 @@
     "alias": "ec",
     "entity_name": "toma",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "estado_contralor"
   },
@@ -89,7 +82,6 @@
     "alias": "alt",
     "entity_name": "toma",
     "data_type": "timestamp",  
-    "subtype": "timestamp",  
     "name": "alta"
   },
 
@@ -101,7 +93,6 @@
     "entity_name": "toma",
     "entity_ref_name": "curso",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "curso"
   },
@@ -114,7 +105,6 @@
     "entity_name": "toma",
     "entity_ref_name": "persona",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "docente"
   },
@@ -127,7 +117,6 @@
     "entity_name": "toma",
     "entity_ref_name": "persona",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "reemplazo"
   },
@@ -140,7 +129,6 @@
     "entity_name": "toma",
     "entity_ref_name": "planilla_docente",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "planilla_docente"
   },
@@ -152,7 +140,6 @@
     "alias": "cal",
     "entity_name": "toma",
     "data_type": "boolean",  
-    "subtype": "checkbox",  
     "length": 1,
     "name": "calificacion"
   },
@@ -164,7 +151,6 @@
     "alias": "tt",
     "entity_name": "toma",
     "data_type": "boolean",  
-    "subtype": "checkbox",  
     "length": 1,
     "name": "temas_tratados"
   },
@@ -176,7 +162,6 @@
     "alias": "asi",
     "entity_name": "toma",
     "data_type": "boolean",  
-    "subtype": "checkbox",  
     "length": 1,
     "name": "asistencia"
   },
@@ -188,7 +173,6 @@
     "alias": "sp",
     "entity_name": "toma",
     "data_type": "boolean",  
-    "subtype": "checkbox",  
     "length": 1,
     "name": "sin_planillas"
   }

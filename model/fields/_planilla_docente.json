@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "planilla_docente",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "num",
     "entity_name": "planilla_docente",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "numero"
   },
@@ -30,7 +28,6 @@
     "alias": "ins",
     "entity_name": "planilla_docente",
     "data_type": "timestamp",  
-    "subtype": "timestamp",  
     "name": "insertado"
   },
 
@@ -41,7 +38,6 @@
     "alias": "fc",
     "entity_name": "planilla_docente",
     "data_type": "date",  
-    "subtype": "date",  
     "name": "fecha_contralor"
   },
 
@@ -52,7 +48,6 @@
     "alias": "fca",
     "entity_name": "planilla_docente",
     "data_type": "date",  
-    "subtype": "date",  
     "name": "fecha_consejo"
   },
 
@@ -63,7 +58,6 @@
     "alias": "obs",
     "entity_name": "planilla_docente",
     "data_type": "text",  
-    "subtype": "textarea",  
     "length": 65535,
     "name": "observaciones"
   }

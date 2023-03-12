@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "designacion",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "des",
     "entity_name": "designacion",
     "data_type": "date",  
-    "subtype": "date",  
     "name": "desde"
   },
 
@@ -29,7 +27,6 @@
     "alias": "has",
     "entity_name": "designacion",
     "data_type": "date",  
-    "subtype": "date",  
     "name": "hasta"
   },
 
@@ -41,7 +38,6 @@
     "entity_name": "designacion",
     "entity_ref_name": "cargo",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "cargo"
   },
@@ -54,7 +50,6 @@
     "entity_name": "designacion",
     "entity_ref_name": "sede",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "sede"
   },
@@ -67,7 +62,6 @@
     "entity_name": "designacion",
     "entity_ref_name": "persona",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "persona"
   },
@@ -79,7 +73,6 @@
     "alias": "alt",
     "entity_name": "designacion",
     "data_type": "timestamp",  
-    "subtype": "timestamp",  
     "name": "alta"
   }
 }

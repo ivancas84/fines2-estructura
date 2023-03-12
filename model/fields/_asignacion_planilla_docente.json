@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "asignacion_planilla_docente",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -19,7 +18,6 @@
     "entity_name": "asignacion_planilla_docente",
     "entity_ref_name": "planilla_docente",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "planilla_docente"
   },
@@ -32,7 +30,6 @@
     "entity_name": "asignacion_planilla_docente",
     "entity_ref_name": "toma",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "toma"
   },
@@ -44,7 +41,6 @@
     "alias": "ins",
     "entity_name": "asignacion_planilla_docente",
     "data_type": "timestamp",  
-    "subtype": "timestamp",  
     "name": "insertado"
   },
 
@@ -55,7 +51,6 @@
     "alias": "com",
     "entity_name": "asignacion_planilla_docente",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 255,
     "name": "comentario"
   },
@@ -67,7 +62,6 @@
     "alias": "rec",
     "entity_name": "asignacion_planilla_docente",
     "data_type": "boolean",  
-    "subtype": "checkbox",  
     "length": 1,
     "name": "reclamo"
   }

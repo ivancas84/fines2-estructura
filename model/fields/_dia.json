@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "dia",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "num",
     "entity_name": "dia",
     "data_type": "integer",  
-    "subtype": "integer",  
     "length": 1,
     "name": "numero"
   },
@@ -30,7 +28,6 @@
     "alias": "dib",
     "entity_name": "dia",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 9,
     "name": "dia"
   }

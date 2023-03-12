@@ -6,7 +6,6 @@
     "alias": "id",
     "entity_name": "planificacion",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "id"
   },
@@ -18,7 +17,6 @@
     "alias": "ani",
     "entity_name": "planificacion",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "anio"
   },
@@ -30,7 +28,6 @@
     "alias": "sem",
     "entity_name": "planificacion",
     "data_type": "string",  
-    "subtype": "text",  
     "length": 45,
     "name": "semestre"
   },
@@ -43,7 +40,6 @@
     "entity_name": "planificacion",
     "entity_ref_name": "plan",  
     "data_type": "string",  
-    "subtype": "typeahead",  
     "length": 45,
     "name": "plan"
   }
