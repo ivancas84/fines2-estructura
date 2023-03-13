@@ -1,6 +1,6 @@
 <?php
 
-require_once("controller/Persist.php");
+require_once("controller/persist.php");
 
 class SedePersist extends Persist { 
 

@@ -1,6 +1,6 @@
 <?php
 
-require_once("api/Persist.php");
+require_once("api/persist.php");
 require_once("controller/ModelTools.php");
 require_once("function/php_input.php");
 
@@ -26,12 +26,12 @@ class ComisionCrearCursosApi extends PersistApi {
       $curso = $this->container->value("curso");
       $curso->_set("comision", $idComision);
       $curso->_set("asignatura", $ch["asignatura"]);
-      $curso->_set("horas_catedra", $ch["horas_catedra_sum"]);
+      $curso->_set("horas_catedra", $ch["horas_catedra.sum"]);
       $curso->_call("reset")->_call("check");
       if($curso->_getLogs()->isError()) throw new Exception($curso->_getLogs()->toString());
       $curso->_call("setDefault");
       $curso->_set("id", uniqid());
-      $sql .= $this->container->getEntitySqlo("curso")->insert($curso->_toArray("sql"));
+      $sql .= $this->container->persist("curso")->insert($curso->_toArray("sql"));
       array_push($detail, "curso".$curso->_get("id"));
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-require_once("api/Persist.php");
+require_once("api/persist.php");
 require_once("controller/ModelTools.php");
 require_once("function/php_input.php");
 
