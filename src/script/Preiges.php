@@ -17,13 +17,14 @@ class PreigesScript extends BaseController{
     $anio_calendario = $_GET["anio_calendario"];
     $semestre_calendario = $_GET["semestre_calendario"];
     $modalidad = $_GET["modalidad"]; //1 Fines 2, //7 Proyectos especiales
-
+    $apertura = settypebool($_GET["apertura"]); //1 Fines 2, //7 Proyectos especiales
 
     $comisiones_autorizadas = $this->container->query("comision")
       ->param("calendario-anio",$anio_calendario)
       ->param("calendario-semestre",$semestre_calendario)
       ->param("autorizada",true)
       ->param("modalidad",$modalidad)
+      ->param("apertura",$apertura)
       ->order(["sede-numero"=>"ASC","division"=>"ASC"])
       ->size(0)->fields()->all();
     $ids_comisiones_autorizadas = array_column($comisiones_autorizadas, "id");
@@ -31,7 +32,7 @@ class PreigesScript extends BaseController{
     $curso_tomas_aprobadas = $this->container->query("toma")
       ->cond([
           ["comision-id","=",$ids_comisiones_autorizadas],
-          // ["estado","=","Aprobada"],
+          ["estado","=","Aprobada"],
           ["estado_contralor","=","Pasar"]
         ])
       ->order(["docente-nombres"=>"ASC","docente-apellidos"=>"ASC"])
