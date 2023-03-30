@@ -22,13 +22,18 @@ class ConstanciaAlumnoRegularPdf extends BaseController{
 
     $qrcode = qr($_GET["url"]);
     $signature = array_key_exists("firma", $_GET)? settypebool($_GET["firma"]) : true;
-    
 
     $this->alumno = $this->container->query("alumno")->param("id",$_GET["id"])->fields()->one();
     
     $anio = intval($this->alumno["anio_ingreso"]);
 
     $cantidades = $this->container->controller("calificaciones","alumno")->aprobadas_por_anio($this->alumno["id"], $this->alumno["plan"]);
+
+    array_multisort(
+      array_column($cantidades, 'anio'), 
+      SORT_ASC, 
+      $cantidades
+    );
 
     foreach($cantidades as $q){
       if(intval($q["anio"]) != $anio) throw new Exception("Existe un error al obtener las asignaturas aprobadas, falta un año");
