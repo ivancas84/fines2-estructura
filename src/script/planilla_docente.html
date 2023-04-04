@@ -1,0 +1,40 @@
+<table>
+  <?foreach($rows as $row):?>
+    <?$r = $this->container->tools("toma")->value($row); ?>
+    <? $fechaToma = $r["toma"]->_get("fecha_toma"); ?>
+    <? $fechaFin = clone $fechaToma; ?>
+    <? $fechaFin->modify("+ 4 month"); ?>
+   
+    <?$t = (acronym($r["comision"]->_get("turno"))=="N") ? "V":acronym($r["comision"]->_get("turno"));?>
+    <tr>
+      <td>S/N</td>
+      <td><?=substr($r["docente"]->_get("cuil"),0,2)?></td>
+      <td><?=$r["docente"]->_get("numero_documento")?></td>
+      <td><?=substr($r["docente"]->_get("cuil"),-1,1)?></td>
+      <td></td>
+      <td><?=$r["docente"]->_get("fecha_nacimiento","d/m/Y")?></td>
+      <td><?=$r["docente"]->_get("apellidos","XX YY")?>, <?=$r["docente"]->_get("nombres","Xx Yy")?></td>
+      <td>P</td>
+      <td><?=acronym($r["plan"]->_get("orientacion"))?></td>
+      <td><?=$r["asignatura"]->_get("codigo")?></td>
+      <td><?=$r["curso"]->_get("horas_catedra")?></td>
+      <td>PF</td>
+      <td><?=$r["planificacion"]->_get("anio")?></td>
+      <td><?=$r["planificacion"]->_get("semestre")?></td>
+      <td><?=$t?></td>
+      <td>AI</td>
+      <td><?=$r["toma"]->_get("fecha_toma","d")?></td>
+      <td><?=$r["toma"]->_get("fecha_toma","m")?></td>
+      <td><?=$r["toma"]->_get("fecha_toma","y")?></td>
+      <td><?=$fechaFin->format("d")?></td>
+      <td><?=$fechaFin->format("m")?></td>
+      <td><?=$fechaFin->format("y")?></td>
+      <td><?=$r["toma"]->_get("comentario")?></td>
+
+    </tr>
+  <?endforeach;?>
+</table>
+
+
+
+  
