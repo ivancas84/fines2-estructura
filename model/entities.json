@@ -7,13 +7,13 @@
 
   "asignatura": {
     "main": ["nombre"],
-    "unique": ["nombre"]
+    "unique": ["id", "nombre"]
   },
 
   "calendario": {
     "order_default": {"anio":"DESC", "semestre":"DESC"},
     "main": ["descripcion","anio", "semestre"],
-    "unique": ["descripcion"]
+    "unique": ["id", "descripcion"]
   },
 
   "cargo": {
