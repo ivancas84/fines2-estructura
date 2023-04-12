@@ -37,16 +37,22 @@ class ConstanciaTituloTramitePdf extends BaseController{
     $model_tools = $this->container->controller_("model_tools");
 
     $cantidades = $this->container->controller("calificaciones","alumno")->aprobadas_por_anio($this->alumno["id"], $this->alumno["plan"]);
+    array_multisort(
+      array_column($cantidades, 'anio'), 
+      SORT_ASC, 
+      $cantidades
+    );
 
     if(empty($cantidades)) throw new Exception("No tiene cargadas asignaturas aprobadas");
 
     $completo = true;
-    $anio = intval($this->alumno["anio_ingreso"]);
+    $anio_ingreso = intval($this->alumno["anio_ingreso"]);
 
     $cantidades_anio = array_combine_key($cantidades, "anio");
 
     for($i = 1; $i <= 3; $i++){
-      if($anio > $i) continue;
+      $anio = $i;
+      if($anio_ingreso > $i) continue;
       if(!array_key_exists($i, $cantidades_anio)) throw new Exception("Existe un error al obtener las asignaturas aprobadas, falta un año");
       if($cantidades_anio[$i]["cantidad"] < 10) $completo = false;
     }
@@ -60,7 +66,7 @@ class ConstanciaTituloTramitePdf extends BaseController{
         $anioPrint = "SEGUNDO";
       break;
       case 3:
-        $anioPrint = "TERCERO";
+        $anioPrint = "TERCER";
       break;
       default:
         throw new Exception("El año definido es incorrecto");
