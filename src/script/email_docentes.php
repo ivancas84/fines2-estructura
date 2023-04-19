@@ -21,8 +21,7 @@ class EmailDocentesScript extends BaseController{
         ["calendario-semestre","=","1"],
         ["modalidad-id","=","7"],
         ["comision-autorizada","=",true],
-      ])->group(["docente-email"])
-      ->field("docente-email")->column();
+      ])->field("docente-email")->size(0)->column();
       echo implode(", ", array_filter(array_merge($emails)));  
   }
 

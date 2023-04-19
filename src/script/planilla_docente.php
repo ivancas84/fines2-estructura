@@ -21,10 +21,9 @@ class PlanillaDocenteScript extends BaseController{
           ->cond([
               ["calendario-anio","=","2023"],
               ["calendario-semestre","=","1"],
-              //["tom_cur_com_moa-nombre","=","Fines 2"],
               ["reclamo","=",false],
               ["toma-estado","=",["Aprobada","Renuncia"]],
-              ["comision-modalidad","=","7"],
+              //["comision-modalidad","=","7"],
               //["planilla_docente","=",$_GET["planilla_docente"]]
           ])->fields()->all();
 
@@ -33,8 +32,7 @@ class PlanillaDocenteScript extends BaseController{
       $query = $this->container->query("toma")->size(0)->fields()->cond([
           ["calendario-anio","=","2023"],
           ["calendario-semestre","=","1"],
-          ["comision-modalidad","=","7"],
-          //["cur_com_moa-nombre","=","Fines 2"],
+          //["comision-modalidad","=","7"],
           ["estado","=",["Aprobada","Renuncia"]],
           ["estado_contralor","=","Pasar"],
       ]);

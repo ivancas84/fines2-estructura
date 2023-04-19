@@ -11,6 +11,7 @@ require_once("function/settypebool.php");
 require_once("function/qr.php");
 require_once("function/pdf/index.php");
 require_once("function/pdf/header.php");
+require_once("function/pdf/extiende-presente.php");
 require_once("function/pdf/signature.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . "/" . PATH_ROOT . '/vendor/autoload.php');
 
@@ -28,6 +29,7 @@ class ConstanciaAlumnoRegularPdf extends BaseController{
     $anio = intval($this->alumno["anio_ingreso"]);
 
     $cantidades = $this->container->controller("calificaciones","alumno")->aprobadas_por_anio($this->alumno["id"], $this->alumno["plan"]);
+    $notes = $_GET["observaciones"];
 
     array_multisort(
       array_column($cantidades, 'anio'), 
@@ -71,14 +73,13 @@ hace constar por la presente que <span class="data">&nbsp;&nbsp;&nbsp;' . $v["pe
 es alumno/a regular de <span class="data">&nbsp;&nbsp;&nbsp;' . $anioPrint . '&nbsp;&nbsp;&nbsp;</span> año <span class="data">&nbsp;&nbsp;&nbsp;Programa Fines 2 Trayecto Secundario&nbsp;&nbsp;&nbsp;</span>
 con orientación en <span class="data">&nbsp;&nbsp;&nbsp;' . $v["plan"]->_get("orientacion") . '&nbsp;&nbsp;&nbsp;</span> resolución <span class="data">&nbsp;&nbsp;&nbsp;' . $v["plan"]->_get("resolucion") . '&nbsp;&nbsp;&nbsp;</span>
   </p>
-  <p>A pedido del/de la interesado/a y al sólo efecto de ser presentado ante las autoridades que se lo exijan, se extiene la presente en La Plata a los <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("d") . '&nbsp;&nbsp;&nbsp;</span> días
-del mes de <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("F") . '&nbsp;&nbsp;&nbsp;</span> 
-de <span class="data">&nbsp;&nbsp;&nbsp;' . $date->format("Y") . '&nbsp;&nbsp;&nbsp;</span>.
-  </p>
-</div>
+
 ';
+    if(!empty($notes)) $c .= '<p><span class="data">&nbsp;&nbsp;&nbsp;'. $notes . '&nbsp;&nbsp;&nbsp;</span></p>';
+    $c .= htmlToPdfExtiendePresente($signature);
     $c .= htmlToPdfSignature($signature);
     $html = htmlToPdfIndex($c); 
+    $c .= '</div>';
 
 
   
