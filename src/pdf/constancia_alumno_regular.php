@@ -29,21 +29,21 @@ class ConstanciaAlumnoRegularPdf extends BaseController{
     $anio = intval($this->alumno["anio_ingreso"]);
 
     $cantidades = $this->container->controller("calificaciones","alumno")->aprobadas_por_anio($this->alumno["id"], $this->alumno["plan"]);
-    $notes = $_GET["observaciones"];
+    $notes = (!empty($_GET["observaciones"])) ? $_GET["observaciones"] : "";
 
     array_multisort(
       array_column($cantidades, 'anio'), 
       SORT_ASC, 
       $cantidades
     );
-
+	
     foreach($cantidades as $q){
       if(intval($q["anio"]) != $anio) throw new Exception("Existe un error al obtener las asignaturas aprobadas, falta un año");
       if($q["cantidad"] < 10) $completo = false;
-      $anio++;
+      if ($anio < 3) $anio++;
     }
 
-    switch($anio-1){
+    switch($anio){
       case 1:
         $anioPrint = "PRIMERO";
       break;
