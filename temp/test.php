@@ -14,7 +14,7 @@ $container = new Container();
         ["nota_final",">=","7"],
         ["crec",">=","4","OR"]
       ]
-    ])->order([])->sql();
+    ])->order([])->all();
     // ->order(["planificacion_dis-anio"=>"ASC", "planificacion_dis-semestre"=>"ASC"])->sql();
     
     echo "<pre>";
