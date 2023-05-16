@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+</style>
+</head>
+<body>
+
+  <h1>Rindex Comisión <?=$comision["sede-numero"].$comision["comision-division"]."/".$comision["planificacion-anio"].$comision["planificacion-semestre"]?></h1>
+<table>
+
+  <tr>
+    <th rowspan="2">APELLIDO</th>
+    <th rowspan="2">NOMBRE</th>
+    <th rowspan="2">DNI</th>
+    <th rowspan="2">FECHA DE NACIMIENTO</th>
+    <th rowspan="2">TIENE CONSTANCIA</th>
+    <th rowspan="2">TIENE CERTIFICADO</th>
+    <th rowspan="2">TIENE DNI</th>
+    <th rowspan="2">TIENE PARTIDA DE NACIMIENTO</th>
+    <th colspan="5">1° año 1° tramo</th>
+    <th colspan="5">1° año 2° tramo</th>
+    <th colspan="5">2° año 1° tramo</th>
+    <th colspan="5">2° año 2° tramo</th >
+    <th colspan="5">3° año 1° tramo</th>
+    <th colspan="5">3° año 2° tramo</th>
+  </tr>
+
+  <tr>
+<?foreach($disposiciones as $d):?>
+    <th><?=$d["asignatura-nombre"]?></th>
+<?endforeach;?>
+  </tr>
+    <? foreach($alumno_comision as $ac):
+            $acp = $this->container->tools("alumno_comision")->value($ac); 
+            $id_alu = $ac["alumno"];?>
+            <tr>
+                <td><?=$acp["persona"]->_get("apellidos", "X")?></td>
+                <td><?=$acp["persona"]->_get("nombres", "X")?></td>
+                <td><?=$acp["persona"]->_get("numero_documento")?></td>
+                <td><?=$acp["persona"]->_get("fecha_nacimiento","d/m/Y")?></td>
+                <td><?=$acp["alumno"]->_get("tiene_constancia","SÍ")?></td>
+                <td><?=$acp["alumno"]->_get("tiene_certificado","SÍ")?></td>
+                <td><?=$acp["alumno"]->_get("tiene_dni","SÍ")?></td>
+                <td><?=$acp["alumno"]->_get("tiene_partida","SÍ")?></td>
+                <?if(array_key_exists($id_alu, $calificaciones)):?>
+                    <?foreach($disposiciones as $d):?>
+                        <td>
+                        <?foreach($calificaciones[$id_alu] as $c):?>
+                        <?if($d["planificacion-tramo"].$d["asignatura"] == $c["planificacion_dis-tramo"].$c["disposicion-asignatura"]):?>
+                            <?=(intval($c["nota_final"]>=7))?intval($c["nota_final"]):intval($c["crec"])."c"?>
+                        <?break; endif;?>
+                        <?endforeach;?>
+                        </td>
+                    <?endforeach;?>
+                <?else:?>
+                    <?foreach($disposiciones as $d):?>
+                        <td></td>
+                    <?endforeach;?>
+                <?endif;?>
+                <td></td>
+            </tr>
+        <?endforeach;?>
+</table>
+</body>
+</html>
