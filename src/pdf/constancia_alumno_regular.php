@@ -43,20 +43,23 @@ class ConstanciaAlumnoRegularPdf extends BaseController{
       if ($anio < 3) $anio++;
     }
 
-    switch($anio){
-      case 1:
-        $anioPrint = "PRIMERO";
-      break;
-      case 2:
-        $anioPrint = "SEGUNDO";
-      break;
-      case 3:
-        $anioPrint = "TERCER";
-      break;
-      default:
-        $anioPrint = "PRIMERO";
+    if(!empty($_GET["anio_print"])) 
+        $anioPrint = $_GET["anio_print"];
+    else {
+        switch($anio){
+            case 1:
+                $anioPrint = "PRIMERO";
+            break;
+            case 2:
+                $anioPrint = "SEGUNDO";
+            break;
+            case 3:
+               $anioPrint = "TERCER";
+            break;
+            default:
+                $anioPrint = "PRIMERO";
+        }
     }
-
 
     $v = $this->container->tools("alumno")->value($this->alumno);
     $date = new SpanishDateTime();
