@@ -32,7 +32,7 @@ class EmailTomaPosesion {
     <li>Copia de email con aviso de designación (para docentes designados en SAD)</li>
   </ul>
 </p>
-<p>Posteriormente deberá presentarse a una entrevista con el director en el CENS 462 (calle 71 e/ 115 y 116 Nº 232) de Lunes a Jueves en el horario de 12 a 15, o los días Lunes de 18 a 21 o Viernes de 18 a 21 para firmar la toma de posesión.</p>
+<p>Posteriormente deberá presentarse a una entrevista con el director en el CENS 462 (calle 71 e/ 115 y 116 Nº 232) de Lunes a Viernes en el horario de 12 a 15, o los días Martes, Miércoles y Viernes de 18 a 21 o Viernes de 18 a 21 para firmar la toma de posesión.</p>
 <p>Dejamos a su disposición el número del CENS 462 para cualquier consulta 2216713326 (solo mensajes y audios de Whatsapp)</p> 
 <br>
 <p>Para la declaración Jurada puede utilizar el siguiente formato: <a href="https://planfines2.com.ar/wp/wp-content/uploads/2021/04/Declaracion-Jurada-de-Cargos.xls">Descargar</a></p>
